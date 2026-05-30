@@ -136,21 +136,24 @@ document.addEventListener('DOMContentLoaded', () => {
       if(p) {
           let vHtml = '';
           if (p.variants && p.variants.length > 0) {
-              vHtml = '<p style="margin-bottom:10px;"><strong>Options:</strong></p><div id="variant-options" style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:30px;">';
-              vHtml += p.variants.map(v => `
-                  <button class="variant-btn" data-variant="${v.name}" data-price="${v.price || p.price}" style="padding:10px 15px; border:1px solid var(--border-gold); background:var(--white); cursor:pointer; border-radius:4px;" 
-                          onclick="selectVariant(this)">${v.name}</button>
-              `).join('');
+              vHtml = '<p style="margin-bottom:10px; font-weight:600; color: var(--ink);"><strong>Chọn phiên bản:</strong></p><div id="variant-options" style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:30px;">';
+              vHtml += p.variants.map(v => {
+                  const label = v.name || v.color;
+                  const price = v.price || p.price;
+                  return `<button class="variant-btn" data-variant="${label}" data-price="${price}" style="padding:10px 18px; border:1px solid var(--border-gold); background:var(--white); cursor:pointer; border-radius:6px; font-size:0.95rem; transition: all 0.2s;" onclick="selectVariant(this)">${label}<br><small style="color:var(--taupe);">${price.toLocaleString('vi-VN')} ₫</small></button>`;
+              }).join('');
               vHtml += '</div>';
           }
           
           window.selectVariant = function(btn) {
               document.querySelectorAll('.variant-btn').forEach(b => {
                   b.style.background = 'var(--white)';
-                  b.style.color = 'black';
+                  b.style.border = '1px solid var(--border-gold)';
+                  b.style.boxShadow = 'none';
               });
-              btn.style.background = 'var(--champagne)';
-              btn.style.color = 'white';
+              btn.style.background = 'var(--champagne-light)';
+              btn.style.border = '2px solid var(--champagne)';
+              btn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
               
               document.getElementById('detail-price').textContent = Number(btn.getAttribute('data-price')).toLocaleString('vi-VN') + ' ₫';
               document.getElementById('selected-variant').value = btn.getAttribute('data-variant');
@@ -187,8 +190,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     </p>
                     
                     ${vHtml}
+                    <input type="hidden" id="selected-variant" value="">
                     
-                    <button class="peach-button" style="width:100%; padding:15px; font-size:1.1rem;" onclick="addToCart('${p.id}')">Add to Cart</button>
+                    <button class="peach-button" style="width:100%; padding:15px; font-size:1.1rem;" onclick="addToCart('${p.id}', true)">Add to Cart</button>
                     
                     <div style="margin-top:40px; border-top:1px solid var(--border-gold); padding-top:30px;">
                         <h3 style="margin-bottom:15px;">Product Details</h3>
@@ -209,15 +213,48 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Expose safe cart add
-window.addToCart = function(id) {
+window.addToCart = function(id, isDetailView = false) {
     const products = window.GradieStore ? window.GradieStore.getProducts() : window.GRADIE_DATA.products;
     const p = products.find(x => x.id === id);
     if (!p) return;
     
+    let selectedVariant = null;
+    let price = p.price;
+
+    if (p.variants && p.variants.length > 0) {
+        if (isDetailView) {
+            const variantInput = document.getElementById('selected-variant');
+            if (!variantInput || !variantInput.value) {
+                alert('Vui lòng chọn option sản phẩm trước khi thêm vào giỏ hàng!');
+                return;
+            }
+            selectedVariant = variantInput.value;
+            const vObj = p.variants.find(v => v.name === selectedVariant);
+            if (vObj && vObj.price) price = vObj.price;
+        } else {
+            // Added from grid, force redirect to detail page to select options
+            alert('Sản phẩm này có nhiều lựa chọn. Vui lòng xem chi tiết để chọn option phù hợp!');
+            window.location.href = `product-detail.html?id=${p.id}`;
+            return;
+        }
+    }
+    
     let cart = JSON.parse(localStorage.getItem('gradie_cart') || '[]');
-    let exists = cart.find(x => x.id === id);
-    if (exists) exists.qty += 1;
-    else cart.push({ id: p.id, name: p.name, price: p.price, image: p.image || p.gallery[0], qty: 1 });
+    // Check if same product AND same variant exists
+    let exists = cart.find(x => x.id === id && x.variant === selectedVariant);
+    
+    if (exists) {
+        exists.qty += 1;
+    } else {
+        cart.push({ 
+            id: p.id, 
+            name: p.name, 
+            price: price, 
+            image: p.image || (p.gallery ? p.gallery[0] : ''), 
+            qty: 1,
+            variant: selectedVariant 
+        });
+    }
     
     localStorage.setItem('gradie_cart', JSON.stringify(cart));
     if(window.updateCartCount) window.updateCartCount();
@@ -231,7 +268,7 @@ window.addToCart = function(id) {
     }
     const toast = document.createElement('div');
     toast.className = 'toast';
-    toast.textContent = 'Item added to cart!';
+    toast.textContent = 'Đã thêm vào giỏ hàng!';
     container.appendChild(toast);
     setTimeout(() => toast.classList.add('show'), 10);
     setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 300); }, 3000);

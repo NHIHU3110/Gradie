@@ -39,13 +39,18 @@ document.addEventListener('DOMContentLoaded', () => {
             blogContainer.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--taupe); font-style: italic; border: 1px dashed var(--border-gold); border-radius: 8px;">No blog posts found for this category yet. Please check back later.</div>';
         } else {
             blogContainer.innerHTML = posts.map(p => `
-                <div class="product-card" style="padding-bottom:15px; cursor:pointer;" onclick="openBlogModal('${p.id}')">
-                    <img src="${p.image}" style="width:100%; height:200px; object-fit:cover;">
-                    <div style="padding:15px;">
-                        <span style="font-size:0.8rem; color:var(--taupe); text-transform:uppercase;">${p.category}</span>
-                        <h3 style="margin:10px 0;">${p.title}</h3>
-                        <p style="font-size:0.9rem; color:var(--soft-black);">${p.content.substring(0, 100)}...</p>
-                        <button class="outline-button" style="margin-top:15px; width:100%;">Read More</button>
+                <div class="product-card blog-card" style="cursor:pointer; display:flex; flex-direction:column; height: 100%; border: none; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;" onclick="openBlogModal('${p.id}')" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.06)';">
+                    <div style="position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
+                        <img src="${p.image}" style="width:100%; height:240px; object-fit:cover; transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+                    </div>
+                    <div style="padding:30px; flex-grow: 1; display: flex; flex-direction: column; background: white;">
+                        <span style="font-size:0.75rem; color:var(--champagne); text-transform:uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 12px; display: block;">${p.category}</span>
+                        <h3 style="margin:0 0 15px; font-size: 1.4rem; line-height: 1.4; color: var(--ink); font-family: 'Playfair Display', serif;">${p.title}</h3>
+                        <p style="font-size:0.95rem; color:var(--taupe); line-height: 1.6; margin-bottom: 25px; flex-grow: 1;">${p.content.substring(0, 120)}...</p>
+                        <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-gold); padding-top: 15px; margin-top: auto;">
+                            <span style="font-size: 0.9rem; font-weight: 600; color: var(--ink); text-transform: uppercase; letter-spacing: 1px;">Read Story</span>
+                            <span style="color: var(--champagne); font-size: 1.2rem;">→</span>
+                        </div>
                     </div>
                 </div>
             `).join('');

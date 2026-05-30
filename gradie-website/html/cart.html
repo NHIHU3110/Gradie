@@ -41,34 +41,39 @@
   <main>
     
     
-    <div style="max-width:1200px; margin: 40px auto; padding: 20px;">
-        <h1 style="text-align:center; font-family:'Playfair Display', serif; color:var(--champagne); margin-bottom: 40px;">Your Shopping Cart</h1>
+    <section class="page-header" style="padding: 60px 40px 40px; text-align: center; background: linear-gradient(to bottom, #fcfbf9, #ffffff); margin-bottom: 20px;">
+      <span class="section-kicker">Almost Yours</span>
+      <h1 class="section-title" style="margin: 0; font-size: 3rem;">Shopping Cart</h1>
+    </section>
+    
+    <div style="max-width:1200px; margin: 0 auto 80px; padding: 0 40px;">
         
         <div style="display:grid; grid-template-columns: 2fr 1fr; gap: 40px;">
             <!-- Cart Items -->
-            <div style="background:var(--white); padding:30px; border-radius:12px; border:1px solid var(--border-gold);">
+            <div style="background:var(--white); padding:40px; border-radius:16px; border:1px solid rgba(140, 132, 122, 0.15); box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
                 <div id="cart-items-container">
                     <p style="text-align:center;">Loading cart...</p>
                 </div>
             </div>
             
             <!-- Summary -->
-            <div style="background:var(--champagne-light); padding:30px; border-radius:12px; height:fit-content; border:1px solid var(--border-gold);">
-                <h3 style="margin-top:0; font-family:'Playfair Display', serif;">Order Summary</h3>
-                <div style="display:flex; justify-content:space-between; margin: 20px 0;">
+            <div style="background:var(--champagne-light); padding:40px; border-radius:16px; height:fit-content; position: sticky; top: 120px; border:none; box-shadow: 0 10px 40px rgba(140, 132, 122, 0.1);">
+                <h3 style="margin-top:0; font-family:'Playfair Display', serif; font-size: 1.6rem; color: var(--ink); margin-bottom: 30px;">Order Summary</h3>
+                <div style="display:flex; justify-content:space-between; margin: 20px 0; color: var(--taupe); font-size: 1.1rem;">
                     <span>Subtotal</span>
-                    <strong id="cart-subtotal">0 ₫</strong>
+                    <strong id="cart-subtotal" style="color: var(--ink); font-weight: 500;">0 ₫</strong>
                 </div>
-                <div style="display:flex; justify-content:space-between; margin: 20px 0;">
+                <div style="display:flex; justify-content:space-between; margin: 20px 0; color: var(--taupe); font-size: 1.1rem;">
                     <span>Shipping</span>
-                    <strong id="cart-shipping">0 ₫</strong>
+                    <strong id="cart-shipping" style="color: var(--ink); font-weight: 500;">0 ₫</strong>
                 </div>
-                <hr style="border-top:1px solid rgba(0,0,0,0.1); margin:20px 0;">
-                <div style="display:flex; justify-content:space-between; font-size:1.2rem;">
-                    <strong>Total</strong>
-                    <strong id="cart-total" style="color:var(--champagne);">0 ₫</strong>
+                <hr style="border-top:1px solid rgba(140, 132, 122, 0.2); margin:30px 0;">
+                <div style="display:flex; justify-content:space-between; font-size:1.4rem; align-items: center;">
+                    <strong style="color: var(--ink); font-weight: 600;">Total</strong>
+                    <strong id="cart-total" style="color:var(--peach); font-weight: 600;">0 ₫</strong>
                 </div>
-                <button onclick="window.location.href='checkout.html'" class="btn-primary" style="width:100%; margin-top:30px; font-size:1.1rem; padding:15px;">Proceed to Checkout</button>
+                <p style="font-size: 0.9rem; color: var(--taupe); margin: 15px 0 30px; text-align: right;">Taxes included at checkout</p>
+                <button onclick="window.location.href='checkout.html'" class="btn-primary" style="width:100%; font-size:1.15rem; padding:18px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">Proceed to Checkout</button>
             </div>
         </div>
     </div>

@@ -188,37 +188,88 @@ h2 {
 /* Tables */
 .table-wrapper {
   background: var(--admin-surface);
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid var(--admin-border);
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
 }
 table {
   width: 100%;
   border-collapse: collapse;
 }
 th, td {
-  padding: 16px 24px;
+  padding: 20px 24px;
   text-align: left;
   border-bottom: 1px solid var(--admin-border);
+  vertical-align: middle;
 }
 th {
   background: #F8FAFC;
   font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   color: var(--admin-muted);
-  font-weight: 600;
+  font-weight: 700;
+}
+tbody tr {
+  transition: all 0.2s ease;
 }
 tbody tr:hover {
   background: #F8FAFC;
 }
+td strong {
+  font-size: 1rem;
+  color: var(--admin-text);
+}
+td small {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  display: inline-block;
+  margin-top: 4px;
+}
 .img-thumb {
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
+  width: 64px !important;
+  height: 64px !important;
+  border-radius: 12px !important;
   object-fit: cover;
   border: 1px solid var(--admin-border);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Action Buttons inside Table */
+td.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+td button, td .btn-danger, td .outline-button, td .btn-primary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  min-width: 70px;
+  padding: 6px 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--admin-border);
+  background: white;
+  color: var(--admin-text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+td button:hover, td .outline-button:hover, td .btn-primary:hover {
+  background: #F1F5F9;
+  border-color: #CBD5E1;
+}
+td .btn-danger {
+  border-color: #FECACA;
+  color: #DC2626;
+  background: #FEF2F2;
+}
+td .btn-danger:hover {
+  background: #FEE2E2;
+  border-color: #FCA5A5;
 }
 
 /* Forms */
