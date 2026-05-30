@@ -1,0 +1,117 @@
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+/* Max Width 1200px already handled by .container / max-width: 1200px rules in style.css */
+
+/* Tablet & Smaller Desktop (Max 992px) */
+@media (max-width: 992px) {
+  .hero {
+    padding: 40px 20px;
+    gap: 30px;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.8rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 20px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+}
+
+/* Mobile Devices (Max 768px) */
+@media (max-width: 768px) {
+  .header-inner {
+    padding: 15px;
+  }
+  
+  .nav {
+    display: none; /* Hidden by default on mobile */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--ivory);
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+    z-index: 999;
+  }
+  
+  .nav.active {
+    display: flex;
+  }
+  
+  .nav-link {
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-gold);
+  }
+  
+  .hamburger {
+    display: block;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 15px;
+  }
+  
+  .hero-actions {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 0 15px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .newsletter-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .newsletter-form input {
+    border-right: 1px solid var(--border-gold);
+  }
+  
+  .newsletter-form button {
+    padding: 12px;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+/* Very Small Mobile (Max 480px) */
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .peach-button, .outline-button {
+    width: 100%;
+  }
+}

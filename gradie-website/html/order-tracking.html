@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradie | Order Tracking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=1780166734">
+  
+</head>
+<body>
+  <div class="announcement-bar">
+    Grand Opening • Free gift tag with every order • Celebrate her next chapter
+  </div>
+
+    <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="../images/Gradie_logo.jpeg" alt="Gradie Logo" style="height:48px; width:auto; border-radius:50%; object-fit:cover; margin-right:10px;">
+        Gradie
+        <span class="tagline">Graduation Gifts</span>
+      </a>
+      <nav class="nav">
+        <a href="about.html">About Us</a>
+        <a href="products.html">Products</a>
+        <a href="customize.html">Customize</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-icons">
+        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <button class="icon-btn" onclick="alert('Search functionality coming soon!')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main><div style='max-width:600px; margin:80px auto; padding:40px; background:var(--white); border-radius:12px; border:1px solid var(--border-gold);'>
+                    <h2 style='text-align:center; margin-bottom:30px;'>Track Your Order</h2>
+                    <form id="track-form" style='display:flex; gap:10px; margin-bottom:30px;'>
+                        <input type="text" id="track-order-no" placeholder="Enter Order Number (e.g. GRADIE...)" required style='flex:1; padding:12px; border:1px solid var(--border-gold); border-radius:4px;'>
+                        <button type="submit" class="peach-button">Track</button>
+                    </form>
+                    <div id="track-result"></div>
+                </div>
+    
+    <section style="padding: 80px 40px; text-align: center;">
+      <h2 class="section-title">Order Tracking</h2>
+      <p>Content for Order Tracking goes here.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="footer-logo">Gradie</div>
+        <p style="font-family: 'Great Vibes', cursive; font-size: 1.5rem; color: var(--champagne); margin-top: 10px;">Celebrate today, cherish forever.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="about.html">About Us</a>
+        <a href="products.html">Shop All</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Customer Care</h4>
+        <a href="store-policy.html">Store Policy</a>
+        <a href="order-tracking.html">Track Order</a>
+        <a href="account.html">My Account</a>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Gradie - Graduation Gifts. All rights reserved.
+    </div>
+  </footer>
+
+    <script src="../js/global-data.js?v=1780167396"></script>
+  <script src="../js/data-store.js?v=1780167396"></script>
+  <script src="../js/main.js?v=1780167396"></script>
+  <script src="../js/products.js?v=1780167396"></script>
+  <script src="../js/cart.js?v=1780167396"></script>
+  <script src="../js/order-tracking.js?v=1780167396"></script>
+</body>
+</html>

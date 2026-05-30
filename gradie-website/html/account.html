@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradie | My Account</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=1780166734">
+</head>
+<body>
+    <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="../images/Gradie_logo.jpeg" alt="Gradie Logo" style="height:48px; width:auto; border-radius:50%; object-fit:cover; margin-right:10px;">
+        Gradie
+        <span class="tagline">Graduation Gifts</span>
+      </a>
+      <nav class="nav">
+        <a href="about.html">About Us</a>
+        <a href="products.html">Products</a>
+        <a href="customize.html">Customize</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-icons">
+        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <button class="icon-btn" onclick="alert('Search functionality coming soon!')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width:1000px; margin: 60px auto; padding: 0 20px;">
+    <h1 style="text-align:center; margin-bottom:40px;">My Account</h1>
+    
+    <div id="account-dashboard" style="display:none; grid-template-columns: 250px 1fr; gap: 40px;">
+      <div class="account-sidebar" style="background:var(--ivory); padding:20px; border-radius:12px; border:1px solid var(--border-gold); height:fit-content;">
+        <h3 id="dash-name" style="margin-bottom:5px; color:var(--champagne);">Name</h3>
+        <p id="dash-email" style="color:var(--taupe); font-size:0.9rem; margin-bottom:20px;">Email</p>
+        <button class="outline-button" style="width:100%; border:none; text-align:left; padding:10px; background:var(--warm-cream); margin-bottom:5px;">Dashboard</button>
+        <button class="outline-button" style="width:100%; border:none; text-align:left; padding:10px; margin-bottom:20px;">Order History</button>
+        <button id="user-logout-btn" class="outline-button" style="width:100%; color:red; border-color:red;">Logout</button>
+      </div>
+      <div class="account-content">
+        <div style="padding:30px; background:var(--white); border-radius:12px; border:1px solid var(--border-gold);">
+            <h2>Recent Orders</h2>
+            <div id="recent-orders-list" style="margin-top:20px;">
+                <p style="color:var(--taupe);">You haven't placed any orders yet.</p>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="account-login-prompt" style="display:none; text-align:center; padding: 50px;">
+        <h2>Please login to view your account</h2>
+        <a href="login.html" class="peach-button" style="margin-top:20px;">Sign In</a>
+    </div>
+  </main>
+
+  <script src="../js/global-data.js?v=1780167396"></script>
+  <script src="../js/data-store.js?v=1780167396"></script>
+  <script src="../js/main.js?v=1780167396"></script>
+  <script src="../js/account.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradie Admin | Customization</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/admin.css?v=1780166734">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar"></aside>
+        <main class="main-content">
+            <header class="topbar"></header>
+            <div class="content-wrapper">
+                
+            <h2>Customization Settings</h2>
+            <div class="form-card">
+                <p>Advanced customization settings (JSON view).</p>
+                <textarea id="admin-customize-json" rows="15" style="width:100%; font-family:monospace; padding:10px;"></textarea>
+                <button class="btn-primary" onclick="saveCustomization()" style="margin-top:15px;">Save Customization</button>
+            </div>
+        
+            </div>
+        </main>
+    </div>
+    <script src="../js/global-data.js?v=1780167290"></script>
+    <script src="../js/data-store.js?v=1780167290"></script>
+    <script src="../js/admin-auth.js?v=1780167290"></script>
+    <script src="../js/admin.js?v=1780167290"></script>
+    <script src="../js/admin-customize.js?v=1780167290"></script>
+</body>
+</html>
