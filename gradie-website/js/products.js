@@ -50,7 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="product-price">${p.price.toLocaleString('vi-VN')} ₫ ${oldPriceHtml}</div>
                 <div class="product-actions">
                   <button class="btn-favorite outline-button" onclick="event.stopPropagation(); toggleFavorite('${p.id}', this)" style="padding: 8px; border: 1px solid var(--border-gold); background: white; cursor:pointer;"><svg width="18" height="18" fill="currentColor" stroke="none" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                  <button class="btn-add-cart" onclick="event.stopPropagation(); addToCart('${p.id}')" style="flex:1;">Add to Cart</button>
+                  <button class="btn-add-cart" onclick="event.stopPropagation(); addToCart('${p.id}')" style="flex:1; display:flex; align-items:center; justify-content:center; gap:8px;">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    Add to Cart
+                  </button>
                 </div>
               </div>
             </div>
@@ -257,7 +260,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <!-- End Customization Panel -->
 
-                    <button class="peach-button" style="width:100%; padding:15px; font-size:1.1rem;" onclick="addToCart('${p.id}', true)">Add to Cart</button>
+                    <button class="peach-button" style="width:100%; padding:15px; font-size:1.1rem; display:flex; align-items:center; justify-content:center; gap:10px; border-radius:12px; font-weight:600; text-transform:uppercase; letter-spacing:1px; cursor:pointer;" onclick="addToCart('${p.id}', true)">
+                      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                      Add to Cart
+                    </button>
                     
                     <div style="margin-top:40px; border-top:1px solid var(--border-gold); padding-top:30px;">
                         <h3 style="margin-bottom:15px;">Product Details</h3>
