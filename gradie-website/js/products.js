@@ -229,7 +229,7 @@ window.addToCart = function(id, isDetailView = false) {
                 return;
             }
             selectedVariant = variantInput.value;
-            const vObj = p.variants.find(v => v.name === selectedVariant);
+            const vObj = p.variants.find(v => (v.name || v.color) === selectedVariant);
             if (vObj && vObj.price) price = vObj.price;
         } else {
             // Added from grid, force redirect to detail page to select options

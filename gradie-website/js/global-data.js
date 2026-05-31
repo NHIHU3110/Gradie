@@ -65,21 +65,20 @@ window.GRADIE_DATA = {
         "name": "Hoa mừng",
         "slug": "hoa-mừng"
     }
-],
+  ],
   products: [
     {
         "id": "gau_bong_tot_nghiep",
-        "name": "Sản phẩm có nhiều hình biến thể",
+        "name": "Gấu Bông Capybara Tốt Nghiệp",
         "category": "Gấu Bông",
         "price": 115000,
         "oldPrice": 145000,
         "description": "Nếu bạn đang tìm một món quà tốt nghiệp vừa độc đáo, vừa hài hước thì gấu Tốt Nghiệp chính là lựa chọn hoàn hảo. Với khuôn mặt “điềm tĩnh vô tri” kết hợp áo choàng, mũ cử nhân và băng Congratulations, chú gấu mang lại cảm giác vừa trang trọng vừa buồn cười khó cưỡng. Chất liệu bông gòn 7D trắng muốt cùng vải miniso mềm mịn giúp ôm cực thích, không lo rụng lông hay phai màu. Đây không chỉ là món quà dễ thương mà còn gửi gắm thông điệp ý nghĩa: tốt nghiệp xong rồi, hãy cứ thong dong và yêu đời như “chiến thần chuột nước”.\n\n📏 Gấu có đủ 2 size để bạn lựa chọn: 20cm nhỏ gọn xinh xắn, 35cm vừa vặn để ôm và giá hợp lý.",
-        "shortDescription": "Nếu bạn đang tìm một món quà tốt nghiệp vừa độc đáo, vừa hài hước thì gấu Tốt Nghiệp chính là lựa chọn hoàn hảo. Với khu...",
+        "shortDescription": "Nếu bạn đang tìm một món quà tốt nghiệp vừa độc đáo, vừa hài hước thì gấu Tốt Nghiệp chính là lựa chọn hoàn hảo.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg",
-            "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg",
-            "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg"
+            "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg"
         ],
         "badge": "Sản phẩm nổi bật",
         "tags": [
@@ -97,18 +96,19 @@ window.GRADIE_DATA = {
                 "20cm"
             ],
             "personalization": [
-                "Capybara",
-                "Bông gòn 7D, vải miniso"
+                "Capybara"
             ]
         },
         "variants": [
             {
+                "name": "35cm",
                 "color": "35cm",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg",
                 "price": 115000,
                 "sku": "SP001-1"
             },
             {
+                "name": "20cm",
                 "color": "20cm",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg",
                 "price": 135000,
@@ -118,12 +118,12 @@ window.GRADIE_DATA = {
     },
     {
         "id": "gau_bong_tot_nghiep_in_logo",
-        "name": "Sản phẩm có nhiều hình biến thể",
+        "name": "Gấu Bông Tốt Nghiệp Gradie",
         "category": "Gấu Bông",
         "price": 65000,
         "oldPrice": 75000,
         "description": "Gấu bông tốt nghiệp là món quà ý nghĩa dành cho sinh viên, ghi dấu khoảnh khắc quan trọng trong cuộc đời. Với kích thước 20cm khi ngồi (18cm), chú gấu nhỏ nhắn, dễ thương, khoác áo choàng và đội mũ cử nhân, mang thông điệp chúc mừng trang trọng nhưng vẫn đáng yêu. Sản phẩm được làm từ bông gòn nhân tạo 3 chiều, mềm mại, an toàn tuyệt đối, ôm cực thích. Khi mua tại Gradie, bạn sẽ được tặng kèm giấy gói quà sang trọng và bảo hành đường chỉ may trọn đời, đảm bảo chất lượng lâu dài. Đây chính là món quà tinh tế, vừa lưu giữ kỷ niệm tốt nghiệp, vừa mang lại niềm vui cho người nhận.",
-        "shortDescription": "Gấu bông tốt nghiệp là món quà ý nghĩa dành cho sinh viên, ghi dấu khoảnh khắc quan trọng trong cuộc đời. Với kích thước...",
+        "shortDescription": "Gấu bông tốt nghiệp là món quà ý nghĩa dành cho sinh viên, ghi dấu khoảnh khắc quan trọng trong cuộc đời.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp002_1.jpg",
@@ -142,12 +142,9 @@ window.GRADIE_DATA = {
         "stock": 20,
         "options": {
             "colors": [],
-            "sizes": [
-                "20cm khi ngồi 18cm"
-            ],
+            "sizes": [],
             "personalization": [
                 "Có kính, không in",
-                "Bông gòn nhân tạo 3 chiều",
                 "Có kính, in tên",
                 "Không kính, không in",
                 "Không kính, in tên"
@@ -155,21 +152,43 @@ window.GRADIE_DATA = {
         },
         "variants": [
             {
-                "color": "20cm khi ngồi 18cm",
+                "name": "Có kính, không in",
+                "color": "Có kính, không in",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_1.jpg",
                 "price": 65000,
                 "sku": "SP002-1"
+            },
+            {
+                "name": "Có kính, in tên",
+                "color": "Có kính, in tên",
+                "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_2.jpg",
+                "price": 80000,
+                "sku": "SP002-2"
+            },
+            {
+                "name": "Không kính, không in",
+                "color": "Không kính, không in",
+                "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_3.jpg",
+                "price": 60000,
+                "sku": "SP002-3"
+            },
+            {
+                "name": "Không kính, in tên",
+                "color": "Không kính, in tên",
+                "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_4.jpg",
+                "price": 70000,
+                "sku": "SP002-4"
             }
         ]
     },
     {
         "id": "qua_tang_bup_be_tot_nghiep",
-        "name": "Sản phẩm có nhiều nhóm sản phẩm",
+        "name": "Búp Bê Móc Len Tốt Nghiệp",
         "category": "Gấu bông",
         "price": 419000,
         "oldPrice": 429000,
         "description": "Gấu bông tốt nghiệp với chiều cao 20–23cm là món quà thủ công 100% đầy ý nghĩa, ghi dấu khoảnh khắc quan trọng trong đời sinh viên. Ngoài kích thước tiêu chuẩn, shop còn nhận làm size lớn hoặc theo mẫu riêng, khách chỉ cần inbox để đặt. Sản phẩm chưa bao gồm trang trí hộp mica, hoa hay các kiểu hộp khác. Do đặc thù len thủ công, màu sắc có thể chênh lệch nhẹ giữa các lô, tạo nên sự độc đáo riêng cho từng sản phẩm",
-        "shortDescription": "Gấu bông tốt nghiệp với chiều cao 20–23cm là món quà thủ công 100% đầy ý nghĩa, ghi dấu khoảnh khắc quan trọng trong đời...",
+        "shortDescription": "Gấu bông tốt nghiệp với chiều cao 20–23cm là món quà thủ công 100% đầy ý nghĩa, ghi dấu khoảnh khắc quan trọng.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp003_1.jpg",
@@ -188,13 +207,9 @@ window.GRADIE_DATA = {
         "stock": 20,
         "options": {
             "colors": [],
-            "sizes": [
-                "23cm",
-                "20cm"
-            ],
+            "sizes": [],
             "personalization": [
                 "Nữ, có đế",
-                "Len",
                 "Nữ, không đế",
                 "Nam, có đế",
                 "Nam, không đế"
@@ -202,27 +217,43 @@ window.GRADIE_DATA = {
         },
         "variants": [
             {
-                "color": "23cm",
+                "name": "Nữ, có đế",
+                "color": "Nữ, có đế",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_1.jpg",
                 "price": 419000,
                 "sku": "SP003-1"
             },
             {
-                "color": "20cm",
+                "name": "Nữ, không đế",
+                "color": "Nữ, không đế",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_2.jpg",
                 "price": 399000,
                 "sku": "SP003-2"
+            },
+            {
+                "name": "Nam, có đế",
+                "color": "Nam, có đế",
+                "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_3.jpg",
+                "price": 419000,
+                "sku": "SP003-3"
+            },
+            {
+                "name": "Nam, không đế",
+                "color": "Nam, không đế",
+                "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_4.jpg",
+                "price": 399000,
+                "sku": "SP003-4"
             }
         ]
     },
     {
         "id": "bo_hoa_len_tot_nghiep",
-        "name": "Sản phẩm có nhiều hình sản phẩm",
+        "name": "Bó Hoa Móc Len Hướng Dương",
         "category": "Hoa mừng",
         "price": 149000,
         "oldPrice": 159000,
         "description": "Bó hoa len handmade được làm hoàn toàn thủ công, mang vẻ đẹp độc đáo và ý nghĩa, rất phù hợp làm quà tặng tốt nghiệp. Sản phẩm có chiều cao 50cm, gồm 1 chú gấu nhỏ đáng yêu kết hợp cùng 5 bông hướng dương rực rỡ, tạo nên tổng thể vừa trang trọng vừa tươi vui.",
-        "shortDescription": "Bó hoa len handmade được làm hoàn toàn thủ công, mang vẻ đẹp độc đáo và ý nghĩa, rất phù hợp làm quà tặng tốt nghiệp. Sả...",
+        "shortDescription": "Bó hoa len handmade được làm hoàn toàn thủ công, mang vẻ đẹp độc đáo và ý nghĩa, rất phù hợp làm quà tặng tốt nghiệp.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp004_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp004_1.jpg",
@@ -244,13 +275,13 @@ window.GRADIE_DATA = {
                 "50cm"
             ],
             "personalization": [
-                "Bó hoa",
-                "Len"
+                "Bó hoa"
             ]
         },
         "variants": [
             {
-                "color": "50cm",
+                "name": "Bó hoa 50cm",
+                "color": "Bó hoa 50cm",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp004_1.jpg",
                 "price": 149000,
                 "sku": "SP004-1"
@@ -259,12 +290,12 @@ window.GRADIE_DATA = {
     },
     {
         "id": "bo_hoa_sap_ecuado",
-        "name": "Sản phẩm có nhiều hình sản phẩm",
+        "name": "Bó Hoa Hồng Hồng",
         "category": "Hoa mừng",
         "price": 209000,
         "oldPrice": 229000,
         "description": "Bó hoa sáp Ecuador 15 bông giấy kiếng từ Paris Florist là món quà tinh tế, phù hợp cho nhiều dịp đặc biệt. Với sự kết hợp giữa hoa sáp và hoa nhũ kim tuyến, sản phẩm mang biểu tượng tình yêu vĩnh cửu bởi vẻ đẹp không tàn, không phai, đồng thời có giá thành dễ tiếp cận hơn hoa tươi. Hoa được làm thủ công tỉ mỉ, thể hiện tâm huyết của người thợ. Mỗi sản phẩm khi đến tay khách hàng đều được chăm chút để giữ nguyên vẻ xinh đẹp, trở thành món quà ý nghĩa và bền lâu cho người nhận.",
-        "shortDescription": "Bó hoa sáp Ecuador 15 bông giấy kiếng từ Paris Florist là món quà tinh tế, phù hợp cho nhiều dịp đặc biệt. Với sự kết hợ...",
+        "shortDescription": "Bó hoa sáp Ecuador 15 bông giấy kiếng từ Paris Florist là món quà tinh tế, phù hợp cho nhiều dịp đặc biệt.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp005_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp005_1.jpg",
@@ -286,13 +317,13 @@ window.GRADIE_DATA = {
                 "30cm"
             ],
             "personalization": [
-                "Bó hoa",
-                "Hoa sáp"
+                "Bó hoa"
             ]
         },
         "variants": [
             {
-                "color": "30cm",
+                "name": "Bó hoa 30cm",
+                "color": "Bó hoa 30cm",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp005_1.jpg",
                 "price": 209000,
                 "sku": "SP005-1"
@@ -301,12 +332,12 @@ window.GRADIE_DATA = {
     },
     {
         "id": "bo_hoa_bong_bong",
-        "name": "Sản phẩm có nhiều hình sản phẩm",
+        "name": "Bó Hoa Bóng Bay Tốt Nghiệp",
         "category": "Hoa mừng",
         "price": 359000,
         "oldPrice": 389000,
         "description": "Hoa bong bóng là lựa chọn quà tặng độc đáo, phù hợp cho ngày tốt nghiệp, chụp ảnh kỷ yếu hay làm quà tặng người yêu. Sản phẩm được thiết kế từ những quả bóng cao cấp, có độ dai tốt, màu sắc chuẩn và đẹp mắt, tạo nên tổng thể vừa trẻ trung vừa sang trọng. Đây là món quà vừa mang tính trang trí, vừa giúp lưu giữ kỷ niệm đáng nhớ trong những dịp đặc biệt.",
-        "shortDescription": "Hoa bong bóng là lựa chọn quà tặng độc đáo, phù hợp cho ngày tốt nghiệp, chụp ảnh kỷ yếu hay làm quà tặng người yêu. Sản...",
+        "shortDescription": "Hoa bong bóng là lựa chọn quà tặng độc đáo, phù hợp cho ngày tốt nghiệp, chụp ảnh kỷ yếu hay làm quà tặng người yêu.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp006_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp006_1.jpg",
@@ -328,13 +359,13 @@ window.GRADIE_DATA = {
                 "80cm"
             ],
             "personalization": [
-                "Bó hoa",
-                "Bong Bóng"
+                "Bó hoa"
             ]
         },
         "variants": [
             {
-                "color": "80cm",
+                "name": "Bó hoa 80cm",
+                "color": "Bó hoa 80cm",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp006_1.jpg",
                 "price": 359000,
                 "sku": "SP006-1"
@@ -343,17 +374,16 @@ window.GRADIE_DATA = {
     },
     {
         "id": "keo_khong_lo",
-        "name": "Sản phẩm có nhiều hình biến thể",
+        "name": "Túi Kẹo Quà Tặng",
         "category": "Kẹo",
         "price": 49000,
         "oldPrice": 59000,
         "description": "Kẹo khổng lồ vừa ngon – xinh – giá yêu, là món quà cực kỳ phù hợp để tặng bé, bạn bè hay cả tập thể lớp trong những dịp đặc biệt. Sản phẩm gồm nhiều loại bánh kẹo, bim bim và snack mix được phối theo tông màu bắt mắt, tạo nên một tổng thể vừa vui nhộn vừa hấp dẫn. Khi mua, khách sẽ được tặng kèm túi đựng và thiệp, giúp món quà thêm phần trọn vẹn.\nHạn sử dụng sản phẩm từ 3 đến 6 tháng, đảm bảo an toàn và chất lượng cho người dùng. Đây chắc chắn là món quà ngọt ngào, độc đáo và đầy bất ngờ dành cho người nhận.",
-        "shortDescription": "Kẹo khổng lồ vừa ngon – xinh – giá yêu, là món quà cực kỳ phù hợp để tặng bé, bạn bè hay cả tập thể lớp trong những dịp ...",
+        "shortDescription": "Kẹo khổng lồ vừa ngon – xinh – giá yêu, là món quà cực kỳ phù hợp để tặng bé, bạn bè hay cả tập thể lớp.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp007_1.jpg",
-            "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg",
-            "https://cdn.hstatic.net/files/200001178391/file/sp007_1.jpg"
+            "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg"
         ],
         "badge": "Trang chủ",
         "tags": [
@@ -379,18 +409,21 @@ window.GRADIE_DATA = {
         },
         "variants": [
             {
+                "name": "Hồng",
                 "color": "Hồng",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_1.jpg",
                 "price": 49000,
                 "sku": "SP007-1"
             },
             {
+                "name": "Đỏ",
                 "color": "Đỏ",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg",
                 "price": 49000,
                 "sku": "SP007-2"
             },
             {
+                "name": "Xanh",
                 "color": "Xanh",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg",
                 "price": 49000,
@@ -400,16 +433,14 @@ window.GRADIE_DATA = {
     },
     {
         "id": "keo_mut_trai_tim",
-        "name": "Sản phẩm có nhiều hình biến thể",
+        "name": "Túi Kẹo Lớn Hình Trái Tim",
         "category": "Kẹo",
         "price": 89000,
         "oldPrice": 99000,
         "description": "Bó kẹo mút hình trái tim siêu xinh là món quà “ngọt ngào” và độc đáo nhất mùa này. Với thiết kế trong suốt, gói cực kỳ dễ thương, sản phẩm được mix trên 10 loại bánh kẹo khác nhau, tạo nên sự đa dạng và hấp dẫn. Mỗi bó kẹo đều được trang trí bằng nơ ruy băng cùng họa tiết hoạt hình đáng yêu, mang lại cảm giác vừa vui nhộn vừa tinh tế.",
-        "shortDescription": "Bó kẹo mút hình trái tim siêu xinh là món quà “ngọt ngào” và độc đáo nhất mùa này. Với thiết kế trong suốt, gói cực kỳ d...",
+        "shortDescription": "Bó kẹo mút hình trái tim siêu xinh là món quà “ngọt ngào” và độc đáo nhất mùa này.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg",
         "gallery": [
-            "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg",
-            "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg",
             "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg"
         ],
         "badge": "Sản phẩm nổi bật",
@@ -435,12 +466,14 @@ window.GRADIE_DATA = {
         },
         "variants": [
             {
+                "name": "Hồng",
                 "color": "Hồng",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg",
                 "price": 89000,
                 "sku": "SP008-1"
             },
             {
+                "name": "Xanh",
                 "color": "Xanh",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg",
                 "price": 89000,
@@ -450,17 +483,16 @@ window.GRADIE_DATA = {
     },
     {
         "id": "khung_anh_ghep_do_tot_nghiep",
-        "name": "Sản phẩm có nhiều hình biến thể",
+        "name": "Khung Ảnh Tốt Nghiệp Chibi",
         "category": "Khung ảnh",
         "price": 64000,
         "oldPrice": 74000,
         "description": "Khung ảnh ghép đồ tốt nghiệp chibi là món quà độc đáo và ý nghĩa dành cho ngày tốt nghiệp. Với thiết kế chibi dễ thương, sản phẩm mang đến lời chúc mừng tốt nghiệp một cách sinh động và vui nhộn, giúp lưu giữ khoảnh khắc quan trọng trong đời sinh viên. Khung ảnh được làm tỉ mỉ, phối hợp cùng các chi tiết lễ phục, mũ cử nhân và dòng chữ chúc mừng, tạo nên tổng thể vừa trang trọng vừa đáng yêu.",
-        "shortDescription": "Khung ảnh ghép đồ tốt nghiệp chibi là món quà độc đáo và ý nghĩa dành cho ngày tốt nghiệp. Với thiết kế chibi dễ thương,...",
+        "shortDescription": "Khung ảnh ghép đồ tốt nghiệp chibi là món quà độc đáo và ý nghĩa dành cho ngày tốt nghiệp.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg",
-            "https://cdn.hstatic.net/files/200001178391/file/sp009_2.jpg",
-            "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg"
+            "https://cdn.hstatic.net/files/200001178391/file/sp009_2.jpg"
         ],
         "badge": "Gradie Pick",
         "tags": [
@@ -478,18 +510,19 @@ window.GRADIE_DATA = {
                 "13x18cm"
             ],
             "personalization": [
-                "Khung chữ nhật",
-                "Nhựa"
+                "Khung chữ nhật"
             ]
         },
         "variants": [
             {
+                "name": "10x15cm",
                 "color": "10x15cm",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg",
                 "price": 64000,
                 "sku": "SP009-1"
             },
             {
+                "name": "13x18cm",
                 "color": "13x18cm",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp009_2.jpg",
                 "price": 75000,
@@ -499,16 +532,14 @@ window.GRADIE_DATA = {
     },
     {
         "id": "khung_anh_3d_totnghiep",
-        "name": "Sản phẩm có nhiều hình biến thể",
+        "name": "Khung Ảnh Tốt Nghiệp",
         "category": "Khung ảnh",
         "price": 139000,
         "oldPrice": 149000,
         "description": "Khung ảnh tốt nghiệp chibi được thiết kế theo yêu cầu, là món quà ý nghĩa dành tặng bạn bè trong ngày tốt nghiệp. Sản phẩm gồm khung ảnh, chân chống, móc treo tường, đèn LED và được tặng thêm 1 ảnh đi kèm. Khung làm từ nhựa giả gỗ composite nhẹ, bền, không cong vênh, chống mối mọt, mặt kính sáng bóng.",
-        "shortDescription": "Khung ảnh tốt nghiệp chibi được thiết kế theo yêu cầu, là món quà ý nghĩa dành tặng bạn bè trong ngày tốt nghiệp. Sản ph...",
+        "shortDescription": "Khung ảnh tốt nghiệp chibi được thiết kế theo yêu cầu, là món quà ý nghĩa dành tặng bạn bè trong ngày tốt nghiệp.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg",
         "gallery": [
-            "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg",
-            "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg",
             "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg"
         ],
         "badge": "Gradie Pick",
@@ -528,19 +559,20 @@ window.GRADIE_DATA = {
             ],
             "personalization": [
                 "Khung chữ nhật",
-                "Nhựa",
                 "Khung vuông"
             ]
         },
         "variants": [
             {
-                "color": "15x21cm",
+                "name": "Khung chữ nhật 15x21cm",
+                "color": "Khung chữ nhật 15x21cm",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg",
                 "price": 139000,
                 "sku": "SP029-1"
             },
             {
-                "color": "18x18cm",
+                "name": "Khung vuông 18x18cm",
+                "color": "Khung vuông 18x18cm",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg",
                 "price": 159000,
                 "sku": "SP029-2"
@@ -549,17 +581,17 @@ window.GRADIE_DATA = {
     },
     {
         "id": "so-dan-anh-scrapbook",
-        "name": "Sản phẩm có nhiều hình biến thể",
+        "name": "Sổ Lưu Kỉ Niệm Pieces of Memories",
         "category": "Scrapbook",
         "price": 146000,
         "oldPrice": 150000,
-        "description": "Sản phẩm có nhiều hình biến thể Scrapbook",
-        "shortDescription": "A wonderful graduation gift from Gradie.",
-        "image": "Link",
+        "description": "Sổ dán ảnh Scrapbook sổ còng Giấy đen 250gsm - Sổ lưu kỉ niệm Pieces of Memories. Một món quà tuyệt vời dành tặng ngày tốt nghiệp để lưu giữ những hồi ức tươi đẹp.",
+        "shortDescription": "Sổ dán ảnh Scrapbook sổ còng Giấy đen 250gsm - Sổ lưu kỉ niệm Pieces of Memories.",
+        "image": "https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&q=80",
         "gallery": [
-            "Link",
-            "Link",
-            "Link"
+            "https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&q=80",
+            "https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&q=80",
+            "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80"
         ],
         "badge": "Sổ tay",
         "tags": [
@@ -577,8 +609,9 @@ window.GRADIE_DATA = {
         },
         "variants": [
             {
-                "color": "SP010-1",
-                "image": "Link",
+                "name": "Tiêu chuẩn",
+                "color": "Tiêu chuẩn",
+                "image": "https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&q=80",
                 "price": 146000,
                 "sku": "SP010-1"
             }
@@ -586,17 +619,17 @@ window.GRADIE_DATA = {
     },
     {
         "id": "so-len-ke-hoach",
-        "name": "Sản phẩm có nhiều hình biến thể",
+        "name": "Sổ Lên Kế Hoạch",
         "category": "Sổ kế hoạch",
         "price": 139000,
         "oldPrice": 140000,
-        "description": "Sản phẩm có nhiều hình biến thể Sổ kế hoạch",
-        "shortDescription": "A wonderful graduation gift from Gradie.",
-        "image": "Link",
+        "description": "Sổ Lên Kế Hoạch Không in sẵn ngày | Undated Sổ Kế Hoạch Cao Cấp Bìa Da Giấy Dày 120gsm. Một người bạn đồng hành hoàn hảo để lập kế hoạch cho tương lai rực rỡ sau tốt nghiệp.",
+        "shortDescription": "Sổ Lên Kế Hoạch Không in sẵn ngày | Undated Sổ Kế Hoạch Cao Cấp Bìa Da Giấy Dày 120gsm.",
+        "image": "https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&q=80",
         "gallery": [
-            "Link",
-            "Link",
-            "Link"
+            "https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&q=80",
+            "https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&q=80",
+            "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80"
         ],
         "badge": "Sổ tay",
         "tags": [
@@ -614,8 +647,9 @@ window.GRADIE_DATA = {
         },
         "variants": [
             {
-                "color": "SP011-1",
-                "image": "Link",
+                "name": "Tiêu chuẩn",
+                "color": "Tiêu chuẩn",
+                "image": "https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&q=80",
                 "price": 139000,
                 "sku": "SP011-1"
             }
@@ -623,16 +657,14 @@ window.GRADIE_DATA = {
     },
     {
         "id": "so-tay-bia-cung",
-        "name": "So-Tay-Bia-Cung",
+        "name": "Sổ Tay Bìa Cứng",
         "category": "Graduation Gifts",
-        "price": 0,
-        "oldPrice": 0,
-        "description": "So-Tay-Bia-Cung Graduation Gifts",
-        "shortDescription": "A wonderful graduation gift from Gradie.",
+        "price": 120000,
+        "oldPrice": 140000,
+        "description": "Sổ Tay Bìa Cứng thiết kế tinh tế, giấy viết cao cấp chống lem nhòe. Thích hợp để ghi chép và lưu giữ những ý tưởng tuyệt vời.",
+        "shortDescription": "Sổ Tay Bìa Cứng thiết kế tinh tế, giấy viết cao cấp chống lem nhòe.",
         "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80",
         "gallery": [
-            "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80",
-            "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80",
             "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80"
         ],
         "badge": "Gradie Pick",
@@ -649,16 +681,24 @@ window.GRADIE_DATA = {
             "sizes": [],
             "personalization": []
         },
-        "variants": []
+        "variants": [
+            {
+                "name": "Bìa cứng",
+                "color": "Bìa cứng",
+                "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80",
+                "price": 120000,
+                "sku": "SP012-1"
+            }
+        ]
     },
     {
         "id": "huy_chuong_chuc_mung_tot_nghiep",
-        "name": "Sản phẩm có nhiều hình biến thể",
+        "name": "Huy Chương Tốt Nghiệp",
         "category": "Huy Chương",
         "price": 69000,
         "oldPrice": 79000,
         "description": "Huy chương chúc mừng tốt nghiệp là món quà độc đáo, mang ý nghĩa ghi dấu hành trình học tập và thành công của bạn bè, người thân. Với thiết kế trang trọng, nổi bật cùng dòng chữ chúc mừng, sản phẩm vừa là kỷ niệm đáng nhớ vừa là lời động viên tinh thần.",
-        "shortDescription": "Huy chương chúc mừng tốt nghiệp là món quà độc đáo, mang ý nghĩa ghi dấu hành trình học tập và thành công của bạn bè, ng...",
+        "shortDescription": "Huy chương chúc mừng tốt nghiệp là món quà độc đáo, mang ý nghĩa ghi dấu hành trình học tập và thành công.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp030_1.jpg",
@@ -682,24 +722,26 @@ window.GRADIE_DATA = {
             ],
             "sizes": [],
             "personalization": [
-                "Hình tròn",
-                "Đồng"
+                "Hình tròn"
             ]
         },
         "variants": [
             {
+                "name": "Xanh đen",
                 "color": "Xanh đen",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_1.jpg",
                 "price": 69000,
                 "sku": "SP030-1"
             },
             {
+                "name": "Vàng cam",
                 "color": "Vàng cam",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_2.jpg",
                 "price": 69000,
                 "sku": "SP030-2"
             },
             {
+                "name": "Da trời",
                 "color": "Da trời",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_3.jpg",
                 "price": 69000,
@@ -709,12 +751,12 @@ window.GRADIE_DATA = {
     },
     {
         "id": "den_ngu_gau_tot_nghiep",
-        "name": "Sản phẩm có nhiều hình biến thể",
+        "name": "Hộp Tuyết Thủy Tinh",
         "category": "Đèn Ngủ",
         "price": 159000,
         "oldPrice": 165000,
         "description": "Mỗi bộ sản phẩm bao gồm: trụ đáy gỗ & dây đèn LED, hoa và lá đính kèm, hạt pha lê trong trang trí, pin, nắp chụp thủy tinh, keo nến và gấu tốt nghiệp. Thiết kế tinh tế, ánh sáng dịu nhẹ cùng chi tiết trang trí độc đáo giúp chiếc đèn trở thành món quà vừa đẹp mắt vừa mang giá trị kỷ niệm.",
-        "shortDescription": "Mỗi bộ sản phẩm bao gồm: trụ đáy gỗ & dây đèn LED, hoa và lá đính kèm, hạt pha lê trong trang trí, pin, nắp chụp thủy ti...",
+        "shortDescription": "Mỗi bộ sản phẩm bao gồm: trụ đáy gỗ & dây đèn LED, hoa và lá đính kèm, hạt pha lê, nắp chụp thủy tinh, gấu tốt nghiệp.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp031_1.jpg",
@@ -739,27 +781,37 @@ window.GRADIE_DATA = {
             ],
             "sizes": [],
             "personalization": [
-                "Hướng dương, nam",
-                "Nhựa",
-                "Hướng dương, nữ",
-                "Tulip Gấu"
+                "Vàng Hướng dương nam",
+                "Vàng Hướng dương nữ",
+                "Hồng Tulip Gấu",
+                "Xanh Tulip Gấu"
             ]
         },
         "variants": [
             {
-                "color": "Vàng",
+                "name": "Vàng Hướng dương nam",
+                "color": "Vàng Hướng dương nam",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_1.jpg",
                 "price": 159000,
                 "sku": "SP031-1"
             },
             {
-                "color": "Hồng",
+                "name": "Vàng Hướng dương nữ",
+                "color": "Vàng Hướng dương nữ",
+                "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_2.jpg",
+                "price": 159000,
+                "sku": "SP031-2"
+            },
+            {
+                "name": "Hồng Tulip Gấu",
+                "color": "Hồng Tulip Gấu",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_3.jpg",
                 "price": 159000,
                 "sku": "SP031-3"
             },
             {
-                "color": "Xanh",
+                "name": "Xanh Tulip Gấu",
+                "color": "Xanh Tulip Gấu",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_4.jpg",
                 "price": 159000,
                 "sku": "SP031-4"
@@ -768,12 +820,12 @@ window.GRADIE_DATA = {
     },
     {
         "id": "den_guong_tulip",
-        "name": "Sản phẩm có nhiều hình biến thể",
+        "name": "Hộp Thủy Tinh Vuông",
         "category": "Đèn Ngủ",
         "price": 49000,
         "oldPrice": 59000,
         "description": "Đèn ngủ hoa tulip 2-in-1 vừa là chiếc đèn ngủ ấm áp, vừa kiêm gương soi tiện lợi, mang lại trải nghiệm đa năng cho người dùng. Khi bật sáng, hiệu ứng thị giác lung linh tạo cảm giác không gian vô cực với những bông hoa rực rỡ, giúp căn phòng thêm phần lãng mạn và thư giãn. Sản phẩm mang tính DIY độc đáo, cho phép bạn tự tay lắp ráp để tạo nên “vườn hoa” riêng, tăng sự cá nhân hóa và ý nghĩa.",
-        "shortDescription": "Đèn ngủ hoa tulip 2-in-1 vừa là chiếc đèn ngủ ấm áp, vừa kiêm gương soi tiện lợi, mang lại trải nghiệm đa năng cho người...",
+        "shortDescription": "Đèn ngủ hoa tulip 2-in-1 vừa là chiếc đèn ngủ ấm áp, vừa kiêm gương soi tiện lợi, mang lại trải nghiệm đa năng.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp032_1.jpg",
@@ -799,30 +851,33 @@ window.GRADIE_DATA = {
             ],
             "sizes": [],
             "personalization": [
-                "Vuông",
-                "Nhựa"
+                "Vuông"
             ]
         },
         "variants": [
             {
+                "name": "Hồng",
                 "color": "Hồng",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_1.jpg",
                 "price": 49000,
                 "sku": "SP032-1"
             },
             {
+                "name": "Xanh",
                 "color": "Xanh",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_2.jpg",
                 "price": 49000,
                 "sku": "SP032-2"
             },
             {
+                "name": "Tím",
                 "color": "Tím",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_3.jpg",
                 "price": 49000,
                 "sku": "SP032-3"
             },
             {
+                "name": "Nhiều màu",
                 "color": "Nhiều màu",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_4.jpg",
                 "price": 49000,
@@ -832,12 +887,12 @@ window.GRADIE_DATA = {
     },
     {
         "id": "den_ngu_silicon",
-        "name": "Sản phẩm có nhiều hình biến thể",
+        "name": "Đèn LED Thú Dễ Thương",
         "category": "Đèn Ngủ",
         "price": 109000,
         "oldPrice": 119000,
         "description": "Đèn ngủ mini được thiết kế nhỏ gọn, tiện lợi với thông số kỹ thuật hiện đại: điện áp định mức 5V / 0,3A, công suất 1W, dung lượng pin 1200mAh cho thời gian sử dụng dài. Ở mức sáng cao nhất, đèn có thể hoạt động 6–7 giờ, còn mức sáng thấp nhất kéo dài tới 12 giờ. Thời gian sạc nhanh chỉ 2–3 giờ, giúp bạn dễ dàng sử dụng liên tục.",
-        "shortDescription": "Đèn ngủ mini được thiết kế nhỏ gọn, tiện lợi với thông số kỹ thuật hiện đại: điện áp định mức 5V / 0,3A, công suất 1W, d...",
+        "shortDescription": "Đèn ngủ mini được thiết kế nhỏ gọn, tiện lợi với thông số kỹ thuật hiện đại, dung lượng pin 1200mAh.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp033_1.jpg",
@@ -854,34 +909,46 @@ window.GRADIE_DATA = {
         "isFeatured": false,
         "stock": 20,
         "options": {
-            "colors": [
-                "Trằng, vàng"
-            ],
+            "colors": [],
             "sizes": [],
             "personalization": [
                 "Thỏ",
-                "Silicon",
                 "Vịt",
                 "Rồng"
             ]
         },
         "variants": [
             {
-                "color": "Trằng, vàng",
+                "name": "Thỏ",
+                "color": "Thỏ",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_1.jpg",
                 "price": 109000,
                 "sku": "SP033-1"
+            },
+            {
+                "name": "Vịt",
+                "color": "Vịt",
+                "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_2.jpg",
+                "price": 109000,
+                "sku": "SP033-2"
+            },
+            {
+                "name": "Rồng",
+                "color": "Rồng",
+                "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_3.jpg",
+                "price": 109000,
+                "sku": "SP033-3"
             }
         ]
     },
     {
         "id": "non_tot_nghiep_hoa_lua",
-        "name": "Sản phẩm có nhiều hình biến thể",
+        "name": "Mũ Cử Nhân Trang Trí Hoa Lụa",
         "category": "Đồ tốt nghiệp",
         "price": 189000,
         "oldPrice": 199000,
         "description": "Chiếc mũ cử nhân được trang trí tỉ mỉ và cẩn thận, thiết kế riêng dành cho bạn, giúp ngày tốt nghiệp thêm phần đặc biệt. Đây không chỉ là phụ kiện ý nghĩa mà còn là điểm nhấn để lưu lại những bức hình ấn tượng, ghi dấu kỷ niệm khó quên trong hành trình học tập. Món quà tinh tế này sẽ mang đến sự tự hào và niềm vui trọn vẹn cho người nhận.",
-        "shortDescription": "Chiếc mũ cử nhân được trang trí tỉ mỉ và cẩn thận, thiết kế riêng dành cho bạn, giúp ngày tốt nghiệp thêm phần đặc biệt....",
+        "shortDescription": "Chiếc mũ cử nhân được trang trí tỉ mỉ và cẩn thận, thiết kế riêng dành cho bạn.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp034_1.jpg",
@@ -905,27 +972,29 @@ window.GRADIE_DATA = {
             ],
             "sizes": [],
             "personalization": [
-                "Bướm",
-                "Giấy, Hoa lụa, Ngọc trai",
-                "Hoa hồng",
-                "Hoa Tulip"
+                "Bướm Xanh",
+                "Hoa hồng Đỏ",
+                "Hoa Tulip Hồng"
             ]
         },
         "variants": [
             {
-                "color": "Xanh",
+                "name": "Bướm Xanh",
+                "color": "Bướm Xanh",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_1.jpg",
                 "price": 189000,
                 "sku": "SP034-1"
             },
             {
-                "color": "Đỏ",
+                "name": "Hoa hồng Đỏ",
+                "color": "Hoa hồng Đỏ",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_2.jpg",
                 "price": 189000,
                 "sku": "SP034-2"
             },
             {
-                "color": "Hồng",
+                "name": "Hoa Tulip Hồng",
+                "color": "Hoa Tulip Hồng",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_3.jpg",
                 "price": 189000,
                 "sku": "SP034-3"
@@ -934,17 +1003,16 @@ window.GRADIE_DATA = {
     },
     {
         "id": "ao_cu_nhan",
-        "name": "Ao Cu Nhan",
+        "name": "Áo Cử Nhân Tốt Nghiệp",
         "category": "Đồ tốt nghiệp",
         "price": 339000,
         "oldPrice": 349000,
         "description": "Bộ lễ phục cử nhân quốc tế màu đen trang trọng, phù hợp cho lễ tốt nghiệp đại học, thạc sĩ hay giảng viên. Sản phẩm gồm áo cử nhân và mũ tốt nghiệp, mang thiết kế chuẩn mực, giúp lưu giữ khoảnh khắc quan trọng trong hành trình học tập. Với chất liệu bền đẹp và kiểu dáng truyền thống, bộ lễ phục không chỉ thể hiện sự tự hào mà còn tạo nên hình ảnh chuyên nghiệp, trang nghiêm trong ngày trọng đại.",
-        "shortDescription": "Bộ lễ phục cử nhân quốc tế màu đen trang trọng, phù hợp cho lễ tốt nghiệp đại học, thạc sĩ hay giảng viên. Sản phẩm gồm ...",
+        "shortDescription": "Bộ lễ phục cử nhân quốc tế màu đen trang trọng, phù hợp cho lễ tốt nghiệp đại học, thạc sĩ hay giảng viên.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg",
-            "https://cdn.hstatic.net/files/200001178391/file/sp035_2.jpg",
-            "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg"
+            "https://cdn.hstatic.net/files/200001178391/file/sp035_2.jpg"
         ],
         "badge": "Trang chủ",
         "tags": [
@@ -956,33 +1024,38 @@ window.GRADIE_DATA = {
         "isFeatured": true,
         "stock": 20,
         "options": {
-            "colors": [
-                "Xanh, trắng"
-            ],
+            "colors": [],
             "sizes": [],
             "personalization": [
                 "Bộ áo mũ",
-                "Cotton",
-                "Bộ áo mũ, nơ"
+                "Bộ áo mũ nơ"
             ]
         },
         "variants": [
             {
-                "color": "Xanh, trắng",
+                "name": "Bộ áo mũ",
+                "color": "Bộ áo mũ",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg",
                 "price": 339000,
                 "sku": "SP035-1"
+            },
+            {
+                "name": "Bộ áo mũ nơ",
+                "color": "Bộ áo mũ nơ",
+                "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_2.jpg",
+                "price": 369000,
+                "sku": "SP035-2"
             }
         ]
     },
     {
         "id": "sash_tot_nghiep",
-        "name": "Sản phẩm có nhiều hình sản phẩm",
+        "name": "Sash Tốt Nghiệp",
         "category": "Đồ tốt nghiệp",
         "price": 149000,
         "oldPrice": 159000,
         "description": "Sash đeo chéo tốt nghiệp là phụ kiện trang trọng, giúp tôn vinh khoảnh khắc quan trọng trong ngày lễ ra trường. Với thiết kế tinh tế, màu sắc nổi bật, sash mang lại vẻ tự tin và phong cách cho người mặc, đồng thời tạo điểm nhấn trong những bức ảnh kỷ yếu.",
-        "shortDescription": "Sash đeo chéo tốt nghiệp là phụ kiện trang trọng, giúp tôn vinh khoảnh khắc quan trọng trong ngày lễ ra trường. Với thiế...",
+        "shortDescription": "Sash đeo chéo tốt nghiệp là phụ kiện trang trọng, giúp tôn vinh khoảnh khắc quan trọng trong ngày lễ ra trường.",
         "image": "https://cdn.hstatic.net/files/200001178391/file/sp036_1.jpg",
         "gallery": [
             "https://cdn.hstatic.net/files/200001178391/file/sp036_1.jpg",
@@ -1006,19 +1079,20 @@ window.GRADIE_DATA = {
                 "170x120cm"
             ],
             "personalization": [
-                "Sash tên"
+                "Sash tên Trắng"
             ]
         },
         "variants": [
             {
-                "color": "Trắng",
+                "name": "Sash tên Trắng",
+                "color": "Sash tên Trắng",
                 "image": "https://cdn.hstatic.net/files/200001178391/file/sp036_1.jpg",
                 "price": 149000,
                 "sku": "SP036-1"
             }
         ]
     }
-],
+  ],
   featuredCollections: [
     { title: "For the Dreamers", description: "Soft, meaningful gifts for the ambitious heart.", image: "https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?w=600&q=80", url: "products.html?category=gấu-bông", cta: "Shop Collection" },
     { title: "Personalized Perfection", description: "Make it truly theirs with custom engraving and embroidery.", image: "https://images.unsplash.com/photo-1600868772023-4ceba9e472cb?w=600&q=80", url: "customize.html", cta: "Customize Now" },

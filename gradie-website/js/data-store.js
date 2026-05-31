@@ -6,21 +6,37 @@ window.GradieStore = {
   init: function() {
     let data = this.getData();
     let updated = false;
-    if (!data || !data.products || data.products.length === 0) {
-      data = this.resetData(true);
+    
+    // Check if products list contains placeholder names
+    let needsCatalogUpdate = false;
+    if (data && data.products && data.products.length > 0) {
+      const placeholders = [
+        "Sản phẩm có nhiều hình biến thể", 
+        "Sản phẩm có nhiều nhóm sản phẩm", 
+        "Sản phẩm có nhiều hình sản phẩm",
+        "So-Tay-Bia-Cung",
+        "Ao Cu Nhan"
+      ];
+      needsCatalogUpdate = data.products.some(p => placeholders.includes(p.name) || p.name.includes("biến thể"));
+    }
+    
+    if (!data || !data.products || data.products.length === 0 || needsCatalogUpdate) {
+      let defaults = this.getDefaultData();
+      if (!data) data = defaults;
+      data.products = this.normalizeProducts(window.GRADIE_DATA?.products || []);
       updated = true;
     } else {
       data.products = this.normalizeProducts(data.products);
-      
-      // Auto-fill mock data if empty (for gallery, blog, orders, policies)
-      let defaults = this.getDefaultData();
-      if (!data.orders || data.orders.length === 0) { data.orders = defaults.orders; updated = true; }
-      if (!data.blogPosts || data.blogPosts.length === 0) { data.blogPosts = defaults.blogPosts; updated = true; }
-      if (!data.gallery || data.gallery.length === 0) { data.gallery = defaults.gallery; updated = true; }
-      if (!data.policies || data.policies.length === 0) { data.policies = defaults.policies; updated = true; }
-      
-      if(updated) this.saveData(data);
     }
+      
+    // Auto-fill mock data if empty (for gallery, blog, orders, policies)
+    let defaults = this.getDefaultData();
+    if (!data.orders || data.orders.length === 0) { data.orders = defaults.orders; updated = true; }
+    if (!data.blogPosts || data.blogPosts.length === 0) { data.blogPosts = defaults.blogPosts; updated = true; }
+    if (!data.gallery || data.gallery.length === 0) { data.gallery = defaults.gallery; updated = true; }
+    if (!data.policies || data.policies.length === 0) { data.policies = defaults.policies; updated = true; }
+      
+    if (updated) this.saveData(data);
   },
 
 
@@ -150,7 +166,13 @@ window.GradieStore = {
     const fallback = 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80';
     while(p.gallery.length < 3) p.gallery.push(p.gallery[0] || fallback);
     p.image = p.gallery[0];
-    if(!Array.isArray(p.variants)) p.variants = []; if(!Array.isArray(p.tags)) p.tags = []; if(!p.options) p.options = { colors: [], sizes: [], personalization: [] };
+    if(!Array.isArray(p.variants)) p.variants = [];
+    p.variants.forEach(v => {
+      v.name = v.name || v.color || '';
+      v.color = v.color || v.name || '';
+      v.price = Number(v.price) || p.price;
+    });
+    if(!Array.isArray(p.tags)) p.tags = []; if(!p.options) p.options = { colors: [], sizes: [], personalization: [] };
     p.isTrending = Boolean(p.isTrending); p.isFeatured = Boolean(p.isFeatured);
     return p;
   },
