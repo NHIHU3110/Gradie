@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradie | Virtual Sash Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1780166734">
+  
+</head>
+<body>
+  <div class="announcement-bar">
+    Grand Opening • Free gift tag with every order • Celebrate her next chapter
+  </div>
+
+    <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/Gradie_logo.jpeg" alt="Gradie Logo" style="height:48px; width:auto; border-radius:50%; object-fit:cover; margin-right:10px;">
+        Gradie
+        <span class="tagline">Graduation Gifts</span>
+      </a>
+      <nav class="nav">
+        <a href="about.html">About Us</a>
+        <a href="products.html">Products</a>
+        <a href="customize.html">Customize</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-icons">
+        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <button class="icon-btn" onclick="alert('Search functionality coming soon!')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Header -->
+    <section class="page-header" style="padding: 80px 40px; text-align: center; background: linear-gradient(to bottom, #fcfbf9, #ffffff); margin-bottom: 40px;">
+      <span class="section-kicker">Interactive Customization</span>
+      <h1 class="section-title" style="margin: 0; font-size: 3rem; font-family:'Playfair Display', serif;">Virtual Sash Designer</h1>
+      <p style="color: var(--taupe); margin-top: 15px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">Design your dream graduation sash in real-time. Choose your sash color, add custom text, select your font — and preview it all instantly before adding to cart.</p>
+    </section>
+
+    <div style="max-width: 1000px; margin: 0 auto 80px; padding: 0 20px; display: grid; gap: 50px;">
+      <!-- Section 1: Info with Image -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center;">
+        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80" style="width: 100%; border-radius: 12px; border: 1px solid var(--border-gold); box-shadow: 0 8px 24px rgba(0,0,0,0.05);" alt="Graduation Sash Preview">
+        <div>
+          <h2 style="font-family:'Playfair Display', serif; margin-bottom: 15px;">Custom Graduation Sashes</h2>
+          <p style="color: var(--taupe); line-height: 1.8; margin-bottom: 15px;">Our premium sashes are crafted from heavyweight satin with a luxurious drape. Personalize with your name, graduation year, or custom message in multiple font styles.</p>
+          <ul style="padding-left: 20px; line-height: 1.8; color: var(--ink);">
+            <li>Premium heavyweight satin fabric</li>
+            <li>Multiple sash colors available</li>
+            <li>Custom text with elegant font options</li>
+            <li>Gold foil or embroidered lettering</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+      <!-- Interactive Sash Designer -->
+      <div style="max-width: 1000px; margin: 0 auto 50px; padding: 0 20px;">
+      <div style="background: var(--white); border-radius: 16px; border: 1px solid var(--border-gold); padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+        
+        <!-- Left: Live Preview Canvas -->
+        <div style="display:flex; flex-direction:column; gap:20px; align-items:center; justify-content:center; background:#faf9f6; padding:30px; border-radius:12px; border:1px solid #eee; position:relative; min-height: 380px;">
+          <span style="position:absolute; top:15px; left:15px; background:var(--champagne-light); color:var(--champagne); font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; padding:4px 8px; border-radius:4px; font-weight:600;">Live Preview</span>
+          
+          <!-- Sash Preview -->
+          <div id="sash-canvas" style="width:100%; height:260px; display:flex; align-items:center; justify-content:center; border-radius:8px; position:relative; overflow:hidden; transition: all 0.4s ease; box-shadow: inset 0 0 20px rgba(0,0,0,0.03); background: linear-gradient(135deg, #17181D 0%, #2c2c2c 100%);">
+            <!-- Diagonal Sash Band -->
+            <div id="sash-band" style="position:absolute; width:140%; height:80px; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 20%, rgba(255,255,255,0.05) 80%, rgba(255,255,255,0) 100%); transform: rotate(-25deg); display:flex; align-items:center; justify-content:center; transition: all 0.4s ease;">
+              <div id="sash-preview-text" style="font-size: 2rem; color: #D8A94F; font-family: 'Great Vibes', cursive; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); user-select:none; transition: all 0.3s ease; white-space: nowrap; letter-spacing: 2px;">Class of 2026</div>
+            </div>
+          </div>
+          
+          <div style="color:var(--taupe); font-size:0.85rem; text-align:center;">*This is a digital rendering of your custom sash design.</div>
+        </div>
+
+        <!-- Right: Interactive Controls -->
+        <div style="display:flex; flex-direction:column; justify-content:center; gap:20px;">
+          <h2 style="font-family:'Playfair Display', serif; margin:0;">Design Your Sash</h2>
+          <p style="color: var(--taupe); font-size:0.95rem; margin:0;">Customize every detail of your graduation sash. Changes update the preview in real-time.</p>
+          
+          <!-- Sash Text -->
+          <div class="form-group" style="margin:0;">
+            <label style="font-weight:600; margin-bottom:8px;">Custom Text</label>
+            <input type="text" id="sash-name-input" value="Class of 2026" placeholder="Your name or graduation year" maxlength="25" style="border-radius:8px;">
+          </div>
+          
+          <!-- Font Style -->
+          <div class="form-group" style="margin:0;">
+            <label style="font-weight:600; margin-bottom:8px;">Font Style</label>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="outline-button active" id="btn-sash-font-elegant" onclick="changeSashFont('elegant', this)" style="flex:1; border-radius:8px; height:42px; font-size:0.85rem; padding:0;">Elegant Script</button>
+              <button class="outline-button" onclick="changeSashFont('classic', this)" style="flex:1; border-radius:8px; height:42px; font-size:0.85rem; padding:0;">Classic Serif</button>
+              <button class="outline-button" onclick="changeSashFont('modern', this)" style="flex:1; border-radius:8px; height:42px; font-size:0.85rem; padding:0;">Modern Sans</button>
+            </div>
+          </div>
+
+          <!-- Sash Color -->
+          <div class="form-group" style="margin:0;">
+            <label style="font-weight:600; margin-bottom:8px;">Sash Color</label>
+            <div style="display:flex; gap:10px;" id="sash-colors-container">
+              <button onclick="changeSashColor('#17181D', 'Classic Black', this)" style="width:36px; height:36px; border-radius:50%; border:3px solid var(--peach); background:#17181D; cursor:pointer;" title="Classic Black"></button>
+              <button onclick="changeSashColor('#D8A94F', 'Champagne Gold', this)" style="width:36px; height:36px; border-radius:50%; border:2px solid transparent; background:#D8A94F; cursor:pointer;" title="Champagne Gold"></button>
+              <button onclick="changeSashColor('#E9A08D', 'Peach', this)" style="width:36px; height:36px; border-radius:50%; border:2px solid transparent; background:#E9A08D; cursor:pointer;" title="Peach"></button>
+              <button onclick="changeSashColor('#800020', 'Burgundy', this)" style="width:36px; height:36px; border-radius:50%; border:2px solid transparent; background:#800020; cursor:pointer;" title="Burgundy"></button>
+              <button onclick="changeSashColor('#002040', 'Royal Navy', this)" style="width:36px; height:36px; border-radius:50%; border:2px solid transparent; background:#002040; cursor:pointer;" title="Royal Navy"></button>
+            </div>
+            <small style="color:var(--taupe); display:block; margin-top:5px;" id="selected-sash-color-label">Active: Classic Black</small>
+          </div>
+
+          <!-- Text Color -->
+          <div class="form-group" style="margin:0;">
+            <label style="font-weight:600; margin-bottom:8px;">Text Color</label>
+            <div style="display:flex; gap:10px;" id="text-colors-container">
+              <button onclick="changeSashTextColor('#D8A94F', 'Champagne Gold', this)" style="width:36px; height:36px; border-radius:50%; border:3px solid var(--peach); background:#D8A94F; cursor:pointer;" title="Champagne Gold"></button>
+              <button onclick="changeSashTextColor('#C0C0C0', 'Classic Silver', this)" style="width:36px; height:36px; border-radius:50%; border:2px solid transparent; background:#C0C0C0; cursor:pointer;" title="Classic Silver"></button>
+              <button onclick="changeSashTextColor('#FFFFFF', 'Crisp White', this)" style="width:36px; height:36px; border-radius:50%; border:2px solid transparent; background:#FFFFFF; cursor:pointer;" title="Crisp White"></button>
+            </div>
+            <small style="color:var(--taupe); display:block; margin-top:5px;" id="selected-text-color-label">Active: Champagne Gold</small>
+          </div>
+
+          <!-- Add to Cart -->
+          <div style="margin-top:10px; padding-top:20px; border-top:1px solid #f0eeeb;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <span style="font-size:0.9rem; color:var(--taupe);">Custom Sash Price</span>
+              <span style="font-size:1.5rem; font-weight:700; color:var(--ink); font-family:'Playfair Display', serif;">450,000 ₫</span>
+            </div>
+            <button id="add-sash-btn" class="peach-button" style="width:100%; padding:14px; font-size:1rem; border-radius:8px; font-weight:600; letter-spacing:0.5px;">Add Custom Sash to Cart</button>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- Section 2: How to Order -->
+      <div style="max-width: 1000px; margin: 0 auto 80px; padding: 0 20px;">
+      <div style="background: var(--white); padding: 40px; border-radius: 12px; border: 1px solid var(--border-gold); text-align: center;">
+        <h2 style="font-family:'Playfair Display', serif; margin-bottom: 15px;">How It Works</h2>
+        <p style="color: var(--taupe); max-width: 600px; margin: 0 auto 30px; line-height: 1.8;">Design your sash using the live preview above, choose your color and text, then click "Add to Cart". Your custom sash will be handcrafted with love by our artisans and delivered within 3-5 business days.</p>
+        <a href="products.html" class="btn-primary" style="border-radius: 8px;">Browse More Products</a>
+      </div>
+      </div>
+
+    <script>
+      // Sash designer live preview
+      let currentSashColor = '#17181D';
+      let currentTextColor = '#D8A94F';
+      let currentSashColorName = 'Classic Black';
+      let currentTextColorName = 'Champagne Gold';
+
+      function changeSashFont(font, btn) {
+        const text = document.getElementById('sash-preview-text');
+        if (!text) return;
+        
+        const siblings = btn.parentElement.querySelectorAll('button');
+        siblings.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        if (font === 'elegant') {
+          text.style.fontFamily = "'Great Vibes', cursive";
+          text.style.fontSize = "2rem";
+          text.style.fontWeight = "normal";
+          text.style.letterSpacing = "2px";
+        } else if (font === 'classic') {
+          text.style.fontFamily = "'Playfair Display', serif";
+          text.style.fontSize = "1.5rem";
+          text.style.fontWeight = "700";
+          text.style.letterSpacing = "3px";
+        } else if (font === 'modern') {
+          text.style.fontFamily = "'Montserrat', sans-serif";
+          text.style.fontSize = "1.2rem";
+          text.style.fontWeight = "600";
+          text.style.letterSpacing = "5px";
+        }
+      }
+
+      function changeSashColor(color, name, btn) {
+        const canvas = document.getElementById('sash-canvas');
+        const label = document.getElementById('selected-sash-color-label');
+        if (!canvas || !label) return;
+
+        currentSashColor = color;
+        currentSashColorName = name;
+
+        // Create gradient from selected color
+        const lighterColor = color === '#17181D' ? '#2c2c2c' : 
+                            color === '#002040' ? '#003366' :
+                            color === '#800020' ? '#a0002c' : color;
+        canvas.style.background = `linear-gradient(135deg, ${color} 0%, ${lighterColor} 100%)`;
+        label.textContent = "Active: " + name;
+
+        const siblings = document.querySelectorAll('#sash-colors-container button');
+        siblings.forEach(b => b.style.borderColor = 'transparent');
+        btn.style.borderColor = 'var(--peach)';
+      }
+
+      function changeSashTextColor(color, name, btn) {
+        const text = document.getElementById('sash-preview-text');
+        const label = document.getElementById('selected-text-color-label');
+        if (!text || !label) return;
+
+        currentTextColor = color;
+        currentTextColorName = name;
+        text.style.color = color;
+        label.textContent = "Active: " + name;
+
+        const siblings = document.querySelectorAll('#text-colors-container button');
+        siblings.forEach(b => b.style.borderColor = 'transparent');
+        btn.style.borderColor = 'var(--peach)';
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const textInput = document.getElementById('sash-name-input');
+        const preview = document.getElementById('sash-preview-text');
+        const addBtn = document.getElementById('add-sash-btn');
+
+        if (textInput && preview) {
+          textInput.addEventListener('input', (e) => {
+            preview.textContent = e.target.value || 'Class of 2026';
+          });
+        }
+
+        if (addBtn) {
+          addBtn.addEventListener('click', () => {
+            const sashText = textInput ? textInput.value.trim() : '';
+            const cart = JSON.parse(localStorage.getItem('gradie_cart') || '[]');
+            cart.push({ 
+              id: 'custom-sash-' + Date.now(), 
+              name: 'Custom Graduation Sash', 
+              price: 450000, 
+              qty: 1, 
+              image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=200&q=80',
+              customization: {
+                sashText: sashText || 'Class of 2026',
+                sashColor: currentSashColorName,
+                textColor: currentTextColorName
+              }
+            });
+            localStorage.setItem('gradie_cart', JSON.stringify(cart));
+            localStorage.setItem('GRADIE_CART', JSON.stringify(cart));
+            if(window.updateCartCount) window.updateCartCount();
+            
+            // Premium toast notification
+            let container = document.querySelector('.toast-container');
+            if (!container) {
+              container = document.createElement('div');
+              container.className = 'toast-container';
+              document.body.appendChild(container);
+            }
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = 'Custom sash added to cart!';
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.add('show'), 10);
+            setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 300); }, 3000);
+          });
+        }
+      });
+    </script>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="footer-logo">Gradie</div>
+        <p style="font-family: 'Great Vibes', cursive; font-size: 1.5rem; color: var(--champagne); margin-top: 10px;">Celebrate today, cherish forever.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="about.html">About Us</a>
+        <a href="products.html">Shop All</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Customer Care</h4>
+        <a href="store-policy.html">Store Policy</a>
+        <a href="order-tracking.html">Track Order</a>
+        <a href="account.html">My Account</a>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Gradie - Graduation Gifts. All rights reserved.
+    </div>
+  </footer>
+
+    <script src="js/global-data.js?v=1780167396"></script>
+  <script src="js/data-store.js?v=1780167396"></script>
+  <script src="js/main.js?v=1780167396"></script>
+  <script src="js/products.js?v=1780167396"></script>
+  <script src="js/cart.js?v=1780167396"></script>
+</body>
+</html>

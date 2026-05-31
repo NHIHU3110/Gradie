@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradie | Gift Wrapping</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1780166734">
+  
+</head>
+<body>
+  <div class="announcement-bar">
+    Grand Opening • Free gift tag with every order • Celebrate her next chapter
+  </div>
+
+    <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/Gradie_logo.jpeg" alt="Gradie Logo" style="height:48px; width:auto; border-radius:50%; object-fit:cover; margin-right:10px;">
+        Gradie
+        <span class="tagline">Graduation Gifts</span>
+      </a>
+      <nav class="nav">
+        <a href="about.html">About Us</a>
+        <a href="products.html">Products</a>
+        <a href="customize.html">Customize</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-icons">
+        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <button class="icon-btn" onclick="alert('Search functionality coming soon!')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header" style="padding: 80px 40px; text-align: center; background: linear-gradient(to bottom, #fcfbf9, #ffffff); margin-bottom: 40px;">
+      <span class="section-kicker">Signature Presentation</span>
+      <h1 class="section-title" style="margin: 0; font-size: 3rem; font-family:'Playfair Display', serif;">Luxury Gift Wrapping</h1>
+      <p style="color: var(--taupe); margin-top: 15px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">Discover our signature art of gifting. Every wrap is carefully assembled by our artists using eco-friendly textured papers, silk ribbons, and real custom wax seals.</p>
+    </section>
+
+    <div style="max-width: 1000px; margin: 0 auto 80px; padding: 0 20px; display: grid; gap: 50px;">
+      <!-- Section 1 -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center;">
+        <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=600&q=80" style="width: 100%; border-radius: 12px; border: 1px solid var(--border-gold); box-shadow: 0 8px 24px rgba(0,0,0,0.05);" alt="Premium Wrapping Paper close-up">
+        <div>
+          <h2 style="font-family:'Playfair Display', serif; margin-bottom: 15px;">Champagne Gold Presentation</h2>
+          <p style="color: var(--taupe); line-height: 1.8; margin-bottom: 15px;">Our signature gift box is finished in classic textured cream paper, secured with a heavyweight satin ribbon in double-bow style, and sealed with a premium gold metallic wax seal.</p>
+          <ul style="padding-left: 20px; line-height: 1.8; color: var(--ink);">
+            <li>Eco-friendly thick paper stock</li>
+            <li>Custom wax seal option</li>
+            <li>Includes handwritten greeting tag</li>
+          </ul>
+        </div>
+      </div>
+
+      </div>
+
+      <!-- Interactive Customizer Demo -->
+      <div style="background: var(--white); border-radius: 16px; border: 1px solid var(--border-gold); padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+        
+        <!-- Left: Live Preview Canvas -->
+        <div style="display:flex; flex-direction:column; gap:20px; align-items:center; justify-content:center; background:#faf9f6; padding:30px; border-radius:12px; border:1px solid #eee; position:relative; min-height: 380px; overflow:hidden;">
+          <span style="position:absolute; top:15px; left:15px; background:var(--champagne-light); color:var(--champagne); font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; padding:4px 8px; border-radius:4px; font-weight:600;">3D Design Preview</span>
+          
+          <!-- Box Representation -->
+          <div id="wrapping-box" style="width:160px; height:160px; background:#F4E8D1; border-radius:8px; position:relative; transition: all 0.4s ease; box-shadow: 0 15px 35px rgba(0,0,0,0.15); display:flex; align-items:center; justify-content:center; margin-top:20px;">
+            <!-- Vertical Ribbon -->
+            <div id="ribbon-vertical" style="position:absolute; top:0; left:50%; width:24px; height:100%; transform:translateX(-50%); background:#D8A94F; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(0,0,0,0.05);"></div>
+            <!-- Horizontal Ribbon -->
+            <div id="ribbon-horizontal" style="position:absolute; top:50%; left:0; width:100%; height:24px; transform:translateY(-50%); background:#D8A94F; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(0,0,0,0.05);"></div>
+            
+            <!-- Elegant Bow Center -->
+            <div id="ribbon-bow" style="position:absolute; top:50%; left:50%; width:44px; height:44px; background:#D8A94F; border-radius:50%; transform:translate(-50%, -50%); z-index:2; display:flex; align-items:center; justify-content:center; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: all 0.3s ease;">
+              <!-- Wax Seal Stamp Inside Bow Center -->
+              <div id="wax-seal" style="width:24px; height:24px; background:#990000; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#FFD700; font-size:0.55rem; font-weight:bold; border:1px solid #730000; box-shadow: inset 0 2px 4px rgba(255,255,255,0.2); transition: all 0.3s ease; font-family:'Playfair Display', serif;" title="Custom Wax Seal">🎓</div>
+            </div>
+
+            <!-- Gift Card Tag hanging off bow -->
+            <div id="gift-card-tag" style="position:absolute; top:65%; left:65%; width:90px; height:60px; background:#fdfdf8; border:1px solid var(--border-gold); border-radius:4px; transform: rotate(15deg); z-index:3; box-shadow: 3px 5px 12px rgba(0,0,0,0.1); padding:8px; display:flex; flex-direction:column; justify-content:center; transition: all 0.3s ease;">
+              <div style="width:4px; height:4px; background:#aaa; border-radius:50%; position:absolute; top:4px; left:4px;"></div>
+              <div id="tag-text-preview" style="font-family:'Great Vibes', cursive; font-size:0.75rem; color:#2c2c2c; line-height:1.2; text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">For you!</div>
+            </div>
+          </div>
+
+          <div style="color:var(--taupe); font-size:0.85rem; text-align:center; margin-top:20px;">*Live simulator showing wraps, ribbons, card tags, and custom wax seals.</div>
+        </div>
+
+        <!-- Right: Interactive Controls -->
+        <div style="display:flex; flex-direction:column; justify-content:center; gap:20px;">
+          <h2 style="font-family:'Playfair Display', serif; margin:0;">Gift Wrap Simulator</h2>
+          <p style="color: var(--taupe); font-size:0.95rem; margin:0;">Create a custom presentation suite. Customize wrapping box materials, ribbon accents, wax seals, and card tag text.</p>
+          
+          <!-- Box Colors -->
+          <div class="form-group" style="margin:0;">
+            <label style="font-weight:600; margin-bottom:8px;">Wrapping Box Color</label>
+            <div style="display:flex; gap:10px;" id="box-colors-container">
+              <button onclick="changeWrapBox('#F4E8D1', 'Signature Cream', this)" style="width:36px; height:36px; border-radius:8px; border:2px solid var(--peach); background:#F4E8D1; cursor:pointer;" title="Signature Cream"></button>
+              <button onclick="changeWrapBox('#E9A08D', 'Pastel Peach', this)" style="width:36px; height:36px; border-radius:8px; border:2px solid transparent; background:#E9A08D; cursor:pointer;" title="Pastel Peach"></button>
+              <button onclick="changeWrapBox('#17181D', 'Midnight Black', this)" style="width:36px; height:36px; border-radius:8px; border:2px solid transparent; background:#17181D; cursor:pointer;" title="Midnight Black"></button>
+              <button onclick="changeWrapBox('#002040', 'Royal Navy', this)" style="width:36px; height:36px; border-radius:8px; border:2px solid transparent; background:#002040; cursor:pointer;" title="Royal Navy"></button>
+            </div>
+            <small style="color:var(--taupe); display:block; margin-top:5px;" id="selected-box-label">Active: Signature Cream</small>
+          </div>
+
+          <!-- Ribbon Colors -->
+          <div class="form-group" style="margin:0;">
+            <label style="font-weight:600; margin-bottom:8px;">Heavyweight Satin Ribbon</label>
+            <div style="display:flex; gap:10px;" id="ribbon-colors-container">
+              <button onclick="changeWrapRibbon('#D8A94F', 'Champagne Gold', this)" style="width:36px; height:36px; border-radius:50%; border:2px solid var(--peach); background:#D8A94F; cursor:pointer;" title="Champagne Gold"></button>
+              <button onclick="changeWrapRibbon('#990000', 'Scarlet Red', this)" style="width:36px; height:36px; border-radius:50%; border:2px solid transparent; background:#990000; cursor:pointer;" title="Scarlet Red"></button>
+              <button onclick="changeWrapRibbon('#2E7D32', 'Emerald Green', this)" style="width:36px; height:36px; border-radius:50%; border:2px solid transparent; background:#2E7D32; cursor:pointer;" title="Emerald Green"></button>
+              <button onclick="changeWrapRibbon('#FFB74D', 'Golden Tangerine', this)" style="width:36px; height:36px; border-radius:50%; border:2px solid transparent; background:#FFB74D; cursor:pointer;" title="Golden Tangerine"></button>
+            </div>
+            <small style="color:var(--taupe); display:block; margin-top:5px;" id="selected-ribbon-label">Active: Champagne Gold</small>
+          </div>
+
+          <!-- Wax Seal -->
+          <div class="form-group" style="margin:0;">
+            <label style="font-weight:600; margin-bottom:8px;">Wax Seal Stamp Motif</label>
+            <select id="wax-seal-motif" style="border-radius:8px; height:45px;" onchange="changeWaxSeal(this.value)">
+              <option value="🎓">Graduation Cap (🎓)</option>
+              <option value="❤️">Heart of Love (❤️)</option>
+              <option value="🌹">Bespoke Rose (🌹)</option>
+              <option value="⭐">Star of Success (⭐)</option>
+            </select>
+          </div>
+
+          <!-- Input Greeting Text -->
+          <div class="form-group" style="margin:0;">
+            <label style="font-weight:600; margin-bottom:8px;">Gift Tag Message</label>
+            <input type="text" id="gift-tag-input" value="For you!" placeholder="e.g. Congrats, To Emily!" maxlength="20" style="border-radius:8px;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div style="background: var(--white); padding: 40px; border-radius: 12px; border: 1px solid var(--border-gold); text-align: center;">
+        <h2 style="font-family:'Playfair Display', serif; margin-bottom: 15px;">Add Gift Wrap at Checkout</h2>
+        <p style="color: var(--taupe); max-width: 600px; margin: 0 auto 30px; line-height: 1.8;">Ready to send the perfect milestone congratulation? You can add our Signature Wrapping option to any product on its detail page or inside your cart during the checkout process.</p>
+        <a href="products.html" class="btn-primary" style="border-radius: 8px;">Explore Products</a>
+      </div>
+    </div>
+
+    <script>
+      function changeWrapBox(color, name, btn) {
+        const box = document.getElementById('wrapping-box');
+        const label = document.getElementById('selected-box-label');
+        if (!box || !label) return;
+
+        box.style.background = color;
+        label.textContent = "Active: " + name;
+
+        const siblings = document.querySelectorAll('#box-colors-container button');
+        siblings.forEach(b => b.style.borderColor = 'transparent');
+        btn.style.borderColor = 'var(--peach)';
+      }
+
+      function changeWrapRibbon(color, name, btn) {
+        const vertical = document.getElementById('ribbon-vertical');
+        const horizontal = document.getElementById('ribbon-horizontal');
+        const bow = document.getElementById('ribbon-bow');
+        const label = document.getElementById('selected-ribbon-label');
+        
+        if (!vertical || !horizontal || !bow || !label) return;
+
+        vertical.style.background = color;
+        horizontal.style.background = color;
+        bow.style.background = color;
+        label.textContent = "Active: " + name;
+
+        const siblings = document.querySelectorAll('#ribbon-colors-container button');
+        siblings.forEach(b => b.style.borderColor = 'transparent');
+        btn.style.borderColor = 'var(--peach)';
+      }
+
+      function changeWaxSeal(motif) {
+        const seal = document.getElementById('wax-seal');
+        if (seal) seal.textContent = motif;
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        // Load custom colors and wax seals from data store if available
+        if (window.GradieStore) {
+          const opts = window.GradieStore.getCustomizationOptions();
+          
+          // 1. Load Box colors
+          const boxContainer = document.getElementById('box-colors-container');
+          if (opts && opts.boxColors && boxContainer) {
+            boxContainer.innerHTML = opts.boxColors.map((c, index) => {
+              const border = index === 0 ? 'var(--peach)' : 'transparent';
+              return `<button onclick="changeWrapBox('${c.hex}', '${c.name}', this)" style="width:36px; height:36px; border-radius:8px; border:2px solid ${border}; background:${c.hex}; cursor:pointer;" title="${c.name}"></button>`;
+            }).join('');
+            
+            if (opts.boxColors[0]) {
+              const box = document.getElementById('wrapping-box');
+              if (box) box.style.background = opts.boxColors[0].hex;
+              const label = document.getElementById('selected-box-label');
+              if (label) label.textContent = "Active: " + opts.boxColors[0].name;
+            }
+          }
+
+          // 2. Load Ribbon colors
+          const ribbonContainer = document.getElementById('ribbon-colors-container');
+          if (opts && opts.ribbonColors && ribbonContainer) {
+            ribbonContainer.innerHTML = opts.ribbonColors.map((c, index) => {
+              const border = index === 0 ? 'var(--peach)' : 'transparent';
+              return `<button onclick="changeWrapRibbon('${c.hex}', '${c.name}', this)" style="width:36px; height:36px; border-radius:50%; border:2px solid ${border}; background:${c.hex}; cursor:pointer;" title="${c.name}"></button>`;
+            }).join('');
+            
+            if (opts.ribbonColors[0]) {
+              const vertical = document.getElementById('ribbon-vertical');
+              const horizontal = document.getElementById('ribbon-horizontal');
+              const bow = document.getElementById('ribbon-bow');
+              if (vertical) vertical.style.background = opts.ribbonColors[0].hex;
+              if (horizontal) horizontal.style.background = opts.ribbonColors[0].hex;
+              if (bow) bow.style.background = opts.ribbonColors[0].hex;
+              const label = document.getElementById('selected-ribbon-label');
+              if (label) label.textContent = "Active: " + opts.ribbonColors[0].name;
+            }
+          }
+
+          // 3. Load Wax Seals select options
+          const sealSelect = document.getElementById('wax-seal-motif');
+          if (opts && opts.waxSeals && sealSelect) {
+            sealSelect.innerHTML = opts.waxSeals.map(s => {
+              return `<option value="${s.emoji}">${s.name} (${s.emoji})</option>`;
+            }).join('');
+            
+            if (opts.waxSeals[0]) {
+              const seal = document.getElementById('wax-seal');
+              if (seal) seal.textContent = opts.waxSeals[0].emoji;
+            }
+          }
+        }
+
+        const giftInput = document.getElementById('gift-tag-input');
+        const textPreview = document.getElementById('tag-text-preview');
+        
+        if (giftInput && textPreview) {
+          giftInput.addEventListener('input', (e) => {
+            textPreview.textContent = e.target.value || "For you!";
+          });
+        }
+      });
+    </script>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="footer-logo">Gradie</div>
+        <p style="font-family: 'Great Vibes', cursive; font-size: 1.5rem; color: var(--champagne); margin-top: 10px;">Celebrate today, cherish forever.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="about.html">About Us</a>
+        <a href="products.html">Shop All</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Customer Care</h4>
+        <a href="store-policy.html">Store Policy</a>
+        <a href="order-tracking.html">Track Order</a>
+        <a href="account.html">My Account</a>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Gradie - Graduation Gifts. All rights reserved.
+    </div>
+  </footer>
+
+    <script src="js/global-data.js?v=1780167396"></script>
+  <script src="js/data-store.js?v=1780167396"></script>
+  <script src="js/main.js?v=1780167396"></script>
+  <script src="js/products.js?v=1780167396"></script>
+  <script src="js/cart.js?v=1780167396"></script>
+</body>
+</html>

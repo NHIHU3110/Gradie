@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradie Admin | Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css?v=1780166734">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar"></aside>
+        <main class="main-content">
+            <header class="topbar"></header>
+            <div class="content-wrapper">
+                <div class="dashboard-header" style="margin-bottom: 30px;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 style="margin:0; font-size: 2rem;">Global Settings</h2>
+                            <p style="color: var(--admin-muted); margin-top: 5px;">Configure store preferences and system operations.</p>
+                        </div>
+                    </div>
+                </div>
+            <div class="form-card">
+                <form id="admin-settings-form">
+                    <div class="form-group"><label>Brand Name</label><input type="text" id="set-brand"></div>
+                    <div class="form-group"><label>Tagline</label><input type="text" id="set-tagline"></div>
+                    <div class="form-group"><label>Announcement Bar Text</label><input type="text" id="set-ann"></div>
+                    <div class="form-group"><label>Default Shipping Fee (VND)</label><input type="number" id="set-ship"></div>
+                    <button type="submit" class="btn-primary">Save Settings</button>
+                </form>
+                <hr style="margin:40px 0;">
+                <h2 style="color:red;">Danger Zone</h2>
+                <button onclick="resetDatabase()" class="btn-danger">Reset Database to Default</button>
+            </div>
+        
+            </div>
+        </main>
+    </div>
+    <script src="js/global-data.js?v=1780167290"></script>
+    <script src="js/data-store.js?v=1780167290"></script>
+    <script src="js/admin-auth.js?v=1780167290"></script>
+    <script src="js/admin.js?v=1780167290"></script>
+    <script src="js/admin-settings.js?v=1780167290"></script>
+</body>
+</html>
