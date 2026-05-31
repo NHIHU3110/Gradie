@@ -17,8 +17,17 @@ document.addEventListener('DOMContentLoaded', () => {
   if (hamburger && nav) {
     hamburger.addEventListener('click', () => {
       nav.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+    // Đóng menu khi bấm vào link trên mobile
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
     });
   }
+
 
   // 3. Dynamic Global Live Search Hijack
   const headerIcons = document.querySelector('.header-icons');
