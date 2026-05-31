@@ -317,6 +317,64 @@
   .track-input-group button {
     width: 100% !important;
   }
+
+  /* Order History Card Optimization for Mobile */
+  .order-card-clickable {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 16px !important;
+    gap: 12px !important;
+  }
+  .order-card-clickable > div:first-child {
+    width: 100% !important;
+  }
+  .order-card-clickable > div:first-child div:last-child {
+    max-width: 100% !important;
+    white-space: normal !important; /* Allow item summary to wrap nicely instead of clipping */
+  }
+  .order-card-clickable > div:last-child {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    border-top: 1px dashed #f0eeeb !important;
+    padding-top: 12px !important;
+    text-align: left !important;
+  }
+  .order-card-clickable > div:last-child span:last-child {
+    display: none !important; /* Hide "Click to view details" on mobile for clean look */
+  }
+
+  /* Order Detail Modal Optimization for Mobile */
+  .order-modal-box {
+    margin: 8% auto !important;
+    width: 92% !important;
+    border-radius: 16px !important;
+    max-height: 84vh !important;
+  }
+  .order-modal-header {
+    padding: 16px 20px !important;
+  }
+  .order-modal-header h3 {
+    font-size: 1.3rem !important;
+  }
+  .order-modal-body {
+    padding: 20px !important;
+  }
+  .om-item-card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 6px !important;
+    padding: 12px 0 !important;
+  }
+  .om-item-total {
+    text-align: right !important;
+    align-self: flex-end !important;
+    font-size: 0.95rem !important;
+  }
+  .om-price-summary {
+    padding: 14px !important;
+  }
 }
 
 /* =========================================
