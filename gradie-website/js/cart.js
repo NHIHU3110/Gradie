@@ -80,8 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       html += `
-        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #f0eeeb; padding:25px 0;">
-          <div style="display:flex; gap:20px; align-items:center;">
+        <div class="cart-item" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #f0eeeb; padding:25px 0;">
+          <div class="cart-item-left" style="display:flex; gap:20px; align-items:center;">
             <img src="${item.image}" style="width:90px; height:90px; object-fit:cover; border-radius:12px; border:1px solid #eee; box-shadow:0 4px 15px rgba(0,0,0,0.02);">
             <div style="display:flex; flex-direction:column; justify-content:center;">
               <strong style="font-size:1.1rem; color:var(--ink); font-family:'Playfair Display', serif;">${item.name}</strong>
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <span style="font-size:0.95rem; color:var(--peach); font-weight:500; margin-top:5px;">${item.price.toLocaleString('vi-VN')}đ</span>
             </div>
           </div>
-          <div style="display:flex; gap:25px; align-items:center;">
+          <div class="cart-item-right" style="display:flex; gap:25px; align-items:center;">
             <!-- Luxury Qty Adjuster -->
             <div style="display:flex; align-items:center; border:1px solid var(--border-gold); border-radius:8px; overflow:hidden; background:white;">
               <button onclick="changeQty(${index}, -1)" style="border:none; background:none; padding:8px 12px; cursor:pointer; font-weight:600; color:#555; transition:background 0.2s;" onmouseover="this.style.background='#faf8f5'" onmouseout="this.style.background='none'">−</button>

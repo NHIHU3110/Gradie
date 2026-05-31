@@ -590,3 +590,47 @@
   }
 }
 
+/* =========================================
+   SHOPPING CART PAGE — Mobile
+   ========================================= */
+@media (max-width: 768px) {
+  .cart-grid-container {
+    padding: 0 16px !important;
+    margin-bottom: 40px !important;
+  }
+  .cart-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .cart-grid > div {
+    padding: 24px 16px !important;
+    border-radius: 12px !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .cart-item {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 16px !important;
+    padding: 20px 0 !important;
+  }
+  .cart-item-left {
+    width: 100% !important;
+  }
+  .cart-item-right {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    border-top: 1px dashed #f0eeeb !important;
+    padding-top: 15px !important;
+    gap: 10px !important;
+  }
+  .cart-item-right strong {
+    min-width: unset !important;
+    text-align: right !important;
+    flex: 1 !important;
+  }
+}
+

@@ -87,7 +87,6 @@
   font-weight: 600;
   color: var(--champagne);
   margin-bottom: 16px;
-  margin-top: auto;
 }
 
 .product-price del {
@@ -100,6 +99,7 @@
 .product-actions {
   display: flex;
   gap: 10px;
+  margin-top: auto;
 }
 
 .btn-favorite {
