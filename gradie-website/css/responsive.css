@@ -468,6 +468,111 @@
   .content-wrapper {
     padding: 16px !important;
   }
+
+  /* Topbar on mobile */
+  .topbar {
+    padding: 0 16px !important;
+    justify-content: space-between !important;
+  }
+
+  /* Table scrollability on mobile */
+  .table-wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: 12px !important;
+    margin-bottom: 20px !important;
+  }
+  .table-wrapper table {
+    min-width: 700px !important; /* Force horizontal scroll for tabular readability */
+  }
+  th, td {
+    padding: 12px 14px !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Admin Dashboard banner on mobile */
+  .dashboard-banner {
+    padding: 24px 18px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    text-align: left !important;
+    margin-top: 24px !important;
+  }
+  .banner-content h3 {
+    font-size: 1.4rem !important;
+  }
+  .banner-illustration {
+    display: none !important;
+  }
+
+  /* Stats Card on mobile */
+  .stat-card {
+    padding: 16px !important;
+  }
+  .stat-card .value {
+    font-size: 1.8rem !important;
+  }
+  .card-icon {
+    width: 46px !important;
+    height: 46px !important;
+    margin-right: 12px !important;
+  }
+
+  /* Form layouts on mobile */
+  .form-card {
+    padding: 20px 16px !important;
+  }
+  .form-row {
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+  .form-row > * {
+    width: 100% !important;
+  }
+
+  /* Variant Rows on mobile */
+  .variant-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    padding: 14px !important;
+  }
+  .variant-row input {
+    width: 100% !important;
+    margin-right: 0 !important;
+  }
+  .variant-row .btn-remove {
+    align-self: flex-end !important;
+    width: 100% !important;
+    padding: 8px 0 !important;
+    text-align: center !important;
+  }
+
+  /* Modals in Admin CMS on mobile */
+  .modal-content {
+    margin: 8% auto !important;
+    width: 92% !important;
+    padding: 20px 16px !important;
+    border-radius: 12px !important;
+    max-height: 85vh !important;
+  }
+
+  /* Header grid / Alignments stacking on mobile */
+  .dashboard-header .d-flex.justify-content-between {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+    text-align: left !important;
+  }
+  .dashboard-header h2 {
+    font-size: 1.6rem !important;
+  }
+  .dashboard-header .btn-primary,
+  .dashboard-header .outline-button,
+  .dashboard-header button {
+    width: 100% !important;
+  }
 }
 
 @media (max-width: 480px) {
