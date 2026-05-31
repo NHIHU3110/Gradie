@@ -387,10 +387,7 @@ textarea {
 @media (max-width: 768px) {
   .hamburger { display: flex; }
 }
-@media (max-width: 768px) {
-  .nav { display: none; }
-  .hamburger { display: block; }
-}
+
 
 .footer {
   background-color: var(--ivory);
