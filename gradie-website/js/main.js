@@ -241,3 +241,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, 500);
 });
+
+// Toggle password visibility helper
+window.togglePasswordVisibility = function(inputId, btn) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  
+  const openIcon = btn.querySelector('.eye-open');
+  const closedIcon = btn.querySelector('.eye-closed');
+  
+  if (input.type === 'password') {
+    input.type = 'text';
+    if (openIcon) openIcon.style.display = 'none';
+    if (closedIcon) closedIcon.style.display = 'block';
+  } else {
+    input.type = 'password';
+    if (openIcon) openIcon.style.display = 'block';
+    if (closedIcon) closedIcon.style.display = 'none';
+  }
+};
