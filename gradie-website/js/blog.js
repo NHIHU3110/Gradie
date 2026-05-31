@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const blogContainer = document.getElementById('blog-container');
     if (blogContainer) {
         const categoryFilter = blogContainer.dataset.blogCategory;
-        const allPosts = window.GradieStore.getBlogPosts().filter(p => p.status === 'Published');
+        // Treat posts without a status (or with status 'Published') as published
+        const allPosts = window.GradieStore.getBlogPosts().filter(p => !p.status || p.status === 'Published');
         const posts = categoryFilter ? allPosts.filter(p => p.category === categoryFilter) : allPosts;
         
         if (!document.getElementById('blog-modal')) {
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('blog-modal-img').src = post.image;
                 document.getElementById('blog-modal-cat').textContent = post.category;
                 document.getElementById('blog-modal-title').textContent = post.title;
-                document.getElementById('blog-modal-content').textContent = post.content;
+                document.getElementById('blog-modal-content').textContent = post.content || post.excerpt || '';
                 document.getElementById('blog-modal').style.display = 'block';
             }
         };
@@ -46,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div style="padding:30px; flex-grow: 1; display: flex; flex-direction: column; background: white;">
                         <span style="font-size:0.75rem; color:var(--champagne); text-transform:uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 12px; display: block;">${p.category}</span>
                         <h3 style="margin:0 0 15px; font-size: 1.4rem; line-height: 1.4; color: var(--ink); font-family: 'Playfair Display', serif;">${p.title}</h3>
-                        <p style="font-size:0.95rem; color:var(--taupe); line-height: 1.6; margin-bottom: 25px; flex-grow: 1;">${p.content.substring(0, 120)}...</p>
+                        <p style="font-size:0.95rem; color:var(--taupe); line-height: 1.6; margin-bottom: 25px; flex-grow: 1;">${(p.content || p.excerpt || '').substring(0, 120)}...</p>
                         <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-gold); padding-top: 15px; margin-top: auto;">
                             <span style="font-size: 0.9rem; font-weight: 600; color: var(--ink); text-transform: uppercase; letter-spacing: 1px;">Read Story</span>
                             <span style="color: var(--champagne); font-size: 1.2rem;">→</span>

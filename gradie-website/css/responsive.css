@@ -79,6 +79,14 @@
     text-align: center;
   }
   
+  .footer-col {
+    align-items: center;
+  }
+  
+  .footer-col h4::after {
+    margin: 8px auto 0;
+  }
+  
   .newsletter-form {
     flex-direction: column;
     gap: 10px;

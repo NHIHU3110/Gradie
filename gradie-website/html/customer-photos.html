@@ -38,12 +38,15 @@
     </div>
   </header>
 
-  <main>
-    <section style="padding: 80px 40px; text-align: center;">
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <div style="margin-top: 30px; margin-left: 20px;">
+      <a href="gallery.html" style="color: var(--champagne); font-weight: 600; text-decoration: none; transition: all 0.2s;" onmouseenter="this.style.color='var(--peach)'" onmouseleave="this.style.color='var(--champagne)'">← Back to Gallery</a>
+    </div>
+    <section style="padding: 40px 40px 60px; text-align: center;">
       <span class="section-kicker">Real Gradie moments from happy graduates.</span>
       <h2 class="section-title">Customer Photos</h2>
     </section>
-    <div id="gallery-container" data-gallery-type="Customer Photo" style="max-width:1200px; margin:0 auto; padding:0 40px 80px; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;"></div>
+    <div id="gallery-container" data-gallery-type="Customer Photo" style="max-width:1200px; margin:0 auto; padding:0 20px 80px; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;"></div>
   </main>
 
   <footer class="footer">

@@ -20,6 +20,48 @@ window.GradieStore = {
       needsCatalogUpdate = data.products.some(p => placeholders.includes(p.name) || p.name.includes("biến thể"));
     }
     
+    const correctCategories = ["Graduation Gifts", "Scrapbook", "Đồ tốt nghiệp", "Gấu Bông", "Gấu bông", "Khung ảnh", "Đèn Ngủ", "Kẹo", "Huy Chương", "Sổ kế hoạch", "Hoa mừng"];
+    if (!data.categories || data.categories.includes("Hoa hồng gấu bông") || data.categories.includes("Hộp quà") || data.categories.includes("Sash") || data.categories.length !== correctCategories.length) {
+      data.categories = correctCategories;
+      updated = true;
+    }
+
+    const defaultCustomization = {
+      sashColors: [{name: 'Classic Black', hex: '#17181d'}, {name: 'Champagne Gold', hex: '#d8a94f'}, {name: 'Peach', hex: '#e9a08d'}],
+      embroideryFonts: [{name: 'Elegant Script', price: 50000}, {name: 'Modern Sans', price: 50000}],
+      wrappingStyles: [{name: 'Standard Box', price: 0}, {name: 'Premium Ribbon Box', price: 100000}],
+      embroideryColors: [
+        { name: 'Champagne Gold', hex: '#D8A94F' },
+        { name: 'Classic Silver', hex: '#C0C0C0' },
+        { name: 'Peach Gold', hex: '#E9A08D' },
+        { name: 'Crisp White', hex: '#FFFFFF' },
+        { name: 'Midnight Black', hex: '#17181D' }
+      ],
+      boxColors: [
+        { name: 'Signature Cream', hex: '#F4E8D1' },
+        { name: 'Pastel Peach', hex: '#E9A08D' },
+        { name: 'Midnight Black', hex: '#17181D' },
+        { name: 'Royal Navy', hex: '#002040' }
+      ],
+      ribbonColors: [
+        { name: 'Champagne Gold', hex: '#D8A94F' },
+        { name: 'Scarlet Red', hex: '#990000' },
+        { name: 'Emerald Green', hex: '#2E7D32' },
+        { name: 'Golden Tangerine', hex: '#FFB74D' }
+      ],
+      waxSeals: [
+        { name: 'Graduation Cap', emoji: '🎓' },
+        { name: 'Heart of Love', emoji: '❤️' },
+        { name: 'Bespoke Rose', emoji: '🌹' },
+        { name: 'Star of Success', emoji: '⭐' }
+      ]
+    };
+
+    if (!data.customization || !data.customization.embroideryColors) {
+      data.customization = defaultCustomization;
+      updated = true;
+    }
+    
     if (!data || !data.products || data.products.length === 0 || needsCatalogUpdate) {
       let defaults = this.getDefaultData();
       if (!data) data = defaults;
@@ -58,7 +100,7 @@ window.GradieStore = {
 
   getDefaultData: function() {
     return {
-      categories: ["Hoa hồng gấu bông", "Hộp quà", "Sash"],
+      categories: ["Graduation Gifts", "Scrapbook", "Đồ tốt nghiệp", "Gấu Bông", "Gấu bông", "Khung ảnh", "Đèn Ngủ", "Kẹo", "Huy Chương", "Sổ kế hoạch", "Hoa mừng"],
       settings: {
         brandName: "Gradie", tagline: "Graduation Gifts", shippingFee: 30000, currency: "VND",
         announcement: "Grand Opening • Free gift tag with every order • Celebrate her next chapter",
@@ -73,7 +115,7 @@ window.GradieStore = {
       blogPosts: [
         { id: 'b1', title: 'Top 5 Graduation Gifts 2026', category: 'Gifting Tips', status: 'Published', content: 'Discover the most meaningful gifts for this graduation season. From personalized sashes to timeless teddy bears...', image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500' },
         { id: 'b2', title: 'The Meaning Behind the Graduation Sash', category: 'Meaning of Gifts', status: 'Published', content: 'Why do we wear sashes? A brief history of this beautiful tradition and how to choose the right one.', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500' },
-        { id: 'b3', title: 'How to Preserve Your Graduation Bouquet', category: 'Care Guide', status: 'Draft', content: 'Don\'t let those beautiful flowers die. Here are 3 ways to dry and preserve your graduation bouquet forever.', image: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=500' }
+        { id: 'b3', title: 'How to Preserve Your Graduation Bouquet', category: 'Care Guide', status: 'Published', content: 'Don\'t let those beautiful flowers die. Here are 3 ways to dry and preserve your graduation bouquet forever.', image: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=500' }
       ],
       gallery: [
         { id: 'g1', type: 'Customer Photo', title: 'A Happy Graduate', status: 'Published', image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500' },
@@ -88,7 +130,32 @@ window.GradieStore = {
       customization: {
         sashColors: [{name: 'Classic Black', hex: '#17181d'}, {name: 'Champagne Gold', hex: '#d8a94f'}, {name: 'Peach', hex: '#e9a08d'}],
         embroideryFonts: [{name: 'Elegant Script', price: 50000}, {name: 'Modern Sans', price: 50000}],
-        wrappingStyles: [{name: 'Standard Box', price: 0}, {name: 'Premium Ribbon Box', price: 100000}]
+        wrappingStyles: [{name: 'Standard Box', price: 0}, {name: 'Premium Ribbon Box', price: 100000}],
+        embroideryColors: [
+          { name: 'Champagne Gold', hex: '#D8A94F' },
+          { name: 'Classic Silver', hex: '#C0C0C0' },
+          { name: 'Peach Gold', hex: '#E9A08D' },
+          { name: 'Crisp White', hex: '#FFFFFF' },
+          { name: 'Midnight Black', hex: '#17181D' }
+        ],
+        boxColors: [
+          { name: 'Signature Cream', hex: '#F4E8D1' },
+          { name: 'Pastel Peach', hex: '#E9A08D' },
+          { name: 'Midnight Black', hex: '#17181D' },
+          { name: 'Royal Navy', hex: '#002040' }
+        ],
+        ribbonColors: [
+          { name: 'Champagne Gold', hex: '#D8A94F' },
+          { name: 'Scarlet Red', hex: '#990000' },
+          { name: 'Emerald Green', hex: '#2E7D32' },
+          { name: 'Golden Tangerine', hex: '#FFB74D' }
+        ],
+        waxSeals: [
+          { name: 'Graduation Cap', emoji: '🎓' },
+          { name: 'Heart of Love', emoji: '❤️' },
+          { name: 'Bespoke Rose', emoji: '🌹' },
+          { name: 'Star of Success', emoji: '⭐' }
+        ]
       }
     };
   },

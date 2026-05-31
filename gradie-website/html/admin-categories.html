@@ -7,10 +7,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/admin.css?v=1780166734">
     <style>
-        .modal { display:none; position:fixed; z-index:100; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); }
-        .modal-content { background:#fff; margin:50px auto; padding:20px; width:600px; border-radius:8px; max-height:80vh; overflow-y:auto; }
-        .product-checkbox { display:flex; align-items:center; gap:10px; margin-bottom:10px; padding:10px; border:1px solid #eee; border-radius:4px; }
-        .product-checkbox img { width:40px; height:40px; object-fit:cover; border-radius:4px; }
+        .modal { display:none; position:fixed; z-index:100; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); backdrop-filter: blur(4px); transition: all 0.3s ease; }
+        .modal-content { background:#fff; margin:50px auto; padding:25px; width:650px; border-radius:12px; max-height:85vh; display:flex; flex-direction:column; box-shadow: 0 10px 25px rgba(0,0,0,0.2); animation: slideDown 0.3s ease; }
+        .product-list-container { flex: 1; overflow-y: auto; margin-top: 10px; max-height: 45vh; padding-right: 5px; }
+        .product-checkbox { display:flex; align-items:center; gap:12px; margin-bottom:8px; padding:10px; border:1px solid #eee; border-radius:6px; cursor:pointer; transition: all 0.2s; }
+        .product-checkbox:hover { background: #f5f5f7; border-color: #ddd; transform: translateY(-1px); }
+        .product-checkbox.selected { background: #f0f7ff; border-color: #3b82f6; }
+        .product-checkbox img { width:44px; height:44px; object-fit:cover; border-radius:6px; }
+        .outline-button { background: #fff; border: 1px solid #ccc; padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: all 0.2s; font-size: 0.85rem; }
+        .outline-button:hover { background: #f5f5f5; border-color: #999; }
+        .outline-button.active { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -47,9 +58,29 @@
     <div id="assignModal" class="modal">
         <div class="modal-content">
             <h3 id="modalCatName" style="margin-top:0;">Assign Products</h3>
-            <p>Select products to include in this category:</p>
-            <div id="modalProductList"></div>
-            <div style="margin-top:20px; text-align:right;">
+            <p style="color: var(--admin-muted); margin-bottom: 15px;">Select products to include in this category:</p>
+            
+            <!-- Smart filters & search -->
+            <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:15px; padding:12px; background:#f9f9f9; border-radius:8px; border:1px solid #eee;">
+                <input type="text" id="modalProductSearch" placeholder="🔍 Search products by name..." style="width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:6px; font-size:0.9rem; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#3b82f6'">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                    <div style="display:flex; gap:5px;">
+                        <button type="button" class="outline-button" id="btn-select-all">Select All</button>
+                        <button type="button" class="outline-button" id="btn-deselect-all">Clear All</button>
+                    </div>
+                    <div style="display:flex; gap:5px;" id="filter-group">
+                        <button type="button" class="outline-button active" data-filter="all">All</button>
+                        <button type="button" class="outline-button" data-filter="selected">Selected</button>
+                        <button type="button" class="outline-button" data-filter="unassigned">Unassigned</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-list-container">
+                <div id="modalProductList"></div>
+            </div>
+            
+            <div style="margin-top:20px; text-align:right; border-top: 1px solid #eee; padding-top: 15px;">
                 <button class="outline-button" onclick="closeModal()">Cancel</button>
                 <button class="btn-primary" onclick="saveCategoryProducts()">Save Assignment</button>
             </div>

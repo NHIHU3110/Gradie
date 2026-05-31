@@ -48,10 +48,99 @@ window.deleteProduct = function(id) {
     }
 }
 
+function getProductExportData(products) {
+    return products.map(p => {
+        const galleryStr = Array.isArray(p.gallery) ? p.gallery.join(', ') : '';
+        const tagsStr = Array.isArray(p.tags) ? p.tags.join(', ') : '';
+        const colorsStr = (p.options && Array.isArray(p.options.colors)) ? p.options.colors.join(', ') : '';
+        const sizesStr = (p.options && Array.isArray(p.options.sizes)) ? p.options.sizes.join(', ') : '';
+        const persStr = (p.options && Array.isArray(p.options.personalization)) ? p.options.personalization.join(', ') : '';
+        const variantsStr = Array.isArray(p.variants) ? p.variants.map(v => 
+            `[Name: ${v.name || ''}, Color: ${v.color || ''}, Price: ${v.price || ''}, SKU: ${v.sku || ''}, Stock: ${v.stock || ''}]`
+        ).join('; ') : '';
 
+        return {
+            "ID": p.id || '',
+            "Name": p.name || '',
+            "Category": p.category || '',
+            "Price": p.price || 0,
+            "Old Price": p.oldPrice !== null && p.oldPrice !== undefined ? p.oldPrice : '',
+            "Stock": p.stock || 0,
+            "Rating": p.rating || '',
+            "Reviews Count": p.reviews || '',
+            "Main Image": p.image || '',
+            "Gallery": galleryStr,
+            "Badge": p.badge || '',
+            "Tags": tagsStr,
+            "Is Trending": p.isTrending ? 'Yes' : 'No',
+            "Is Featured": p.isFeatured ? 'Yes' : 'No',
+            "Short Description": p.shortDescription || '',
+            "Description": p.description || '',
+            "Options Colors": colorsStr,
+            "Options Sizes": sizesStr,
+            "Options Personalization": persStr,
+            "Variants": variantsStr
+        };
+    });
+}
+
+function exportToCSV() {
+    const products = window.GradieStore.getProducts();
+    if (!products || products.length === 0) {
+        alert("No products to export.");
+        return;
+    }
+    
+    const data = getProductExportData(products);
+    const headers = Object.keys(data[0]);
+    const rows = [headers];
+    
+    data.forEach(item => {
+        rows.push(headers.map(header => {
+            const val = item[header];
+            return String(val).replace(/"/g, '""');
+        }));
+    });
+    
+    const csvContent = "\uFEFF" + rows.map(e => e.map(val => `"${val}"`).join(",")).join("\n");
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `products_gradie_${new Date().toISOString().slice(0,10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function exportToXLSX() {
+    const products = window.GradieStore.getProducts();
+    if (!products || products.length === 0) {
+        alert("No products to export.");
+        return;
+    }
+    
+    if (typeof XLSX === 'undefined') {
+        alert("SheetJS library is still loading. Please try again in a moment.");
+        return;
+    }
+    
+    const data = getProductExportData(products);
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
+    
+    XLSX.writeFile(workbook, `products_gradie_${new Date().toISOString().slice(0,10)}.xlsx`);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     if(document.getElementById('admin-product-list')) {
         renderAdminProducts();
     }
+    
+    const btnCSV = document.getElementById('btn-export-csv');
+    const btnXLSX = document.getElementById('btn-export-xlsx');
+    
+    if (btnCSV) btnCSV.addEventListener('click', exportToCSV);
+    if (btnXLSX) btnXLSX.addEventListener('click', exportToXLSX);
 });

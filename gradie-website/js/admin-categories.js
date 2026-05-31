@@ -37,28 +37,39 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
         
+        let activeFilter = 'all'; // 'all', 'selected', 'unassigned'
+        let searchQuery = '';
+        const modalSelectedIds = new Set();
+        
         window.openAssignModal = function(catName) {
             currentEditingCategory = catName;
             document.getElementById('modalCatName').textContent = `Assign Products to "${catName}"`;
             
+            // Load current products in this category into our Set
+            modalSelectedIds.clear();
             const products = window.GradieStore.getProducts();
-            const list = document.getElementById('modalProductList');
+            products.forEach(p => {
+                if (p.category === catName) {
+                    modalSelectedIds.add(p.id);
+                }
+            });
             
-            if(products.length === 0) {
-                list.innerHTML = "<p>No products available to assign.</p>";
-            } else {
-                list.innerHTML = products.map(p => `
-                    <label class="product-checkbox">
-                        <input type="checkbox" value="${p.id}" ${p.category === catName ? 'checked' : ''}>
-                        <img src="${p.image || 'https://via.placeholder.com/40'}">
-                        <div>
-                            <strong>${p.name}</strong><br>
-                            <small>${p.price.toLocaleString('vi-VN')} ₫ - Current: ${p.category}</small>
-                        </div>
-                    </label>
-                `).join('');
-            }
+            // Reset filters & search input
+            activeFilter = 'all';
+            searchQuery = '';
+            const searchInput = document.getElementById('modalProductSearch');
+            if (searchInput) searchInput.value = '';
             
+            // Set active class on filter group buttons
+            document.querySelectorAll('#filter-group button').forEach(btn => {
+                if (btn.getAttribute('data-filter') === 'all') {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            renderModalProducts();
             document.getElementById('assignModal').style.display = 'block';
         };
         
@@ -67,17 +78,123 @@ document.addEventListener('DOMContentLoaded', () => {
             currentEditingCategory = null;
         };
         
+        window.renderModalProducts = function() {
+            const products = window.GradieStore.getProducts();
+            const list = document.getElementById('modalProductList');
+            
+            if(products.length === 0) {
+                list.innerHTML = "<p style='text-align:center; padding:20px; color:var(--admin-muted);'>No products available.</p>";
+                return;
+            }
+
+            // Filter items based on activeFilter and searchQuery
+            const filteredProducts = products.filter(p => {
+                // Search query matching
+                const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                      p.id.toLowerCase().includes(searchQuery.toLowerCase());
+                if (!matchesSearch) return false;
+
+                // Category status matching
+                const isCurrentlySelected = modalSelectedIds.has(p.id);
+                const isUnassigned = !p.category || p.category === 'Uncategorized';
+
+                if (activeFilter === 'selected') {
+                    return isCurrentlySelected;
+                } else if (activeFilter === 'unassigned') {
+                    return isUnassigned;
+                }
+                return true;
+            });
+
+            if (filteredProducts.length === 0) {
+                list.innerHTML = "<p style='text-align:center; padding:20px; color:var(--admin-muted);'>No products match your filters.</p>";
+                return;
+            }
+
+            list.innerHTML = filteredProducts.map(p => {
+                const isSelected = modalSelectedIds.has(p.id);
+                return `
+                    <label class="product-checkbox ${isSelected ? 'selected' : ''}" data-id="${p.id}">
+                        <input type="checkbox" value="${p.id}" ${isSelected ? 'checked' : ''} onchange="handleModalCheckboxChange(this)">
+                        <img src="${p.image || 'https://via.placeholder.com/40'}">
+                        <div style="flex:1;">
+                            <strong>${p.name}</strong><br>
+                            <small>${p.price.toLocaleString('vi-VN')} ₫ - Current: ${p.category || 'Uncategorized'}</small>
+                        </div>
+                    </label>
+                `;
+            }).join('');
+        };
+
+        window.handleModalCheckboxChange = function(checkbox) {
+            const pId = checkbox.value;
+            const label = checkbox.closest('.product-checkbox');
+            if (checkbox.checked) {
+                modalSelectedIds.add(pId);
+                if (label) label.classList.add('selected');
+            } else {
+                modalSelectedIds.delete(pId);
+                if (label) label.classList.remove('selected');
+            }
+        };
+        
         window.saveCategoryProducts = function() {
             if(!currentEditingCategory) return;
             
-            const checkboxes = document.querySelectorAll('#modalProductList input[type="checkbox"]');
-            const selectedIds = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
-            
+            const selectedIds = Array.from(modalSelectedIds);
             window.GradieStore.assignProductsToCategory(currentEditingCategory, selectedIds);
             
             closeModal();
             renderAdminCategories();
-            alert(`Assigned ${selectedIds.length} products to ${currentEditingCategory}`);
+            alert(`Assigned ${selectedIds.length} products to "${currentEditingCategory}"`);
         };
+
+        // Attach modal event listeners once elements are ready
+        setTimeout(() => {
+            const searchInput = document.getElementById('modalProductSearch');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    searchQuery = e.target.value;
+                    renderModalProducts();
+                });
+            }
+
+            // Filter group buttons
+            document.querySelectorAll('#filter-group button').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('#filter-group button').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    activeFilter = btn.getAttribute('data-filter');
+                    renderModalProducts();
+                });
+            });
+
+            // Bulk buttons
+            const btnSelectAll = document.getElementById('btn-select-all');
+            if (btnSelectAll) {
+                btnSelectAll.addEventListener('click', () => {
+                    const checkboxes = document.querySelectorAll('#modalProductList input[type="checkbox"]');
+                    checkboxes.forEach(cb => {
+                        cb.checked = true;
+                        modalSelectedIds.add(cb.value);
+                        const label = cb.closest('.product-checkbox');
+                        if (label) label.classList.add('selected');
+                    });
+                });
+            }
+
+            const btnDeselectAll = document.getElementById('btn-deselect-all');
+            if (btnDeselectAll) {
+                btnDeselectAll.addEventListener('click', () => {
+                    const checkboxes = document.querySelectorAll('#modalProductList input[type="checkbox"]');
+                    checkboxes.forEach(cb => {
+                        cb.checked = false;
+                        modalSelectedIds.delete(cb.value);
+                        const label = cb.closest('.product-checkbox');
+                        if (label) label.classList.remove('selected');
+                    });
+                });
+            }
+        }, 100);
     }
 });
