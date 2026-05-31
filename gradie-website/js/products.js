@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
       
           detailContainer.innerHTML = `
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 50px;">
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
                 <!-- Left: Gallery -->
                 <div style="display:flex; flex-direction:column; gap:20px;">
                     <div style="width:100%; padding-top:100%; position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--border-gold);">
