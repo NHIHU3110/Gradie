@@ -45,7 +45,7 @@
       <p style="color: var(--taupe); margin-top: 15px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">Make your graduation gift unique with our bespoke customization options, from virtual sash design to gold thread embroidery.</p>
     </section>
     
-    <div style="max-width: 1200px; margin: 0 auto 80px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;">
+    <div id="services-cards-container" style="max-width: 1200px; margin: 0 auto 80px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;">
       <!-- Card 1: DIY Sash Design -->
       <div style="background:var(--white); border-radius:16px; border:1px solid var(--border-gold); overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); display:flex; flex-direction:column; transition:all 0.3s ease;" onmouseenter="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.1)'" onmouseleave="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.05)'">
         <div style="height:220px; background:url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80') center/cover;"></div>
@@ -114,10 +114,32 @@
     </div>
   </footer>
 
-    <script src="../js/global-data.js?v=1780167396"></script>
+  <script src="../js/global-data.js?v=1780167396"></script>
   <script src="../js/data-store.js?v=1780167396"></script>
   <script src="../js/main.js?v=1780167396"></script>
   <script src="../js/products.js?v=1780167396"></script>
   <script src="../js/cart.js?v=1780167396"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.GradieStore) {
+        const opts = window.GradieStore.getCustomizationOptions();
+        const container = document.getElementById('services-cards-container');
+        if (opts && opts.services && container) {
+          container.innerHTML = opts.services.map(s => `
+            <div style="background:var(--white); border-radius:16px; border:1px solid var(--border-gold); overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); display:flex; flex-direction:column; transition:all 0.3s ease;" onmouseenter="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.1)'" onmouseleave="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.05)'">
+              <div style="height:220px; background:url('${s.img}') center/cover;"></div>
+              <div style="padding:30px; flex:1; display:flex; flex-direction:column; justify-content:space-between; gap:20px;">
+                <div>
+                  <h3 style="font-size:1.5rem; margin-bottom:12px; font-family:'Playfair Display', serif;">${s.title}</h3>
+                  <p style="color:var(--taupe); font-size:0.95rem; line-height:1.6;">${s.desc}</p>
+                </div>
+                <a href="${s.link}" class="btn-primary" style="width:100%; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; text-decoration:none;">${s.btnText}</a>
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+    });
+  </script>
 </body>
 </html>

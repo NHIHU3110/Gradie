@@ -55,7 +55,13 @@
             <h3 id="galleryModalTitle" style="margin-top:0;">Add / Edit Gallery Image</h3>
             <input type="hidden" id="gallery-id">
             <div class="form-group"><label>Title / Description</label><input type="text" id="gallery-title" required></div>
-            <div class="form-group"><label>Type</label><input type="text" id="gallery-type" placeholder="e.g. Customer Photo, Studio" required></div>
+            <div class="form-group">
+                <label>Gallery Category</label>
+                <select id="gallery-type" required>
+                    <option value="Customer Photo">Customer Photos</option>
+                    <option value="Photoshoot Concept">Photoshoot Concepts</option>
+                </select>
+            </div>
             <div class="form-group"><label>Image URL</label><input type="text" id="gallery-image" required></div>
             <div class="form-group">
                 <label>Status</label>

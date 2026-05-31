@@ -50,16 +50,72 @@ window.GradieStore = {
         { name: 'Golden Tangerine', hex: '#FFB74D' }
       ],
       waxSeals: [
-        { name: 'Graduation Cap', emoji: '🎓' },
-        { name: 'Heart of Love', emoji: '❤️' },
-        { name: 'Bespoke Rose', emoji: '🌹' },
-        { name: 'Star of Success', emoji: '⭐' }
+        { name: 'Congratulations Motif', emoji: '✦' },
+        { name: 'Classic Romance', emoji: '❦' },
+        { name: 'Royal Fleur-de-lis', emoji: '⚜' },
+        { name: 'Gradie Monogram', emoji: 'G' }
+      ],
+      services: [
+        {
+          title: 'Virtual Sash Designer',
+          desc: 'Use our live interactive designer to preview your sash color, select font styles, and see your name beautifully displayed in real-time.',
+          img: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80',
+          btnText: 'Design Now',
+          link: 'diy-sash-design.html'
+        },
+        {
+          title: 'Bespoke Embroidery',
+          desc: 'Add elegant monogramming, graduation year, or personal messages in metallic gold, silver, or classic black thread embroidery.',
+          img: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=600&q=80',
+          btnText: 'Learn More',
+          link: 'embroidery-services.html'
+        },
+        {
+          title: 'Luxury Gift Wrapping',
+          desc: 'Choose premium textured paper wraps, champagne gold ribbons, wax-sealed custom greeting tags, and luxury box packaging.',
+          img: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=600&q=80',
+          btnText: 'Explore Wraps',
+          link: 'gift-wrapping.html'
+        }
       ]
     };
 
     if (!data.customization || !data.customization.embroideryColors) {
       data.customization = defaultCustomization;
       updated = true;
+    } else {
+      // Migrate old emojis to clean luxury symbols if present
+      if (data.customization.waxSeals) {
+        data.customization.waxSeals.forEach(s => {
+          if (s.emoji === '🎓') { s.name = 'Congratulations Motif'; s.emoji = '✦'; updated = true; }
+          else if (s.emoji === '❤️') { s.name = 'Classic Romance'; s.emoji = '❦'; updated = true; }
+          else if (s.emoji === '🌹') { s.name = 'Royal Fleur-de-lis'; s.emoji = '⚜'; updated = true; }
+          else if (s.emoji === '⭐') { s.name = 'Gradie Monogram'; s.emoji = 'G'; updated = true; }
+          else if (s.emoji === '✨') { s.name = 'Classic Sparkle'; s.emoji = '✦'; updated = true; }
+        });
+      }
+      if (!data.customization.services) {
+        data.customization.services = defaultCustomization.services;
+        updated = true;
+      }
+    }
+
+    // Clean up invalid or undefined gallery items from localStorage
+    if (data.gallery) {
+      const originalLength = data.gallery.length;
+      data.gallery = data.gallery.filter(item => 
+        item && 
+        typeof item === 'object' && 
+        item.id && 
+        item.id !== 'undefined' && 
+        item.title && 
+        item.title !== 'undefined' && 
+        item.image && 
+        item.image !== 'undefined'
+      );
+      if (data.gallery.length !== originalLength) {
+        updated = true;
+      }
     }
     
     if (!data || !data.products || data.products.length === 0 || needsCatalogUpdate) {
@@ -151,10 +207,33 @@ window.GradieStore = {
           { name: 'Golden Tangerine', hex: '#FFB74D' }
         ],
         waxSeals: [
-          { name: 'Graduation Cap', emoji: '🎓' },
-          { name: 'Heart of Love', emoji: '❤️' },
-          { name: 'Bespoke Rose', emoji: '🌹' },
-          { name: 'Star of Success', emoji: '⭐' }
+          { name: 'Congratulations Motif', emoji: '✦' },
+          { name: 'Classic Romance', emoji: '❦' },
+          { name: 'Royal Fleur-de-lis', emoji: '⚜' },
+          { name: 'Gradie Monogram', emoji: 'G' }
+        ],
+        services: [
+          {
+            title: 'Virtual Sash Designer',
+            desc: 'Use our live interactive designer to preview your sash color, select font styles, and see your name beautifully displayed in real-time.',
+            img: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80',
+            btnText: 'Design Now',
+            link: 'diy-sash-design.html'
+          },
+          {
+            title: 'Bespoke Embroidery',
+            desc: 'Add elegant monogramming, graduation year, or personal messages in metallic gold, silver, or classic black thread embroidery.',
+            img: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=600&q=80',
+            btnText: 'Learn More',
+            link: 'embroidery-services.html'
+          },
+          {
+            title: 'Luxury Gift Wrapping',
+            desc: 'Choose premium textured paper wraps, champagne gold ribbons, wax-sealed custom greeting tags, and luxury box packaging.',
+            img: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=600&q=80',
+            btnText: 'Explore Wraps',
+            link: 'gift-wrapping.html'
+          }
         ]
       }
     };
@@ -259,11 +338,11 @@ window.GradieStore = {
   deleteBlogPost: function(id) { let data = this.getData(); data.blogPosts = data.blogPosts.filter(o => o.id !== id); this.saveData(data); },
   
   // GALLERY
-  getGallery: function() { return this.getData().gallery || []; },
-  saveGallery: function(gallery) { let data = this.getData(); data.gallery = gallery; this.saveData(data); },
-  addGalleryItem: function(item) { let data = this.getData(); data.gallery.push(item); this.saveData(data); },
-  updateGalleryItem: function(id, item) { let data = this.getData(); let i = data.gallery.findIndex(o => o.id === id); if(i !== -1) { data.gallery[i] = { ...data.gallery[i], ...item }; this.saveData(data); } },
-  deleteGalleryItem: function(id) { let data = this.getData(); data.gallery = data.gallery.filter(o => o.id !== id); this.saveData(data); },
+  getGallery: function() { const d = this.getData(); return (d && d.gallery) ? d.gallery : []; },
+  saveGallery: function(gallery) { let data = this.getData(); data.gallery = gallery || []; this.saveData(data); },
+  addGalleryItem: function(item) { let data = this.getData(); if(!data.gallery) data.gallery = []; data.gallery.push(item); this.saveData(data); },
+  updateGalleryItem: function(id, item) { let data = this.getData(); if(!data.gallery) data.gallery = []; let i = data.gallery.findIndex(o => o.id === id); if(i !== -1) { data.gallery[i] = { ...data.gallery[i], ...item }; this.saveData(data); } },
+  deleteGalleryItem: function(id) { let data = this.getData(); if(!data.gallery) data.gallery = []; data.gallery = data.gallery.filter(o => o.id !== id); this.saveData(data); },
   
   // POLICIES
   getPolicies: function() { return this.getData().policies || []; },
