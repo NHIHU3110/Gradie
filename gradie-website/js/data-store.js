@@ -127,9 +127,27 @@ window.GradieStore = {
       data.products = this.normalizeProducts(data.products);
     }
       
-    // Auto-fill mock data if empty (for gallery, blog, orders, policies)
+    // Auto-fill mock data if empty (for gallery, blog, orders, policies, users)
     let defaults = this.getDefaultData();
-    if (!data.orders || data.orders.length === 0) { data.orders = defaults.orders; updated = true; }
+    if (!data.users || data.users.length === 0) { data.users = defaults.users; updated = true; }
+    
+    // Backfill avatars and address books if missing
+    if (data.users && data.users.length > 0) {
+      data.users.forEach(u => {
+        if (!u.avatar) {
+          u.avatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150";
+          updated = true;
+        }
+        if (!u.addresses || !Array.isArray(u.addresses) || u.addresses.length === 0) {
+          u.addresses = [
+            { id: "addr-gen-" + Math.floor(Math.random()*100000), label: "Default Address", name: u.username || "User", phone: u.phone || "", detail: u.address || u.shippingAddress || "", isDefault: true }
+          ];
+          updated = true;
+        }
+      });
+    }
+
+    if (!data.orders || data.orders.length === 0 || data.orders.some(o => !o.customerEmail)) { data.orders = defaults.orders; updated = true; }
     if (!data.blogPosts || data.blogPosts.length === 0) { data.blogPosts = defaults.blogPosts; updated = true; }
     if (!data.gallery || data.gallery.length === 0) { data.gallery = defaults.gallery; updated = true; }
     if (!data.policies || data.policies.length === 0) { data.policies = defaults.policies; updated = true; }
@@ -163,10 +181,98 @@ window.GradieStore = {
         promoCode: "GRAD2026", promoDiscount: 50000
       },
       products: this.normalizeProducts(window.GRADIE_DATA?.products || []),
+      users: [
+        {
+          id: 'u-1',
+          username: "Nhi Huynh",
+          email: "nhi@gradie.com",
+          password: "password123",
+          phone: "0901234567",
+          address: "123 Le Loi, District 1, HCMC",
+          avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+          addresses: [
+            { id: "addr-1-1", label: "Home", name: "Nhi Huynh", phone: "0901234567", detail: "123 Le Loi, District 1, HCMC", isDefault: true },
+            { id: "addr-1-2", label: "Office", name: "Huynh Thao Nhi", phone: "0909998887", detail: "Tower A, 88 Dong Khoi, District 1, HCMC", isDefault: false }
+          ]
+        },
+        {
+          id: 'u-2',
+          username: "Alex Mercer",
+          email: "alex@gradie.com",
+          password: "password123",
+          phone: "0987654321",
+          address: "456 Nguyen Hue, District 1, HCMC",
+          avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+          addresses: [
+            { id: "addr-2-1", label: "Apartment", name: "Alex Mercer", phone: "0987654321", detail: "Room 405, 456 Nguyen Hue, District 1, HCMC", isDefault: true }
+          ]
+        },
+        {
+          id: 'u-3',
+          username: "Helena Rostova",
+          email: "helena@gradie.com",
+          password: "password123",
+          phone: "0912345678",
+          address: "789 Dong Khoi, District 1, HCMC",
+          avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150",
+          addresses: [
+            { id: "addr-3-1", label: "Home Villa", name: "Helena Rostova", phone: "0912345678", detail: "789 Dong Khoi, District 1, HCMC", isDefault: true }
+          ]
+        }
+      ],
       orders: [
-        { orderNumber: "ORD-" + Math.floor(Math.random()*10000), createdAt: Date.now() - 86400000, customer: {name: "Nguyen Van A", email: "a@example.com"}, total: 350000, status: "Delivered" },
-        { orderNumber: "ORD-" + Math.floor(Math.random()*10000), createdAt: Date.now() - 3600000, customer: {name: "Tran Thi B", email: "b@example.com"}, total: 520000, status: "Order Confirmed" },
-        { orderNumber: "ORD-" + Math.floor(Math.random()*10000), createdAt: Date.now() - 120000, customer: {name: "Le Van C", email: "c@example.com"}, total: 150000, status: "Dispatched" }
+        {
+          orderNumber: "GRD-26-9821",
+          customerName: "Nhi Huynh",
+          customerEmail: "nhi@gradie.com",
+          customerPhone: "0901234567",
+          shippingAddress: "123 Le Loi, District 1, HCMC",
+          notes: "Giao giờ hành chính, gọi trước khi giao 15p",
+          paymentMethod: "COD",
+          date: "30/05/2026 14:30:15",
+          items: [
+            { id: "gau-bong-teddy", name: "Gấu Bông Tốt Nghiệp Teddy", quantity: 1, price: 250000, customization: { embroideryText: "Nhi Huynh", threadColor: "Champagne Gold" } },
+            { id: "hoa-huong-duong", name: "Hoa Hướng Dương Tốt Nghiệp", quantity: 1, price: 120000, customization: null }
+          ],
+          subtotal: 370000,
+          shippingFee: 30000,
+          total: 400000,
+          status: "Delivered"
+        },
+        {
+          orderNumber: "GRD-26-4412",
+          customerName: "Alex Mercer",
+          customerEmail: "alex@gradie.com",
+          customerPhone: "0987654321",
+          shippingAddress: "456 Nguyen Hue, District 1, HCMC",
+          notes: "Xin hãy gói kỹ giúp mình, làm quà tặng bạn thân",
+          paymentMethod: "COD",
+          date: "31/05/2026 08:15:22",
+          items: [
+            { id: "scrapbook-ky-niem", name: "Scrapbook Kỷ Niệm Graduation", quantity: 1, price: 380000, customization: { boxColor: "Signature Cream", ribbonColor: "Champagne Gold", waxSeal: "Gradie Monogram" } }
+          ],
+          subtotal: 380000,
+          shippingFee: 30000,
+          total: 410000,
+          status: "Shipped"
+        },
+        {
+          orderNumber: "GRD-26-7731",
+          customerName: "Helena Rostova",
+          customerEmail: "helena@gradie.com",
+          customerPhone: "0912345678",
+          shippingAddress: "789 Dong Khoi, District 1, HCMC",
+          notes: "Giao cổng sau tòa nhà",
+          paymentMethod: "COD",
+          date: "31/05/2026 10:05:00",
+          items: [
+            { id: "huy-chuong-danh-du", name: "Huy Chương Tốt Nghiệp Danh Dự", quantity: 1, price: 180000, customization: null }
+          ],
+          subtotal: 180000,
+          shippingFee: 30000,
+          total: 210000,
+          status: "Pending"
+        }
       ],
       blogPosts: [
         { id: 'b1', title: 'Top 5 Graduation Gifts 2026', category: 'Gifting Tips', status: 'Published', content: 'Discover the most meaningful gifts for this graduation season. From personalized sashes to timeless teddy bears...', image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500' },
@@ -354,6 +460,62 @@ window.GradieStore = {
   // CUSTOMIZATION
   getCustomizationOptions: function() { return this.getData().customization || this.resetData(false).customization; },
   saveCustomizationOptions: function(options) { let data = this.getData(); data.customization = options; this.saveData(data); },
+  
+  // USER AUTHENTICATION & SESSIONS
+  getUsers: function() { return this.getData().users || []; },
+  registerUser: function(username, email, password) {
+    let data = this.getData();
+    if (!data.users) data.users = [];
+    if (data.users.some(u => u.email.toLowerCase() === email.toLowerCase())) return { success: false, message: "Email is already registered." };
+    const newUser = { id: 'u-' + Date.now(), username, email: email.toLowerCase(), password };
+    data.users.push(newUser);
+    this.saveData(data);
+    this.setCurrentUser(newUser);
+    return { success: true, user: newUser };
+  },
+  loginUser: function(email, password) {
+    const user = this.getUsers().find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
+    if (user) {
+      this.setCurrentUser(user);
+      return { success: true, user };
+    }
+    return { success: false, message: "Invalid email or password." };
+  },
+  getCurrentUser: function() {
+    try {
+      const sess = localStorage.getItem('GRADIE_USER_SESSION');
+      return sess ? JSON.parse(sess) : null;
+    } catch(e) { return null; }
+  },
+  setCurrentUser: function(user) {
+    localStorage.setItem('GRADIE_USER_SESSION', JSON.stringify(user));
+  },
+  logoutUser: function() {
+    localStorage.removeItem('GRADIE_USER_SESSION');
+  },
+  updateUserProfile: function(email, updatedData) {
+    let data = this.getData();
+    if (!data.users) data.users = [];
+    let index = data.users.findIndex(u => u.email.toLowerCase() === email.toLowerCase());
+    if (index !== -1) {
+      data.users[index] = { ...data.users[index], ...updatedData };
+      this.saveData(data);
+      this.setCurrentUser(data.users[index]);
+      return { success: true, user: data.users[index] };
+    }
+    return { success: false, message: "User not found." };
+  },
+
+  // STOCK MANIPULATION
+  deductStock: function(productId, quantity) {
+    let data = this.getData();
+    if (!data.products) return;
+    let index = data.products.findIndex(p => p.id === productId);
+    if (index !== -1) {
+      data.products[index].stock = Math.max(0, (data.products[index].stock || 0) - quantity);
+      this.saveData(data);
+    }
+  },
   
   exportData: function() { return JSON.stringify(this.getData(), null, 2); },
   importData: function(jsonData) { try { const p = JSON.parse(jsonData); if (p && p.products) { this.saveData(p); return true; } } catch (e) {} return false; }

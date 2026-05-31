@@ -191,7 +191,72 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     ${vHtml}
                     <input type="hidden" id="selected-variant" value="">
-                    
+
+                    <!-- Customization Panel -->
+                    <div id="customization-panel" style="margin-bottom:30px;">
+
+                      <!-- Embroidery Toggle -->
+                      <div style="border:1px solid var(--border-gold); border-radius:10px; overflow:hidden; margin-bottom:14px;">
+                        <button type="button" id="toggle-emb" onclick="(function(){ var s=document.getElementById('emb-section'); var a=document.getElementById('emb-arrow'); if(s.style.display==='none'){s.style.display='block';a.style.transform='rotate(180deg)';}else{s.style.display='none';a.style.transform='rotate(0deg)';} })()" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:var(--warm-cream); border:none; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:600; color:var(--ink);">
+                          <span>✨ Embroidery Personalization</span>
+                          <svg id="emb-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div id="emb-section" style="display:none; padding:18px; background:var(--white);">
+                          <label for="custom-emb-text" style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Embroidery Text</label>
+                          <input type="text" id="custom-emb-text" maxlength="25" placeholder="e.g. Congratulations, Sarah!" style="width:100%; padding:12px 14px; border:1px solid var(--border-gold); border-radius:8px; font-family:'Montserrat',sans-serif; font-size:0.95rem; color:var(--ink); background:var(--warm-cream); outline:none; box-sizing:border-box; transition:border .2s;" onfocus="this.style.borderColor='var(--champagne)'" onblur="this.style.borderColor='var(--border-gold)'">
+                          <div style="text-align:right; font-size:0.75rem; color:var(--taupe); margin-top:4px;"><span id="emb-char-count">0</span>/25 characters</div>
+
+                          <label style="display:block; margin:16px 0 8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Thread Color</label>
+                          <input type="hidden" id="custom-thread-color" value="Champagne Gold">
+                          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                            <button type="button" class="thread-swatch" data-color="Champagne Gold" onclick="window._pickSwatch(this,'custom-thread-color','thread-swatch')" style="width:36px;height:36px;border-radius:50%;border:3px solid var(--champagne);background:#D8A94F;cursor:pointer;box-shadow:0 0 0 2px rgba(216,169,79,.4);transition:all .2s;" title="Champagne Gold"></button>
+                            <button type="button" class="thread-swatch" data-color="Classic Silver" onclick="window._pickSwatch(this,'custom-thread-color','thread-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#C0C0C0;cursor:pointer;transition:all .2s;" title="Classic Silver"></button>
+                            <button type="button" class="thread-swatch" data-color="Peach Gold" onclick="window._pickSwatch(this,'custom-thread-color','thread-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#E9A08D;cursor:pointer;transition:all .2s;" title="Peach Gold"></button>
+                            <button type="button" class="thread-swatch" data-color="Crisp White" onclick="window._pickSwatch(this,'custom-thread-color','thread-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#FFFFFF;cursor:pointer;transition:all .2s;" title="Crisp White"></button>
+                            <button type="button" class="thread-swatch" data-color="Midnight Black" onclick="window._pickSwatch(this,'custom-thread-color','thread-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#17181D;cursor:pointer;transition:all .2s;" title="Midnight Black"></button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Gift Wrapping Toggle -->
+                      <div style="border:1px solid var(--border-gold); border-radius:10px; overflow:hidden;">
+                        <button type="button" id="toggle-gift" onclick="(function(){ var s=document.getElementById('gift-section'); var a=document.getElementById('gift-arrow'); if(s.style.display==='none'){s.style.display='block';a.style.transform='rotate(180deg)';}else{s.style.display='none';a.style.transform='rotate(0deg)';} })()" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:var(--warm-cream); border:none; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:600; color:var(--ink);">
+                          <span>🎁 Gift Wrapping</span>
+                          <svg id="gift-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div id="gift-section" style="display:none; padding:18px; background:var(--white);">
+
+                          <label style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Box Color</label>
+                          <input type="hidden" id="custom-box-color" value="">
+                          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;">
+                            <button type="button" class="box-swatch" data-color="Signature Cream" onclick="window._pickSwatch(this,'custom-box-color','box-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#F4E8D1;cursor:pointer;transition:all .2s;" title="Signature Cream"></button>
+                            <button type="button" class="box-swatch" data-color="Pastel Peach" onclick="window._pickSwatch(this,'custom-box-color','box-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#E9A08D;cursor:pointer;transition:all .2s;" title="Pastel Peach"></button>
+                            <button type="button" class="box-swatch" data-color="Midnight Black" onclick="window._pickSwatch(this,'custom-box-color','box-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#17181D;cursor:pointer;transition:all .2s;" title="Midnight Black"></button>
+                            <button type="button" class="box-swatch" data-color="Royal Navy" onclick="window._pickSwatch(this,'custom-box-color','box-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#002040;cursor:pointer;transition:all .2s;" title="Royal Navy"></button>
+                          </div>
+
+                          <label style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Ribbon Color</label>
+                          <input type="hidden" id="custom-ribbon-color" value="">
+                          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;">
+                            <button type="button" class="ribbon-swatch" data-color="Champagne Gold" onclick="window._pickSwatch(this,'custom-ribbon-color','ribbon-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#D8A94F;cursor:pointer;transition:all .2s;" title="Champagne Gold"></button>
+                            <button type="button" class="ribbon-swatch" data-color="Scarlet Red" onclick="window._pickSwatch(this,'custom-ribbon-color','ribbon-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#990000;cursor:pointer;transition:all .2s;" title="Scarlet Red"></button>
+                            <button type="button" class="ribbon-swatch" data-color="Emerald Green" onclick="window._pickSwatch(this,'custom-ribbon-color','ribbon-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#2E7D32;cursor:pointer;transition:all .2s;" title="Emerald Green"></button>
+                          </div>
+
+                          <label for="custom-wax-seal" style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Wax Seal</label>
+                          <select id="custom-wax-seal" style="width:100%; padding:12px 14px; border:1px solid var(--border-gold); border-radius:8px; font-family:'Montserrat',sans-serif; font-size:0.95rem; color:var(--ink); background:var(--warm-cream); outline:none; box-sizing:border-box; cursor:pointer; appearance:auto;">
+                            <option value="">— No Seal —</option>
+                            <option value="Graduation Cap">🎓 Graduation Cap</option>
+                            <option value="Heart">❤️ Heart</option>
+                            <option value="Rose">🌹 Rose</option>
+                            <option value="Star">⭐ Star</option>
+                          </select>
+                        </div>
+                      </div>
+
+                    </div>
+                    <!-- End Customization Panel -->
+
                     <button class="peach-button" style="width:100%; padding:15px; font-size:1.1rem;" onclick="addToCart('${p.id}', true)">Add to Cart</button>
                     
                     <div style="margin-top:40px; border-top:1px solid var(--border-gold); padding-top:30px;">
@@ -206,11 +271,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
           `;
+
+          // Wire up character counter for embroidery text
+          var embInput = document.getElementById('custom-emb-text');
+          if (embInput) {
+            embInput.addEventListener('input', function() {
+              var counter = document.getElementById('emb-char-count');
+              if (counter) counter.textContent = embInput.value.length;
+            });
+          }
       } else {
           detailContainer.innerHTML = '<p style="text-align:center; padding:100px;">Product not found.</p>';
       }
   }
 });
+
+// Swatch picker helper
+window._pickSwatch = function(btn, hiddenId, swatchClass) {
+  document.querySelectorAll('.' + swatchClass).forEach(function(b) {
+    b.style.border = '2px solid #ddd';
+    b.style.boxShadow = 'none';
+  });
+  btn.style.border = '3px solid var(--champagne)';
+  btn.style.boxShadow = '0 0 0 2px rgba(216,169,79,.4)';
+  document.getElementById(hiddenId).value = btn.getAttribute('data-color');
+};
 
 // Expose safe cart add
 window.addToCart = function(id, isDetailView = false) {
@@ -238,10 +323,36 @@ window.addToCart = function(id, isDetailView = false) {
             return;
         }
     }
+
+    // Collect customization data (only on detail page)
+    let customization = null;
+    if (isDetailView) {
+        const embText = document.getElementById('custom-emb-text');
+        const threadColor = document.getElementById('custom-thread-color');
+        const boxColor = document.getElementById('custom-box-color');
+        const ribbonColor = document.getElementById('custom-ribbon-color');
+        const waxSeal = document.getElementById('custom-wax-seal');
+
+        if (embText && embText.value.trim()) {
+            customization = customization || {};
+            customization.embroideryText = embText.value.trim();
+            customization.threadColor = threadColor ? threadColor.value : 'Champagne Gold';
+        }
+        if (boxColor && boxColor.value) {
+            customization = customization || {};
+            customization.boxColor = boxColor.value;
+            customization.ribbonColor = ribbonColor ? ribbonColor.value : 'Champagne Gold';
+            customization.waxSeal = waxSeal ? waxSeal.value : '';
+        }
+    }
     
     let cart = JSON.parse(localStorage.getItem('gradie_cart') || '[]');
-    // Check if same product AND same variant exists
-    let exists = cart.find(x => x.id === id && x.variant === selectedVariant);
+    // Check if same product, variant, AND customization exists
+    let exists = cart.find(function(x) {
+        if (x.id !== id || x.variant !== selectedVariant) return false;
+        // If customization differs, treat as new entry
+        return JSON.stringify(x.customization || null) === JSON.stringify(customization);
+    });
     
     if (exists) {
         exists.qty += 1;
@@ -252,7 +363,8 @@ window.addToCart = function(id, isDetailView = false) {
             price: price, 
             image: p.image || (p.gallery ? p.gallery[0] : ''), 
             qty: 1,
-            variant: selectedVariant 
+            variant: selectedVariant,
+            customization: customization
         });
     }
     
