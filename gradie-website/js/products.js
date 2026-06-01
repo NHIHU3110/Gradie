@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (p.variants && p.variants.length > 0) {
               vHtml = '<p style="margin-bottom:10px; font-weight:600; color: var(--ink);"><strong>Chọn phiên bản:</strong></p><div id="variant-options" style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:30px;">';
               vHtml += p.variants.map(v => {
-                  const label = v.name || v.color;
+                  const label = (v.options && v.options.length) ? v.options.filter(Boolean).join(' / ') : (v.name || v.color || v.title || v.sku || "Mặc định");
                   const price = v.price || p.price;
                   return `<button class="variant-btn" data-variant="${label}" data-price="${price}" style="padding:10px 18px; border:1px solid var(--border-gold); background:var(--white); cursor:pointer; border-radius:6px; font-size:0.95rem; transition: all 0.2s;" onclick="selectVariant(this)">${label}<br><small style="color:var(--taupe);">${price.toLocaleString('vi-VN')} ₫</small></button>`;
               }).join('');

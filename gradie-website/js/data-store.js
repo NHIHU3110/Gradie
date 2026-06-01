@@ -125,6 +125,28 @@ window.GradieStore = {
       updated = true;
     } else {
       data.products = this.normalizeProducts(data.products);
+      // Merge any new products added to global-data.js that are missing from localStorage
+      // AND update existing products so they get the latest options and gallery images.
+      if (window.GRADIE_DATA && window.GRADIE_DATA.products) {
+        let hasUpdates = false;
+        const globalProducts = window.GRADIE_DATA.products;
+        
+        globalProducts.forEach(gp => {
+          const localIndex = data.products.findIndex(p => p.id === gp.id);
+          if (localIndex === -1) {
+            data.products.push(gp);
+            hasUpdates = true;
+          } else {
+            // Update the existing product to ensure it has the latest variants and gallery
+            if (JSON.stringify(data.products[localIndex].variants) !== JSON.stringify(gp.variants) || 
+                JSON.stringify(data.products[localIndex].gallery) !== JSON.stringify(gp.gallery)) {
+              data.products[localIndex] = gp;
+              hasUpdates = true;
+            }
+          }
+        });
+        if (hasUpdates) updated = true;
+      }
     }
       
     // Auto-fill mock data if empty (for gallery, blog, orders, policies, users)
