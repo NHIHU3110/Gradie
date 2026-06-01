@@ -438,7 +438,7 @@ window.GradieStore = {
     p.gallery = p.gallery.filter(img => img && typeof img === 'string' && img.trim() !== '');
     p.gallery = [...new Set(p.gallery)];
     const fallback = 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80';
-    while(p.gallery.length < 3) p.gallery.push(p.gallery[0] || fallback);
+    if (p.gallery.length === 0) p.gallery.push(fallback);
     p.image = p.gallery[0];
     if(!Array.isArray(p.variants)) p.variants = [];
     p.variants.forEach(v => {
