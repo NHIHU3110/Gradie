@@ -197,7 +197,10 @@ document.addEventListener('DOMContentLoaded', () => {
               customHtml += `
                       <div style="border:1px solid var(--border-gold); border-radius:10px; overflow:hidden; margin-bottom:14px;">
                         <button type="button" id="toggle-emb" onclick="(function(){ var s=document.getElementById('emb-section'); var a=document.getElementById('emb-arrow'); if(s.style.display==='none'){s.style.display='block';a.style.transform='rotate(180deg)';}else{s.style.display='none';a.style.transform='rotate(0deg)';} })()" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:var(--warm-cream); border:none; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:600; color:var(--ink);">
-                          <span>✨ Thêu Tên (+50.000 ₫)</span>
+                          <span style="display:flex; align-items:center; gap:8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.6 7.6 2.4-7.6 2.4-2.4 7.6-2.4-7.6-7.6-2.4 7.6-2.4z"/></svg>
+                            Thêu Tên (+50.000 ₫)
+                          </span>
                           <svg id="emb-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </button>
                         <div id="emb-section" style="display:none; padding:18px; background:var(--white);">
@@ -222,7 +225,10 @@ document.addEventListener('DOMContentLoaded', () => {
               customHtml += `
                       <div style="border:1px solid var(--border-gold); border-radius:10px; overflow:hidden; margin-bottom:14px;">
                         <button type="button" id="toggle-engrave" onclick="(function(){ var s=document.getElementById('engrave-section'); var a=document.getElementById('engrave-arrow'); if(s.style.display==='none'){s.style.display='block';a.style.transform='rotate(180deg)';}else{s.style.display='none';a.style.transform='rotate(0deg)';} })()" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:var(--warm-cream); border:none; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:600; color:var(--ink);">
-                          <span>🖋️ Khắc Tên (+50.000 ₫)</span>
+                          <span style="display:flex; align-items:center; gap:8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line></svg>
+                            Khắc Tên (+50.000 ₫)
+                          </span>
                           <svg id="engrave-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </button>
                         <div id="engrave-section" style="display:none; padding:18px; background:var(--white);">
@@ -237,7 +243,10 @@ document.addEventListener('DOMContentLoaded', () => {
           customHtml += `
                       <div style="border:1px solid var(--border-gold); border-radius:10px; overflow:hidden;">
                         <button type="button" id="toggle-gift" onclick="(function(){ var s=document.getElementById('gift-section'); var a=document.getElementById('gift-arrow'); if(s.style.display==='none'){s.style.display='block';a.style.transform='rotate(180deg)';}else{s.style.display='none';a.style.transform='rotate(0deg)';} })()" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:var(--warm-cream); border:none; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:600; color:var(--ink);">
-                          <span>🎁 Gói Quà (+30.000 ₫)</span>
+                          <span style="display:flex; align-items:center; gap:8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+                            Gói Quà (+30.000 ₫)
+                          </span>
                           <svg id="gift-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </button>
                         <div id="gift-section" style="display:none; padding:18px; background:var(--white);">
@@ -259,8 +268,8 @@ document.addEventListener('DOMContentLoaded', () => {
                           <label for="custom-wax-seal" style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Dấu Sáp</label>
                           <select id="custom-wax-seal" style="width:100%; padding:12px 14px; border:1px solid var(--border-gold); border-radius:8px; font-family:'Montserrat',sans-serif; font-size:0.95rem; color:var(--ink); background:var(--warm-cream); outline:none; box-sizing:border-box; cursor:pointer; appearance:auto;">
                             <option value="">— Không Dấu Sáp —</option>
-                            <option value="Graduation Cap">🎓 Mũ Tốt Nghiệp</option>
-                            <option value="Heart">❤️ Trái Tim</option>
+                            <option value="Graduation Cap">Mũ Tốt Nghiệp</option>
+                            <option value="Heart">Trái Tim</option>
                           </select>
                         </div>
                       </div>
