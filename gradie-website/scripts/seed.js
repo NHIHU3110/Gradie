@@ -36,10 +36,16 @@ async function seed() {
     await usersCollection.insertMany(defaultUsers);
     console.log(`Inserted ${defaultUsers.length} users.`);
 
-    // 3. Clear Orders
+    // 3. Clear and Seed Orders
     const ordersCollection = db.collection('orders');
     await ordersCollection.deleteMany({});
-    console.log(`Cleared orders collection.`);
+    const orders = [
+      { orderNumber: "GRD-26-9821", customerName: "Nhi Huynh", customerEmail: "nhi@gradie.com", customerPhone: "0901234567", shippingAddress: "123 Le Loi, District 1, HCMC", notes: "Giao giờ hành chính", paymentMethod: "COD", date: "30/05/2026 14:30:15", items: [{ id: "gau-bong-teddy", name: "Gấu Bông Tốt Nghiệp Teddy", quantity: 1, price: 250000, customization: { embroideryText: "Nhi Huynh", threadColor: "Champagne Gold" } }, { id: "hoa-huong-duong", name: "Hoa Hướng Dương Tốt Nghiệp", quantity: 1, price: 120000, customization: null }], subtotal: 370000, shippingFee: 30000, total: 400000, status: "Delivered" },
+      { orderNumber: "GRD-26-4412", customerName: "Alex Mercer", customerEmail: "alex@gradie.com", customerPhone: "0987654321", shippingAddress: "456 Nguyen Hue, District 1, HCMC", notes: "Làm quà tặng", paymentMethod: "COD", date: "31/05/2026 08:15:22", items: [{ id: "scrapbook-ky-niem", name: "Scrapbook Kỷ Niệm Graduation", quantity: 1, price: 380000, customization: { boxColor: "Signature Cream", ribbonColor: "Champagne Gold", waxSeal: "Gradie Monogram" } }], subtotal: 380000, shippingFee: 30000, total: 410000, status: "Shipped" },
+      { orderNumber: "GRD-26-7731", customerName: "Helena Rostova", customerEmail: "helena@gradie.com", customerPhone: "0912345678", shippingAddress: "789 Dong Khoi, District 1, HCMC", notes: "Giao cổng sau", paymentMethod: "COD", date: "31/05/2026 10:05:00", items: [{ id: "huy-chuong-danh-du", name: "Huy Chương Tốt Nghiệp Danh Dự", quantity: 1, price: 180000, customization: null }], subtotal: 180000, shippingFee: 30000, total: 210000, status: "Pending" }
+    ];
+    await ordersCollection.insertMany(orders);
+    console.log(`Inserted ${orders.length} mock orders.`);
     
     // 4. Seed Categories
     const categoriesCol = db.collection('categories');
