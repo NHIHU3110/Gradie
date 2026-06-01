@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // 1. Filter by category
       if (currentCategory !== 'all') {
-          filtered = filtered.filter(p => p.category === currentCategory);
+          filtered = filtered.filter(p => (p.category || '').toLowerCase() === currentCategory.toLowerCase());
       }
       
       // 2. Filter by search
