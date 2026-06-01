@@ -76,6 +76,13 @@ window.GradieStore = {
           img: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=600&q=80',
           btnText: 'Explore Wraps',
           link: 'gift-wrapping.html'
+        },
+        {
+          title: 'Precision Engraving',
+          desc: 'Personalize metal tumblers and medals with elegant laser engraving. Preview your name in multiple classic fonts.',
+          img: 'https://images.unsplash.com/photo-1582210173510-18e31003f901?w=600&q=80',
+          btnText: 'Test Engraving',
+          link: 'engraving-services.html'
         }
       ]
     };
@@ -361,6 +368,13 @@ window.GradieStore = {
             img: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=600&q=80',
             btnText: 'Explore Wraps',
             link: 'gift-wrapping.html'
+          },
+          {
+            title: 'Precision Engraving',
+            desc: 'Personalize metal tumblers and medals with elegant laser engraving. Preview your name in multiple classic fonts.',
+            img: 'https://images.unsplash.com/photo-1582210173510-18e31003f901?w=600&q=80',
+            btnText: 'Test Engraving',
+            link: 'engraving-services.html'
           }
         ]
       }

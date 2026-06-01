@@ -75,7 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
           customDetails += `<div style="font-size:0.75rem; color:#888; margin-top:5px;">Thêu tên: "${c.embroideryText || 'Không'}" (Chỉ: ${c.threadColor || 'Mặc định'})</div>`;
         }
         if (c.engraveText) {
-          customDetails += `<div style="font-size:0.75rem; color:#888; margin-top:5px;">Khắc tên: "${c.engraveText}"</div>`;
+          const fontLabel = c.engraveFont ? (c.engraveFont.includes('Serif') ? 'Cổ điển' : c.engraveFont.includes('Sans') ? 'Hiện đại' : 'Nghệ thuật') : 'Cổ điển';
+          customDetails += `<div style="font-size:0.75rem; color:#888; margin-top:5px;">Khắc tên: "${c.engraveText}" (Font: ${fontLabel})</div>`;
         }
         if (c.boxColor || c.ribbonColor || c.waxSeal) {
           customDetails += `<div style="font-size:0.75rem; color:#888; margin-top:2px;">Gói quà: Hộp (${c.boxColor || 'Kem'}), Nơ (${c.ribbonColor || 'Vàng'}), Sáp (${c.waxSeal || 'Không'})</div>`;

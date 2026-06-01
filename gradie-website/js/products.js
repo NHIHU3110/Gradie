@@ -235,6 +235,13 @@ document.addEventListener('DOMContentLoaded', () => {
                           <label for="custom-engrave-text" style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Nội dung khắc</label>
                           <input type="text" id="custom-engrave-text" maxlength="15" placeholder="Ví dụ: Gradie 2026" style="width:100%; padding:12px 14px; border:1px solid var(--border-gold); border-radius:8px; font-family:'Montserrat',sans-serif; font-size:0.95rem; color:var(--ink); background:var(--warm-cream); outline:none; box-sizing:border-box; transition:border .2s;" onfocus="this.style.borderColor='var(--champagne)'" onblur="this.style.borderColor='var(--border-gold)'">
                           <div style="text-align:right; font-size:0.75rem; color:var(--taupe); margin-top:4px;"><span id="engrave-char-count">0</span>/15 ký tự</div>
+
+                          <label for="custom-engrave-font" style="display:block; margin:16px 0 8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Font chữ</label>
+                          <select id="custom-engrave-font" style="width:100%; padding:12px 14px; border:1px solid var(--border-gold); border-radius:8px; font-family:'Montserrat',sans-serif; font-size:0.95rem; color:var(--ink); background:var(--warm-cream); outline:none; box-sizing:border-box; cursor:pointer; appearance:auto;">
+                            <option value="Classic Serif" style="font-family:'Playfair Display', serif;">Classic Serif (Cổ điển)</option>
+                            <option value="Modern Sans" style="font-family:'Montserrat', sans-serif;">Modern Sans (Hiện đại)</option>
+                            <option value="Elegant Script" style="font-family:'Great Vibes', cursive;">Elegant Script (Nghệ thuật)</option>
+                          </select>
                         </div>
                       </div>
               `;
@@ -392,6 +399,8 @@ window.addToCart = function(id, isDetailView = false) {
         if (engraveText && engraveText.value.trim()) {
             customization = customization || {};
             customization.engraveText = engraveText.value.trim();
+            const engraveFont = document.getElementById('custom-engrave-font');
+            customization.engraveFont = engraveFont ? engraveFont.value : 'Classic Serif';
             price += 50000;
         }
         if (boxColor && boxColor.value) {

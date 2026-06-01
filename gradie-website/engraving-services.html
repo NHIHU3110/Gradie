@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradie | Precision Engraving Tester</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1780166734">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="announcement-bar">
+    Grand Opening • Free gift tag with every order • Celebrate her next chapter
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/Gradie_logo.jpeg" alt="Gradie Logo" style="height:48px; width:auto; border-radius:50%; object-fit:cover; margin-right:10px;">
+        Gradie
+        <span class="tagline">Graduation Gifts</span>
+      </a>
+      <nav class="nav">
+        <a href="about.html">About Us</a>
+        <a href="products.html">Products</a>
+        <a href="customize.html">Customize</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <div class="header-icons">
+        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <button class="icon-btn" onclick="alert('Search functionality coming soon!')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Header -->
+    <section class="page-header" style="padding: 80px 40px; text-align: center; background: linear-gradient(to bottom, #fcfbf9, #ffffff); margin-bottom: 40px;">
+      <span class="section-kicker">Laser Precision</span>
+      <h1 class="section-title" style="margin: 0; font-size: 3rem; font-family:'Playfair Display', serif;">Engraving Tester</h1>
+      <p style="color: var(--taupe); margin-top: 15px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">Preview how your personalized message will look when laser-engraved onto our premium stainless steel bottles and medals.</p>
+    </section>
+
+    <!-- Interactive Engraving Designer -->
+    <div style="max-width: 1000px; margin: 0 auto 50px; padding: 0 20px;">
+      <div style="background: var(--white); border-radius: 16px; border: 1px solid var(--border-gold); padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+        
+        <!-- Left: Live Preview Canvas -->
+        <div style="display:flex; flex-direction:column; gap:20px; align-items:center; justify-content:center; background:#faf9f6; padding:30px; border-radius:12px; border:1px solid #eee; position:relative; min-height: 380px;">
+          <span style="position:absolute; top:15px; left:15px; background:var(--champagne-light); color:var(--champagne); font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; padding:4px 8px; border-radius:4px; font-weight:600;">Live Preview</span>
+          
+          <!-- Engraving Preview -->
+          <div id="engrave-canvas" style="width:100%; height:260px; display:flex; align-items:center; justify-content:center; border-radius:8px; position:relative; overflow:hidden; transition: all 0.4s ease; box-shadow: inset 0 0 20px rgba(0,0,0,0.1); background: linear-gradient(135deg, #434343 0%, #000000 100%);">
+            <div id="engrave-preview-text" style="font-size: 2.5rem; color: #e0e0e0; font-family: 'Playfair Display', serif; text-shadow: inset 1px 1px 2px rgba(0,0,0,0.8), 0 0 1px rgba(255,255,255,0.5); user-select:none; transition: all 0.3s ease; white-space: nowrap; letter-spacing: 2px;">Gradie 2026</div>
+          </div>
+          
+          <div style="color:var(--taupe); font-size:0.85rem; text-align:center;">*Mô phỏng khắc laser trên bề mặt kim loại.</div>
+        </div>
+
+        <!-- Right: Interactive Controls -->
+        <div style="display:flex; flex-direction:column; justify-content:center; gap:20px;">
+          <h2 style="font-family:'Playfair Display', serif; margin:0;">Test Your Engraving</h2>
+          <p style="color: var(--taupe); font-size:0.95rem; margin:0;">Type your name or message to see how it looks before ordering.</p>
+          
+          <!-- Custom Text -->
+          <div class="form-group" style="margin:0;">
+            <label style="font-weight:600; margin-bottom:8px;">Nội dung khắc (Tối đa 15 ký tự)</label>
+            <input type="text" id="engrave-text-input" value="Gradie 2026" placeholder="Nhập chữ..." maxlength="15" style="border-radius:8px;">
+          </div>
+          
+          <!-- Font Style -->
+          <div class="form-group" style="margin:0;">
+            <label style="font-weight:600; margin-bottom:8px;">Font Chữ (Font Style)</label>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="outline-button active" onclick="changeEngraveFont('classic', this)" style="flex:1; border-radius:8px; height:42px; font-size:0.85rem; padding:0;">Classic Serif</button>
+              <button class="outline-button" onclick="changeEngraveFont('modern', this)" style="flex:1; border-radius:8px; height:42px; font-size:0.85rem; padding:0;">Modern Sans</button>
+              <button class="outline-button" onclick="changeEngraveFont('elegant', this)" style="flex:1; border-radius:8px; height:42px; font-size:0.85rem; padding:0;">Elegant Script</button>
+            </div>
+          </div>
+
+          <!-- Note -->
+          <div style="margin-top:10px; padding-top:20px; border-top:1px solid #f0eeeb;">
+            <p style="color:var(--taupe); font-size:0.9rem; line-height:1.6; margin-bottom: 15px;">Tính năng Khắc Tên khả dụng cho các sản phẩm Bình Nước Giữ Nhiệt và Huy Chương. Hãy truy cập trang sản phẩm để đặt hàng cùng tùy chọn này.</p>
+            <a href="products.html" class="peach-button" style="width:100%; display:block; text-align:center; padding:14px; font-size:1rem; border-radius:8px; font-weight:600; letter-spacing:0.5px; text-decoration:none; box-sizing:border-box;">Shop Engravable Products</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="footer-logo">Gradie</div>
+        <p style="font-family: 'Great Vibes', cursive; font-size: 1.5rem; color: var(--champagne); margin-top: 10px;">Celebrate today, cherish forever.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="about.html">About Us</a>
+        <a href="products.html">Shop All</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Customer Care</h4>
+        <a href="store-policy.html">Store Policy</a>
+        <a href="order-tracking.html">Track Order</a>
+        <a href="account.html">My Account</a>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Gradie - Graduation Gifts. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="js/global-data.js?v=1780167396"></script>
+  <script src="js/data-store.js?v=1780167396"></script>
+  <script src="js/main.js?v=1780167396"></script>
+  <script src="js/cart.js?v=1780167396"></script>
+  <script>
+    function changeEngraveFont(font, btn) {
+      const text = document.getElementById('engrave-preview-text');
+      if (!text) return;
+      
+      const siblings = btn.parentElement.querySelectorAll('button');
+      siblings.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if (font === 'elegant') {
+        text.style.fontFamily = "'Great Vibes', cursive";
+        text.style.fontSize = "3.5rem";
+        text.style.fontWeight = "normal";
+        text.style.letterSpacing = "2px";
+      } else if (font === 'classic') {
+        text.style.fontFamily = "'Playfair Display', serif";
+        text.style.fontSize = "2.5rem";
+        text.style.fontWeight = "700";
+        text.style.letterSpacing = "3px";
+      } else if (font === 'modern') {
+        text.style.fontFamily = "'Montserrat', sans-serif";
+        text.style.fontSize = "2rem";
+        text.style.fontWeight = "600";
+        text.style.letterSpacing = "5px";
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const textInput = document.getElementById('engrave-text-input');
+      const preview = document.getElementById('engrave-preview-text');
+
+      if (textInput && preview) {
+        textInput.addEventListener('input', (e) => {
+          preview.textContent = e.target.value || 'Gradie 2026';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
