@@ -187,8 +187,9 @@ document.addEventListener('DOMContentLoaded', () => {
               `).join('');
           }
           const cat = (p.category || "").toLowerCase();
+          const pName = (p.name || "").toLowerCase();
           const isFabric = cat.includes('gấu') || cat.includes('tốt nghiệp') || cat.includes('túi') || cat.includes('balo') || cat.includes('ví');
-          const isMetal = cat.includes('bình') || cat.includes('huy chương');
+          const isMetal = (cat.includes('bình') && pName.includes('giữ nhiệt')) || cat.includes('huy chương');
 
           let customHtml = '<div id="customization-panel" style="margin-bottom:30px;">';
           
