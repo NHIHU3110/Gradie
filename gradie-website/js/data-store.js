@@ -435,15 +435,15 @@ window.GradieStore = {
   },
   // SETTINGS
   getSettings: function() { return this.getData().settings || this.resetData(false).settings; },
-  saveSettings: function(settings) { let data = this.getData(); data.settings = { ...data.settings, ...settings }; this.saveData(data); },
+  saveSettings: function(settings) { let data = this.getData(); data.settings = { ...data.settings, ...settings }; this.saveData(data); fetch('/api/global', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'settings', data: data.settings }) }).catch(e => console.error('Sync error', e)); },
 
   // PRODUCTS
   getProducts: function() { const p = this.getData().products; return (p && p.length > 0) ? p : this.normalizeProducts(window.GRADIE_DATA?.products || []); },
   saveProducts: function(products) { let data = this.getData(); data.products = this.normalizeProducts(products); this.saveData(data); },
   getProductById: function(id) { return this.getProducts().find(p => p.id === id); },
-  addProduct: function(product) { let data = this.getData(); let norm = this.normalizeProduct(product); if(!norm.id) { norm.id = norm.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now(); } data.products.push(norm); this.saveData(data); },
-  updateProduct: function(id, updatedProduct) { let data = this.getData(); let index = data.products.findIndex(p => p.id === id); if (index !== -1) { let merged = { ...data.products[index], ...updatedProduct }; data.products[index] = this.normalizeProduct(merged); this.saveData(data); } },
-  deleteProduct: function(id) { let data = this.getData(); data.products = data.products.filter(p => p.id !== id); this.saveData(data); },
+  addProduct: function(product) { let data = this.getData(); let norm = this.normalizeProduct(product); if(!norm.id) { norm.id = norm.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now(); } data.products.push(norm); this.saveData(data); fetch('/api/products', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(norm) }).catch(e => console.error('Sync error', e)); },
+  updateProduct: function(id, updatedProduct) { let data = this.getData(); let index = data.products.findIndex(p => p.id === id); if (index !== -1) { let merged = { ...data.products[index], ...updatedProduct }; data.products[index] = this.normalizeProduct(merged); this.saveData(data); fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data.products[index]) }).catch(e => console.error('Sync error', e)); } },
+  deleteProduct: function(id) { let data = this.getData(); data.products = data.products.filter(p => p.id !== id); this.saveData(data); fetch('/api/products?id=' + id, { method: 'DELETE' }).catch(e => console.error('Sync error', e)); },
   
   normalizeProduct: function(p) {
     p.id = p.id || ''; p.name = p.name || 'Untitled Product'; p.category = p.category || 'Uncategorized'; p.price = Number(p.price) || 0;
@@ -469,22 +469,22 @@ window.GradieStore = {
   // ORDERS
   getOrders: function() { return this.getData().orders || []; },
   saveOrders: function(orders) { let data = this.getData(); data.orders = orders; this.saveData(data); },
-  addOrder: function(order) { let data = this.getData(); if(!data.orders) data.orders = []; data.orders.unshift(order); this.saveData(data); },
-  updateOrder: function(id, order) { let data = this.getData(); let i = data.orders.findIndex(o => o.orderNumber === id); if (i !== -1) { data.orders[i] = { ...data.orders[i], ...order }; this.saveData(data); } },
-  deleteOrder: function(id) { let data = this.getData(); data.orders = data.orders.filter(o => o.orderNumber !== id); this.saveData(data); },
+  addOrder: function(order) { let data = this.getData(); if(!data.orders) data.orders = []; data.orders.unshift(order); this.saveData(data); fetch('/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(order) }).catch(e => console.error('Sync error', e)); },
+  updateOrder: function(id, order) { let data = this.getData(); let i = data.orders.findIndex(o => o.orderNumber === id); if (i !== -1) { data.orders[i] = { ...data.orders[i], ...order }; this.saveData(data); fetch('/api/orders', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data.orders[i]) }).catch(e => console.error('Sync error', e)); } },
+  deleteOrder: function(id) { let data = this.getData(); data.orders = data.orders.filter(o => o.orderNumber !== id); this.saveData(data); /* Missing delete api, but usually handled by status 'Cancelled' in updateOrder */ },
   
   // BLOG
   getBlogPosts: function() { return this.getData().blogPosts || []; },
-  addBlogPost: function(post) { let data = this.getData(); data.blogPosts.push(post); this.saveData(data); },
-  updateBlogPost: function(id, post) { let data = this.getData(); let i = data.blogPosts.findIndex(o => o.id === id); if (i !== -1) { data.blogPosts[i] = { ...data.blogPosts[i], ...post }; this.saveData(data); } },
-  deleteBlogPost: function(id) { let data = this.getData(); data.blogPosts = data.blogPosts.filter(o => o.id !== id); this.saveData(data); },
+  addBlogPost: function(post) { let data = this.getData(); data.blogPosts.push(post); this.saveData(data); fetch('/api/global', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'blogPosts', data: data.blogPosts }) }).catch(e => console.error('Sync error', e)); },
+  updateBlogPost: function(id, post) { let data = this.getData(); let i = data.blogPosts.findIndex(o => o.id === id); if (i !== -1) { data.blogPosts[i] = { ...data.blogPosts[i], ...post }; this.saveData(data); fetch('/api/global', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'blogPosts', data: data.blogPosts }) }).catch(e => console.error('Sync error', e)); } },
+  deleteBlogPost: function(id) { let data = this.getData(); data.blogPosts = data.blogPosts.filter(o => o.id !== id); this.saveData(data); fetch('/api/global', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'blogPosts', data: data.blogPosts }) }).catch(e => console.error('Sync error', e)); },
   
   // GALLERY
   getGallery: function() { const d = this.getData(); return (d && d.gallery) ? d.gallery : []; },
   saveGallery: function(gallery) { let data = this.getData(); data.gallery = gallery || []; this.saveData(data); },
-  addGalleryItem: function(item) { let data = this.getData(); if(!data.gallery) data.gallery = []; data.gallery.push(item); this.saveData(data); },
-  updateGalleryItem: function(id, item) { let data = this.getData(); if(!data.gallery) data.gallery = []; let i = data.gallery.findIndex(o => o.id === id); if(i !== -1) { data.gallery[i] = { ...data.gallery[i], ...item }; this.saveData(data); } },
-  deleteGalleryItem: function(id) { let data = this.getData(); if(!data.gallery) data.gallery = []; data.gallery = data.gallery.filter(o => o.id !== id); this.saveData(data); },
+  addGalleryItem: function(item) { let data = this.getData(); if(!data.gallery) data.gallery = []; data.gallery.push(item); this.saveData(data); fetch('/api/global', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'gallery', data: data.gallery }) }).catch(e => console.error('Sync error', e)); },
+  updateGalleryItem: function(id, item) { let data = this.getData(); if(!data.gallery) data.gallery = []; let i = data.gallery.findIndex(o => o.id === id); if(i !== -1) { data.gallery[i] = { ...data.gallery[i], ...item }; this.saveData(data); fetch('/api/global', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'gallery', data: data.gallery }) }).catch(e => console.error('Sync error', e)); } },
+  deleteGalleryItem: function(id) { let data = this.getData(); if(!data.gallery) data.gallery = []; data.gallery = data.gallery.filter(o => o.id !== id); this.saveData(data); fetch('/api/global', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'gallery', data: data.gallery }) }).catch(e => console.error('Sync error', e)); },
   
   // POLICIES
   getPolicies: function() { return this.getData().policies || []; },
@@ -503,7 +503,7 @@ window.GradieStore = {
     }
     return storedCust || defaultCust; 
   },
-  saveCustomizationOptions: function(options) { let data = this.getData(); data.customization = options; this.saveData(data); },
+  saveCustomizationOptions: function(options) { let data = this.getData(); data.customization = options; this.saveData(data); fetch('/api/global', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'customization', data: options }) }).catch(e => console.error('Sync error', e)); },
   
   // USER AUTHENTICATION & SESSIONS
   getUsers: function() { return this.getData().users || []; },
@@ -515,6 +515,7 @@ window.GradieStore = {
     data.users.push(newUser);
     this.saveData(data);
     this.setCurrentUser(newUser);
+    fetch('/api/users', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newUser) }).catch(e => console.error('Sync error', e));
     return { success: true, user: newUser };
   },
   loginUser: function(email, password) {

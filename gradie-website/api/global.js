@@ -21,6 +21,22 @@ module.exports = async (req, res) => {
         blogPosts,
         settings: settings || {}
       });
+    } else if (req.method === 'POST') {
+      const payload = req.body; // Expects { type: 'settings', data: {...} }
+      if (payload.type === 'settings') {
+        await db.collection('settings').deleteMany({});
+        await db.collection('settings').insertOne(payload.data);
+      } else if (payload.type === 'customization') {
+        await db.collection('customizations').deleteMany({});
+        await db.collection('customizations').insertOne(payload.data);
+      } else if (payload.type === 'gallery') {
+        await db.collection('gallery').deleteMany({});
+        await db.collection('gallery').insertMany(payload.data);
+      } else if (payload.type === 'blogPosts') {
+        await db.collection('blogPosts').deleteMany({});
+        await db.collection('blogPosts').insertMany(payload.data);
+      }
+      res.status(200).json({ success: true });
     } else {
       res.status(405).json({ message: 'Method Not Allowed' });
     }
