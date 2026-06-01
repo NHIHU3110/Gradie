@@ -53,7 +53,13 @@ async function seed() {
       { id: "binh-nuoc", name: "Bình Nước", slug: "binh-nuoc" },
       { id: "tui", name: "Túi", slug: "tui" },
       { id: "balo", name: "Balo", slug: "balo" },
-      { id: "huy-chuong", name: "Huy Chương", slug: "huy-chuong" }
+      { id: "huy-chuong", name: "Huy Chương", slug: "huy-chuong" },
+      { id: "den-ngu", name: "Đèn Ngủ", slug: "den-ngu" },
+      { id: "do-tot-nghiep", name: "Đồ Tốt Nghiệp", slug: "do-tot-nghiep" },
+      { id: "chau-cay", name: "Chậu Cây", slug: "chau-cay" },
+      { id: "vi", name: "Ví", slug: "vi" },
+      { id: "nen-thom", "name": "Nến Thơm", "slug": "nen-thom" },
+      { id: "tui-dung-laptop", name: "Túi Đựng Laptop", slug: "tui-dung-laptop" }
     ];
     await categoriesCol.insertMany(categories);
     console.log(`Inserted ${categories.length} categories.`);
