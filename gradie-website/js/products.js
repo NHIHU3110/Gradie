@@ -186,13 +186,92 @@ document.addEventListener('DOMContentLoaded', () => {
                      onclick="document.getElementById('main-detail-image').src = this.src;">
               `).join('');
           }
+          const cat = (p.category || "").toLowerCase();
+          const isFabric = cat.includes('gấu') || cat.includes('tốt nghiệp') || cat.includes('túi') || cat.includes('balo') || cat.includes('ví');
+          const isMetal = cat.includes('bình') || cat.includes('huy chương');
+
+          let customHtml = '<div id="customization-panel" style="margin-bottom:30px;">';
+          
+          if (isFabric) {
+              customHtml += `
+                      <div style="border:1px solid var(--border-gold); border-radius:10px; overflow:hidden; margin-bottom:14px;">
+                        <button type="button" id="toggle-emb" onclick="(function(){ var s=document.getElementById('emb-section'); var a=document.getElementById('emb-arrow'); if(s.style.display==='none'){s.style.display='block';a.style.transform='rotate(180deg)';}else{s.style.display='none';a.style.transform='rotate(0deg)';} })()" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:var(--warm-cream); border:none; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:600; color:var(--ink);">
+                          <span>✨ Thêu Tên (+50.000 ₫)</span>
+                          <svg id="emb-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div id="emb-section" style="display:none; padding:18px; background:var(--white);">
+                          <label for="custom-emb-text" style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Nội dung thêu</label>
+                          <input type="text" id="custom-emb-text" maxlength="25" placeholder="Ví dụ: Gradie 2026" style="width:100%; padding:12px 14px; border:1px solid var(--border-gold); border-radius:8px; font-family:'Montserrat',sans-serif; font-size:0.95rem; color:var(--ink); background:var(--warm-cream); outline:none; box-sizing:border-box; transition:border .2s;" onfocus="this.style.borderColor='var(--champagne)'" onblur="this.style.borderColor='var(--border-gold)'">
+                          <div style="text-align:right; font-size:0.75rem; color:var(--taupe); margin-top:4px;"><span id="emb-char-count">0</span>/25 ký tự</div>
+
+                          <label style="display:block; margin:16px 0 8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Màu Chỉ</label>
+                          <input type="hidden" id="custom-thread-color" value="Champagne Gold">
+                          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                            <button type="button" class="thread-swatch" data-color="Champagne Gold" onclick="window._pickSwatch(this,'custom-thread-color','thread-swatch')" style="width:36px;height:36px;border-radius:50%;border:3px solid var(--champagne);background:#D8A94F;cursor:pointer;box-shadow:0 0 0 2px rgba(216,169,79,.4);transition:all .2s;" title="Champagne Gold"></button>
+                            <button type="button" class="thread-swatch" data-color="Classic Silver" onclick="window._pickSwatch(this,'custom-thread-color','thread-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#C0C0C0;cursor:pointer;transition:all .2s;" title="Classic Silver"></button>
+                            <button type="button" class="thread-swatch" data-color="Crisp White" onclick="window._pickSwatch(this,'custom-thread-color','thread-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#FFFFFF;cursor:pointer;transition:all .2s;" title="Crisp White"></button>
+                            <button type="button" class="thread-swatch" data-color="Midnight Black" onclick="window._pickSwatch(this,'custom-thread-color','thread-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#17181D;cursor:pointer;transition:all .2s;" title="Midnight Black"></button>
+                          </div>
+                        </div>
+                      </div>
+              `;
+          }
+
+          if (isMetal) {
+              customHtml += `
+                      <div style="border:1px solid var(--border-gold); border-radius:10px; overflow:hidden; margin-bottom:14px;">
+                        <button type="button" id="toggle-engrave" onclick="(function(){ var s=document.getElementById('engrave-section'); var a=document.getElementById('engrave-arrow'); if(s.style.display==='none'){s.style.display='block';a.style.transform='rotate(180deg)';}else{s.style.display='none';a.style.transform='rotate(0deg)';} })()" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:var(--warm-cream); border:none; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:600; color:var(--ink);">
+                          <span>🖋️ Khắc Tên (+50.000 ₫)</span>
+                          <svg id="engrave-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div id="engrave-section" style="display:none; padding:18px; background:var(--white);">
+                          <label for="custom-engrave-text" style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Nội dung khắc</label>
+                          <input type="text" id="custom-engrave-text" maxlength="15" placeholder="Ví dụ: Gradie 2026" style="width:100%; padding:12px 14px; border:1px solid var(--border-gold); border-radius:8px; font-family:'Montserrat',sans-serif; font-size:0.95rem; color:var(--ink); background:var(--warm-cream); outline:none; box-sizing:border-box; transition:border .2s;" onfocus="this.style.borderColor='var(--champagne)'" onblur="this.style.borderColor='var(--border-gold)'">
+                          <div style="text-align:right; font-size:0.75rem; color:var(--taupe); margin-top:4px;"><span id="engrave-char-count">0</span>/15 ký tự</div>
+                        </div>
+                      </div>
+              `;
+          }
+
+          customHtml += `
+                      <div style="border:1px solid var(--border-gold); border-radius:10px; overflow:hidden;">
+                        <button type="button" id="toggle-gift" onclick="(function(){ var s=document.getElementById('gift-section'); var a=document.getElementById('gift-arrow'); if(s.style.display==='none'){s.style.display='block';a.style.transform='rotate(180deg)';}else{s.style.display='none';a.style.transform='rotate(0deg)';} })()" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:var(--warm-cream); border:none; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:600; color:var(--ink);">
+                          <span>🎁 Gói Quà (+30.000 ₫)</span>
+                          <svg id="gift-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div id="gift-section" style="display:none; padding:18px; background:var(--white);">
+                          <label style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Màu Hộp</label>
+                          <input type="hidden" id="custom-box-color" value="">
+                          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;">
+                            <button type="button" class="box-swatch" data-color="Signature Cream" onclick="window._pickSwatch(this,'custom-box-color','box-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#F4E8D1;cursor:pointer;transition:all .2s;" title="Signature Cream"></button>
+                            <button type="button" class="box-swatch" data-color="Midnight Black" onclick="window._pickSwatch(this,'custom-box-color','box-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#17181D;cursor:pointer;transition:all .2s;" title="Midnight Black"></button>
+                            <button type="button" class="box-swatch" data-color="Royal Navy" onclick="window._pickSwatch(this,'custom-box-color','box-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#002040;cursor:pointer;transition:all .2s;" title="Royal Navy"></button>
+                          </div>
+
+                          <label style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Màu Ruy Băng</label>
+                          <input type="hidden" id="custom-ribbon-color" value="">
+                          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;">
+                            <button type="button" class="ribbon-swatch" data-color="Champagne Gold" onclick="window._pickSwatch(this,'custom-ribbon-color','ribbon-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#D8A94F;cursor:pointer;transition:all .2s;" title="Champagne Gold"></button>
+                            <button type="button" class="ribbon-swatch" data-color="Scarlet Red" onclick="window._pickSwatch(this,'custom-ribbon-color','ribbon-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#990000;cursor:pointer;transition:all .2s;" title="Scarlet Red"></button>
+                          </div>
+
+                          <label for="custom-wax-seal" style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Dấu Sáp</label>
+                          <select id="custom-wax-seal" style="width:100%; padding:12px 14px; border:1px solid var(--border-gold); border-radius:8px; font-family:'Montserrat',sans-serif; font-size:0.95rem; color:var(--ink); background:var(--warm-cream); outline:none; box-sizing:border-box; cursor:pointer; appearance:auto;">
+                            <option value="">— Không Dấu Sáp —</option>
+                            <option value="Graduation Cap">🎓 Mũ Tốt Nghiệp</option>
+                            <option value="Heart">❤️ Trái Tim</option>
+                          </select>
+                        </div>
+                      </div>
+          </div>
+          `;
       
           detailContainer.innerHTML = `
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
                 <!-- Left: Gallery -->
                 <div style="display:flex; flex-direction:column; gap:20px;">
                     <div style="width:100%; padding-top:100%; position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--border-gold);">
-                        <img id="main-detail-image" src="${p.image || p.gallery[0]}" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;">
+                        <img id="main-detail-image" src="${p.image || (p.gallery && p.gallery.length ? p.gallery[0] : '')}" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;">
                     </div>
                     <div style="display:flex; gap:15px; overflow-x:auto;">
                         ${thumbsHtml}
@@ -206,77 +285,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h2 id="detail-price" style="color:var(--peach); font-size:2rem; font-weight:500; margin-bottom:30px;">${p.price.toLocaleString('vi-VN')} ₫</h2>
                     
                     <p style="font-size:1.1rem; line-height:1.8; color:var(--soft-black); margin-bottom:30px;">
-                        ${p.description || p.shortDescription || 'A beautiful personalized graduation gift from Gradie.'}
+                        ${p.description || p.shortDescription || 'Món quà ý nghĩa cho ngày tốt nghiệp đến từ Gradie.'}
                     </p>
                     
                     ${vHtml}
                     <input type="hidden" id="selected-variant" value="">
 
-                    <!-- Customization Panel -->
-                    <div id="customization-panel" style="margin-bottom:30px;">
-
-                      <!-- Embroidery Toggle -->
-                      <div style="border:1px solid var(--border-gold); border-radius:10px; overflow:hidden; margin-bottom:14px;">
-                        <button type="button" id="toggle-emb" onclick="(function(){ var s=document.getElementById('emb-section'); var a=document.getElementById('emb-arrow'); if(s.style.display==='none'){s.style.display='block';a.style.transform='rotate(180deg)';}else{s.style.display='none';a.style.transform='rotate(0deg)';} })()" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:var(--warm-cream); border:none; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:600; color:var(--ink);">
-                          <span>✨ Embroidery Personalization</span>
-                          <svg id="emb-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </button>
-                        <div id="emb-section" style="display:none; padding:18px; background:var(--white);">
-                          <label for="custom-emb-text" style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Embroidery Text</label>
-                          <input type="text" id="custom-emb-text" maxlength="25" placeholder="e.g. Congratulations, Sarah!" style="width:100%; padding:12px 14px; border:1px solid var(--border-gold); border-radius:8px; font-family:'Montserrat',sans-serif; font-size:0.95rem; color:var(--ink); background:var(--warm-cream); outline:none; box-sizing:border-box; transition:border .2s;" onfocus="this.style.borderColor='var(--champagne)'" onblur="this.style.borderColor='var(--border-gold)'">
-                          <div style="text-align:right; font-size:0.75rem; color:var(--taupe); margin-top:4px;"><span id="emb-char-count">0</span>/25 characters</div>
-
-                          <label style="display:block; margin:16px 0 8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Thread Color</label>
-                          <input type="hidden" id="custom-thread-color" value="Champagne Gold">
-                          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                            <button type="button" class="thread-swatch" data-color="Champagne Gold" onclick="window._pickSwatch(this,'custom-thread-color','thread-swatch')" style="width:36px;height:36px;border-radius:50%;border:3px solid var(--champagne);background:#D8A94F;cursor:pointer;box-shadow:0 0 0 2px rgba(216,169,79,.4);transition:all .2s;" title="Champagne Gold"></button>
-                            <button type="button" class="thread-swatch" data-color="Classic Silver" onclick="window._pickSwatch(this,'custom-thread-color','thread-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#C0C0C0;cursor:pointer;transition:all .2s;" title="Classic Silver"></button>
-                            <button type="button" class="thread-swatch" data-color="Peach Gold" onclick="window._pickSwatch(this,'custom-thread-color','thread-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#E9A08D;cursor:pointer;transition:all .2s;" title="Peach Gold"></button>
-                            <button type="button" class="thread-swatch" data-color="Crisp White" onclick="window._pickSwatch(this,'custom-thread-color','thread-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#FFFFFF;cursor:pointer;transition:all .2s;" title="Crisp White"></button>
-                            <button type="button" class="thread-swatch" data-color="Midnight Black" onclick="window._pickSwatch(this,'custom-thread-color','thread-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#17181D;cursor:pointer;transition:all .2s;" title="Midnight Black"></button>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- Gift Wrapping Toggle -->
-                      <div style="border:1px solid var(--border-gold); border-radius:10px; overflow:hidden;">
-                        <button type="button" id="toggle-gift" onclick="(function(){ var s=document.getElementById('gift-section'); var a=document.getElementById('gift-arrow'); if(s.style.display==='none'){s.style.display='block';a.style.transform='rotate(180deg)';}else{s.style.display='none';a.style.transform='rotate(0deg)';} })()" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:var(--warm-cream); border:none; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:600; color:var(--ink);">
-                          <span>🎁 Gift Wrapping</span>
-                          <svg id="gift-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </button>
-                        <div id="gift-section" style="display:none; padding:18px; background:var(--white);">
-
-                          <label style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Box Color</label>
-                          <input type="hidden" id="custom-box-color" value="">
-                          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;">
-                            <button type="button" class="box-swatch" data-color="Signature Cream" onclick="window._pickSwatch(this,'custom-box-color','box-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#F4E8D1;cursor:pointer;transition:all .2s;" title="Signature Cream"></button>
-                            <button type="button" class="box-swatch" data-color="Pastel Peach" onclick="window._pickSwatch(this,'custom-box-color','box-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#E9A08D;cursor:pointer;transition:all .2s;" title="Pastel Peach"></button>
-                            <button type="button" class="box-swatch" data-color="Midnight Black" onclick="window._pickSwatch(this,'custom-box-color','box-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#17181D;cursor:pointer;transition:all .2s;" title="Midnight Black"></button>
-                            <button type="button" class="box-swatch" data-color="Royal Navy" onclick="window._pickSwatch(this,'custom-box-color','box-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#002040;cursor:pointer;transition:all .2s;" title="Royal Navy"></button>
-                          </div>
-
-                          <label style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Ribbon Color</label>
-                          <input type="hidden" id="custom-ribbon-color" value="">
-                          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;">
-                            <button type="button" class="ribbon-swatch" data-color="Champagne Gold" onclick="window._pickSwatch(this,'custom-ribbon-color','ribbon-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#D8A94F;cursor:pointer;transition:all .2s;" title="Champagne Gold"></button>
-                            <button type="button" class="ribbon-swatch" data-color="Scarlet Red" onclick="window._pickSwatch(this,'custom-ribbon-color','ribbon-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#990000;cursor:pointer;transition:all .2s;" title="Scarlet Red"></button>
-                            <button type="button" class="ribbon-swatch" data-color="Emerald Green" onclick="window._pickSwatch(this,'custom-ribbon-color','ribbon-swatch')" style="width:36px;height:36px;border-radius:50%;border:2px solid #ddd;background:#2E7D32;cursor:pointer;transition:all .2s;" title="Emerald Green"></button>
-                          </div>
-
-                          <label for="custom-wax-seal" style="display:block; margin-bottom:8px; font-size:0.85rem; font-weight:600; color:var(--taupe); text-transform:uppercase; letter-spacing:.5px;">Wax Seal</label>
-                          <select id="custom-wax-seal" style="width:100%; padding:12px 14px; border:1px solid var(--border-gold); border-radius:8px; font-family:'Montserrat',sans-serif; font-size:0.95rem; color:var(--ink); background:var(--warm-cream); outline:none; box-sizing:border-box; cursor:pointer; appearance:auto;">
-                            <option value="">— No Seal —</option>
-                            <option value="Graduation Cap">🎓 Graduation Cap</option>
-                            <option value="Heart">❤️ Heart</option>
-                            <option value="Rose">🌹 Rose</option>
-                            <option value="Star">⭐ Star</option>
-                          </select>
-                        </div>
-                      </div>
-
-                    </div>
-                    <!-- End Customization Panel -->
-
+                    ${customHtml}
+                    
                     <button class="peach-button" style="width:100%; padding:15px; font-size:1.1rem; display:flex; align-items:center; justify-content:center; gap:10px; border-radius:12px; font-weight:600; text-transform:uppercase; letter-spacing:1px; cursor:pointer;" onclick="addToCart('${p.id}', true)">
                       <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
                       Add to Cart
@@ -352,6 +368,7 @@ window.addToCart = function(id, isDetailView = false) {
     if (isDetailView) {
         const embText = document.getElementById('custom-emb-text');
         const threadColor = document.getElementById('custom-thread-color');
+        const engraveText = document.getElementById('custom-engrave-text');
         const boxColor = document.getElementById('custom-box-color');
         const ribbonColor = document.getElementById('custom-ribbon-color');
         const waxSeal = document.getElementById('custom-wax-seal');
@@ -360,12 +377,19 @@ window.addToCart = function(id, isDetailView = false) {
             customization = customization || {};
             customization.embroideryText = embText.value.trim();
             customization.threadColor = threadColor ? threadColor.value : 'Champagne Gold';
+            price += 50000;
+        }
+        if (engraveText && engraveText.value.trim()) {
+            customization = customization || {};
+            customization.engraveText = engraveText.value.trim();
+            price += 50000;
         }
         if (boxColor && boxColor.value) {
             customization = customization || {};
             customization.boxColor = boxColor.value;
             customization.ribbonColor = ribbonColor ? ribbonColor.value : 'Champagne Gold';
             customization.waxSeal = waxSeal ? waxSeal.value : '';
+            price += 30000;
         }
     }
     

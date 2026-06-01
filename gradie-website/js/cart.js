@@ -72,10 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (item.customization) {
         const c = item.customization;
         if (c.threadColor || c.embroideryText) {
-          customDetails += `<div style="font-size:0.75rem; color:#888; margin-top:5px;">Embroidery: "${c.embroideryText || 'None'}" (${c.threadColor || 'Default Color'})</div>`;
+          customDetails += `<div style="font-size:0.75rem; color:#888; margin-top:5px;">Thêu tên: "${c.embroideryText || 'Không'}" (Chỉ: ${c.threadColor || 'Mặc định'})</div>`;
+        }
+        if (c.engraveText) {
+          customDetails += `<div style="font-size:0.75rem; color:#888; margin-top:5px;">Khắc tên: "${c.engraveText}"</div>`;
         }
         if (c.boxColor || c.ribbonColor || c.waxSeal) {
-          customDetails += `<div style="font-size:0.75rem; color:#888; margin-top:2px;">Wrap: Box (${c.boxColor || 'Cream'}), Ribbon (${c.ribbonColor || 'Gold'}), Seal (${c.waxSeal || 'None'})</div>`;
+          customDetails += `<div style="font-size:0.75rem; color:#888; margin-top:2px;">Gói quà: Hộp (${c.boxColor || 'Kem'}), Nơ (${c.ribbonColor || 'Vàng'}), Sáp (${c.waxSeal || 'Không'})</div>`;
         }
       }
 
