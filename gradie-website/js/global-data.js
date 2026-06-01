@@ -83,51 +83,29 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Capybara"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "35cm",
-            "20cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Bông gòn 7D, vải miniso  "
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "gau_bong_tot_nghiep_SP001-1",
           "sku": "SP001-1",
           "price": "115000",
           "compare_at_price": "145000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg",
           "options": [
-            "Capybara",
-            "35cm",
-            "Bông gòn 7D, vải miniso  "
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg"
         },
         {
-          "id": "gau_bong_tot_nghiep_SP001-2",
           "sku": "SP001-2",
           "price": "135000",
           "compare_at_price": "165000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg",
           "options": [
-            "Capybara",
-            "20cm",
-            "Bông gòn 7D, vải miniso  "
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg"
         }
       ]
     },
@@ -146,77 +124,51 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp002_3.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp002_4.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Có kính, không in",
-            "Có kính, in tên",
-            "Không kính, không in",
-            "Không kính, in tên"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            " 20cm khi ngồi 18cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Bông gòn nhân tạo 3 chiều"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "gau_bong_tot_nghiep_in_logo_SP002-1",
           "sku": "SP002-1",
           "price": "65000",
           "compare_at_price": "75000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_1.jpg",
           "options": [
-            "Có kính, không in",
-            " 20cm khi ngồi 18cm",
-            "Bông gòn nhân tạo 3 chiều"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_1.jpg"
         },
         {
-          "id": "gau_bong_tot_nghiep_in_logo_SP002-2",
           "sku": "SP002-2",
           "price": "80000",
           "compare_at_price": "90000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_2.jpg",
           "options": [
-            "Có kính, in tên",
-            " 20cm khi ngồi 18cm",
-            "Bông gòn nhân tạo 3 chiều"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_2.jpg"
         },
         {
-          "id": "gau_bong_tot_nghiep_in_logo_SP002-3",
           "sku": "SP002-3",
           "price": "60000",
           "compare_at_price": "65000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_3.jpg",
           "options": [
-            "Không kính, không in",
-            " 20cm khi ngồi 18cm",
-            "Bông gòn nhân tạo 3 chiều"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_3.jpg"
         },
         {
-          "id": "gau_bong_tot_nghiep_in_logo_SP002-4",
           "sku": "SP002-4",
           "price": "70000",
           "compare_at_price": "80000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_4.jpg",
           "options": [
-            "Không kính, in tên",
-            " 20cm khi ngồi 18cm",
-            "Bông gòn nhân tạo 3 chiều"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_4.jpg"
         }
       ]
     },
@@ -230,40 +182,56 @@ window.GRADIE_DATA = {
       "sku": "SP003-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp003_1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp003_1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp003_2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp003_3.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp003_4.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Nữ, có đế"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "23cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Len"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "qua_tang_bup_be_tot_nghiep_SP003-1",
           "sku": "SP003-1",
           "price": "419000",
           "compare_at_price": "429000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_1.jpg",
           "options": [
-            "Nữ, có đế",
-            "23cm",
-            "Len"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_1.jpg"
+        },
+        {
+          "sku": "SP003-2",
+          "price": "399000",
+          "compare_at_price": "409000",
+          "options": [
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_2.jpg"
+        },
+        {
+          "sku": "SP003-3",
+          "price": "419000",
+          "compare_at_price": "429000",
+          "options": [
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_3.jpg"
+        },
+        {
+          "sku": "SP003-4",
+          "price": "399000",
+          "compare_at_price": "409000",
+          "options": [
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_4.jpg"
         }
       ]
     },
@@ -277,40 +245,22 @@ window.GRADIE_DATA = {
       "sku": "SP004-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp004_1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp004_1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp004_1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp004_2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp004_3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Bó hoa"
-          ]
-        },
-        {
-          "name": "Kích thước ",
-          "values": [
-            "50cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Len"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "bo_hoa_len_tot_nghiep_SP004-1",
           "sku": "SP004-1",
           "price": "149000",
           "compare_at_price": "159000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp004_1.jpg",
           "options": [
-            "Bó hoa",
-            "50cm",
-            "Len"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp004_1.jpg"
         }
       ]
     },
@@ -324,40 +274,22 @@ window.GRADIE_DATA = {
       "sku": "SP005-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp005_1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp005_1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp005_1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp005_2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp005_3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Bó hoa"
-          ]
-        },
-        {
-          "name": "Kích thước ",
-          "values": [
-            "30cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Hoa sáp"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "bo_hoa_sap_ecuado_SP005-1",
           "sku": "SP005-1",
           "price": "209000",
           "compare_at_price": "229000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp005_1.jpg",
           "options": [
-            "Bó hoa",
-            "30cm",
-            "Hoa sáp"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp005_1.jpg"
         }
       ]
     },
@@ -371,40 +303,22 @@ window.GRADIE_DATA = {
       "sku": "SP006-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp006_1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp006_1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp006_1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp006_2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp006_3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Bó hoa"
-          ]
-        },
-        {
-          "name": "Kích thước ",
-          "values": [
-            "80cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Bong Bóng"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "bo_hoa_bong_bong_SP006-1",
           "sku": "SP006-1",
           "price": "359000",
           "compare_at_price": "389000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp006_1.jpg",
           "options": [
-            "Bó hoa",
-            "80cm",
-            "Bong Bóng"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp006_1.jpg"
         }
       ]
     },
@@ -418,40 +332,43 @@ window.GRADIE_DATA = {
       "sku": "SP007-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp007_1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp007_1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg"
       ],
-      "options": [
-        {
-          "name": "Màu sắc",
-          "values": [
-            "Hồng"
-          ]
-        },
-        {
-          "name": "Kích thước ",
-          "values": [
-            "30cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Kẹo"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "keo_khong_lo_SP007-1",
           "sku": "SP007-1",
           "price": "49000",
           "compare_at_price": "59000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_1.jpg",
           "options": [
-            "Hồng",
-            "30cm",
-            "Kẹo"
-          ]
+            "Màu sắc",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_1.jpg"
+        },
+        {
+          "sku": "SP007-2",
+          "price": "49000",
+          "compare_at_price": "59000",
+          "options": [
+            "Màu sắc",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg"
+        },
+        {
+          "sku": "SP007-3",
+          "price": "49000",
+          "compare_at_price": "59000",
+          "options": [
+            "Màu sắc",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg"
         }
       ]
     },
@@ -467,38 +384,29 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg"
       ],
-      "options": [
-        {
-          "name": "Màu sắc",
-          "values": [
-            "Hồng"
-          ]
-        },
-        {
-          "name": "Kích thước ",
-          "values": [
-            "90cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Kẹo"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "keo_mut_trai_tim_SP008-1",
           "sku": "SP008-1",
           "price": "89000",
           "compare_at_price": "99000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg",
           "options": [
-            "Hồng",
-            "90cm",
-            "Kẹo"
-          ]
+            "Màu sắc",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg"
+        },
+        {
+          "sku": "SP008-2",
+          "price": "89000",
+          "compare_at_price": "99000",
+          "options": [
+            "Màu sắc",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg"
         }
       ]
     },
@@ -512,40 +420,32 @@ window.GRADIE_DATA = {
       "sku": "SP009-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp009_2.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Khung chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "10x15cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Nhựa"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "khung_anh_ghep_do_tot_nghiep_SP009-1",
           "sku": "SP009-1",
           "price": "64000",
           "compare_at_price": "74000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg",
           "options": [
-            "Khung chữ nhật",
-            "10x15cm",
-            "Nhựa"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg"
+        },
+        {
+          "sku": "SP009-2",
+          "price": "75000",
+          "compare_at_price": "85000",
+          "options": [
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp009_2.jpg"
         }
       ]
     },
@@ -561,38 +461,29 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Khung chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "15x21cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Nhựa"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "khung_anh_3d_totnghiep_SP029-1",
           "sku": "SP029-1",
           "price": "139000",
           "compare_at_price": "149000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg",
           "options": [
-            "Khung chữ nhật",
-            "15x21cm",
-            "Nhựa"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg"
+        },
+        {
+          "sku": "SP029-2",
+          "price": "159000",
+          "compare_at_price": "169000",
+          "options": [
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg"
         }
       ]
     },
@@ -610,54 +501,18 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp010-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp010-3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Hình chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "19x19cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Giấy"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "so-dan-anh-scrapbook_SP010-1",
           "sku": "SP010-1",
           "price": "146000",
           "compare_at_price": "150000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp010-1.jpg",
           "options": [
-            "Hình chữ nhật",
-            "19x19cm",
-            "Giấy"
-          ]
-        },
-        {
-          "id": "so-dan-anh-scrapbook_SP010-2",
-          "sku": "SP010-2",
-          "price": "146000",
-          "compare_at_price": "150000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp010-2.jpg",
-          "options": []
-        },
-        {
-          "id": "so-dan-anh-scrapbook_SP010-3",
-          "sku": "SP010-3",
-          "price": "146000",
-          "compare_at_price": "150000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp010-3.jpg",
-          "options": []
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp010-1.jpg"
         }
       ]
     },
@@ -675,54 +530,18 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp011-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp011-3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Hình chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "19x19cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Giấy"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "so-len-ke-hoach_SP011-1",
           "sku": "SP011-1",
           "price": "139000",
           "compare_at_price": "140000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp011-1.jpg",
           "options": [
-            "Hình chữ nhật",
-            "19x19cm",
-            "Giấy"
-          ]
-        },
-        {
-          "id": "so-len-ke-hoach_SP011-2",
-          "sku": "SP011-2",
-          "price": "139000",
-          "compare_at_price": "140000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp011-2.jpg",
-          "options": []
-        },
-        {
-          "id": "so-len-ke-hoach_SP011-3",
-          "sku": "SP011-3",
-          "price": "139000",
-          "compare_at_price": "140000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp011-3.jpg",
-          "options": []
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp011-1.jpg"
         }
       ]
     },
@@ -736,40 +555,22 @@ window.GRADIE_DATA = {
       "sku": "SP012-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp012-1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp012-1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp012-1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp012-2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp012-3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Hình chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "19x19cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Giấy"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "so-tay-bia-cung_SP012-1",
           "sku": "SP012-1",
           "price": "79000",
           "compare_at_price": "90000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp012-1.jpg",
           "options": [
-            "Hình chữ nhật",
-            "19x19cm",
-            "Giấy"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp012-1.jpg"
         }
       ]
     },
@@ -787,54 +588,18 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp013-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp013-3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Hình chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "19x25cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Giấy"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "so-tay-a5-vintage_SP013-1",
           "sku": "SP013-1",
           "price": "60000",
           "compare_at_price": "70000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp013-1.jpg",
           "options": [
-            "Hình chữ nhật",
-            "19x25cm",
-            "Giấy"
-          ]
-        },
-        {
-          "id": "so-tay-a5-vintage_SP013-2",
-          "sku": "SP013-2",
-          "price": "60000",
-          "compare_at_price": "70000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp013-2.jpg",
-          "options": []
-        },
-        {
-          "id": "so-tay-a5-vintage_SP013-3",
-          "sku": "SP013-3",
-          "price": "60000",
-          "compare_at_price": "70000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp013-3.jpg",
-          "options": []
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp013-1.jpg"
         }
       ]
     },
@@ -852,54 +617,18 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp014-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp014-3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Hình chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "18x23cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Giấy"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "so-tay-bia-da_SP014-1",
           "sku": "SP014-1",
           "price": "79000",
           "compare_at_price": "90000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp014-1.jpg",
           "options": [
-            "Hình chữ nhật",
-            "18x23cm",
-            "Giấy"
-          ]
-        },
-        {
-          "id": "so-tay-bia-da_SP014-2",
-          "sku": "SP014-2",
-          "price": "79000",
-          "compare_at_price": "90000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp014-2.jpg",
-          "options": []
-        },
-        {
-          "id": "so-tay-bia-da_SP014-3",
-          "sku": "SP014-3",
-          "price": "79000",
-          "compare_at_price": "90000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp014-3.jpg",
-          "options": []
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp014-1.jpg"
         }
       ]
     },
@@ -917,54 +646,18 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp015-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp015-3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Hình chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "18x23cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Giấy"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "so-ghi-chi-davinci_SP015-1",
           "sku": "SP015-1",
           "price": "35000",
           "compare_at_price": "50000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp015-1.jpg",
           "options": [
-            "Hình chữ nhật",
-            "18x23cm",
-            "Giấy"
-          ]
-        },
-        {
-          "id": "so-ghi-chi-davinci_SP015-2",
-          "sku": "SP015-2",
-          "price": "35000",
-          "compare_at_price": "50000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp015-2.jpg",
-          "options": []
-        },
-        {
-          "id": "so-ghi-chi-davinci_SP015-3",
-          "sku": "SP015-3",
-          "price": "35000",
-          "compare_at_price": "50000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp015-3.jpg",
-          "options": []
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp015-1.jpg"
         }
       ]
     },
@@ -978,40 +671,21 @@ window.GRADIE_DATA = {
       "sku": "SP016-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp016-1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp016-1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp016-1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp016-2.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Hình trụ"
-          ]
-        },
-        {
-          "name": "Dung tích",
-          "values": [
-            "2L"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Nhựa"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "binh-dung-nuoc-cute_SP016-1",
           "sku": "SP016-1",
           "price": "48000",
           "compare_at_price": "60000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp016-1.jpg",
           "options": [
-            "Hình trụ",
-            "2L",
-            "Nhựa"
-          ]
+            "Hình dạng",
+            "Dung tích",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp016-1.jpg"
         }
       ]
     },
@@ -1030,62 +704,18 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp017-3.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp017-4.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Hình trụ"
-          ]
-        },
-        {
-          "name": "Dung tích",
-          "values": [
-            "2L"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Nhựa"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "binh-nuoc-the-thao_SP017-1",
           "sku": "SP017-1",
           "price": "48000",
           "compare_at_price": "65000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-1.jpg",
           "options": [
-            "Hình trụ",
-            "2L",
-            "Nhựa"
-          ]
-        },
-        {
-          "id": "binh-nuoc-the-thao_SP017-2",
-          "sku": "SP017-2",
-          "price": "48000",
-          "compare_at_price": "65000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-2.jpg",
-          "options": []
-        },
-        {
-          "id": "binh-nuoc-the-thao_SP017-3",
-          "sku": "SP017-3",
-          "price": "48000",
-          "compare_at_price": "65000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-3.jpg",
-          "options": []
-        },
-        {
-          "id": "binh-nuoc-the-thao_SP017-4",
-          "sku": "SP017-4",
-          "price": "48000",
-          "compare_at_price": "65000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-4.jpg",
-          "options": []
+            "Hình dạng",
+            "Dung tích",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-1.jpg"
         }
       ]
     },
@@ -1099,40 +729,22 @@ window.GRADIE_DATA = {
       "sku": "SP018-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp018-1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp018-1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp018-1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp018-2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp018-3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Hình trụ"
-          ]
-        },
-        {
-          "name": "Dung tích",
-          "values": [
-            "480ml"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Thép không gỉ 316 + nhựa PP"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "binh-giu-nhiet-du-lich_SP018-1",
           "sku": "SP018-1",
           "price": "100000",
           "compare_at_price": "120000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp018-1.jpg",
           "options": [
-            "Hình trụ",
-            "480ml",
-            "Thép không gỉ 316 + nhựa PP"
-          ]
+            "Hình dạng",
+            "Dung tích",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp018-1.jpg"
         }
       ]
     },
@@ -1146,40 +758,21 @@ window.GRADIE_DATA = {
       "sku": "SP019-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp019-1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp019-1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp019-1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp019-2.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Hình trụ"
-          ]
-        },
-        {
-          "name": "Dung tích",
-          "values": [
-            "2L"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Nhựa"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "binh-pha-ca-phe_SP019-1",
           "sku": "SP019-1",
           "price": "120000",
           "compare_at_price": "160000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp019-1.jpg",
           "options": [
-            "Hình trụ",
-            "2L",
-            "Nhựa"
-          ]
+            "Hình dạng",
+            "Dung tích",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp019-1.jpg"
         }
       ]
     },
@@ -1193,40 +786,22 @@ window.GRADIE_DATA = {
       "sku": "SP020-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp020-1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp020-1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp020-1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp020-2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp020-3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Hình trụ"
-          ]
-        },
-        {
-          "name": "Dung tích",
-          "values": [
-            "1,4L"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Nhựa"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "binh0pha-ca-phe-cold-brew_SP020-1",
           "sku": "SP020-1",
           "price": "239000",
           "compare_at_price": "260000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp020-1.jpg",
           "options": [
-            "Hình trụ",
-            "1,4L",
-            "Nhựa"
-          ]
+            "Hình dạng",
+            "Dung tích",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp020-1.jpg"
         }
       ]
     },
@@ -1240,40 +815,21 @@ window.GRADIE_DATA = {
       "sku": "SP021-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp021-1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp021-1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp021-1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp021-2.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Hình trụ"
-          ]
-        },
-        {
-          "name": "Dung tích",
-          "values": [
-            "500ml"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Inox"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "coc-giu-nhiet_SP021-1",
           "sku": "SP021-1",
           "price": "99000",
           "compare_at_price": "150000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp021-1.jpg",
           "options": [
-            "Hình trụ",
-            "500ml",
-            "Inox"
-          ]
+            "Hình dạng",
+            "Dung tích",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp021-1.jpg"
         }
       ]
     },
@@ -1287,40 +843,22 @@ window.GRADIE_DATA = {
       "sku": "SP022-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp022-1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp022-1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp022-1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp022-2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp022-3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Hình chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước ",
-          "values": [
-            "32* 12*26"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Da pu"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "tui-tote-nu-da_SP022-1",
           "sku": "SP022-1",
           "price": "70000",
           "compare_at_price": "90000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp022-1.jpg",
           "options": [
-            "Hình chữ nhật",
-            "32* 12*26",
-            "Da pu"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp022-1.jpg"
         }
       ]
     },
@@ -1334,40 +872,22 @@ window.GRADIE_DATA = {
       "sku": "SP023-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp023-1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp023-1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp023-1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp023-2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp023-3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Hình chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước ",
-          "values": [
-            "32* 12*26"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Da pu"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "tui-deo-vai-nu_SP023-1",
           "sku": "SP023-1",
           "price": "67000",
           "compare_at_price": "85000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp023-1.jpg",
           "options": [
-            "Hình chữ nhật",
-            "32* 12*26",
-            "Da pu"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp023-1.jpg"
         }
       ]
     },
@@ -1381,40 +901,21 @@ window.GRADIE_DATA = {
       "sku": "SP024-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp024-1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp024-1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp024-1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp024-2.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Hình chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước ",
-          "values": [
-            "15* 12*26"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Da pu"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "tui-tote-balo-nu_SP024-1",
           "sku": "SP024-1",
           "price": "70000",
           "compare_at_price": "95000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp024-1.jpg",
           "options": [
-            "Hình chữ nhật",
-            "15* 12*26",
-            "Da pu"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp024-1.jpg"
         }
       ]
     },
@@ -1428,40 +929,21 @@ window.GRADIE_DATA = {
       "sku": "SP025-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp025-1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp025-1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp025-1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp025-2.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Hình chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước ",
-          "values": [
-            "15* 12*26"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Da pu"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "tui-xach-tote-nu-hoa-tiet_SP025-1",
           "sku": "SP025-1",
           "price": "70000",
           "compare_at_price": "100000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp025-1.jpg",
           "options": [
-            "Hình chữ nhật",
-            "15* 12*26",
-            "Da pu"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp025-1.jpg"
         }
       ]
     },
@@ -1475,40 +957,21 @@ window.GRADIE_DATA = {
       "sku": "SP026-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp026-1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp026-1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp026-1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp026-2.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Hình chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước ",
-          "values": [
-            "15* 12*26"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Canvas"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "tui-tote-nu-vai-canvas_SP026-1",
           "sku": "SP026-1",
           "price": "65000",
           "compare_at_price": "85000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp026-1.jpg",
           "options": [
-            "Hình chữ nhật",
-            "15* 12*26",
-            "Canvas"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp026-1.jpg"
         }
       ]
     },
@@ -1522,40 +985,21 @@ window.GRADIE_DATA = {
       "sku": "SP027-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp027-1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp027-1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp027-1.jpg",
+        "`"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Hình chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước ",
-          "values": [
-            "20*20*25"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Da pu"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "tui-toe-cong-so_SP027-1",
           "sku": "SP027-1",
           "price": "85000",
           "compare_at_price": "105000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp027-1.jpg",
           "options": [
-            "Hình chữ nhật",
-            "20*20*25",
-            "Da pu"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp027-1.jpg"
         }
       ]
     },
@@ -1569,40 +1013,44 @@ window.GRADIE_DATA = {
       "sku": "SP030-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp030_1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp030_1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp030_2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp030_3.jpg"
       ],
-      "options": [
-        {
-          "name": "Màu sắc",
-          "values": [
-            "Xanh đen"
-          ]
-        },
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Hình tròn"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Đồng"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "huy_chuong_chuc_mung_tot_nghiep_SP030-1",
           "sku": "SP030-1",
           "price": "69000",
           "compare_at_price": "79000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_1.jpg",
           "options": [
-            "Xanh đen",
-            "Hình tròn",
-            "Đồng"
-          ]
+            "Màu sắc",
+            "Hình dạng",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_1.jpg"
+        },
+        {
+          "sku": "SP030-2",
+          "price": "69000",
+          "compare_at_price": "79000",
+          "options": [
+            "Màu sắc",
+            "Hình dạng",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_2.jpg"
+        },
+        {
+          "sku": "SP030-3",
+          "price": "69000",
+          "compare_at_price": "79000",
+          "options": [
+            "Màu sắc",
+            "Hình dạng",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_3.jpg"
         }
       ]
     },
@@ -1616,40 +1064,56 @@ window.GRADIE_DATA = {
       "sku": "SP031-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp031_1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp031_1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp031_2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp031_3.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp031_4.jpg"
       ],
-      "options": [
-        {
-          "name": "Màu sắc",
-          "values": [
-            "Vàng"
-          ]
-        },
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Hướng dương, nam"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Nhựa"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "den_ngu_gau_tot_nghiep_SP031-1",
           "sku": "SP031-1",
           "price": "159000",
           "compare_at_price": "165000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_1.jpg",
           "options": [
-            "Vàng",
-            "Hướng dương, nam",
-            "Nhựa"
-          ]
+            "Màu sắc",
+            "Hình dạng",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_1.jpg"
+        },
+        {
+          "sku": "SP031-2",
+          "price": "159000",
+          "compare_at_price": "165000",
+          "options": [
+            "Màu sắc",
+            "Hình dạng",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_2.jpg"
+        },
+        {
+          "sku": "SP031-3",
+          "price": "159000",
+          "compare_at_price": "165000",
+          "options": [
+            "Màu sắc",
+            "Hình dạng",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_3.jpg"
+        },
+        {
+          "sku": "SP031-4",
+          "price": "159000",
+          "compare_at_price": "165000",
+          "options": [
+            "Màu sắc",
+            "Hình dạng",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_4.jpg"
         }
       ]
     },
@@ -1663,40 +1127,56 @@ window.GRADIE_DATA = {
       "sku": "SP032-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp032_1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp032_1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp032_2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp032_3.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp032_4.jpg"
       ],
-      "options": [
-        {
-          "name": "Màu sắc",
-          "values": [
-            "Hồng"
-          ]
-        },
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Vuông"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Nhựa"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "den_guong_tulip_SP032-1",
           "sku": "SP032-1",
           "price": "49000",
           "compare_at_price": "59000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_1.jpg",
           "options": [
-            "Hồng",
-            "Vuông",
-            "Nhựa"
-          ]
+            "Màu sắc",
+            "Hình dạng",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_1.jpg"
+        },
+        {
+          "sku": "SP032-2",
+          "price": "49000",
+          "compare_at_price": "59000",
+          "options": [
+            "Màu sắc",
+            "Hình dạng",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_2.jpg"
+        },
+        {
+          "sku": "SP032-3",
+          "price": "49000",
+          "compare_at_price": "59000",
+          "options": [
+            "Màu sắc",
+            "Hình dạng",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_3.jpg"
+        },
+        {
+          "sku": "SP032-4",
+          "price": "49000",
+          "compare_at_price": "59000",
+          "options": [
+            "Màu sắc",
+            "Hình dạng",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_4.jpg"
         }
       ]
     },
@@ -1710,40 +1190,44 @@ window.GRADIE_DATA = {
       "sku": "SP033-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp033_1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp033_1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp033_2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp033_3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Thỏ"
-          ]
-        },
-        {
-          "name": "Màu sắc",
-          "values": [
-            "Trằng, vàng"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Silicon"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "den_ngu_silicon_SP033-1",
           "sku": "SP033-1",
           "price": "109000",
           "compare_at_price": "119000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_1.jpg",
           "options": [
-            "Thỏ",
-            "Trằng, vàng",
-            "Silicon"
-          ]
+            "Hình dạng",
+            "Màu sắc",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_1.jpg"
+        },
+        {
+          "sku": "SP033-2",
+          "price": "109000",
+          "compare_at_price": "119000",
+          "options": [
+            "Hình dạng",
+            "Màu sắc",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_2.jpg"
+        },
+        {
+          "sku": "SP033-3",
+          "price": "109000",
+          "compare_at_price": "119000",
+          "options": [
+            "Hình dạng",
+            "Màu sắc",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_3.jpg"
         }
       ]
     },
@@ -1757,40 +1241,44 @@ window.GRADIE_DATA = {
       "sku": "SP034-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp034_1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp034_1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp034_2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp034_3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Bướm"
-          ]
-        },
-        {
-          "name": "Màu sắc",
-          "values": [
-            "Xanh"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Giấy, Hoa lụa, Ngọc trai"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "non_tot_nghiep_hoa_lua_SP034-1",
           "sku": "SP034-1",
           "price": "189000",
           "compare_at_price": "199000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_1.jpg",
           "options": [
-            "Bướm",
-            "Xanh",
-            "Giấy, Hoa lụa, Ngọc trai"
-          ]
+            "Hình dạng",
+            "Màu sắc",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_1.jpg"
+        },
+        {
+          "sku": "SP034-2",
+          "price": "189000",
+          "compare_at_price": "199000",
+          "options": [
+            "Hình dạng",
+            "Màu sắc",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_2.jpg"
+        },
+        {
+          "sku": "SP034-3",
+          "price": "189000",
+          "compare_at_price": "199000",
+          "options": [
+            "Hình dạng",
+            "Màu sắc",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_3.jpg"
         }
       ]
     },
@@ -1804,40 +1292,32 @@ window.GRADIE_DATA = {
       "sku": "SP035-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp035_2.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Bộ áo mũ"
-          ]
-        },
-        {
-          "name": "Màu sắc",
-          "values": [
-            "Xanh, trắng"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Cotton"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "ao_cu_nhan_SP035-1",
           "sku": "SP035-1",
           "price": "339000",
           "compare_at_price": "349000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg",
           "options": [
-            "Bộ áo mũ",
-            "Xanh, trắng",
-            "Cotton"
-          ]
+            "Hình dạng",
+            "Màu sắc",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg"
+        },
+        {
+          "sku": "SP035-2",
+          "price": "369000",
+          "compare_at_price": "379000",
+          "options": [
+            "Hình dạng",
+            "Màu sắc",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_2.jpg"
         }
       ]
     },
@@ -1851,40 +1331,22 @@ window.GRADIE_DATA = {
       "sku": "SP036-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp036_1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp036_1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp036_1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp036_2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp036_3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Sash tên"
-          ]
-        },
-        {
-          "name": "Màu sắc",
-          "values": [
-            "Trắng"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "170x120cm"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "sash_tot_nghiep_SP036-1",
           "sku": "SP036-1",
           "price": "149000",
           "compare_at_price": "159000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp036_1.jpg",
           "options": [
-            "Sash tên",
-            "Trắng",
-            "170x120cm"
-          ]
+            "Hình dạng",
+            "Màu sắc",
+            "Kích thước"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp036_1.jpg"
         }
       ]
     },
@@ -1898,40 +1360,22 @@ window.GRADIE_DATA = {
       "sku": "SP037-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp037-1.webp",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp037-1.webp"
+        "https://cdn.hstatic.net/files/200001178391/file/sp037-1.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp037-2.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp037-3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Cánh cụt"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            " Chất nhung, lông xù"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            " 24-25cm"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "gau_bong_chim_canh_cut_SP037-1",
           "sku": "SP037-1",
           "price": "129000",
           "compare_at_price": "139000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp037-1.webp",
           "options": [
-            "Cánh cụt",
-            " Chất nhung, lông xù",
-            " 24-25cm"
-          ]
+            "Hình dạng",
+            "Chất liệu",
+            "Kích thước"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp037-1.webp"
         }
       ]
     },
@@ -1945,40 +1389,22 @@ window.GRADIE_DATA = {
       "sku": "SP038-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp038-1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp038-1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp038-1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp038-2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp038-3.jpg"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Mũ tốt nghiệp"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "thi và bìa cứng"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            " 24-25cm"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "the_keo_mu_tot_nghiep_SP038-1",
           "sku": "SP038-1",
           "price": "149000",
           "compare_at_price": "169000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp038-1.jpg",
           "options": [
-            "Mũ tốt nghiệp",
-            "thi và bìa cứng",
-            " 24-25cm"
-          ]
+            "Hình dạng",
+            "Chất liệu",
+            "Kích thước"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp038-1.jpg"
         }
       ]
     },
@@ -1992,40 +1418,44 @@ window.GRADIE_DATA = {
       "sku": "SP039-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp039-1.webp",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp039-1.webp"
+        "https://cdn.hstatic.net/files/200001178391/file/sp039-1.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp039-2.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp039-3.webp"
       ],
-      "options": [
-        {
-          "name": "Màu sắc",
-          "values": [
-            "Đỏ"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Giấy"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "9x6x6 cm"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "hop_keo_mu_bac_si_SP039-1",
           "sku": "SP039-1",
           "price": "79000",
           "compare_at_price": "89000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp039-1.webp",
           "options": [
-            "Đỏ",
-            "Giấy",
-            "9x6x6 cm"
-          ]
+            "Màu sắc",
+            "Chất liệu",
+            "Kích thước"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp039-1.webp"
+        },
+        {
+          "sku": "SP039-2",
+          "price": "79000",
+          "compare_at_price": "89000",
+          "options": [
+            "Màu sắc",
+            "Chất liệu",
+            "Kích thước"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp039-2.webp"
+        },
+        {
+          "sku": "SP039-3",
+          "price": "79000",
+          "compare_at_price": "89000",
+          "options": [
+            "Màu sắc",
+            "Chất liệu",
+            "Kích thước"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp039-3.webp"
         }
       ]
     },
@@ -2039,40 +1469,22 @@ window.GRADIE_DATA = {
       "sku": "SP040-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp040-1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp040-1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp040-1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp040-2.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp040-3.webp"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Tự do, phụ thuộc ảnh gửi"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "15-20cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Mica"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "khung_anh_mica_de__SP040-1",
           "sku": "SP040-1",
           "price": "259000",
           "compare_at_price": "279000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp040-1.jpg",
           "options": [
-            "Tự do, phụ thuộc ảnh gửi",
-            "15-20cm",
-            "Mica"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp040-1.jpg"
         }
       ]
     },
@@ -2086,40 +1498,22 @@ window.GRADIE_DATA = {
       "sku": "SP041-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp041-1.webp",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp041-1.webp"
+        "https://cdn.hstatic.net/files/200001178391/file/sp041-1.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp041-2.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp041-3.webp"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Hình chữ nhật"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "21x29.7cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            " Kính trong suốt"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "khung_anh_bang_khen_SP041-1",
           "sku": "SP041-1",
           "price": "259000",
           "compare_at_price": "279000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp041-1.webp",
           "options": [
-            "Hình chữ nhật",
-            "21x29.7cm",
-            " Kính trong suốt"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp041-1.webp"
         }
       ]
     },
@@ -2133,40 +1527,44 @@ window.GRADIE_DATA = {
       "sku": "SP042-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp042-1.webp",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp042-1.webp"
+        "https://cdn.hstatic.net/files/200001178391/file/sp042-1.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp042-2.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp042-3.webp"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Lá"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "19cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Thủy tinh"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "ky_niem_chuong_chibi_SP042-1",
           "sku": "SP042-1",
           "price": "299000",
           "compare_at_price": "339000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp042-1.webp",
           "options": [
-            "Lá",
-            "19cm",
-            "Thủy tinh"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp042-1.webp"
+        },
+        {
+          "sku": "SP042-2",
+          "price": "299000",
+          "compare_at_price": "339000",
+          "options": [
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp042-2.webp"
+        },
+        {
+          "sku": "SP042-3",
+          "price": "299000",
+          "compare_at_price": "339000",
+          "options": [
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp042-3.webp"
         }
       ]
     },
@@ -2180,40 +1578,32 @@ window.GRADIE_DATA = {
       "sku": "SP043-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp043-2.webp",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp043-2.webp"
+        "https://cdn.hstatic.net/files/200001178391/file/sp043-2.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp043-3.webp"
       ],
-      "options": [
-        {
-          "name": "Hình dáng",
-          "values": [
-            "Tròn - Nam"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "8,5cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Mica"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "huy_chuong_moc_khoa_SP043-1",
           "sku": "SP043-1",
           "price": "89000",
           "compare_at_price": "99000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp043-2.webp",
           "options": [
-            "Tròn - Nam",
-            "8,5cm",
-            "Mica"
-          ]
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp043-2.webp"
+        },
+        {
+          "sku": "SP043-2",
+          "price": "89000",
+          "compare_at_price": "99000",
+          "options": [
+            "Hình dáng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp043-3.webp"
         }
       ]
     },
@@ -2227,40 +1617,32 @@ window.GRADIE_DATA = {
       "sku": "SP044-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp044-1.webp",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp044-1.webp"
+        "https://cdn.hstatic.net/files/200001178391/file/sp044-1.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp044-2.webp"
       ],
-      "options": [
-        {
-          "name": "Màu sắc",
-          "values": [
-            "Hồng"
-          ]
-        },
-        {
-          "name": "Kích thước ",
-          "values": [
-            "80cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Bánh kẹo,sữa, gấu bông"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "bo_hoa_banh_keo_SP044-1",
           "sku": "SP044-1",
           "price": "189000",
           "compare_at_price": "199000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp044-1.webp",
           "options": [
-            "Hồng",
-            "80cm",
-            "Bánh kẹo,sữa, gấu bông"
-          ]
+            "Màu sắc",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp044-1.webp"
+        },
+        {
+          "sku": "SP044-2",
+          "price": "189000",
+          "compare_at_price": "199000",
+          "options": [
+            "Màu sắc",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp044-2.webp"
         }
       ]
     },
@@ -2274,40 +1656,44 @@ window.GRADIE_DATA = {
       "sku": "SP045-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp045-1.webp",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp045-1.webp"
+        "https://cdn.hstatic.net/files/200001178391/file/sp045-1.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp045-2.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp045-3.webp"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Gấu"
-          ]
-        },
-        {
-          "name": "Màu sắc",
-          "values": [
-            "Trằng, vàng"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Thủy tinh"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "den_ngu_hoa_huong_duong_SP045-1",
           "sku": "SP045-1",
           "price": "89000",
           "compare_at_price": "99000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp045-1.webp",
           "options": [
-            "Gấu",
-            "Trằng, vàng",
-            "Thủy tinh"
-          ]
+            "Hình dạng",
+            "Màu sắc",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp045-1.webp"
+        },
+        {
+          "sku": "SP045-2",
+          "price": "89000",
+          "compare_at_price": "99000",
+          "options": [
+            "Hình dạng",
+            "Màu sắc",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp045-2.webp"
+        },
+        {
+          "sku": "SP045-3",
+          "price": "89000",
+          "compare_at_price": "99000",
+          "options": [
+            "Hình dạng",
+            "Màu sắc",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp045-3.webp"
         }
       ]
     },
@@ -2321,40 +1707,44 @@ window.GRADIE_DATA = {
       "sku": "SP046-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp046-1.webp",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp046-1.webp"
+        "https://cdn.hstatic.net/files/200001178391/file/sp046-1.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp046-2.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp046-3.webp"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Cẩm Tú Cầu"
-          ]
-        },
-        {
-          "name": "Màu sắc",
-          "values": [
-            "Vàng hồng đào"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Thủy tinh"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "den_ngu_hoa_cam_tu_cau_SP046-1",
           "sku": "SP046-1",
           "price": "269000",
           "compare_at_price": "299000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp046-1.webp",
           "options": [
-            "Cẩm Tú Cầu",
-            "Vàng hồng đào",
-            "Thủy tinh"
-          ]
+            "Hình dạng",
+            "Màu sắc",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp046-1.webp"
+        },
+        {
+          "sku": "SP046-2",
+          "price": "269000",
+          "compare_at_price": "299000",
+          "options": [
+            "Hình dạng",
+            "Màu sắc",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp046-2.webp"
+        },
+        {
+          "sku": "SP046-3",
+          "price": "269000",
+          "compare_at_price": "299000",
+          "options": [
+            "Hình dạng",
+            "Màu sắc",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp046-3.webp"
         }
       ]
     },
@@ -2368,40 +1758,32 @@ window.GRADIE_DATA = {
       "sku": "SP047-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp047-1.webp",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp047-1.webp"
+        "https://cdn.hstatic.net/files/200001178391/file/sp047-1.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp047-3.webp"
       ],
-      "options": [
-        {
-          "name": "Màu sắc",
-          "values": [
-            "Hồng"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "29,7 x 42 cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Giấy cứng"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "lich_tot_nghiep_SP047-1",
           "sku": "SP047-1",
           "price": "69000",
           "compare_at_price": "79000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp047-1.webp",
           "options": [
-            "Hồng",
-            "29,7 x 42 cm",
-            "Giấy cứng"
-          ]
+            "Màu sắc",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp047-1.webp"
+        },
+        {
+          "sku": "SP047-2",
+          "price": "69000",
+          "compare_at_price": "79000",
+          "options": [
+            "Màu sắc",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp047-3.webp"
         }
       ]
     },
@@ -2415,40 +1797,32 @@ window.GRADIE_DATA = {
       "sku": "SP048-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp048-1.webp",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp048-1.webp"
+        "https://cdn.hstatic.net/files/200001178391/file/sp048-1.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp048-2.webp"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Gấu "
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            "29,7 x 42 cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Sen đá"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "sen_da_va_gau_SP048-1",
           "sku": "SP048-1",
           "price": "79000",
           "compare_at_price": "89000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp048-1.webp",
           "options": [
-            "Gấu ",
-            "29,7 x 42 cm",
-            "Sen đá"
-          ]
+            "Hình dạng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp048-1.webp"
+        },
+        {
+          "sku": "SP048-2",
+          "price": "79000",
+          "compare_at_price": "89000",
+          "options": [
+            "Hình dạng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp048-2.webp"
         }
       ]
     },
@@ -2462,40 +1836,32 @@ window.GRADIE_DATA = {
       "sku": "SP049-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp049-1.webp",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp049-1.webp"
+        "https://cdn.hstatic.net/files/200001178391/file/sp049-1.webp",
+        "https://cdn.hstatic.net/files/200001178391/file/sp049-2.webp"
       ],
-      "options": [
-        {
-          "name": "Hình dạng",
-          "values": [
-            "Nam"
-          ]
-        },
-        {
-          "name": "Kích thước",
-          "values": [
-            " 8cm"
-          ]
-        },
-        {
-          "name": "Chất liệu",
-          "values": [
-            "Xương rồng"
-          ]
-        }
-      ],
+      "options": [],
       "variants": [
         {
-          "id": "chau_cay_may_man_SP049-1",
           "sku": "SP049-1",
           "price": "159000",
           "compare_at_price": "169000",
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp049-1.webp",
           "options": [
-            "Nam",
-            " 8cm",
-            "Xương rồng"
-          ]
+            "Hình dạng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp049-1.webp"
+        },
+        {
+          "sku": "SP049-2",
+          "price": "159000",
+          "compare_at_price": "169000",
+          "options": [
+            "Hình dạng",
+            "Kích thước",
+            "Chất liệu"
+          ],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp049-2.webp"
         }
       ]
     }

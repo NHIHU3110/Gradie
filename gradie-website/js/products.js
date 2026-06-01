@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
               vHtml += p.variants.map(v => {
                   const label = (v.options && v.options.length) ? v.options.filter(Boolean).join(' / ') : (v.name || v.color || v.title || v.sku || "Mặc định");
                   const price = v.price || p.price;
-                  return `<button class="variant-btn" data-variant="${label}" data-price="${price}" style="padding:10px 18px; border:1px solid var(--border-gold); background:var(--white); cursor:pointer; border-radius:6px; font-size:0.95rem; transition: all 0.2s;" onclick="selectVariant(this)">${label}<br><small style="color:var(--taupe);">${price.toLocaleString('vi-VN')} ₫</small></button>`;
+                  return `<button class="variant-btn" data-variant="${label}" data-price="${price}" data-image="${v.image || ''}" style="padding:10px 18px; border:1px solid var(--border-gold); background:var(--white); cursor:pointer; border-radius:6px; font-size:0.95rem; transition: all 0.2s;" onclick="selectVariant(this)">${label}<br><small style="color:var(--taupe);">${price.toLocaleString('vi-VN')} ₫</small></button>`;
               }).join('');
               vHtml += '</div>';
           }
@@ -160,6 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
               
               document.getElementById('detail-price').textContent = Number(btn.getAttribute('data-price')).toLocaleString('vi-VN') + ' ₫';
               document.getElementById('selected-variant').value = btn.getAttribute('data-variant');
+              
+              const vImg = btn.getAttribute('data-image');
+              if (vImg) {
+                  const mainImg = document.getElementById('main-detail-image');
+                  if (mainImg) mainImg.src = vImg;
+              }
           };
           
           let thumbsHtml = '';
