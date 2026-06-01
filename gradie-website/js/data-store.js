@@ -531,18 +531,39 @@ window.GradieStore = {
 
   syncWithDB: async function() {
     try {
-      const res = await fetch('/api/products');
-      if (res.ok) {
-        const products = await res.json();
+      const [resProducts, resGlobal] = await Promise.all([
+        fetch('/api/products'),
+        fetch('/api/global')
+      ]);
+      
+      let data = this.getData();
+      let updated = false;
+
+      if (resProducts.ok) {
+        const products = await resProducts.json();
         if (products && products.length > 0) {
-          let data = this.getData();
-          // Merge logic: preserve missing images or formatting by relying on DB
           data.products = this.normalizeProducts(products);
-          this.saveData(data);
+          updated = true;
         }
       }
+
+      if (resGlobal.ok) {
+        const globalData = await resGlobal.json();
+        if (globalData) {
+          if (globalData.categories && globalData.categories.length > 0) data.categories = globalData.categories;
+          if (globalData.customization && Object.keys(globalData.customization).length > 0) data.customization = globalData.customization;
+          if (globalData.gallery && globalData.gallery.length > 0) data.gallery = globalData.gallery;
+          if (globalData.blogPosts && globalData.blogPosts.length > 0) data.blogPosts = globalData.blogPosts;
+          if (globalData.settings && Object.keys(globalData.settings).length > 0) data.settings = globalData.settings;
+          updated = true;
+        }
+      }
+
+      if (updated) {
+        this.saveData(data);
+      }
     } catch (e) {
-      console.warn('API /api/products unavailable. Falling back to local storage.');
+      console.warn('API sync failed. Falling back to local storage.', e);
     }
   },
   getCurrentUser: function() {
