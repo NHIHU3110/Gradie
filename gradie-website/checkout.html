@@ -304,6 +304,7 @@
       }
     }
   </style>
+<link rel="stylesheet" href="css/toast.css">
 </head>
 <body>
   <div class="announcement-bar">
@@ -313,7 +314,7 @@
   <header class="header">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <img src="images/Gradie_logo.jpeg" alt="Gradie Logo" style="height:48px; width:auto; border-radius:50%; object-fit:cover; margin-right:10px;">
+        <img loading="lazy" src="images/Gradie_logo.jpeg" alt="Gradie Logo" style="height:48px; width:auto; border-radius:50%; object-fit:cover; margin-right:10px;">
         Gradie
         <span class="tagline">Graduation Gifts</span>
       </a>
@@ -328,7 +329,7 @@
       <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
       <div class="header-icons">
         <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
-        <button class="icon-btn" onclick="alert('Search functionality coming soon!')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <button class="icon-btn" onclick="showToast('Tính năng tìm kiếm đang được phát triển!', 'info')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
         <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
       </div>
     </div>
@@ -401,20 +402,44 @@
             Payment Method
           </h2>
 
-          <div class="payment-card">
-            <input type="radio" id="payment-cod" name="payment-method" checked>
+          <div class="payment-card" onclick="selectPayment('cod')" id="payment-card-cod" style="border-color:var(--champagne);">
+            <input type="radio" id="payment-cod" name="payment-method" value="cod" checked onchange="selectPayment('cod')">
             <div>
-              <div class="payment-card-label">Cash on Delivery (COD)</div>
-              <p class="payment-card-desc">Pay securely with cash upon delivery of your Gradie signature gift box. No deposit required.</p>
+              <div class="payment-card-label">💵 Thanh toán khi nhận hàng (COD)</div>
+              <p class="payment-card-desc">Thanh toán bằng tiền mặt khi nhận hàng. Không cần đặt cọc.</p>
             </div>
           </div>
 
-          <button type="submit" class="btn-place-order">
-            🎁 Place My Order
+          <div class="payment-card" onclick="selectPayment('qr')" id="payment-card-qr" style="border-color:#e2e8f0; background:#fff;">
+            <input type="radio" id="payment-qr" name="payment-method" value="qr" onchange="selectPayment('qr')">
+            <div>
+              <div class="payment-card-label">📱 Chuyển khoản ngân hàng (QR Code)</div>
+              <p class="payment-card-desc">Quét mã QR bằng App ngân hàng bất kỳ. Hệ thống tự điền số tiền và mã đơn hàng.</p>
+            </div>
+          </div>
+
+          <!-- VietQR Section (hidden until QR selected) -->
+          <div id="vietqr-section" style="display:none; margin-top:20px; padding:20px; background:linear-gradient(135deg,#f9f7ff,#fff); border:1px solid var(--border-gold); border-radius:14px; text-align:center;">
+            <div style="font-size:0.85rem; color:var(--taupe); margin-bottom:12px; text-transform:uppercase; letter-spacing:1px;">Mã QR Thanh Toán</div>
+            <div id="qr-loading" style="padding:20px; color:var(--taupe); font-style:italic;">Đang tạo mã QR...</div>
+            <img id="qr-image" src="" alt="VietQR" loading="lazy"
+              style="display:none; width:220px; height:220px; border-radius:12px; border:3px solid var(--champagne); box-shadow:0 8px 24px rgba(216,169,79,0.2); margin:0 auto;">
+            <div id="qr-info" style="display:none; margin-top:14px; font-size:0.88rem; color:var(--ink); line-height:1.8;">
+              <strong>Ngân hàng:</strong> <span id="qr-bank"></span><br>
+              <strong>Số tài khoản:</strong> <span id="qr-acct"></span><br>
+              <strong>Chủ tài khoản:</strong> <span id="qr-name"></span><br>
+              <strong>Nội dung CK:</strong> <span id="qr-desc" style="color:var(--champagne); font-weight:700;"></span>
+            </div>
+            <p style="margin-top:14px; font-size:0.8rem; color:var(--taupe);">⚠️ Vui lòng chuyển đúng số tiền và nội dung để đơn hàng được xác nhận nhanh nhất.</p>
+          </div>
+
+          <button type="submit" class="btn-place-order" id="btn-place-order">
+            🎁 Đặt Hàng Ngay
           </button>
 
         </form>
       </section>
+
 
       <!-- Right: Order Summary -->
       <section class="order-summary-section">
@@ -478,6 +503,7 @@
     </div>
   </footer>
 
+  <script src="js/toast.js"></script>
   <script src="js/global-data.js?v=1780167396"></script>
   <script src="js/data-store.js?v=1780167396"></script>
   <script src="js/main.js?v=1780167396"></script>

@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Customization settings successfully updated!");
         } catch (e) {
             console.error(e);
-            alert("Error saving customization data.");
+            showToast('Lỗi khi lưu dữ liệu Customization!', 'error');
         }
     };
 

@@ -44,7 +44,7 @@ window.deleteProduct = function(id) {
     if(confirm('Are you sure you want to delete this product?')) {
         window.GradieStore.deleteProduct(id);
         renderAdminProducts();
-        alert('Product deleted successfully');
+        showToast('Đã xóa sản phẩm thành công!', 'success');
     }
 }
 
@@ -87,7 +87,7 @@ function getProductExportData(products) {
 function exportToCSV() {
     const products = window.GradieStore.getProducts();
     if (!products || products.length === 0) {
-        alert("No products to export.");
+        showToast('Không có sản phẩm nào để xuất.', 'warning');
         return;
     }
     
@@ -116,12 +116,12 @@ function exportToCSV() {
 function exportToXLSX() {
     const products = window.GradieStore.getProducts();
     if (!products || products.length === 0) {
-        alert("No products to export.");
+        showToast('Không có sản phẩm nào để xuất.', 'warning');
         return;
     }
     
     if (typeof XLSX === 'undefined') {
-        alert("SheetJS library is still loading. Please try again in a moment.");
+        showToast('Thư viện đang tải, vui lòng thử lại.', 'warning');
         return;
     }
     

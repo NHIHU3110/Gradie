@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
               const res = window.GradieStore.updateUserProfile(user.email, { avatar: base64 });
               if (res.success) {
                 if (avatarImg) avatarImg.src = base64;
-                alert("Avatar updated successfully!");
+                showToast('Đã cập nhật ảnh đại diện!', 'success');
               }
             };
             reader.readAsDataURL(file);
@@ -537,7 +537,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const res = window.GradieStore.updateUserProfile(currentUser.email, { addresses: addrs });
         if (res.success) {
-          alert("New address added successfully!");
+          showToast('Đã thêm địa chỉ mới thành công!', 'success');
           document.getElementById('address-add-form').reset();
           window.selectAddressLabel('Home'); // Reset active label to Home
           window.renderAddressBook();

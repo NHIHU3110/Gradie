@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let data = window.GradieStore.getData();
                     data.users = (data.users || []).filter(u => u.id !== userId);
                     window.GradieStore.saveData(data);
-                    alert("User successfully deleted.");
+                    showToast('Đã xóa người dùng thành công!', 'success');
                     window.renderUsersTable();
                 }
             } catch (err) {

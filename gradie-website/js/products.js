@@ -366,7 +366,7 @@ window.addToCart = function(id, isDetailView = false) {
         if (isDetailView) {
             const variantInput = document.getElementById('selected-variant');
             if (!variantInput || !variantInput.value) {
-                alert('Vui lòng chọn option sản phẩm trước khi thêm vào giỏ hàng!');
+                showToast('Vui lòng chọn tùy chọn sản phẩm trước khi thêm vào giỏ!', 'warning');
                 return;
             }
             selectedVariant = variantInput.value;
@@ -374,7 +374,7 @@ window.addToCart = function(id, isDetailView = false) {
             if (vObj && vObj.price) price = vObj.price;
         } else {
             // Added from grid, force redirect to detail page to select options
-            alert('Sản phẩm này có nhiều lựa chọn. Vui lòng xem chi tiết để chọn option phù hợp!');
+            showToast('Sản phẩm này có nhiều lựa chọn, vui lòng xem chi tiết để chọn!', 'info');
             window.location.href = `product-detail.html?id=${p.id}`;
             return;
         }

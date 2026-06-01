@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const statusSelect = document.getElementById('detail-status');
                 if (orderNumber && statusSelect) {
                     window.GradieStore.updateOrder(orderNumber, { status: statusSelect.value });
-                    alert('Order status successfully updated to: ' + statusSelect.value);
+                    showToast('Đã cập nhật trạng thái đơn hàng!', 'success');
                     window.closeOrderDetailModal();
                     window.renderOrdersTable();
                 }

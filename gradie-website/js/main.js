@@ -1,5 +1,18 @@
 // js/main.js
 document.addEventListener('DOMContentLoaded', () => {
+  // 0. Lazy Image Loading Observer
+  if ('IntersectionObserver' in window) {
+    const imgObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('loaded');
+          imgObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '100px' });
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => imgObserver.observe(img));
+  }
+
   // 1. Sync Settings
   if (window.GradieStore) {
     const settings = window.GradieStore.getSettings();
@@ -203,7 +216,7 @@ window.addToCart = function(productId, qty = 1, variant = '') {
       badge.style.backgroundColor = 'var(--text-color)';
     }, 300);
   }
-  alert(product.name + " added to cart!");
+  showToast(product.name + " đã được thêm vào giỏ hàng! 🛒", 'success');
 };
 
 // Favorites persistence

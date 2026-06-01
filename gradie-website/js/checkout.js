@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // 0. Enforce user authentication
   const currentUser = window.GradieStore.getCurrentUser();
   if (!currentUser) {
-    alert("Please log in or sign up to proceed to checkout.");
-    window.location.href = "login.html?redirect=checkout";
+    showToast('Vui lòng đăng nhập để tiến hành thanh toán.', 'warning');
+    setTimeout(() => { window.location.href = 'login.html?redirect=checkout'; }, 1200);
     return;
   }
 
@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
   } catch(e) { cart = []; }
 
   if (cart.length === 0) {
-    alert("Your shopping cart is empty. Redirecting to shop...");
-    window.location.href = "products.html";
+    showToast('Giỏ hàng của bạn đang trống. Đang chuyển đến cửa hàng...', 'info');
+    setTimeout(() => { window.location.href = 'products.html'; }, 1500);
     return;
   }
 
@@ -139,9 +139,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 3. Retrieve Shipping Settings
+  // 3. Dynamic Shipping Fee based on Province
   const settings = window.GradieStore.getSettings();
-  const shippingFee = settings.shippingFee !== undefined ? Number(settings.shippingFee) : 30000;
+  let shippingFee = settings.shippingFee !== undefined ? Number(settings.shippingFee) : 30000;
+
+  // Update shipping fee dynamically when address changes
+  function updateShippingByProvince(address) {
+    const hcmKeywords = ['hồ chí minh', 'hcm', 'ho chi minh', 'sài gòn', 'sai gon', 'quận', 'quan '];
+    const isHCM = hcmKeywords.some(kw => address.toLowerCase().includes(kw));
+    const newFee = isHCM ? 20000 : 40000;
+    if (newFee !== shippingFee) {
+      shippingFee = newFee;
+      const grandTotal = subtotal + shippingFee;
+      if (shippingEl) shippingEl.textContent = shippingFee.toLocaleString('vi-VN') + 'đ';
+      if (grandTotalEl) grandTotalEl.textContent = grandTotal.toLocaleString('vi-VN') + 'đ';
+      const label = isHCM ? 'Nội thành HCM (20.000đ)' : 'Ngoại tỉnh (40.000đ)';
+      showToast('Phí vận chuyển: ' + label, 'info');
+    }
+  }
+
+  // Watch address input for province detection
+  const addrInput = document.getElementById('shipping-address');
+  if (addrInput) {
+    addrInput.addEventListener('blur', () => updateShippingByProvince(addrInput.value));
+  }
 
   // 4. Render Order Summary
   let subtotal = 0;
@@ -191,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const notes = document.getElementById('shipping-notes').value.trim();
 
     if (!name || !phone || !email || !address) {
-      alert("Please fill in all required shipping fields.");
+      showToast('Vui lòng điền đầy đủ thông tin giao hàng!', 'error');
       return;
     }
 
@@ -267,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div style="background: #faf8f5; border: 1px dashed #d8a94f; padding: 20px; border-radius: 12px; margin-bottom: 35px;">
           <span style="font-size:0.85rem; color:#888; text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:5px;">Your Order Tracking Code</span>
           <strong id="tracking-code-display" style="font-size: 1.6rem; letter-spacing: 1px; color: #1a1a1a;">${orderNumber}</strong>
-          <button onclick="navigator.clipboard.writeText('${orderNumber}'); alert('Copied tracking code to clipboard!');" style="margin-left:12px; background:none; border:none; color:#d8a94f; font-weight:600; cursor:pointer; font-size:0.9rem;">Copy</button>
+          <button onclick="navigator.clipboard.writeText('${orderNumber}'); showToast('Đã sao chép mã đơn hàng!', 'success');" style="margin-left:12px; background:none; border:none; color:#d8a94f; font-weight:600; cursor:pointer; font-size:0.9rem;">Copy</button>
         </div>
         <div style="display:flex; gap:15px; justify-content:center;">
           <a href="order-tracking.html?code=${orderNumber}" class="btn-primary" style="padding:12px 25px; border-radius:8px; text-decoration:none; font-weight:600;">Track Order Now</a>
@@ -277,3 +298,81 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   };
 });
+
+// ── VietQR Payment Selection ─────────────────────────────────────────────────
+window._currentPaymentMethod = 'cod';
+
+window.selectPayment = function(method) {
+  window._currentPaymentMethod = method;
+  const cardCod = document.getElementById('payment-card-cod');
+  const cardQr  = document.getElementById('payment-card-qr');
+  const qrSec   = document.getElementById('vietqr-section');
+  const radioCod = document.getElementById('payment-cod');
+  const radioQr  = document.getElementById('payment-qr');
+
+  if (method === 'qr') {
+    if (cardCod) cardCod.style.borderColor = '#e2e8f0';
+    if (cardQr)  { cardQr.style.borderColor = 'var(--champagne)'; cardQr.style.background = 'linear-gradient(135deg, #fdfaf5 0%, #fff9f0 100%)'; }
+    if (qrSec)   qrSec.style.display = 'block';
+    if (radioQr) radioQr.checked = true;
+    // Generate QR
+    generateVietQR();
+  } else {
+    if (cardCod) cardCod.style.borderColor = 'var(--champagne)';
+    if (cardQr)  { cardQr.style.borderColor = '#e2e8f0'; cardQr.style.background = '#fff'; }
+    if (qrSec)   qrSec.style.display = 'none';
+    if (radioCod) radioCod.checked = true;
+  }
+};
+
+window.generateVietQR = async function() {
+  const totalEl = document.getElementById('checkout-grand-total');
+  const rawText = totalEl ? totalEl.textContent.replace(/[^\d]/g, '') : '0';
+  const amount = parseInt(rawText) || 0;
+
+  // Generate temp order number for QR (will be regenerated on submit)
+  const tempOrder = 'GRD-' + Math.floor(1000 + Math.random() * 9000);
+  window._tempOrderForQR = tempOrder;
+
+  const qrImg     = document.getElementById('qr-image');
+  const qrLoading = document.getElementById('qr-loading');
+  const qrInfo    = document.getElementById('qr-info');
+
+  if (qrLoading) qrLoading.style.display = 'block';
+  if (qrImg)     qrImg.style.display = 'none';
+  if (qrInfo)    qrInfo.style.display = 'none';
+
+  try {
+    const res = await fetch('/api/vietqr', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount, orderNumber: tempOrder })
+    });
+    const data = await res.json();
+
+    if (data.qrUrl && qrImg) {
+      qrImg.src = data.qrUrl;
+      qrImg.onload = () => {
+        if (qrLoading) qrLoading.style.display = 'none';
+        qrImg.style.display = 'block';
+        if (qrInfo) qrInfo.style.display = 'block';
+      };
+      qrImg.onerror = () => {
+        if (qrLoading) qrLoading.textContent = 'Không tải được mã QR. Vui lòng chọn COD.';
+      };
+      // Fill info
+      const bankEl = document.getElementById('qr-bank');
+      const acctEl = document.getElementById('qr-acct');
+      const nameEl = document.getElementById('qr-name');
+      const descEl = document.getElementById('qr-desc');
+      if (bankEl) bankEl.textContent = data.bankCode;
+      if (acctEl) acctEl.textContent = data.accountNumber;
+      if (nameEl) nameEl.textContent = data.accountName;
+      if (descEl) descEl.textContent = data.description;
+    }
+  } catch (e) {
+    if (qrLoading) qrLoading.textContent = 'Không thể tạo mã QR. Vui lòng chọn COD.';
+    console.error('VietQR error:', e);
+  }
+};
+

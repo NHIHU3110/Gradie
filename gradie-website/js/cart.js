@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.handleProceedCheckout = function() {
     const user = window.GradieStore ? window.GradieStore.getCurrentUser() : null;
     if (!user) {
-      alert("Please log in or register to proceed to checkout.");
+      showToast('Vui lòng đăng nhập để tiến hành thanh toán.', 'warning');
       window.location.href = "login.html?redirect=checkout";
     } else {
       window.location.href = "checkout.html";

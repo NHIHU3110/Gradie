@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>${cName}</td>
                             <td>${total.toLocaleString('vi-VN')} ₫</td>
                             <td>
-                                <select onchange="window.GradieStore.updateOrder('${o.orderNumber}', {status: this.value}); alert('Status Updated!');" style="padding:5px;">
+                                <select onchange="window.GradieStore.updateOrder('${o.orderNumber}', {status: this.value}); showToast('Cập nhật trạng thái thành công!', 'success');" style="padding:5px;">
                                     <option value="Order Confirmed" ${o.status === 'Order Confirmed'?'selected':''}>Confirmed</option>
                                     <option value="Dispatched" ${o.status === 'Dispatched'?'selected':''}>Dispatched</option>
                                     <option value="Delivered" ${o.status === 'Delivered'?'selected':''}>Delivered</option>
@@ -78,13 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 announcement: document.getElementById('set-ann').value,
                 shippingFee: Number(document.getElementById('set-ship').value)
             });
-            alert('Settings Saved! Changes will reflect on user pages immediately.');
+            showToast('Đã lưu cài đặt! Thay đổi sẽ được áp dụng ngay lập tức.', 'success');
         });
         
         window.resetDatabase = function() {
             if(confirm("DANGER! This will wipe all current orders, custom products, and content. Restore original CSV products and defaults?")) {
                 window.GradieStore.resetData(true);
-                alert('Database Reset Complete.');
+                showToast('Đã reset database thành công!', 'info');
                 window.location.reload();
             }
         }
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td><strong>${p.title}</strong></td>
                         <td>${p.category}</td>
                         <td>
-                            <select onchange="window.GradieStore.updateBlogPost('${p.id}', {status: this.value}); alert('Status Updated!');" style="padding:5px;">
+                            <select onchange="window.GradieStore.updateBlogPost('${p.id}', {status: this.value}); showToast('Cập nhật trạng thái thành công!', 'success');" style="padding:5px;">
                                 <option value="Published" ${p.status==='Published'?'selected':''}>Published</option>
                                 <option value="Draft" ${p.status==='Draft'?'selected':''}>Draft</option>
                             </select>
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td><strong>${p.title}</strong></td>
                         <td>${p.type}</td>
                         <td>
-                            <select onchange="window.GradieStore.updateGalleryItem('${p.id}', {status: this.value}); alert('Status Updated!');" style="padding:5px;">
+                            <select onchange="window.GradieStore.updateGalleryItem('${p.id}', {status: this.value}); showToast('Cập nhật trạng thái thành công!', 'success');" style="padding:5px;">
                                 <option value="Published" ${p.status==='Published'?'selected':''}>Published</option>
                                 <option value="Draft" ${p.status==='Draft'?'selected':''}>Draft</option>
                             </select>
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td><strong>${p.title}</strong></td>
                         <td>${p.content.substring(0, 50)}...</td>
                         <td>
-                            <select onchange="window.GradieStore.updatePolicy('${p.id}', {status: this.value}); alert('Status Updated!');" style="padding:5px;">
+                            <select onchange="window.GradieStore.updatePolicy('${p.id}', {status: this.value}); showToast('Cập nhật trạng thái thành công!', 'success');" style="padding:5px;">
                                 <option value="Published" ${p.status==='Published'?'selected':''}>Published</option>
                                 <option value="Draft" ${p.status==='Draft'?'selected':''}>Draft</option>
                             </select>
@@ -382,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             closeModal();
             renderAdminCategories();
-            alert(`Assigned ${selectedIds.length} products to ${currentEditingCategory}`);
+            showToast(`Đã gán ${selectedIds.length} sản phẩm vào danh mục!`, 'success');
         };
     }
     // 8. ADMIN CUSTOMIZATION
@@ -395,9 +395,9 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const updated = JSON.parse(customizeJson.value);
                 window.GradieStore.saveCustomizationOptions(updated);
-                alert("Customization settings saved successfully!");
+                showToast('Đã lưu cài đặt Customization!', 'success');
             } catch(e) {
-                alert("Invalid JSON format! Please fix syntax errors.");
+                showToast('Định dạng JSON không hợp lệ!', 'error');
             }
         };
     }

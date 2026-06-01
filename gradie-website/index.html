@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="css/products.css?v=1780166734">
   <link rel="stylesheet" href="css/home.css?v=1780166734">
   <link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/toast.css">
 </head>
 
 <body>
@@ -24,7 +25,7 @@
   <header class="header">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <img src="images/Gradie_logo.jpeg" alt="Gradie Logo"
+        <img loading="lazy" src="images/Gradie_logo.jpeg" alt="Gradie Logo"
           style="height:48px; width:auto; border-radius:50%; object-fit:cover; margin-right:10px;">
         Gradie
         <span class="tagline">Graduation Gifts</span>
@@ -45,7 +46,7 @@
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
             <circle cx="12" cy="7" r="4" />
           </svg></a>
-        <button class="icon-btn" onclick="alert('Search functionality coming soon!')"><svg width="18" height="18"
+        <button class="icon-btn" onclick="showToast('Tính năng tìm kiếm đang được phát triển!', 'info')"><svg width="18" height="18"
             fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
             viewBox="0 0 24 24" style="vertical-align: text-bottom;">
             <circle cx="11" cy="11" r="8" />
@@ -75,7 +76,7 @@
         </div>
       </div>
       <div class="hero-img">
-        <img src="images/Gradie_banner.jpg" alt="Graduation Celebration">
+        <img loading="lazy" src="images/Gradie_banner.jpg" alt="Graduation Celebration">
         <div class="hero-badge">Class of<br>2026</div>
       </div>
     </section>
@@ -88,7 +89,7 @@
       </div>
       <div class="cat-grid">
         <a href="products.html?category=Sash" class="cat-card">
-          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80" alt="Graduation Sashes">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80" alt="Graduation Sashes">
           <div class="cat-overlay">
             <div>
               <h3>Custom Sashes</h3>
@@ -97,7 +98,7 @@
           </div>
         </a>
         <a href="products.html?category=Gấu Bông" class="cat-card">
-          <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=600&q=80" alt="Plushies">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=600&q=80" alt="Plushies">
           <div class="cat-overlay">
             <div>
               <h3>Graduation Plushies</h3>
@@ -106,7 +107,7 @@
           </div>
         </a>
         <a href="products.html?category=Hoa mừng" class="cat-card">
-          <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=600&q=80" alt="Flowers">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=600&q=80" alt="Flowers">
           <div class="cat-overlay">
             <div>
               <h3>Bouquets</h3>
@@ -121,7 +122,7 @@
     <section class="story-section">
       <div class="story-inner">
         <div class="story-img">
-          <img src="https://asamahelmet.vn/wp-content/uploads/2024/04/qua-tang-tot-nghiep11.jpg" alt="Boutique Details">
+          <img loading="lazy" src="https://asamahelmet.vn/wp-content/uploads/2024/04/qua-tang-tot-nghiep11.jpg" alt="Boutique Details">
         </div>
         <div class="story-text">
           <span class="section-kicker">About Gradie</span>
@@ -209,6 +210,7 @@
     </div>
   </footer>
 
+  <script src="js/toast.js"></script>
   <script src="js/global-data.js?v=1780167396"></script>
   <script src="js/data-store.js?v=1780167396"></script>
   <script src="js/main.js?v=1780167396"></script>

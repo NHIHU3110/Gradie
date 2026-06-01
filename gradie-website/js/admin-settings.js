@@ -17,13 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 announcement: document.getElementById('set-ann').value,
                 shippingFee: Number(document.getElementById('set-ship').value)
             });
-            alert('Settings Saved! Changes will reflect on user pages immediately.');
+            showToast('Đã lưu cài đặt! Thay đổi sẽ được áp dụng ngay lập tức.', 'success');
         });
         
         window.resetDatabase = function() {
             if(confirm("DANGER! This will wipe all current orders, custom products, and content. Restore original CSV products and defaults?")) {
                 window.GradieStore.resetData(true);
-                alert('Database Reset Complete.');
+                showToast('Đã reset database thành công!', 'info');
                 window.location.reload();
             }
         }

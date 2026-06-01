@@ -499,48 +499,31 @@ textarea {
   }
 }
 
-/* Toast Notifications */
-.toast-container {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+
+/* =========================================
+   PAGE FADE-IN TRANSITION
+========================================= */
+@keyframes fadeInPage {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-.toast {
-  background: var(--ink);
-  color: white;
-  padding: 15px 25px;
-  border-radius: 8px;
-  font-weight: 500;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  transform: translateY(100px);
+
+body {
+  animation: fadeInPage 0.45s ease-out both;
+}
+
+/* Lazy-loaded images: fade in when loaded */
+img[loading="lazy"] {
   opacity: 0;
-  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  transition: opacity 0.5s ease;
 }
-.toast::before {
-  content: '✓';
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  background: var(--champagne);
-  color: white;
-  border-radius: 50%;
-  font-size: 12px;
-}
-.toast.show {
-  transform: translateY(0);
+img[loading="lazy"].loaded {
   opacity: 1;
 }
 
-/* Old Price / Sale Price */
+/* =========================================
+   OLD PRICE / SALE PRICE
+========================================= */
 .old-price {
   text-decoration: line-through;
   color: var(--taupe);

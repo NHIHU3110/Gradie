@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td><strong>${p.title}</strong></td>
                         <td>${p.type}</td>
                         <td>
-                            <select onchange="window.GradieStore.updateGalleryItem('${p.id}', {status: this.value}); alert('Status Updated!');" style="padding:5px;">
+                            <select onchange="window.GradieStore.updateGalleryItem('${p.id}', {status: this.value}); showToast('Cập nhật trạng thái thành công!', 'success');" style="padding:5px;">
                                 <option value="Published" ${p.status==='Published'?'selected':''}>Published</option>
                                 <option value="Draft" ${p.status==='Draft'?'selected':''}>Draft</option>
                             </select>
