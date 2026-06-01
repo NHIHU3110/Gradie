@@ -494,7 +494,15 @@ window.GradieStore = {
   deletePolicy: function(id) { let data = this.getData(); data.policies = data.policies.filter(o => o.id !== id); this.saveData(data); },
   
   // CUSTOMIZATION
-  getCustomizationOptions: function() { return this.getData().customization || this.resetData(false).customization; },
+  getCustomizationOptions: function() { 
+    const defaultCust = this.resetData(false).customization;
+    let storedCust = this.getData().customization;
+    if (storedCust && storedCust.services && storedCust.services.length < 4) {
+      storedCust.services = defaultCust.services;
+      this.saveCustomizationOptions(storedCust);
+    }
+    return storedCust || defaultCust; 
+  },
   saveCustomizationOptions: function(options) { let data = this.getData(); data.customization = options; this.saveData(data); },
   
   // USER AUTHENTICATION & SESSIONS
