@@ -533,6 +533,20 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp010-1.jpg"
+        },
+        {
+          "sku": "SP010-2",
+          "price": "146000",
+          "compare_at_price": "150000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp010-2.jpg"
+        },
+        {
+          "sku": "SP010-3",
+          "price": "146000",
+          "compare_at_price": "150000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp010-3.jpg"
         }
       ]
     },
@@ -562,6 +576,20 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp011-1.jpg"
+        },
+        {
+          "sku": "SP011-2",
+          "price": "139000",
+          "compare_at_price": "140000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp011-2.jpg"
+        },
+        {
+          "sku": "SP011-3",
+          "price": "139000",
+          "compare_at_price": "140000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp011-3.jpg"
         }
       ]
     },
@@ -642,6 +670,20 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp013-1.jpg"
+        },
+        {
+          "sku": "SP013-2",
+          "price": "60000",
+          "compare_at_price": "70000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp013-2.jpg"
+        },
+        {
+          "sku": "SP013-3",
+          "price": "60000",
+          "compare_at_price": "70000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp013-3.jpg"
         }
       ]
     },
@@ -671,6 +713,20 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp014-1.jpg"
+        },
+        {
+          "sku": "SP014-2",
+          "price": "79000",
+          "compare_at_price": "90000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp014-2.jpg"
+        },
+        {
+          "sku": "SP014-3",
+          "price": "79000",
+          "compare_at_price": "90000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp014-3.jpg"
         }
       ]
     },
@@ -780,6 +836,27 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-1.jpg"
+        },
+        {
+          "sku": "SP017-2",
+          "price": "48000",
+          "compare_at_price": "65000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-2.jpg"
+        },
+        {
+          "sku": "SP017-3",
+          "price": "48000",
+          "compare_at_price": "65000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-3.jpg"
+        },
+        {
+          "sku": "SP017-4",
+          "price": "48000",
+          "compare_at_price": "65000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-4.jpg"
         }
       ]
     },
@@ -809,6 +886,20 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp018-1.jpg"
+        },
+        {
+          "sku": "SP018-2",
+          "price": "100000",
+          "compare_at_price": "120000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp018-2.jpg"
+        },
+        {
+          "sku": "SP018-3",
+          "price": "100000",
+          "compare_at_price": "120000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp018-3.jpg"
         }
       ]
     },
@@ -866,6 +957,20 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp020-1.jpg"
+        },
+        {
+          "sku": "SP020-2",
+          "price": "239000",
+          "compare_at_price": "260000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp020-2.jpg"
+        },
+        {
+          "sku": "SP020-3",
+          "price": "239000",
+          "compare_at_price": "260000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp020-3.jpg"
         }
       ]
     },
@@ -894,6 +999,13 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp021-1.jpg"
+        },
+        {
+          "sku": "SP021-2",
+          "price": "99000",
+          "compare_at_price": "150000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp021-2.jpg"
         }
       ]
     },
@@ -923,6 +1035,20 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp022-1.jpg"
+        },
+        {
+          "sku": "SP022-2",
+          "price": "70000",
+          "compare_at_price": "90000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp022-2.jpg"
+        },
+        {
+          "sku": "SP022-3",
+          "price": "70000",
+          "compare_at_price": "90000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp022-3.jpg"
         }
       ]
     },
@@ -1002,6 +1128,13 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp024-1.jpg"
+        },
+        {
+          "sku": "SP024-2",
+          "price": "70000",
+          "compare_at_price": "95000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp024-2.jpg"
         }
       ]
     },
@@ -1030,6 +1163,13 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp025-1.jpg"
+        },
+        {
+          "sku": "SP025-2",
+          "price": "70000",
+          "compare_at_price": "100000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp025-2.jpg"
         }
       ]
     },
@@ -1176,6 +1316,20 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp029-1.jpg"
+        },
+        {
+          "sku": "SP029-2",
+          "price": "71000",
+          "compare_at_price": "90000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp029-2.jpg"
+        },
+        {
+          "sku": "SP029-3",
+          "price": "71000",
+          "compare_at_price": "90000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp029-3.jpg"
         }
       ]
     },
@@ -2066,6 +2220,13 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp050-1.jpg"
+        },
+        {
+          "sku": "SP050-2",
+          "price": "69000",
+          "compare_at_price": "90000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp050-2.jpg"
         }
       ]
     },
@@ -2377,6 +2538,20 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp057-1.jpg"
+        },
+        {
+          "sku": "SP057-2",
+          "price": "80000",
+          "compare_at_price": "120000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp057-2.jpg"
+        },
+        {
+          "sku": "SP057-3",
+          "price": "80000",
+          "compare_at_price": "120000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp057-3.jpg"
         }
       ]
     },
@@ -2405,6 +2580,13 @@ window.GRADIE_DATA = {
             "Chất liệu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp058-1.jpg"
+        },
+        {
+          "sku": "SP058-2",
+          "price": "25000",
+          "compare_at_price": "50000",
+          "options": [],
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp508-2.jpg"
         }
       ]
     },
