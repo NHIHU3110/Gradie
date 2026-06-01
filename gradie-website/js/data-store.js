@@ -525,6 +525,26 @@ window.GradieStore = {
     }
     return { success: false, message: "Invalid email or password." };
   },
+  logoutUser: function() {
+    this.setCurrentUser(null);
+  },
+
+  syncWithDB: async function() {
+    try {
+      const res = await fetch('/api/products');
+      if (res.ok) {
+        const products = await res.json();
+        if (products && products.length > 0) {
+          let data = this.getData();
+          // Merge logic: preserve missing images or formatting by relying on DB
+          data.products = this.normalizeProducts(products);
+          this.saveData(data);
+        }
+      }
+    } catch (e) {
+      console.warn('API /api/products unavailable. Falling back to local storage.');
+    }
+  },
   getCurrentUser: function() {
     try {
       const sess = localStorage.getItem('GRADIE_USER_SESSION');
@@ -566,5 +586,13 @@ window.GradieStore = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (window.GradieStore) window.GradieStore.init();
+  if (!localStorage.getItem("gradie_data")) {
+    window.GradieStore.resetData();
+  }
+  if (window.GradieStore) {
+    window.GradieStore.init();
+    if (window.GradieStore.syncWithDB) {
+      window.GradieStore.syncWithDB();
+    }
+  }
 });
