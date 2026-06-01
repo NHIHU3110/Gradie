@@ -169,9 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
           };
           
           let thumbsHtml = '';
-          if (p.gallery) {
+          if (p.gallery && p.gallery.length > 1) {
               thumbsHtml = p.gallery.map(img => `
-                <img src="${img}" style="width:80px; height:80px; object-fit:cover; cursor:pointer; border:1px solid var(--border-gold); border-radius:8px;" 
+                <img src="${img}" style="width:70px; height:70px; object-fit:cover; border-radius:8px; cursor:pointer; border:1px solid var(--border-gold);" 
                      onclick="document.getElementById('main-detail-image').src = this.src;">
               `).join('');
           }

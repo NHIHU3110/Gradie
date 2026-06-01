@@ -103,16 +103,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Capybara"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "35cm",
+            "20cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Bông gòn 7D, vải miniso"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP001-1",
           "price": "115000",
           "compare_at_price": "145000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Capybara",
+            "35cm",
+            "Bông gòn 7D, vải miniso"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg"
         },
@@ -121,9 +141,9 @@ window.GRADIE_DATA = {
           "price": "135000",
           "compare_at_price": "165000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Capybara",
+            "20cm",
+            "Bông gòn 7D, vải miniso"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg"
         }
@@ -144,16 +164,38 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp002_3.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp002_4.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Có kính, không in",
+            "Có kính, in tên",
+            "Không kính, không in",
+            "Không kính, in tên"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "20cm khi ngồi 18cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Bông gòn nhân tạo 3 chiều"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP002-1",
           "price": "65000",
           "compare_at_price": "75000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Có kính, không in",
+            "20cm khi ngồi 18cm",
+            "Bông gòn nhân tạo 3 chiều"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_1.jpg"
         },
@@ -162,9 +204,9 @@ window.GRADIE_DATA = {
           "price": "80000",
           "compare_at_price": "90000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Có kính, in tên",
+            "20cm khi ngồi 18cm",
+            "Bông gòn nhân tạo 3 chiều"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_2.jpg"
         },
@@ -173,9 +215,9 @@ window.GRADIE_DATA = {
           "price": "60000",
           "compare_at_price": "65000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Không kính, không in",
+            "20cm khi ngồi 18cm",
+            "Bông gòn nhân tạo 3 chiều"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_3.jpg"
         },
@@ -184,9 +226,9 @@ window.GRADIE_DATA = {
           "price": "70000",
           "compare_at_price": "80000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Không kính, in tên",
+            "20cm khi ngồi 18cm",
+            "Bông gòn nhân tạo 3 chiều"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_4.jpg"
         }
@@ -207,16 +249,39 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp003_3.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp003_4.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Nữ, có đế",
+            "Nữ, không đế",
+            "Nam, có đế",
+            "Nam, không đế"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "23cm",
+            "20cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Len"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP003-1",
           "price": "419000",
           "compare_at_price": "429000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Nữ, có đế",
+            "23cm",
+            "Len"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_1.jpg"
         },
@@ -225,9 +290,9 @@ window.GRADIE_DATA = {
           "price": "399000",
           "compare_at_price": "409000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Nữ, không đế",
+            "20cm",
+            "Len"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_2.jpg"
         },
@@ -236,9 +301,9 @@ window.GRADIE_DATA = {
           "price": "419000",
           "compare_at_price": "429000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Nam, có đế",
+            "23cm",
+            "Len"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_3.jpg"
         },
@@ -247,9 +312,9 @@ window.GRADIE_DATA = {
           "price": "399000",
           "compare_at_price": "409000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Nam, không đế",
+            "20cm",
+            "Len"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_4.jpg"
         }
@@ -269,16 +334,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp004_2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp004_3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Bó hoa"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "50cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Len"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP004-1",
           "price": "149000",
           "compare_at_price": "159000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Bó hoa",
+            "50cm",
+            "Len"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp004_1.jpg"
         }
@@ -298,16 +382,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp005_2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp005_3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Bó hoa"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "30cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Hoa sáp"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP005-1",
           "price": "209000",
           "compare_at_price": "229000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Bó hoa",
+            "30cm",
+            "Hoa sáp"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp005_1.jpg"
         }
@@ -327,16 +430,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp006_2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp006_3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Bó hoa"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "80cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Bong Bóng"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP006-1",
           "price": "359000",
           "compare_at_price": "389000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Bó hoa",
+            "80cm",
+            "Bong Bóng"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp006_1.jpg"
         }
@@ -355,16 +477,37 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp007_1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Hồng",
+            "Đỏ",
+            "Xanh"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "30cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Kẹo"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP007-1",
           "price": "49000",
           "compare_at_price": "59000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Hồng",
+            "30cm",
+            "Kẹo"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_1.jpg"
         },
@@ -373,9 +516,9 @@ window.GRADIE_DATA = {
           "price": "49000",
           "compare_at_price": "59000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Đỏ",
+            "30cm",
+            "Kẹo"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg"
         },
@@ -384,9 +527,9 @@ window.GRADIE_DATA = {
           "price": "49000",
           "compare_at_price": "59000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Xanh",
+            "30cm",
+            "Kẹo"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg"
         }
@@ -404,16 +547,36 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Hồng",
+            "Xanh"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "90cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Kẹo"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP008-1",
           "price": "89000",
           "compare_at_price": "99000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Hồng",
+            "90cm",
+            "Kẹo"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg"
         },
@@ -422,9 +585,9 @@ window.GRADIE_DATA = {
           "price": "89000",
           "compare_at_price": "99000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Xanh",
+            "90cm",
+            "Kẹo"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg"
         }
@@ -443,16 +606,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp009_2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Khung chữ nhật"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "10x15cm",
+            "13x18cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Nhựa"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP009-1",
           "price": "64000",
           "compare_at_price": "74000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Khung chữ nhật",
+            "10x15cm",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg"
         },
@@ -461,9 +644,9 @@ window.GRADIE_DATA = {
           "price": "75000",
           "compare_at_price": "85000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Khung chữ nhật",
+            "13x18cm",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp009_2.jpg"
         }
@@ -481,16 +664,37 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Khung chữ nhật",
+            "Khung vuông"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "15x21cm",
+            "18x18cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Nhựa"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP029-1",
           "price": "139000",
           "compare_at_price": "149000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Khung chữ nhật",
+            "15x21cm",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg"
         },
@@ -499,9 +703,9 @@ window.GRADIE_DATA = {
           "price": "159000",
           "compare_at_price": "169000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Khung vuông",
+            "18x18cm",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg"
         }
@@ -521,16 +725,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp010-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp010-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Hình chữ nhật"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "19x19cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Giấy"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP010-1",
           "price": "146000",
           "compare_at_price": "150000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Hình chữ nhật",
+            "19x19cm",
+            "Giấy"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp010-1.jpg"
         },
@@ -564,16 +787,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp011-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp011-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Hình chữ nhật"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "19x19cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Giấy"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP011-1",
           "price": "139000",
           "compare_at_price": "140000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Hình chữ nhật",
+            "19x19cm",
+            "Giấy"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp011-1.jpg"
         },
@@ -607,16 +849,37 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp012-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp012-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Xám",
+            "Nâu",
+            "Trắng"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "19x19cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Giấy"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP012-1",
           "price": "79000",
           "compare_at_price": "90000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Xám",
+            "19x19cm",
+            "Giấy"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp012-1.jpg"
         },
@@ -625,9 +888,9 @@ window.GRADIE_DATA = {
           "price": "79000",
           "compare_at_price": "90000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Nâu",
+            "19x19cm",
+            "Giấy"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp012-2.jpg"
         },
@@ -636,9 +899,9 @@ window.GRADIE_DATA = {
           "price": "79000",
           "compare_at_price": "90000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Trắng",
+            "19x19cm",
+            "Giấy"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp012-3.jpg"
         }
@@ -658,16 +921,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp013-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp013-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Hình chữ nhật"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "19x25cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Giấy"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP013-1",
           "price": "60000",
           "compare_at_price": "70000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Hình chữ nhật",
+            "19x25cm",
+            "Giấy"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp013-1.jpg"
         },
@@ -701,16 +983,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp014-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp014-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Hình chữ nhật"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "18x23cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Giấy"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP014-1",
           "price": "79000",
           "compare_at_price": "90000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Hình chữ nhật",
+            "18x23cm",
+            "Giấy"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp014-1.jpg"
         },
@@ -744,16 +1045,37 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp015-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp015-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Loại",
+          "values": [
+            "Monet Claude",
+            "Bridge",
+            "Monet"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "18x23cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Giấy"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP015-1",
           "price": "35000",
           "compare_at_price": "50000",
           "options": [
-            "Loại",
-            "Kích thước",
-            "Chất liệu"
+            "Monet Claude",
+            "18x23cm",
+            "Giấy"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp015-1.jpg"
         },
@@ -762,9 +1084,9 @@ window.GRADIE_DATA = {
           "price": "35000",
           "compare_at_price": "50000",
           "options": [
-            "Loại",
-            "Kích thước",
-            "Chất liệu"
+            "Bridge",
+            "18x23cm",
+            "Giấy"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp015-2.jpg"
         },
@@ -773,9 +1095,9 @@ window.GRADIE_DATA = {
           "price": "35000",
           "compare_at_price": "50000",
           "options": [
-            "Loại",
-            "Kích thước",
-            "Chất liệu"
+            "Monet",
+            "18x23cm",
+            "Giấy"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp015-3.jpg"
         }
@@ -794,16 +1116,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp016-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp016-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Hình trụ"
+          ]
+        },
+        {
+          "name": "Dung tích",
+          "values": [
+            "2L"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Nhựa"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP016-1",
           "price": "48000",
           "compare_at_price": "60000",
           "options": [
-            "Hình dạng",
-            "Dung tích",
-            "Chất liệu"
+            "Hình trụ",
+            "2L",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp016-1.jpg"
         }
@@ -824,16 +1165,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp017-3.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp017-4.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Hình trụ"
+          ]
+        },
+        {
+          "name": "Dung tích",
+          "values": [
+            "2L"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Nhựa"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP017-1",
           "price": "48000",
           "compare_at_price": "65000",
           "options": [
-            "Hình dạng",
-            "Dung tích",
-            "Chất liệu"
+            "Hình trụ",
+            "2L",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-1.jpg"
         },
@@ -874,16 +1234,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp018-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp018-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Hình trụ"
+          ]
+        },
+        {
+          "name": "Dung tích",
+          "values": [
+            "480ml"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Thép không gỉ 316 + nhựa PP"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP018-1",
           "price": "100000",
           "compare_at_price": "120000",
           "options": [
-            "Hình dạng",
-            "Dung tích",
-            "Chất liệu"
+            "Hình trụ",
+            "480ml",
+            "Thép không gỉ 316 + nhựa PP"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp018-1.jpg"
         },
@@ -916,16 +1295,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp019-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp019-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Hình trụ"
+          ]
+        },
+        {
+          "name": "Dung tích",
+          "values": [
+            "2L"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Nhựa"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP019-1",
           "price": "120000",
           "compare_at_price": "160000",
           "options": [
-            "Hình dạng",
-            "Dung tích",
-            "Chất liệu"
+            "Hình trụ",
+            "2L",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp019-1.jpg"
         }
@@ -945,16 +1343,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp020-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp020-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Hình trụ"
+          ]
+        },
+        {
+          "name": "Dung tích",
+          "values": [
+            "1,4L"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Nhựa"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP020-1",
           "price": "239000",
           "compare_at_price": "260000",
           "options": [
-            "Hình dạng",
-            "Dung tích",
-            "Chất liệu"
+            "Hình trụ",
+            "1,4L",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp020-1.jpg"
         },
@@ -987,16 +1404,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp021-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp021-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Hình trụ"
+          ]
+        },
+        {
+          "name": "Dung tích",
+          "values": [
+            "500ml"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Inox"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP021-1",
           "price": "99000",
           "compare_at_price": "150000",
           "options": [
-            "Hình dạng",
-            "Dung tích",
-            "Chất liệu"
+            "Hình trụ",
+            "500ml",
+            "Inox"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp021-1.jpg"
         },
@@ -1023,16 +1459,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp022-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp022-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Hình chữ nhật"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "32* 12*26"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Da pu"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP022-1",
           "price": "70000",
           "compare_at_price": "90000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Hình chữ nhật",
+            "32* 12*26",
+            "Da pu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp022-1.jpg"
         },
@@ -1066,16 +1521,37 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp023-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp023-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Đen",
+            "Trắng",
+            "Hồng"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "32* 12*26"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Da pu"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP023-1",
           "price": "67000",
           "compare_at_price": "85000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Đen",
+            "32* 12*26",
+            "Da pu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp023-1.jpg"
         },
@@ -1084,9 +1560,9 @@ window.GRADIE_DATA = {
           "price": "67000",
           "compare_at_price": "85000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Trắng",
+            "32* 12*26",
+            "Da pu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp023-2.jpg"
         },
@@ -1095,9 +1571,9 @@ window.GRADIE_DATA = {
           "price": "67000",
           "compare_at_price": "85000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Hồng",
+            "32* 12*26",
+            "Da pu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp023-3.jpg"
         }
@@ -1116,16 +1592,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp024-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp024-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Hình chữ nhật"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "15* 12*26"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Da pu"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP024-1",
           "price": "70000",
           "compare_at_price": "95000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Hình chữ nhật",
+            "15* 12*26",
+            "Da pu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp024-1.jpg"
         },
@@ -1151,16 +1646,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp025-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp025-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Hình chữ nhật"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "15* 12*26"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Da pu"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP025-1",
           "price": "70000",
           "compare_at_price": "100000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Hình chữ nhật",
+            "15* 12*26",
+            "Da pu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp025-1.jpg"
         },
@@ -1186,16 +1700,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp026-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp026-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Trắng",
+            "Đen"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "15* 12*26"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Canvas"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP026-1",
           "price": "65000",
           "compare_at_price": "85000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Trắng",
+            "15* 12*26",
+            "Canvas"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp026-1.jpg"
         },
@@ -1204,9 +1738,9 @@ window.GRADIE_DATA = {
           "price": "65000",
           "compare_at_price": "85000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Đen",
+            "15* 12*26",
+            "Canvas"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp026-2.jpg"
         }
@@ -1225,16 +1759,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp027-1.jpg",
         "`https://cdn.hstatic.net/files/200001178391/file/sp027-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Nâu",
+            "Đen"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "20*20*25"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Da pu"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP027-1",
           "price": "85000",
           "compare_at_price": "105000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Nâu",
+            "20*20*25",
+            "Da pu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp027-1.jpg"
         },
@@ -1243,9 +1797,9 @@ window.GRADIE_DATA = {
           "price": "85000",
           "compare_at_price": "105000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Đen",
+            "20*20*25",
+            "Da pu"
           ],
           "image": "`https://cdn.hstatic.net/files/200001178391/file/sp027-2.jpg"
         }
@@ -1264,16 +1818,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp028-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp028-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Trắng",
+            "Đen"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "15*15*30"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Vải dạ"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP028-1",
           "price": "73000",
           "compare_at_price": "120000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Trắng",
+            "15*15*30",
+            "Vải dạ"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp028-1.jpg"
         },
@@ -1282,9 +1856,9 @@ window.GRADIE_DATA = {
           "price": "73000",
           "compare_at_price": "120000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Đen",
+            "15*15*30",
+            "Vải dạ"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp028-2.jpg"
         }
@@ -1304,16 +1878,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp029-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp029-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Hình chữ nhật"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "15*15*30"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Da nhung"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP029-1",
           "price": "71000",
           "compare_at_price": "90000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Hình chữ nhật",
+            "15*15*30",
+            "Da nhung"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp029-1.jpg"
         },
@@ -1347,16 +1940,37 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp030_2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp030_3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Xanh đen",
+            "Vàng cam",
+            "Da trời"
+          ]
+        },
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Hình tròn"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Đồng"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP030-1",
           "price": "69000",
           "compare_at_price": "79000",
           "options": [
-            "Màu sắc",
-            "Hình dạng",
-            "Chất liệu"
+            "Xanh đen",
+            "Hình tròn",
+            "Đồng"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_1.jpg"
         },
@@ -1365,9 +1979,9 @@ window.GRADIE_DATA = {
           "price": "69000",
           "compare_at_price": "79000",
           "options": [
-            "Màu sắc",
-            "Hình dạng",
-            "Chất liệu"
+            "Vàng cam",
+            "Hình tròn",
+            "Đồng"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_2.jpg"
         },
@@ -1376,9 +1990,9 @@ window.GRADIE_DATA = {
           "price": "69000",
           "compare_at_price": "79000",
           "options": [
-            "Màu sắc",
-            "Hình dạng",
-            "Chất liệu"
+            "Da trời",
+            "Hình tròn",
+            "Đồng"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_3.jpg"
         }
@@ -1399,16 +2013,39 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp031_3.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp031_4.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Vàng",
+            "Hồng",
+            "Xanh"
+          ]
+        },
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Hướng dương, nam",
+            "Hướng dương, nữ",
+            "Tulip Gấu"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Nhựa"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP031-1",
           "price": "159000",
           "compare_at_price": "165000",
           "options": [
-            "Màu sắc",
-            "Hình dạng",
-            "Chất liệu"
+            "Vàng",
+            "Hướng dương, nam",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_1.jpg"
         },
@@ -1417,9 +2054,9 @@ window.GRADIE_DATA = {
           "price": "159000",
           "compare_at_price": "165000",
           "options": [
-            "Màu sắc",
-            "Hình dạng",
-            "Chất liệu"
+            "Vàng",
+            "Hướng dương, nữ",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_2.jpg"
         },
@@ -1428,9 +2065,9 @@ window.GRADIE_DATA = {
           "price": "159000",
           "compare_at_price": "165000",
           "options": [
-            "Màu sắc",
-            "Hình dạng",
-            "Chất liệu"
+            "Hồng",
+            "Tulip Gấu",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_3.jpg"
         },
@@ -1439,9 +2076,9 @@ window.GRADIE_DATA = {
           "price": "159000",
           "compare_at_price": "165000",
           "options": [
-            "Màu sắc",
-            "Hình dạng",
-            "Chất liệu"
+            "Xanh",
+            "Tulip Gấu",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_4.jpg"
         }
@@ -1462,16 +2099,38 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp032_3.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp032_4.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Hồng",
+            "Xanh",
+            "Tím",
+            "Nhiều màu"
+          ]
+        },
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Vuông"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Nhựa"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP032-1",
           "price": "49000",
           "compare_at_price": "59000",
           "options": [
-            "Màu sắc",
-            "Hình dạng",
-            "Chất liệu"
+            "Hồng",
+            "Vuông",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_1.jpg"
         },
@@ -1480,9 +2139,9 @@ window.GRADIE_DATA = {
           "price": "49000",
           "compare_at_price": "59000",
           "options": [
-            "Màu sắc",
-            "Hình dạng",
-            "Chất liệu"
+            "Xanh",
+            "Vuông",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_2.jpg"
         },
@@ -1491,9 +2150,9 @@ window.GRADIE_DATA = {
           "price": "49000",
           "compare_at_price": "59000",
           "options": [
-            "Màu sắc",
-            "Hình dạng",
-            "Chất liệu"
+            "Tím",
+            "Vuông",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_3.jpg"
         },
@@ -1502,9 +2161,9 @@ window.GRADIE_DATA = {
           "price": "49000",
           "compare_at_price": "59000",
           "options": [
-            "Màu sắc",
-            "Hình dạng",
-            "Chất liệu"
+            "Nhiều màu",
+            "Vuông",
+            "Nhựa"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_4.jpg"
         }
@@ -1524,16 +2183,37 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp033_2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp033_3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Thỏ",
+            "Vịt",
+            "Rồng"
+          ]
+        },
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Trằng, vàng"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Silicon"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP033-1",
           "price": "109000",
           "compare_at_price": "119000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Chất liệu"
+            "Thỏ",
+            "Trằng, vàng",
+            "Silicon"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_1.jpg"
         },
@@ -1542,9 +2222,9 @@ window.GRADIE_DATA = {
           "price": "109000",
           "compare_at_price": "119000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Chất liệu"
+            "Vịt",
+            "Trằng, vàng",
+            "Silicon"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_2.jpg"
         },
@@ -1553,9 +2233,9 @@ window.GRADIE_DATA = {
           "price": "109000",
           "compare_at_price": "119000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Chất liệu"
+            "Rồng",
+            "Trằng, vàng",
+            "Silicon"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_3.jpg"
         }
@@ -1575,16 +2255,39 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp034_2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp034_3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Bướm",
+            "Hoa hồng",
+            "Hoa Tulip"
+          ]
+        },
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Xanh",
+            "Đỏ",
+            "Hồng"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Giấy, Hoa lụa, Ngọc trai"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP034-1",
           "price": "189000",
           "compare_at_price": "199000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Chất liệu"
+            "Bướm",
+            "Xanh",
+            "Giấy, Hoa lụa, Ngọc trai"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_1.jpg"
         },
@@ -1593,9 +2296,9 @@ window.GRADIE_DATA = {
           "price": "189000",
           "compare_at_price": "199000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Chất liệu"
+            "Hoa hồng",
+            "Đỏ",
+            "Giấy, Hoa lụa, Ngọc trai"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_2.jpg"
         },
@@ -1604,9 +2307,9 @@ window.GRADIE_DATA = {
           "price": "189000",
           "compare_at_price": "199000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Chất liệu"
+            "Hoa Tulip",
+            "Hồng",
+            "Giấy, Hoa lụa, Ngọc trai"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_3.jpg"
         }
@@ -1625,16 +2328,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp035_2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Bộ áo mũ",
+            "Bộ áo mũ, nơ"
+          ]
+        },
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Xanh, trắng"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Cotton"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP035-1",
           "price": "339000",
           "compare_at_price": "349000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Chất liệu"
+            "Bộ áo mũ",
+            "Xanh, trắng",
+            "Cotton"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg"
         },
@@ -1643,9 +2366,9 @@ window.GRADIE_DATA = {
           "price": "369000",
           "compare_at_price": "379000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Chất liệu"
+            "Bộ áo mũ, nơ",
+            "Xanh, trắng",
+            "Cotton"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_2.jpg"
         }
@@ -1665,16 +2388,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp036_2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp036_3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Sash tên"
+          ]
+        },
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Trắng"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "170x120cm"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP036-1",
           "price": "149000",
           "compare_at_price": "159000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Kích thước"
+            "Sash tên",
+            "Trắng",
+            "170x120cm"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp036_1.jpg"
         }
@@ -1694,16 +2436,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp037-2_872c336fd1124b549532c0e40352da87.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp037-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Cánh cụt"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Chất nhung, lông xù"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "24-25cm"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP037-1",
           "price": "129000",
           "compare_at_price": "139000",
           "options": [
-            "Hình dạng",
-            "Chất liệu",
-            "Kích thước"
+            "Cánh cụt",
+            "Chất nhung, lông xù",
+            "24-25cm"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp037-1_89a66e29e1b74c988e6075b6f4562b2c.jpg"
         }
@@ -1723,16 +2484,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp038-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp038-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Mũ tốt nghiệp"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "thi và bìa cứng"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "24-25cm"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP038-1",
           "price": "149000",
           "compare_at_price": "169000",
           "options": [
-            "Hình dạng",
-            "Chất liệu",
-            "Kích thước"
+            "Mũ tốt nghiệp",
+            "thi và bìa cứng",
+            "24-25cm"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp038-1.jpg"
         }
@@ -1752,16 +2532,37 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp039-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp039-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Đỏ",
+            "Xanh",
+            "Tím"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Giấy"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "9x6x6 cm"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP039-1",
           "price": "79000",
           "compare_at_price": "89000",
           "options": [
-            "Màu sắc",
-            "Chất liệu",
-            "Kích thước"
+            "Đỏ",
+            "Giấy",
+            "9x6x6 cm"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp039-1.jpg"
         },
@@ -1770,9 +2571,9 @@ window.GRADIE_DATA = {
           "price": "79000",
           "compare_at_price": "89000",
           "options": [
-            "Màu sắc",
-            "Chất liệu",
-            "Kích thước"
+            "Xanh",
+            "Giấy",
+            "9x6x6 cm"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp039-2.jpg"
         },
@@ -1781,9 +2582,9 @@ window.GRADIE_DATA = {
           "price": "79000",
           "compare_at_price": "89000",
           "options": [
-            "Màu sắc",
-            "Chất liệu",
-            "Kích thước"
+            "Tím",
+            "Giấy",
+            "9x6x6 cm"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp039-3.jpg"
         }
@@ -1803,16 +2604,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp040-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp040-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Tự do, phụ thuộc ảnh gửi"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "15-20cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Mica"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP040-1",
           "price": "259000",
           "compare_at_price": "279000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Tự do, phụ thuộc ảnh gửi",
+            "15-20cm",
+            "Mica"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp040-1.jpg"
         }
@@ -1832,16 +2652,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp041-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp041-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Hình chữ nhật"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "21x29.7cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Kính trong suốt"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP041-1",
           "price": "259000",
           "compare_at_price": "279000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Hình chữ nhật",
+            "21x29.7cm",
+            "Kính trong suốt"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp041-1.jpg"
         }
@@ -1861,16 +2700,37 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp042-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp042-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Lá",
+            "Trái tim",
+            "Xéo"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "19cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Thủy tinh"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP042-1",
           "price": "299000",
           "compare_at_price": "339000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Lá",
+            "19cm",
+            "Thủy tinh"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp042-1.jpg"
         },
@@ -1879,9 +2739,9 @@ window.GRADIE_DATA = {
           "price": "299000",
           "compare_at_price": "339000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Trái tim",
+            "19cm",
+            "Thủy tinh"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp042-2.jpg"
         },
@@ -1890,9 +2750,9 @@ window.GRADIE_DATA = {
           "price": "299000",
           "compare_at_price": "339000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Xéo",
+            "19cm",
+            "Thủy tinh"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp042-3.jpg"
         }
@@ -1911,16 +2771,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp043-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp043-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Tròn - Nam",
+            "Tròn -"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "8,5cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Mica"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP043-1",
           "price": "89000",
           "compare_at_price": "99000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Tròn - Nam",
+            "8,5cm",
+            "Mica"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp043-2.jpg"
         },
@@ -1929,9 +2809,9 @@ window.GRADIE_DATA = {
           "price": "89000",
           "compare_at_price": "99000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Tròn -",
+            "8,5cm",
+            "Mica"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp043-3.jpg"
         }
@@ -1950,16 +2830,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp044-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp044-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Hồng",
+            "Xanh"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "80cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Bánh kẹo,sữa, gấu bông"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP044-1",
           "price": "189000",
           "compare_at_price": "199000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Hồng",
+            "80cm",
+            "Bánh kẹo,sữa, gấu bông"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp044-1.jpg"
         },
@@ -1968,9 +2868,9 @@ window.GRADIE_DATA = {
           "price": "189000",
           "compare_at_price": "199000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Xanh",
+            "80cm",
+            "Bánh kẹo,sữa, gấu bông"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp044-2.jpg"
         }
@@ -1990,16 +2890,37 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp045-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp045-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Gấu",
+            "Nam",
+            "Nữ"
+          ]
+        },
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Trằng, vàng"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Thủy tinh"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP045-1",
           "price": "89000",
           "compare_at_price": "99000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Chất liệu"
+            "Gấu",
+            "Trằng, vàng",
+            "Thủy tinh"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp045-1.jpg"
         },
@@ -2008,9 +2929,9 @@ window.GRADIE_DATA = {
           "price": "89000",
           "compare_at_price": "99000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Chất liệu"
+            "Nam",
+            "Trằng, vàng",
+            "Thủy tinh"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp045-2.jpg"
         },
@@ -2019,9 +2940,9 @@ window.GRADIE_DATA = {
           "price": "89000",
           "compare_at_price": "99000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Chất liệu"
+            "Nữ",
+            "Trằng, vàng",
+            "Thủy tinh"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp045-3.jpg"
         }
@@ -2041,16 +2962,37 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp046-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp046-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Cẩm Tú Cầu"
+          ]
+        },
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Vàng hồng đào",
+            "Đỏ trắng ánh kim",
+            "Tím ánh"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Thủy tinh"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP046-1",
           "price": "269000",
           "compare_at_price": "299000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Chất liệu"
+            "Cẩm Tú Cầu",
+            "Vàng hồng đào",
+            "Thủy tinh"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp046-1.jpg"
         },
@@ -2059,9 +3001,9 @@ window.GRADIE_DATA = {
           "price": "269000",
           "compare_at_price": "299000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Chất liệu"
+            "Cẩm Tú Cầu",
+            "Đỏ trắng ánh kim",
+            "Thủy tinh"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp046-2.jpg"
         },
@@ -2070,9 +3012,9 @@ window.GRADIE_DATA = {
           "price": "269000",
           "compare_at_price": "299000",
           "options": [
-            "Hình dạng",
-            "Màu sắc",
-            "Chất liệu"
+            "Cẩm Tú Cầu",
+            "Tím ánh",
+            "Thủy tinh"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp046-3.jpg"
         }
@@ -2091,16 +3033,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp047-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp047-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Hồng",
+            "Vàng"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "29,7 x 42 cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Giấy cứng"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP047-1",
           "price": "69000",
           "compare_at_price": "79000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Hồng",
+            "29,7 x 42 cm",
+            "Giấy cứng"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp047-1.jpg"
         },
@@ -2109,9 +3071,9 @@ window.GRADIE_DATA = {
           "price": "69000",
           "compare_at_price": "79000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Vàng",
+            "29,7 x 42 cm",
+            "Giấy cứng"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp047-3.jpg"
         }
@@ -2130,16 +3092,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp048-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp048-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Gấu"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "29,7 x 42 cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Sen đá",
+            "Lá may mắn"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP048-1",
           "price": "79000",
           "compare_at_price": "89000",
           "options": [
-            "Hình dạng",
-            "Kích thước",
-            "Chất liệu"
+            "Gấu",
+            "29,7 x 42 cm",
+            "Sen đá"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp048-1.jpg"
         },
@@ -2148,9 +3130,9 @@ window.GRADIE_DATA = {
           "price": "79000",
           "compare_at_price": "89000",
           "options": [
-            "Hình dạng",
-            "Kích thước",
-            "Chất liệu"
+            "Gấu",
+            "29,7 x 42 cm",
+            "Lá may mắn"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp048-2.jpg"
         }
@@ -2169,16 +3151,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp049-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp049-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Nam",
+            "Nữ"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "8cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Xương rồng"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP049-1",
           "price": "159000",
           "compare_at_price": "169000",
           "options": [
-            "Hình dạng",
-            "Kích thước",
-            "Chất liệu"
+            "Nam",
+            "8cm",
+            "Xương rồng"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp049-1.jpg"
         },
@@ -2187,9 +3189,9 @@ window.GRADIE_DATA = {
           "price": "159000",
           "compare_at_price": "169000",
           "options": [
-            "Hình dạng",
-            "Kích thước",
-            "Chất liệu"
+            "Nữ",
+            "8cm",
+            "Xương rồng"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp049-2.jpg"
         }
@@ -2208,16 +3210,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp050-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp050-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dáng",
+          "values": [
+            "Hình chữ nhật"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "12*15*30"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Da én"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP050-1",
           "price": "69000",
           "compare_at_price": "90000",
           "options": [
-            "Hình dáng",
-            "Kích thước",
-            "Chất liệu"
+            "Hình chữ nhật",
+            "12*15*30",
+            "Da én"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp050-1.jpg"
         },
@@ -2243,16 +3264,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp051-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp051-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Xám",
+            "Đen"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "11x8cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Canvas"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP051-1",
           "price": "60000",
           "compare_at_price": "90000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Xám",
+            "11x8cm",
+            "Canvas"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp051-1.jpg"
         },
@@ -2261,9 +3302,9 @@ window.GRADIE_DATA = {
           "price": "60000",
           "compare_at_price": "90000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Đen",
+            "11x8cm",
+            "Canvas"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp051-2.jpg"
         }
@@ -2282,16 +3323,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp052-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp052-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Navy",
+            "Xanh dương"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "11x8cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Canvas"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP052-1",
           "price": "80000",
           "compare_at_price": "100000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Navy",
+            "11x8cm",
+            "Canvas"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp052-1.jpg"
         },
@@ -2300,9 +3361,9 @@ window.GRADIE_DATA = {
           "price": "80000",
           "compare_at_price": "100000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Xanh dương",
+            "11x8cm",
+            "Canvas"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp052-2.jpg"
         }
@@ -2321,16 +3382,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp053-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp053-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Navy",
+            "Nâu"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "11x8cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Canvas"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP053-1",
           "price": "85000",
           "compare_at_price": "106000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Navy",
+            "11x8cm",
+            "Canvas"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp053-1.jpg"
         },
@@ -2339,9 +3420,9 @@ window.GRADIE_DATA = {
           "price": "85000",
           "compare_at_price": "106000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Nâu",
+            "11x8cm",
+            "Canvas"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp053-2.jpg"
         }
@@ -2362,16 +3443,38 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp054-3.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp054-4.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Kaki",
+            "Đen",
+            "Hồng",
+            "Xanh lá"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "11x8cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Da pu"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP054-1",
           "price": "45000",
           "compare_at_price": "60000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Kaki",
+            "11x8cm",
+            "Da pu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp054-1.jpg"
         },
@@ -2380,9 +3483,9 @@ window.GRADIE_DATA = {
           "price": "45000",
           "compare_at_price": "60000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Đen",
+            "11x8cm",
+            "Da pu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp054-2.jpg"
         },
@@ -2391,9 +3494,9 @@ window.GRADIE_DATA = {
           "price": "45000",
           "compare_at_price": "60000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Hồng",
+            "11x8cm",
+            "Da pu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp054-3.jpg"
         },
@@ -2402,9 +3505,9 @@ window.GRADIE_DATA = {
           "price": "45000",
           "compare_at_price": "60000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Xanh lá",
+            "11x8cm",
+            "Da pu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp054-4.jpg"
         }
@@ -2424,16 +3527,37 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp055-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp055-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Xanh",
+            "Hồng",
+            "Đen"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "11x8cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Da pu"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP055-1",
           "price": "45000",
           "compare_at_price": "70000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Xanh",
+            "11x8cm",
+            "Da pu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp055-1.jpg"
         },
@@ -2442,9 +3566,9 @@ window.GRADIE_DATA = {
           "price": "45000",
           "compare_at_price": "70000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Hồng",
+            "11x8cm",
+            "Da pu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp055-2.jpg"
         },
@@ -2453,9 +3577,9 @@ window.GRADIE_DATA = {
           "price": "45000",
           "compare_at_price": "70000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Đen",
+            "11x8cm",
+            "Da pu"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp055-3.jpg"
         }
@@ -2475,16 +3599,37 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp056-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp056-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hương",
+          "values": [
+            "Cam quýt",
+            "Hoa cỏ",
+            "Trái cây"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "7x7x9cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Sáp"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP056-1",
           "price": "119000",
           "compare_at_price": "150000",
           "options": [
-            "Hương",
-            "Kích thước",
-            "Chất liệu"
+            "Cam quýt",
+            "7x7x9cm",
+            "Sáp"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp056-1.jpg"
         },
@@ -2493,9 +3638,9 @@ window.GRADIE_DATA = {
           "price": "119000",
           "compare_at_price": "150000",
           "options": [
-            "Hương",
-            "Kích thước",
-            "Chất liệu"
+            "Hoa cỏ",
+            "7x7x9cm",
+            "Sáp"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp056-2.jpg"
         },
@@ -2504,9 +3649,9 @@ window.GRADIE_DATA = {
           "price": "119000",
           "compare_at_price": "150000",
           "options": [
-            "Hương",
-            "Kích thước",
-            "Chất liệu"
+            "Trái cây",
+            "7x7x9cm",
+            "Sáp"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp056-3.jpg"
         }
@@ -2526,16 +3671,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp057-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp057-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Vỏ sò"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "7x7x9cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Sáp"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP057-1",
           "price": "80000",
           "compare_at_price": "120000",
           "options": [
-            "Hình dạng",
-            "Kích thước",
-            "Chất liệu"
+            "Vỏ sò",
+            "7x7x9cm",
+            "Sáp"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp057-1.jpg"
         },
@@ -2568,16 +3732,35 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp058-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp508-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Hộp"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "10x7x9cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Sáp"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP058-1",
           "price": "25000",
           "compare_at_price": "50000",
           "options": [
-            "Hình dạng",
-            "Kích thước",
-            "Chất liệu"
+            "Hộp",
+            "10x7x9cm",
+            "Sáp"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp058-1.jpg"
         },
@@ -2604,16 +3787,37 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp059-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp059-3.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Hồng",
+            "Đen",
+            "Trắng"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "39x28cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Vải"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP059-1",
           "price": "138000",
           "compare_at_price": "160000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Hồng",
+            "39x28cm",
+            "Vải"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp059-1.jpg"
         },
@@ -2622,9 +3826,9 @@ window.GRADIE_DATA = {
           "price": "138000",
           "compare_at_price": "160000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Đen",
+            "39x28cm",
+            "Vải"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp059-2.jpg"
         },
@@ -2633,9 +3837,9 @@ window.GRADIE_DATA = {
           "price": "138000",
           "compare_at_price": "160000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Trắng",
+            "39x28cm",
+            "Vải"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp059-3.jpg"
         }
@@ -2654,16 +3858,36 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp060-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp060-2.jpg"
       ],
-      "options": [],
+      "options": [
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Xanh biển",
+            "Hồng"
+          ]
+        },
+        {
+          "name": "Kích thước",
+          "values": [
+            "39x28cm"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Canvas"
+          ]
+        }
+      ],
       "variants": [
         {
           "sku": "SP060-1",
           "price": "140000",
           "compare_at_price": "170000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Xanh biển",
+            "39x28cm",
+            "Canvas"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp060-1.jpg"
         },
@@ -2672,9 +3896,9 @@ window.GRADIE_DATA = {
           "price": "140000",
           "compare_at_price": "170000",
           "options": [
-            "Màu sắc",
-            "Kích thước",
-            "Chất liệu"
+            "Hồng",
+            "39x28cm",
+            "Canvas"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp060-2.jpg"
         }
