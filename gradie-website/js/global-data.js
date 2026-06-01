@@ -14,59 +14,59 @@ window.GRADIE_DATA = {
   },
   "categories": [
     {
-      "id": "graduation-gifts",
-      "name": "Graduation Gifts",
-      "slug": "graduation-gifts"
-    },
-    {
-      "id": "scrapbook",
-      "name": "Scrapbook",
-      "slug": "scrapbook"
-    },
-    {
-      "id": "đồ-tốt-nghiệp",
-      "name": "Đồ tốt nghiệp",
-      "slug": "đồ-tốt-nghiệp"
-    },
-    {
-      "id": "gấu-bông",
+      "id": "gau-bong",
       "name": "Gấu Bông",
-      "slug": "gấu-bông"
+      "slug": "gau-bong"
     },
     {
-      "id": "khung-ảnh",
-      "name": "Khung ảnh",
-      "slug": "khung-ảnh"
+      "id": "hoa-mung",
+      "name": "Hoa Mừng",
+      "slug": "hoa-mung"
     },
     {
-      "id": "đèn-ngủ",
-      "name": "Đèn Ngủ",
-      "slug": "đèn-ngủ"
-    },
-    {
-      "id": "gấu-bông",
-      "name": "Gấu bông",
-      "slug": "gấu-bông"
-    },
-    {
-      "id": "kẹo",
+      "id": "keo",
       "name": "Kẹo",
-      "slug": "kẹo"
+      "slug": "keo"
     },
     {
-      "id": "huy-chương",
+      "id": "khung-anh",
+      "name": "Khung Ảnh",
+      "slug": "khung-anh"
+    },
+    {
+      "id": "so",
+      "name": "Sổ",
+      "slug": "so"
+    },
+    {
+      "id": "binh-nuoc",
+      "name": "Bình Nước",
+      "slug": "binh-nuoc"
+    },
+    {
+      "id": "tui",
+      "name": "Túi",
+      "slug": "tui"
+    },
+    {
+      "id": "huy-chuong",
       "name": "Huy Chương",
-      "slug": "huy-chương"
+      "slug": "huy-chuong"
     },
     {
-      "id": "sổ-kế-hoạch",
-      "name": "Sổ kế hoạch",
-      "slug": "sổ-kế-hoạch"
+      "id": "den-ngu",
+      "name": "Đèn Ngủ",
+      "slug": "den-ngu"
     },
     {
-      "id": "hoa-mừng",
-      "name": "Hoa mừng",
-      "slug": "hoa-mừng"
+      "id": "do-tot-nghiep",
+      "name": "Đồ Tốt Nghiệp",
+      "slug": "do-tot-nghiep"
+    },
+    {
+      "id": "chau-cay",
+      "name": "Chậu Cây",
+      "slug": "chau-cay"
     }
   ],
   "products": [
@@ -1790,6 +1790,53 @@ window.GRADIE_DATA = {
             "Bướm",
             "Xanh",
             "Giấy, Hoa lụa, Ngọc trai"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ao_cu_nhan",
+      "name": "Đồ tốt nghiệp",
+      "description": "Bộ lễ phục cử nhân quốc tế màu đen trang trọng, phù hợp cho lễ tốt nghiệp đại học, thạc sĩ hay giảng viên. Sản phẩm gồm áo cử nhân và mũ tốt nghiệp, mang thiết kế chuẩn mực, giúp lưu giữ khoảnh khắc quan trọng trong hành trình học tập. Với chất liệu bền đẹp và kiểu dáng truyền thống, bộ lễ phục không chỉ thể hiện sự tự hào mà còn tạo nên hình ảnh chuyên nghiệp, trang nghiêm trong ngày trọng đại.",
+      "category": "Đồ tốt nghiệp",
+      "price": "339000",
+      "compare_at_price": "349000",
+      "sku": "SP035-1",
+      "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg",
+      "gallery": [
+        "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg"
+      ],
+      "options": [
+        {
+          "name": "Hình dạng",
+          "values": [
+            "Bộ áo mũ"
+          ]
+        },
+        {
+          "name": "Màu sắc",
+          "values": [
+            "Xanh, trắng"
+          ]
+        },
+        {
+          "name": "Chất liệu",
+          "values": [
+            "Cotton"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "ao_cu_nhan_SP035-1",
+          "sku": "SP035-1",
+          "price": "339000",
+          "compare_at_price": "349000",
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg",
+          "options": [
+            "Bộ áo mũ",
+            "Xanh, trắng",
+            "Cotton"
           ]
         }
       ]
