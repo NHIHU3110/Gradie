@@ -364,12 +364,12 @@ window._pickSwatch = function(btn, hiddenId, swatchClass) {
 
 // Expose safe cart add
 window.addToCart = function(id, isDetailView = false) {
-    const products = window.GradieStore ? window.GradieStore.getProducts() : window.GRADIE_DATA.products;
+    const products = window.GradieStore ? window.GradieStore.getProducts() : (window.GRADIE_DATA?.products || []);
     const p = products.find(x => x.id === id);
     if (!p) return;
     
     let selectedVariant = null;
-    let price = p.price;
+    let price = Number(p.price) || 0;
 
     if (p.variants && p.variants.length > 0) {
         if (isDetailView) {
@@ -379,8 +379,22 @@ window.addToCart = function(id, isDetailView = false) {
                 return;
             }
             selectedVariant = variantInput.value;
-            const vObj = p.variants.find(v => (v.name || v.color) === selectedVariant);
-            if (vObj && vObj.price) price = vObj.price;
+            const vObj = p.variants.find(v => {
+                let label = "Mặc định";
+                if (v.options && v.options.length) {
+                    label = v.options.map((val, idx) => {
+                        if (val) {
+                            const optName = (p.options && p.options[idx] && p.options[idx].name) ? p.options[idx].name : "";
+                            return optName ? `${optName}: ${val}` : val;
+                        }
+                        return null;
+                    }).filter(Boolean).join(' | ');
+                } else {
+                    label = v.name || v.color || v.title || v.sku || "Mặc định";
+                }
+                return label === selectedVariant;
+            });
+            if (vObj && vObj.price) price = Number(vObj.price) || price;
         } else {
             // Added from grid, force redirect to detail page and pass selection message
             window.location.href = `product-detail.html?id=${p.id}&msg=select-options`;
