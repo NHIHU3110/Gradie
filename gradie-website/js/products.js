@@ -364,9 +364,14 @@ window._pickSwatch = function(btn, hiddenId, swatchClass) {
 
 // Expose safe cart add
 window.addToCart = function(id, isDetailView = false) {
+    // Debounce: prevent multiple rapid clicks
+    if (window._addToCartLock) return;
+    window._addToCartLock = true;
+    setTimeout(() => { window._addToCartLock = false; }, 1500);
+
     const products = window.GradieStore ? window.GradieStore.getProducts() : (window.GRADIE_DATA?.products || []);
     const p = products.find(x => x.id === id);
-    if (!p) return;
+    if (!p) { window._addToCartLock = false; return; }
     
     let selectedVariant = null;
     let price = Number(p.price) || 0;
@@ -376,6 +381,7 @@ window.addToCart = function(id, isDetailView = false) {
             const variantInput = document.getElementById('selected-variant');
             if (!variantInput || !variantInput.value) {
                 showToast('Vui lòng chọn tùy chọn sản phẩm trước khi thêm vào giỏ!', 'warning');
+                window._addToCartLock = false;
                 return;
             }
             selectedVariant = variantInput.value;
@@ -396,7 +402,7 @@ window.addToCart = function(id, isDetailView = false) {
             });
             if (vObj && vObj.price) price = Number(vObj.price) || price;
         } else {
-            // Added from grid, force redirect to detail page and pass selection message
+            // Added from grid, force redirect to detail page
             window.location.href = `product-detail.html?id=${p.id}&msg=select-options`;
             return;
         }
@@ -442,7 +448,6 @@ window.addToCart = function(id, isDetailView = false) {
     // Check if same product, variant, AND customization exists
     let exists = cart.find(function(x) {
         if (x.id !== id || x.variant !== selectedVariant) return false;
-        // If customization differs, treat as new entry
         return JSON.stringify(x.customization || null) === JSON.stringify(customization);
     });
     
@@ -466,7 +471,14 @@ window.addToCart = function(id, isDetailView = false) {
     localStorage.setItem('gradie_cart', JSON.stringify(cart));
     if(window.updateCartCount) window.updateCartCount();
     
-    // Show success toast
+    // Visual feedback on badge
+    const badge = document.getElementById('cart-count');
+    if (badge) {
+        badge.style.transform = 'scale(1.5)';
+        setTimeout(() => { badge.style.transform = 'scale(1)'; }, 300);
+    }
+
+    // Show success toast (only once)
     if (typeof showToast === 'function') {
       showToast('Đã thêm sản phẩm vào giỏ hàng thành công! 🛒', 'success');
     }

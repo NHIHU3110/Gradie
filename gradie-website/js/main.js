@@ -173,51 +173,9 @@ window.updateCartCount = function() {
   if (badge) badge.textContent = count;
 };
 
-// Add to Cart helper supporting both storage keys
-window.addToCart = function(productId, qty = 1, variant = '') {
-  if (!window.GradieStore) return;
-  const product = window.GradieStore.getProductById(productId);
-  if (!product) return;
-  
-  let cart = JSON.parse(localStorage.getItem('GRADIE_CART')) || JSON.parse(localStorage.getItem('gradie_cart')) || [];
-  let actualPrice = product.price;
-  if (variant && product.variants) {
-    let v = product.variants.find(x => x.name === variant);
-    if (v && v.price) actualPrice = v.price;
-  }
-  
-  let cartItemId = product.id + (variant ? '-' + variant : '');
-  let existingItem = cart.find(i => i.cartItemId === cartItemId);
-  
-  if (existingItem) {
-    existingItem.quantity = (existingItem.quantity || existingItem.qty || 0) + parseInt(qty);
-  } else {
-    cart.push({
-      cartItemId: cartItemId,
-      id: product.id,
-      name: product.name + (variant ? ` (${variant})` : ''),
-      price: actualPrice,
-      image: product.image || (product.gallery && product.gallery[0]) || '',
-      quantity: parseInt(qty)
-    });
-  }
-  
-  localStorage.setItem('GRADIE_CART', JSON.stringify(cart));
-  localStorage.setItem('gradie_cart', JSON.stringify(cart));
-  window.updateCartCount();
-  
-  // Visual Feedback
-  const badge = document.getElementById('cart-count');
-  if (badge) {
-    badge.style.transform = 'scale(1.5)';
-    badge.style.backgroundColor = 'var(--champagne)';
-    setTimeout(() => {
-      badge.style.transform = 'scale(1)';
-      badge.style.backgroundColor = 'var(--text-color)';
-    }, 300);
-  }
-  showToast(product.name + " đã được thêm vào giỏ hàng! 🛒", 'success');
-};
+// Note: window.addToCart is defined in products.js with full variant + customization support.
+// Do NOT redefine addToCart here.
+
 
 // Favorites persistence
 window.toggleFavorite = function(productId, btn) {
