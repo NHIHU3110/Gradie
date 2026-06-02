@@ -59,7 +59,18 @@ document.addEventListener('DOMContentLoaded', () => {
             <select style="font-size:0.8rem; padding:4px 8px; margin-top:8px; border:1px solid var(--border-gold); border-radius:6px; outline:none; background:#faf8f5; font-family:inherit; color:var(--ink); cursor:pointer;" onchange="updateVariant(${index}, this.value)">
           `;
           p.variants.forEach(v => {
-            const vLabel = v.name || v.color;
+            let vLabel = "Mặc định";
+            if (v.options && v.options.length) {
+              vLabel = v.options.map((val, idx) => {
+                if (val) {
+                  const optName = (p.options && p.options[idx] && p.options[idx].name) ? p.options[idx].name : "";
+                  return optName ? `${optName}: ${val}` : val;
+                }
+                return null;
+              }).filter(Boolean).join(' | ');
+            } else {
+              vLabel = v.name || v.color || v.title || v.sku || "Mặc định";
+            }
             variantHtml += `<option value="${vLabel}" ${item.variant === vLabel ? 'selected' : ''}>${vLabel}</option>`;
           });
           variantHtml += `</select><br>`;
@@ -137,7 +148,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const products = window.GradieStore ? window.GradieStore.getProducts() : [];
     let p = products.find(x => x.id === cart[index].id);
     if (p && p.variants) {
-      const vObj = p.variants.find(v => (v.name || v.color) === newVariantName);
+      const vObj = p.variants.find(v => {
+        let label = "Mặc định";
+        if (v.options && v.options.length) {
+          label = v.options.map((val, idx) => {
+            if (val) {
+              const optName = (p.options && p.options[idx] && p.options[idx].name) ? p.options[idx].name : "";
+              return optName ? `${optName}: ${val}` : val;
+            }
+            return null;
+          }).filter(Boolean).join(' | ');
+        } else {
+          label = v.name || v.color || v.title || v.sku || "Mặc định";
+        }
+        return label === newVariantName;
+      });
       if (vObj) {
         cart[index].variant = newVariantName;
         cart[index].price = vObj.price || p.price;
