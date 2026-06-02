@@ -532,9 +532,10 @@ window.GradieStore = {
 
   syncWithDB: async function() {
     try {
-      const [resProducts, resGlobal] = await Promise.all([
+      const [resProducts, resGlobal, resUsers] = await Promise.all([
         fetch('/api/products'),
-        fetch('/api/global')
+        fetch('/api/global'),
+        fetch('/api/users')
       ]);
       
       let data = this.getData();
@@ -557,6 +558,33 @@ window.GradieStore = {
           if (globalData.blogPosts && globalData.blogPosts.length > 0) data.blogPosts = globalData.blogPosts;
           if (globalData.settings && Object.keys(globalData.settings).length > 0) data.settings = globalData.settings;
           updated = true;
+        }
+      }
+
+      if (resUsers.ok) {
+        const users = await resUsers.json();
+        if (users && users.length > 0) {
+          if (!data.users) data.users = [];
+          
+          // Merge users from DB, keeping local ones and avoiding duplicates by email
+          users.forEach(dbUser => {
+            const index = data.users.findIndex(u => u.email.toLowerCase() === dbUser.email.toLowerCase());
+            if (index === -1) {
+              data.users.push(dbUser);
+              updated = true;
+            } else {
+              // Update details if they changed in the DB
+              const localUser = data.users[index];
+              if (localUser.username !== dbUser.username || 
+                  localUser.password !== dbUser.password || 
+                  localUser.phone !== dbUser.phone || 
+                  localUser.address !== dbUser.address || 
+                  JSON.stringify(localUser.addresses) !== JSON.stringify(dbUser.addresses)) {
+                data.users[index] = { ...localUser, ...dbUser };
+                updated = true;
+              }
+            }
+          });
         }
       }
 
