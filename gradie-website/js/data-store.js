@@ -532,25 +532,35 @@ window.GradieStore = {
 
   syncWithDB: async function() {
     try {
+      const fetchSafe = async (url) => {
+        try {
+          const res = await fetch(url);
+          return res.ok ? res : null;
+        } catch (e) {
+          console.warn(`Fetch to ${url} failed`, e);
+          return null;
+        }
+      };
+
       const [resProducts, resGlobal, resUsers] = await Promise.all([
-        fetch('/api/products'),
-        fetch('/api/global'),
-        fetch('/api/users')
+        fetchSafe('/api/products'),
+        fetchSafe('/api/global'),
+        fetchSafe('/api/users')
       ]);
       
       let data = this.getData();
       let updated = false;
 
-      if (resProducts.ok) {
-        const products = await resProducts.json();
+      if (resProducts) {
+        const products = await resProducts.json().catch(() => null);
         if (products && products.length > 0) {
           data.products = this.normalizeProducts(products);
           updated = true;
         }
       }
 
-      if (resGlobal.ok) {
-        const globalData = await resGlobal.json();
+      if (resGlobal) {
+        const globalData = await resGlobal.json().catch(() => null);
         if (globalData) {
           if (globalData.categories && globalData.categories.length > 0) data.categories = globalData.categories;
           if (globalData.customization && Object.keys(globalData.customization).length > 0) data.customization = globalData.customization;
@@ -561,8 +571,8 @@ window.GradieStore = {
         }
       }
 
-      if (resUsers.ok) {
-        const users = await resUsers.json();
+      if (resUsers) {
+        const users = await resUsers.json().catch(() => null);
         if (users && users.length > 0) {
           if (!data.users) data.users = [];
           
@@ -636,7 +646,7 @@ window.GradieStore = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (!localStorage.getItem("gradie_data")) {
+  if (!localStorage.getItem(window.GradieStore.storageKey)) {
     window.GradieStore.resetData();
   }
   if (window.GradieStore) {
