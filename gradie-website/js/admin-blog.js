@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td><strong>${p.title}</strong></td>
                         <td>${p.category}</td>
                         <td>
-                            <select onchange="window.GradieStore.updateBlogPost('${p.id}', {status: this.value}); showToast('Cập nhật trạng thái thành công!', 'success');" style="padding:5px;">
+                            <select onchange="window.GradieStore.updateBlogPost('${p.id || p._id}', {status: this.value}); showToast('Cập nhật trạng thái thành công!', 'success');" style="padding:5px;">
                                 <option value="Published" ${p.status==='Published'?'selected':''}>Published</option>
                                 <option value="Draft" ${p.status==='Draft'?'selected':''}>Draft</option>
                             </select>
                         </td>
                         <td>
-                            <button class="btn-primary" onclick="openBlogModal('${p.id}')">Edit</button>
-                            <button class="btn-danger" onclick="if(confirm('Delete post?')){ window.GradieStore.deleteBlogPost('${p.id}'); renderAdminBlog(); }">Delete</button>
+                            <button class="btn-primary" onclick="openBlogModal('${p.id || p._id}')">Edit</button>
+                            <button class="btn-danger" onclick="if(confirm('Delete post?')){ window.GradieStore.deleteBlogPost('${p.id || p._id}'); renderAdminBlog(); }">Delete</button>
                         </td>
                     </tr>
                 `).join('');
@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
         window.openBlogModal = function(id = null) {
             document.getElementById('blogModal').style.display = 'block';
             if (id) {
-                const post = window.GradieStore.getBlogPosts().find(p => p.id === id);
+                const post = window.GradieStore.getBlogPosts().find(p => (p.id === id || p._id === id || p._id?.toString() === id));
                 document.getElementById('blogModalTitle').textContent = 'Edit Blog Post';
-                document.getElementById('blog-id').value = post.id;
+                document.getElementById('blog-id').value = post.id || post._id;
                 document.getElementById('blog-title').value = post.title;
                 document.getElementById('blog-category').value = post.category;
                 document.getElementById('blog-image').value = post.image;

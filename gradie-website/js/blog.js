@@ -48,13 +48,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     window.openBlogModal = function(id) {
-        const post = filtered.find(p => p.id === id);
+        const post = filtered.find(p => (p.id === id || p._id === id || p._id?.toString() === id));
         if (post) {
             document.getElementById('blog-modal-img').src = post.image || '';
             document.getElementById('blog-modal-cat').textContent = post.category || '';
             document.getElementById('blog-modal-title').textContent = post.title || '';
             document.getElementById('blog-modal-content').textContent = post.content || post.excerpt || '';
             document.getElementById('blog-modal').style.display = 'block';
+        } else {
+            console.warn('Blog post not found for ID:', id, 'Available posts:', filtered);
         }
     };
 
@@ -63,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         blogContainer.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--taupe); font-style: italic; border: 1px dashed var(--border-gold); border-radius: 8px;">No blog posts found for this category yet. Please check back later.</div>';
     } else {
         blogContainer.innerHTML = filtered.map(p => `
-            <div class="product-card blog-card" style="cursor:pointer; display:flex; flex-direction:column; height:100%; border:none; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.06); overflow:hidden; transition:transform 0.3s, box-shadow 0.3s;" onclick="openBlogModal('${p.id}')" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.06)';">
+            <div class="product-card blog-card" style="cursor:pointer; display:flex; flex-direction:column; height:100%; border:none; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.06); overflow:hidden; transition:transform 0.3s, box-shadow 0.3s;" onclick="openBlogModal('${p.id || p._id}')" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.06)';">
                 <div style="position:relative; overflow:hidden; border-radius:16px 16px 0 0; background:#f4f4f4; height:240px;">
                     <img src="${p.image || ''}" loading="lazy" alt="${p.title}" style="width:100%; height:240px; object-fit:cover; transition:transform 0.7s cubic-bezier(0.2,0.8,0.2,1); display:block;" onload="this.style.opacity=1" onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80'" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
                 </div>
