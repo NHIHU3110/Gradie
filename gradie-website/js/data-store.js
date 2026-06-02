@@ -560,10 +560,11 @@ window.GradieStore = {
         }
       };
 
-      const [resProducts, resGlobal, resUsers] = await Promise.all([
+      const [resProducts, resGlobal, resUsers, resOrders] = await Promise.all([
         fetchSafe('/api/products'),
         fetchSafe('/api/global'),
-        fetchSafe('/api/users')
+        fetchSafe('/api/users'),
+        fetchSafe('/api/orders')
       ]);
       
       let data = this.getData();
@@ -593,6 +594,7 @@ window.GradieStore = {
         const users = await resUsers.json().catch(() => null);
         if (users && users.length > 0) {
           if (!data.users) data.users = [];
+          const currUser = this.getCurrentUser();
           
           // Merge users from DB, keeping local ones and avoiding duplicates by email
           users.forEach(dbUser => {
@@ -610,9 +612,40 @@ window.GradieStore = {
                   JSON.stringify(localUser.addresses) !== JSON.stringify(dbUser.addresses)) {
                 data.users[index] = { ...localUser, ...dbUser };
                 updated = true;
+
+                // Sync current active session if details changed in DB
+                if (currUser && currUser.email.toLowerCase() === dbUser.email.toLowerCase()) {
+                  this.setCurrentUser(data.users[index]);
+                }
               }
             }
           });
+        }
+      }
+
+      if (resOrders) {
+        const orders = await resOrders.json().catch(() => null);
+        if (orders && orders.length > 0) {
+          if (!data.orders) data.orders = [];
+          
+          orders.forEach(dbOrder => {
+            const index = data.orders.findIndex(o => o.orderNumber === dbOrder.orderNumber);
+            if (index === -1) {
+              data.orders.push(dbOrder);
+              updated = true;
+            } else {
+              // Update status/details if changed in the DB (e.g. status changed by admin)
+              const localOrder = data.orders[index];
+              if (localOrder.status !== dbOrder.status ||
+                  JSON.stringify(localOrder) !== JSON.stringify(dbOrder)) {
+                data.orders[index] = { ...localOrder, ...dbOrder };
+                updated = true;
+              }
+            }
+          });
+
+          // Sort orders by orderNumber descending so newest are always on top
+          data.orders.sort((a, b) => b.orderNumber.localeCompare(a.orderNumber));
         }
       }
 
