@@ -437,17 +437,8 @@ window.addToCart = function(id, isDetailView = false) {
     localStorage.setItem('gradie_cart', JSON.stringify(cart));
     if(window.updateCartCount) window.updateCartCount();
     
-    // Quick toast
-    let container = document.querySelector('.toast-container');
-    if (!container) {
-      container = document.createElement('div');
-      container.className = 'toast-container';
-      document.body.appendChild(container);
+    // Show success toast
+    if (typeof showToast === 'function') {
+      showToast('Đã thêm sản phẩm vào giỏ hàng thành công! 🛒', 'success');
     }
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = 'Đã thêm vào giỏ hàng!';
-    container.appendChild(toast);
-    setTimeout(() => toast.classList.add('show'), 10);
-    setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 300); }, 3000);
 }
