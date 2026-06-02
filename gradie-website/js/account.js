@@ -59,7 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const result = window.GradieStore.registerUser(name, email, pass);
+      const phone = document.getElementById('signup-phone') ? document.getElementById('signup-phone').value.trim() : '';
+      const result = window.GradieStore.registerUser(name, email, pass, phone);
       if (result.success) {
         msg.textContent = `Welcome ${result.user.username || 'User'} to Gradie! Account created successfully! Redirecting...`;
         msg.style.color = 'green';

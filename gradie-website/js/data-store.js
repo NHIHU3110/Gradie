@@ -507,11 +507,29 @@ window.GradieStore = {
   
   // USER AUTHENTICATION & SESSIONS
   getUsers: function() { return this.getData().users || []; },
-  registerUser: function(username, email, password) {
+  registerUser: function(username, email, password, phone = '') {
     let data = this.getData();
     if (!data.users) data.users = [];
     if (data.users.some(u => u.email.toLowerCase() === email.toLowerCase())) return { success: false, message: "Email is already registered." };
-    const newUser = { id: 'u-' + Date.now(), username, email: email.toLowerCase(), password };
+    const newUser = { 
+      id: 'u-' + Date.now(), 
+      username, 
+      email: email.toLowerCase(), 
+      password,
+      phone: phone,
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+      addresses: []
+    };
+    if (phone) {
+      newUser.addresses.push({
+        id: "addr-gen-" + Date.now(),
+        label: "Default Address",
+        name: username,
+        phone: phone,
+        detail: "",
+        isDefault: true
+      });
+    }
     data.users.push(newUser);
     this.saveData(data);
     this.setCurrentUser(newUser);
@@ -625,6 +643,14 @@ window.GradieStore = {
       data.users[index] = { ...data.users[index], ...updatedData };
       this.saveData(data);
       this.setCurrentUser(data.users[index]);
+      
+      // Sync profile updates (including phone and addresses) to MongoDB Atlas!
+      fetch('/api/users', { 
+        method: 'PUT', 
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify(data.users[index]) 
+      }).catch(e => console.error('Sync error', e));
+
       return { success: true, user: data.users[index] };
     }
     return { success: false, message: "User not found." };
