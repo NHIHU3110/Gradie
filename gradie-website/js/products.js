@@ -420,7 +420,11 @@ window.addToCart = function(id, isDetailView = false) {
         }
     }
     
-    let cart = JSON.parse(localStorage.getItem('gradie_cart') || '[]');
+    let cart = [];
+    try {
+        cart = JSON.parse(localStorage.getItem('GRADIE_CART')) || JSON.parse(localStorage.getItem('gradie_cart')) || [];
+    } catch(e) { cart = []; }
+
     // Check if same product, variant, AND customization exists
     let exists = cart.find(function(x) {
         if (x.id !== id || x.variant !== selectedVariant) return false;
@@ -429,7 +433,8 @@ window.addToCart = function(id, isDetailView = false) {
     });
     
     if (exists) {
-        exists.qty += 1;
+        exists.qty = (exists.qty || exists.quantity || 0) + 1;
+        exists.quantity = exists.qty;
     } else {
         cart.push({ 
             id: p.id, 
@@ -437,11 +442,13 @@ window.addToCart = function(id, isDetailView = false) {
             price: price, 
             image: p.image || (p.gallery ? p.gallery[0] : ''), 
             qty: 1,
+            quantity: 1,
             variant: selectedVariant,
             customization: customization
         });
     }
     
+    localStorage.setItem('GRADIE_CART', JSON.stringify(cart));
     localStorage.setItem('gradie_cart', JSON.stringify(cart));
     if(window.updateCartCount) window.updateCartCount();
     
