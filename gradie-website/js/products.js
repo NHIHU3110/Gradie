@@ -336,6 +336,15 @@ document.addEventListener('DOMContentLoaded', () => {
               if (counter) counter.textContent = embInput.value.length;
             });
           }
+
+          // Show redirected options selection prompt toast
+          if (urlParams.get('msg') === 'select-options') {
+            setTimeout(() => {
+              if (typeof showToast === 'function') {
+                showToast('Sản phẩm này có nhiều lựa chọn, vui lòng chọn phiên bản trước khi thêm vào giỏ! ✨', 'info');
+              }
+            }, 400);
+          }
       } else {
           detailContainer.innerHTML = '<p style="text-align:center; padding:100px;">Product not found.</p>';
       }
@@ -373,9 +382,8 @@ window.addToCart = function(id, isDetailView = false) {
             const vObj = p.variants.find(v => (v.name || v.color) === selectedVariant);
             if (vObj && vObj.price) price = vObj.price;
         } else {
-            // Added from grid, force redirect to detail page to select options
-            showToast('Sản phẩm này có nhiều lựa chọn, vui lòng xem chi tiết để chọn!', 'info');
-            window.location.href = `product-detail.html?id=${p.id}`;
+            // Added from grid, force redirect to detail page and pass selection message
+            window.location.href = `product-detail.html?id=${p.id}&msg=select-options`;
             return;
         }
     }
