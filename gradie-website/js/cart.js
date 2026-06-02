@@ -192,7 +192,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = window.GradieStore ? window.GradieStore.getCurrentUser() : null;
     if (!user) {
       showToast('Vui lòng đăng nhập để tiến hành thanh toán.', 'warning');
-      window.location.href = "login.html?redirect=checkout";
+      setTimeout(() => {
+        window.location.href = "login.html?redirect=checkout";
+      }, 1500);
     } else {
       window.location.href = "checkout.html";
     }
