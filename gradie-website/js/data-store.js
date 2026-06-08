@@ -36,6 +36,21 @@ window.GradieStore = {
       }
     }
 
+    // Force update mock data if missing
+    let defaultData = this.getDefaultData();
+    if (!data.users || data.users.length < 10) {
+      data.users = defaultData.users;
+      updated = true;
+    }
+    if (!data.orders || data.orders.length < 40) {
+      data.orders = defaultData.orders;
+      updated = true;
+    }
+    if (!data.staff || data.staff.length < 5) {
+      data.staff = defaultData.staff;
+      updated = true;
+    }
+
     const defaultCustomization = {
       sashColors: [{name: 'Classic Black', hex: '#17181d'}, {name: 'Champagne Gold', hex: '#d8a94f'}, {name: 'Peach', hex: '#e9a08d'}],
       embroideryFonts: [{name: 'Elegant Script', price: 50000}, {name: 'Modern Sans', price: 50000}],
