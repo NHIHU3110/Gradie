@@ -50,6 +50,14 @@ window.GradieStore = {
       data.staff = defaultData.staff;
       updated = true;
     }
+    if (!data.blogPosts || data.blogPosts.length === 0) {
+      data.blogPosts = defaultData.blogPosts;
+      updated = true;
+    }
+    if (!data.gallery || data.gallery.length === 0) {
+      data.gallery = defaultData.gallery;
+      updated = true;
+    }
 
     const defaultCustomization = {
       sashColors: [{name: 'Classic Black', hex: '#17181d'}, {name: 'Champagne Gold', hex: '#d8a94f'}, {name: 'Peach', hex: '#e9a08d'}],
@@ -432,206 +440,213 @@ window.GradieStore = {
       orders: [
               {
                       "orderNumber": "GRD-26-1001",
-                      "customerName": "Khách hàng 7",
-                      "customerEmail": "user7@example.com",
-                      "customerPhone": "0900000007",
-                      "shippingAddress": "7 Đường Số 7, Quận 1, TP.HCM",
+                      "customerName": "Khách hàng 4",
+                      "customerEmail": "user4@example.com",
+                      "customerPhone": "0900000004",
+                      "shippingAddress": "4 Đường Số 4, Quận 1, TP.HCM",
                       "notes": "",
-                      "paymentMethod": "COD",
-                      "date": "17/05/2026 07:42:00",
+                      "paymentMethod": "Bank Transfer",
+                      "date": "09/05/2026 22:16:00",
                       "items": [
                               {
-                                      "id": "huy-chuong-danh-du",
-                                      "name": "Huy Chương Tốt Nghiệp Danh Dự",
+                                      "id": "sen_da_va_gau",
+                                      "name": "Bó Hoa Mini Kèm Gấu Tốt Nghiệp",
                                       "quantity": 2,
-                                      "price": 180000,
+                                      "price": 79000,
                                       "customization": null
                               },
                               {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
-                                      "quantity": 2,
-                                      "price": 250000,
+                                      "id": "khung_anh_3d_totnghiep",
+                                      "name": "Khung Ảnh Tốt Nghiệp",
+                                      "quantity": 1,
+                                      "price": 139000,
                                       "customization": null
                               },
                               {
-                                      "id": "huy-chuong-danh-du",
-                                      "name": "Huy Chương Tốt Nghiệp Danh Dự",
-                                      "quantity": 2,
-                                      "price": 180000,
+                                      "id": "keo_mut_trai_tim",
+                                      "name": "Túi Kẹo Lớn Hình Trái Tim",
+                                      "quantity": 1,
+                                      "price": 89000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 1220000,
+                      "subtotal": 386000,
                       "shippingFee": 30000,
-                      "total": 1250000,
-                      "status": "Pending"
+                      "total": 416000,
+                      "status": "Processing"
               },
               {
                       "orderNumber": "GRD-26-1002",
-                      "customerName": "Khách hàng 3",
-                      "customerEmail": "user3@example.com",
-                      "customerPhone": "0900000003",
-                      "shippingAddress": "3 Đường Số 3, Quận 1, TP.HCM",
+                      "customerName": "Khách hàng 8",
+                      "customerEmail": "user8@example.com",
+                      "customerPhone": "0900000008",
+                      "shippingAddress": "8 Đường Số 8, Quận 1, TP.HCM",
                       "notes": "",
-                      "paymentMethod": "Credit Card",
-                      "date": "17/05/2026 22:51:00",
+                      "paymentMethod": "COD",
+                      "date": "20/05/2026 19:39:00",
                       "items": [
                               {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
-                                      "quantity": 1,
-                                      "price": 120000,
+                                      "id": "so-tay-a5-vintage",
+                                      "name": "Sổ Tay A5 Vintage",
+                                      "quantity": 2,
+                                      "price": 60000,
                                       "customization": null
                               }
                       ],
                       "subtotal": 120000,
                       "shippingFee": 30000,
                       "total": 150000,
-                      "status": "Confirmed"
-              },
-              {
-                      "orderNumber": "GRD-26-1003",
-                      "customerName": "Khách hàng 6",
-                      "customerEmail": "user6@example.com",
-                      "customerPhone": "0900000006",
-                      "shippingAddress": "6 Đường Số 6, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "Credit Card",
-                      "date": "25/05/2026 00:48:00",
-                      "items": [
-                              {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
-                                      "quantity": 1,
-                                      "price": 380000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 380000,
-                      "shippingFee": 30000,
-                      "total": 410000,
-                      "status": "Processing"
-              },
-              {
-                      "orderNumber": "GRD-26-1004",
-                      "customerName": "Khách hàng 4",
-                      "customerEmail": "user4@example.com",
-                      "customerPhone": "0900000004",
-                      "shippingAddress": "4 Đường Số 4, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "Credit Card",
-                      "date": "10/05/2026 07:36:00",
-                      "items": [
-                              {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
-                                      "quantity": 1,
-                                      "price": 250000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
-                                      "quantity": 1,
-                                      "price": 250000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 500000,
-                      "shippingFee": 30000,
-                      "total": 530000,
-                      "status": "Shipped"
-              },
-              {
-                      "orderNumber": "GRD-26-1005",
-                      "customerName": "Khách hàng 10",
-                      "customerEmail": "user10@example.com",
-                      "customerPhone": "09000000010",
-                      "shippingAddress": "10 Đường Số 10, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "Credit Card",
-                      "date": "28/05/2026 05:17:00",
-                      "items": [
-                              {
-                                      "id": "huy-chuong-danh-du",
-                                      "name": "Huy Chương Tốt Nghiệp Danh Dự",
-                                      "quantity": 2,
-                                      "price": 180000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 360000,
-                      "shippingFee": 30000,
-                      "total": 390000,
-                      "status": "Delivered"
-              },
-              {
-                      "orderNumber": "GRD-26-1006",
-                      "customerName": "Khách hàng 3",
-                      "customerEmail": "user3@example.com",
-                      "customerPhone": "0900000003",
-                      "shippingAddress": "3 Đường Số 3, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "COD",
-                      "date": "06/06/2026 12:05:00",
-                      "items": [
-                              {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
-                                      "quantity": 2,
-                                      "price": 120000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "khung-anh-a4",
-                                      "name": "Khung Ảnh Tốt Nghiệp A4",
-                                      "quantity": 1,
-                                      "price": 150000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 390000,
-                      "shippingFee": 30000,
-                      "total": 420000,
                       "status": "Completed"
               },
               {
-                      "orderNumber": "GRD-26-1007",
+                      "orderNumber": "GRD-26-1003",
                       "customerName": "Khách hàng 7",
                       "customerEmail": "user7@example.com",
                       "customerPhone": "0900000007",
                       "shippingAddress": "7 Đường Số 7, Quận 1, TP.HCM",
                       "notes": "",
                       "paymentMethod": "Bank Transfer",
-                      "date": "18/05/2026 05:20:00",
+                      "date": "03/06/2026 03:25:00",
                       "items": [
                               {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
+                                      "id": "lich_tot_nghiep",
+                                      "name": "Lịch Tốt Nghiệp",
                                       "quantity": 1,
-                                      "price": 120000,
+                                      "price": 69000,
                                       "customization": null
                               },
                               {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
+                                      "id": "khung_anh_ghep_do_tot_nghiep",
+                                      "name": "Khung Ảnh Tốt Nghiệp Chibi",
                                       "quantity": 2,
-                                      "price": 120000,
+                                      "price": 64000,
                                       "customization": null
                               },
                               {
-                                      "id": "huy-chuong-danh-du",
-                                      "name": "Huy Chương Tốt Nghiệp Danh Dự",
-                                      "quantity": 2,
-                                      "price": 180000,
+                                      "id": "tui-tote-nu-vai-canvas",
+                                      "name": "Túi tote nữ vải canvas",
+                                      "quantity": 1,
+                                      "price": 65000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 720000,
+                      "subtotal": 262000,
                       "shippingFee": 30000,
-                      "total": 750000,
-                      "status": "Cancelled"
+                      "total": 292000,
+                      "status": "Delivered"
+              },
+              {
+                      "orderNumber": "GRD-26-1004",
+                      "customerName": "Khách hàng 8",
+                      "customerEmail": "user8@example.com",
+                      "customerPhone": "0900000008",
+                      "shippingAddress": "8 Đường Số 8, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Bank Transfer",
+                      "date": "28/05/2026 21:26:00",
+                      "items": [
+                              {
+                                      "id": "huy_chuong_moc_khoa",
+                                      "name": "Huy Chương Tốt Nghiệp",
+                                      "quantity": 2,
+                                      "price": 89000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "vi-mini-khoa-keo",
+                                      "name": "Ví mini 2 khoá kéo",
+                                      "quantity": 2,
+                                      "price": 45000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 268000,
+                      "shippingFee": 30000,
+                      "total": 298000,
+                      "status": "Completed"
+              },
+              {
+                      "orderNumber": "GRD-26-1005",
+                      "customerName": "Khách hàng 2",
+                      "customerEmail": "user2@example.com",
+                      "customerPhone": "0900000002",
+                      "shippingAddress": "2 Đường Số 2, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Credit Card",
+                      "date": "26/05/2026 13:32:00",
+                      "items": [
+                              {
+                                      "id": "vi-nam-canvas",
+                                      "name": "Ví nam dáng đứng vải canvas",
+                                      "quantity": 2,
+                                      "price": 60000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "gau_bong_tot_nghiep",
+                                      "name": "Gấu Bông Capybara Tốt Nghiệp",
+                                      "quantity": 2,
+                                      "price": 115000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "hop_keo_mu_bac_si",
+                                      "name": "Hộp Quà Tốt Nghiệp Hình Mũ Cử Nhân",
+                                      "quantity": 1,
+                                      "price": 79000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 429000,
+                      "shippingFee": 30000,
+                      "total": 459000,
+                      "status": "Completed"
+              },
+              {
+                      "orderNumber": "GRD-26-1006",
+                      "customerName": "Khách hàng 6",
+                      "customerEmail": "user6@example.com",
+                      "customerPhone": "0900000006",
+                      "shippingAddress": "6 Đường Số 6, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Bank Transfer",
+                      "date": "08/06/2026 18:30:00",
+                      "items": [
+                              {
+                                      "id": "den_ngu_silicon",
+                                      "name": "Đèn LED Thú Dễ Thương",
+                                      "quantity": 1,
+                                      "price": 109000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 109000,
+                      "shippingFee": 30000,
+                      "total": 139000,
+                      "status": "Confirmed"
+              },
+              {
+                      "orderNumber": "GRD-26-1007",
+                      "customerName": "Khách hàng 2",
+                      "customerEmail": "user2@example.com",
+                      "customerPhone": "0900000002",
+                      "shippingAddress": "2 Đường Số 2, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Credit Card",
+                      "date": "21/05/2026 03:26:00",
+                      "items": [
+                              {
+                                      "id": "coc-giu-nhiet",
+                                      "name": "LY giữ nhiệt hoa lá cành",
+                                      "quantity": 2,
+                                      "price": 99000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 198000,
+                      "shippingFee": 30000,
+                      "total": 228000,
+                      "status": "Completed"
               },
               {
                       "orderNumber": "GRD-26-1008",
@@ -640,384 +655,293 @@ window.GradieStore = {
                       "customerPhone": "0900000006",
                       "shippingAddress": "6 Đường Số 6, Quận 1, TP.HCM",
                       "notes": "",
-                      "paymentMethod": "Bank Transfer",
-                      "date": "15/05/2026 10:11:00",
-                      "items": [
-                              {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
-                                      "quantity": 1,
-                                      "price": 250000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
-                                      "quantity": 2,
-                                      "price": 250000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
-                                      "quantity": 1,
-                                      "price": 120000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 870000,
-                      "shippingFee": 30000,
-                      "total": 900000,
-                      "status": "Refunded"
-              },
-              {
-                      "orderNumber": "GRD-26-1009",
-                      "customerName": "Khách hàng 8",
-                      "customerEmail": "user8@example.com",
-                      "customerPhone": "0900000008",
-                      "shippingAddress": "8 Đường Số 8, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "Bank Transfer",
-                      "date": "08/06/2026 05:10:00",
-                      "items": [
-                              {
-                                      "id": "khung-anh-a4",
-                                      "name": "Khung Ảnh Tốt Nghiệp A4",
-                                      "quantity": 1,
-                                      "price": 150000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "huy-chuong-danh-du",
-                                      "name": "Huy Chương Tốt Nghiệp Danh Dự",
-                                      "quantity": 2,
-                                      "price": 180000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "huy-chuong-danh-du",
-                                      "name": "Huy Chương Tốt Nghiệp Danh Dự",
-                                      "quantity": 2,
-                                      "price": 180000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 870000,
-                      "shippingFee": 30000,
-                      "total": 900000,
-                      "status": "Delivered"
-              },
-              {
-                      "orderNumber": "GRD-26-1010",
-                      "customerName": "Khách hàng 1",
-                      "customerEmail": "user1@example.com",
-                      "customerPhone": "0900000001",
-                      "shippingAddress": "1 Đường Số 1, Quận 1, TP.HCM",
-                      "notes": "",
                       "paymentMethod": "COD",
-                      "date": "29/05/2026 12:26:00",
+                      "date": "12/05/2026 06:42:00",
                       "items": [
                               {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
+                                      "id": "vi-gap-in-hinh",
+                                      "name": "Ví Gập được in hình mèo con",
                                       "quantity": 2,
-                                      "price": 120000,
+                                      "price": 45000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 240000,
+                      "subtotal": 90000,
                       "shippingFee": 30000,
-                      "total": 270000,
-                      "status": "Delivered"
-              },
-              {
-                      "orderNumber": "GRD-26-1011",
-                      "customerName": "Khách hàng 1",
-                      "customerEmail": "user1@example.com",
-                      "customerPhone": "0900000001",
-                      "shippingAddress": "1 Đường Số 1, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "Credit Card",
-                      "date": "24/05/2026 06:13:00",
-                      "items": [
-                              {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
-                                      "quantity": 1,
-                                      "price": 380000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "khung-anh-a4",
-                                      "name": "Khung Ảnh Tốt Nghiệp A4",
-                                      "quantity": 1,
-                                      "price": 150000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
-                                      "quantity": 1,
-                                      "price": 250000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 780000,
-                      "shippingFee": 30000,
-                      "total": 810000,
+                      "total": 120000,
                       "status": "Confirmed"
               },
               {
-                      "orderNumber": "GRD-26-1012",
-                      "customerName": "Khách hàng 2",
-                      "customerEmail": "user2@example.com",
-                      "customerPhone": "0900000002",
-                      "shippingAddress": "2 Đường Số 2, Quận 1, TP.HCM",
+                      "orderNumber": "GRD-26-1009",
+                      "customerName": "Khách hàng 9",
+                      "customerEmail": "user9@example.com",
+                      "customerPhone": "0900000009",
+                      "shippingAddress": "9 Đường Số 9, Quận 1, TP.HCM",
                       "notes": "",
                       "paymentMethod": "Bank Transfer",
-                      "date": "16/05/2026 10:00:00",
+                      "date": "22/05/2026 19:48:00",
                       "items": [
                               {
-                                      "id": "khung-anh-a4",
-                                      "name": "Khung Ảnh Tốt Nghiệp A4",
+                                      "id": "nen-thom-hoa-kho",
+                                      "name": "Nến Thơm Trang Trí Hoa Khô",
                                       "quantity": 1,
-                                      "price": 150000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
-                                      "quantity": 1,
-                                      "price": 250000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
-                                      "quantity": 1,
-                                      "price": 120000,
+                                      "price": 119000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 520000,
+                      "subtotal": 119000,
                       "shippingFee": 30000,
-                      "total": 550000,
+                      "total": 149000,
                       "status": "Completed"
               },
               {
-                      "orderNumber": "GRD-26-1013",
-                      "customerName": "Khách hàng 8",
-                      "customerEmail": "user8@example.com",
-                      "customerPhone": "0900000008",
-                      "shippingAddress": "8 Đường Số 8, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "Bank Transfer",
-                      "date": "17/05/2026 14:47:00",
-                      "items": [
-                              {
-                                      "id": "huy-chuong-danh-du",
-                                      "name": "Huy Chương Tốt Nghiệp Danh Dự",
-                                      "quantity": 2,
-                                      "price": 180000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
-                                      "quantity": 2,
-                                      "price": 120000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
-                                      "quantity": 2,
-                                      "price": 380000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 1360000,
-                      "shippingFee": 30000,
-                      "total": 1390000,
-                      "status": "Delivered"
-              },
-              {
-                      "orderNumber": "GRD-26-1014",
-                      "customerName": "Khách hàng 4",
-                      "customerEmail": "user4@example.com",
-                      "customerPhone": "0900000004",
-                      "shippingAddress": "4 Đường Số 4, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "COD",
-                      "date": "02/06/2026 11:50:00",
-                      "items": [
-                              {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
-                                      "quantity": 1,
-                                      "price": 380000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "khung-anh-a4",
-                                      "name": "Khung Ảnh Tốt Nghiệp A4",
-                                      "quantity": 1,
-                                      "price": 150000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
-                                      "quantity": 1,
-                                      "price": 380000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 910000,
-                      "shippingFee": 30000,
-                      "total": 940000,
-                      "status": "Shipped"
-              },
-              {
-                      "orderNumber": "GRD-26-1015",
-                      "customerName": "Khách hàng 10",
-                      "customerEmail": "user10@example.com",
-                      "customerPhone": "09000000010",
-                      "shippingAddress": "10 Đường Số 10, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "Credit Card",
-                      "date": "04/06/2026 02:06:00",
-                      "items": [
-                              {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
-                                      "quantity": 1,
-                                      "price": 380000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
-                                      "quantity": 2,
-                                      "price": 250000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
-                                      "quantity": 2,
-                                      "price": 380000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 1640000,
-                      "shippingFee": 30000,
-                      "total": 1670000,
-                      "status": "Cancelled"
-              },
-              {
-                      "orderNumber": "GRD-26-1016",
-                      "customerName": "Khách hàng 4",
-                      "customerEmail": "user4@example.com",
-                      "customerPhone": "0900000004",
-                      "shippingAddress": "4 Đường Số 4, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "COD",
-                      "date": "02/06/2026 18:44:00",
-                      "items": [
-                              {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
-                                      "quantity": 2,
-                                      "price": 250000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "khung-anh-a4",
-                                      "name": "Khung Ảnh Tốt Nghiệp A4",
-                                      "quantity": 1,
-                                      "price": 150000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "huy-chuong-danh-du",
-                                      "name": "Huy Chương Tốt Nghiệp Danh Dự",
-                                      "quantity": 1,
-                                      "price": 180000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 830000,
-                      "shippingFee": 30000,
-                      "total": 860000,
-                      "status": "Cancelled"
-              },
-              {
-                      "orderNumber": "GRD-26-1017",
+                      "orderNumber": "GRD-26-1010",
                       "customerName": "Khách hàng 6",
                       "customerEmail": "user6@example.com",
                       "customerPhone": "0900000006",
                       "shippingAddress": "6 Đường Số 6, Quận 1, TP.HCM",
                       "notes": "",
-                      "paymentMethod": "Bank Transfer",
-                      "date": "30/05/2026 12:50:00",
+                      "paymentMethod": "Credit Card",
+                      "date": "12/05/2026 02:28:00",
                       "items": [
                               {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
-                                      "quantity": 2,
-                                      "price": 120000,
+                                      "id": "non_tot_nghiep_hoa_lua",
+                                      "name": "Mũ Cử Nhân Trang Trí Hoa Lụa",
+                                      "quantity": 1,
+                                      "price": 189000,
                                       "customization": null
                               },
                               {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
-                                      "quantity": 1,
-                                      "price": 380000,
+                                      "id": "den_ngu_gau_tot_nghiep",
+                                      "name": "Hộp Tuyết Thủy Tinh",
+                                      "quantity": 2,
+                                      "price": 159000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 620000,
+                      "subtotal": 507000,
                       "shippingFee": 30000,
-                      "total": 650000,
+                      "total": 537000,
+                      "status": "Shipped"
+              },
+              {
+                      "orderNumber": "GRD-26-1011",
+                      "customerName": "Khách hàng 7",
+                      "customerEmail": "user7@example.com",
+                      "customerPhone": "0900000007",
+                      "shippingAddress": "7 Đường Số 7, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Bank Transfer",
+                      "date": "26/05/2026 09:44:00",
+                      "items": [
+                              {
+                                      "id": "binh_pha-ca-phe-cold-brew",
+                                      "name": "Bình Pha Cà Phê Cold Brew 1400ml",
+                                      "quantity": 2,
+                                      "price": 239000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "khung_anh_mica_de_",
+                                      "name": "Mô Hình Tốt Nghiệp",
+                                      "quantity": 1,
+                                      "price": 259000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 737000,
+                      "shippingFee": 30000,
+                      "total": 767000,
+                      "status": "Pending"
+              },
+              {
+                      "orderNumber": "GRD-26-1012",
+                      "customerName": "Khách hàng 9",
+                      "customerEmail": "user9@example.com",
+                      "customerPhone": "0900000009",
+                      "shippingAddress": "9 Đường Số 9, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Credit Card",
+                      "date": "28/05/2026 02:23:00",
+                      "items": [
+                              {
+                                      "id": "keo_mut_trai_tim",
+                                      "name": "Túi Kẹo Lớn Hình Trái Tim",
+                                      "quantity": 1,
+                                      "price": 89000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "so-tay-bia-cung",
+                                      "name": "Sổ tay dot grid",
+                                      "quantity": 2,
+                                      "price": 79000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 247000,
+                      "shippingFee": 30000,
+                      "total": 277000,
+                      "status": "Completed"
+              },
+              {
+                      "orderNumber": "GRD-26-1013",
+                      "customerName": "Khách hàng 1",
+                      "customerEmail": "user1@example.com",
+                      "customerPhone": "0900000001",
+                      "shippingAddress": "1 Đường Số 1, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Credit Card",
+                      "date": "20/05/2026 18:47:00",
+                      "items": [
+                              {
+                                      "id": "balo-da-en",
+                                      "name": "Balo mini thời trang DA ÉN",
+                                      "quantity": 2,
+                                      "price": 69000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "tui-toe-cong-so",
+                                      "name": "Túi tote túi công sở",
+                                      "quantity": 1,
+                                      "price": 85000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "vi-mini-khoa-keo",
+                                      "name": "Ví mini 2 khoá kéo",
+                                      "quantity": 2,
+                                      "price": 45000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 313000,
+                      "shippingFee": 30000,
+                      "total": 343000,
+                      "status": "Pending"
+              },
+              {
+                      "orderNumber": "GRD-26-1014",
+                      "customerName": "Khách hàng 7",
+                      "customerEmail": "user7@example.com",
+                      "customerPhone": "0900000007",
+                      "shippingAddress": "7 Đường Số 7, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Credit Card",
+                      "date": "13/05/2026 10:45:00",
+                      "items": [
+                              {
+                                      "id": "gau_bong_tot_nghiep",
+                                      "name": "Gấu Bông Capybara Tốt Nghiệp",
+                                      "quantity": 1,
+                                      "price": 115000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 115000,
+                      "shippingFee": 30000,
+                      "total": 145000,
                       "status": "Cancelled"
               },
               {
-                      "orderNumber": "GRD-26-1018",
+                      "orderNumber": "GRD-26-1015",
                       "customerName": "Khách hàng 2",
                       "customerEmail": "user2@example.com",
                       "customerPhone": "0900000002",
                       "shippingAddress": "2 Đường Số 2, Quận 1, TP.HCM",
                       "notes": "",
-                      "paymentMethod": "Credit Card",
-                      "date": "04/06/2026 13:29:00",
+                      "paymentMethod": "Bank Transfer",
+                      "date": "18/05/2026 19:00:00",
                       "items": [
                               {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
-                                      "quantity": 1,
-                                      "price": 380000,
+                                      "id": "balo-da-en",
+                                      "name": "Balo mini thời trang DA ÉN",
+                                      "quantity": 2,
+                                      "price": 69000,
                                       "customization": null
                               },
                               {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
+                                      "id": "bo_hoa_bong_bong",
+                                      "name": "Bó Hoa Bóng Bay Tốt Nghiệp",
                                       "quantity": 2,
-                                      "price": 380000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
-                                      "quantity": 2,
-                                      "price": 250000,
+                                      "price": 359000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 1640000,
+                      "subtotal": 856000,
                       "shippingFee": 30000,
-                      "total": 1670000,
+                      "total": 886000,
+                      "status": "Refunded"
+              },
+              {
+                      "orderNumber": "GRD-26-1016",
+                      "customerName": "Khách hàng 2",
+                      "customerEmail": "user2@example.com",
+                      "customerPhone": "0900000002",
+                      "shippingAddress": "2 Đường Số 2, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Bank Transfer",
+                      "date": "31/05/2026 23:37:00",
+                      "items": [
+                              {
+                                      "id": "so-len-ke-hoach",
+                                      "name": "Sổ Lên Kế Hoạch",
+                                      "quantity": 1,
+                                      "price": 139000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 139000,
+                      "shippingFee": 30000,
+                      "total": 169000,
                       "status": "Confirmed"
+              },
+              {
+                      "orderNumber": "GRD-26-1017",
+                      "customerName": "Khách hàng 1",
+                      "customerEmail": "user1@example.com",
+                      "customerPhone": "0900000001",
+                      "shippingAddress": "1 Đường Số 1, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "COD",
+                      "date": "28/05/2026 23:55:00",
+                      "items": [
+                              {
+                                      "id": "khung_anh_bang_khen",
+                                      "name": "khung ảnh khung bằng khen",
+                                      "quantity": 1,
+                                      "price": 259000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 259000,
+                      "shippingFee": 30000,
+                      "total": 289000,
+                      "status": "Confirmed"
+              },
+              {
+                      "orderNumber": "GRD-26-1018",
+                      "customerName": "Khách hàng 7",
+                      "customerEmail": "user7@example.com",
+                      "customerPhone": "0900000007",
+                      "shippingAddress": "7 Đường Số 7, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Credit Card",
+                      "date": "11/05/2026 16:14:00",
+                      "items": [
+                              {
+                                      "id": "ky_niem_chuong_chibi",
+                                      "name": "Khung Pha Lê",
+                                      "quantity": 1,
+                                      "price": 299000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 299000,
+                      "shippingFee": 30000,
+                      "total": 329000,
+                      "status": "Pending"
               },
               {
                       "orderNumber": "GRD-26-1019",
@@ -1027,57 +951,43 @@ window.GradieStore = {
                       "shippingAddress": "6 Đường Số 6, Quận 1, TP.HCM",
                       "notes": "",
                       "paymentMethod": "Credit Card",
-                      "date": "11/05/2026 22:22:00",
+                      "date": "21/05/2026 01:33:00",
                       "items": [
                               {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
-                                      "quantity": 1,
-                                      "price": 380000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
-                                      "quantity": 1,
-                                      "price": 250000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "huy-chuong-danh-du",
-                                      "name": "Huy Chương Tốt Nghiệp Danh Dự",
-                                      "quantity": 1,
-                                      "price": 180000,
+                                      "id": "vi-dung-the-sang-tao",
+                                      "name": "Ví đựng thẻ",
+                                      "quantity": 2,
+                                      "price": 85000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 810000,
+                      "subtotal": 170000,
                       "shippingFee": 30000,
-                      "total": 840000,
-                      "status": "Completed"
+                      "total": 200000,
+                      "status": "Refunded"
               },
               {
                       "orderNumber": "GRD-26-1020",
-                      "customerName": "Khách hàng 9",
-                      "customerEmail": "user9@example.com",
-                      "customerPhone": "0900000009",
-                      "shippingAddress": "9 Đường Số 9, Quận 1, TP.HCM",
+                      "customerName": "Khách hàng 6",
+                      "customerEmail": "user6@example.com",
+                      "customerPhone": "0900000006",
+                      "shippingAddress": "6 Đường Số 6, Quận 1, TP.HCM",
                       "notes": "",
                       "paymentMethod": "COD",
-                      "date": "04/06/2026 02:02:00",
+                      "date": "28/05/2026 22:03:00",
                       "items": [
                               {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
-                                      "quantity": 1,
-                                      "price": 380000,
+                                      "id": "non_tot_nghiep_hoa_lua",
+                                      "name": "Mũ Cử Nhân Trang Trí Hoa Lụa",
+                                      "quantity": 2,
+                                      "price": 189000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 380000,
+                      "subtotal": 378000,
                       "shippingFee": 30000,
-                      "total": 410000,
-                      "status": "Shipped"
+                      "total": 408000,
+                      "status": "Completed"
               },
               {
                       "orderNumber": "GRD-26-1021",
@@ -1086,81 +996,81 @@ window.GradieStore = {
                       "customerPhone": "0900000004",
                       "shippingAddress": "4 Đường Số 4, Quận 1, TP.HCM",
                       "notes": "",
-                      "paymentMethod": "Bank Transfer",
-                      "date": "04/06/2026 07:48:00",
+                      "paymentMethod": "COD",
+                      "date": "29/05/2026 11:51:00",
                       "items": [
                               {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
+                                      "id": "lich_tot_nghiep",
+                                      "name": "Lịch Tốt Nghiệp",
                                       "quantity": 1,
-                                      "price": 120000,
+                                      "price": 69000,
                                       "customization": null
                               },
                               {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
+                                      "id": "den_ngu_silicon",
+                                      "name": "Đèn LED Thú Dễ Thương",
                                       "quantity": 2,
-                                      "price": 380000,
+                                      "price": 109000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 880000,
+                      "subtotal": 287000,
                       "shippingFee": 30000,
-                      "total": 910000,
-                      "status": "Refunded"
-              },
-              {
-                      "orderNumber": "GRD-26-1022",
-                      "customerName": "Khách hàng 3",
-                      "customerEmail": "user3@example.com",
-                      "customerPhone": "0900000003",
-                      "shippingAddress": "3 Đường Số 3, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "Credit Card",
-                      "date": "21/05/2026 09:40:00",
-                      "items": [
-                              {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
-                                      "quantity": 1,
-                                      "price": 120000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
-                                      "quantity": 1,
-                                      "price": 120000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 240000,
-                      "shippingFee": 30000,
-                      "total": 270000,
+                      "total": 317000,
                       "status": "Completed"
               },
               {
-                      "orderNumber": "GRD-26-1023",
-                      "customerName": "Khách hàng 3",
-                      "customerEmail": "user3@example.com",
-                      "customerPhone": "0900000003",
-                      "shippingAddress": "3 Đường Số 3, Quận 1, TP.HCM",
+                      "orderNumber": "GRD-26-1022",
+                      "customerName": "Khách hàng 8",
+                      "customerEmail": "user8@example.com",
+                      "customerPhone": "0900000008",
+                      "shippingAddress": "8 Đường Số 8, Quận 1, TP.HCM",
                       "notes": "",
                       "paymentMethod": "Bank Transfer",
-                      "date": "29/05/2026 22:02:00",
+                      "date": "02/06/2026 23:20:00",
                       "items": [
                               {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
+                                      "id": "keo_khong_lo",
+                                      "name": "Túi Kẹo Quà Tặng",
                                       "quantity": 1,
-                                      "price": 380000,
+                                      "price": 49000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 380000,
+                      "subtotal": 49000,
                       "shippingFee": 30000,
-                      "total": 410000,
-                      "status": "Shipped"
+                      "total": 79000,
+                      "status": "Cancelled"
+              },
+              {
+                      "orderNumber": "GRD-26-1023",
+                      "customerName": "Khách hàng 8",
+                      "customerEmail": "user8@example.com",
+                      "customerPhone": "0900000008",
+                      "shippingAddress": "8 Đường Số 8, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "COD",
+                      "date": "31/05/2026 20:23:00",
+                      "items": [
+                              {
+                                      "id": "bo_hoa_banh_keo",
+                                      "name": "Bó Quà Tốt Nghiệp",
+                                      "quantity": 1,
+                                      "price": 189000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "binh-pha-ca-phe",
+                                      "name": "Bình Pha Cafe Cold Brew",
+                                      "quantity": 2,
+                                      "price": 120000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 429000,
+                      "shippingFee": 30000,
+                      "total": 459000,
+                      "status": "Delivered"
               },
               {
                       "orderNumber": "GRD-26-1024",
@@ -1170,490 +1080,578 @@ window.GradieStore = {
                       "shippingAddress": "2 Đường Số 2, Quận 1, TP.HCM",
                       "notes": "",
                       "paymentMethod": "COD",
-                      "date": "27/05/2026 14:45:00",
+                      "date": "22/05/2026 12:49:00",
                       "items": [
                               {
-                                      "id": "huy-chuong-danh-du",
-                                      "name": "Huy Chương Tốt Nghiệp Danh Dự",
-                                      "quantity": 2,
-                                      "price": 180000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
-                                      "quantity": 2,
-                                      "price": 120000,
+                                      "id": "binh-giu-nhiet-du-lich",
+                                      "name": "Bình Giữ Nhiệt Đi Du Lịch 500ml",
+                                      "quantity": 1,
+                                      "price": 100000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 600000,
+                      "subtotal": 100000,
                       "shippingFee": 30000,
-                      "total": 630000,
-                      "status": "Confirmed"
+                      "total": 130000,
+                      "status": "Shipped"
               },
               {
                       "orderNumber": "GRD-26-1025",
-                      "customerName": "Khách hàng 9",
-                      "customerEmail": "user9@example.com",
-                      "customerPhone": "0900000009",
-                      "shippingAddress": "9 Đường Số 9, Quận 1, TP.HCM",
+                      "customerName": "Khách hàng 6",
+                      "customerEmail": "user6@example.com",
+                      "customerPhone": "0900000006",
+                      "shippingAddress": "6 Đường Số 6, Quận 1, TP.HCM",
                       "notes": "",
-                      "paymentMethod": "Bank Transfer",
-                      "date": "28/05/2026 09:43:00",
+                      "paymentMethod": "Credit Card",
+                      "date": "21/05/2026 13:04:00",
                       "items": [
                               {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
-                                      "quantity": 2,
-                                      "price": 250000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
+                                      "id": "khung_anh_ghep_do_tot_nghiep",
+                                      "name": "Khung Ảnh Tốt Nghiệp Chibi",
                                       "quantity": 1,
-                                      "price": 380000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
-                                      "quantity": 1,
-                                      "price": 120000,
+                                      "price": 64000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 1000000,
+                      "subtotal": 64000,
                       "shippingFee": 30000,
-                      "total": 1030000,
-                      "status": "Processing"
+                      "total": 94000,
+                      "status": "Completed"
               },
               {
                       "orderNumber": "GRD-26-1026",
-                      "customerName": "Khách hàng 10",
-                      "customerEmail": "user10@example.com",
-                      "customerPhone": "09000000010",
-                      "shippingAddress": "10 Đường Số 10, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "Credit Card",
-                      "date": "19/05/2026 15:11:00",
-                      "items": [
-                              {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
-                                      "quantity": 1,
-                                      "price": 120000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 120000,
-                      "shippingFee": 30000,
-                      "total": 150000,
-                      "status": "Cancelled"
-              },
-              {
-                      "orderNumber": "GRD-26-1027",
                       "customerName": "Khách hàng 5",
                       "customerEmail": "user5@example.com",
                       "customerPhone": "0900000005",
                       "shippingAddress": "5 Đường Số 5, Quận 1, TP.HCM",
                       "notes": "",
                       "paymentMethod": "Credit Card",
-                      "date": "29/05/2026 10:53:00",
+                      "date": "07/06/2026 13:24:00",
                       "items": [
                               {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
-                                      "quantity": 1,
-                                      "price": 250000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "huy-chuong-danh-du",
-                                      "name": "Huy Chương Tốt Nghiệp Danh Dự",
-                                      "quantity": 1,
-                                      "price": 180000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
+                                      "id": "gau_bong_tot_nghiep_in_logo",
+                                      "name": "Gấu Bông Tốt Nghiệp Gradie",
                                       "quantity": 2,
-                                      "price": 250000,
+                                      "price": 65000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "so-tay-a5-vintage",
+                                      "name": "Sổ Tay A5 Vintage",
+                                      "quantity": 1,
+                                      "price": 60000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 930000,
+                      "subtotal": 190000,
                       "shippingFee": 30000,
-                      "total": 960000,
-                      "status": "Shipped"
+                      "total": 220000,
+                      "status": "Confirmed"
+              },
+              {
+                      "orderNumber": "GRD-26-1027",
+                      "customerName": "Khách hàng 10",
+                      "customerEmail": "user10@example.com",
+                      "customerPhone": "09000000010",
+                      "shippingAddress": "10 Đường Số 10, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "COD",
+                      "date": "13/05/2026 18:42:00",
+                      "items": [
+                              {
+                                      "id": "balo-vai-da",
+                                      "name": "Balo đi học, đi chơi vải dạ",
+                                      "quantity": 1,
+                                      "price": 73000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 73000,
+                      "shippingFee": 30000,
+                      "total": 103000,
+                      "status": "Pending"
               },
               {
                       "orderNumber": "GRD-26-1028",
+                      "customerName": "Khách hàng 5",
+                      "customerEmail": "user5@example.com",
+                      "customerPhone": "0900000005",
+                      "shippingAddress": "5 Đường Số 5, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Bank Transfer",
+                      "date": "25/05/2026 19:34:00",
+                      "items": [
+                              {
+                                      "id": "tui-tote-nu-vai-canvas",
+                                      "name": "Túi tote nữ vải canvas",
+                                      "quantity": 2,
+                                      "price": 65000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "den_guong_tulip",
+                                      "name": "Hộp Thủy Tinh Vuông",
+                                      "quantity": 1,
+                                      "price": 49000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 179000,
+                      "shippingFee": 30000,
+                      "total": 209000,
+                      "status": "Confirmed"
+              },
+              {
+                      "orderNumber": "GRD-26-1029",
+                      "customerName": "Khách hàng 6",
+                      "customerEmail": "user6@example.com",
+                      "customerPhone": "0900000006",
+                      "shippingAddress": "6 Đường Số 6, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "COD",
+                      "date": "13/05/2026 21:13:00",
+                      "items": [
+                              {
+                                      "id": "binh_pha-ca-phe-cold-brew",
+                                      "name": "Bình Pha Cà Phê Cold Brew 1400ml",
+                                      "quantity": 2,
+                                      "price": 239000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "vi-dung-the",
+                                      "name": "Ví Đựng Thẻ Zootopia",
+                                      "quantity": 2,
+                                      "price": 80000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "ky_niem_chuong_chibi",
+                                      "name": "Khung Pha Lê",
+                                      "quantity": 1,
+                                      "price": 299000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 937000,
+                      "shippingFee": 30000,
+                      "total": 967000,
+                      "status": "Completed"
+              },
+              {
+                      "orderNumber": "GRD-26-1030",
+                      "customerName": "Khách hàng 7",
+                      "customerEmail": "user7@example.com",
+                      "customerPhone": "0900000007",
+                      "shippingAddress": "7 Đường Số 7, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Bank Transfer",
+                      "date": "19/05/2026 21:00:00",
+                      "items": [
+                              {
+                                      "id": "balo-mini",
+                                      "name": "Balo mini dành cho nữ",
+                                      "quantity": 2,
+                                      "price": 71000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "vi-gap-in-hinh",
+                                      "name": "Ví Gập được in hình mèo con",
+                                      "quantity": 1,
+                                      "price": 45000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "keo_khong_lo",
+                                      "name": "Túi Kẹo Quà Tặng",
+                                      "quantity": 2,
+                                      "price": 49000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 285000,
+                      "shippingFee": 30000,
+                      "total": 315000,
+                      "status": "Completed"
+              },
+              {
+                      "orderNumber": "GRD-26-1031",
                       "customerName": "Khách hàng 3",
                       "customerEmail": "user3@example.com",
                       "customerPhone": "0900000003",
                       "shippingAddress": "3 Đường Số 3, Quận 1, TP.HCM",
                       "notes": "",
                       "paymentMethod": "Bank Transfer",
-                      "date": "21/05/2026 04:08:00",
+                      "date": "30/05/2026 11:24:00",
                       "items": [
                               {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
+                                      "id": "binh-nuoc-the-thao",
+                                      "name": "Bình Nước Thể Thao 2 Lít",
                                       "quantity": 2,
-                                      "price": 250000,
+                                      "price": 48000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 500000,
+                      "subtotal": 96000,
                       "shippingFee": 30000,
-                      "total": 530000,
+                      "total": 126000,
+                      "status": "Pending"
+              },
+              {
+                      "orderNumber": "GRD-26-1032",
+                      "customerName": "Khách hàng 3",
+                      "customerEmail": "user3@example.com",
+                      "customerPhone": "0900000003",
+                      "shippingAddress": "3 Đường Số 3, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Credit Card",
+                      "date": "20/05/2026 10:56:00",
+                      "items": [
+                              {
+                                      "id": "bo_hoa_bong_bong",
+                                      "name": "Bó Hoa Bóng Bay Tốt Nghiệp",
+                                      "quantity": 2,
+                                      "price": 359000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "bo_hoa_banh_keo",
+                                      "name": "Bó Quà Tốt Nghiệp",
+                                      "quantity": 2,
+                                      "price": 189000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "khung_anh_mica_de_",
+                                      "name": "Mô Hình Tốt Nghiệp",
+                                      "quantity": 1,
+                                      "price": 259000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 1355000,
+                      "shippingFee": 30000,
+                      "total": 1385000,
+                      "status": "Pending"
+              },
+              {
+                      "orderNumber": "GRD-26-1033",
+                      "customerName": "Khách hàng 1",
+                      "customerEmail": "user1@example.com",
+                      "customerPhone": "0900000001",
+                      "shippingAddress": "1 Đường Số 1, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Bank Transfer",
+                      "date": "04/06/2026 05:33:00",
+                      "items": [
+                              {
+                                      "id": "tui-dung-laptop",
+                                      "name": "Túi đựng laptop chống sốc",
+                                      "quantity": 2,
+                                      "price": 138000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "nen-thom-hop",
+                                      "name": "Nến thơm hộp quà",
+                                      "quantity": 1,
+                                      "price": 25000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 301000,
+                      "shippingFee": 30000,
+                      "total": 331000,
                       "status": "Refunded"
               },
               {
-                      "orderNumber": "GRD-26-1029",
+                      "orderNumber": "GRD-26-1034",
                       "customerName": "Khách hàng 7",
                       "customerEmail": "user7@example.com",
                       "customerPhone": "0900000007",
                       "shippingAddress": "7 Đường Số 7, Quận 1, TP.HCM",
                       "notes": "",
                       "paymentMethod": "COD",
-                      "date": "17/05/2026 19:59:00",
+                      "date": "26/05/2026 06:12:00",
                       "items": [
                               {
-                                      "id": "khung-anh-a4",
-                                      "name": "Khung Ảnh Tốt Nghiệp A4",
-                                      "quantity": 2,
-                                      "price": 150000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 300000,
-                      "shippingFee": 30000,
-                      "total": 330000,
-                      "status": "Completed"
-              },
-              {
-                      "orderNumber": "GRD-26-1030",
-                      "customerName": "Khách hàng 9",
-                      "customerEmail": "user9@example.com",
-                      "customerPhone": "0900000009",
-                      "shippingAddress": "9 Đường Số 9, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "COD",
-                      "date": "04/06/2026 16:51:00",
-                      "items": [
-                              {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
-                                      "quantity": 2,
-                                      "price": 380000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 760000,
-                      "shippingFee": 30000,
-                      "total": 790000,
-                      "status": "Shipped"
-              },
-              {
-                      "orderNumber": "GRD-26-1031",
-                      "customerName": "Khách hàng 1",
-                      "customerEmail": "user1@example.com",
-                      "customerPhone": "0900000001",
-                      "shippingAddress": "1 Đường Số 1, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "Bank Transfer",
-                      "date": "03/06/2026 21:41:00",
-                      "items": [
-                              {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
-                                      "quantity": 2,
-                                      "price": 380000,
+                                      "id": "nen-thom-hop",
+                                      "name": "Nến thơm hộp quà",
+                                      "quantity": 1,
+                                      "price": 25000,
                                       "customization": null
                               },
                               {
-                                      "id": "gau-bong-teddy",
-                                      "name": "Gấu Bông Tốt Nghiệp Teddy",
-                                      "quantity": 2,
-                                      "price": 250000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 1260000,
-                      "shippingFee": 30000,
-                      "total": 1290000,
-                      "status": "Pending"
-              },
-              {
-                      "orderNumber": "GRD-26-1032",
-                      "customerName": "Khách hàng 1",
-                      "customerEmail": "user1@example.com",
-                      "customerPhone": "0900000001",
-                      "shippingAddress": "1 Đường Số 1, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "Credit Card",
-                      "date": "10/05/2026 06:19:00",
-                      "items": [
-                              {
-                                      "id": "khung-anh-a4",
-                                      "name": "Khung Ảnh Tốt Nghiệp A4",
-                                      "quantity": 2,
-                                      "price": 150000,
+                                      "id": "khung_anh_3d_totnghiep",
+                                      "name": "Khung Ảnh Tốt Nghiệp",
+                                      "quantity": 1,
+                                      "price": 139000,
                                       "customization": null
                               },
                               {
-                                      "id": "khung-anh-a4",
-                                      "name": "Khung Ảnh Tốt Nghiệp A4",
-                                      "quantity": 2,
-                                      "price": 150000,
+                                      "id": "hop_keo_mu_bac_si",
+                                      "name": "Hộp Quà Tốt Nghiệp Hình Mũ Cử Nhân",
+                                      "quantity": 1,
+                                      "price": 79000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 600000,
+                      "subtotal": 243000,
                       "shippingFee": 30000,
-                      "total": 630000,
+                      "total": 273000,
                       "status": "Delivered"
               },
               {
-                      "orderNumber": "GRD-26-1033",
-                      "customerName": "Khách hàng 8",
-                      "customerEmail": "user8@example.com",
-                      "customerPhone": "0900000008",
-                      "shippingAddress": "8 Đường Số 8, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "Bank Transfer",
-                      "date": "28/05/2026 05:50:00",
-                      "items": [
-                              {
-                                      "id": "khung-anh-a4",
-                                      "name": "Khung Ảnh Tốt Nghiệp A4",
-                                      "quantity": 1,
-                                      "price": 150000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "huy-chuong-danh-du",
-                                      "name": "Huy Chương Tốt Nghiệp Danh Dự",
-                                      "quantity": 1,
-                                      "price": 180000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 330000,
-                      "shippingFee": 30000,
-                      "total": 360000,
-                      "status": "Completed"
-              },
-              {
-                      "orderNumber": "GRD-26-1034",
-                      "customerName": "Khách hàng 3",
-                      "customerEmail": "user3@example.com",
-                      "customerPhone": "0900000003",
-                      "shippingAddress": "3 Đường Số 3, Quận 1, TP.HCM",
+                      "orderNumber": "GRD-26-1035",
+                      "customerName": "Khách hàng 2",
+                      "customerEmail": "user2@example.com",
+                      "customerPhone": "0900000002",
+                      "shippingAddress": "2 Đường Số 2, Quận 1, TP.HCM",
                       "notes": "",
                       "paymentMethod": "COD",
-                      "date": "29/05/2026 05:32:00",
+                      "date": "28/05/2026 13:08:00",
                       "items": [
                               {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
+                                      "id": "khung_anh_ghep_do_tot_nghiep",
+                                      "name": "Khung Ảnh Tốt Nghiệp Chibi",
                                       "quantity": 2,
-                                      "price": 120000,
-                                      "customization": null
-                              },
-                              {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
-                                      "quantity": 1,
-                                      "price": 380000,
+                                      "price": 64000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 620000,
+                      "subtotal": 128000,
                       "shippingFee": 30000,
-                      "total": 650000,
-                      "status": "Shipped"
+                      "total": 158000,
+                      "status": "Pending"
               },
               {
-                      "orderNumber": "GRD-26-1035",
+                      "orderNumber": "GRD-26-1036",
+                      "customerName": "Khách hàng 1",
+                      "customerEmail": "user1@example.com",
+                      "customerPhone": "0900000001",
+                      "shippingAddress": "1 Đường Số 1, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "Bank Transfer",
+                      "date": "14/05/2026 00:36:00",
+                      "items": [
+                              {
+                                      "id": "binh-dung-nuoc-cute",
+                                      "name": "Bình Đựng Nước 2L",
+                                      "quantity": 2,
+                                      "price": 48000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "gau_bong_tot_nghiep",
+                                      "name": "Gấu Bông Capybara Tốt Nghiệp",
+                                      "quantity": 1,
+                                      "price": 115000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 211000,
+                      "shippingFee": 30000,
+                      "total": 241000,
+                      "status": "Pending"
+              },
+              {
+                      "orderNumber": "GRD-26-1037",
+                      "customerName": "Khách hàng 4",
+                      "customerEmail": "user4@example.com",
+                      "customerPhone": "0900000004",
+                      "shippingAddress": "4 Đường Số 4, Quận 1, TP.HCM",
+                      "notes": "",
+                      "paymentMethod": "COD",
+                      "date": "29/05/2026 21:19:00",
+                      "items": [
+                              {
+                                      "id": "gau_bong_chim_canh_cut",
+                                      "name": "Gấu Bông Penguin Tốt Nghiệp",
+                                      "quantity": 1,
+                                      "price": 129000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "qua_tang_bup_be_tot_nghiep",
+                                      "name": "Búp Bê Móc Len Tốt Nghiệp",
+                                      "quantity": 2,
+                                      "price": 419000,
+                                      "customization": null
+                              },
+                              {
+                                      "id": "keo_khong_lo",
+                                      "name": "Túi Kẹo Quà Tặng",
+                                      "quantity": 2,
+                                      "price": 49000,
+                                      "customization": null
+                              }
+                      ],
+                      "subtotal": 1065000,
+                      "shippingFee": 30000,
+                      "total": 1095000,
+                      "status": "Cancelled"
+              },
+              {
+                      "orderNumber": "GRD-26-1038",
                       "customerName": "Khách hàng 4",
                       "customerEmail": "user4@example.com",
                       "customerPhone": "0900000004",
                       "shippingAddress": "4 Đường Số 4, Quận 1, TP.HCM",
                       "notes": "",
                       "paymentMethod": "Credit Card",
-                      "date": "12/05/2026 01:04:00",
+                      "date": "30/05/2026 10:56:00",
                       "items": [
                               {
-                                      "id": "khung-anh-a4",
-                                      "name": "Khung Ảnh Tốt Nghiệp A4",
+                                      "id": "binh-nuoc-the-thao",
+                                      "name": "Bình Nước Thể Thao 2 Lít",
                                       "quantity": 1,
-                                      "price": 150000,
+                                      "price": 48000,
                                       "customization": null
                               },
                               {
-                                      "id": "huy-chuong-danh-du",
-                                      "name": "Huy Chương Tốt Nghiệp Danh Dự",
-                                      "quantity": 1,
-                                      "price": 180000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 330000,
-                      "shippingFee": 30000,
-                      "total": 360000,
-                      "status": "Completed"
-              },
-              {
-                      "orderNumber": "GRD-26-1036",
-                      "customerName": "Khách hàng 2",
-                      "customerEmail": "user2@example.com",
-                      "customerPhone": "0900000002",
-                      "shippingAddress": "2 Đường Số 2, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "COD",
-                      "date": "06/06/2026 14:48:00",
-                      "items": [
-                              {
-                                      "id": "khung-anh-a4",
-                                      "name": "Khung Ảnh Tốt Nghiệp A4",
+                                      "id": "khung_anh_3d_totnghiep",
+                                      "name": "Khung Ảnh Tốt Nghiệp",
                                       "quantity": 2,
-                                      "price": 150000,
+                                      "price": 139000,
                                       "customization": null
-                              }
-                      ],
-                      "subtotal": 300000,
-                      "shippingFee": 30000,
-                      "total": 330000,
-                      "status": "Pending"
-              },
-              {
-                      "orderNumber": "GRD-26-1037",
-                      "customerName": "Khách hàng 2",
-                      "customerEmail": "user2@example.com",
-                      "customerPhone": "0900000002",
-                      "shippingAddress": "2 Đường Số 2, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "Credit Card",
-                      "date": "26/05/2026 23:17:00",
-                      "items": [
+                              },
                               {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
-                                      "quantity": 1,
-                                      "price": 120000,
-                                      "customization": null
-                              }
-                      ],
-                      "subtotal": 120000,
-                      "shippingFee": 30000,
-                      "total": 150000,
-                      "status": "Delivered"
-              },
-              {
-                      "orderNumber": "GRD-26-1038",
-                      "customerName": "Khách hàng 9",
-                      "customerEmail": "user9@example.com",
-                      "customerPhone": "0900000009",
-                      "shippingAddress": "9 Đường Số 9, Quận 1, TP.HCM",
-                      "notes": "",
-                      "paymentMethod": "COD",
-                      "date": "22/05/2026 05:53:00",
-                      "items": [
-                              {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
+                                      "id": "bo_hoa_len_tot_nghiep",
+                                      "name": "Bó Hoa Móc Len Hướng Dương",
                                       "quantity": 2,
-                                      "price": 120000,
+                                      "price": 149000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 240000,
+                      "subtotal": 624000,
                       "shippingFee": 30000,
-                      "total": 270000,
-                      "status": "Cancelled"
+                      "total": 654000,
+                      "status": "Processing"
               },
               {
                       "orderNumber": "GRD-26-1039",
-                      "customerName": "Khách hàng 2",
-                      "customerEmail": "user2@example.com",
-                      "customerPhone": "0900000002",
-                      "shippingAddress": "2 Đường Số 2, Quận 1, TP.HCM",
+                      "customerName": "Khách hàng 10",
+                      "customerEmail": "user10@example.com",
+                      "customerPhone": "09000000010",
+                      "shippingAddress": "10 Đường Số 10, Quận 1, TP.HCM",
                       "notes": "",
-                      "paymentMethod": "Credit Card",
-                      "date": "10/05/2026 13:56:00",
+                      "paymentMethod": "Bank Transfer",
+                      "date": "02/06/2026 16:22:00",
                       "items": [
                               {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
-                                      "quantity": 2,
-                                      "price": 120000,
+                                      "id": "sen_da_va_gau",
+                                      "name": "Bó Hoa Mini Kèm Gấu Tốt Nghiệp",
+                                      "quantity": 1,
+                                      "price": 79000,
                                       "customization": null
                               },
                               {
-                                      "id": "huy-chuong-danh-du",
-                                      "name": "Huy Chương Tốt Nghiệp Danh Dự",
+                                      "id": "tui-dung-laptop-notebook",
+                                      "name": "TÚI ĐỰNG laptop notebook",
                                       "quantity": 2,
-                                      "price": 180000,
+                                      "price": 140000,
                                       "customization": null
                               },
                               {
-                                      "id": "khung-anh-a4",
-                                      "name": "Khung Ảnh Tốt Nghiệp A4",
+                                      "id": "khung_anh_bang_khen",
+                                      "name": "khung ảnh khung bằng khen",
                                       "quantity": 2,
-                                      "price": 150000,
+                                      "price": 259000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 900000,
+                      "subtotal": 877000,
                       "shippingFee": 30000,
-                      "total": 930000,
-                      "status": "Delivered"
+                      "total": 907000,
+                      "status": "Pending"
               },
               {
                       "orderNumber": "GRD-26-1040",
-                      "customerName": "Khách hàng 3",
-                      "customerEmail": "user3@example.com",
-                      "customerPhone": "0900000003",
-                      "shippingAddress": "3 Đường Số 3, Quận 1, TP.HCM",
+                      "customerName": "Khách hàng 4",
+                      "customerEmail": "user4@example.com",
+                      "customerPhone": "0900000004",
+                      "shippingAddress": "4 Đường Số 4, Quận 1, TP.HCM",
                       "notes": "",
-                      "paymentMethod": "Bank Transfer",
-                      "date": "20/05/2026 15:10:00",
+                      "paymentMethod": "COD",
+                      "date": "31/05/2026 14:46:00",
                       "items": [
                               {
-                                      "id": "hoa-huong-duong",
-                                      "name": "Hoa Hướng Dương Tốt Nghiệp",
-                                      "quantity": 1,
-                                      "price": 120000,
+                                      "id": "binh-giu-nhiet-du-lich",
+                                      "name": "Bình Giữ Nhiệt Đi Du Lịch 500ml",
+                                      "quantity": 2,
+                                      "price": 100000,
                                       "customization": null
                               },
                               {
-                                      "id": "scrapbook-ky-niem",
-                                      "name": "Scrapbook Kỷ Niệm Graduation",
+                                      "id": "binh-dung-nuoc-cute",
+                                      "name": "Bình Đựng Nước 2L",
                                       "quantity": 2,
-                                      "price": 380000,
+                                      "price": 48000,
                                       "customization": null
                               }
                       ],
-                      "subtotal": 880000,
+                      "subtotal": 296000,
                       "shippingFee": 30000,
-                      "total": 910000,
+                      "total": 326000,
                       "status": "Shipped"
               }
       ],
       blogPosts: [
-        { id: 'b1', title: 'Top 5 Graduation Gifts 2026', category: 'Gifting Tips', status: 'Published', content: 'Discover the most meaningful gifts for this graduation season. From personalized sashes to timeless teddy bears...', image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500' },
-        { id: 'b2', title: 'The Meaning Behind the Graduation Sash', category: 'Meaning of Gifts', status: 'Published', content: 'Why do we wear sashes? A brief history of this beautiful tradition and how to choose the right one.', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500' },
-        { id: 'b3', title: 'How to Preserve Your Graduation Bouquet', category: 'Care Guide', status: 'Published', content: 'Don\'t let those beautiful flowers die. Here are 3 ways to dry and preserve your graduation bouquet forever.', image: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=500' }
+              {
+                      "id": "b1",
+                      "title": "Top 5 Món Quà Tốt Nghiệp Ý Nghĩa Nhất",
+                      "excerpt": "Khám phá ngay những món quà được săn đón nhất mùa tốt nghiệp...",
+                      "date": "15/05/2026",
+                      "author": "Gradie",
+                      "category": "Gợi ý Quà Tặng",
+                      "status": "Published"
+              },
+              {
+                      "id": "b2",
+                      "title": "Tại Sao Nên Chọn Gấu Bông Cử Nhân?",
+                      "excerpt": "Gấu bông cử nhân không chỉ là quà tặng mà còn là kỉ vật...",
+                      "date": "20/05/2026",
+                      "author": "Admin",
+                      "category": "Kinh Nghiệm",
+                      "status": "Published"
+              },
+              {
+                      "id": "b3",
+                      "title": "Cách Gói Quà Tốt Nghiệp Ghi Điểm Tuyệt Đối",
+                      "excerpt": "Bật mí bí kíp gói quà cực xinh xắn và ý nghĩa...",
+                      "date": "22/05/2026",
+                      "author": "Gradie",
+                      "category": "Handmade",
+                      "status": "Published"
+              }
       ],
       gallery: [
-        { id: 'g1', type: 'Customer Photo', title: 'A Happy Graduate', status: 'Published', image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500' },
-        { id: 'g2', type: 'Photoshoot Concept', title: 'Studio Glam', status: 'Published', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500' },
-        { id: 'g3', type: 'Product Showcase', title: 'Premium Sash Close-up', status: 'Published', image: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=500' }
+              {
+                      "id": "g1",
+                      "title": "Khoảnh khắc Lễ Tốt Nghiệp ĐHQG",
+                      "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500"
+              },
+              {
+                      "id": "g2",
+                      "title": "Nhóm bạn thân ngày ra trường",
+                      "image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500"
+              },
+              {
+                      "id": "g3",
+                      "title": "Quà tặng từ gia đình",
+                      "image": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=500"
+              },
+              {
+                      "id": "g4",
+                      "title": "Kỷ niệm thanh xuân",
+                      "image": "https://images.unsplash.com/photo-1627556592933-ffe99c1c9dd0?w=500"
+              },
+              {
+                      "id": "g5",
+                      "title": "Đón nhận bằng cử nhân",
+                      "image": "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=500"
+              }
       ],
       policies: [
         { id: 'p1', title: 'Shipping Policy', content: 'We ship nationwide within 3-5 business days. Standard shipping fee is 30,000 VND. Free shipping for orders over 1,000,000 VND.', status: 'Published' },

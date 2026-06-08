@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const p = window.GradieStore.getProducts().length;
     const c = window.GradieStore.getCategories().length;
     const o = window.GradieStore.getOrders().length;
+    const u = window.GradieStore.getUsers().length;
     const b = window.GradieStore.getBlogPosts().length;
     const g = window.GradieStore.getGallery().length;
     const pol = window.GradieStore.getPolicies().length;
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     animateValue('stat-products', 0, p, 1500);
     animateValue('stat-categories', 0, c, 1500);
     animateValue('stat-orders', 0, o, 1500);
+    animateValue('stat-users', 0, u, 1500);
     animateValue('stat-blog', 0, b, 1500);
     animateValue('stat-gallery', 0, g, 1500);
     animateValue('stat-policies', 0, pol, 1500);
