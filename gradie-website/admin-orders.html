@@ -77,6 +77,22 @@
                     </div>
                 </div>
 
+                <!-- Status Filter -->
+                <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: center; background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <label for="order-status-filter" style="font-weight: 600; color: #1e293b; margin-bottom: 0;">Lọc theo trạng thái:</label>
+                    <select id="order-status-filter" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; outline: none; font-family: inherit; width: 250px; background: #f8fafc;">
+                        <option value="all">Tất cả trạng thái (All)</option>
+                        <option value="pending">Pending (Chờ duyệt)</option>
+                        <option value="confirmed">Confirmed (Đã xác nhận)</option>
+                        <option value="processing">Processing (Đang chuẩn bị)</option>
+                        <option value="shipped">Shipped (Đang giao)</option>
+                        <option value="delivered">Delivered (Đã giao)</option>
+                        <option value="completed">Completed (Hoàn tất)</option>
+                        <option value="cancelled">Cancelled (Hủy)</option>
+                        <option value="refunded">Refunded (Hoàn tiền)</option>
+                    </select>
+                </div>
+
                 <!-- Bulk Actions -->
                 <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; display: none;" id="bulk-actions-container-orders">
                     <span style="font-weight: 600; color: #1e293b;"><span id="selected-count-orders">0</span> đã chọn</span>

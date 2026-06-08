@@ -36,10 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         const userOrders = orders.filter(o => o.customerEmail && o.customerEmail.toLowerCase() === u.email.toLowerCase());
                         const orderCount = userOrders.length;
                         
-                        // Calculate total spent (excluding Cancelled/Refunded)
+                        // Calculate total spent (Only Completed)
                         const validUserOrders = userOrders.filter(o => {
                             const status = (o.status || '').toLowerCase();
-                            return !['cancelled', 'refunded'].includes(status);
+                            return status === 'completed';
                         });
                         const totalSpent = validUserOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
                         

@@ -4,11 +4,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const ordersBody = document.getElementById('admin-orders-list');
     
     if (ordersBody) {
+        let currentStatusFilter = 'all';
+
+        // Add Event Listener for Status Filter
+        const filterEl = document.getElementById('order-status-filter');
+        if (filterEl) {
+            filterEl.addEventListener('change', (e) => {
+                currentStatusFilter = e.target.value;
+                window.renderOrdersTable();
+            });
+        }
+
         window.renderOrdersTable = function() {
             try {
-                const ords = window.GradieStore.getOrders();
+                let ords = window.GradieStore.getOrders();
+                
+                // Apply status filter
+                if (currentStatusFilter !== 'all') {
+                    ords = ords.filter(o => {
+                        const status = (o.status || 'Pending').toLowerCase();
+                        return status === currentStatusFilter.toLowerCase();
+                    });
+                }
+
                 if (!ords || ords.length === 0) {
-                    ordersBody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 30px; color: #64748b;">No orders yet.</td></tr>';
+                    ordersBody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 30px; color: #64748b;">Không có đơn hàng nào.</td></tr>';
                 } else {
                     // Updated orders table rendering with row click listeners
                     ordersBody.innerHTML = ords.map(o => {
