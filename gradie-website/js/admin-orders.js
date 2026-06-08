@@ -18,8 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         const status = o.status || 'Pending';
                         
                         // Gorgeous status badges
-                        let badgeStyle = 'background: #fef3c7; color: #d97706;';
-                        if (status === 'Shipped' || status === 'Dispatched') {
+                        let badgeStyle = 'background: #fef3c7; color: #d97706;'; // Pending
+                        if (status === 'Confirmed') {
+                            badgeStyle = 'background: #e0e7ff; color: #4338ca;';
+                        } else if (status === 'Processing') {
+                            badgeStyle = 'background: #fce7f3; color: #be185d;';
+                        } else if (status === 'Shipped' || status === 'Dispatched') {
                             badgeStyle = 'background: #dbeafe; color: #2563eb;';
                         } else if (status === 'Delivered') {
                             badgeStyle = 'background: #dcfce7; color: #15803d;';
@@ -44,12 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </span>
                             </td>
                             <td>
-                                <div style="display: flex; gap: 10px; align-items: center;">
+                                <div style="display: flex; gap: 10px; align-items: center;" onclick="event.stopPropagation();">
                                     <button class="outline-button" onclick="openOrderDetailModal('${o.orderNumber}')" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 4px; border: 1px solid #d8a94f; color: #d8a94f; background: transparent; cursor: pointer; font-weight: 500;">
                                         View Details
                                     </button>
                                     <select onchange="window.GradieStore.updateOrder('${o.orderNumber}', {status: this.value}); window.renderOrdersTable();" style="padding: 5px; border-radius: 4px; border: 1px solid #cbd5e1; background: #fff; cursor: pointer;">
                                         <option value="Pending" ${status === 'Pending'?'selected':''}>Pending</option>
+                                        <option value="Confirmed" ${status === 'Confirmed'?'selected':''}>Confirmed</option>
+                                        <option value="Processing" ${status === 'Processing'?'selected':''}>Processing</option>
                                         <option value="Shipped" ${status === 'Shipped' || status === 'Dispatched'?'selected':''}>Shipped</option>
                                         <option value="Delivered" ${status === 'Delivered'?'selected':''}>Delivered</option>
                                         <option value="Cancelled" ${status === 'Cancelled'?'selected':''}>Cancelled</option>
@@ -166,6 +172,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('detail-shipping').innerText = shippingFee.toLocaleString('vi-VN') + 'đ';
                 document.getElementById('detail-total').innerText = grandTotal.toLocaleString('vi-VN') + 'đ';
                 
+                // Render Timeline
+                const timelineContainer = document.getElementById('admin-order-timeline');
+                if (timelineContainer) {
+                    const st = o.status || 'Pending';
+                    const isCancelled = st === 'Cancelled';
+                    
+                    if (isCancelled) {
+                        timelineContainer.innerHTML = `
+                            <div style="display:flex; gap:15px; align-items:center; background:#fef2f2; border:1px solid #fca5a5; padding:15px; border-radius:8px;">
+                                <div style="width:30px; height:30px; border-radius:50%; background:#ef4444; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:bold;">✕</div>
+                                <div>
+                                    <div style="font-weight:600; color:#b91c1c;">Cancelled (Đã Hủy)</div>
+                                    <div style="font-size:0.85rem; color:#7f1d1d;">Đơn hàng này đã bị hủy.</div>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        const steps = ['Pending', 'Confirmed', 'Processing', 'Shipped', 'Delivered'];
+                        const currentIndex = steps.indexOf(st) >= 0 ? steps.indexOf(st) : 0;
+                        const labels = ['Chờ duyệt', 'Đã xác nhận', 'Đang xử lý', 'Đang giao', 'Đã giao'];
+                        
+                        let timelineHtml = '<div style="display:flex; justify-content:space-between; position:relative; padding-bottom:10px;">';
+                        timelineHtml += '<div style="position:absolute; top:12px; left:15px; right:15px; height:2px; background:#e2e8f0; z-index:1;"></div>';
+                        
+                        steps.forEach((step, idx) => {
+                            const isCompleted = idx <= currentIndex;
+                            const isCurrent = idx === currentIndex;
+                            const color = isCompleted ? '#22c55e' : '#cbd5e1';
+                            const bgColor = isCompleted ? '#22c55e' : '#f1f5f9';
+                            const textColor = isCurrent ? '#15803d' : (isCompleted ? '#16a34a' : '#94a3b8');
+                            const fw = isCurrent ? '700' : (isCompleted ? '600' : '500');
+                            
+                            // progress line override
+                            if (idx < steps.length - 1 && isCompleted && idx < currentIndex) {
+                                const w = 100 / (steps.length - 1);
+                                timelineHtml += `<div style="position:absolute; top:12px; left:${idx * w}%; width:${w}%; height:2px; background:#22c55e; z-index:2;"></div>`;
+                            }
+
+                            timelineHtml += `
+                                <div style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3; width:20%;">
+                                    <div style="width:26px; height:26px; border-radius:50%; background:${bgColor}; color:${isCompleted ? '#fff' : '#cbd5e1'}; border:2px solid ${color}; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:bold; box-shadow:${isCurrent ? '0 0 0 4px rgba(34,197,94,0.2)' : 'none'};">
+                                        ${isCompleted ? '✓' : idx + 1}
+                                    </div>
+                                    <div style="font-size:0.75rem; color:${textColor}; font-weight:${fw}; margin-top:8px; text-align:center;">${step}</div>
+                                    <div style="font-size:0.65rem; color:#64748b; text-align:center;">${labels[idx]}</div>
+                                </div>
+                            `;
+                        });
+                        timelineHtml += '</div>';
+                        timelineContainer.innerHTML = timelineHtml;
+                    }
+                }
+
                 // Select active status dropdown
                 const statusSelect = document.getElementById('detail-status');
                 if (statusSelect) {

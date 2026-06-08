@@ -141,13 +141,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (myOrders.length > 0) {
         orderList.innerHTML = myOrders.map(o => {
           const itemsSummary = o.items.map(item => `${item.name} (x${item.quantity || item.qty || 1})`).join(', ');
-          const statusStyle = o.status === 'Delivered' ? 'background: #e6f4ea; color: #137333;' :
-                    o.status === 'Shipped' ? 'background: #e8f0fe; color: #1a73e8;' :
-                    o.status === 'Cancelled' ? 'background: #fee2e2; color: #dc2626;' :
-                    'background: #fef7e0; color: #b06000;';
+          const statusStyle = o.status === 'Delivered' ? 'background:#dcfce7; color:#15803d;' :
+                    o.status === 'Shipped' ? 'background:#dbeafe; color:#2563eb;' :
+                    o.status === 'Processing' ? 'background:#fce7f3; color:#be185d;' :
+                    o.status === 'Confirmed' ? 'background:#e0e7ff; color:#4338ca;' :
+                    o.status === 'Cancelled' ? 'background:#fee2e2; color:#dc2626;' :
+                    'background:#fef3c7; color:#d97706;';
           const statusVN = o.status === 'Delivered' ? 'Đã Giao Hàng' :
-                           o.status === 'Shipped' ? 'Đang Vận Chuyển' :
-                           o.status === 'Cancelled' ? 'Đã Hủy' : 'Đang Chờ Xử Lý';
+                           o.status === 'Shipped' ? 'Đang Giao' :
+                           o.status === 'Processing' ? 'Đang Xử Lý' :
+                           o.status === 'Confirmed' ? 'Đã Xác Nhận' :
+                           o.status === 'Cancelled' ? 'Đã Hủy' : 'Chờ Duyệt';
           return `
             <div class="order-card-clickable" onclick="openUserOrderModal('${o.orderNumber}')" style="border: 1px solid var(--border-gold); padding: 18px; border-radius: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; background: #fff; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.01);">
               <div>
@@ -177,13 +181,17 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('user-modal-title').textContent = 'Đơn Hàng ' + o.orderNumber;
 
         // Info Grid
-        const statusStyle = o.status === 'Delivered' ? 'background: #e6f4ea; color: #137333;' :
-              o.status === 'Shipped' ? 'background: #e8f0fe; color: #1a73e8;' :
-              o.status === 'Cancelled' ? 'background: #fee2e2; color: #dc2626;' :
-              'background: #fef7e0; color: #b06000;';
+        const statusStyle = o.status === 'Delivered' ? 'background:#dcfce7; color:#15803d;' :
+                    o.status === 'Shipped' ? 'background:#dbeafe; color:#2563eb;' :
+                    o.status === 'Processing' ? 'background:#fce7f3; color:#be185d;' :
+                    o.status === 'Confirmed' ? 'background:#e0e7ff; color:#4338ca;' :
+                    o.status === 'Cancelled' ? 'background:#fee2e2; color:#dc2626;' :
+                    'background:#fef3c7; color:#d97706;';
         const statusVN = o.status === 'Delivered' ? 'Đã Giao Hàng' :
-                         o.status === 'Shipped' ? 'Đang Vận Chuyển' :
-                         o.status === 'Cancelled' ? 'Đã Hủy' : 'Đang Chờ Xử Lý';
+                         o.status === 'Shipped' ? 'Đang Giao' :
+                         o.status === 'Processing' ? 'Đang Xử Lý' :
+                         o.status === 'Confirmed' ? 'Đã Xác Nhận' :
+                         o.status === 'Cancelled' ? 'Đã Hủy' : 'Chờ Duyệt';
 
         const paymentMethodVN = o.paymentMethod === 'COD' || o.paymentMethod === 'COD (Cash on Delivery)' ? 'Thanh toán khi nhận hàng (COD)' : o.paymentMethod || 'COD';
 
@@ -420,23 +428,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const status = order.status || 'Pending';
         const isCancelled = status === 'Cancelled';
-        const isShipped = status === 'Shipped' || status === 'Delivered';
-        const isDelivered = status === 'Delivered';
-
+        
         const statusVN = status === 'Delivered' ? 'Đã Giao Hàng' :
-                         status === 'Shipped' ? 'Đang Vận Chuyển' :
-                         status === 'Cancelled' ? 'Đã Hủy' : 'Đang Chờ Xử Lý';
+                         status === 'Shipped' ? 'Đang Giao' :
+                         status === 'Processing' ? 'Đang Xử Lý' :
+                         status === 'Confirmed' ? 'Đã Xác Nhận' :
+                         status === 'Cancelled' ? 'Đã Hủy' : 'Chờ Duyệt';
 
         // Status badge styling
-        const statusStyle = isDelivered ? 'background:#e6f4ea; color:#137333;' :
-                    isShipped ? 'background:#e8f0fe; color:#1a73e8;' :
+        const statusStyle = status === 'Delivered' ? 'background:#dcfce7; color:#15803d;' :
+                    status === 'Shipped' ? 'background:#dbeafe; color:#2563eb;' :
+                    status === 'Processing' ? 'background:#fce7f3; color:#be185d;' :
+                    status === 'Confirmed' ? 'background:#e0e7ff; color:#4338ca;' :
                     isCancelled ? 'background:#fee2e2; color:#dc2626;' :
-                    'background:#fef7e0; color:#b06000;';
+                    'background:#fef3c7; color:#d97706;';
 
         // Items list
         const itemsList = (order.items || []).map(item =>
           `<div style="font-size:0.85rem; color:#555; margin-top:4px;">• ${item.name} (x${item.quantity || item.qty || 1})</div>`
         ).join('');
+
+        let timelineHtml = '';
+        if (isCancelled) {
+            timelineHtml = `
+                <div class="timeline-step">
+                  <div>
+                    <div class="timeline-dot cancelled">✕</div>
+                  </div>
+                  <div class="timeline-content">
+                    <h4>Đơn Hàng Đã Hủy</h4>
+                    <p>Đơn hàng này đã bị hủy. Vui lòng liên hệ bộ phận hỗ trợ để biết thêm chi tiết.</p>
+                  </div>
+                </div>
+            `;
+        } else {
+            const steps = ['Pending', 'Confirmed', 'Processing', 'Shipped', 'Delivered'];
+            const titles = ['Chờ Duyệt', 'Đã Xác Nhận', 'Đang Xử Lý', 'Đang Giao Hàng', 'Đã Giao Thành Công'];
+            const desc = [
+                'Đơn hàng của bạn đã được hệ thống tiếp nhận và đang chờ xử lý.',
+                'Đơn hàng đã được xác nhận. Chúng tôi đang chuẩn bị các bước tiếp theo.',
+                'Món quà của bạn đang được đóng gói cẩn thận tại kho của Gradie.',
+                'Đơn hàng đang trên đường vận chuyển bởi đối tác giao hàng.',
+                'Đơn hàng đã được giao thành công. Hãy tận hưởng khoảnh khắc tuyệt vời cùng Gradie!'
+            ];
+            const currentIndex = steps.indexOf(status) >= 0 ? steps.indexOf(status) : 0;
+            
+            steps.forEach((step, idx) => {
+                const isCompleted = idx <= currentIndex;
+                const isCurrent = idx === currentIndex;
+                const isActiveLine = idx < currentIndex;
+                
+                timelineHtml += `
+                <div class="timeline-step">
+                  <div>
+                    <div class="timeline-dot ${isCompleted ? 'active' : 'inactive'}">${isCompleted ? '✓' : idx + 1}</div>
+                    <div class="timeline-line ${isActiveLine ? 'active' : ''}"></div>
+                  </div>
+                  <div class="timeline-content">
+                    <h4 class="${isCompleted ? '' : 'inactive'}">${titles[idx]}</h4>
+                    <p>${isCurrent || isCompleted ? desc[idx] : '...'}</p>
+                  </div>
+                </div>
+                `;
+            });
+        }
 
         resultDiv.innerHTML = `
           <div class="track-result-card">
@@ -469,47 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             <h4 style="font-family:'Playfair Display', serif; font-size:1.1rem; margin:0 0 8px; color:#1e293b;">Tiến Trình Đơn Hàng</h4>
             <div style="padding:10px 0;">
-              ${isCancelled ? `
-                <div class="timeline-step">
-                  <div>
-                    <div class="timeline-dot cancelled">✕</div>
-                  </div>
-                  <div class="timeline-content">
-                    <h4>Đơn Hàng Đã Hủy</h4>
-                    <p>Đơn hàng này đã bị hủy. Vui lòng liên hệ bộ phận hỗ trợ để biết thêm chi tiết.</p>
-                  </div>
-                </div>
-              ` : `
-                <div class="timeline-step">
-                  <div>
-                    <div class="timeline-dot active">✓</div>
-                    <div class="timeline-line ${isShipped ? 'active' : ''}"></div>
-                  </div>
-                  <div class="timeline-content">
-                    <h4>Đã Xác Nhận Đơn Hàng</h4>
-                    <p>Đơn hàng của bạn đã được tiếp nhận và xác thực thành công.</p>
-                  </div>
-                </div>
-                <div class="timeline-step">
-                  <div>
-                    <div class="timeline-dot ${isShipped ? 'active' : 'inactive'}">${isShipped ? '✓' : '2'}</div>
-                    <div class="timeline-line ${isDelivered ? 'active' : ''}"></div>
-                  </div>
-                  <div class="timeline-content">
-                    <h4 class="${isShipped ? '' : 'inactive'}">Đang Vận Chuyển</h4>
-                    <p>${isShipped ? 'Món quà của bạn đang trên đường vận chuyển bởi đối tác giao hàng cao cấp.' : 'Đang chờ xử lý giao hàng...'}</p>
-                  </div>
-                </div>
-                <div class="timeline-step">
-                  <div>
-                    <div class="timeline-dot ${isDelivered ? 'active' : 'inactive'}">${isDelivered ? '✓' : '3'}</div>
-                  </div>
-                  <div class="timeline-content">
-                    <h4 class="${isDelivered ? '' : 'inactive'}">Đã Giao Hàng</h4>
-                    <p>${isDelivered ? 'Đơn hàng đã được giao thành công. Hãy tận hưởng khoảnh khắc tuyệt vời cùng Gradie!' : 'Đang chờ giao hàng...'}</p>
-                  </div>
-                </div>
-              `}
+              ${timelineHtml}
             </div>
           </div>
         `;

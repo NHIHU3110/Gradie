@@ -84,6 +84,7 @@
                     <select id="bulk-status-select" class="outline-button" style="padding: 6px 12px; border-color: #cbd5e1;">
                         <option value="">Đổi trạng thái...</option>
                         <option value="Pending">Pending (Chờ duyệt)</option>
+                        <option value="Confirmed">Confirmed (Đã xác nhận)</option>
                         <option value="Processing">Processing (Đang xử lý)</option>
                         <option value="Shipped">Shipped (Đang giao)</option>
                         <option value="Delivered">Delivered (Đã giao)</option>
@@ -133,7 +134,12 @@
                 <div class="detail-row"><label>Delivery Notes:</label><span id="detail-customer-notes" style="font-style:italic; color:#64748b;"></span></div>
                 <div class="detail-row"><label>Payment Method:</label><span>COD (Cash on Delivery)</span></div>
                 
-                <h4 style="font-family:'Playfair Display', serif; font-size:1.2rem; margin:25px 0 10px; color:#1e293b; border-bottom:1px solid #f1f5f9; padding-bottom:8px;">Items Breakdown</h4>
+                <h4 style="font-family:'Playfair Display', serif; font-size:1.2rem; margin:25px 0 10px; color:#1e293b; border-bottom:1px solid #f1f5f9; padding-bottom:8px;">Fulfillment Progress</h4>
+                <div id="admin-order-timeline" style="margin-bottom:20px;">
+                    <!-- Rendered by JS -->
+                </div>
+
+                <h4 style="font-family:'Playfair Display', serif; font-size:1.2rem; margin:10px 0 10px; color:#1e293b; border-bottom:1px solid #f1f5f9; padding-bottom:8px;">Items Breakdown</h4>
                 <div id="detail-items-list" style="margin-bottom:20px;">
                     <!-- Rendered dynamically -->
                 </div>
@@ -156,10 +162,12 @@
                 <div class="detail-row" style="border:none; align-items:center;">
                     <label>Fulfillment Status:</label>
                     <select id="detail-status" style="width:200px; padding:8px 12px; border:1px solid #cbd5e1; border-radius:6px; background:#fff; font-family:inherit;">
-                        <option value="Pending">Pending</option>
-                        <option value="Shipped">Shipped</option>
-                        <option value="Delivered">Delivered</option>
-                        <option value="Cancelled">Cancelled</option>
+                        <option value="Pending">Pending (Chờ duyệt)</option>
+                        <option value="Confirmed">Confirmed (Đã xác nhận)</option>
+                        <option value="Processing">Processing (Đang xử lý)</option>
+                        <option value="Shipped">Shipped (Đang giao)</option>
+                        <option value="Delivered">Delivered (Đã giao)</option>
+                        <option value="Cancelled">Cancelled (Hủy)</option>
                     </select>
                 </div>
             </div>

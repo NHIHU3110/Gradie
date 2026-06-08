@@ -109,23 +109,32 @@ document.addEventListener('DOMContentLoaded', () => {
                         usersBody.innerHTML = htmlRows.length > 0 ? htmlRows.join('') : '<tr><td colspan="8" style="text-align:center; padding: 30px; color: #64748b;">Không có khách hàng nào khớp với bộ lọc.</td></tr>';
                     }
                     
-                    // Render Top 3 customers (ignores segmentation filter)
+                    // Render Top 3 customers All-Time (ignores segmentation filter)
                     const topCustomersContainer = document.getElementById('top-customers-container');
                     if (topCustomersContainer) {
-                        const top3 = userSpending.filter(item => item.weeklySpent > 0).sort((a, b) => b.weeklySpent - a.weeklySpent).slice(0, 3);
+                        const top3 = userSpending.filter(item => item.totalSpent > 0).sort((a, b) => b.totalSpent - a.totalSpent).slice(0, 3);
                         
                         if (top3.length === 0) {
-                            topCustomersContainer.innerHTML = '<div style="color:#64748b; font-style:italic; padding:15px;">Chưa có khách hàng nào phát sinh đơn hàng trong 7 ngày qua.</div>';
+                            topCustomersContainer.innerHTML = '<div style="color:#64748b; font-style:italic; padding:15px;">Chưa có dữ liệu khách hàng.</div>';
                         } else {
-                            const medals = ['🥇', '🥈', '🥉'];
+                            const getCrownSVG = (color) => `<svg width="42" height="42" viewBox="0 0 24 24" fill="${color}"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>`;
+                            const medals = [getCrownSVG('#fbbf24'), getCrownSVG('#94a3b8'), getCrownSVG('#b45309')];
+                            const labelColors = ['#fbbf24', '#94a3b8', '#b45309'];
+                            
                             topCustomersContainer.innerHTML = top3.map((item, index) => `
-                                <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); position: relative; overflow: hidden;">
-                                    <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: ${index === 0 ? '#fbbf24' : index === 1 ? '#94a3b8' : '#b45309'};"></div>
-                                    <div style="font-size: 2.5rem; position: absolute; top: 10px; right: 15px; opacity: 0.2;">${medals[index]}</div>
-                                    <h4 style="margin: 0 0 10px 0; font-family: 'Playfair Display', serif; color: #1e293b; font-size: 1.2rem;">${item.user.username || 'N/A'}</h4>
-                                    <div style="font-size: 0.9rem; color: #475569; margin-bottom: 5px;"><strong>Email:</strong> ${item.user.email}</div>
-                                    <div style="font-size: 0.9rem; color: #475569; margin-bottom: 5px;"><strong>Tổng mua (từ trước):</strong> ${item.totalSpent.toLocaleString('vi-VN')}đ</div>
-                                    <div style="font-size: 1.15rem; color: #d8a94f; font-weight: 700; margin-top: 10px;">Chi tiêu tuần này: ${item.weeklySpent.toLocaleString('vi-VN')}đ</div>
+                                <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;">
+                                    <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: ${labelColors[index]};"></div>
+                                    <div style="position: absolute; top: 15px; right: 15px; opacity: 0.15; transform: rotate(15deg);">${medals[index]}</div>
+                                    
+                                    <div>
+                                        <div style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: ${labelColors[index]}; letter-spacing: 1px; margin-bottom: 8px;">Top ${index + 1} Khách Hàng</div>
+                                        <h4 style="margin: 0 0 10px 0; font-family: 'Playfair Display', serif; color: #1e293b; font-size: 1.3rem;">${item.user.username || 'N/A'}</h4>
+                                        <div style="font-size: 0.85rem; color: #64748b; margin-bottom: 5px;">${item.user.email}</div>
+                                    </div>
+                                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #e2e8f0;">
+                                        <div style="font-size: 0.8rem; color: #64748b;">Tổng chi tiêu mọi thời đại:</div>
+                                        <div style="font-size: 1.4rem; color: #1e293b; font-weight: 700;">${item.totalSpent.toLocaleString('vi-VN')}đ</div>
+                                    </div>
                                 </div>
                             `).join('');
                         }

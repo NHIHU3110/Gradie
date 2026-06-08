@@ -113,27 +113,64 @@ document.addEventListener('DOMContentLoaded', () => {
             data: {
                 labels: last7Days,
                 datasets: [{
-                    label: 'Doanh thu (VNĐ)',
+                    label: 'Doanh thu',
                     data: revenueData,
                     borderColor: '#d8a94f',
                     backgroundColor: 'rgba(216, 169, 79, 0.1)',
-                    borderWidth: 2,
+                    borderWidth: 3,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#d8a94f',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
                     fill: true,
-                    tension: 0.3
+                    tension: 0.4 // Smooth curve
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
                 plugins: {
-                    legend: { display: false }
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        titleFont: { size: 13, family: "'Inter', sans-serif" },
+                        bodyFont: { size: 14, weight: 'bold', family: "'Inter', sans-serif" },
+                        padding: 12,
+                        cornerRadius: 8,
+                        displayColors: false,
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y.toLocaleString('vi-VN') + ' VNĐ';
+                            }
+                        }
+                    }
                 },
                 scales: {
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        }
+                    },
                     y: {
                         beginAtZero: true,
+                        grid: {
+                            color: '#f1f5f9',
+                            drawBorder: false
+                        },
                         ticks: {
+                            maxTicksLimit: 6,
                             callback: function(value) {
-                                return value.toLocaleString('vi-VN');
+                                if(value >= 1000000) return (value / 1000000) + 'M';
+                                if(value >= 1000) return (value / 1000) + 'k';
+                                return value;
                             }
                         }
                     }
