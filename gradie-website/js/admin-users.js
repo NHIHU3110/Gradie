@@ -4,6 +4,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const usersBody = document.getElementById('admin-users-list');
 
     if (usersBody) {
+        let currentSegmentFilter = 'all';
+
+        // Add Event Listener for Filter
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterEl = document.getElementById('user-segment-filter');
+            if(filterEl) {
+                filterEl.addEventListener('change', (e) => {
+                    currentSegmentFilter = e.target.value;
+                    window.renderUsersTable();
+                });
+            }
+        });
+
         window.renderUsersTable = function() {
             try {
                 const users = window.GradieStore.getUsers();
@@ -13,21 +26,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Variables for Top 3 customers
                 const now = new Date();
                 const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                const threeMonthsAgo = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
                 let userSpending = [];
 
                 if (!users || users.length === 0) {
                     if(usersBody) usersBody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 30px; color: #64748b;">No registered users yet.</td></tr>';
                 } else {
-                    const htmlRows = users.map(u => {
+                    let htmlRows = [];
+                    
+                    users.forEach(u => {
                         const userOrders = orders.filter(o => o.customerEmail && o.customerEmail.toLowerCase() === u.email.toLowerCase());
                         const orderCount = userOrders.length;
                         
                         // Calculate total spent
                         const totalSpent = userOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
                         
-                        // VIP Threshold: 2,000,000 VND
-                        const isVIP = totalSpent >= 2000000;
-                        const tierBadge = isVIP ? `<span style="background:#fef08a; color:#854d0e; padding:3px 8px; border-radius:12px; font-weight:600; font-size:0.75rem;">VIP</span>` : `<span style="background:#e2e8f0; color:#475569; padding:3px 8px; border-radius:12px; font-weight:600; font-size:0.75rem;">Thường</span>`;
+                        // Tier Logic
+                        let tierBadge = `<span style="background:#e2e8f0; color:#475569; padding:3px 8px; border-radius:12px; font-weight:600; font-size:0.75rem;">Đồng</span>`;
+                        if(totalSpent >= 3000000) {
+                            tierBadge = `<span style="background:#fef08a; color:#854d0e; padding:3px 8px; border-radius:12px; font-weight:600; font-size:0.75rem;">💎 VIP</span>`;
+                        } else if(totalSpent >= 1500000) {
+                            tierBadge = `<span style="background:#fde68a; color:#b45309; padding:3px 8px; border-radius:12px; font-weight:600; font-size:0.75rem;">Vàng</span>`;
+                        } else if(totalSpent >= 500000) {
+                            tierBadge = `<span style="background:#e2e8f0; color:#334155; padding:3px 8px; border-radius:12px; font-weight:600; font-size:0.75rem; border:1px solid #cbd5e1;">Bạc</span>`;
+                        }
+
+                        // Last purchase date
+                        let lastPurchaseDate = 0;
+                        let boughtTeddy = false;
+                        
+                        userOrders.forEach(o => {
+                            const oDate = new Date(o.createdAt || o.date || Date.now()).getTime();
+                            if(oDate > lastPurchaseDate) lastPurchaseDate = oDate;
+                            if(o.items && o.items.some(i => i.name.toLowerCase().includes('gấu bông') || i.id.toLowerCase().includes('teddy'))) {
+                                boughtTeddy = true;
+                            }
+                        });
 
                         // Calculate weekly spending
                         const weeklyOrders = userOrders.filter(o => {
@@ -38,34 +72,44 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         userSpending.push({ user: u, weeklySpent: weeklySpent, totalSpent: totalSpent });
 
-                        return `
-                        <tr>
-                            <td class="clickable-user" onclick="openUserDetailModal('${u.id}')" style="font-weight:600;">
-                                ${u.username || 'N/A'}
-                            </td>
-                            <td>${u.email}</td>
-                            <td>${u.phone || 'N/A'}</td>
-                            <td>${u.address || 'N/A'}</td>
-                            <td style="font-weight:600; text-align:center;">${orderCount}</td>
-                            <td style="font-weight:600; color:#15803d;">${totalSpent.toLocaleString('vi-VN')}đ</td>
-                            <td>${tierBadge}</td>
-                            <td>
-                                <div style="display:flex; gap:10px;">
-                                    <button class="outline-button" onclick="openUserDetailModal('${u.id}')" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 4px; border: 1px solid #d8a94f; color: #d8a94f; background: transparent; cursor: pointer; font-weight: 500;">
-                                        History
-                                    </button>
-                                    <button class="outline-button" onclick="deleteUser('${u.id}')" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 4px; border: 1px solid #dc2626; color: #dc2626; background: transparent; cursor: pointer; font-weight: 500;">
-                                        Delete
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        `;
+                        // Filtering logic (Segmentation)
+                        let isMatch = true;
+                        if(currentSegmentFilter === 'vip_only' && totalSpent < 3000000) isMatch = false;
+                        if(currentSegmentFilter === 'sleeping' && (lastPurchaseDate >= threeMonthsAgo.getTime() || orderCount === 0)) isMatch = false;
+                        if(currentSegmentFilter === 'teddy_lovers' && !boughtTeddy) isMatch = false;
+
+                        if (isMatch) {
+                            htmlRows.push(`
+                            <tr>
+                                <td class="clickable-user" onclick="openUserDetailModal('${u.id}')" style="font-weight:600;">
+                                    ${u.username || 'N/A'}
+                                </td>
+                                <td>${u.email}</td>
+                                <td>${u.phone || 'N/A'}</td>
+                                <td>${u.address || 'N/A'}</td>
+                                <td style="font-weight:600; text-align:center;">${orderCount}</td>
+                                <td style="font-weight:600; color:#15803d;">${totalSpent.toLocaleString('vi-VN')}đ</td>
+                                <td>${tierBadge}</td>
+                                <td>
+                                    <div style="display:flex; gap:10px;">
+                                        <button class="outline-button" onclick="openUserDetailModal('${u.id}')" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 4px; border: 1px solid #d8a94f; color: #d8a94f; background: transparent; cursor: pointer; font-weight: 500;">
+                                            History
+                                        </button>
+                                        <button class="outline-button" onclick="deleteUser('${u.id}')" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 4px; border: 1px solid #dc2626; color: #dc2626; background: transparent; cursor: pointer; font-weight: 500;">
+                                            Delete
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            `);
+                        }
                     });
 
-                    if(usersBody) usersBody.innerHTML = htmlRows.join('');
+                    if(usersBody) {
+                        usersBody.innerHTML = htmlRows.length > 0 ? htmlRows.join('') : '<tr><td colspan="8" style="text-align:center; padding: 30px; color: #64748b;">Không có khách hàng nào khớp với bộ lọc.</td></tr>';
+                    }
                     
-                    // Render Top 3 customers
+                    // Render Top 3 customers (ignores segmentation filter)
                     const topCustomersContainer = document.getElementById('top-customers-container');
                     if (topCustomersContainer) {
                         const top3 = userSpending.filter(item => item.weeklySpent > 0).sort((a, b) => b.weeklySpent - a.weeklySpent).slice(0, 3);

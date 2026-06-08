@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         return `
                         <tr style="cursor: pointer;">
+                            <td style="text-align:center;" onclick="event.stopPropagation();">
+                                <input type="checkbox" class="order-select-cb" value="${o.orderNumber}">
+                            </td>
                             <td class="clickable-order" onclick="openOrderDetailModal('${o.orderNumber}')" style="font-weight: 600;">
                                 ${o.orderNumber}
                             </td>
@@ -63,11 +66,41 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (orderCell) {
                                 const orderNum = orderCell.textContent.trim();
                                 row.addEventListener('click', (e) => {
-                                    if (e.target.tagName.toLowerCase() === 'button' || e.target.tagName.toLowerCase() === 'select') return;
+                                    if (e.target.tagName.toLowerCase() === 'button' || e.target.tagName.toLowerCase() === 'select' || e.target.tagName.toLowerCase() === 'input') return;
                                     openOrderDetailModal(orderNum);
                                 });
                             }
                         });
+
+                        // Attach Bulk Checkbox Listeners
+                        const selectAllCb = document.getElementById('select-all-orders');
+                        const itemCbs = document.querySelectorAll('.order-select-cb');
+                        const bulkContainer = document.getElementById('bulk-actions-container-orders');
+                        const selectedCountEl = document.getElementById('selected-count-orders');
+
+                        const updateBulkUI = () => {
+                            const checkedCount = document.querySelectorAll('.order-select-cb:checked').length;
+                            if (checkedCount > 0) {
+                                if(bulkContainer) bulkContainer.style.display = 'flex';
+                                if(selectedCountEl) selectedCountEl.innerText = checkedCount;
+                            } else {
+                                if(bulkContainer) bulkContainer.style.display = 'none';
+                                if(selectAllCb) selectAllCb.checked = false;
+                            }
+                        };
+
+                        if (selectAllCb) {
+                            // remove old listener to avoid dupes (cheap way: clone node, but here we just assign onclick to avoid dupes)
+                            selectAllCb.onclick = (e) => {
+                                itemCbs.forEach(cb => cb.checked = e.target.checked);
+                                updateBulkUI();
+                            };
+                        }
+
+                        itemCbs.forEach(cb => {
+                            cb.onclick = updateBulkUI;
+                        });
+
                     }, 0);
                 }
             } catch(e) { console.error("Error rendering orders:", e); }
@@ -174,6 +207,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.closeOrderDetailModal();
             }
         });
+
+        // Bulk Actions Handlers
+        const getSelectedOrderIds = () => {
+            return Array.from(document.querySelectorAll('.order-select-cb:checked')).map(cb => cb.value);
+        };
+
+        const bulkDeleteBtn = document.getElementById('bulk-delete-orders-btn');
+        if (bulkDeleteBtn) {
+            bulkDeleteBtn.addEventListener('click', () => {
+                const ids = getSelectedOrderIds();
+                if (ids.length === 0) return;
+                if (confirm(`Bạn có chắc chắn muốn xóa ${ids.length} đơn hàng đã chọn không?`)) {
+                    let data = window.GradieStore.getData();
+                    data.orders = data.orders.filter(o => !ids.includes(o.orderNumber));
+                    window.GradieStore.saveData(data);
+                    
+                    window.GradieStore.addActivityLog('Xóa hàng loạt đơn hàng', `Đã xóa ${ids.length} đơn hàng khỏi hệ thống.`);
+                    
+                    window.renderOrdersTable();
+                    document.getElementById('bulk-actions-container-orders').style.display = 'none';
+                    if(document.getElementById('select-all-orders')) document.getElementById('select-all-orders').checked = false;
+                }
+            });
+        }
+
+        const bulkStatusSelect = document.getElementById('bulk-status-select');
+        if (bulkStatusSelect) {
+            bulkStatusSelect.addEventListener('change', (e) => {
+                const newStatus = e.target.value;
+                if (!newStatus) return; // User selected the default prompt option
+                
+                const ids = getSelectedOrderIds();
+                if (ids.length === 0) {
+                    e.target.value = "";
+                    return;
+                }
+                
+                if (confirm(`Bạn có chắc muốn đổi trạng thái ${ids.length} đơn hàng thành "${newStatus}"?`)) {
+                    ids.forEach(id => {
+                        window.GradieStore.updateOrder(id, { status: newStatus });
+                    });
+                    
+                    window.GradieStore.addActivityLog('Cập nhật trạng thái hàng loạt', `Đã đổi ${ids.length} đơn hàng sang trạng thái ${newStatus}.`);
+                    
+                    window.renderOrdersTable();
+                    document.getElementById('bulk-actions-container-orders').style.display = 'none';
+                    if(document.getElementById('select-all-orders')) document.getElementById('select-all-orders').checked = false;
+                }
+                
+                // Reset select back to default
+                e.target.value = "";
+            });
+        }
 
         renderOrdersTable();
     }

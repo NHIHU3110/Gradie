@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>Analytics - Gradie Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <!-- Sidebar will be injected by JS -->
+        <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+        <main class="admin-main">
+            <header class="admin-header">
+                <div class="header-left">
+                    <button id="mobile-menu-btn" class="mobile-menu-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                    <h1>Báo Cáo & Phân Tích (Analytics)</h1>
+                </div>
+                <div class="header-right">
+                    <div class="admin-profile">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=d8a94f&color=fff" alt="Admin" class="avatar">
+                        <span class="admin-name">Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <div class="dashboard-header" style="margin-bottom: 30px;">
+                    <div>
+                        <h2 style="margin:0; font-size: 2rem;">Thống Kê Kinh Doanh</h2>
+                        <p style="color: var(--admin-muted); margin-top: 5px;">Số liệu dòng tiền, hiệu quả sản phẩm và doanh thu đa chiều.</p>
+                    </div>
+                </div>
+
+                <!-- Cash Flow Summary -->
+                <div class="dashboard-stats" style="margin-bottom: 40px;">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white;">
+                        <h3 style="color: rgba(255,255,255,0.8);">Tổng Dòng Tiền (Cash Flow)</h3>
+                        <div class="stat-value" id="total-cashflow" style="color: white;">0đ</div>
+                        <div class="stat-desc" style="color: rgba(255,255,255,0.8);">Từ các đơn hàng "Delivered" & "Completed"</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Tiền Thu Hộ (COD Đang Giao)</h3>
+                        <div class="stat-value" id="pending-cod" style="color: #d8a94f;">0đ</div>
+                        <div class="stat-desc">Chờ đối soát từ đơn vị vận chuyển</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Tổng Khách Hàng</h3>
+                        <div class="stat-value" id="total-customers">0</div>
+                        <div class="stat-desc" id="vip-count">0 khách VIP</div>
+                    </div>
+                </div>
+
+                <!-- Revenue Chart -->
+                <div style="background: #fff; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 40px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+                    <h3 style="margin-top:0; margin-bottom:20px; font-family:'Playfair Display', serif; color:#1e293b; font-size:1.4rem;">Doanh Thu 7 Ngày Qua</h3>
+                    <canvas id="revenueChart" style="width: 100%; height: 300px;"></canvas>
+                </div>
+
+                <!-- Product Performance -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;">
+                    
+                    <!-- Best Sellers -->
+                    <div style="background: #fff; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+                        <h3 style="margin-top:0; margin-bottom:20px; font-family:'Playfair Display', serif; color:#15803d; font-size:1.4rem;">🔥 Top Bán Chạy (Best Sellers)</h3>
+                        <div class="table-wrapper" style="margin:0; box-shadow:none; border:none; padding:0;">
+                            <table style="margin:0;">
+                                <thead>
+                                    <tr>
+                                        <th>Sản Phẩm</th>
+                                        <th style="text-align:center;">Đã Bán</th>
+                                        <th style="text-align:right;">Doanh Thu</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="best-sellers-list">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Dead Stock -->
+                    <div style="background: #fff; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+                        <h3 style="margin-top:0; margin-bottom:20px; font-family:'Playfair Display', serif; color:#dc2626; font-size:1.4rem;">⚠️ Sản Phẩm Tồn Đọng (Dead Stock)</h3>
+                        <div class="table-wrapper" style="margin:0; box-shadow:none; border:none; padding:0;">
+                            <table style="margin:0;">
+                                <thead>
+                                    <tr>
+                                        <th>Sản Phẩm</th>
+                                        <th style="text-align:center;">Kho</th>
+                                        <th style="text-align:center;">Tình Trạng</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dead-stock-list">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="js/data-store.js"></script>
+    <script src="js/admin-auth.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/admin-analytics.js"></script>
+</body>
+</html>

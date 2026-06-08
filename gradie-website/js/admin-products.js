@@ -8,7 +8,7 @@ function renderAdminProducts() {
     console.log("GradieStore products count (Admin):", products.length);
     
     if (!products || products.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No products found.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No products found.</td></tr>';
         return;
     }
     
@@ -19,11 +19,13 @@ function renderAdminProducts() {
             const encodedId = encodeURIComponent(safeId);
             const safeIdForClick = safeId.replace(/'/g, "\\'");
             const price = Number(p.price) || 0;
+            const featuredBadge = p.isFeatured ? '<span style="color:#d8a94f; margin-left:5px;">★</span>' : '';
             
             return `
             <tr>
+                <td style="text-align:center;"><input type="checkbox" class="product-select-cb" value="${safeIdForClick}"></td>
                 <td><img src="${img}" class="img-thumb" style="width:50px; height:50px; object-fit:cover; border-radius:4px;"></td>
-                <td><strong>${p.name || 'Untitled'}</strong><br><small style="color:var(--admin-muted)">ID: ${safeId}</small></td>
+                <td><strong>${p.name || 'Untitled'}</strong>${featuredBadge}<br><small style="color:var(--admin-muted)">ID: ${safeId}</small></td>
                 <td>${p.category || 'Uncategorized'}</td>
                 <td>${price.toLocaleString('vi-VN')} ₫</td>
                 <td>${p.stock || 0}</td>
@@ -34,9 +36,38 @@ function renderAdminProducts() {
             </tr>
             `;
         }).join('');
+
+        // Attach Bulk Checkbox Listeners
+        const selectAllCb = document.getElementById('select-all-products');
+        const itemCbs = document.querySelectorAll('.product-select-cb');
+        const bulkContainer = document.getElementById('bulk-actions-container');
+        const selectedCountEl = document.getElementById('selected-count');
+
+        const updateBulkUI = () => {
+            const checkedCount = document.querySelectorAll('.product-select-cb:checked').length;
+            if (checkedCount > 0) {
+                bulkContainer.style.display = 'flex';
+                selectedCountEl.innerText = checkedCount;
+            } else {
+                bulkContainer.style.display = 'none';
+                if(selectAllCb) selectAllCb.checked = false;
+            }
+        };
+
+        if (selectAllCb) {
+            selectAllCb.addEventListener('change', (e) => {
+                itemCbs.forEach(cb => cb.checked = e.target.checked);
+                updateBulkUI();
+            });
+        }
+
+        itemCbs.forEach(cb => {
+            cb.addEventListener('change', updateBulkUI);
+        });
+
     } catch (e) {
         console.error("Error rendering admin products:", e);
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:red;">Error rendering products. Check console.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:red;">Error rendering products. Check console.</td></tr>';
     }
 }
 
@@ -143,4 +174,50 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (btnCSV) btnCSV.addEventListener('click', exportToCSV);
     if (btnXLSX) btnXLSX.addEventListener('click', exportToXLSX);
+
+    // Bulk Actions Handlers
+    const bulkDeleteBtn = document.getElementById('bulk-delete-btn');
+    const bulkFeatureBtn = document.getElementById('bulk-feature-btn');
+
+    const getSelectedIds = () => {
+        return Array.from(document.querySelectorAll('.product-select-cb:checked')).map(cb => cb.value);
+    };
+
+    if (bulkDeleteBtn) {
+        bulkDeleteBtn.addEventListener('click', () => {
+            const ids = getSelectedIds();
+            if (ids.length === 0) return;
+            if (confirm(`Bạn có chắc chắn muốn xóa ${ids.length} sản phẩm đã chọn không?`)) {
+                let data = window.GradieStore.getData();
+                data.products = data.products.filter(p => !ids.includes(p.id));
+                window.GradieStore.saveData(data);
+                
+                window.GradieStore.addActivityLog('Xóa hàng loạt sản phẩm', `Đã xóa ${ids.length} sản phẩm khỏi hệ thống.`);
+                
+                renderAdminProducts();
+                document.getElementById('bulk-actions-container').style.display = 'none';
+                if(document.getElementById('select-all-products')) document.getElementById('select-all-products').checked = false;
+            }
+        });
+    }
+
+    if (bulkFeatureBtn) {
+        bulkFeatureBtn.addEventListener('click', () => {
+            const ids = getSelectedIds();
+            if (ids.length === 0) return;
+            let data = window.GradieStore.getData();
+            data.products.forEach(p => {
+                if(ids.includes(p.id)) {
+                    p.isFeatured = true;
+                }
+            });
+            window.GradieStore.saveData(data);
+            
+            window.GradieStore.addActivityLog('Đánh dấu Nổi Bật', `Đã đánh dấu ${ids.length} sản phẩm là Nổi bật.`);
+            
+            renderAdminProducts();
+            document.getElementById('bulk-actions-container').style.display = 'none';
+            if(document.getElementById('select-all-products')) document.getElementById('select-all-products').checked = false;
+        });
+    }
 });

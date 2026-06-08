@@ -166,9 +166,11 @@ window.GradieStore = {
       }
     }
       
-    // Auto-fill mock data if empty (for gallery, blog, orders, policies, users)
+    // Auto-fill mock data if empty (for gallery, blog, orders, policies, users, staff, activityLogs)
     let defaults = this.getDefaultData();
     if (!data.users || data.users.length === 0) { data.users = defaults.users; updated = true; }
+    if (!data.staff || data.staff.length === 0) { data.staff = defaults.staff; updated = true; }
+    if (!data.activityLogs || data.activityLogs.length === 0) { data.activityLogs = defaults.activityLogs; updated = true; }
     
     // Backfill avatars and address books if missing
     if (data.users && data.users.length > 0) {
@@ -387,7 +389,17 @@ window.GradieStore = {
             link: 'engraving-services.html'
           }
         ]
-      }
+      },
+      staff: [
+        { id: "s-1", name: "Huỳnh Thảo Nhi", role: "Admin", email: "thaonhi@gradie.com", phone: "0900000001", commissionRate: 0, kpi: 0, avatar: "https://ui-avatars.com/api/?name=Huynh+Thao+Nhi&background=d8a94f&color=fff" },
+        { id: "s-2", name: "Nguyễn Thị Ái Nhi", role: "Manager", email: "ainhi@gradie.com", phone: "0900000002", commissionRate: 0, kpi: 100000000, avatar: "https://ui-avatars.com/api/?name=Ai+Nhi&background=1e293b&color=fff" },
+        { id: "s-3", name: "Nguyễn Vân Ngọc Khánh", role: "Sales", email: "ngockhanh@gradie.com", phone: "0900000003", commissionRate: 5, kpi: 50000000, avatar: "https://ui-avatars.com/api/?name=Ngoc+Khanh&background=3b82f6&color=fff" },
+        { id: "s-4", name: "Lý Minh Thư", role: "Warehouse", email: "minhthu@gradie.com", phone: "0900000004", commissionRate: 0, kpi: 0, avatar: "https://ui-avatars.com/api/?name=Minh+Thu&background=10b981&color=fff" },
+        { id: "s-5", name: "Trần Khánh Ly", role: "Accountant", email: "khanhly@gradie.com", phone: "0900000005", commissionRate: 0, kpi: 0, avatar: "https://ui-avatars.com/api/?name=Khanh+Ly&background=ef4444&color=fff" }
+      ],
+      activityLogs: [
+        { id: "log-" + Date.now(), timestamp: Date.now(), user: "System", action: "System Initialized", details: "CMS started successfully." }
+      ]
     };
   },
 
@@ -515,6 +527,27 @@ window.GradieStore = {
   },
   saveCustomizationOptions: function(options) { let data = this.getData(); data.customization = options; this.saveData(data); fetch('/api/global', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'customization', data: options }) }).catch(e => console.error('Sync error', e)); },
   
+  // STAFF & RBAC
+  getStaff: function() { return this.getData().staff || []; },
+  saveStaff: function(staffList) { let data = this.getData(); data.staff = staffList; this.saveData(data); },
+  
+  // ACTIVITY LOGS
+  getActivityLogs: function() { return this.getData().activityLogs || []; },
+  addActivityLog: function(action, details, user = "Admin") {
+    let data = this.getData();
+    if (!data.activityLogs) data.activityLogs = [];
+    data.activityLogs.unshift({
+      id: "log-" + Date.now(),
+      timestamp: Date.now(),
+      user: user,
+      action: action,
+      details: details
+    });
+    // Keep only last 200 logs to save space
+    if (data.activityLogs.length > 200) data.activityLogs.length = 200;
+    this.saveData(data);
+  },
+
   // USER AUTHENTICATION & SESSIONS
   getUsers: function() { return this.getData().users || []; },
   registerUser: function(username, email, password, phone = '') {

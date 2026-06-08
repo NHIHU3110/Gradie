@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>Staff & Roles - Gradie Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <!-- Sidebar will be injected by JS -->
+        <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+        <main class="admin-main">
+            <header class="admin-header">
+                <div class="header-left">
+                    <button id="mobile-menu-btn" class="mobile-menu-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                    <h1>Quản Lý Nhân Sự (RBAC)</h1>
+                </div>
+                <div class="header-right">
+                    <div class="admin-profile">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=d8a94f&color=fff" alt="Admin" class="avatar">
+                        <span class="admin-name">Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <div class="dashboard-header" style="margin-bottom: 30px;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 style="margin:0; font-size: 2rem;">Đội Ngũ Nhân Viên</h2>
+                            <p style="color: var(--admin-muted); margin-top: 5px;">Quản lý vai trò, quyền hạn và xem báo cáo KPIs / hoa hồng của từng nhân sự.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nhân Viên</th>
+                                <th>Email / Liên Hệ</th>
+                                <th>Vai Trò (Role)</th>
+                                <th>Hoa Hồng / KPIs</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-staff-list">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="margin-top:0; margin-bottom:15px; font-family:'Playfair Display', serif; color:#1e293b; font-size:1.4rem;">Ghi Vết Thao Tác (Activity Logs)</h3>
+                    <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; max-height: 400px; overflow-y: auto;">
+                        <table style="margin: 0; box-shadow: none; border-radius: 0;">
+                            <thead style="position: sticky; top: 0; z-index: 10;">
+                                <tr>
+                                    <th>Thời gian</th>
+                                    <th>Nhân viên</th>
+                                    <th>Hành động</th>
+                                    <th>Chi tiết</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-activity-logs">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Staff Modal -->
+    <div id="staff-modal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>Cập Nhật Vai Trò & Hoa Hồng</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="staff-form">
+                    <input type="hidden" id="staff-id">
+                    <div class="form-group">
+                        <label>Tên nhân viên</label>
+                        <input type="text" id="staff-name" readonly style="background: #f8fafc; cursor: not-allowed;">
+                    </div>
+                    <div class="form-group">
+                        <label>Vai trò (Role)</label>
+                        <select id="staff-role" required>
+                            <option value="Admin">Admin (Toàn quyền)</option>
+                            <option value="Manager">Quản lý cửa hàng</option>
+                            <option value="Sales">Sales (Bán hàng)</option>
+                            <option value="Warehouse">Kho vận</option>
+                            <option value="Accountant">Kế toán</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tỷ lệ hoa hồng (%) - Dành cho Sales</label>
+                        <input type="number" id="staff-commission" min="0" max="100" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>Mục tiêu KPIs (VNĐ)</label>
+                        <input type="number" id="staff-kpi" min="0" step="1000000">
+                    </div>
+                    <div class="form-actions" style="margin-top: 20px;">
+                        <button type="button" class="outline-button close-modal">Hủy</button>
+                        <button type="submit" class="primary-button">Lưu Thay Đổi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data-store.js"></script>
+    <script src="js/admin-auth.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/admin-staff.js"></script>
+</body>
+</html>

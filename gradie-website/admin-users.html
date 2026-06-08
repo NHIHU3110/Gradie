@@ -78,6 +78,16 @@
                     </div>
                 </div>
 
+                <!-- Segmentation & Filter -->
+                <div style="margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap;">
+                    <select id="user-segment-filter" class="outline-button" style="padding: 8px 15px; border-radius: 8px; border: 1px solid #cbd5e1; background: #fff; cursor: pointer; min-width: 250px;">
+                        <option value="all">Tất cả khách hàng (All)</option>
+                        <option value="vip_only">Chỉ khách VIP (Chi tiêu > 3tr)</option>
+                        <option value="sleeping">Khách hàng ngủ đông (Chưa mua 3 tháng qua)</option>
+                        <option value="teddy_lovers">Tín đồ Gấu bông (Đã từng mua Gấu bông)</option>
+                    </select>
+                </div>
+
                 <div class="table-wrapper">
                     <table>
                         <thead>

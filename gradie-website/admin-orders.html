@@ -77,20 +77,36 @@
                     </div>
                 </div>
 
+                <!-- Bulk Actions -->
+                <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; display: none;" id="bulk-actions-container-orders">
+                    <span style="font-weight: 600; color: #1e293b;"><span id="selected-count-orders">0</span> đã chọn</span>
+                    <div style="height: 20px; width: 1px; background: #cbd5e1;"></div>
+                    <select id="bulk-status-select" class="outline-button" style="padding: 6px 12px; border-color: #cbd5e1;">
+                        <option value="">Đổi trạng thái...</option>
+                        <option value="Pending">Pending (Chờ duyệt)</option>
+                        <option value="Processing">Processing (Đang xử lý)</option>
+                        <option value="Shipped">Shipped (Đang giao)</option>
+                        <option value="Delivered">Delivered (Đã giao)</option>
+                        <option value="Cancelled">Cancelled (Hủy)</option>
+                    </select>
+                    <button class="outline-button" id="bulk-delete-orders-btn" style="border-color: #dc2626; color: #dc2626; padding: 6px 12px;">Xóa đơn hàng</button>
+                </div>
+
                 <div class="table-wrapper">
                     <table>
                         <thead>
                             <tr>
-                                <th>Order Number</th>
-                                <th>Date</th>
-                                <th>Customer Name</th>
-                                <th>Total</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th style="width: 40px; text-align: center;"><input type="checkbox" id="select-all-orders"></th>
+                                <th>Mã đơn</th>
+                                <th>Ngày đặt</th>
+                                <th>Khách hàng</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody id="admin-orders-list">
-                            <!-- Auto generated -->
+                            <!-- Populated by JS -->
                         </tbody>
                     </table>
                 </div>
