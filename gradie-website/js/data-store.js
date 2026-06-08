@@ -42,7 +42,9 @@ window.GradieStore = {
       data.users = defaultData.users;
       updated = true;
     }
-    if (!data.orders || data.orders.length < 40) {
+    const oldFakeIds = ['gau-bong-teddy', 'hoa-huong-duong', 'scrapbook-ky-niem', 'huy-chuong-danh-du', 'khung-anh-a4'];
+    const hasOldFakeIds = data.orders && data.orders.some(o => o.items && o.items.some(i => oldFakeIds.includes(i.id)));
+    if (!data.orders || data.orders.length < 40 || hasOldFakeIds) {
       data.orders = defaultData.orders;
       updated = true;
     }
