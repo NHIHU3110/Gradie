@@ -8,14 +8,36 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const users = window.GradieStore.getUsers();
                 const orders = window.GradieStore.getOrders();
+                const usersBody = document.getElementById('admin-users-list');
+
+                // Variables for Top 3 customers
+                const now = new Date();
+                const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                let userSpending = [];
 
                 if (!users || users.length === 0) {
-                    usersBody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 30px; color: #64748b;">No registered users yet.</td></tr>';
+                    if(usersBody) usersBody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 30px; color: #64748b;">No registered users yet.</td></tr>';
                 } else {
-                    usersBody.innerHTML = users.map(u => {
+                    const htmlRows = users.map(u => {
                         const userOrders = orders.filter(o => o.customerEmail && o.customerEmail.toLowerCase() === u.email.toLowerCase());
                         const orderCount = userOrders.length;
                         
+                        // Calculate total spent
+                        const totalSpent = userOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+                        
+                        // VIP Threshold: 2,000,000 VND
+                        const isVIP = totalSpent >= 2000000;
+                        const tierBadge = isVIP ? `<span style="background:#fef08a; color:#854d0e; padding:3px 8px; border-radius:12px; font-weight:600; font-size:0.75rem;">VIP</span>` : `<span style="background:#e2e8f0; color:#475569; padding:3px 8px; border-radius:12px; font-weight:600; font-size:0.75rem;">Thường</span>`;
+
+                        // Calculate weekly spending
+                        const weeklyOrders = userOrders.filter(o => {
+                            const oDate = new Date(o.createdAt || o.date || Date.now());
+                            return oDate >= oneWeekAgo && oDate <= now;
+                        });
+                        const weeklySpent = weeklyOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+                        
+                        userSpending.push({ user: u, weeklySpent: weeklySpent, totalSpent: totalSpent });
+
                         return `
                         <tr>
                             <td class="clickable-user" onclick="openUserDetailModal('${u.id}')" style="font-weight:600;">
@@ -25,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>${u.phone || 'N/A'}</td>
                             <td>${u.address || 'N/A'}</td>
                             <td style="font-weight:600; text-align:center;">${orderCount}</td>
+                            <td style="font-weight:600; color:#15803d;">${totalSpent.toLocaleString('vi-VN')}đ</td>
+                            <td>${tierBadge}</td>
                             <td>
                                 <div style="display:flex; gap:10px;">
                                     <button class="outline-button" onclick="openUserDetailModal('${u.id}')" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 4px; border: 1px solid #d8a94f; color: #d8a94f; background: transparent; cursor: pointer; font-weight: 500;">
@@ -37,7 +61,31 @@ document.addEventListener('DOMContentLoaded', () => {
                             </td>
                         </tr>
                         `;
-                    }).join('');
+                    });
+
+                    if(usersBody) usersBody.innerHTML = htmlRows.join('');
+                    
+                    // Render Top 3 customers
+                    const topCustomersContainer = document.getElementById('top-customers-container');
+                    if (topCustomersContainer) {
+                        const top3 = userSpending.filter(item => item.weeklySpent > 0).sort((a, b) => b.weeklySpent - a.weeklySpent).slice(0, 3);
+                        
+                        if (top3.length === 0) {
+                            topCustomersContainer.innerHTML = '<div style="color:#64748b; font-style:italic; padding:15px;">Chưa có khách hàng nào phát sinh đơn hàng trong 7 ngày qua.</div>';
+                        } else {
+                            const medals = ['🥇', '🥈', '🥉'];
+                            topCustomersContainer.innerHTML = top3.map((item, index) => `
+                                <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); position: relative; overflow: hidden;">
+                                    <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: ${index === 0 ? '#fbbf24' : index === 1 ? '#94a3b8' : '#b45309'};"></div>
+                                    <div style="font-size: 2.5rem; position: absolute; top: 10px; right: 15px; opacity: 0.2;">${medals[index]}</div>
+                                    <h4 style="margin: 0 0 10px 0; font-family: 'Playfair Display', serif; color: #1e293b; font-size: 1.2rem;">${item.user.username || 'N/A'}</h4>
+                                    <div style="font-size: 0.9rem; color: #475569; margin-bottom: 5px;"><strong>Email:</strong> ${item.user.email}</div>
+                                    <div style="font-size: 0.9rem; color: #475569; margin-bottom: 5px;"><strong>Tổng mua (từ trước):</strong> ${item.totalSpent.toLocaleString('vi-VN')}đ</div>
+                                    <div style="font-size: 1.15rem; color: #d8a94f; font-weight: 700; margin-top: 10px;">Chi tiêu tuần này: ${item.weeklySpent.toLocaleString('vi-VN')}đ</div>
+                                </div>
+                            `).join('');
+                        }
+                    }
                 }
             } catch (err) {
                 console.error("Error rendering users:", err);
