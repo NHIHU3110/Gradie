@@ -20,15 +20,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = document.getElementById('staff-name').value;
         const email = document.getElementById('staff-email').value;
         const phone = document.getElementById('staff-phone').value;
+        const passwordInput = document.getElementById('staff-password').value;
         const role = document.getElementById('staff-role').value;
         const commissionRate = parseFloat(document.getElementById('staff-commission').value) || 0;
         const kpi = parseFloat(document.getElementById('staff-kpi').value) || 0;
+
+        // Keep existing password if editing and left blank
+        let finalPassword = passwordInput;
+        if (id && !passwordInput) {
+            const existingStaff = globalStaffList.find(s => s.id === id);
+            finalPassword = existingStaff ? existingStaff.password : '123456';
+        } else if (!id && !passwordInput) {
+            finalPassword = '123456'; // Default password for new staff if not provided
+        }
 
         const staffData = {
             id: id || ('s-' + Date.now()),
             name,
             email,
             phone,
+            password: finalPassword,
             role,
             commissionRate,
             kpi,
@@ -166,6 +177,7 @@ window.openAddStaffModal = function() {
     document.getElementById('staff-name').value = '';
     document.getElementById('staff-email').value = '';
     document.getElementById('staff-phone').value = '';
+    document.getElementById('staff-password').value = '';
     document.getElementById('staff-role').value = 'Sales';
     document.getElementById('staff-commission').value = '0';
     document.getElementById('staff-kpi').value = '0';
@@ -179,6 +191,7 @@ window.editStaff = function(id) {
         document.getElementById('staff-name').value = s.name || '';
         document.getElementById('staff-email').value = s.email || '';
         document.getElementById('staff-phone').value = s.phone || '';
+        document.getElementById('staff-password').value = '';
         document.getElementById('staff-role').value = s.role || 'Sales';
         document.getElementById('staff-commission').value = s.commissionRate || 0;
         document.getElementById('staff-kpi').value = s.kpi || 0;

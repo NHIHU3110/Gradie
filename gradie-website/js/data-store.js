@@ -1863,7 +1863,8 @@ window.GradieStore = {
   
   // ACTIVITY LOGS
   getActivityLogs: function() { return this.getData().activityLogs || []; },
-  addActivityLog: function(action, details, user = "Admin") {
+  addActivityLog: function(action, details, user) {
+    if (!user) user = localStorage.getItem('GRADIE_ACTIVE_USER') || "System";
     let data = this.getData();
     if (!data.activityLogs) data.activityLogs = [];
     data.activityLogs.unshift({

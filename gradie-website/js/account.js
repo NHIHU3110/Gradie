@@ -18,9 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // ADMIN LOGIN INTERCEPT
-      if (email === 'admin@gradie.com' && pass === 'GradieAdmin123') {
+      const staffList = window.GradieStore.getStaff() || [];
+      const matchedStaff = staffList.find(s => s.email === email && (s.password === pass || (!s.password && pass === '123456')));
+
+      if (matchedStaff) {
         localStorage.setItem('GRADIE_ADMIN_AUTH', 'true');
-        msg.textContent = 'Thông tin đăng nhập Admin chính xác! Đang chuyển hướng đến trang quản trị...';
+        localStorage.setItem('GRADIE_ACTIVE_ROLE', matchedStaff.role);
+        localStorage.setItem('GRADIE_ACTIVE_USER', matchedStaff.name);
+        msg.textContent = `Đăng nhập hệ thống thành công! Xin chào ${matchedStaff.name}...`;
         msg.style.color = 'var(--champagne)';
         setTimeout(() => window.location.href = 'admin-dashboard.html', 1000);
         return;
