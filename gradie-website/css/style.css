@@ -86,6 +86,11 @@ a:hover {
   margin-bottom: 48px;
 }
 
+.section-cta {
+  text-align: center;
+  margin-top: 52px;
+}
+
 .section-kicker {
   font-size: 0.85rem;
   text-transform: uppercase;

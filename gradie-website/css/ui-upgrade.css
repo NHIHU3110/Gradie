@@ -1,0 +1,713 @@
+/*==========================================================
+  css/ui-upgrade.css
+  Visual Upgrade — Premium UI for All User-Facing Pages
+  Gradie 2026
+==========================================================*/
+
+/* ───────────────────────────────────────────
+   1. ENHANCED GLOBAL TOKENS
+─────────────────────────────────────────── */
+:root {
+  --shadow-sm:  0 2px 8px rgba(216,169,79,0.06);
+  --shadow-md:  0 8px 28px rgba(216,169,79,0.10);
+  --shadow-lg:  0 20px 60px rgba(216,169,79,0.14);
+  --shadow-hover: 0 24px 48px rgba(194,139,139,0.18);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --transition: all 0.38s cubic-bezier(0.25, 1, 0.5, 1);
+  --glass-bg: rgba(255,255,255,0.72);
+  --glass-border: rgba(216,169,79,0.18);
+}
+
+/* ───────────────────────────────────────────
+   2. HEADER — Glassmorphism Premium
+─────────────────────────────────────────── */
+.header {
+  background: rgba(255,255,255,0.88) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(216,169,79,0.15) !important;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.04), 0 1px 0 rgba(216,169,79,0.08) !important;
+  transition: box-shadow 0.3s ease !important;
+}
+
+/* Active nav link underline indicator */
+.nav-link.active, .nav a.active {
+  color: var(--champagne) !important;
+  background: rgba(216,169,79,0.10) !important;
+}
+
+/* Nav link hover — elegant underline */
+.nav a::after, .nav-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: var(--champagne);
+  border-radius: 2px;
+  transition: width 0.25s ease;
+  margin: 0 auto;
+}
+.nav a:hover::after, .nav-link:hover::after,
+.nav a.active::after, .nav-link.active::after {
+  width: 60%;
+}
+
+/* Announcement bar — shimmer effect */
+.announcement-bar {
+  background: linear-gradient(90deg, var(--champagne) 0%, #c49040 50%, var(--champagne) 100%) !important;
+  background-size: 200% auto !important;
+  animation: shimmer-bar 4s linear infinite !important;
+  letter-spacing: 2px !important;
+}
+@keyframes shimmer-bar {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ───────────────────────────────────────────
+   3. HERO SECTION — Premium Glow & Motion
+─────────────────────────────────────────── */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated soft bokeh blobs */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px; left: -180px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(216,169,79,0.09) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: blob-drift 10s ease-in-out infinite alternate;
+  z-index: 0;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; right: -120px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(233,160,141,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: blob-drift 13s ease-in-out infinite alternate-reverse;
+  z-index: 0;
+}
+@keyframes blob-drift {
+  0%   { transform: translate(0,0) scale(1); }
+  100% { transform: translate(40px, 30px) scale(1.12); }
+}
+.hero-content, .hero-img {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero h1 — gradient text */
+.hero-content h1 {
+  background: linear-gradient(135deg, #2C2C2C 0%, #4a3728 55%, var(--champagne) 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  font-size: 4rem !important;
+  line-height: 1.12 !important;
+  letter-spacing: -1px !important;
+}
+
+/* Hero image — premium frame */
+.hero-img img {
+  border-radius: 28px 90px 28px 28px !important;
+  box-shadow: 0 32px 70px rgba(216,169,79,0.18), 0 0 0 1px rgba(255,255,255,0.6) inset !important;
+}
+
+/* Hero badge — glass pill */
+.hero-badge {
+  background: rgba(255,255,255,0.85) !important;
+  backdrop-filter: blur(16px) !important;
+  box-shadow: 0 12px 40px rgba(216,169,79,0.2), 0 0 0 1px rgba(255,255,255,0.5) inset !important;
+  border: 1.5px solid rgba(216,169,79,0.2) !important;
+}
+
+/* ───────────────────────────────────────────
+   4. SECTION HEADERS — Elegant & Spaced
+─────────────────────────────────────────── */
+.section-kicker {
+  font-size: 0.78rem !important;
+  letter-spacing: 3px !important;
+  color: var(--champagne) !important;
+  font-weight: 700 !important;
+  position: relative;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px !important;
+}
+.section-kicker::before,
+.section-kicker::after {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--champagne);
+  opacity: 0.5;
+}
+
+.section-title {
+  font-size: 2.8rem !important;
+  letter-spacing: -0.5px !important;
+  line-height: 1.2 !important;
+  color: var(--soft-black) !important;
+}
+
+/* ───────────────────────────────────────────
+   5. PRODUCT CARDS — Premium Hover Experience
+─────────────────────────────────────────── */
+.product-card {
+  border-radius: 20px !important;
+  box-shadow: var(--shadow-sm) !important;
+  border: 1px solid rgba(216,169,79,0.12) !important;
+  transition: var(--transition) !important;
+  background: var(--white) !important;
+  overflow: hidden !important;
+}
+.product-card:hover {
+  transform: translateY(-8px) scale(1.01) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border-color: rgba(216,169,79,0.35) !important;
+}
+
+/* Product image zoom */
+.product-image-wrapper {
+  background: linear-gradient(135deg, #fdf9f4 0%, #fff8f0 100%) !important;
+}
+.product-card:hover .product-image-wrapper img.p-img {
+  transform: scale(1.08) !important;
+}
+
+/* Badge — pill with glow */
+.badge {
+  background: linear-gradient(135deg, var(--peach) 0%, var(--dusty-rose) 100%) !important;
+  box-shadow: 0 4px 12px rgba(233,160,141,0.35) !important;
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.2px !important;
+}
+
+/* Add to cart button */
+.btn-add-cart {
+  background: linear-gradient(135deg, #2C2C2C 0%, #3d3d3d 100%) !important;
+  border-radius: 10px !important;
+  letter-spacing: 1px !important;
+  transition: var(--transition) !important;
+}
+.btn-add-cart:hover {
+  background: linear-gradient(135deg, var(--champagne) 0%, #c49040 100%) !important;
+  box-shadow: 0 6px 20px rgba(216,169,79,0.30) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ───────────────────────────────────────────
+   6. CATEGORY CARDS (homepage)
+─────────────────────────────────────────── */
+.cat-card {
+  border-radius: 24px !important;
+  box-shadow: var(--shadow-md) !important;
+  transition: var(--transition) !important;
+}
+.cat-card:hover {
+  transform: translateY(-12px) !important;
+  box-shadow: var(--shadow-hover) !important;
+}
+.cat-overlay {
+  background: linear-gradient(to top, rgba(23,24,29,0.92) 0%, rgba(23,24,29,0.25) 65%, transparent 100%) !important;
+  padding: 36px !important;
+}
+.cat-overlay h3 {
+  font-size: 1.9rem !important;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+  margin-bottom: 8px !important;
+}
+.cat-overlay span {
+  letter-spacing: 2.5px !important;
+  opacity: 0.9 !important;
+  font-size: 0.8rem !important;
+}
+
+/* ───────────────────────────────────────────
+   7. TESTIMONIAL CARDS — Enhanced Glass
+─────────────────────────────────────────── */
+.testimonials {
+  background: linear-gradient(135deg, #c49040 0%, var(--champagne) 50%, #b8853a 100%) !important;
+}
+.testi-card {
+  background: rgba(255,255,255,0.13) !important;
+  border: 1px solid rgba(255,255,255,0.22) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.15) !important;
+  transition: var(--transition) !important;
+  padding: 48px 36px !important;
+}
+.testi-card:hover {
+  background: rgba(255,255,255,0.20) !important;
+  transform: translateY(-10px) !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.2) !important;
+}
+.testi-stars {
+  font-size: 1.2rem !important;
+  letter-spacing: 4px !important;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)) !important;
+  margin-bottom: 24px !important;
+}
+.testi-text {
+  font-size: 1.08rem !important;
+  line-height: 1.75 !important;
+  font-style: italic !important;
+}
+.testi-author {
+  font-size: 1.15rem !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* ───────────────────────────────────────────
+   8. STORY SECTION — Enhanced Layout
+─────────────────────────────────────────── */
+.story-section {
+  background: linear-gradient(160deg, #fdfaf5 0%, var(--ivory) 60%, #fffbf0 100%) !important;
+  position: relative;
+}
+.story-img img {
+  border-radius: 24px !important;
+  box-shadow: -24px 24px 0 rgba(216,169,79,0.18) !important;
+  border: 1px solid rgba(216,169,79,0.15) !important;
+  transition: var(--transition) !important;
+}
+.story-img:hover img {
+  transform: translateX(8px) translateY(-8px) !important;
+  box-shadow: -32px 32px 0 rgba(216,169,79,0.22) !important;
+}
+.story-text h2 {
+  font-size: 3rem !important;
+  line-height: 1.18 !important;
+  letter-spacing: -0.5px !important;
+}
+
+/* ───────────────────────────────────────────
+   9. BUTTONS — Premium Micro-interactions
+─────────────────────────────────────────── */
+.btn-primary, .peach-button {
+  background: linear-gradient(135deg, var(--peach) 0%, var(--dusty-rose) 100%) !important;
+  box-shadow: 0 8px 24px rgba(233,160,141,0.35) !important;
+  letter-spacing: 1.2px !important;
+  transition: var(--transition) !important;
+}
+.btn-primary:hover, .peach-button:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 18px 36px rgba(194,139,139,0.4) !important;
+}
+
+.btn-secondary, .outline-button {
+  border: 2px solid var(--champagne) !important;
+  transition: var(--transition) !important;
+  letter-spacing: 1.2px !important;
+}
+.btn-secondary:hover, .outline-button:hover {
+  background: var(--champagne) !important;
+  color: white !important;
+  transform: translateY(-5px) !important;
+  box-shadow: 0 15px 30px rgba(216,169,79,0.30) !important;
+}
+
+/* ───────────────────────────────────────────
+   10. ABOUT PAGE — Visual Premium Upgrade
+─────────────────────────────────────────── */
+
+/* About Hero */
+.about-hero {
+  background: linear-gradient(135deg, #fdfaf5 0%, #fffcf4 50%, #fff9f0 100%) !important;
+  border: 1px solid rgba(216,169,79,0.15) !important;
+  border-radius: 28px !important;
+  padding: 90px 40px 70px !important;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  margin-bottom: 80px !important;
+}
+.about-hero::before {
+  content: '✦';
+  position: absolute;
+  top: 30px; right: 60px;
+  font-size: 5rem;
+  color: var(--champagne);
+  opacity: 0.06;
+  font-family: serif;
+  pointer-events: none;
+}
+.about-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(216,169,79,0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.about-hero h1 {
+  font-size: 3.6rem !important;
+  letter-spacing: -1px !important;
+  background: linear-gradient(135deg, var(--soft-black) 0%, #4a3a28 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  margin-bottom: 24px !important;
+}
+.about-hero p {
+  font-size: 1.2rem !important;
+  line-height: 1.85 !important;
+  color: var(--taupe) !important;
+  max-width: 660px !important;
+  margin: 0 auto !important;
+}
+
+/* Value Cards */
+.value-card {
+  border-radius: 20px !important;
+  border: 1px solid rgba(216,169,79,0.12) !important;
+  padding: 44px 32px !important;
+  background: var(--white) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: var(--transition) !important;
+  position: relative;
+  overflow: hidden;
+}
+.value-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--champagne), var(--peach));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 20px 20px 0 0;
+}
+.value-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border-color: rgba(216,169,79,0.25) !important;
+}
+.value-card:hover::before {
+  opacity: 1;
+}
+.value-icon {
+  width: 68px !important;
+  height: 68px !important;
+  line-height: 68px !important;
+  font-size: 2rem !important;
+  background: linear-gradient(135deg, var(--champagne-light) 0%, #ffe9c5 100%) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 6px 18px rgba(216,169,79,0.15) !important;
+  margin-bottom: 24px !important;
+}
+.value-card h3 {
+  font-size: 1.45rem !important;
+  margin-bottom: 16px !important;
+}
+.value-card p {
+  font-size: 0.98rem !important;
+  line-height: 1.75 !important;
+}
+
+/* Stats Banner */
+.stats-banner {
+  background: linear-gradient(135deg, #fdfaf5 0%, #fff9f0 100%) !important;
+  border: 1px solid rgba(216,169,79,0.18) !important;
+  border-radius: 28px !important;
+  padding: 56px 40px !important;
+  box-shadow: var(--shadow-md) !important;
+  position: relative;
+  overflow: hidden;
+}
+.stats-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(216,169,79,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.stat-number {
+  font-size: 3.2rem !important;
+  font-weight: 700 !important;
+  background: linear-gradient(135deg, var(--champagne) 0%, #c49040 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  margin-bottom: 10px !important;
+  line-height: 1 !important;
+}
+.stat-label {
+  font-size: 0.8rem !important;
+  letter-spacing: 2px !important;
+  color: var(--taupe) !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+}
+
+/* Craft Section */
+.craft-img {
+  border-radius: 24px !important;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.08) !important;
+  border: 1px solid rgba(216,169,79,0.12) !important;
+  transition: var(--transition) !important;
+  height: 440px !important;
+}
+.craft-img:hover {
+  transform: scale(1.02) !important;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.12) !important;
+}
+.craft-content h2 {
+  font-size: 2.6rem !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.5px !important;
+  margin-bottom: 24px !important;
+}
+.craft-content p {
+  font-size: 1.05rem !important;
+  line-height: 1.85 !important;
+}
+
+/* Quick Navigation Cards */
+.quick-card {
+  border-radius: 20px !important;
+  border: 1px solid rgba(216,169,79,0.14) !important;
+  padding: 36px 32px !important;
+  transition: var(--transition) !important;
+  background: var(--white) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+.quick-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: var(--shadow-md) !important;
+  border-color: rgba(216,169,79,0.30) !important;
+}
+.quick-card::before {
+  border-radius: 0 !important;
+  width: 100% !important;
+  height: 3px !important;
+  top: 0; bottom: auto !important;
+  background: linear-gradient(90deg, var(--champagne), var(--peach)) !important;
+}
+.quick-card h4 {
+  font-size: 1.3rem !important;
+  margin-bottom: 14px !important;
+}
+.quick-card p {
+  font-size: 0.95rem !important;
+  line-height: 1.7 !important;
+  margin-bottom: 20px !important;
+}
+.quick-link {
+  color: var(--champagne) !important;
+  font-weight: 700 !important;
+  font-size: 0.83rem !important;
+  letter-spacing: 0.8px !important;
+  transition: gap 0.2s ease !important;
+}
+.quick-link:hover {
+  gap: 10px !important;
+}
+
+/* ───────────────────────────────────────────
+   11. PRODUCTS PAGE — Hero Banner
+─────────────────────────────────────────── */
+.products-hero {
+  background: linear-gradient(135deg, #fdfbf7 0%, #fff9f0 60%, #fdf5e8 100%);
+  padding: 72px 24px 56px;
+  text-align: center;
+  border-bottom: 1px solid rgba(216,169,79,0.12);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+.products-hero::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(216,169,79,0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.products-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  color: var(--soft-black);
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+.products-hero p {
+  font-size: 1.1rem;
+  color: var(--taupe);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* ───────────────────────────────────────────
+   12. FOOTER — Elevated Premium
+─────────────────────────────────────────── */
+.footer {
+  background: linear-gradient(180deg, var(--ivory) 0%, #fdfaf5 100%) !important;
+  border-top: 1px solid rgba(216,169,79,0.15) !important;
+  padding: 88px 0 48px !important;
+  margin-top: 0 !important;
+}
+.footer-logo {
+  font-size: 2.1rem !important;
+  background: linear-gradient(135deg, var(--soft-black) 0%, #4a3a28 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  letter-spacing: 1px !important;
+}
+.footer-tagline {
+  font-size: 1.35rem !important;
+  opacity: 0.85 !important;
+}
+.footer-col h4 {
+  font-size: 0.82rem !important;
+  letter-spacing: 2px !important;
+}
+.footer-col a {
+  font-size: 0.9rem !important;
+  transition: var(--transition) !important;
+}
+.footer-col a:hover {
+  color: var(--champagne) !important;
+  transform: translateX(6px) !important;
+}
+.footer-bottom {
+  font-size: 0.82rem !important;
+  letter-spacing: 0.8px !important;
+  opacity: 0.7 !important;
+}
+
+/* ───────────────────────────────────────────
+   13. SCROLL ANIMATIONS (Intersection Observer via CSS)
+─────────────────────────────────────────── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeSlideUp 0.7s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* ───────────────────────────────────────────
+   14. PAGE HEADER — Upgraded
+─────────────────────────────────────────── */
+.page-header {
+  background: linear-gradient(135deg, #fdfbf7 0%, #fff9f2 60%, #fdf5e8 100%) !important;
+  padding: 72px 40px 56px !important;
+  text-align: center !important;
+  border-bottom: 1px solid rgba(216,169,79,0.10) !important;
+  margin-bottom: 0 !important;
+  position: relative;
+  overflow: hidden;
+}
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; right: -60px;
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, rgba(233,160,141,0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.page-header .section-title {
+  font-size: 3.2rem !important;
+  margin-top: 8px !important;
+}
+.page-header .section-kicker {
+  margin-bottom: 4px !important;
+}
+
+/* ───────────────────────────────────────────
+   15. FORM INPUTS — Premium Focus States
+─────────────────────────────────────────── */
+.input:focus, input:focus, select:focus, textarea:focus {
+  border-color: var(--champagne) !important;
+  box-shadow: 0 0 0 4px rgba(216,169,79,0.12) !important;
+}
+
+/* ───────────────────────────────────────────
+   16. CART SUMMARY PANEL — Elevated
+─────────────────────────────────────────── */
+.cart-summary-panel {
+  background: linear-gradient(160deg, #fdfaf5 0%, #fffbf0 100%) !important;
+  border: 1px solid rgba(216,169,79,0.18) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+.cart-items-panel {
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* ───────────────────────────────────────────
+   17. CART PAGE HEADER
+─────────────────────────────────────────── */
+.cart-grid-container {
+  padding-top: 40px !important;
+}
+
+/* ───────────────────────────────────────────
+   18. PRODUCT DETAIL — Premium
+─────────────────────────────────────────── */
+.detail-main-img-box {
+  border-radius: 20px !important;
+  box-shadow: var(--shadow-md) !important;
+  border: 1px solid rgba(216,169,79,0.10) !important;
+}
+.detail-title {
+  letter-spacing: -0.5px !important;
+}
+.detail-price {
+  font-size: 2.2rem !important;
+  background: linear-gradient(135deg, var(--peach) 0%, var(--dusty-rose) 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* ───────────────────────────────────────────
+   19. SCROLLBAR — Custom Branded
+─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #fdfbf7; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--champagne), var(--peach));
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--champagne); }
+
+/* ───────────────────────────────────────────
+   20. RESPONSIVE OVERRIDES
+─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-content h1 { font-size: 2.8rem !important; }
+  .about-hero h1   { font-size: 2.6rem !important; }
+  .section-title   { font-size: 2.2rem !important; }
+}
+@media (max-width: 768px) {
+  .hero-content h1 { font-size: 2.2rem !important; letter-spacing: -0.5px !important; }
+  .about-hero      { padding: 60px 20px 48px !important; border-radius: 20px !important; }
+  .about-hero h1   { font-size: 2rem !important; }
+  .about-hero p    { font-size: 1rem !important; }
+  .testi-card      { padding: 36px 24px !important; }
+  .value-card      { padding: 36px 24px !important; }
+  .quick-card      { padding: 28px 24px !important; }
+  .stats-banner    { padding: 40px 20px !important; border-radius: 20px !important; }
+  .stat-number     { font-size: 2.4rem !important; }
+  .footer          { padding: 60px 0 32px !important; }
+  .page-header     { padding: 48px 20px 40px !important; }
+  .page-header .section-title { font-size: 2.4rem !important; }
+}
+@media (max-width: 480px) {
+  .hero-content h1 { font-size: 1.9rem !important; }
+  .section-title   { font-size: 1.8rem !important; }
+  .stat-number     { font-size: 2rem !important; }
+}

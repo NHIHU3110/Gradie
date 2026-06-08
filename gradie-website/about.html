@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/icons.css?v=1780166734">
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/ui-upgrade.css">
   <link rel="stylesheet" href="css/toast.css?v=1780167435">
   <style>
     /* ── About Us Custom CSS ── */
@@ -270,7 +271,7 @@
         <h2>Chi Tiết Thủ Công Sang Trọng</h2>
         <p>Tại Gradie, mỗi hộp quà đều là một tác phẩm nghệ thuật. Từ việc tuyển chọn satin cao cấp dày dặn cho băng đeo cử nhân đến sự tỉ mỉ chọn chỉ thêu vàng kim lấp lánh, chúng tôi đảm bảo không bỏ sót bất kỳ chi tiết nhỏ nào.</p>
         <p>Đội ngũ nghệ nhân tận tâm của chúng tôi hoàn thiện mỗi hộp quà bằng giấy gói thân thiện với môi trường, ruy băng satin thắt tay và con dấu sáp đóng dấu thủ công trực tiếp. Chúng tôi không chỉ đóng gói quà tặng; chúng tôi tạo ra những trải nghiệm mà cô ấy sẽ trân quý suốt đời.</p>
-        <a href="products.html" class="btn-primary" style="margin-top: 10px; border-radius: 8px;">Khám Phá Sản Phẩm</a>
+        <a href="products.html" class="btn-primary">Khám Phá Sản Phẩm</a>
       </div>
     </section>
 
@@ -371,5 +372,12 @@
   <script src="js/global-data.js?v=1780167435"></script>
   <script src="js/data-store.js?v=1780167435"></script>
   <script src="js/main.js?v=1780167435"></script>
+  <script>
+    const revealEls = document.querySelectorAll('.craft-section, .values-section, .stats-banner, .quick-nav-section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('fade-up'); observer.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
