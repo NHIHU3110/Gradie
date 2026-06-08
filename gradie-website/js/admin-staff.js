@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('staff-modal');
     const closeBtns = modal.querySelectorAll('.close-modal');
     closeBtns.forEach(btn => btn.addEventListener('click', () => {
-        modal.classList.remove('active');
+        modal.style.display = 'none';
     }));
 
     // Form Submit
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
             }
 
-            modal.classList.remove('active');
+            modal.style.display = 'none';
             showToast('Lưu thông tin nhân sự thành công!', 'success');
             fetchStaffFromMongo();
             if(window.renderActivityLogs) window.renderActivityLogs();
@@ -149,7 +149,7 @@ window.openAddStaffModal = function() {
     document.getElementById('staff-role').value = 'Sales';
     document.getElementById('staff-commission').value = '0';
     document.getElementById('staff-kpi').value = '0';
-    document.getElementById('staff-modal').classList.add('active');
+    document.getElementById('staff-modal').style.display = 'block';
 };
 
 window.editStaff = function(id) {
@@ -163,7 +163,7 @@ window.editStaff = function(id) {
         document.getElementById('staff-commission').value = s.commissionRate || 0;
         document.getElementById('staff-kpi').value = s.kpi || 0;
         
-        document.getElementById('staff-modal').classList.add('active');
+        document.getElementById('staff-modal').style.display = 'block';
     }
 };
 
