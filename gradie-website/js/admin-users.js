@@ -36,8 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         const userOrders = orders.filter(o => o.customerEmail && o.customerEmail.toLowerCase() === u.email.toLowerCase());
                         const orderCount = userOrders.length;
                         
-                        // Calculate total spent
-                        const totalSpent = userOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+                        // Calculate total spent (excluding Cancelled/Refunded)
+                        const validUserOrders = userOrders.filter(o => {
+                            const status = (o.status || '').toLowerCase();
+                            return !['cancelled', 'refunded'].includes(status);
+                        });
+                        const totalSpent = validUserOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
                         
                         // Tier Logic
                         let tierBadge = `<span style="background:#e2e8f0; color:#475569; padding:3px 8px; border-radius:12px; font-weight:600; font-size:0.75rem;">Đồng</span>`;
