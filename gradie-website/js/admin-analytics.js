@@ -682,7 +682,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
             <!-- Section: Key Highlights -->
             <div style="margin-bottom: 30px;">
-                <h4 style="margin: 0 0 15px 0; font-size: 1.1rem; color: #1e293b; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px;">📊 Điểm Sáng Kinh Doanh & Tồn Kho</h4>
+                <h4 style="margin: 0 0 15px 0; font-size: 1.1rem; color: #1e293b; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d8a94f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                    Điểm Sáng Kinh Doanh & Tồn Kho
+                </h4>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex-wrap: wrap;">
                     <div>
                         <div style="font-weight: 600; color: #475569; font-size: 0.9rem; margin-bottom: 8px;">Sản phẩm bán chạy nhất:</div>
@@ -709,7 +716,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <span style="font-size: 0.9rem; font-weight: 600; color: #991b1b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">${p.name}</span>
                                     <span style="font-size: 0.8rem; background: #fecaca; color: #991b1b; padding: 2px 8px; border-radius: 20px; font-weight: 700;">Tồn: ${p.stock}</span>
                                 </div>
-                            `).join('') : '<div style="color: #10b981; font-weight: 600; font-size: 0.9rem; padding: 12px; background: #ecfdf5; border-radius: 8px;">✨ Tuyệt vời! Không có hàng tồn đọng.</div>'}
+                            `).join('') : `
+                                <div style="color: #10b981; font-weight: 600; font-size: 0.9rem; padding: 12px; background: #ecfdf5; border-radius: 8px; display: flex; align-items: center; gap: 8px;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                                    Tuyệt vời! Không có hàng tồn đọng.
+                                </div>
+                            `}
                         </div>
                     </div>
                 </div>
@@ -718,7 +730,15 @@ document.addEventListener('DOMContentLoaded', () => {
             <!-- Section: Staff Performance -->
             ${salesPerformance.length > 0 ? `
             <div style="margin-bottom: 30px;">
-                <h4 style="margin: 0 0 15px 0; font-size: 1.1rem; color: #1e293b; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px;">👥 Hiệu Suất Đội Ngũ Kinh Doanh</h4>
+                <h4 style="margin: 0 0 15px 0; font-size: 1.1rem; color: #1e293b; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d8a94f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Hiệu Suất Đội Ngũ Kinh Doanh
+                </h4>
                 <div style="background: #f8fafc; border-radius: 12px; padding: 15px; border: 1px solid #e2e8f0;">
                     <div style="margin-bottom: 12px; font-size: 0.9rem; color: #475569;">
                         Nhân viên dẫn đầu KPI: <strong>${topRep ? `${topRep.name} (${topRep.progress}% KPI)` : 'N/A'}</strong>
@@ -742,25 +762,40 @@ document.addEventListener('DOMContentLoaded', () => {
     
             <!-- Section: Strategic Recommendations -->
             <div>
-                <h4 style="margin: 0 0 15px 0; font-size: 1.1rem; color: #1e293b; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px;">💡 Đề Xuất Chiến Lược Từ AI</h4>
+                <h4 style="margin: 0 0 15px 0; font-size: 1.1rem; color: #1e293b; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d8a94f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .3 2.5 1 3.5l1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                    </svg>
+                    Đề Xuất Chiến Lược Từ AI
+                </h4>
                 <div style="display: flex; flex-direction: column; gap: 12px;">
                     ${recommendations.map(rec => {
                         let bgColor = '#f8fafc';
                         let borderColor = '#cbd5e1';
                         let titleColor = '#334155';
+                        let iconSvg = '';
                         if (rec.type === 'warning') {
                             bgColor = '#fffbeb'; borderColor = '#fcd34d'; titleColor = '#b45309';
+                            iconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
                         } else if (rec.type === 'success') {
                             bgColor = '#f0fdf4'; borderColor = '#86efac'; titleColor = '#15803d';
+                            iconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
                         } else if (rec.type === 'danger') {
                             bgColor = '#fdf2f8'; borderColor = '#fbcfe8'; titleColor = '#be185d';
+                            iconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#be185d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
                         } else if (rec.type === 'info') {
                             bgColor = '#eff6ff'; borderColor = '#93c5fd'; titleColor = '#1d4ed8';
+                            iconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`;
                         }
                         return `
                             <div style="background: ${bgColor}; border: 1px solid ${borderColor}; border-left: 5px solid ${borderColor}; border-radius: 8px; padding: 15px;">
-                                <h5 style="margin: 0 0 5px 0; font-size: 0.95rem; font-weight: 700; color: ${titleColor};">${rec.title}</h5>
-                                <p style="margin: 0; font-size: 0.88rem; color: #475569; line-height: 1.6;">${rec.content}</p>
+                                <h5 style="margin: 0 0 8px 0; font-size: 0.95rem; font-weight: 700; color: ${titleColor}; display: flex; align-items: center; gap: 8px;">
+                                    ${iconSvg}
+                                    ${rec.title}
+                                </h5>
+                                <p style="margin: 0 0 0 26px; font-size: 0.88rem; color: #475569; line-height: 1.6;">${rec.content}</p>
                             </div>
                         `;
                     }).join('')}
