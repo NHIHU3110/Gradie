@@ -37,14 +37,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const method = id ? 'PUT' : 'POST';
-            const res = await fetch('/api/staff', {
-                method: method,
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(staffData)
-            });
+            let apiSuccess = false;
+            try {
+                const res = await fetch('/api/staff', {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(staffData)
+                });
+                if (res.ok) apiSuccess = true;
+            } catch (e) {
+                console.warn('Network error when fetching /api/staff', e);
+            }
 
-            if (!res.ok) {
-                console.warn('API save failed, falling back to Local Storage.');
+            if (!apiSuccess) {
+                console.warn('API save failed or unavailable, falling back to Local Storage.');
                 if (window.GradieStore) {
                     let staffList = window.GradieStore.getStaff() || [];
                     if (id) {
@@ -70,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(window.renderActivityLogs) window.renderActivityLogs();
         } catch (error) {
             console.error('Error saving staff:', error);
-            showToast('Lỗi khi lưu nhân sự!', 'error');
+            showToast('Lỗi hệ thống khi lưu nhân sự!', 'error');
         }
     });
 });
@@ -184,8 +190,15 @@ window.editStaff = function(id) {
 window.deleteStaff = async function(id) {
     if(confirm('Bạn có chắc chắn muốn xóa nhân viên này khỏi hệ thống? Dữ liệu không thể khôi phục!')) {
         try {
-            const res = await fetch('/api/staff?id=' + id, { method: 'DELETE' });
-            if (!res.ok) {
+            let apiSuccess = false;
+            try {
+                const res = await fetch('/api/staff?id=' + id, { method: 'DELETE' });
+                if (res.ok) apiSuccess = true;
+            } catch (e) {
+                console.warn('Network error deleting staff', e);
+            }
+
+            if (!apiSuccess) {
                 console.warn('API delete failed, falling back to Local Storage.');
                 if (window.GradieStore) {
                     let staffList = window.GradieStore.getStaff() || [];
