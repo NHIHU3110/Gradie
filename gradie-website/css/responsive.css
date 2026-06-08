@@ -450,36 +450,7 @@
     flex-direction: column !important;
   }
 
-  .sidebar {
-    width: 100% !important;
-    height: auto !important;
-    position: static !important;
-    overflow-x: auto;
-    min-height: unset !important;
-  }
-
-  .sidebar-nav {
-    display: flex !important;
-    flex-direction: row !important;
-    overflow-x: auto !important;
-    gap: 4px;
-    padding: 8px !important;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .sidebar-nav::-webkit-scrollbar { display: none; }
-
-  .sidebar-nav a {
-    flex-shrink: 0 !important;
-    padding: 8px 12px !important;
-    border-radius: 8px !important;
-    white-space: nowrap;
-    font-size: 0.78rem !important;
-  }
-
-  .sidebar-nav a svg {
-    display: none !important;
-  }
+  /* Sidebar relies on global hamburger logic */
 
   .sidebar-header {
     padding: 16px !important;
