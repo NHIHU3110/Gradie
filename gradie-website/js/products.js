@@ -126,7 +126,10 @@ document.addEventListener('DOMContentLoaded', () => {
       renderGrid(trendingGrid, products.filter(p => p.isTrending || p.rating >= 4.8).slice(0, 4));
   }
   if (featuredGrid) {
-      renderGrid(featuredGrid, products.filter(p => p.isFeatured || p.pr  // Product Detail Page Logic
+      renderGrid(featuredGrid, products.filter(p => p.isFeatured || p.price >= 500000).slice(0, 4));
+  }
+  
+  // Product Detail Page Logic
   const detailContainer = document.getElementById('product-detail-container');
   if (detailContainer) {
       const urlParams = new URLSearchParams(window.location.search);
@@ -354,14 +357,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
               if (typeof showToast === 'function') {
                 showToast('Sản phẩm này có nhiều lựa chọn, vui lòng chọn phiên bản trước khi thêm vào giỏ! ✨', 'info');
-              }
-            }, 400);
-          }
-      } else {
-          detailContainer.innerHTML = '<p style="text-align:center; padding:100px;">Không tìm thấy sản phẩm.</p>';
-      }
-  }
-});��c khi thêm vào giỏ! ✨', 'info');
               }
             }, 400);
           }
