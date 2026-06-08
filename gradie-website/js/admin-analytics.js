@@ -5,27 +5,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const products = window.GradieStore.getProducts() || [];
     const users = window.GradieStore.getUsers() || [];
 
-    // 1. Calculate Cash Flow
-    let cashFlow = 0;
-    let pendingCod = 0;
+    // Helper to format currency
+    const formatMoney = (amount) => Number(amount).toLocaleString('vi-VN') + 'đ';
+
+    // 1. Calculate KPIs
+    let totalRevenue = 0;
+    let validOrdersCount = 0;
+    const validStatuses = ['shipped', 'delivered', 'completed'];
     
     orders.forEach(o => {
         const status = (o.status || '').toLowerCase();
         const total = Number(o.total) || 0;
-        
-        if (status === 'delivered' || status === 'completed') {
-            cashFlow += total;
-        } else if (status === 'shipped' || status === 'processing' || status === 'pending') {
-            if ((o.paymentMethod || '').toLowerCase() === 'cod') {
-                pendingCod += total;
-            }
+        if (validStatuses.includes(status)) {
+            totalRevenue += total;
+            validOrdersCount++;
         }
     });
 
-    document.getElementById('total-cashflow').innerText = cashFlow.toLocaleString('vi-VN') + 'đ';
-    document.getElementById('pending-cod').innerText = pendingCod.toLocaleString('vi-VN') + 'đ';
+    const aov = validOrdersCount > 0 ? (totalRevenue / validOrdersCount) : 0;
 
-    // 2. Customers
+    document.getElementById('total-revenue').innerText = formatMoney(totalRevenue);
+    document.getElementById('total-orders').innerText = validOrdersCount;
+    document.getElementById('avg-order-value').innerText = formatMoney(Math.round(aov));
+
+    // Customers & VIPs
     let vipCount = 0;
     users.forEach(u => {
         const userOrders = orders.filter(o => o.customerEmail && o.customerEmail.toLowerCase() === u.email.toLowerCase());
@@ -34,23 +37,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     document.getElementById('total-customers').innerText = users.length;
-    document.getElementById('vip-count').innerText = `${vipCount} khách VIP`;
+    document.getElementById('vip-count').innerText = `${vipCount} Khách VIP`;
 
-    // 3. Product Performance (Best Sellers & Dead Stock)
+    // 2. Product Performance (Best Sellers & Dead Stock) & Category Distribution
     let productSales = {};
+    let categorySales = {};
+
     products.forEach(p => {
-        productSales[p.id] = { name: p.name, sold: 0, revenue: 0, stock: p.stock || 0 };
+        productSales[p.id] = { 
+            name: p.name, 
+            image: p.image || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=100',
+            category: p.category || 'Uncategorized',
+            sold: 0, 
+            revenue: 0, 
+            stock: p.stock || 0 
+        };
+        if (!categorySales[p.category || 'Uncategorized']) {
+            categorySales[p.category || 'Uncategorized'] = 0;
+        }
     });
 
     orders.forEach(o => {
         const status = (o.status || '').toLowerCase();
-        if (status === 'cancelled') return;
+        if (!validStatuses.includes(status)) return;
 
         if (o.items && Array.isArray(o.items)) {
             o.items.forEach(item => {
+                const qty = item.quantity || 1;
+                const rev = item.price * qty;
+                
                 if (productSales[item.id]) {
-                    productSales[item.id].sold += (item.quantity || 1);
-                    productSales[item.id].revenue += (item.price * (item.quantity || 1));
+                    productSales[item.id].sold += qty;
+                    productSales[item.id].revenue += rev;
+                    categorySales[productSales[item.id].category] += qty;
+                } else {
+                    // For items deleted from catalog but in orders
+                    if (!categorySales['Khác']) categorySales['Khác'] = 0;
+                    categorySales['Khác'] += qty;
                 }
             });
         }
@@ -62,59 +85,156 @@ document.addEventListener('DOMContentLoaded', () => {
     const bestSellers = [...salesArray].sort((a, b) => b.sold - a.sold).slice(0, 5);
     const bestSellersHtml = bestSellers.map(p => `
         <tr>
-            <td style="font-weight: 500;">${p.name}</td>
-            <td style="text-align:center; font-weight: 600; color:#15803d;">${p.sold}</td>
-            <td style="text-align:right;">${p.revenue.toLocaleString('vi-VN')}đ</td>
+            <td>
+                <div class="product-cell">
+                    <img src="${p.image}" alt="${p.name}" class="product-img">
+                    <div class="product-info">
+                        <span class="product-name">${p.name}</span>
+                        <span class="product-cat">${p.category}</span>
+                    </div>
+                </div>
+            </td>
+            <td style="text-align:center; font-weight: 600; color:#1e293b;">${p.sold}</td>
+            <td style="text-align:right; font-weight: 600; color:#10b981;">${formatMoney(p.revenue)}</td>
         </tr>
     `).join('');
-    document.getElementById('best-sellers-list').innerHTML = bestSellersHtml || '<tr><td colspan="3" style="text-align:center; color:#64748b;">Chưa có dữ liệu</td></tr>';
+    document.getElementById('best-sellers-list').innerHTML = bestSellersHtml || '<tr><td colspan="3" style="text-align:center; color:#64748b; padding:20px;">Chưa có dữ liệu</td></tr>';
 
     // Dead Stock (0 sold but has stock > 0)
-    const deadStock = salesArray.filter(p => p.sold === 0 && p.stock > 0).sort((a, b) => b.stock - a.stock);
+    const deadStock = salesArray.filter(p => p.sold === 0 && p.stock > 0).sort((a, b) => b.stock - a.stock).slice(0, 5);
     const deadStockHtml = deadStock.map(p => `
         <tr>
-            <td style="font-weight: 500;">${p.name}</td>
-            <td style="text-align:center; font-weight: 600; color:#dc2626;">${p.stock}</td>
+            <td>
+                <div class="product-cell">
+                    <img src="${p.image}" alt="${p.name}" class="product-img">
+                    <div class="product-info">
+                        <span class="product-name">${p.name}</span>
+                        <span class="product-cat">${p.category}</span>
+                    </div>
+                </div>
+            </td>
+            <td style="text-align:center; font-weight: 600; color:#ef4444;">${p.stock}</td>
             <td style="text-align:center;">
-                <span style="background:#fee2e2; color:#b91c1c; padding:3px 8px; border-radius:12px; font-size:0.75rem; font-weight:600;">Chưa bán được</span>
+                <span class="badge badge-danger">Tồn đọng</span>
             </td>
         </tr>
     `).join('');
-    document.getElementById('dead-stock-list').innerHTML = deadStockHtml || '<tr><td colspan="3" style="text-align:center; color:#64748b;">Tuyệt vời! Không có sản phẩm tồn đọng.</td></tr>';
+    document.getElementById('dead-stock-list').innerHTML = deadStockHtml || '<tr><td colspan="3" style="text-align:center; color:#64748b; padding:20px;">Tuyệt vời! Không có sản phẩm tồn đọng.</td></tr>';
 
-    // 4. Revenue Chart (Last 7 Days)
-    const ctx = document.getElementById('revenueChart');
-    if (ctx) {
-        const last7Days = [];
-        const revenueData = [];
-        const now = new Date();
+    // 3. Category Doughnut Chart
+    const catCtx = document.getElementById('categoryChart');
+    if (catCtx) {
+        const catLabels = Object.keys(categorySales).filter(k => categorySales[k] > 0);
+        const catData = catLabels.map(k => categorySales[k]);
         
-        for (let i = 6; i >= 0; i--) {
-            const d = new Date(now.getTime() - i * 24 * 60 * 60 * 1000);
-            const dateStr = `${d.getDate()}/${d.getMonth()+1}`;
-            last7Days.push(dateStr);
-            
-            // Calculate revenue for this day
-            let dayRev = 0;
-            orders.forEach(o => {
-                const status = (o.status || '').toLowerCase();
-                if (status !== 'cancelled') {
-                    const oDate = new Date(o.createdAt || o.date || Date.now());
-                    if (oDate.getDate() === d.getDate() && oDate.getMonth() === d.getMonth() && oDate.getFullYear() === d.getFullYear()) {
-                        dayRev += (Number(o.total) || 0);
+        new Chart(catCtx, {
+            type: 'doughnut',
+            data: {
+                labels: catLabels.length > 0 ? catLabels : ['Chưa có dữ liệu'],
+                datasets: [{
+                    data: catData.length > 0 ? catData : [1],
+                    backgroundColor: ['#d8a94f', '#10b981', '#3b82f6', '#8b5cf6', '#ef4444', '#f59e0b', '#06b6d4'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: { family: "'Inter', sans-serif", size: 12 },
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        titleFont: { size: 13, family: "'Inter', sans-serif" },
+                        bodyFont: { size: 14, weight: 'bold', family: "'Inter', sans-serif" },
+                        padding: 12,
+                        cornerRadius: 8,
+                        callbacks: {
+                            label: function(context) {
+                                if (catData.length === 0) return ' 0';
+                                return ` ${context.parsed} sản phẩm`;
+                            }
+                        }
                     }
                 }
-            });
-            revenueData.push(dayRev);
+            }
+        });
+    }
+
+    // 4. Revenue Trend Chart (Dynamic Dates)
+    const revCtx = document.getElementById('revenueChart');
+    let revenueChartInstance = null;
+
+    function renderRevenueChart(timeframe) {
+        // Parse all dates from orders
+        let dailyRevenue = {};
+        
+        orders.forEach(o => {
+            const status = (o.status || '').toLowerCase();
+            if (validStatuses.includes(status)) {
+                // Parse date: format in DB is often DD/MM/YYYY HH:mm:ss
+                let dateStr = o.date || o.createdAt || new Date().toISOString();
+                let d;
+                if (dateStr.includes('/')) {
+                    const parts = dateStr.split(' ')[0].split('/');
+                    if (parts.length === 3) {
+                        d = new Date(parts[2], parts[1] - 1, parts[0]);
+                    } else {
+                        d = new Date(dateStr);
+                    }
+                } else {
+                    d = new Date(dateStr);
+                }
+                
+                if (!isNaN(d.getTime())) {
+                    const formattedDate = `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth()+1).padStart(2, '0')}/${d.getFullYear()}`;
+                    if (!dailyRevenue[formattedDate]) dailyRevenue[formattedDate] = { timestamp: d.getTime(), revenue: 0 };
+                    dailyRevenue[formattedDate].revenue += (Number(o.total) || 0);
+                }
+            }
+        });
+
+        // Convert to array and sort chronologically
+        let revenueArray = Object.keys(dailyRevenue).map(date => ({
+            date: date.substring(0, 5), // Keep DD/MM
+            timestamp: dailyRevenue[date].timestamp,
+            revenue: dailyRevenue[date].revenue
+        })).sort((a, b) => a.timestamp - b.timestamp);
+
+        if (revenueArray.length === 0) {
+            // Mock empty data if no orders
+            const today = new Date();
+            revenueArray = [{ date: `${today.getDate()}/${today.getMonth()+1}`, revenue: 0 }];
         }
 
-        new Chart(ctx, {
+        if (timeframe === 'recent') {
+            // Take the last 7 distinct dates with sales
+            revenueArray = revenueArray.slice(-7);
+        }
+
+        const labels = revenueArray.map(item => item.date);
+        const data = revenueArray.map(item => item.revenue);
+
+        if (revenueChartInstance) {
+            revenueChartInstance.destroy();
+        }
+
+        revenueChartInstance = new Chart(revCtx, {
             type: 'line',
             data: {
-                labels: last7Days,
+                labels: labels,
                 datasets: [{
                     label: 'Doanh thu',
-                    data: revenueData,
+                    data: data,
                     borderColor: '#d8a94f',
                     backgroundColor: 'rgba(216, 169, 79, 0.1)',
                     borderWidth: 3,
@@ -124,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     pointRadius: 4,
                     pointHoverRadius: 6,
                     fill: true,
-                    tension: 0.4 // Smooth curve
+                    tension: 0.4
                 }]
             },
             options: {
@@ -154,17 +274,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 scales: {
                     x: {
-                        grid: {
-                            display: false,
-                            drawBorder: false
-                        }
+                        grid: { display: false, drawBorder: false }
                     },
                     y: {
                         beginAtZero: true,
-                        grid: {
-                            color: '#f1f5f9',
-                            drawBorder: false
-                        },
+                        grid: { color: '#f1f5f9', drawBorder: false },
                         ticks: {
                             maxTicksLimit: 6,
                             callback: function(value) {
@@ -177,5 +291,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+    }
+
+    if (revCtx) {
+        renderRevenueChart('all');
+        const tfSelect = document.getElementById('revenue-timeframe');
+        if (tfSelect) {
+            tfSelect.addEventListener('change', (e) => {
+                renderRevenueChart(e.target.value);
+            });
+        }
     }
 });
