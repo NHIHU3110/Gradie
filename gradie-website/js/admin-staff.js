@@ -37,11 +37,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const method = id ? 'PUT' : 'POST';
-            await fetch('/api/staff', {
+            const res = await fetch('/api/staff', {
                 method: method,
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(staffData)
             });
+
+            if (!res.ok) {
+                console.warn('API save failed, falling back to Local Storage.');
+                if (window.GradieStore) {
+                    let staffList = window.GradieStore.getStaff() || [];
+                    if (id) {
+                        const index = staffList.findIndex(s => s.id === id);
+                        if (index !== -1) staffList[index] = { ...staffList[index], ...staffData };
+                    } else {
+                        staffList.push(staffData);
+                    }
+                    window.GradieStore.saveStaff(staffList);
+                }
+            }
 
             if (window.GradieStore && window.GradieStore.addActivityLog) {
                 window.GradieStore.addActivityLog(
@@ -170,7 +184,15 @@ window.editStaff = function(id) {
 window.deleteStaff = async function(id) {
     if(confirm('Bạn có chắc chắn muốn xóa nhân viên này khỏi hệ thống? Dữ liệu không thể khôi phục!')) {
         try {
-            await fetch('/api/staff?id=' + id, { method: 'DELETE' });
+            const res = await fetch('/api/staff?id=' + id, { method: 'DELETE' });
+            if (!res.ok) {
+                console.warn('API delete failed, falling back to Local Storage.');
+                if (window.GradieStore) {
+                    let staffList = window.GradieStore.getStaff() || [];
+                    staffList = staffList.filter(s => s.id !== id);
+                    window.GradieStore.saveStaff(staffList);
+                }
+            }
             showToast('Đã xóa nhân viên thành công!', 'success');
             
             if (window.GradieStore && window.GradieStore.addActivityLog) {
