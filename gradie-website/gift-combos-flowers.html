@@ -1,67 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gradie | Gift Combos Flowers</title>
+  <title>Gradie | Hoa Tốt Nghiệp & Combo Quà</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=1780166734">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/icons.css?v=1780166734">
   <link rel="stylesheet" href="css/products.css?v=1780166734">
-  
   <link rel="stylesheet" href="css/responsive.css">
-<link rel="stylesheet" href="css/toast.css?v=1780167435">
+  <link rel="stylesheet" href="css/toast.css?v=1780167435">
 </head>
 <body>
   <div class="announcement-bar">
-    Grand Opening • Free gift tag with every order • Celebrate her next chapter
+    Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới của cô ấy
   </div>
 
-    <header class="header">
+  <header class="header">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <img loading="lazy" src="images/Gradie_logo.jpeg" alt="Gradie Logo" style="height:48px; width:auto; border-radius:50%; object-fit:cover; margin-right:10px;">
+        <img loading="lazy" src="images/Gradie_logo.jpeg" alt="Gradie Logo">
         Gradie
-        <span class="tagline">Graduation Gifts</span>
+        <span class="tagline">Quà Tặng Tốt Nghiệp</span>
       </a>
       <nav class="nav">
-        <a href="about.html">About Us</a>
-        <a href="products.html">Products</a>
-        <a href="customize.html">Customize</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
+        <a href="about.html">Về Chúng Tôi</a>
+        <a href="products.html">Sản Phẩm</a>
+        <a href="customize.html">Cá Nhân Hóa</a>
+        <a href="gallery.html">Bộ Sưu Tập</a>
+        <a href="blog.html">Bài Viết</a>
+        <a href="contact.html">Liên Hệ</a>
       </nav>
       <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
       <div class="header-icons">
-        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
-        <button class="icon-btn" onclick="showToast('Tính năng tìm kiếm đang được phát triển!', 'info')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
-        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
+        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <button class="icon-btn" onclick="showToast('Tính năng tìm kiếm đang được phát triển!', 'info')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
       </div>
     </div>
   </header>
 
   <main>
-    
-    
     <div style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
         <div style="display:flex; justify-content:space-between; margin-bottom: 20px; flex-wrap:wrap; gap:15px;">
             <div class="filters">
-                <button class="outline-button category-filter active" data-category="all" style="padding: 8px 15px;">All</button>
-                <button class="outline-button category-filter" data-category="Gấu Bông" style="padding: 8px 15px;">Plushies</button>
-                <button class="outline-button category-filter" data-category="Đồ tốt nghiệp" style="padding: 8px 15px;">Sashes</button>
-                <button class="outline-button category-filter" data-category="Hoa mừng" style="padding: 8px 15px;">Flowers</button>
-                <button class="outline-button category-filter" data-category="Kẹo" style="padding: 8px 15px;">Candy</button>
-                <button class="outline-button category-filter" data-category="Khung ảnh" style="padding: 8px 15px;">Frames</button>
+                <button class="outline-button category-filter active" data-category="all" style="padding: 8px 15px;">Tất Cả</button>
+                <button class="outline-button category-filter" data-category="Gấu Bông" style="padding: 8px 15px;">Gấu Bông</button>
+                <button class="outline-button category-filter" data-category="Đồ tốt nghiệp" style="padding: 8px 15px;">Dải Băng</button>
+                <button class="outline-button category-filter" data-category="Hoa mừng" style="padding: 8px 15px;">Hoa Tốt Nghiệp</button>
+                <button class="outline-button category-filter" data-category="Kẹo" style="padding: 8px 15px;">Bánh Kẹo</button>
+                <button class="outline-button category-filter" data-category="Khung ảnh" style="padding: 8px 15px;">Khung Ảnh</button>
             </div>
             <div class="controls" style="display:flex; gap:10px;">
-                <input type="text" id="product-search" placeholder="Search..." style="padding:8px; border:1px solid var(--border-gold); border-radius:4px;">
+                <input type="text" id="product-search" placeholder="Tìm kiếm sản phẩm..." style="padding:8px; border:1px solid var(--border-gold); border-radius:4px;">
                 <select id="sort-select" style="padding:8px; border:1px solid var(--border-gold); border-radius:4px; font-family:inherit;">
-                    <option value="newest">Newest</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                    <option value="rating">Top Rated</option>
+                    <option value="newest">Mới nhất</option>
+                    <option value="price-low">Giá: Thấp đến Cao</option>
+                    <option value="price-high">Giá: Cao đến Thấp</option>
+                    <option value="rating">Đánh giá tốt nhất</option>
                 </select>
             </div>
         </div>
@@ -69,38 +67,38 @@
             <!-- Products will be rendered here -->
         </div>
     </div>
-
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-col">
         <div class="footer-logo">Gradie</div>
-        <p style="font-family: 'Great Vibes', cursive; font-size: 1.5rem; color: var(--champagne); margin-top: 10px;">Celebrate today, cherish forever.</p>
+        <p class="footer-tagline">Kỷ niệm hôm nay, trân quý mãi về sau.</p>
       </div>
       <div class="footer-col">
-        <h4>Quick Links</h4>
-        <a href="about.html">About Us</a>
-        <a href="products.html">Shop All</a>
-        <a href="contact.html">Contact</a>
+        <h4>Liên Kết Nhanh</h4>
+        <a href="about.html">Về Chúng Tôi</a>
+        <a href="products.html">Cửa Hàng</a>
+        <a href="contact.html">Liên Hệ</a>
       </div>
       <div class="footer-col">
-        <h4>Customer Care</h4>
-        <a href="store-policy.html">Store Policy</a>
-        <a href="order-tracking.html">Track Order</a>
-        <a href="account.html">My Account</a>
+        <h4>Chăm Sóc Khách Hàng</h4>
+        <a href="store-policy.html">Chính Sách Cửa Hàng</a>
+        <a href="order-tracking.html">Theo Dõi Đơn Hàng</a>
+        <a href="account.html">Tài Khoản Của Tôi</a>
       </div>
       <div class="footer-col">
-        <h4>Follow Us</h4>
+        <h4>Theo Dõi Chúng Tôi</h4>
         <a href="#">Instagram</a>
         <a href="#">Facebook</a>
         <a href="#">TikTok</a>
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2026 Gradie - Graduation Gifts. All rights reserved.
+      &copy; 2026 Gradie - Quà Tặng Tốt Nghiệp. Toàn bộ bản quyền được bảo lưu.
     </div>
   </footer>
+  <script src="js/icons.js"></script>
   <script src="js/toast.js"></script>
   <script src="js/global-data.js?v=1780167435"></script>
   <script src="js/data-store.js?v=1780167435"></script>

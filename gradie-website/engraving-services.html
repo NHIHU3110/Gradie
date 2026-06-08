@@ -1,41 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gradie | Precision Engraving Tester</title>
+  <title>Gradie | Trình Mô Phỏng Khắc Chữ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=1780166734">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/icons.css?v=1780166734">
   <link rel="stylesheet" href="css/responsive.css">
-<link rel="stylesheet" href="css/toast.css?v=1780167435">
+  <link rel="stylesheet" href="css/toast.css?v=1780167435">
 </head>
 <body>
   <div class="announcement-bar">
-    Grand Opening • Free gift tag with every order • Celebrate her next chapter
+    Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới của cô ấy
   </div>
 
   <header class="header">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <img loading="lazy" src="images/Gradie_logo.jpeg" alt="Gradie Logo" style="height:48px; width:auto; border-radius:50%; object-fit:cover; margin-right:10px;">
+        <img loading="lazy" src="images/Gradie_logo.jpeg" alt="Gradie Logo">
         Gradie
-        <span class="tagline">Graduation Gifts</span>
+        <span class="tagline">Quà Tặng Tốt Nghiệp</span>
       </a>
       <nav class="nav">
-        <a href="about.html">About Us</a>
-        <a href="products.html">Products</a>
-        <a href="customize.html">Customize</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
+        <a href="about.html">Về Chúng Tôi</a>
+        <a href="products.html">Sản Phẩm</a>
+        <a href="customize.html">Cá Nhân Hóa</a>
+        <a href="gallery.html">Bộ Sưu Tập</a>
+        <a href="blog.html">Bài Viết</a>
+        <a href="contact.html">Liên Hệ</a>
       </nav>
       <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
       <div class="header-icons">
-        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
-        <button class="icon-btn" onclick="showToast('Tính năng tìm kiếm đang được phát triển!', 'info')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
-        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
+        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <button class="icon-btn" onclick="showToast('Tính năng tìm kiếm đang được phát triển!', 'info')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
       </div>
     </div>
   </header>
@@ -43,9 +44,9 @@
   <main>
     <!-- Page Header -->
     <section class="page-header" style="padding: 80px 40px; text-align: center; background: linear-gradient(to bottom, #fcfbf9, #ffffff); margin-bottom: 40px;">
-      <span class="section-kicker">Laser Precision</span>
-      <h1 class="section-title" style="margin: 0; font-size: 3rem; font-family:'Playfair Display', serif;">Engraving Tester</h1>
-      <p style="color: var(--taupe); margin-top: 15px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">Preview how your personalized message will look when laser-engraved onto our premium stainless steel bottles and medals.</p>
+      <span class="section-kicker">Khắc Laser Chính Xác</span>
+      <h1 class="section-title" style="margin: 0; font-size: 3rem; font-family:'Playfair Display', serif;">Trình Mô Phỏng Khắc Chữ</h1>
+      <p style="color: var(--taupe); margin-top: 15px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">Xem trước thông điệp cá nhân hóa của bạn sẽ hiển thị như thế nào khi được khắc laser trực tiếp lên các sản phẩm bình giữ nhiệt thép không gỉ và huy chương cao cấp của chúng tôi.</p>
     </section>
 
     <!-- Interactive Engraving Designer -->
@@ -54,7 +55,7 @@
         
         <!-- Left: Live Preview Canvas -->
         <div style="display:flex; flex-direction:column; gap:20px; align-items:center; justify-content:center; background:#faf9f6; padding:30px; border-radius:12px; border:1px solid #eee; position:relative; min-height: 380px;">
-          <span style="position:absolute; top:15px; left:15px; background:var(--champagne-light); color:var(--champagne); font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; padding:4px 8px; border-radius:4px; font-weight:600;">Live Preview</span>
+          <span style="position:absolute; top:15px; left:15px; background:var(--champagne-light); color:var(--champagne); font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; padding:4px 8px; border-radius:4px; font-weight:600;">Xem Trước Trực Tiếp</span>
           
           <!-- Engraving Preview -->
           <div id="engrave-canvas" style="width:100%; height:260px; display:flex; align-items:center; justify-content:center; border-radius:8px; position:relative; overflow:hidden; transition: all 0.4s ease; box-shadow: inset 0 0 30px rgba(0,0,0,0.4); background: url('https://images.unsplash.com/photo-1621217036725-7b567d2ff6db?w=800&q=80') center/cover;">
@@ -67,8 +68,8 @@
 
         <!-- Right: Interactive Controls -->
         <div style="display:flex; flex-direction:column; justify-content:center; gap:20px;">
-          <h2 style="font-family:'Playfair Display', serif; margin:0;">Test Your Engraving</h2>
-          <p style="color: var(--taupe); font-size:0.95rem; margin:0;">Type your name or message to see how it looks before ordering.</p>
+          <h2 style="font-family:'Playfair Display', serif; margin:0;">Thử Nghiệm Khắc Chữ</h2>
+          <p style="color: var(--taupe); font-size:0.95rem; margin:0;">Nhập tên hoặc thông điệp của bạn để xem kết quả trước khi đặt hàng.</p>
           
           <!-- Custom Text -->
           <div class="form-group" style="margin:0;">
@@ -80,16 +81,16 @@
           <div class="form-group" style="margin:0;">
             <label style="font-weight:600; margin-bottom:8px;">Font Chữ (Font Style)</label>
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
-              <button class="outline-button active" onclick="changeEngraveFont('classic', this)" style="flex:1; border-radius:8px; height:42px; font-size:0.85rem; padding:0;">Classic Serif</button>
-              <button class="outline-button" onclick="changeEngraveFont('modern', this)" style="flex:1; border-radius:8px; height:42px; font-size:0.85rem; padding:0;">Modern Sans</button>
-              <button class="outline-button" onclick="changeEngraveFont('elegant', this)" style="flex:1; border-radius:8px; height:42px; font-size:0.85rem; padding:0;">Elegant Script</button>
+              <button class="outline-button active" onclick="changeEngraveFont('classic', this)" style="flex:1; border-radius:8px; height:42px; font-size:0.85rem; padding:0;">Cổ Điển (Có Chân)</button>
+              <button class="outline-button" onclick="changeEngraveFont('modern', this)" style="flex:1; border-radius:8px; height:42px; font-size:0.85rem; padding:0;">Hiện Đại (Không Chân)</button>
+              <button class="outline-button" onclick="changeEngraveFont('elegant', this)" style="flex:1; border-radius:8px; height:42px; font-size:0.85rem; padding:0;">Chữ Nghệ Thuật</button>
             </div>
           </div>
 
           <!-- Note -->
           <div style="margin-top:10px; padding-top:20px; border-top:1px solid #f0eeeb;">
             <p style="color:var(--taupe); font-size:0.9rem; line-height:1.6; margin-bottom: 15px;">Tính năng Khắc Tên khả dụng cho các sản phẩm Bình Nước Giữ Nhiệt và Huy Chương. Hãy truy cập trang sản phẩm để đặt hàng cùng tùy chọn này.</p>
-            <a href="products.html" class="peach-button" style="width:100%; display:block; text-align:center; padding:14px; font-size:1rem; border-radius:8px; font-weight:600; letter-spacing:0.5px; text-decoration:none; box-sizing:border-box;">Shop Engravable Products</a>
+            <a href="products.html" class="peach-button" style="width:100%; display:block; text-align:center; padding:14px; font-size:1rem; border-radius:8px; font-weight:600; letter-spacing:0.5px; text-decoration:none; box-sizing:border-box;">Mua Sản Phẩm Khắc Chữ</a>
           </div>
         </div>
       </div>
@@ -101,31 +102,32 @@
     <div class="footer-inner">
       <div class="footer-col">
         <div class="footer-logo">Gradie</div>
-        <p style="font-family: 'Great Vibes', cursive; font-size: 1.5rem; color: var(--champagne); margin-top: 10px;">Celebrate today, cherish forever.</p>
+        <p class="footer-tagline">Kỷ niệm hôm nay, trân quý mãi về sau.</p>
       </div>
       <div class="footer-col">
-        <h4>Quick Links</h4>
-        <a href="about.html">About Us</a>
-        <a href="products.html">Shop All</a>
-        <a href="contact.html">Contact</a>
+        <h4>Liên Kết Nhanh</h4>
+        <a href="about.html">Về Chúng Tôi</a>
+        <a href="products.html">Cửa Hàng</a>
+        <a href="contact.html">Liên Hệ</a>
       </div>
       <div class="footer-col">
-        <h4>Customer Care</h4>
-        <a href="store-policy.html">Store Policy</a>
-        <a href="order-tracking.html">Track Order</a>
-        <a href="account.html">My Account</a>
+        <h4>Chăm Sóc Khách Hàng</h4>
+        <a href="store-policy.html">Chính Sách Cửa Hàng</a>
+        <a href="order-tracking.html">Theo Dõi Đơn Hàng</a>
+        <a href="account.html">Tài Khoản Của Tôi</a>
       </div>
       <div class="footer-col">
-        <h4>Follow Us</h4>
+        <h4>Theo Dõi Chúng Tôi</h4>
         <a href="#">Instagram</a>
         <a href="#">Facebook</a>
         <a href="#">TikTok</a>
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2026 Gradie - Graduation Gifts. All rights reserved.
+      &copy; 2026 Gradie - Quà Tặng Tốt Nghiệp. Toàn bộ bản quyền được bảo lưu.
     </div>
   </footer>
+  <script src="js/icons.js"></script>
   <script src="js/toast.js"></script>
   <script src="js/global-data.js?v=1780167435"></script>
   <script src="js/data-store.js?v=1780167435"></script>

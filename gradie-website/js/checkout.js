@@ -77,6 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('shipping-name').value = '';
             document.getElementById('shipping-phone').value = '';
             document.getElementById('shipping-address').value = '';
+            document.getElementById('shipping-name').readOnly = false;
+            document.getElementById('shipping-phone').readOnly = false;
+            document.getElementById('shipping-address').readOnly = false;
             if (saveAddressWrapper) saveAddressWrapper.style.display = 'block';
           } else {
             const selected = savedAddrs.find(a => a.id === selectedId);
@@ -85,6 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
               document.getElementById('shipping-phone').value = selected.phone || '';
               document.getElementById('shipping-address').value = selected.detail || '';
             }
+            document.getElementById('shipping-name').readOnly = true;
+            document.getElementById('shipping-phone').readOnly = true;
+            document.getElementById('shipping-address').readOnly = true;
             if (saveAddressWrapper) saveAddressWrapper.style.display = 'none';
           }
         };
@@ -98,10 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
               <div>
                 <div style="display:flex; align-items:center; gap:8px;">
                   <strong style="font-size:0.95rem; color:#1a1a1a; font-family: inherit;">${a.label}</strong>
-                  ${a.isDefault ? '<span style="background:var(--warm-cream, #fef4e8); color:var(--champagne, #d8a94f); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:4px; border:1px solid #d8a94f; letter-spacing:0.5px;">DEFAULT</span>' : ''}
+                  ${a.isDefault ? '<span style="background:var(--warm-cream, #fef4e8); color:var(--champagne, #d8a94f); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:4px; border:1px solid #d8a94f; letter-spacing:0.5px;">MẶC ĐỊNH</span>' : ''}
                 </div>
-                <div style="font-size:0.85rem; color:#666; margin-top:6px;">Receiver: <strong>${a.name}</strong> | Phone: ${a.phone}</div>
-                <div style="font-size:0.85rem; color:#666; margin-top:3px;">Address: ${a.detail}</div>
+                <div style="font-size:0.85rem; color:#666; margin-top:6px;">Người nhận: <strong>${a.name}</strong> | SĐT: ${a.phone}</div>
+                <div style="font-size:0.85rem; color:#666; margin-top:3px;">Địa chỉ: ${a.detail}</div>
               </div>
               <div class="circle-indicator" style="width:20px; height:20px; border-radius:50%; border:2px solid ${isSelected ? '#d8a94f' : '#cbd5e1'}; display:flex; align-items:center; justify-content:center; background:${isSelected ? '#d8a94f' : 'transparent'};">
                 ${isSelected ? '<div style="width:8px; height:8px; border-radius:50%; background:#fff;"></div>' : ''}
@@ -113,8 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsHtml += `
           <div class="checkout-address-card" onclick="selectCheckoutAddressCard('new')" id="card-new" style="border:1px solid #e2e8f0; background:#fff; padding:16px; border-radius:10px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition: all 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.01);">
             <div>
-              <strong style="font-size:0.95rem; color:#1a1a1a; font-family: inherit;">Use a new shipping address</strong>
-              <div style="font-size:0.82rem; color:#666; margin-top:4px;">Enter a custom shipping name, phone number, and address details below.</div>
+              <strong style="font-size:0.95rem; color:#1a1a1a; font-family: inherit;">Sử dụng địa chỉ nhận hàng mới</strong>
+              <div style="font-size:0.82rem; color:#666; margin-top:4px;">Nhập tên người nhận, số điện thoại và thông tin địa chỉ mới bên dưới.</div>
             </div>
             <div class="circle-indicator" style="width:20px; height:20px; border-radius:50%; border:2px solid #cbd5e1; display:flex; align-items:center; justify-content:center; background:transparent;">
             </div>
@@ -128,6 +134,9 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('shipping-name').value = defaultAddr.name || '';
           document.getElementById('shipping-phone').value = defaultAddr.phone || '';
           document.getElementById('shipping-address').value = defaultAddr.detail || '';
+          document.getElementById('shipping-name').readOnly = true;
+          document.getElementById('shipping-phone').readOnly = true;
+          document.getElementById('shipping-address').readOnly = true;
         }
       }
     } else {
@@ -135,13 +144,66 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('shipping-name').value = currentUser.username || '';
       document.getElementById('shipping-phone').value = currentUser.phone || '';
       document.getElementById('shipping-address').value = currentUser.shippingAddress || '';
+      document.getElementById('shipping-name').readOnly = false;
+      document.getElementById('shipping-phone').readOnly = false;
+      document.getElementById('shipping-address').readOnly = false;
       if (saveAddressWrapper) saveAddressWrapper.style.display = 'block';
     }
   }
 
-  // 3. Dynamic Shipping Fee based on Province
+  // 3. Dynamic Shipping Fee based on Province & Coupon Variables
   const settings = window.GradieStore.getSettings();
   let shippingFee = settings.shippingFee !== undefined ? Number(settings.shippingFee) : 30000;
+  let activeCouponCode = '';
+  let discountAmount = 0;
+  let subtotal = 0;
+
+  // Recalculate and update pricing layout
+  function recalculateTotals() {
+    let baseShipping = shippingFee;
+    discountAmount = 0;
+
+    if (activeCouponCode) {
+      const upperCode = activeCouponCode.toUpperCase().trim();
+      const dbPromoCode = (settings.promoCode || 'GRAD2026').toUpperCase().trim();
+
+      if (upperCode === dbPromoCode) {
+        // Flat discount from settings
+        const flatDiscount = Number(settings.promoDiscount) || 50000;
+        discountAmount = Math.min(flatDiscount, subtotal);
+      } else if (upperCode === 'WELCOME10') {
+        // 10% discount off subtotal
+        discountAmount = Math.round(subtotal * 0.1);
+      } else if (upperCode === 'FREESHIP') {
+        // Waive shipping
+        discountAmount = baseShipping;
+      }
+    }
+
+    const finalTotal = Math.max(0, subtotal + baseShipping - discountAmount);
+
+    if (subtotalEl) subtotalEl.textContent = subtotal.toLocaleString('vi-VN') + 'đ';
+    if (shippingEl) shippingEl.textContent = baseShipping.toLocaleString('vi-VN') + 'đ';
+
+    const discountRow = document.getElementById('discount-row');
+    const activeCouponLabel = document.getElementById('active-coupon-label');
+    const checkoutDiscount = document.getElementById('checkout-discount');
+
+    if (discountAmount > 0 && activeCouponCode) {
+      if (discountRow) discountRow.style.display = 'flex';
+      if (activeCouponLabel) activeCouponLabel.textContent = activeCouponCode.toUpperCase();
+      if (checkoutDiscount) checkoutDiscount.textContent = '-' + discountAmount.toLocaleString('vi-VN') + 'đ';
+    } else {
+      if (discountRow) discountRow.style.display = 'none';
+    }
+
+    if (grandTotalEl) grandTotalEl.textContent = finalTotal.toLocaleString('vi-VN') + 'đ';
+
+    // If QR code payment is active, regenerate VietQR code with correct amount
+    if (window._currentPaymentMethod === 'qr') {
+      window.generateVietQR();
+    }
+  }
 
   // Update shipping fee dynamically when address changes
   function updateShippingByProvince(address) {
@@ -150,9 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const newFee = isHCM ? 20000 : 40000;
     if (newFee !== shippingFee) {
       shippingFee = newFee;
-      const grandTotal = subtotal + shippingFee;
-      if (shippingEl) shippingEl.textContent = shippingFee.toLocaleString('vi-VN') + 'đ';
-      if (grandTotalEl) grandTotalEl.textContent = grandTotal.toLocaleString('vi-VN') + 'đ';
+      recalculateTotals();
       const label = isHCM ? 'Nội thành HCM (20.000đ)' : 'Ngoại tỉnh (40.000đ)';
       showToast('Phí vận chuyển: ' + label, 'info');
     }
@@ -164,8 +224,58 @@ document.addEventListener('DOMContentLoaded', () => {
     addrInput.addEventListener('blur', () => updateShippingByProvince(addrInput.value));
   }
 
+  // Apply Coupon Function
+  window.applyCoupon = function() {
+    const input = document.getElementById('coupon-code-input');
+    const msgEl = document.getElementById('coupon-message');
+    if (!input || !msgEl) return;
+
+    const code = input.value.trim().toUpperCase();
+    if (!code) {
+      showToast('Vui lòng nhập mã giảm giá!', 'warning');
+      return;
+    }
+
+    const dbPromoCode = (settings.promoCode || 'GRAD2026').toUpperCase().trim();
+    let isValid = false;
+    let message = '';
+    let isSuccess = false;
+
+    if (code === dbPromoCode) {
+      isValid = true;
+      const discountVal = Number(settings.promoDiscount) || 50000;
+      message = `Áp dụng thành công mã giảm ${discountVal.toLocaleString('vi-VN')}đ!`;
+      isSuccess = true;
+    } else if (code === 'WELCOME10') {
+      isValid = true;
+      message = 'Áp dụng thành công mã giảm 10% tổng giá trị sản phẩm!';
+      isSuccess = true;
+    } else if (code === 'FREESHIP') {
+      isValid = true;
+      message = 'Áp dụng thành công mã miễn phí vận chuyển!';
+      isSuccess = true;
+    } else {
+      message = 'Mã giảm giá không hợp lệ hoặc đã hết hạn.';
+      isSuccess = false;
+    }
+
+    msgEl.style.display = 'block';
+    if (isSuccess) {
+      msgEl.style.color = '#15803d'; // green-700
+      msgEl.textContent = '✓ ' + message;
+      activeCouponCode = code;
+      showToast('Áp dụng mã giảm giá thành công!', 'success');
+    } else {
+      msgEl.style.color = '#b91c1c'; // red-700
+      msgEl.textContent = '✗ ' + message;
+      activeCouponCode = '';
+      showToast('Mã giảm giá không hợp lệ!', 'error');
+    }
+
+    recalculateTotals();
+  };
+
   // 4. Render Order Summary
-  let subtotal = 0;
   summaryList.innerHTML = cart.map(item => {
     // Find base price
     const baseProduct = window.GradieStore.getProductById(item.id);
@@ -178,10 +288,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (item.customization) {
       const c = item.customization;
       if (c.threadColor || c.embroideryText) {
-        customDetails += `<div style="font-size:0.8rem; color:#888; margin-top:3px;">Embroidery: "${c.embroideryText || 'None'}" (${c.threadColor || 'Default Color'})</div>`;
+        customDetails += `<div style="font-size:0.8rem; color:#888; margin-top:3px;">Thêu chữ: "${c.embroideryText || 'Không'}" (${c.threadColor || 'Màu mặc định'})</div>`;
       }
       if (c.boxColor || c.ribbonColor || c.waxSeal) {
-        customDetails += `<div style="font-size:0.8rem; color:#888;">Gift Wrap: Box (${c.boxColor || 'Cream'}), Ribbon (${c.ribbonColor || 'Gold'}), Seal (${c.waxSeal || 'None'})</div>`;
+        customDetails += `<div style="font-size:0.8rem; color:#888;">Hộp quà: Hộp (${c.boxColor || 'Kem'}), Ruy băng (${c.ribbonColor || 'Vàng'}), Con dấu (${c.waxSeal || 'Không'})</div>`;
       }
     }
 
@@ -189,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="summary-item-row">
         <div>
           <div style="font-weight:600; font-size:0.95rem; color:#1a1a1a;">${item.name}</div>
-          <div style="font-size:0.85rem; color:#666;">Qty: ${qty} x ${price.toLocaleString('vi-VN')}đ</div>
+          <div style="font-size:0.85rem; color:#666;">Số lượng: ${qty} x ${price.toLocaleString('vi-VN')}đ</div>
           ${customDetails}
         </div>
         <div style="font-weight:600; color:#1a1a1a;">${itemTotal.toLocaleString('vi-VN')}đ</div>
@@ -197,11 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   }).join('');
 
-  const grandTotal = subtotal + shippingFee;
-
-  if (subtotalEl) subtotalEl.textContent = subtotal.toLocaleString('vi-VN') + 'đ';
-  if (shippingEl) shippingEl.textContent = shippingFee.toLocaleString('vi-VN') + 'đ';
-  if (grandTotalEl) grandTotalEl.textContent = grandTotal.toLocaleString('vi-VN') + 'đ';
+  // Initial recalculation call to load values
+  recalculateTotals();
 
   // 5. Submit Order Action
   window.submitOrder = function() {
@@ -224,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
       addrs.forEach(a => a.isDefault = false);
       addrs.push({
         id: 'addr-chk-' + Date.now(),
-        label: 'Saved Address ' + (addrs.length + 1),
+        label: 'Địa chỉ đã lưu ' + (addrs.length + 1),
         name: name,
         phone: phone,
         detail: address,
@@ -237,6 +344,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const randPart = Math.floor(1000 + Math.random() * 9000);
     const orderNumber = `GRD-26-${randPart}`;
 
+    const finalTotal = Math.max(0, subtotal + shippingFee - discountAmount);
+    const paymentMethodText = window._currentPaymentMethod === 'qr' ? 'Chuyển khoản (QR Code)' : 'COD';
+
     // Prepare order object
     const orderObject = {
       orderNumber: orderNumber,
@@ -245,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
       customerPhone: phone,
       shippingAddress: address,
       notes: notes,
-      paymentMethod: "COD",
+      paymentMethod: paymentMethodText,
       date: new Date().toLocaleDateString('vi-VN') + ' ' + new Date().toLocaleTimeString('vi-VN'),
       items: cart.map(item => ({
         id: item.id,
@@ -256,7 +366,9 @@ document.addEventListener('DOMContentLoaded', () => {
       })),
       subtotal: subtotal,
       shippingFee: shippingFee,
-      total: grandTotal,
+      couponApplied: activeCouponCode || null,
+      discountAmount: discountAmount,
+      total: finalTotal,
       status: "Pending" // Initial status in dashboard
     };
 
@@ -275,24 +387,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Render gorgeous Success Screen
     const mainEl = document.getElementById('checkout-main-content');
+    const paymentSuccessDesc = window._currentPaymentMethod === 'qr'
+      ? 'Phương thức thanh toán: <strong>Chuyển khoản trực tuyến qua mã QR</strong>. Đơn hàng của bạn sẽ được xử lý ngay sau khi hệ thống xác nhận giao dịch.'
+      : 'Đội ngũ giao hàng của chúng tôi sẽ thu tiền mặt khi giao hàng tận nơi: <strong>Thanh toán khi nhận hàng (COD)</strong>.';
+
     mainEl.innerHTML = `
       <div class="success-container">
         <div style="width: 70px; height: 70px; border-radius: 50%; background: rgba(216,169,79,0.1); color: #d8a94f; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 25px;">
           <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
         </div>
-        <h1 style="font-family:'Playfair Display', serif; font-size: 2.2rem; color: #1a1a1a; margin-bottom: 15px;">Order Placed Successfully!</h1>
+        <h1 style="font-family:'Playfair Display', serif; font-size: 2.2rem; color: #1a1a1a; margin-bottom: 15px;">Đặt Hàng Thành Công!</h1>
         <p style="color: #666; font-size: 1.05rem; line-height: 1.6; margin-bottom: 30px;">
-          Thank you for choosing Gradie. Your luxurious champagne gift box order has been recorded successfully. 
-          Our delivery team will collect payment via <strong>Cash on Delivery (COD)</strong>.
+          Cảm ơn bạn đã lựa chọn Gradie. Đơn hàng quà tặng tốt nghiệp sang trọng của bạn đã được lưu lại thành công.<br>
+          ${paymentSuccessDesc}
         </p>
         <div style="background: #faf8f5; border: 1px dashed #d8a94f; padding: 20px; border-radius: 12px; margin-bottom: 35px;">
-          <span style="font-size:0.85rem; color:#888; text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:5px;">Your Order Tracking Code</span>
+          <span style="font-size:0.85rem; color:#888; text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:5px;">Mã Theo Dõi Đơn Hàng Của Bạn</span>
           <strong id="tracking-code-display" style="font-size: 1.6rem; letter-spacing: 1px; color: #1a1a1a;">${orderNumber}</strong>
-          <button onclick="navigator.clipboard.writeText('${orderNumber}'); showToast('Đã sao chép mã đơn hàng!', 'success');" style="margin-left:12px; background:none; border:none; color:#d8a94f; font-weight:600; cursor:pointer; font-size:0.9rem;">Copy</button>
+          <button onclick="navigator.clipboard.writeText('${orderNumber}'); showToast('Đã sao chép mã đơn hàng!', 'success');" style="margin-left:12px; background:none; border:none; color:#d8a94f; font-weight:600; cursor:pointer; font-size:0.9rem;">Sao chép</button>
         </div>
         <div style="display:flex; gap:15px; justify-content:center;">
-          <a href="order-tracking.html?code=${orderNumber}" class="btn-primary" style="padding:12px 25px; border-radius:8px; text-decoration:none; font-weight:600;">Track Order Now</a>
-          <a href="products.html" class="outline-button" style="padding:12px 25px; border-radius:8px; text-decoration:none; font-weight:600;">Continue Shopping</a>
+          <a href="order-tracking.html?code=${orderNumber}" class="btn-primary" style="padding:12px 25px; border-radius:8px; text-decoration:none; font-weight:600; color: white; background: var(--champagne); display: inline-block;">Theo Dõi Đơn Hàng</a>
+          <a href="products.html" class="outline-button" style="padding:12px 25px; border-radius:8px; text-decoration:none; font-weight:600; border: 1.5px solid var(--champagne); color: var(--champagne); display: inline-block; background: transparent;">Tiếp Tục Mua Sắm</a>
         </div>
       </div>
     `;

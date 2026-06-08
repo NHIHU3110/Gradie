@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cart.length === 0) {
       if (cartContainer) {
         cartContainer.innerHTML = `
-          <div style="text-align:center; padding:60px 20px;">
-            <p style="color:var(--taupe); font-size:1.1rem; margin-bottom:20px; font-style:italic;">Your shopping cart is currently empty.</p>
-            <a href="products.html" class="btn-primary" style="padding:10px 25px; border-radius:8px; text-decoration:none; font-weight:600; font-size:0.9rem;">Start Shopping</a>
+          <div class="cart-empty-state">
+            <p class="cart-empty-msg">Giỏ hàng của bạn đang trống.</p>
+            <a href="products.html" class="btn-primary">Khám Phá Sản Phẩm</a>
           </div>
         `;
       }
@@ -55,9 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const allProducts = window.GradieStore ? window.GradieStore.getProducts() : [];
         const p = allProducts.find(x => x.id === item.id);
         if (p && p.variants && p.variants.length > 0) {
-          variantHtml = `
-            <select style="font-size:0.8rem; padding:4px 8px; margin-top:8px; border:1px solid var(--border-gold); border-radius:6px; outline:none; background:#faf8f5; font-family:inherit; color:var(--ink); cursor:pointer;" onchange="updateVariant(${index}, this.value)">
-          `;
+          variantHtml = `<select class="cart-item-variant" onchange="updateVariant(${index}, this.value)">`;
           p.variants.forEach(v => {
             let vLabel = "Mặc định";
             if (v.options && v.options.length) {
@@ -73,9 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             variantHtml += `<option value="${vLabel}" ${item.variant === vLabel ? 'selected' : ''}>${vLabel}</option>`;
           });
-          variantHtml += `</select><br>`;
+          variantHtml += `</select>`;
         } else {
-          variantHtml = `<span style="color:var(--taupe); display:inline-block; margin-top:6px; font-size:0.8rem; padding:4px 10px; background:#faf8f5; border-radius:4px; border:1px solid #eee;">${item.variant}</span>`;
+          variantHtml = `<span class="cart-item-variant-label">${item.variant}</span>`;
         }
       }
 
@@ -83,41 +81,42 @@ document.addEventListener('DOMContentLoaded', () => {
       if (item.customization) {
         const c = item.customization;
         if (c.threadColor || c.embroideryText) {
-          customDetails += `<div style="font-size:0.75rem; color:#888; margin-top:5px;">Thêu tên: "${c.embroideryText || 'Không'}" (Chỉ: ${c.threadColor || 'Mặc định'})</div>`;
+          customDetails += `<div class="cart-item-customization">Thêu tên: "${c.embroideryText || 'Không'}" (Chỉ: ${c.threadColor || 'Mặc định'})</div>`;
         }
         if (c.engraveText) {
           const fontLabel = c.engraveFont ? (c.engraveFont.includes('Serif') ? 'Cổ điển' : c.engraveFont.includes('Sans') ? 'Hiện đại' : 'Nghệ thuật') : 'Cổ điển';
-          customDetails += `<div style="font-size:0.75rem; color:#888; margin-top:5px;">Khắc tên: "${c.engraveText}" (Font: ${fontLabel})</div>`;
+          customDetails += `<div class="cart-item-customization">Khắc tên: "${c.engraveText}" (Font: ${fontLabel})</div>`;
         }
         if (c.boxColor || c.ribbonColor || c.waxSeal) {
-          customDetails += `<div style="font-size:0.75rem; color:#888; margin-top:2px;">Gói quà: Hộp (${c.boxColor || 'Kem'}), Nơ (${c.ribbonColor || 'Vàng'}), Sáp (${c.waxSeal || 'Không'})</div>`;
+          customDetails += `<div class="cart-item-customization">Gói quà: Hộp (${c.boxColor || 'Kem'}), Nơ (${c.ribbonColor || 'Vàng'}), Sáp (${c.waxSeal || 'Không'})</div>`;
         }
       }
 
       html += `
-        <div class="cart-item" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #f0eeeb; padding:25px 0;">
-          <div class="cart-item-left" style="display:flex; gap:20px; align-items:center;">
-            <img src="${item.image}" style="width:90px; height:90px; object-fit:cover; border-radius:12px; border:1px solid #eee; box-shadow:0 4px 15px rgba(0,0,0,0.02);">
-            <div style="display:flex; flex-direction:column; justify-content:center;">
-              <strong style="font-size:1.1rem; color:var(--ink); font-family:'Playfair Display', serif;">${item.name}</strong>
-              ${variantHtml}
+        <div class="cart-item">
+          <div class="cart-item-left">
+            <img src="${item.image}" class="cart-item-img" alt="${item.name}">
+            <div class="cart-item-info">
+              <span class="cart-item-name">${item.name}</span>
               ${customDetails}
-              <span style="font-size:0.95rem; color:var(--peach); font-weight:500; margin-top:5px;">${item.price.toLocaleString('vi-VN')}đ</span>
+              <span class="cart-item-price">${item.price.toLocaleString('vi-VN')}đ</span>
             </div>
           </div>
-          <div class="cart-item-right" style="display:flex; gap:25px; align-items:center;">
-            <!-- Luxury Qty Adjuster -->
-            <div style="display:flex; align-items:center; border:1px solid var(--border-gold); border-radius:8px; overflow:hidden; background:white;">
-              <button onclick="changeQty(${index}, -1)" style="border:none; background:none; padding:8px 12px; cursor:pointer; font-weight:600; color:#555; transition:background 0.2s;" onmouseover="this.style.background='#faf8f5'" onmouseout="this.style.background='none'">−</button>
-              <span style="min-width:30px; text-align:center; font-weight:600; font-size:0.9rem; color:var(--ink);">${qty}</span>
-              <button onclick="changeQty(${index}, 1)" style="border:none; background:none; padding:8px 12px; cursor:pointer; font-weight:600; color:#555; transition:background 0.2s;" onmouseover="this.style.background='#faf8f5'" onmouseout="this.style.background='none'">+</button>
+          <div class="cart-item-right">
+            ${variantHtml}
+            <div class="cart-qty-adjuster">
+              <button class="cart-qty-btn" onclick="changeQty(${index}, -1)">−</button>
+              <span class="cart-qty-value">${qty}</span>
+              <button class="cart-qty-btn" onclick="changeQty(${index}, 1)">+</button>
             </div>
-            
-            <strong style="min-width:100px; text-align:right; font-size:1.1rem; color:var(--ink); font-weight:600;">${itemTotal.toLocaleString('vi-VN')}đ</strong>
-            
-            <!-- Elegant Typographic Delete Link (No Icons) -->
-            <button onclick="removeCartItem(${index})" style="background:none; border:none; color:#999; font-family:'Montserrat',sans-serif; font-size:0.68rem; font-weight:600; letter-spacing:1.2px; cursor:pointer; padding:5px 8px; transition:all 0.2s; text-transform:uppercase; border-bottom:1px solid transparent;" onmouseover="this.style.color='#c28b8b'; this.style.borderBottomColor='#c28b8b';" onmouseout="this.style.color='#999'; this.style.borderBottomColor='transparent';">
-              Remove
+            <span class="cart-item-total">${itemTotal.toLocaleString('vi-VN')}đ</span>
+            <button class="cart-item-remove" onclick="removeCartItem(${index})" title="Xóa khỏi giỏ hàng">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                <line x1="10" y1="11" x2="10" y2="17"></line>
+                <line x1="14" y1="11" x2="14" y2="17"></line>
+              </svg>
             </button>
           </div>
         </div>

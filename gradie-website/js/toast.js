@@ -32,7 +32,7 @@
   };
 
   // ── Main function ─────────────────────────────────────────────────────────
-  window.showToast = function (message, type = 'info', duration = 3500) {
+  window.showToast = function (message, type = 'info', duration = 2000) {
     const container = getContainer();
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;

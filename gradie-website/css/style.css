@@ -59,6 +59,22 @@ a:hover {
   padding: 72px 0;
 }
 
+.page-header {
+  padding: 56px 40px 40px;
+  text-align: center;
+  background: linear-gradient(to bottom, #fcfbf9, #ffffff);
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    padding: 36px 16px 24px;
+  }
+  .page-header .section-title {
+    font-size: 2.2rem;
+  }
+}
+
 @media (max-width: 768px) {
   .section {
     padding: 44px 0;
@@ -284,11 +300,13 @@ textarea {
   background-color: var(--champagne);
   color: var(--white);
   text-align: center;
-  padding: 8px 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 1px;
+  padding: 10px 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
+  line-height: 1.4;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .header {
@@ -297,54 +315,92 @@ textarea {
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
 }
 
 .header-inner {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 16px 24px;
+  padding: 0 28px;
+  height: 72px; /* Slightly taller header for more breathability */
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
 }
 
 .logo {
   font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
+  font-size: 1.75rem;
+  font-weight: 700;
   color: var(--soft-black);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+}
+/* Override any inline margin on the logo image */
+.logo img {
+  display: block;
+  height: 42px !important;
+  width: 42px !important;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 !important;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 .logo .tagline {
   font-family: 'Great Vibes', cursive;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   color: var(--champagne);
   display: none;
+  line-height: 1;
+  align-self: center;
+  margin-top: 2px;
 }
-@media (min-width: 768px) {
-  .logo .tagline { display: inline-block; margin-left: 10px; }
+@media (min-width: 900px) {
+  .logo .tagline { display: inline-flex; align-items: center; margin-left: 8px; }
 }
 
 .nav {
   display: flex;
-  gap: 24px;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  justify-content: center;
 }
 .nav-link, .nav a {
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 0.82rem;
+  font-weight: 600;
   color: var(--ink);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  height: 38px;
 }
 .nav-link:hover, .nav a:hover {
   color: var(--peach);
+  background: rgba(233, 160, 141, 0.08);
+}
+.nav-link.active, .nav a.active {
+  color: var(--champagne);
+  background: rgba(216, 169, 79, 0.08);
 }
 
 .header-icons {
   display: flex;
-  gap: 16px;
+  gap: 6px;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .icon-btn {
@@ -358,29 +414,39 @@ textarea {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  transition: background 0.2s;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
+  flex-shrink: 0;
 }
 .icon-btn:hover {
   background: var(--champagne-light);
   color: var(--champagne);
+  transform: translateY(-1px);
+}
+.icon-btn svg {
+  display: block;
+  margin: 0;
 }
 
 .cart-count-badge, #cart-count {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -1px;
+  right: -1px;
   background-color: var(--peach);
   color: white;
-  font-size: 0.7rem;
-  font-weight: 600;
-  width: 18px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  min-width: 18px;
   height: 18px;
-  border-radius: 50%;
+  padding: 0 4px;
+  border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.2s;
+  border: 1.5px solid var(--white);
+  line-height: 1;
+  pointer-events: none;
 }
 
 .hamburger {
@@ -424,7 +490,7 @@ textarea {
 .footer {
   background-color: var(--ivory);
   border-top: 1px solid var(--border-gold);
-  padding: 80px 0 30px;
+  padding: 80px 0 40px;
   margin-top: 80px;
 }
 .footer-inner {
@@ -432,14 +498,14 @@ textarea {
   margin: 0 auto;
   padding: 0 24px;
   display: grid;
-  grid-template-columns: 2.2fr 1fr 1fr 1fr;
-  gap: 50px;
+  grid-template-columns: 2.2fr 1.2fr 1.2fr 1fr;
+  gap: 60px;
 }
 .footer-col {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: 14px;
 }
 .footer-col h4 {
   font-family: 'Montserrat', sans-serif;
@@ -447,7 +513,7 @@ textarea {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   color: var(--soft-black);
   position: relative;
 }
@@ -462,7 +528,8 @@ textarea {
 }
 .footer-col a {
   color: var(--taupe);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  line-height: 1.4;
   transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: inline-block;
   position: relative;
@@ -473,7 +540,7 @@ textarea {
 }
 .footer-logo {
   font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   font-weight: 700;
   color: var(--soft-black);
   letter-spacing: 0.5px;
@@ -486,6 +553,14 @@ textarea {
   color: var(--taupe);
   font-size: 0.85rem;
   letter-spacing: 0.5px;
+}
+
+.footer-tagline {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.5rem;
+  color: var(--champagne);
+  margin-top: 10px;
+  line-height: 1.4;
 }
 
 @media (max-width: 768px) {

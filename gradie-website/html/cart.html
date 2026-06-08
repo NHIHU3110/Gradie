@@ -1,51 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gradie | Cart</title>
+  <title>Gradie | Giỏ Hàng</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=1780166734">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/icons.css?v=1780166734">
   
   <link rel="stylesheet" href="../css/responsive.css">
+<link rel="stylesheet" href="../css/toast.css?v=1780167435">
 </head>
 <body>
   <div class="announcement-bar">
-    Grand Opening • Free gift tag with every order • Celebrate her next chapter
+    Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới của cô ấy
   </div>
 
-    <header class="header">
+  <header class="header">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <img src="../images/Gradie_logo.jpeg" alt="Gradie Logo" style="height:48px; width:auto; border-radius:50%; object-fit:cover; margin-right:10px;">
+        <img loading="lazy" src="../images/Gradie_logo.jpeg" alt="Gradie Logo">
         Gradie
-        <span class="tagline">Graduation Gifts</span>
+        <span class="tagline">Quà Tặng Tốt Nghiệp</span>
       </a>
       <nav class="nav">
-        <a href="about.html">About Us</a>
-        <a href="products.html">Products</a>
-        <a href="customize.html">Customize</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
+        <a href="about.html">Về Chúng Tôi</a>
+        <a href="products.html">Sản Phẩm</a>
+        <a href="customize.html">Cá Nhân Hóa</a>
+        <a href="gallery.html">Bộ Sưu Tập</a>
+        <a href="blog.html">Bài Viết</a>
+        <a href="contact.html">Liên Hệ</a>
       </nav>
       <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
       <div class="header-icons">
-        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
-        <button class="icon-btn" onclick="alert('Search functionality coming soon!')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
-        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
+        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <button class="icon-btn" onclick="showToast('Tính năng tìm kiếm đang được phát triển!', 'info')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
       </div>
     </div>
   </header>
 
   <main>
     
-    
     <section class="page-header" style="padding: 60px 40px 40px; text-align: center; background: linear-gradient(to bottom, #fcfbf9, #ffffff); margin-bottom: 20px;">
-      <span class="section-kicker">Almost Yours</span>
-      <h1 class="section-title" style="margin: 0; font-size: 3rem;">Shopping Cart</h1>
+      <span class="section-kicker">Sản phẩm của bạn</span>
+      <h1 class="section-title" style="margin: 0; font-size: 3rem;">Giỏ Hàng</h1>
     </section>
     
     <div class="cart-grid-container" style="max-width:1200px; margin: 0 auto 80px; padding: 0 40px;">
@@ -54,28 +55,28 @@
             <!-- Cart Items -->
             <div style="background:var(--white); padding:40px; border-radius:16px; border:1px solid rgba(140, 132, 122, 0.15); box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
                 <div id="cart-items-container">
-                    <p style="text-align:center;">Loading cart...</p>
+                    <p style="text-align:center;">Đang tải giỏ hàng...</p>
                 </div>
             </div>
             
             <!-- Summary -->
             <div style="background:var(--champagne-light); padding:40px; border-radius:16px; height:fit-content; position: sticky; top: 120px; border:none; box-shadow: 0 10px 40px rgba(140, 132, 122, 0.1);">
-                <h3 style="margin-top:0; font-family:'Playfair Display', serif; font-size: 1.6rem; color: var(--ink); margin-bottom: 30px;">Order Summary</h3>
+                <h3 style="margin-top:0; font-family:'Playfair Display', serif; font-size: 1.6rem; color: var(--ink); margin-bottom: 30px;">Tóm Tắt Đơn Hàng</h3>
                 <div style="display:flex; justify-content:space-between; margin: 20px 0; color: var(--taupe); font-size: 1.1rem;">
-                    <span>Subtotal</span>
+                    <span>Tạm tính</span>
                     <strong id="cart-subtotal" style="color: var(--ink); font-weight: 500;">0 ₫</strong>
                 </div>
                 <div style="display:flex; justify-content:space-between; margin: 20px 0; color: var(--taupe); font-size: 1.1rem;">
-                    <span>Shipping</span>
+                    <span>Phí vận chuyển</span>
                     <strong id="cart-shipping" style="color: var(--ink); font-weight: 500;">0 ₫</strong>
                 </div>
                 <hr style="border-top:1px solid rgba(140, 132, 122, 0.2); margin:30px 0;">
                 <div style="display:flex; justify-content:space-between; font-size:1.4rem; align-items: center;">
-                    <strong style="color: var(--ink); font-weight: 600;">Total</strong>
+                    <strong style="color: var(--ink); font-weight: 600;">Tổng cộng</strong>
                     <strong id="cart-total" style="color:var(--peach); font-weight: 600;">0 ₫</strong>
                 </div>
-                <p style="font-size: 0.9rem; color: var(--taupe); margin: 15px 0 30px; text-align: right;">Taxes included at checkout</p>
-                <button onclick="handleProceedCheckout()" class="btn-primary" style="width:100%; font-size:1.15rem; padding:18px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">Proceed to Checkout</button>
+                <p style="font-size: 0.9rem; color: var(--taupe); margin: 15px 0 30px; text-align: right;">Đã bao gồm thuế GTGT</p>
+                <button onclick="handleProceedCheckout()" class="btn-primary" style="width:100%; font-size:1.15rem; padding:18px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">Tiến Hành Thanh Toán</button>
             </div>
         </div>
     </div>
@@ -86,33 +87,34 @@
     <div class="footer-inner">
       <div class="footer-col">
         <div class="footer-logo">Gradie</div>
-        <p style="font-family: 'Great Vibes', cursive; font-size: 1.5rem; color: var(--champagne); margin-top: 10px;">Celebrate today, cherish forever.</p>
+        <p class="footer-tagline">Kỷ niệm hôm nay, trân quý mãi về sau.</p>
       </div>
       <div class="footer-col">
-        <h4>Quick Links</h4>
-        <a href="about.html">About Us</a>
-        <a href="products.html">Shop All</a>
-        <a href="contact.html">Contact</a>
+        <h4>Liên Kết Nhanh</h4>
+        <a href="about.html">Về Chúng Tôi</a>
+        <a href="products.html">Cửa Hàng</a>
+        <a href="contact.html">Liên Hệ</a>
       </div>
       <div class="footer-col">
-        <h4>Customer Care</h4>
-        <a href="store-policy.html">Store Policy</a>
-        <a href="order-tracking.html">Track Order</a>
-        <a href="account.html">My Account</a>
+        <h4>Chăm Sóc Khách Hàng</h4>
+        <a href="store-policy.html">Chính Sách Cửa Hàng</a>
+        <a href="order-tracking.html">Theo Dõi Đơn Hàng</a>
+        <a href="account.html">Tài Khoản Của Tôi</a>
       </div>
       <div class="footer-col">
-        <h4>Follow Us</h4>
+        <h4>Theo Dõi Chúng Tôi</h4>
         <a href="#">Instagram</a>
         <a href="#">Facebook</a>
         <a href="#">TikTok</a>
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2026 Gradie - Graduation Gifts. All rights reserved.
+      &copy; 2026 Gradie - Quà Tặng Tốt Nghiệp. Toàn bộ bản quyền được bảo lưu.
     </div>
   </footer>
-
-    <script src="../js/global-data.js?v=1780167435"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/toast.js"></script>
+  <script src="../js/global-data.js?v=1780167435"></script>
   <script src="../js/data-store.js?v=1780167435"></script>
   <script src="../js/main.js?v=1780167435"></script>
   <script src="../js/products.js?v=1780167435"></script>

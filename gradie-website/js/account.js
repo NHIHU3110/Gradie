@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const msg = document.getElementById('login-message');
 
       if (!email || !pass) {
-        msg.textContent = 'Please fill out all fields.';
+        msg.textContent = 'Vui lòng điền đầy đủ thông tin.';
         msg.style.color = 'red';
         return;
       }
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // ADMIN LOGIN INTERCEPT
       if (email === 'admin@gradie.com' && pass === 'GradieAdmin123') {
         localStorage.setItem('GRADIE_ADMIN_AUTH', 'true');
-        msg.textContent = 'Admin credentials recognized! Redirecting to dashboard...';
+        msg.textContent = 'Thông tin đăng nhập Admin chính xác! Đang chuyển hướng đến trang quản trị...';
         msg.style.color = 'var(--champagne)';
         setTimeout(() => window.location.href = 'admin-dashboard.html', 1000);
         return;
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // User Authentication
       const result = window.GradieStore.loginUser(email, pass);
       if (result.success) {
-        msg.textContent = `Welcome ${result.user.username || 'User'} to Gradie! Redirecting...`;
+        msg.textContent = `Chào mừng ${result.user.username || 'Khách'} đến với Gradie! Đang chuyển hướng...`;
         msg.style.color = 'green';
         const params = new URLSearchParams(window.location.search);
         const redirect = params.get('redirect');
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const msg = document.getElementById('signup-message');
 
       if (pass !== confirm) {
-        msg.textContent = 'Passwords do not match.';
+        msg.textContent = 'Mật khẩu xác nhận không khớp.';
         msg.style.color = 'red';
         return;
       }
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const phone = document.getElementById('signup-phone') ? document.getElementById('signup-phone').value.trim() : '';
       const result = window.GradieStore.registerUser(name, email, pass, phone);
       if (result.success) {
-        msg.textContent = `Welcome ${result.user.username || 'User'} to Gradie! Account created successfully! Redirecting...`;
+        msg.textContent = `Chào mừng ${result.user.username || 'Khách'} đến với Gradie! Đăng ký tài khoản thành công! Đang chuyển hướng...`;
         msg.style.color = 'green';
         const params = new URLSearchParams(window.location.search);
         const redirect = params.get('redirect');
@@ -145,23 +145,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     o.status === 'Shipped' ? 'background: #e8f0fe; color: #1a73e8;' :
                     o.status === 'Cancelled' ? 'background: #fee2e2; color: #dc2626;' :
                     'background: #fef7e0; color: #b06000;';
+          const statusVN = o.status === 'Delivered' ? 'Đã Giao Hàng' :
+                           o.status === 'Shipped' ? 'Đang Vận Chuyển' :
+                           o.status === 'Cancelled' ? 'Đã Hủy' : 'Đang Chờ Xử Lý';
           return `
             <div class="order-card-clickable" onclick="openUserOrderModal('${o.orderNumber}')" style="border: 1px solid var(--border-gold); padding: 18px; border-radius: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; background: #fff; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.01);">
               <div>
                 <strong style="color: var(--black); font-size: 1.05rem; letter-spacing: 0.5px;">${o.orderNumber}</strong>
-                <div style="font-size: 0.82rem; color: var(--taupe); margin-top: 4px;">Date: ${o.date}</div>
+                <div style="font-size: 0.82rem; color: var(--taupe); margin-top: 4px;">Ngày đặt: ${o.date}</div>
                 <div style="font-size: 0.82rem; color: #777; margin-top: 4px; max-width: 400px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" title="${itemsSummary}">${itemsSummary}</div>
               </div>
               <div style="text-align: right; display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
                 <strong style="color: var(--black); font-size: 1.05rem;">${Number(o.total).toLocaleString('vi-VN')}đ</strong>
-                <span class="om-status-badge" style="${statusStyle}">${o.status}</span>
-                <span style="font-size:0.72rem; color:var(--champagne, #d8a94f); font-weight:500;">Click to view details →</span>
+                <span class="om-status-badge" style="${statusStyle}">${statusVN}</span>
+                <span style="font-size:0.72rem; color:var(--champagne, #d8a94f); font-weight:500;">Nhấn để xem chi tiết →</span>
               </div>
             </div>
           `;
         }).join('');
       } else {
-        orderList.innerHTML = '<p style="color: var(--taupe); font-style: italic;">You haven\'t placed any orders yet.</p>';
+        orderList.innerHTML = '<p style="color: var(--taupe); font-style: italic;">Bạn chưa thực hiện đơn hàng nào.</p>';
       }
 
       // User Order Detail Modal Functions
@@ -171,37 +174,42 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!o) return;
 
         // Title
-        document.getElementById('user-modal-title').textContent = 'Order ' + o.orderNumber;
+        document.getElementById('user-modal-title').textContent = 'Đơn Hàng ' + o.orderNumber;
 
         // Info Grid
         const statusStyle = o.status === 'Delivered' ? 'background: #e6f4ea; color: #137333;' :
               o.status === 'Shipped' ? 'background: #e8f0fe; color: #1a73e8;' :
               o.status === 'Cancelled' ? 'background: #fee2e2; color: #dc2626;' :
               'background: #fef7e0; color: #b06000;';
+        const statusVN = o.status === 'Delivered' ? 'Đã Giao Hàng' :
+                         o.status === 'Shipped' ? 'Đang Vận Chuyển' :
+                         o.status === 'Cancelled' ? 'Đã Hủy' : 'Đang Chờ Xử Lý';
+
+        const paymentMethodVN = o.paymentMethod === 'COD' || o.paymentMethod === 'COD (Cash on Delivery)' ? 'Thanh toán khi nhận hàng (COD)' : o.paymentMethod || 'COD';
 
         document.getElementById('user-order-info').innerHTML = `
           <div class="om-info-item">
-            <div class="om-info-label">Order Number</div>
+            <div class="om-info-label">Mã Đơn Hàng</div>
             <div class="om-info-value">${o.orderNumber}</div>
           </div>
           <div class="om-info-item">
-            <div class="om-info-label">Status</div>
-            <div class="om-info-value"><span class="om-status-badge" style="${statusStyle}">${o.status || 'Pending'}</span></div>
+            <div class="om-info-label">Trạng Thái</div>
+            <div class="om-info-value"><span class="om-status-badge" style="${statusStyle}">${statusVN}</span></div>
           </div>
           <div class="om-info-item">
-            <div class="om-info-label">Order Date</div>
+            <div class="om-info-label">Ngày Đặt Hàng</div>
             <div class="om-info-value">${o.date || new Date(o.createdAt || Date.now()).toLocaleString('vi-VN')}</div>
           </div>
           <div class="om-info-item">
-            <div class="om-info-label">Payment Method</div>
-            <div class="om-info-value">${o.paymentMethod || 'COD (Cash on Delivery)'}</div>
+            <div class="om-info-label">Phương Thức Thanh Toán</div>
+            <div class="om-info-value">${paymentMethodVN}</div>
           </div>
           <div class="om-info-item full-width">
-            <div class="om-info-label">Shipping Address</div>
+            <div class="om-info-label">Địa Chỉ Giao Hàng</div>
             <div class="om-info-value">${o.shippingAddress || (o.customer && o.customer.address) || 'N/A'}</div>
           </div>
           ${o.notes || o.customerNotes ? `<div class="om-info-item full-width">
-            <div class="om-info-label">Delivery Notes</div>
+            <div class="om-info-label">Ghi Chú Giao Hàng</div>
             <div class="om-info-value" style="font-style:italic; color:#64748b;">${o.notes || o.customerNotes}</div>
           </div>` : ''}
         `;
@@ -218,13 +226,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (item.customization) {
               const c = item.customization;
               let parts = [];
-              if (c.embroideryText) parts.push('Embroidery: "' + c.embroideryText + '"');
-              if (c.threadColor) parts.push('Thread: ' + c.threadColor);
-              if (c.boxColor) parts.push('Box: ' + c.boxColor);
-              if (c.ribbonColor) parts.push('Ribbon: ' + c.ribbonColor);
-              if (c.waxSeal) parts.push('Wax Seal: ' + c.waxSeal);
-              if (c.sashColor) parts.push('Sash: ' + c.sashColor);
-              if (c.sashText) parts.push('Sash Text: "' + c.sashText + '"');
+              if (c.embroideryText) parts.push('Thêu chữ: "' + c.embroideryText + '"');
+              if (c.threadColor) parts.push('Màu chỉ: ' + c.threadColor);
+              if (c.boxColor) parts.push('Hộp quà: ' + c.boxColor);
+              if (c.ribbonColor) parts.push('Ruy băng: ' + c.ribbonColor);
+              if (c.waxSeal) parts.push('Dấu sáp: ' + c.waxSeal);
+              if (c.sashColor) parts.push('Dải băng: ' + c.sashColor);
+              if (c.sashText) parts.push('Chữ dải băng: "' + c.sashText + '"');
               if (parts.length > 0) {
                 customHtml = '<div class="om-item-custom">' + parts.join(' · ') + '</div>';
               }
@@ -234,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="om-item-card">
                 <div style="flex:1;">
                   <div class="om-item-name">${item.name}</div>
-                  <div class="om-item-qty">Qty: ${qty} × ${price.toLocaleString('vi-VN')}đ</div>
+                  <div class="om-item-qty">Số lượng: ${qty} × ${price.toLocaleString('vi-VN')}đ</div>
                   ${customHtml}
                 </div>
                 <div class="om-item-total">${itemTotal.toLocaleString('vi-VN')}đ</div>
@@ -242,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
           }).join('');
         } else {
-          itemsContainer.innerHTML = '<div style="color:#94a3b8; font-style:italic; padding:10px 0;">No item details available.</div>';
+          itemsContainer.innerHTML = '<div style="color:#94a3b8; font-style:italic; padding:10px 0;">Không có thông tin chi tiết sản phẩm.</div>';
         }
 
         // Pricing
@@ -250,9 +258,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const shipping = Number(o.shippingFee) || 0;
         const total = Number(o.total) || 0;
         document.getElementById('user-order-pricing').innerHTML = `
-          <div class="om-price-row"><span>Subtotal</span><span>${subtotal.toLocaleString('vi-VN')}đ</span></div>
-          <div class="om-price-row"><span>Shipping</span><span>${shipping.toLocaleString('vi-VN')}đ</span></div>
-          <div class="om-price-row total"><span>Total</span><span>${total.toLocaleString('vi-VN')}đ</span></div>
+          <div class="om-price-row"><span>Tạm tính</span><span>${subtotal.toLocaleString('vi-VN')}đ</span></div>
+          <div class="om-price-row"><span>Phí vận chuyển</span><span>${shipping.toLocaleString('vi-VN')}đ</span></div>
+          <div class="om-price-row total"><span>Tổng cộng</span><span>${total.toLocaleString('vi-VN')}đ</span></div>
         `;
 
         // Show modal
@@ -291,17 +299,18 @@ document.addEventListener('DOMContentLoaded', () => {
           const defaultAddr = addrs.find(a => a.isDefault) || addrs[0];
           if (defaultCard) {
             if (defaultAddr) {
+              const labelVN = defaultAddr.label === 'Home' ? 'Nhà riêng' : defaultAddr.label === 'Office' ? 'Văn phòng' : defaultAddr.label;
               defaultCard.innerHTML = `
                 <div style="font-size:0.88rem; color:#1e293b; line-height:1.4; text-align: left;">
-                  <strong style="color:var(--champagne);">[${defaultAddr.label}]</strong> ${defaultAddr.name} (${defaultAddr.phone})<br>
+                  <strong style="color:var(--champagne);">[${labelVN}]</strong> ${defaultAddr.name} (${defaultAddr.phone})<br>
                   <span style="color:#64748b; font-size:0.82rem;">${defaultAddr.detail}</span>
                 </div>
-                <a href="#" onclick="event.preventDefault(); document.getElementById('btn-tab-addresses').click();" style="font-size:0.82rem; color:var(--champagne); text-decoration:underline; font-weight:600; font-family:inherit; margin-left:15px; white-space:nowrap;">Change in Book</a>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('btn-tab-addresses').click();" style="font-size:0.82rem; color:var(--champagne); text-decoration:underline; font-weight:600; font-family:inherit; margin-left:15px; white-space:nowrap;">Thay đổi trong sổ</a>
               `;
             } else {
               defaultCard.innerHTML = `
-                <span style="color:#888; font-style:italic; font-size:0.9rem;">No default address set.</span>
-                <a href="#" onclick="event.preventDefault(); document.getElementById('btn-tab-addresses').click();" style="font-size:0.82rem; color:var(--champagne); text-decoration:underline; font-weight:600; font-family:inherit; margin-left:15px; white-space:nowrap;">Add Address</a>
+                <span style="color:#888; font-style:italic; font-size:0.9rem;">Chưa thiết lập địa chỉ mặc định.</span>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('btn-tab-addresses').click();" style="font-size:0.82rem; color:var(--champagne); text-decoration:underline; font-weight:600; font-family:inherit; margin-left:15px; white-space:nowrap;">Thêm địa chỉ</a>
               `;
             }
           }
@@ -309,24 +318,25 @@ document.addEventListener('DOMContentLoaded', () => {
           // Render My Addresses panel list
           if (addressesList) {
             if (addrs.length === 0) {
-              addressesList.innerHTML = '<p style="color:var(--taupe); font-style: italic; text-align: center; padding: 15px;">No saved addresses in your book yet.</p>';
+              addressesList.innerHTML = '<p style="color:var(--taupe); font-style: italic; text-align: center; padding: 15px;">Chưa có địa chỉ nào được lưu trong sổ địa chỉ.</p>';
             } else {
               addressesList.innerHTML = addrs.map(a => {
-                const defaultBadge = a.isDefault ? `<span style="background:var(--warm-cream); color:var(--champagne); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:4px; border:1px solid var(--border-gold); margin-left:10px; letter-spacing: 0.5px;">DEFAULT</span>` : '';
-                const setDefaultBtn = !a.isDefault ? `<button class="outline-button" onclick="setDefaultAddress('${a.id}')" style="padding:5px 10px; font-size:0.75rem; border-radius:6px; border:1px solid #cbd5e1; background:transparent; cursor:pointer; font-weight: 500;">Set Default</button>` : '';
+                const labelVN = a.label === 'Home' ? 'Nhà riêng' : a.label === 'Office' ? 'Văn phòng' : a.label;
+                const defaultBadge = a.isDefault ? `<span style="background:var(--warm-cream); color:var(--champagne); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:4px; border:1px solid var(--border-gold); margin-left:10px; letter-spacing: 0.5px;">MẶC ĐỊNH</span>` : '';
+                const setDefaultBtn = !a.isDefault ? `<button class="outline-button" onclick="setDefaultAddress('${a.id}')" style="padding:5px 10px; font-size:0.75rem; border-radius:6px; border:1px solid #cbd5e1; background:transparent; cursor:pointer; font-weight: 500;">Đặt mặc định</button>` : '';
                 return `
                   <div style="border:1px solid #f0eeeb; padding:18px; border-radius:12px; background:#faf8f5; display:flex; justify-content:space-between; align-items:center; box-shadow: 0 4px 12px rgba(0,0,0,0.01);">
                     <div>
                       <div style="display:flex; align-items:center;">
-                        <strong style="color:var(--ink); font-size:1rem; font-family: inherit;">${a.label}</strong>
+                        <strong style="color:var(--ink); font-size:1rem; font-family: inherit;">${labelVN}</strong>
                         ${defaultBadge}
                       </div>
-                      <div style="font-size:0.85rem; color:#666; margin-top:6px;">Receiver: <strong>${a.name}</strong> | Phone: ${a.phone}</div>
-                      <div style="font-size:0.85rem; color:#666; margin-top:3px;">Address: ${a.detail}</div>
+                      <div style="font-size:0.85rem; color:#666; margin-top:6px;">Người nhận: <strong>${a.name}</strong> | SĐT: ${a.phone}</div>
+                      <div style="font-size:0.85rem; color:#666; margin-top:3px;">Địa chỉ: ${a.detail}</div>
                     </div>
                     <div style="display:flex; gap:8px;">
                       ${setDefaultBtn}
-                      <button class="outline-button" onclick="deleteAddress('${a.id}')" style="padding:5px 10px; font-size:0.75rem; border-radius:6px; border:1px solid #dc2626; color:#dc2626; background:transparent; cursor:pointer; font-weight: 500;">Delete</button>
+                      <button class="outline-button" onclick="deleteAddress('${a.id}')" style="padding:5px 10px; font-size:0.75rem; border-radius:6px; border:1px solid #dc2626; color:#dc2626; background:transparent; cursor:pointer; font-weight: 500;">Xóa</button>
                     </div>
                   </div>
                 `;
@@ -391,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const orderNo = input ? input.value.trim() : '';
 
         if (!orderNo) {
-          resultDiv.innerHTML = '<p style="color:#dc2626; text-align:center; font-weight:500; margin-top:10px;">Please enter an order number.</p>';
+          resultDiv.innerHTML = '<p style="color:#dc2626; text-align:center; font-weight:500; margin-top:10px;">Vui lòng nhập mã đơn hàng.</p>';
           return;
         }
 
@@ -401,8 +411,8 @@ document.addEventListener('DOMContentLoaded', () => {
           resultDiv.innerHTML = `
             <div style="text-align:center; padding:30px; color:#64748b;">
               <div style="font-size:2.5rem; margin-bottom:10px;">🔍</div>
-              <p style="font-weight:600; color:#1e293b; font-size:1rem; margin-bottom:5px;">Order Not Found</p>
-              <p style="font-size:0.85rem;">Please check your order number and try again.</p>
+              <p style="font-weight:600; color:#1e293b; font-size:1rem; margin-bottom:5px;">Không Tìm Thấy Đơn Hàng</p>
+              <p style="font-size:0.85rem;">Vui lòng kiểm tra lại mã đơn hàng và thử lại.</p>
             </div>
           `;
           return;
@@ -412,6 +422,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const isCancelled = status === 'Cancelled';
         const isShipped = status === 'Shipped' || status === 'Delivered';
         const isDelivered = status === 'Delivered';
+
+        const statusVN = status === 'Delivered' ? 'Đã Giao Hàng' :
+                         status === 'Shipped' ? 'Đang Vận Chuyển' :
+                         status === 'Cancelled' ? 'Đã Hủy' : 'Đang Chờ Xử Lý';
 
         // Status badge styling
         const statusStyle = isDelivered ? 'background:#e6f4ea; color:#137333;' :
@@ -429,31 +443,31 @@ document.addEventListener('DOMContentLoaded', () => {
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding-bottom:14px; border-bottom:1.5px solid #f0eeeb;">
               <div>
                 <h3 style="font-family:'Playfair Display', serif; font-size:1.3rem; margin:0; color:#1e293b;">${order.orderNumber}</h3>
-                <span style="font-size:0.82rem; color:#94a3b8;">${order.date || ''}</span>
+                <span style="font-size:0.82rem; color:#94a3b8;">Ngày đặt: ${order.date || ''}</span>
               </div>
-              <span class="om-status-badge" style="${statusStyle}">${status}</span>
+              <span class="om-status-badge" style="${statusStyle}">${statusVN}</span>
             </div>
 
             <div class="track-info-grid">
               <div class="track-info-cell">
-                <div class="ti-label">Recipient</div>
+                <div class="ti-label">Người nhận</div>
                 <div class="ti-value">${order.customerName || 'N/A'}</div>
               </div>
               <div class="track-info-cell">
-                <div class="ti-label">Total</div>
+                <div class="ti-label">Tổng cộng</div>
                 <div class="ti-value">${Number(order.total).toLocaleString('vi-VN')}đ</div>
               </div>
               <div class="track-info-cell full">
-                <div class="ti-label">Shipping Address</div>
+                <div class="ti-label">Địa chỉ giao hàng</div>
                 <div class="ti-value">${order.shippingAddress || 'N/A'}</div>
               </div>
               <div class="track-info-cell full">
-                <div class="ti-label">Items</div>
-                <div class="ti-value">${itemsList || '<span style="color:#94a3b8;">No items</span>'}</div>
+                <div class="ti-label">Sản phẩm</div>
+                <div class="ti-value">${itemsList || '<span style="color:#94a3b8;">Không có sản phẩm</span>'}</div>
               </div>
             </div>
 
-            <h4 style="font-family:'Playfair Display', serif; font-size:1.1rem; margin:0 0 8px; color:#1e293b;">Fulfillment Timeline</h4>
+            <h4 style="font-family:'Playfair Display', serif; font-size:1.1rem; margin:0 0 8px; color:#1e293b;">Tiến Trình Đơn Hàng</h4>
             <div style="padding:10px 0;">
               ${isCancelled ? `
                 <div class="timeline-step">
@@ -461,8 +475,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="timeline-dot cancelled">✕</div>
                   </div>
                   <div class="timeline-content">
-                    <h4>Order Cancelled</h4>
-                    <p>This order has been cancelled. Please contact support for details.</p>
+                    <h4>Đơn Hàng Đã Hủy</h4>
+                    <p>Đơn hàng này đã bị hủy. Vui lòng liên hệ bộ phận hỗ trợ để biết thêm chi tiết.</p>
                   </div>
                 </div>
               ` : `
@@ -472,8 +486,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="timeline-line ${isShipped ? 'active' : ''}"></div>
                   </div>
                   <div class="timeline-content">
-                    <h4>Order Confirmed</h4>
-                    <p>Your order has been placed and payment verified successfully.</p>
+                    <h4>Đã Xác Nhận Đơn Hàng</h4>
+                    <p>Đơn hàng của bạn đã được tiếp nhận và xác thực thành công.</p>
                   </div>
                 </div>
                 <div class="timeline-step">
@@ -482,8 +496,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="timeline-line ${isDelivered ? 'active' : ''}"></div>
                   </div>
                   <div class="timeline-content">
-                    <h4 class="${isShipped ? '' : 'inactive'}">Shipped (In Transit)</h4>
-                    <p>${isShipped ? 'Your gift is on the way via our premium delivery partner.' : 'Waiting for shipment processing...'}</p>
+                    <h4 class="${isShipped ? '' : 'inactive'}">Đang Vận Chuyển</h4>
+                    <p>${isShipped ? 'Món quà của bạn đang trên đường vận chuyển bởi đối tác giao hàng cao cấp.' : 'Đang chờ xử lý giao hàng...'}</p>
                   </div>
                 </div>
                 <div class="timeline-step">
@@ -491,8 +505,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="timeline-dot ${isDelivered ? 'active' : 'inactive'}">${isDelivered ? '✓' : '3'}</div>
                   </div>
                   <div class="timeline-content">
-                    <h4 class="${isDelivered ? '' : 'inactive'}">Delivered</h4>
-                    <p>${isDelivered ? 'Your Gradie gift has been delivered successfully. Enjoy!' : 'Awaiting delivery...'}</p>
+                    <h4 class="${isDelivered ? '' : 'inactive'}">Đã Giao Hàng</h4>
+                    <p>${isDelivered ? 'Đơn hàng đã được giao thành công. Hãy tận hưởng khoảnh khắc tuyệt vời cùng Gradie!' : 'Đang chờ giao hàng...'}</p>
                   </div>
                 </div>
               `}
@@ -546,7 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       window.deleteAddress = function(addressId) {
-        if (confirm("Are you sure you want to delete this address?")) {
+        if (confirm("Bạn có chắc chắn muốn xóa địa chỉ này không?")) {
           const currentUser = window.GradieStore.getCurrentUser();
           if (!currentUser) return;
           
@@ -603,7 +617,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const res = window.GradieStore.updateUserProfile(user.email, updatedData);
         if (res.success) {
-          msgEl.textContent = "Profile successfully updated!";
+          msgEl.textContent = "Cập nhật thông tin hồ sơ thành công!";
           msgEl.style.color = "var(--champagne)";
           document.getElementById('dash-name').textContent = username;
           document.getElementById('profile-password').value = '';

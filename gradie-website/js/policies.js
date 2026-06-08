@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (policyContainer) {
         const policies = window.GradieStore.getPolicies().filter(p => p.status === 'Published');
         if (policies.length === 0) {
-            policyContainer.innerHTML = '<p>No policies defined yet.</p>';
+            policyContainer.innerHTML = '<p>Chưa có chính sách nào được ban hành.</p>';
         } else {
             policyContainer.innerHTML = policies.map(p => `
                 <div style="margin-bottom:20px; padding:20px; background:var(--white); border:1px solid var(--border-gold); border-radius:8px;">

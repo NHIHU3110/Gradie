@@ -1,77 +1,375 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gradie | About Us</title>
+  <title>Gradie | Về Chúng Tôi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=1780166734">
-  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/icons.css?v=1780166734">
   <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/toast.css?v=1780167435">
+  <style>
+    /* ── About Us Custom CSS ── */
+    .about-hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      background: linear-gradient(180deg, #fdfbf7 0%, var(--cream, #FFFBF0) 100%);
+      border-bottom: 1px solid var(--border-gold);
+      margin-bottom: 60px;
+      border-radius: 24px;
+    }
+    .about-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      color: var(--soft-black);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    .about-hero p {
+      font-size: 1.15rem;
+      color: var(--taupe);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* Core Values Grid */
+    .values-section {
+      margin-bottom: 80px;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .value-card {
+      background: var(--white);
+      padding: 40px 30px;
+      border-radius: 20px;
+      border: 1px solid var(--border-gold);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 20px rgba(216, 169, 79, 0.03);
+    }
+    .value-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(216, 169, 79, 0.08);
+    }
+    .value-icon {
+      font-size: 2.2rem;
+      margin-bottom: 18px;
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      background: var(--champagne-light);
+      border-radius: 50%;
+      color: var(--champagne);
+    }
+    .value-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      color: var(--soft-black);
+    }
+    .value-card p {
+      color: var(--taupe);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* Stats Banner */
+    .stats-banner {
+      background: linear-gradient(135deg, #FAF6EE 0%, #FFFDF9 100%);
+      border: 1px solid var(--border-gold);
+      border-radius: 24px;
+      padding: 50px 30px;
+      margin-bottom: 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      text-align: center;
+    }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--champagne);
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--soft-black);
+      font-weight: 600;
+    }
+
+    /* Story & Craft Section */
+    .craft-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+    .craft-img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 1px solid var(--border-gold);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .craft-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+    .craft-content p {
+      color: var(--taupe);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    /* Navigation Quick Cards */
+    .quick-nav-section {
+      margin-bottom: 80px;
+    }
+    .quick-nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .quick-card {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid var(--border-gold);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .quick-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 4px; height: 100%;
+      background: var(--champagne);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .quick-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(216,169,79,0.06);
+    }
+    .quick-card:hover::before {
+      opacity: 1;
+    }
+    .quick-card h4 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+    .quick-card h4 a {
+      color: var(--soft-black);
+      text-decoration: none;
+    }
+    .quick-card h4 a:hover {
+      color: var(--champagne);
+    }
+    .quick-card p {
+      color: var(--taupe);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    .quick-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--champagne);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Mobile Responsive adjustments */
+    @media (max-width: 768px) {
+      .about-hero {
+        padding: 50px 16px 40px;
+        margin-bottom: 40px;
+      }
+      .about-hero h1 {
+        font-size: 2.2rem;
+      }
+      .about-hero p {
+        font-size: 1rem;
+      }
+      .craft-section {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-bottom: 50px;
+      }
+      .craft-img {
+        height: 280px;
+      }
+      .values-section, .stats-banner, .quick-nav-section {
+        margin-bottom: 50px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="announcement-bar">Grand Opening • Free gift tag with every order • Celebrate her next chapter</div>
-    <header class="header">
+  <div class="announcement-bar">Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới của cô ấy</div>
+  
+  <header class="header">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <img src="../images/Gradie_logo.jpeg" alt="Gradie Logo" style="height:48px; width:auto; border-radius:50%; object-fit:cover; margin-right:10px;">
+        <img loading="lazy" src="../images/Gradie_logo.jpeg" alt="Gradie Logo">
         Gradie
-        <span class="tagline">Graduation Gifts</span>
+        <span class="tagline">Quà Tặng Tốt Nghiệp</span>
       </a>
       <nav class="nav">
-        <a href="about.html">About Us</a>
-        <a href="products.html">Products</a>
-        <a href="customize.html">Customize</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
+        <a href="about.html">Về Chúng Tôi</a>
+        <a href="products.html">Sản Phẩm</a>
+        <a href="customize.html">Cá Nhân Hóa</a>
+        <a href="gallery.html">Bộ Sưu Tập</a>
+        <a href="blog.html">Bài Viết</a>
+        <a href="contact.html">Liên Hệ</a>
       </nav>
       <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
       <div class="header-icons">
-        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
-        <button class="icon-btn" onclick="alert('Search functionality coming soon!')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
-        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="vertical-align: text-bottom;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
+        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <button class="icon-btn" onclick="showToast('Tính năng tìm kiếm đang được phát triển!', 'info')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
       </div>
     </div>
   </header>
 
   <main style="max-width:1200px; margin:60px auto; padding:0 20px;">
     
-        <div style="text-align:center; margin-bottom:40px;">
-            <h1 style="font-size:3rem; color:var(--champagne); margin-bottom:20px;">About Gradie</h1>
-            <p style="font-size:1.1rem; color:var(--taupe); max-width:600px; margin:0 auto;">Born from a love for meaningful celebrations, Gradie is your premier destination for personalized graduation gifts.</p>
+    <!-- Hero Banner -->
+    <div class="about-hero">
+      <span class="section-kicker">Chào mừng bạn đến với Gradie</span>
+      <h1>Triết Lý Tặng Quà Của Chúng Tôi</h1>
+      <p>Ra đời từ niềm yêu thích những ngày kỷ niệm ý nghĩa, Gradie là điểm đến hàng đầu cho các món quà tốt nghiệp cá nhân hóa. Chúng tôi tin rằng mỗi cột mốc quan trọng đều xứng đáng có một kỷ vật kể nên câu chuyện độc nhất.</p>
+    </div>
+
+    <!-- Craftsmanship Section -->
+    <section class="craft-section">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800&q=80" alt="Gradie Crafting Process" class="craft-img">
+      <div class="craft-content">
+        <span class="section-kicker">Nghệ Thuật Trưng Bày</span>
+        <h2>Chi Tiết Thủ Công Sang Trọng</h2>
+        <p>Tại Gradie, mỗi hộp quà đều là một tác phẩm nghệ thuật. Từ việc tuyển chọn satin cao cấp dày dặn cho băng đeo cử nhân đến sự tỉ mỉ chọn chỉ thêu vàng kim lấp lánh, chúng tôi đảm bảo không bỏ sót bất kỳ chi tiết nhỏ nào.</p>
+        <p>Đội ngũ nghệ nhân tận tâm của chúng tôi hoàn thiện mỗi hộp quà bằng giấy gói thân thiện với môi trường, ruy băng satin thắt tay và con dấu sáp đóng dấu thủ công trực tiếp. Chúng tôi không chỉ đóng gói quà tặng; chúng tôi tạo ra những trải nghiệm mà cô ấy sẽ trân quý suốt đời.</p>
+        <a href="products.html" class="btn-primary" style="margin-top: 10px; border-radius: 8px;">Khám Phá Sản Phẩm</a>
+      </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <section class="values-section">
+      <div class="section-header">
+        <span class="section-kicker">Niềm Tin Cốt Lõi</span>
+        <h2 class="section-title">Ba Trụ Cột Của Gradie</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">✨</div>
+          <h3>Chất Lượng Vô Song</h3>
+          <p>Chúng tôi chỉ sử dụng các loại vải satin tốt nhất, giấy bìa cứng định lượng cao và vật liệu bền bỉ để đảm bảo mỗi món quà đều mang lại cảm giác cực kỳ cao cấp và trường tồn với thời gian.</p>
         </div>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px;">
-            <div style="background:var(--white); padding:30px; border-radius:12px; border:1px solid var(--border-gold); text-align:center;">
-                <h3><a href="brand-story.html">Our Story</a></h3>
-                <p>Discover how Gradie started from a simple graduation sash to a full gifting boutique.</p>
-            </div>
-            <div style="background:var(--white); padding:30px; border-radius:12px; border:1px solid var(--border-gold); text-align:center;">
-                <h3><a href="mission.html">Our Mission</a></h3>
-                <p>Learn about our commitment to quality, deep customization, and customer trust.</p>
-            </div>
-            <div style="background:var(--white); padding:30px; border-radius:12px; border:1px solid var(--border-gold); text-align:center;">
-                <h3><a href="store-policy.html">Store Policies</a></h3>
-                <p>Everything you need to know about shipping, returns, and payments.</p>
-            </div>
+        <div class="value-card">
+          <div class="value-icon">🎨</div>
+          <h3>Cá Nhân Hóa Sâu Sắc</h3>
+          <p>Với các công cụ thiết kế trực quan, bạn có thể xem trước tên thêu, lựa chọn phông chữ và kết hợp ruy băng trong thời gian thực để tạo ra kỷ niệm cột mốc độc bản thực sự.</p>
         </div>
-        
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <h3>Sự Tin Cậy Của Khách Hàng</h3>
+          <p>Từ việc giao hàng nhanh chóng, thanh toán an toàn đến sự chăm sóc khách hàng tận tâm, chúng tôi cam kết mang lại hành trình tặng quà liền mạch, đáng tin cậy và tràn đầy niềm vui.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Banner -->
+    <section class="stats-banner">
+      <div>
+        <div class="stat-number">15K+</div>
+        <div class="stat-label">Cột mốc được kỷ niệm</div>
+      </div>
+      <div>
+        <div class="stat-number">99%</div>
+        <div class="stat-label">Đánh giá hài lòng</div>
+      </div>
+      <div>
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Hỗ trợ tận tâm</div>
+      </div>
+      <div>
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Chất lượng thủ công</div>
+      </div>
+    </section>
+
+    <!-- Quick Navigation Cards -->
+    <section class="quick-nav-section">
+      <div class="section-header">
+        <span class="section-kicker">Tìm Hiểu Thêm</span>
+        <h2 class="section-title">Khám Phá Thương Hiệu</h2>
+      </div>
+      <div class="quick-nav-grid">
+        <div class="quick-card">
+          <div>
+            <h4><a href="brand-story.html">Câu Chuyện Của Chúng Tôi</a></h4>
+            <p>Khám phá cách Gradie khởi đầu từ một dự án băng đeo tốt nghiệp đơn giản trở thành một cửa hàng quà tặng cao cấp phục vụ các cử nhân trên toàn quốc.</p>
+          </div>
+          <a href="brand-story.html" class="quick-link">Đọc Câu Chuyện &rarr;</a>
+        </div>
+        <div class="quick-card">
+          <div>
+            <h4><a href="mission.html">Sứ Mệnh Của Chúng Tôi</a></h4>
+            <p>Tìm hiểu về cam kết của chúng tôi trong việc tôn vinh thành tựu, hỗ trợ các nghệ nhân địa phương và duy trì các tiêu chuẩn chất lượng nghiêm ngặt.</p>
+          </div>
+          <a href="mission.html" class="quick-link">Tìm Hiểu Sứ Mệnh &rarr;</a>
+        </div>
+        <div class="quick-card">
+          <div>
+            <h4><a href="store-policy.html">Chính Sách Cửa Hàng</a></h4>
+            <p>Mọi điều bạn cần biết về quy trình thanh toán an toàn, phí vận chuyển toàn quốc, chính sách đổi trả và theo dõi đơn hàng.</p>
+          </div>
+          <a href="store-policy.html" class="quick-link">Xem Chính Sách &rarr;</a>
+        </div>
+      </div>
+    </section>
+
   </main>
   
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-col">
         <div class="footer-logo">Gradie</div>
-        <p style="font-family:'Great Vibes', cursive; font-size:1.5rem; color:var(--champagne); margin-top:10px;">Celebrate today, cherish forever.</p>
+        <p style="font-family:'Great Vibes', cursive; font-size:1.5rem; color:var(--champagne); margin-top:10px;">Kỷ niệm hôm nay, trân quý mãi về sau.</p>
       </div>
-      <div class="footer-col"><h4>Quick Links</h4><a href="about.html">About Us</a><a href="products.html">Shop All</a><a href="contact.html">Contact</a></div>
-      <div class="footer-col"><h4>Customer Care</h4><a href="store-policy.html">Store Policy</a><a href="order-tracking.html">Track Order</a><a href="account.html">My Account</a></div>
+      <div class="footer-col"><h4>Liên Kết Nhanh</h4><a href="about.html">Về Chúng Tôi</a><a href="products.html">Cửa Hàng</a><a href="contact.html">Liên Hệ</a></div>
+      <div class="footer-col"><h4>Chăm Sóc Khách Hàng</h4><a href="store-policy.html">Chính Sách Cửa Hàng</a><a href="order-tracking.html">Theo Dõi Đơn Hàng</a><a href="account.html">Tài Khoản Của Tôi</a></div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Gradie - Quà Tặng Tốt Nghiệp. Toàn bộ bản quyền được bảo lưu.
     </div>
   </footer>
 
+  <script src="../js/icons.js"></script>
+  <script src="../js/toast.js"></script>
   <script src="../js/global-data.js?v=1780167435"></script>
   <script src="../js/data-store.js?v=1780167435"></script>
   <script src="../js/main.js?v=1780167435"></script>
-  
 </body>
 </html>
