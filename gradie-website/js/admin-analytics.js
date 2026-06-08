@@ -399,9 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const content = document.getElementById('ai-content');
         
         if (modal) {
-            modal.style.display = 'flex';
-            modal.style.alignItems = 'center';
-            modal.style.justifyContent = 'center';
+            modal.style.display = 'block';
         }
         if (loading) loading.style.display = 'block';
         if (content) content.style.display = 'none';
