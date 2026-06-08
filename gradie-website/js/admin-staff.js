@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchStaffFromMongo() {
     try {
-        const res = await fetch('/api/staff');
+        const res = await fetch('/api/staff', { cache: 'no-store' });
         if (!res.ok) throw new Error('API fetch failed');
         globalStaffList = await res.json();
         renderStaffTable();

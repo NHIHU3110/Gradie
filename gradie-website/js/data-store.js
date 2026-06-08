@@ -1953,7 +1953,7 @@ window.GradieStore = {
     try {
       const fetchSafe = async (url) => {
         try {
-          const res = await fetch(url);
+          const res = await fetch(url, { cache: 'no-store' });
           return res.ok ? res : null;
         } catch (e) {
           console.warn(`Fetch to ${url} failed`, e);
