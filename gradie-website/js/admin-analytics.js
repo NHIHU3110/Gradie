@@ -387,7 +387,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderAnalytics(false);
     });
 });
-});
 
 // ── PDF Export Function ────────────────────────────────────────────────────────
 window.exportAnalyticsPDF = function() {
