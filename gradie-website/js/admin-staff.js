@@ -1,9 +1,10 @@
 // js/admin-staff.js
 
+let globalStaffList = [];
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Initial Render
-    renderStaffTable();
-    renderActivityLogs();
+    fetchStaffFromMongo();
+    if(window.renderActivityLogs) window.renderActivityLogs();
 
     // Setup Modal
     const modal = document.getElementById('staff-modal');
@@ -13,41 +14,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
 
     // Form Submit
-    document.getElementById('staff-form').addEventListener('submit', (e) => {
+    document.getElementById('staff-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const id = document.getElementById('staff-id').value;
+        const name = document.getElementById('staff-name').value;
+        const email = document.getElementById('staff-email').value;
+        const phone = document.getElementById('staff-phone').value;
         const role = document.getElementById('staff-role').value;
         const commissionRate = parseFloat(document.getElementById('staff-commission').value) || 0;
         const kpi = parseFloat(document.getElementById('staff-kpi').value) || 0;
 
-        let staffList = window.GradieStore.getStaff();
-        const index = staffList.findIndex(s => s.id === id);
-        if(index !== -1) {
-            staffList[index].role = role;
-            staffList[index].commissionRate = commissionRate;
-            staffList[index].kpi = kpi;
-            window.GradieStore.saveStaff(staffList);
-            
-            // Log Activity
-            window.GradieStore.addActivityLog(
-                "Cập nhật phân quyền",
-                `Đã cập nhật chức vụ/KPIs cho nhân viên: ${staffList[index].name} (${role})`
-            );
-            
+        const staffData = {
+            id: id || ('s-' + Date.now()),
+            name,
+            email,
+            phone,
+            role,
+            commissionRate,
+            kpi,
+            avatar: id ? globalStaffList.find(s => s.id === id)?.avatar : `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1e293b&color=fff`
+        };
+
+        try {
+            const method = id ? 'PUT' : 'POST';
+            await fetch('/api/staff', {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(staffData)
+            });
+
+            if (window.GradieStore && window.GradieStore.addActivityLog) {
+                window.GradieStore.addActivityLog(
+                    id ? "Cập nhật nhân sự" : "Thêm nhân sự",
+                    `Đã ${id ? 'cập nhật' : 'thêm mới'} nhân viên: ${name} (${role})`
+                );
+            }
+
             modal.classList.remove('active');
-            renderStaffTable();
-            renderActivityLogs();
+            showToast('Lưu thông tin nhân sự thành công!', 'success');
+            fetchStaffFromMongo();
+            if(window.renderActivityLogs) window.renderActivityLogs();
+        } catch (error) {
+            console.error('Error saving staff:', error);
+            showToast('Lỗi khi lưu nhân sự!', 'error');
         }
     });
 });
 
+async function fetchStaffFromMongo() {
+    try {
+        const res = await fetch('/api/staff');
+        globalStaffList = await res.json();
+        renderStaffTable();
+    } catch (e) {
+        console.error('Fetch staff error', e);
+        const tbody = document.getElementById('admin-staff-list');
+        if (tbody) tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color: red;">Lỗi tải dữ liệu. Vui lòng thử lại.</td></tr>';
+    }
+}
+
 window.renderStaffTable = function() {
-    const staffList = window.GradieStore.getStaff();
     const tbody = document.getElementById('admin-staff-list');
-    
     if(!tbody) return;
 
-    if (!staffList || staffList.length === 0) {
+    if (!globalStaffList || globalStaffList.length === 0) {
         tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 30px; color: #64748b;">Chưa có dữ liệu nhân viên.</td></tr>';
         return;
     }
@@ -60,14 +90,14 @@ window.renderStaffTable = function() {
         'Accountant': { bg: '#f3e8ff', text: '#7e22ce' }
     };
 
-    const rows = staffList.map(s => {
+    const rows = globalStaffList.map(s => {
         const rc = roleColors[s.role] || { bg: '#e2e8f0', text: '#475569' };
         
         let kpiText = '-';
         if(s.role === 'Sales') {
-            kpiText = `Hoa hồng: ${s.commissionRate}%<br><span style="font-size:0.8rem; color:#64748b;">KPI: ${s.kpi.toLocaleString('vi-VN')}đ</span>`;
+            kpiText = `Hoa hồng: ${s.commissionRate}%<br><span style="font-size:0.8rem; color:#64748b;">KPI: ${(s.kpi||0).toLocaleString('vi-VN')}đ</span>`;
         } else if(s.kpi > 0) {
-            kpiText = `KPI: ${s.kpi.toLocaleString('vi-VN')}đ`;
+            kpiText = `KPI: ${(s.kpi||0).toLocaleString('vi-VN')}đ`;
         }
 
         return `
@@ -89,9 +119,14 @@ window.renderStaffTable = function() {
             </td>
             <td>${kpiText}</td>
             <td>
-                <button class="outline-button" onclick="editStaff('${s.id}')" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 4px; border: 1px solid #d8a94f; color: #d8a94f; background: transparent; cursor: pointer; font-weight: 500;">
-                    Phân Quyền
-                </button>
+                <div style="display:flex; gap: 10px;">
+                    <button class="outline-button" onclick="editStaff('${s.id}')" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 4px; border: 1px solid #d8a94f; color: #d8a94f; background: transparent; cursor: pointer; font-weight: 500;">
+                        Phân Quyền
+                    </button>
+                    <button class="outline-button" onclick="deleteStaff('${s.id}')" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 4px; border: 1px solid #dc2626; color: #dc2626; background: transparent; cursor: pointer; font-weight: 500;">
+                        Xóa
+                    </button>
+                </div>
             </td>
         </tr>
         `;
@@ -100,43 +135,47 @@ window.renderStaffTable = function() {
     tbody.innerHTML = rows.join('');
 };
 
-window.renderActivityLogs = function() {
-    const logs = window.GradieStore.getActivityLogs();
-    const tbody = document.getElementById('admin-activity-logs');
-    
-    if(!tbody) return;
-
-    if (!logs || logs.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 20px; color: #64748b;">Chưa có lịch sử thao tác.</td></tr>';
-        return;
-    }
-
-    const rows = logs.slice(0, 50).map(log => {
-        const d = new Date(log.timestamp);
-        const timeStr = `${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')} ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
-        return `
-        <tr>
-            <td style="color:#64748b; font-size:0.85rem;">${timeStr}</td>
-            <td style="font-weight:500;">${log.user}</td>
-            <td style="color:#0f172a; font-weight:600;">${log.action}</td>
-            <td style="color:#475569; font-size:0.9rem;">${log.details}</td>
-        </tr>
-        `;
-    });
-
-    tbody.innerHTML = rows.join('');
+window.openAddStaffModal = function() {
+    document.getElementById('staff-id').value = '';
+    document.getElementById('staff-name').value = '';
+    document.getElementById('staff-email').value = '';
+    document.getElementById('staff-phone').value = '';
+    document.getElementById('staff-role').value = 'Sales';
+    document.getElementById('staff-commission').value = '0';
+    document.getElementById('staff-kpi').value = '0';
+    document.getElementById('staff-modal').classList.add('active');
 };
 
 window.editStaff = function(id) {
-    const staffList = window.GradieStore.getStaff();
-    const s = staffList.find(x => x.id === id);
+    const s = globalStaffList.find(x => x.id === id);
     if(s) {
         document.getElementById('staff-id').value = s.id;
-        document.getElementById('staff-name').value = s.name;
+        document.getElementById('staff-name').value = s.name || '';
+        document.getElementById('staff-email').value = s.email || '';
+        document.getElementById('staff-phone').value = s.phone || '';
         document.getElementById('staff-role').value = s.role || 'Sales';
         document.getElementById('staff-commission').value = s.commissionRate || 0;
         document.getElementById('staff-kpi').value = s.kpi || 0;
         
         document.getElementById('staff-modal').classList.add('active');
+    }
+};
+
+window.deleteStaff = async function(id) {
+    if(confirm('Bạn có chắc chắn muốn xóa nhân viên này khỏi hệ thống? Dữ liệu không thể khôi phục!')) {
+        try {
+            await fetch('/api/staff?id=' + id, { method: 'DELETE' });
+            showToast('Đã xóa nhân viên thành công!', 'success');
+            
+            if (window.GradieStore && window.GradieStore.addActivityLog) {
+                window.GradieStore.addActivityLog("Xóa nhân sự", `Đã xóa nhân viên ID: ${id}`);
+                if(window.renderActivityLogs) window.renderActivityLogs();
+            }
+
+            fetchStaffFromMongo();
+        } catch (e) {
+            console.error(e);
+            showToast('Lỗi khi xóa nhân viên!', 'error');
+        }
     }
 };

@@ -308,4 +308,60 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    // 5. Commission Report
+    (async function renderCommissionReport() {
+        try {
+            const res = await fetch('/api/staff');
+            const staffList = await res.json();
+            const salesReps = staffList.filter(s => s.role === 'Sales');
+            
+            const tbody = document.getElementById('commission-table-body');
+            if(!tbody) return;
+            
+            if(salesReps.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">Chưa có nhân viên Sales nào.</td></tr>';
+                return;
+            }
+
+            let html = '';
+            salesReps.forEach(rep => {
+                const repOrders = orders.filter(o => o.salesperson_id === rep.id && validStatuses.includes((o.status || '').toLowerCase()));
+                const totalSales = repOrders.reduce((sum, o) => sum + (Number(o.total)||0), 0);
+                const kpi = Number(rep.kpi) || 0;
+                const commissionRate = Number(rep.commissionRate) || 0;
+                
+                const commissionAmount = (totalSales * commissionRate) / 100;
+                let kpiProgress = kpi > 0 ? Math.min(100, Math.round((totalSales / kpi) * 100)) : 100;
+
+                html += `
+                <tr>
+                    <td>
+                        <div class="product-cell">
+                            <img src="${rep.avatar}" class="product-img" style="border-radius:50%;" alt="${rep.name}">
+                            <div class="product-info">
+                                <span class="product-name">${rep.name}</span>
+                                <span class="product-cat">${rep.email}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="font-weight:700; color:#0f172a;">${formatMoney(totalSales)}</td>
+                    <td>
+                        <div style="font-size:0.8rem; color:#64748b; margin-bottom:4px;">${kpiProgress}% / ${formatMoney(kpi)}</div>
+                        <div style="width:100%; height:8px; background:#e2e8f0; border-radius:4px; overflow:hidden;">
+                            <div style="width:${kpiProgress}%; height:100%; background:${kpiProgress >= 100 ? '#10b981' : '#3b82f6'};"></div>
+                        </div>
+                    </td>
+                    <td style="font-weight:700; color:#10b981;">
+                        +${formatMoney(commissionAmount)}
+                        <br><span style="font-size:0.75rem; color:#64748b; font-weight:500;">(${commissionRate}%)</span>
+                    </td>
+                </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        } catch(e) {
+            console.error('Error rendering commission report:', e);
+        }
+    })();
 });

@@ -78,6 +78,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const sidebar = document.querySelector('.sidebar');
   if (sidebar) {
     const currentPage = window.location.pathname.split('/').pop() || 'admin-dashboard.html';
+    const activeRole = localStorage.getItem('GRADIE_ACTIVE_ROLE') || 'Admin';
+    
+    const roleRestrictions = {
+        'Admin': [],
+        'Manager': [],
+        'Sales': ['admin-analytics.html', 'admin-staff.html', 'admin-settings.html', 'admin-customize.html', 'admin-policies.html'],
+        'Warehouse': ['admin-dashboard.html', 'admin-analytics.html', 'admin-users.html', 'admin-blog.html', 'admin-staff.html', 'admin-settings.html', 'admin-customize.html', 'admin-policies.html'],
+        'Accountant': ['admin-products.html', 'admin-categories.html', 'admin-users.html', 'admin-blog.html', 'admin-gallery.html', 'admin-staff.html', 'admin-settings.html', 'admin-customize.html', 'admin-policies.html']
+    };
+    const restrictedPages = roleRestrictions[activeRole] || [];
 
     let html = `
       <div class="sidebar-header">
@@ -92,14 +102,22 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     ADMIN_ROUTES.forEach(group => {
-      html += `<div class="sidebar-section-label">${group.section}</div><nav class="sidebar-nav" style="padding:0 0 4px;">`;
+      let groupHtml = `<div class="sidebar-section-label">${group.section}</div><nav class="sidebar-nav" style="padding:0 0 4px;">`;
+      let hasVisibleItems = false;
+      
       group.items.forEach(route => {
-        const isActive = (currentPage === route.href ||
-          (currentPage === 'admin-product-form.html' && route.href === 'admin-products.html'))
-          ? 'active' : '';
-        html += `<a href="${route.href}" class="${isActive}">${route.icon}<span>${route.label}</span></a>`;
+        if (!restrictedPages.includes(route.href)) {
+            hasVisibleItems = true;
+            const isActive = (currentPage === route.href ||
+              (currentPage === 'admin-product-form.html' && route.href === 'admin-products.html'))
+              ? 'active' : '';
+            groupHtml += `<a href="${route.href}" class="${isActive}">${route.icon}<span>${route.label}</span></a>`;
+        }
       });
-      html += `</nav>`;
+      groupHtml += `</nav>`;
+      if (hasVisibleItems) {
+          html += groupHtml;
+      }
     });
 
     // Footer
@@ -123,6 +141,18 @@ document.addEventListener('DOMContentLoaded', () => {
       </button>
       <span class="topbar-title">${pageTitle}</span>
       <div class="topbar-spacer"></div>
+      
+      <div style="display: flex; align-items: center; gap: 10px; margin-right: 20px;">
+          <span style="font-size: 0.85rem; color: #64748b; font-weight: 500;">Role:</span>
+          <select id="simulate-role-select" style="padding: 5px 10px; border-radius: 6px; border: 1px solid #cbd5e1; background: #f8fafc; font-size: 0.85rem; font-weight: 600; cursor: pointer; color: #0f172a;">
+              <option value="Admin" ${activeRole === 'Admin' ? 'selected' : ''}>Admin</option>
+              <option value="Manager" ${activeRole === 'Manager' ? 'selected' : ''}>Manager</option>
+              <option value="Sales" ${activeRole === 'Sales' ? 'selected' : ''}>Sales</option>
+              <option value="Warehouse" ${activeRole === 'Warehouse' ? 'selected' : ''}>Warehouse (Kho)</option>
+              <option value="Accountant" ${activeRole === 'Accountant' ? 'selected' : ''}>Accountant (Kế toán)</option>
+          </select>
+      </div>
+
       <div class="topbar-actions">
         <a href="index.html" target="_blank" class="topbar-view-link">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -134,6 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
         </button>
       </div>
     `;
+
+    document.getElementById('simulate-role-select').addEventListener('change', (e) => {
+        localStorage.setItem('GRADIE_ACTIVE_ROLE', e.target.value);
+        window.location.reload();
+    });
 
     // Toggle sidebar
     const toggleBtn = document.getElementById('sidebar-toggle');

@@ -22,6 +22,7 @@
                             <h2 style="margin:0; font-size: 2rem;">Đội Ngũ Nhân Viên</h2>
                             <p style="color: var(--admin-muted); margin-top: 5px;">Quản lý vai trò, quyền hạn và xem báo cáo KPIs / hoa hồng của từng nhân sự.</p>
                         </div>
+                        <button class="btn btn-primary" onclick="openAddStaffModal()">+ Thêm Nhân Viên</button>
                     </div>
                 </div>
 
@@ -76,7 +77,15 @@
                     <input type="hidden" id="staff-id">
                     <div class="form-group">
                         <label>Tên nhân viên</label>
-                        <input type="text" id="staff-name" readonly style="background: #f8fafc; cursor: not-allowed;">
+                        <input type="text" id="staff-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="staff-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="text" id="staff-phone" required>
                     </div>
                     <div class="form-group">
                         <label>Vai trò (Role)</label>

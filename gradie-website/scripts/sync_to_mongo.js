@@ -29,7 +29,7 @@ function extractData() {
     const ordersMatch = content.match(/orders:\s*(\[[\s\S]*?\]),\n\s*blogPosts:/);
     const blogMatch = content.match(/blogPosts:\s*(\[[\s\S]*?\]),\n\s*gallery:/);
     const galleryMatch = content.match(/gallery:\s*(\[[\s\S]*?\]),\n\s*policies:/);
-    const staffMatch = content.match(/staff:\s*(\[[\s\S]*?\])\n\s*\}/);
+    const staffMatch = content.match(/staff:\s*(\[[\s\S]*?\]),\n\s*activityLogs:/);
 
     let data = {
         products: gradieData.products || [],
