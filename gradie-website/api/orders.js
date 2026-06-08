@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     } else if (req.method === 'PUT') {
       const updatedOrder = req.body;
       const { _id, ...updateData } = updatedOrder;
-      await collection.updateOne({ orderNumber: updatedOrder.orderNumber }, { $set: updateData });
+      await collection.updateOne({ orderNumber: updatedOrder.orderNumber }, { $set: updateData }, { upsert: true });
       res.status(200).json({ success: true });
     } else {
       res.status(405).json({ message: 'Method Not Allowed' });

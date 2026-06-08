@@ -165,6 +165,9 @@ function exportToXLSX() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('gradie_data_synced', () => {
+        if (window.renderProductsTable) window.renderProductsTable();
+    });
     if(document.getElementById('admin-product-list')) {
         renderAdminProducts();
     }

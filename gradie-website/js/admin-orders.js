@@ -1,5 +1,10 @@
 // js/admin-orders.js
 document.addEventListener('DOMContentLoaded', () => {
+    // Initial setup and bindings
+    window.addEventListener('gradie_data_synced', () => {
+        if (window.renderOrdersTable) window.renderOrdersTable();
+    });
+
     if(!window.GradieStore) return;
     const ordersBody = document.getElementById('admin-orders-list');
     
@@ -76,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <button class="outline-button" onclick="openOrderDetailModal('${o.orderNumber}')" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 4px; border: 1px solid #d8a94f; color: #d8a94f; background: transparent; cursor: pointer; font-weight: 500;">
                                         View Details
                                     </button>
-                                    <select onchange="if(confirm('Bạn có chắc chắn muốn thay đổi trạng thái thành \'' + this.value + '\'?')) { window.GradieStore.updateOrder('${o.orderNumber}', {status: this.value}); window.renderOrdersTable(); } else { this.value = '${status}'; }" style="padding: 5px; border-radius: 4px; border: 1px solid #cbd5e1; background: #fff; cursor: pointer;">
+                                    <select onchange="if(confirm('Bạn có chắc chắn muốn thay đổi trạng thái thành \'' + this.value + '\'?')) { window.GradieStore.updateOrder('${o.orderNumber}', {status: this.value}); window.GradieStore.addActivityLog('Cập nhật trạng thái đơn hàng', 'Đã thay đổi trạng thái đơn ' + '${o.orderNumber}' + ' thành ' + this.value); window.renderOrdersTable(); } else { this.value = '${status}'; }" style="padding: 5px; border-radius: 4px; border: 1px solid #cbd5e1; background: #fff; cursor: pointer;">
                                         <option value="Pending" ${status === 'Pending'?'selected':''}>Pending</option>
                                         <option value="Confirmed" ${status === 'Confirmed'?'selected':''}>Confirmed</option>
                                         <option value="Processing" ${status === 'Processing'?'selected':''}>Processing</option>
@@ -277,6 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (orderNumber && statusSelect) {
                     if (!confirm(`Bạn có chắc chắn muốn cập nhật trạng thái đơn ${orderNumber} thành '${statusSelect.value}'?`)) return;
                     window.GradieStore.updateOrder(orderNumber, { status: statusSelect.value });
+                    window.GradieStore.addActivityLog('Cập nhật trạng thái đơn hàng', 'Đã thay đổi trạng thái đơn ' + orderNumber + ' thành ' + statusSelect.value);
                     showToast('Đã cập nhật trạng thái đơn hàng!', 'success');
                     window.closeOrderDetailModal();
                     window.renderOrdersTable();

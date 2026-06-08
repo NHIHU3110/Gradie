@@ -108,7 +108,13 @@ window.renderActivityLogs = function() {
     // Populate Filter Dropdown
     const filterSelect = document.getElementById('log-filter-staff');
     if (filterSelect) {
-        const uniqueStaff = [...new Set(logs.map(log => log.user))].filter(Boolean);
+        let staffNames = logs.map(log => log.user);
+        if (typeof globalStaffList !== 'undefined') {
+            staffNames = staffNames.concat(globalStaffList.map(s => s.name));
+        }
+        // Always include System and Admin to be safe
+        staffNames.push('System', 'Admin');
+        const uniqueStaff = [...new Set(staffNames)].filter(Boolean);
         const currentFilter = filterSelect.value;
         filterSelect.innerHTML = '<option value="all">Tất cả nhân viên</option>';
         uniqueStaff.forEach(staffName => {
@@ -149,6 +155,10 @@ window.renderActivityLogs = function() {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('gradie_data_synced', () => {
+        if (window.renderActivityLogs) window.renderActivityLogs();
+        if (typeof fetchStaffFromMongo === 'function') fetchStaffFromMongo();
+    });
     if(window.renderActivityLogs) window.renderActivityLogs();
 });
 

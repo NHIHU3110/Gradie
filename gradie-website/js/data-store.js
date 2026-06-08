@@ -1822,7 +1822,31 @@ window.GradieStore = {
   getOrders: function() { return this.getData().orders || []; },
   saveOrders: function(orders) { let data = this.getData(); data.orders = orders; this.saveData(data); },
   addOrder: function(order) { let data = this.getData(); if(!data.orders) data.orders = []; data.orders.unshift(order); this.saveData(data); fetch('/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(order) }).catch(e => console.error('Sync error', e)); },
-  updateOrder: function(id, order) { let data = this.getData(); let i = data.orders.findIndex(o => o.orderNumber === id); if (i !== -1) { data.orders[i] = { ...data.orders[i], ...order }; this.saveData(data); fetch('/api/orders', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data.orders[i]) }).catch(e => console.error('Sync error', e)); } },
+  updateOrder: function(id, order) { 
+    let data = this.getData(); 
+    let i = data.orders.findIndex(o => o.orderNumber === id); 
+    if (i !== -1) { 
+      const oldStatus = data.orders[i].status || 'Pending';
+      data.orders[i] = { ...data.orders[i], ...order }; 
+      
+      // Phép tính riêng khi cập nhật từ completed sang refund: hoàn lại số lượng tồn kho (restock)
+      if ((oldStatus === 'Completed' || oldStatus === 'Delivered') && order.status === 'Refunded') {
+        if (data.orders[i].items && data.products) {
+          data.orders[i].items.forEach(item => {
+            let pIndex = data.products.findIndex(p => p.id === item.id);
+            if (pIndex !== -1) {
+              data.products[pIndex].stock = (data.products[pIndex].stock || 0) + (parseInt(item.quantity || item.qty) || 1);
+              // Push updated product to MongoDB
+              fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data.products[pIndex]) }).catch(e => console.error('Sync product error', e));
+            }
+          });
+        }
+      }
+      
+      this.saveData(data); 
+      fetch('/api/orders', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data.orders[i]) }).catch(e => console.error('Sync error', e)); 
+    } 
+  },
   deleteOrder: function(id) { let data = this.getData(); data.orders = data.orders.filter(o => o.orderNumber !== id); this.saveData(data); /* Missing delete api, but usually handled by status 'Cancelled' in updateOrder */ },
   
   // BLOG
@@ -1877,6 +1901,9 @@ window.GradieStore = {
     // Keep only last 200 logs to save space
     if (data.activityLogs.length > 200) data.activityLogs.length = 200;
     this.saveData(data);
+    
+    // Push Activity Log to MongoDB
+    fetch('/api/global', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'activityLogs', data: data.activityLogs }) }).catch(e => console.error('Sync error', e));
   },
 
   // USER AUTHENTICATION & SESSIONS
@@ -1960,6 +1987,7 @@ window.GradieStore = {
           if (globalData.gallery && globalData.gallery.length > 0) data.gallery = globalData.gallery;
           if (globalData.blogPosts && globalData.blogPosts.length > 0) data.blogPosts = globalData.blogPosts;
           if (globalData.settings && Object.keys(globalData.settings).length > 0) data.settings = globalData.settings;
+          if (globalData.activityLogs && globalData.activityLogs.length > 0) data.activityLogs = globalData.activityLogs;
           updated = true;
         }
       }
@@ -2025,7 +2053,11 @@ window.GradieStore = {
 
       if (updated) {
         this.saveData(data);
+        console.log("GradieStore: Synchronized with database.");
+        // Dispatch event so UI components can re-render with fresh data
+        window.dispatchEvent(new Event('gradie_data_synced'));
       }
+      return { success: true };
     } catch (e) {
       console.warn('API sync failed. Falling back to local storage.', e);
     }

@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     } else if (req.method === 'PUT') {
       const updatedStaff = req.body;
       const { _id, ...updateData } = updatedStaff;
-      await collection.updateOne({ id: updatedStaff.id }, { $set: updateData });
+      await collection.updateOne({ id: updatedStaff.id }, { $set: updateData }, { upsert: true });
       res.status(200).json({ success: true });
     } else if (req.method === 'DELETE') {
       const { id } = req.query;

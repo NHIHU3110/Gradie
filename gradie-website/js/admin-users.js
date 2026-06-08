@@ -1,5 +1,8 @@
 // js/admin-users.js
 document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('gradie_data_synced', () => {
+        if (window.renderUsersTable) window.renderUsersTable();
+    });
     if (!window.GradieStore) return;
     const usersBody = document.getElementById('admin-users-list');
 
