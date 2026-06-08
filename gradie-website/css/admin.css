@@ -579,10 +579,7 @@ td small { font-size: 0.78rem; color: var(--adm-text-muted); display: block; mar
 
 /* ── Table Action Buttons ── */
 td.actions {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 
 td button, td .btn-danger, td .outline-button, td .btn-primary {

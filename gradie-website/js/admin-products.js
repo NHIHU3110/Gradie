@@ -30,8 +30,10 @@ function renderAdminProducts() {
                 <td>${price.toLocaleString('vi-VN')} ₫</td>
                 <td>${p.stock || 0}</td>
                 <td class="actions">
-                    <button onclick="window.location.href='admin-product-form.html?id=${encodedId}'">Edit</button>
-                    <button class="btn-danger" onclick="deleteProduct('${safeIdForClick}')">Delete</button>
+                    <div style="display: flex; gap: 6px; align-items: center;">
+                        <button onclick="window.location.href='admin-product-form.html?id=${encodedId}'">Edit</button>
+                        <button class="btn-danger" onclick="deleteProduct('${safeIdForClick}')">Delete</button>
+                    </div>
                 </td>
             </tr>
             `;
