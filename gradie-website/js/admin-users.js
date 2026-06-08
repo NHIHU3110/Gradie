@@ -7,15 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentSegmentFilter = 'all';
 
         // Add Event Listener for Filter
-        document.addEventListener('DOMContentLoaded', () => {
-            const filterEl = document.getElementById('user-segment-filter');
-            if(filterEl) {
-                filterEl.addEventListener('change', (e) => {
-                    currentSegmentFilter = e.target.value;
-                    window.renderUsersTable();
-                });
-            }
-        });
+        const filterEl = document.getElementById('user-segment-filter');
+        if(filterEl) {
+            filterEl.addEventListener('change', (e) => {
+                currentSegmentFilter = e.target.value;
+                window.renderUsersTable();
+            });
+        }
 
         window.renderUsersTable = function() {
             try {
