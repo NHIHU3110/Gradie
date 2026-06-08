@@ -278,7 +278,7 @@ window.GradieStore = {
           subtotal: 370000,
           shippingFee: 30000,
           total: 400000,
-          status: "Delivered"
+          status: "Completed"
         },
         {
           orderNumber: "GRD-26-4412",
