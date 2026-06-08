@@ -399,7 +399,7 @@
 
     <!-- AI Insights Modal -->
     <div id="aiModal" class="modal" style="display:none;">
-        <div class="modal-content" style="max-width: 800px; border-radius: 20px; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.2); background: #ffffff;">
+        <div class="modal-content" style="max-width: 800px; border-radius: 20px; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.2); background: #ffffff; display: flex; flex-direction: column; max-height: 90vh;">
             <!-- Header with AI gradient background -->
             <div style="background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%); padding: 30px 40px; color: white; position: relative;">
                 <h3 style="margin: 0; font-size: 1.6rem; font-family: 'Playfair Display', serif; display: flex; align-items: center; gap: 10px; color: white;">
@@ -410,7 +410,7 @@
             </div>
             
             <!-- Body -->
-            <div id="aiModalBody" style="padding: 40px; max-height: 500px; overflow-y: auto; background: #fafafa; font-family: 'Inter', sans-serif; line-height: 1.7; color: #334155;">
+            <div id="aiModalBody" style="padding: 40px; flex: 1; overflow-y: auto; background: #fafafa; font-family: 'Inter', sans-serif; line-height: 1.7; color: #334155;">
                 <!-- Loading Animation initially -->
                 <div id="ai-loading" style="text-align: center; padding: 40px 0;">
                     <div class="ai-spinner"></div>

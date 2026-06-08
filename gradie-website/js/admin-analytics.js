@@ -431,14 +431,17 @@ document.addEventListener('DOMContentLoaded', () => {
             showToast('🖨️ Đang chuẩn bị báo cáo AI...', 'info');
         }
         
-        const afterPrintHandler = () => {
+        const cleanUp = () => {
             document.body.classList.remove('printing-ai');
-            window.removeEventListener('afterprint', afterPrintHandler);
+            window.removeEventListener('afterprint', cleanUp);
         };
-        window.addEventListener('afterprint', afterPrintHandler);
+        
+        window.addEventListener('afterprint', cleanUp, { once: true });
         
         setTimeout(() => {
             window.print();
+            // Fallback for browsers that don't support or delay afterprint
+            setTimeout(cleanUp, 1000);
         }, 300);
     };
 
