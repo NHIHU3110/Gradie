@@ -7,28 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/admin.css">
 </head>
-<body class="admin-body">
+<body>
     <div class="admin-layout">
         <!-- Sidebar will be injected by JS -->
-        <aside class="admin-sidebar" id="admin-sidebar"></aside>
+        <aside class="sidebar" id="admin-sidebar"></aside>
 
-        <main class="admin-main">
-            <header class="admin-header">
-                <div class="header-left">
-                    <button id="mobile-menu-btn" class="mobile-menu-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                    </button>
-                    <h1>Quản Lý Nhân Sự (RBAC)</h1>
-                </div>
-                <div class="header-right">
-                    <div class="admin-profile">
-                        <img src="https://ui-avatars.com/api/?name=Admin&background=d8a94f&color=fff" alt="Admin" class="avatar">
-                        <span class="admin-name">Admin</span>
-                    </div>
-                </div>
-            </header>
+        <main class="main-content">
+            <header class="topbar"></header>
 
-            <div class="admin-content">
+            <div class="content-wrapper">
                 <div class="dashboard-header" style="margin-bottom: 30px;">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
