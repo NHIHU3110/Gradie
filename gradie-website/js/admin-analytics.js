@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 2. Product Performance (Best Sellers & Dead Stock) & Category Distribution
         let productSales = {};
         let categorySales = {};
+        let categoryProductCounts = {};
 
         products.forEach(p => {
             productSales[p.id] = { 
@@ -57,8 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 revenue: 0, 
                 stock: p.stock || 0 
             };
-            if (!categorySales[p.category || 'Uncategorized']) {
-                categorySales[p.category || 'Uncategorized'] = 0;
+            
+            const cat = p.category || 'Uncategorized';
+            categoryProductCounts[cat] = (categoryProductCounts[cat] || 0) + 1;
+
+            if (!categorySales[cat]) {
+                categorySales[cat] = 0;
             }
         });
 
@@ -129,8 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // 3. Category Doughnut Chart
         const catCtx = document.getElementById('categoryChart');
         if (catCtx) {
-            const catLabels = Object.keys(categorySales).filter(k => categorySales[k] > 0);
-            const catData = catLabels.map(k => categorySales[k]);
+            const catLabels = Object.keys(categoryProductCounts).filter(k => categoryProductCounts[k] > 0);
+            const catData = catLabels.map(k => categoryProductCounts[k]);
             
             if (categoryChartInstance) {
                 categoryChartInstance.destroy();

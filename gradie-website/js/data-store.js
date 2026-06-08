@@ -1855,9 +1855,9 @@ window.GradieStore = {
   getProducts: function() { const p = this.getData().products; return (p && p.length > 0) ? p : this.normalizeProducts(window.GRADIE_DATA?.products || []); },
   saveProducts: function(products) { let data = this.getData(); data.products = this.normalizeProducts(products); this.saveData(data); },
   getProductById: function(id) { return this.getProducts().find(p => p.id === id); },
-  addProduct: function(product) { let data = this.getData(); let norm = this.normalizeProduct(product); if(!norm.id) { norm.id = norm.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now(); } data.products.push(norm); this.saveData(data); fetch('/api/products', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(norm) }).catch(e => console.error('Sync error', e)); },
-  updateProduct: function(id, updatedProduct) { let data = this.getData(); let index = data.products.findIndex(p => p.id === id); if (index !== -1) { let merged = { ...data.products[index], ...updatedProduct }; data.products[index] = this.normalizeProduct(merged); this.saveData(data); fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data.products[index]) }).catch(e => console.error('Sync error', e)); } },
-  deleteProduct: function(id) { let data = this.getData(); data.products = data.products.filter(p => p.id !== id); this.saveData(data); fetch('/api/products?id=' + id, { method: 'DELETE' }).catch(e => console.error('Sync error', e)); },
+  addProduct: function(product) { let data = this.getData(); let norm = this.normalizeProduct(product); if(!norm.id) { norm.id = norm.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now(); } data.products.push(norm); this.saveData(data); fetch('/api/products', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(norm) }).then(() => { window.dispatchEvent(new Event('gradie_data_synced')); }).catch(e => console.error('Sync error', e)); },
+  updateProduct: function(id, updatedProduct) { let data = this.getData(); let index = data.products.findIndex(p => p.id === id); if (index !== -1) { let merged = { ...data.products[index], ...updatedProduct }; data.products[index] = this.normalizeProduct(merged); this.saveData(data); fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data.products[index]) }).then(() => { window.dispatchEvent(new Event('gradie_data_synced')); }).catch(e => console.error('Sync error', e)); } },
+  deleteProduct: function(id) { let data = this.getData(); data.products = data.products.filter(p => p.id !== id); this.saveData(data); fetch('/api/products?id=' + id, { method: 'DELETE' }).then(() => { window.dispatchEvent(new Event('gradie_data_synced')); }).catch(e => console.error('Sync error', e)); },
   
   normalizeProduct: function(p) {
     p.id = p.id || ''; p.name = p.name || 'Untitled Product'; p.category = p.category || 'Uncategorized'; p.price = Number(p.price) || 0;
@@ -2205,7 +2205,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Background synchronization every 8 seconds (dynamic based on page type)
       setInterval(() => {
         const isAdminPage = window.location.pathname.includes('admin-');
-        window.GradieStore.syncWithDB(isAdminPage ? 'orders_and_global' : 'orders');
+        window.GradieStore.syncWithDB(isAdminPage ? 'all' : 'orders');
       }, 8000);
     }
   }
