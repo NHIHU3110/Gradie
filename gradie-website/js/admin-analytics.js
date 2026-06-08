@@ -1,187 +1,206 @@
 // js/admin-analytics.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    const orders = window.GradieStore.getOrders() || [];
-    const products = window.GradieStore.getProducts() || [];
-    const users = window.GradieStore.getUsers() || [];
+    let categoryChartInstance = null;
+    let revenueChartInstance = null;
+    let currentRevenueTimeframe = 'all';
 
     // Helper to format currency
     const formatMoney = (amount) => Number(amount).toLocaleString('vi-VN') + 'đ';
 
-    // 1. Calculate KPIs
-    let totalRevenue = 0;
-    let validOrdersCount = 0;
-    const validStatuses = ['completed'];
-    
-    orders.forEach(o => {
-        const status = (o.status || '').toLowerCase();
-        const total = Number(o.total) || 0;
-        if (validStatuses.includes(status)) {
-            totalRevenue += total;
-            validOrdersCount++;
-        }
-    });
+    function renderAnalytics(animate = true) {
+        const orders = window.GradieStore.getOrders() || [];
+        const products = window.GradieStore.getProducts() || [];
+        const users = window.GradieStore.getUsers() || [];
 
-    const aov = validOrdersCount > 0 ? (totalRevenue / validOrdersCount) : 0;
-
-    document.getElementById('total-revenue').innerText = formatMoney(totalRevenue);
-    document.getElementById('total-orders').innerText = validOrdersCount;
-    document.getElementById('avg-order-value').innerText = formatMoney(Math.round(aov));
-
-    // Customers & VIPs
-    let vipCount = 0;
-    users.forEach(u => {
-        const userOrders = orders.filter(o => o.customerEmail && o.customerEmail.toLowerCase() === u.email.toLowerCase());
-        const totalSpent = userOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
-        if (totalSpent >= 3000000) vipCount++;
-    });
-    
-    document.getElementById('total-customers').innerText = users.length;
-    document.getElementById('vip-count').innerText = `${vipCount} Khách VIP`;
-
-    // 2. Product Performance (Best Sellers & Dead Stock) & Category Distribution
-    let productSales = {};
-    let categorySales = {};
-
-    products.forEach(p => {
-        productSales[p.id] = { 
-            name: p.name, 
-            image: p.image || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=100',
-            category: p.category || 'Uncategorized',
-            sold: 0, 
-            revenue: 0, 
-            stock: p.stock || 0 
-        };
-        if (!categorySales[p.category || 'Uncategorized']) {
-            categorySales[p.category || 'Uncategorized'] = 0;
-        }
-    });
-
-    orders.forEach(o => {
-        const status = (o.status || '').toLowerCase();
-        if (!validStatuses.includes(status)) return;
-
-        if (o.items && Array.isArray(o.items)) {
-            o.items.forEach(item => {
-                const qty = item.quantity || 1;
-                const rev = item.price * qty;
-                
-                if (productSales[item.id]) {
-                    productSales[item.id].sold += qty;
-                    productSales[item.id].revenue += rev;
-                    categorySales[productSales[item.id].category] += qty;
-                } else {
-                    // For items deleted from catalog but in orders
-                    if (!categorySales['Khác']) categorySales['Khác'] = 0;
-                    categorySales['Khác'] += qty;
-                }
-            });
-        }
-    });
-
-    const salesArray = Object.values(productSales);
-    
-    // Best Sellers (Top 5)
-    const bestSellers = [...salesArray].sort((a, b) => b.sold - a.sold).slice(0, 5);
-    const bestSellersHtml = bestSellers.map(p => `
-        <tr>
-            <td>
-                <div class="product-cell">
-                    <img src="${p.image}" alt="${p.name}" class="product-img">
-                    <div class="product-info">
-                        <span class="product-name">${p.name}</span>
-                        <span class="product-cat">${p.category}</span>
-                    </div>
-                </div>
-            </td>
-            <td style="text-align:center; font-weight: 600; color:#1e293b;">${p.sold}</td>
-            <td style="text-align:right; font-weight: 600; color:#10b981;">${formatMoney(p.revenue)}</td>
-        </tr>
-    `).join('');
-    document.getElementById('best-sellers-list').innerHTML = bestSellersHtml || '<tr><td colspan="3" style="text-align:center; color:#64748b; padding:20px;">Chưa có dữ liệu</td></tr>';
-
-    // Dead Stock (0 sold but has stock > 0)
-    const deadStock = salesArray.filter(p => p.sold === 0 && p.stock > 0).sort((a, b) => b.stock - a.stock).slice(0, 5);
-    const deadStockHtml = deadStock.map(p => `
-        <tr>
-            <td>
-                <div class="product-cell">
-                    <img src="${p.image}" alt="${p.name}" class="product-img">
-                    <div class="product-info">
-                        <span class="product-name">${p.name}</span>
-                        <span class="product-cat">${p.category}</span>
-                    </div>
-                </div>
-            </td>
-            <td style="text-align:center; font-weight: 600; color:#ef4444;">${p.stock}</td>
-            <td style="text-align:center;">
-                <span class="badge badge-danger">Tồn đọng</span>
-            </td>
-        </tr>
-    `).join('');
-    document.getElementById('dead-stock-list').innerHTML = deadStockHtml || '<tr><td colspan="3" style="text-align:center; color:#64748b; padding:20px;">Tuyệt vời! Không có sản phẩm tồn đọng.</td></tr>';
-
-    // 3. Category Doughnut Chart
-    const catCtx = document.getElementById('categoryChart');
-    if (catCtx) {
-        const catLabels = Object.keys(categorySales).filter(k => categorySales[k] > 0);
-        const catData = catLabels.map(k => categorySales[k]);
+        // 1. Calculate KPIs
+        let totalRevenue = 0;
+        let validOrdersCount = 0;
+        const validStatuses = ['completed'];
         
-        new Chart(catCtx, {
-            type: 'doughnut',
-            data: {
-                labels: catLabels.length > 0 ? catLabels : ['Chưa có dữ liệu'],
-                datasets: [{
-                    data: catData.length > 0 ? catData : [1],
-                    backgroundColor: ['#d8a94f', '#10b981', '#3b82f6', '#8b5cf6', '#ef4444', '#f59e0b', '#06b6d4'],
-                    borderWidth: 0,
-                    hoverOffset: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '75%',
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            font: { family: "'Inter', sans-serif", size: 12 },
-                            padding: 20,
-                            usePointStyle: true,
-                            pointStyle: 'circle'
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                        titleFont: { size: 13, family: "'Inter', sans-serif" },
-                        bodyFont: { size: 14, weight: 'bold', family: "'Inter', sans-serif" },
-                        padding: 12,
-                        cornerRadius: 8,
-                        callbacks: {
-                            label: function(context) {
-                                if (catData.length === 0) return ' 0';
-                                return ` ${context.parsed} sản phẩm`;
+        orders.forEach(o => {
+            const status = (o.status || '').toLowerCase();
+            const total = Number(o.total) || 0;
+            if (validStatuses.includes(status)) {
+                totalRevenue += total;
+                validOrdersCount++;
+            }
+        });
+
+        const aov = validOrdersCount > 0 ? (totalRevenue / validOrdersCount) : 0;
+
+        document.getElementById('total-revenue').innerText = formatMoney(totalRevenue);
+        document.getElementById('total-orders').innerText = validOrdersCount;
+        document.getElementById('avg-order-value').innerText = formatMoney(Math.round(aov));
+
+        // Customers & VIPs
+        let vipCount = 0;
+        users.forEach(u => {
+            const userOrders = orders.filter(o => o.customerEmail && o.customerEmail.toLowerCase() === u.email.toLowerCase());
+            const totalSpent = userOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+            if (totalSpent >= 3000000) vipCount++;
+        });
+        
+        document.getElementById('total-customers').innerText = users.length;
+        document.getElementById('vip-count').innerText = `${vipCount} Khách VIP`;
+
+        // 2. Product Performance (Best Sellers & Dead Stock) & Category Distribution
+        let productSales = {};
+        let categorySales = {};
+
+        products.forEach(p => {
+            productSales[p.id] = { 
+                name: p.name, 
+                image: p.image || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=100',
+                category: p.category || 'Uncategorized',
+                sold: 0, 
+                revenue: 0, 
+                stock: p.stock || 0 
+            };
+            if (!categorySales[p.category || 'Uncategorized']) {
+                categorySales[p.category || 'Uncategorized'] = 0;
+            }
+        });
+
+        orders.forEach(o => {
+            const status = (o.status || '').toLowerCase();
+            if (!validStatuses.includes(status)) return;
+
+            if (o.items && Array.isArray(o.items)) {
+                o.items.forEach(item => {
+                    const qty = item.quantity || 1;
+                    const rev = item.price * qty;
+                    
+                    if (productSales[item.id]) {
+                        productSales[item.id].sold += qty;
+                        productSales[item.id].revenue += rev;
+                        categorySales[productSales[item.id].category] += qty;
+                    } else {
+                        // For items deleted from catalog but in orders
+                        if (!categorySales['Khác']) categorySales['Khác'] = 0;
+                        categorySales['Khác'] += qty;
+                    }
+                });
+            }
+        });
+
+        const salesArray = Object.values(productSales);
+        
+        // Best Sellers (Top 5)
+        const bestSellers = [...salesArray].sort((a, b) => b.sold - a.sold).slice(0, 5);
+        const bestSellersHtml = bestSellers.map(p => `
+            <tr>
+                <td>
+                    <div class="product-cell">
+                        <img src="${p.image}" alt="${p.name}" class="product-img">
+                        <div class="product-info">
+                            <span class="product-name">${p.name}</span>
+                            <span class="product-cat">${p.category}</span>
+                        </div>
+                    </div>
+                </td>
+                <td style="text-align:center; font-weight: 600; color:#1e293b;">${p.sold}</td>
+                <td style="text-align:right; font-weight: 600; color:#10b981;">${formatMoney(p.revenue)}</td>
+            </tr>
+        `).join('');
+        document.getElementById('best-sellers-list').innerHTML = bestSellersHtml || '<tr><td colspan="3" style="text-align:center; color:#64748b; padding:20px;">Chưa có dữ liệu</td></tr>';
+
+        // Dead Stock (0 sold but has stock > 0)
+        const deadStock = salesArray.filter(p => p.sold === 0 && p.stock > 0).sort((a, b) => b.stock - a.stock).slice(0, 5);
+        const deadStockHtml = deadStock.map(p => `
+            <tr>
+                <td>
+                    <div class="product-cell">
+                        <img src="${p.image}" alt="${p.name}" class="product-img">
+                        <div class="product-info">
+                            <span class="product-name">${p.name}</span>
+                            <span class="product-cat">${p.category}</span>
+                        </div>
+                    </div>
+                </td>
+                <td style="text-align:center; font-weight: 600; color:#ef4444;">${p.stock}</td>
+                <td style="text-align:center;">
+                    <span class="badge badge-danger">Tồn đọng</span>
+                </td>
+            </tr>
+        `).join('');
+        document.getElementById('dead-stock-list').innerHTML = deadStockHtml || '<tr><td colspan="3" style="text-align:center; color:#64748b; padding:20px;">Tuyệt vời! Không có sản phẩm tồn đọng.</td></tr>';
+
+        // 3. Category Doughnut Chart
+        const catCtx = document.getElementById('categoryChart');
+        if (catCtx) {
+            const catLabels = Object.keys(categorySales).filter(k => categorySales[k] > 0);
+            const catData = catLabels.map(k => categorySales[k]);
+            
+            if (categoryChartInstance) {
+                categoryChartInstance.destroy();
+            }
+
+            categoryChartInstance = new Chart(catCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: catLabels.length > 0 ? catLabels : ['Chưa có dữ liệu'],
+                    datasets: [{
+                        data: catData.length > 0 ? catData : [1],
+                        backgroundColor: ['#d8a94f', '#10b981', '#3b82f6', '#8b5cf6', '#ef4444', '#f59e0b', '#06b6d4'],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '75%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { family: "'Inter', sans-serif", size: 12 },
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleFont: { size: 13, family: "'Inter', sans-serif" },
+                            bodyFont: { size: 14, weight: 'bold', family: "'Inter', sans-serif" },
+                            padding: 12,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    if (catData.length === 0) return ' 0';
+                                    return ` ${context.parsed} sản phẩm`;
+                                }
                             }
                         }
                     }
                 }
-            }
-        });
+            });
+        }
+
+        // 4. Revenue Trend Chart
+        const revCtx = document.getElementById('revenueChart');
+        if (revCtx) {
+            renderRevenueChart(currentRevenueTimeframe);
+        }
+
+        // 5. Commission Report
+        renderCommissionReport();
     }
 
-    // 4. Revenue Trend Chart (Dynamic Dates)
-    const revCtx = document.getElementById('revenueChart');
-    let revenueChartInstance = null;
-
     function renderRevenueChart(timeframe) {
-        // Parse all dates from orders
+        const revCtx = document.getElementById('revenueChart');
+        if (!revCtx) return;
+
+        const orders = window.GradieStore.getOrders() || [];
+        const validStatuses = ['completed'];
+
         let dailyRevenue = {};
         
         orders.forEach(o => {
             const status = (o.status || '').toLowerCase();
             if (validStatuses.includes(status)) {
-                // Parse date: format in DB is often DD/MM/YYYY HH:mm:ss
                 let dateStr = o.date || o.createdAt || new Date().toISOString();
                 let d;
                 if (dateStr.includes('/')) {
@@ -203,21 +222,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Convert to array and sort chronologically
         let revenueArray = Object.keys(dailyRevenue).map(date => ({
-            date: date.substring(0, 5), // Keep DD/MM
+            date: date.substring(0, 5),
             timestamp: dailyRevenue[date].timestamp,
             revenue: dailyRevenue[date].revenue
         })).sort((a, b) => a.timestamp - b.timestamp);
 
         if (revenueArray.length === 0) {
-            // Mock empty data if no orders
             const today = new Date();
             revenueArray = [{ date: `${today.getDate()}/${today.getMonth()+1}`, revenue: 0 }];
         }
 
         if (timeframe === 'recent') {
-            // Take the last 7 distinct dates with sales
             revenueArray = revenueArray.slice(-7);
         }
 
@@ -228,7 +244,6 @@ document.addEventListener('DOMContentLoaded', () => {
             revenueChartInstance.destroy();
         }
 
-        // Create a gradient for the line chart
         const ctx2d = revCtx.getContext('2d');
         const gradientFill = ctx2d.createLinearGradient(0, 0, 0, 320);
         gradientFill.addColorStop(0, 'rgba(216, 169, 79, 0.4)');
@@ -256,10 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                interaction: {
-                    mode: 'index',
-                    intersect: false,
-                },
+                interaction: { mode: 'index', intersect: false },
                 plugins: {
                     legend: { display: false },
                     tooltip: {
@@ -279,9 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 },
                 scales: {
-                    x: {
-                        grid: { display: false, drawBorder: false }
-                    },
+                    x: { grid: { display: false, drawBorder: false } },
                     y: {
                         beginAtZero: true,
                         grid: { color: '#f1f5f9', drawBorder: false },
@@ -299,19 +309,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (revCtx) {
-        renderRevenueChart('all');
-        const tfSelect = document.getElementById('revenue-timeframe');
-        if (tfSelect) {
-            tfSelect.addEventListener('change', (e) => {
-                renderRevenueChart(e.target.value);
-            });
-        }
-    }
-
-    // 5. Commission Report
-    (async function renderCommissionReport() {
+    async function renderCommissionReport() {
         try {
+            const orders = window.GradieStore.getOrders() || [];
+            const validStatuses = ['completed'];
             let staffList = [];
             try {
                 const res = await fetch('/api/staff');
@@ -370,7 +371,22 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch(e) {
             console.error('Error rendering commission report:', e);
         }
-    })();
+    }
+
+    renderAnalytics(true);
+
+    const tfSelect = document.getElementById('revenue-timeframe');
+    if (tfSelect) {
+        tfSelect.addEventListener('change', (e) => {
+            currentRevenueTimeframe = e.target.value;
+            renderRevenueChart(currentRevenueTimeframe);
+        });
+    }
+
+    window.addEventListener('gradie_data_synced', () => {
+        renderAnalytics(false);
+    });
+});
 });
 
 // ── PDF Export Function ────────────────────────────────────────────────────────

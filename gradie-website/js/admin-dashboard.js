@@ -25,19 +25,41 @@ document.addEventListener('DOMContentLoaded', () => {
         window.requestAnimationFrame(step);
     };
 
-    const p = window.GradieStore.getProducts().length;
-    const c = window.GradieStore.getCategories().length;
-    const o = window.GradieStore.getOrders().length;
-    const u = window.GradieStore.getUsers().length;
-    const b = window.GradieStore.getBlogPosts().length;
-    const g = window.GradieStore.getGallery().length;
-    const pol = window.GradieStore.getPolicies().length;
+    let prevStats = { p: 0, c: 0, o: 0, u: 0, b: 0, g: 0, pol: 0 };
 
-    animateValue('stat-products', 0, p, 1500);
-    animateValue('stat-categories', 0, c, 1500);
-    animateValue('stat-orders', 0, o, 1500);
-    animateValue('stat-users', 0, u, 1500);
-    animateValue('stat-blog', 0, b, 1500);
-    animateValue('stat-gallery', 0, g, 1500);
-    animateValue('stat-policies', 0, pol, 1500);
+    function updateStats(animate = true) {
+        const p = window.GradieStore.getProducts().length;
+        const c = window.GradieStore.getCategories().length;
+        const o = window.GradieStore.getOrders().length;
+        const u = window.GradieStore.getUsers().length;
+        const b = window.GradieStore.getBlogPosts().length;
+        const g = window.GradieStore.getGallery().length;
+        const pol = window.GradieStore.getPolicies().length;
+
+        if (animate) {
+            animateValue('stat-products', prevStats.p, p, 1500);
+            animateValue('stat-categories', prevStats.c, c, 1500);
+            animateValue('stat-orders', prevStats.o, o, 1500);
+            animateValue('stat-users', prevStats.u, u, 1500);
+            animateValue('stat-blog', prevStats.b, b, 1500);
+            animateValue('stat-gallery', prevStats.g, g, 1500);
+            animateValue('stat-policies', prevStats.pol, pol, 1500);
+        } else {
+            setStat('stat-products', p);
+            setStat('stat-categories', c);
+            setStat('stat-orders', o);
+            setStat('stat-users', u);
+            setStat('stat-blog', b);
+            setStat('stat-gallery', g);
+            setStat('stat-policies', pol);
+        }
+
+        prevStats = { p, c, o, u, b, g, pol };
+    }
+
+    updateStats(true);
+
+    window.addEventListener('gradie_data_synced', () => {
+        updateStats(false);
+    });
 });
