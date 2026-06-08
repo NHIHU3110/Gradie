@@ -312,8 +312,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Commission Report
     (async function renderCommissionReport() {
         try {
-            const res = await fetch('/api/staff');
-            const staffList = await res.json();
+            let staffList = [];
+            try {
+                const res = await fetch('/api/staff');
+                if(!res.ok) throw new Error('API fetch failed');
+                staffList = await res.json();
+            } catch(e) {
+                console.warn('API /api/staff failed. Using local storage fallback.');
+                if (window.GradieStore) staffList = window.GradieStore.getStaff() || [];
+            }
             const salesReps = staffList.filter(s => s.role === 'Sales');
             
             const tbody = document.getElementById('commission-table-body');

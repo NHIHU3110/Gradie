@@ -64,12 +64,18 @@ document.addEventListener('DOMContentLoaded', () => {
 async function fetchStaffFromMongo() {
     try {
         const res = await fetch('/api/staff');
+        if (!res.ok) throw new Error('API fetch failed');
         globalStaffList = await res.json();
         renderStaffTable();
     } catch (e) {
-        console.error('Fetch staff error', e);
-        const tbody = document.getElementById('admin-staff-list');
-        if (tbody) tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color: red;">Lỗi tải dữ liệu. Vui lòng thử lại.</td></tr>';
+        console.warn('Fetch staff API failed (likely running locally without vercel dev). Falling back to Local Storage.', e);
+        if (window.GradieStore) {
+            globalStaffList = window.GradieStore.getStaff() || [];
+            renderStaffTable();
+        } else {
+            const tbody = document.getElementById('admin-staff-list');
+            if (tbody) tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color: red;">Lỗi tải dữ liệu. Vui lòng chạy qua vercel dev hoặc thử lại.</td></tr>';
+        }
     }
 }
 

@@ -74,11 +74,12 @@ const ADMIN_ROUTES = [
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  const activeRole = localStorage.getItem('GRADIE_ACTIVE_ROLE') || 'Admin';
+
   // ── 1. Build Sidebar ──
   const sidebar = document.querySelector('.sidebar');
   if (sidebar) {
     const currentPage = window.location.pathname.split('/').pop() || 'admin-dashboard.html';
-    const activeRole = localStorage.getItem('GRADIE_ACTIVE_ROLE') || 'Admin';
     
     const roleRestrictions = {
         'Admin': [],
