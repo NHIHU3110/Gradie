@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Calculate KPIs
     let totalRevenue = 0;
     let validOrdersCount = 0;
-    const validStatuses = ['shipped', 'delivered', 'completed'];
+    const validStatuses = ['completed'];
     
     orders.forEach(o => {
         const status = (o.status || '').toLowerCase();
