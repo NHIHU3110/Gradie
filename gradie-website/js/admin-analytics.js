@@ -391,6 +391,385 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('gradie_data_synced', () => {
         renderAnalytics(false);
     });
+
+    // ── AI Insights Modal Functions ──────────────────────────────────────────────────
+    window.openAiAnalysis = function() {
+        const modal = document.getElementById('aiModal');
+        const loading = document.getElementById('ai-loading');
+        const content = document.getElementById('ai-content');
+        
+        if (modal) {
+            modal.style.display = 'flex';
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
+        }
+        if (loading) loading.style.display = 'block';
+        if (content) content.style.display = 'none';
+        
+        setTimeout(async () => {
+            try {
+                await generateAiReport();
+                if (loading) loading.style.display = 'none';
+                if (content) content.style.display = 'block';
+            } catch (e) {
+                console.error('Error generating AI report:', e);
+                if (loading) loading.style.display = 'none';
+                if (content) {
+                    content.innerHTML = `<div style="padding: 20px; color: #ef4444; text-align: center; font-weight: 600;">Đã xảy ra lỗi khi phân tích dữ liệu: ${e.message}</div>`;
+                    content.style.display = 'block';
+                }
+            }
+        }, 1500);
+    };
+
+    window.closeAiModal = function() {
+        const modal = document.getElementById('aiModal');
+        if (modal) modal.style.display = 'none';
+    };
+
+    window.exportAiReport = function() {
+        document.body.classList.add('printing-ai');
+        if (typeof showToast === 'function') {
+            showToast('🖨️ Đang chuẩn bị báo cáo AI...', 'info');
+        }
+        
+        const afterPrintHandler = () => {
+            document.body.classList.remove('printing-ai');
+            window.removeEventListener('afterprint', afterPrintHandler);
+        };
+        window.addEventListener('afterprint', afterPrintHandler);
+        
+        setTimeout(() => {
+            window.print();
+        }, 300);
+    };
+
+    async function generateAiReport() {
+        const orders = window.GradieStore.getOrders() || [];
+        const products = window.GradieStore.getProducts() || [];
+        
+        // Determine Timeframe & filter orders
+        const now = new Date();
+        const currentMonth = now.getMonth();
+        const currentYear = now.getFullYear();
+        
+        const isCurrentMonth = (o) => {
+            let dateStr = o.date || o.createdAt || '';
+            let d;
+            if (dateStr.includes('/')) {
+                const parts = dateStr.split(' ')[0].split('/');
+                if (parts.length === 3) {
+                    d = new Date(parts[2], parts[1] - 1, parts[0]);
+                } else {
+                    d = new Date(dateStr);
+                }
+            } else {
+                d = new Date(dateStr);
+            }
+            return (!isNaN(d.getTime()) && d.getMonth() === currentMonth && d.getFullYear() === currentYear);
+        };
+        
+        const validStatuses = ['completed'];
+        let monthOrders = orders.filter(o => validStatuses.includes((o.status || '').toLowerCase()) && isCurrentMonth(o));
+        let isHistoricalFallback = false;
+        
+        if (monthOrders.length === 0) {
+            monthOrders = orders.filter(o => validStatuses.includes((o.status || '').toLowerCase()));
+            isHistoricalFallback = true;
+        }
+        
+        // Calculate KPIs
+        let totalRevenue = 0;
+        monthOrders.forEach(o => {
+            totalRevenue += (Number(o.total) || 0);
+        });
+        const ordersCount = monthOrders.length;
+        const aov = ordersCount > 0 ? Math.round(totalRevenue / ordersCount) : 0;
+        
+        // Product & Category performance
+        let productSales = {};
+        let categorySales = {};
+        
+        products.forEach(p => {
+            productSales[p.id] = {
+                name: p.name,
+                category: p.category || 'Chưa phân loại',
+                sold: 0,
+                revenue: 0,
+                stock: Number(p.stock) || 0
+            };
+        });
+        
+        monthOrders.forEach(o => {
+            if (o.items && Array.isArray(o.items)) {
+                o.items.forEach(item => {
+                    const qty = Number(item.quantity) || 1;
+                    const price = Number(item.price) || 0;
+                    const rev = price * qty;
+                    
+                    if (productSales[item.id]) {
+                        productSales[item.id].sold += qty;
+                        productSales[item.id].revenue += rev;
+                        
+                        const cat = productSales[item.id].category;
+                        categorySales[cat] = (categorySales[cat] || 0) + rev;
+                    } else {
+                        const cat = item.category || 'Khác';
+                        categorySales[cat] = (categorySales[cat] || 0) + rev;
+                    }
+                });
+            }
+        });
+        
+        // Best selling product
+        let bestSeller = null;
+        Object.keys(productSales).forEach(id => {
+            const p = productSales[id];
+            if (p.sold > 0) {
+                if (!bestSeller || p.sold > bestSeller.sold) {
+                    bestSeller = p;
+                }
+            }
+        });
+        
+        // Best selling category
+        let topCategory = null;
+        Object.keys(categorySales).forEach(cat => {
+            const rev = categorySales[cat];
+            if (!topCategory || rev > topCategory.revenue) {
+                topCategory = { name: cat, revenue: rev };
+            }
+        });
+        
+        // Dead stock
+        const deadStock = Object.values(productSales)
+            .filter(p => p.sold === 0 && p.stock > 0)
+            .sort((a, b) => b.stock - a.stock)
+            .slice(0, 3);
+            
+        // Staff KPIs
+        let staffList = [];
+        try {
+            const res = await fetch('/api/staff');
+            if (res.ok) {
+                staffList = await res.json();
+            } else {
+                throw new Error('API failed');
+            }
+        } catch (e) {
+            if (window.GradieStore) staffList = window.GradieStore.getStaff() || [];
+        }
+        
+        const salesReps = staffList.filter(s => s.role === 'Sales');
+        const salesPerformance = [];
+        let topRep = null;
+        
+        salesReps.forEach(rep => {
+            const repOrders = monthOrders.filter(o => o.salesperson_id === rep.id);
+            const totalSales = repOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+            const kpi = Number(rep.kpi) || 0;
+            const progress = kpi > 0 ? Math.min(100, Math.round((totalSales / kpi) * 100)) : 100;
+            
+            const perf = {
+                name: rep.name,
+                totalSales: totalSales,
+                kpi: kpi,
+                progress: progress
+            };
+            salesPerformance.push(perf);
+            
+            if (!topRep || progress > topRep.progress) {
+                topRep = perf;
+            }
+        });
+        
+        // Strategic recommendations
+        const recommendations = [];
+        
+        // Recommendation 1: AOV
+        if (aov < 350000) {
+            recommendations.push({
+                type: 'warning',
+                title: 'Tối ưu hóa giá trị trung bình đơn hàng (AOV)',
+                content: `AOV hiện tại là <strong>${formatMoney(aov)}</strong>, tương đối thấp. Đề xuất áp dụng chính sách Freeship cho đơn hàng từ 350.000đ hoặc tạo các combo sản phẩm bán kèm (cross-sell) để khuyến khích khách hàng mua thêm sản phẩm.`
+            });
+        } else {
+            recommendations.push({
+                type: 'success',
+                title: 'Duy trì sức mua tốt (AOV cao)',
+                content: `AOV đang ở mức tốt <strong>${formatMoney(aov)}</strong>. Hãy tiếp tục duy trì các ưu đãi quà tặng kèm để giữ chân khách hàng giá trị cao.`
+            });
+        }
+        
+        // Recommendation 2: Dead Stock
+        if (deadStock.length > 0) {
+            const itemsList = deadStock.map(p => `<strong>${p.name}</strong> (Tồn kho: ${p.stock})`).join(', ');
+            recommendations.push({
+                type: 'danger',
+                title: 'Giải phóng hàng tồn đọng (Dead Stock)',
+                content: `Phát hiện các mặt hàng có tồn kho nhưng chưa phát sinh doanh số trong kỳ: ${itemsList}. Đề xuất tổ chức chương trình flash sale giảm giá 15-20% hoặc làm quà tặng đính kèm khi mua sản phẩm bán chạy.`
+            });
+        } else {
+            recommendations.push({
+                type: 'success',
+                title: 'Quản lý vòng quay kho tối ưu',
+                content: 'Không phát hiện sản phẩm tồn kho bị đóng băng lâu ngày. Hiệu quả luân chuyển hàng hóa đạt mức xuất sắc.'
+            });
+        }
+        
+        // Recommendation 3: Sales Reps KPI
+        if (salesPerformance.length > 0) {
+            const lowPerformers = salesPerformance.filter(rep => rep.progress < 50);
+            if (lowPerformers.length > 0) {
+                const names = lowPerformers.map(rep => `<strong>${rep.name}</strong> (${rep.progress}% KPI)`).join(', ');
+                recommendations.push({
+                    type: 'info',
+                    title: 'Thúc đẩy hiệu suất đội ngũ Sales',
+                    content: `Một số nhân sự đang có tiến độ hoàn thành KPI dưới 50%: ${names}. Đề xuất xem xét phân bổ lại khu vực khách hàng hoặc áp dụng chương trình thưởng nóng ngắn hạn.`
+                });
+            } else {
+                recommendations.push({
+                    type: 'success',
+                    title: 'Hiệu suất đội ngũ kinh doanh xuất sắc',
+                    content: 'Tất cả nhân viên kinh doanh đều đạt trên 50% tiến độ KPI trong kỳ. Tiếp tục duy trì động lực tốt này.'
+                });
+            }
+        }
+        
+        // Recommendation 4: Best Seller Stock Alert
+        if (bestSeller) {
+            const catalogItem = products.find(p => p.id === bestSeller.id);
+            const currentStock = catalogItem ? Number(catalogItem.stock) || 0 : 0;
+            if (currentStock < 10) {
+                recommendations.push({
+                    type: 'danger',
+                    title: 'Cảnh báo hết hàng dòng sản phẩm Hot',
+                    content: `Sản phẩm bán chạy nhất <strong>${bestSeller.name}</strong> hiện chỉ còn <strong>${currentStock}</strong> sản phẩm trong kho. Cần liên hệ nhà cung cấp để bổ sung gấp tránh đứt gãy doanh số.`
+                });
+            } else {
+                recommendations.push({
+                    type: 'success',
+                    title: 'Tối ưu nguồn hàng bán chạy',
+                    content: `Sản phẩm <strong>${bestSeller.name}</strong> là dòng bán chạy nhất với <strong>${bestSeller.sold}</strong> sản phẩm bán ra. Lượng tồn kho hiện tại (${currentStock}) đủ đáp ứng nhu cầu kỳ tới.`
+                });
+            }
+        }
+        
+        const reportHtml = `
+            <div style="margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; background: #e0e7ff; color: #4f46e5; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.05em;">
+                    ${isHistoricalFallback ? 'Phân tích dữ liệu tích lũy' : `Phân tích dữ liệu tháng ${currentMonth + 1}/${currentYear}`}
+                </span>
+                <span style="font-size: 0.85rem; color: #64748b;">Mã báo cáo: #AI-${Math.floor(100000 + Math.random() * 900000)}</span>
+            </div>
+            
+            <!-- Grid: Key metrics -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px;">
+                <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                    <div style="font-size: 0.85rem; color: #64748b; font-weight: 600;">Doanh Số Trong Kỳ</div>
+                    <div style="font-size: 1.4rem; font-weight: 700; color: #0f172a; margin-top: 5px;">${formatMoney(totalRevenue)}</div>
+                </div>
+                <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                    <div style="font-size: 0.85rem; color: #64748b; font-weight: 600;">Số Đơn Hoàn Tất</div>
+                    <div style="font-size: 1.4rem; font-weight: 700; color: #0f172a; margin-top: 5px;">${ordersCount} đơn hàng</div>
+                </div>
+                <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                    <div style="font-size: 0.85rem; color: #64748b; font-weight: 600;">Giá Trị Đơn Trung Bình (AOV)</div>
+                    <div style="font-size: 1.4rem; font-weight: 700; color: #7c3aed; margin-top: 5px;">${formatMoney(aov)}</div>
+                </div>
+            </div>
+    
+            <!-- Section: Key Highlights -->
+            <div style="margin-bottom: 30px;">
+                <h4 style="margin: 0 0 15px 0; font-size: 1.1rem; color: #1e293b; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px;">📊 Điểm Sáng Kinh Doanh & Tồn Kho</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex-wrap: wrap;">
+                    <div>
+                        <div style="font-weight: 600; color: #475569; font-size: 0.9rem; margin-bottom: 8px;">Sản phẩm bán chạy nhất:</div>
+                        ${bestSeller ? `
+                            <div style="display: flex; align-items: center; gap: 10px; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 4px solid #10b981;">
+                                <div style="font-weight: 700; color: #0f172a; font-size: 0.95rem;">${bestSeller.name}</div>
+                                <div style="font-size: 0.85rem; background: #d1fae5; color: #065f46; padding: 2px 8px; border-radius: 20px; font-weight: 600; margin-left: auto;">Bán: ${bestSeller.sold}</div>
+                            </div>
+                        ` : '<div style="color: #94a3b8; font-style: italic;">Chưa ghi nhận sản phẩm bán chạy</div>'}
+                        
+                        <div style="font-weight: 600; color: #475569; font-size: 0.9rem; margin-top: 15px; margin-bottom: 8px;">Danh mục đóng góp doanh số tốt nhất:</div>
+                        ${topCategory ? `
+                            <div style="display: flex; align-items: center; gap: 10px; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                                <div style="font-weight: 700; color: #0f172a; font-size: 0.95rem;">${topCategory.name}</div>
+                                <div style="font-size: 0.85rem; color: #64748b; margin-left: auto;">Doanh số: <strong>${formatMoney(topCategory.revenue)}</strong></div>
+                            </div>
+                        ` : '<div style="color: #94a3b8; font-style: italic;">Chưa ghi nhận danh mục nổi bật</div>'}
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; color: #475569; font-size: 0.9rem; margin-bottom: 8px;">Mặt hàng tồn đọng cần lưu ý (Dead Stock):</div>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            ${deadStock.length > 0 ? deadStock.map(p => `
+                                <div style="display: flex; align-items: center; justify-content: space-between; background: #fff1f2; padding: 8px 12px; border-radius: 8px; border: 1px solid #fee2e2;">
+                                    <span style="font-size: 0.9rem; font-weight: 600; color: #991b1b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">${p.name}</span>
+                                    <span style="font-size: 0.8rem; background: #fecaca; color: #991b1b; padding: 2px 8px; border-radius: 20px; font-weight: 700;">Tồn: ${p.stock}</span>
+                                </div>
+                            `).join('') : '<div style="color: #10b981; font-weight: 600; font-size: 0.9rem; padding: 12px; background: #ecfdf5; border-radius: 8px;">✨ Tuyệt vời! Không có hàng tồn đọng.</div>'}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Section: Staff Performance -->
+            ${salesPerformance.length > 0 ? `
+            <div style="margin-bottom: 30px;">
+                <h4 style="margin: 0 0 15px 0; font-size: 1.1rem; color: #1e293b; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px;">👥 Hiệu Suất Đội Ngũ Kinh Doanh</h4>
+                <div style="background: #f8fafc; border-radius: 12px; padding: 15px; border: 1px solid #e2e8f0;">
+                    <div style="margin-bottom: 12px; font-size: 0.9rem; color: #475569;">
+                        Nhân viên dẫn đầu KPI: <strong>${topRep ? `${topRep.name} (${topRep.progress}% KPI)` : 'N/A'}</strong>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        ${salesPerformance.map(rep => `
+                            <div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                                    <span style="font-weight: 600; color: #334155;">${rep.name}</span>
+                                    <span style="font-weight: 700; color: #64748b;">${formatMoney(rep.totalSales)} / ${formatMoney(rep.kpi)} (${rep.progress}%)</span>
+                                </div>
+                                <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                                    <div style="width: ${rep.progress}%; height: 100%; background: ${rep.progress >= 100 ? '#10b981' : '#3b82f6'};"></div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+            ` : ''}
+    
+            <!-- Section: Strategic Recommendations -->
+            <div>
+                <h4 style="margin: 0 0 15px 0; font-size: 1.1rem; color: #1e293b; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px;">💡 Đề Xuất Chiến Lược Từ AI</h4>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    ${recommendations.map(rec => {
+                        let bgColor = '#f8fafc';
+                        let borderColor = '#cbd5e1';
+                        let titleColor = '#334155';
+                        if (rec.type === 'warning') {
+                            bgColor = '#fffbeb'; borderColor = '#fcd34d'; titleColor = '#b45309';
+                        } else if (rec.type === 'success') {
+                            bgColor = '#f0fdf4'; borderColor = '#86efac'; titleColor = '#15803d';
+                        } else if (rec.type === 'danger') {
+                            bgColor = '#fdf2f8'; borderColor = '#fbcfe8'; titleColor = '#be185d';
+                        } else if (rec.type === 'info') {
+                            bgColor = '#eff6ff'; borderColor = '#93c5fd'; titleColor = '#1d4ed8';
+                        }
+                        return `
+                            <div style="background: ${bgColor}; border: 1px solid ${borderColor}; border-left: 5px solid ${borderColor}; border-radius: 8px; padding: 15px;">
+                                <h5 style="margin: 0 0 5px 0; font-size: 0.95rem; font-weight: 700; color: ${titleColor};">${rec.title}</h5>
+                                <p style="margin: 0; font-size: 0.88rem; color: #475569; line-height: 1.6;">${rec.content}</p>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+        
+        const container = document.getElementById('ai-content');
+        if (container) container.innerHTML = reportHtml;
+    }
 });
 
 // ── PDF Export Function ────────────────────────────────────────────────────────
