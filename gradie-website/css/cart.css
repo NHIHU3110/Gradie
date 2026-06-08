@@ -15,20 +15,20 @@
 .cart-items-panel {
   background: var(--white);
   padding: 40px;
-  border-radius: 16px;
+  border-radius: 20px;
   border: 1px solid rgba(140, 132, 122, 0.15);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.03);
 }
 
 .cart-summary-panel {
-  background: var(--champagne-light);
+  background: linear-gradient(160deg, #fdfaf5 0%, #fffbf0 100%);
   padding: 40px;
-  border-radius: 16px;
+  border-radius: 20px;
   height: fit-content;
   position: sticky;
   top: 120px;
-  border: none;
-  box-shadow: 0 10px 40px rgba(140, 132, 122, 0.08);
+  border: 1px solid rgba(216, 169, 79, 0.18);
+  box-shadow: 0 12px 40px rgba(216, 169, 79, 0.10);
 }
 
 .cart-item {

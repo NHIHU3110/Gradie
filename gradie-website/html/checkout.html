@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/icons.css?v=1780166734">
   <link rel="stylesheet" href="../css/responsive.css">
+  
   <style>
     /* ── Checkout Layout ── */
     .checkout-page-header {
@@ -314,6 +315,47 @@
         padding: 40px 24px;
       }
     }
+
+    /* ── Progress Bar ── */
+    .checkout-progress {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--taupe);
+      flex-wrap: wrap;
+    }
+
+    .progress-step {
+      color: var(--taupe);
+      transition: color 0.2s;
+    }
+
+    .progress-step--done {
+      color: var(--champagne);
+      text-decoration: none;
+    }
+    .progress-step--done:hover {
+      color: var(--peach);
+      text-decoration: underline;
+    }
+
+    .progress-step--active {
+      color: var(--ink);
+      padding: 6px 16px;
+      background: var(--champagne-light);
+      border-radius: 20px;
+      border: 1.5px solid var(--champagne);
+      box-shadow: 0 2px 8px rgba(216, 169, 79, 0.08);
+    }
+
+    .progress-arrow {
+      color: var(--border-gold);
+      font-size: 1rem;
+    }
   </style>
 <link rel="stylesheet" href="../css/toast.css?v=1780167435">
 </head>
@@ -354,12 +396,12 @@
       <h1>Thông Tin Thanh Toán</h1>
       
       <!-- Progress Bar -->
-      <div class="checkout-progress" style="display:flex; justify-content:center; align-items:center; gap:12px; margin-top:20px; font-size:0.88rem; font-weight:600; color:var(--taupe);">
-        <span style="color:var(--champagne);">Giỏ Hàng</span>
-        <span style="color:var(--border-gold);">⟶</span>
-        <span style="color:var(--ink); padding:6px 14px; background:var(--champagne-light); border-radius:20px; border:1.5px solid var(--champagne); box-shadow:0 2px 8px rgba(216,169,79,0.08);">Thanh Toán</span>
-        <span style="color:var(--border-gold);">⟶</span>
-        <span>Hoàn Tất</span>
+      <div class="checkout-progress">
+        <a href="cart.html" class="progress-step progress-step--done">Giỏ Hàng</a>
+        <span class="progress-arrow">⟶</span>
+        <span class="progress-step progress-step--active">Thanh Toán</span>
+        <span class="progress-arrow">⟶</span>
+        <span class="progress-step">Hoàn Tất</span>
       </div>
     </div>
 

@@ -9,8 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/icons.css?v=1780166734">
-  
+  <link rel="stylesheet" href="../css/cart.css?v=1780167435">
   <link rel="stylesheet" href="../css/responsive.css">
+  
 <link rel="stylesheet" href="../css/toast.css?v=1780167435">
 </head>
 <body>
@@ -44,39 +45,39 @@
 
   <main>
     
-    <section class="page-header" style="padding: 60px 40px 40px; text-align: center; background: linear-gradient(to bottom, #fcfbf9, #ffffff); margin-bottom: 20px;">
+    <section class="page-header">
       <span class="section-kicker">Sản phẩm của bạn</span>
-      <h1 class="section-title" style="margin: 0; font-size: 3rem;">Giỏ Hàng</h1>
+      <h1 class="section-title">Giỏ Hàng</h1>
     </section>
     
-    <div class="cart-grid-container" style="max-width:1200px; margin: 0 auto 80px; padding: 0 40px;">
+    <div class="cart-grid-container">
         
-        <div class="cart-grid" style="display:grid; grid-template-columns: 2fr 1fr; gap: 40px;">
+        <div class="cart-grid">
             <!-- Cart Items -->
-            <div style="background:var(--white); padding:40px; border-radius:16px; border:1px solid rgba(140, 132, 122, 0.15); box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
+            <div class="cart-items-panel">
                 <div id="cart-items-container">
-                    <p style="text-align:center;">Đang tải giỏ hàng...</p>
+                    <p class="cart-loading-msg">Đang tải giỏ hàng...</p>
                 </div>
             </div>
             
             <!-- Summary -->
-            <div style="background:var(--champagne-light); padding:40px; border-radius:16px; height:fit-content; position: sticky; top: 120px; border:none; box-shadow: 0 10px 40px rgba(140, 132, 122, 0.1);">
-                <h3 style="margin-top:0; font-family:'Playfair Display', serif; font-size: 1.6rem; color: var(--ink); margin-bottom: 30px;">Tóm Tắt Đơn Hàng</h3>
-                <div style="display:flex; justify-content:space-between; margin: 20px 0; color: var(--taupe); font-size: 1.1rem;">
+            <div class="cart-summary-panel">
+                <h3 class="cart-summary-title">Tóm Tắt Đơn Hàng</h3>
+                <div class="cart-summary-row">
                     <span>Tạm tính</span>
-                    <strong id="cart-subtotal" style="color: var(--ink); font-weight: 500;">0 ₫</strong>
+                    <strong id="cart-subtotal" class="cart-summary-value">0 ₫</strong>
                 </div>
-                <div style="display:flex; justify-content:space-between; margin: 20px 0; color: var(--taupe); font-size: 1.1rem;">
+                <div class="cart-summary-row">
                     <span>Phí vận chuyển</span>
-                    <strong id="cart-shipping" style="color: var(--ink); font-weight: 500;">0 ₫</strong>
+                    <strong id="cart-shipping" class="cart-summary-value">0 ₫</strong>
                 </div>
-                <hr style="border-top:1px solid rgba(140, 132, 122, 0.2); margin:30px 0;">
-                <div style="display:flex; justify-content:space-between; font-size:1.4rem; align-items: center;">
-                    <strong style="color: var(--ink); font-weight: 600;">Tổng cộng</strong>
-                    <strong id="cart-total" style="color:var(--peach); font-weight: 600;">0 ₫</strong>
+                <hr class="cart-summary-divider">
+                <div class="cart-summary-row cart-summary-total-row">
+                    <strong class="cart-summary-total-label">Tổng cộng</strong>
+                    <strong id="cart-total" class="cart-summary-total-amount">0 ₫</strong>
                 </div>
-                <p style="font-size: 0.9rem; color: var(--taupe); margin: 15px 0 30px; text-align: right;">Đã bao gồm thuế GTGT</p>
-                <button onclick="handleProceedCheckout()" class="btn-primary" style="width:100%; font-size:1.15rem; padding:18px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">Tiến Hành Thanh Toán</button>
+                <p class="cart-summary-tax-note">Đã bao gồm thuế GTGT</p>
+                <button onclick="handleProceedCheckout()" class="btn-primary btn-full cart-checkout-btn">Tiến Hành Thanh Toán</button>
             </div>
         </div>
     </div>

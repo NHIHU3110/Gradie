@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/products.css?v=1780166734">
   <link rel="stylesheet" href="../css/home.css?v=1780166734">
   <link rel="stylesheet" href="../css/responsive.css">
+  
   <link rel="stylesheet" href="../css/toast.css?v=1780167435">
 </head>
 
@@ -143,11 +144,10 @@
         <span class="section-kicker">Được Yêu Thích Nhất</span>
         <h2 class="section-title">Quà Lưu Niệm Thịnh Hành</h2>
       </div>
-      <!-- product-grid uses the styling from products.css -->
-      <div class="product-grid" id="trending-grid" style="max-width:1200px; margin:0 auto;">
+      <div class="product-grid" id="trending-grid">
         <!-- Rendered by JS -->
       </div>
-      <div style="text-align: center; margin-top: 50px;">
+      <div class="section-cta">
         <a href="products.html" class="btn-primary">Xem Tất Cả Sản Phẩm</a>
       </div>
     </section>
@@ -214,6 +214,14 @@
   <script src="../js/main.js?v=1780167435"></script>
   <script src="../js/products.js?v=1780167435"></script>
   <script src="../js/cart.js?v=1780167435"></script>
+  <script>
+    // Scroll-reveal: fade-up sections on scroll
+    const revealEls = document.querySelectorAll('.category-showcase, .story-section, .testimonials, .trending-section, .values-section, .stats-banner, .quick-nav-section, .craft-section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('fade-up'); observer.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
 </body>
 
 </html>
