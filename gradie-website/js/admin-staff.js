@@ -92,6 +92,66 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+window.renderActivityLogs = function() {
+    if (!window.GradieStore) return;
+    let logs = window.GradieStore.getActivityLogs() || [];
+    
+    // Sort
+    const sortOrder = document.getElementById('log-sort-order')?.value || 'newest';
+    logs.sort((a, b) => {
+        // Handle both ISO string and raw timestamp formats
+        const timeA = new Date(a.timestamp).getTime() || a.timestamp || 0;
+        const timeB = new Date(b.timestamp).getTime() || b.timestamp || 0;
+        return sortOrder === 'newest' ? timeB - timeA : timeA - timeB;
+    });
+
+    // Populate Filter Dropdown
+    const filterSelect = document.getElementById('log-filter-staff');
+    if (filterSelect) {
+        const uniqueStaff = [...new Set(logs.map(log => log.user))].filter(Boolean);
+        const currentFilter = filterSelect.value;
+        filterSelect.innerHTML = '<option value="all">Tất cả nhân viên</option>';
+        uniqueStaff.forEach(staffName => {
+            const opt = document.createElement('option');
+            opt.value = staffName;
+            opt.textContent = staffName;
+            if (staffName === currentFilter) opt.selected = true;
+            filterSelect.appendChild(opt);
+        });
+    }
+
+    // Filter
+    const filterValue = document.getElementById('log-filter-staff')?.value || 'all';
+    if (filterValue !== 'all') {
+        logs = logs.filter(log => log.user === filterValue);
+    }
+
+    const tbody = document.getElementById('admin-activity-logs');
+    if (!tbody) return;
+
+    if (logs.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px; color:#64748b;">Chưa có hoạt động nào được ghi nhận.</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = logs.map(log => {
+        const dateObj = new Date(log.timestamp);
+        const dateStr = isNaN(dateObj.getTime()) ? 'N/A' : dateObj.toLocaleString('vi-VN');
+        return `
+            <tr>
+                <td style="color:#64748b; font-size:0.85rem; white-space:nowrap;">${dateStr}</td>
+                <td><strong style="color:#0f172a;">${log.user || 'Hệ thống'}</strong></td>
+                <td><span style="background:#f1f5f9; padding:4px 8px; border-radius:4px; font-size:0.85rem; color:#475569; font-weight:500;">${log.action}</span></td>
+                <td style="color:#334155;">${log.details}</td>
+            </tr>
+        `;
+    }).join('');
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    if(window.renderActivityLogs) window.renderActivityLogs();
+});
+
 async function fetchStaffFromMongo() {
     try {
         const res = await fetch('/api/staff');
@@ -158,7 +218,7 @@ window.renderStaffTable = function() {
             <td>
                 <div style="display:flex; gap: 10px;">
                     <button class="outline-button" onclick="editStaff('${s.id}')" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 4px; border: 1px solid #d8a94f; color: #d8a94f; background: transparent; cursor: pointer; font-weight: 500;">
-                        Phân Quyền
+                        Chỉnh sửa
                     </button>
                     <button class="outline-button" onclick="deleteStaff('${s.id}')" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 4px; border: 1px solid #dc2626; color: #dc2626; background: transparent; cursor: pointer; font-weight: 500;">
                         Xóa
