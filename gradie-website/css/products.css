@@ -144,16 +144,18 @@
   color: var(--white);
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.5px;
   border: none;
   cursor: pointer;
   transition: var(--tr);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
+  white-space: nowrap;
+  padding: 0 8px;
 }
 
 .btn-add-cart:hover {
