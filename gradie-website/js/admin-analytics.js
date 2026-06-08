@@ -228,6 +228,12 @@ document.addEventListener('DOMContentLoaded', () => {
             revenueChartInstance.destroy();
         }
 
+        // Create a gradient for the line chart
+        const ctx2d = revCtx.getContext('2d');
+        const gradientFill = ctx2d.createLinearGradient(0, 0, 0, 320);
+        gradientFill.addColorStop(0, 'rgba(216, 169, 79, 0.4)');
+        gradientFill.addColorStop(1, 'rgba(216, 169, 79, 0.0)');
+
         revenueChartInstance = new Chart(revCtx, {
             type: 'line',
             data: {
@@ -236,15 +242,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     label: 'Doanh thu',
                     data: data,
                     borderColor: '#d8a94f',
-                    backgroundColor: 'rgba(216, 169, 79, 0.1)',
+                    backgroundColor: gradientFill,
                     borderWidth: 3,
                     pointBackgroundColor: '#fff',
                     pointBorderColor: '#d8a94f',
-                    pointBorderWidth: 2,
-                    pointRadius: 4,
-                    pointHoverRadius: 6,
+                    pointBorderWidth: 3,
+                    pointRadius: 5,
+                    pointHoverRadius: 8,
                     fill: true,
-                    tension: 0.4
+                    tension: 0.45
                 }]
             },
             options: {
