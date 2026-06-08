@@ -141,17 +141,21 @@ document.addEventListener('DOMContentLoaded', () => {
       if (myOrders.length > 0) {
         orderList.innerHTML = myOrders.map(o => {
           const itemsSummary = o.items.map(item => `${item.name} (x${item.quantity || item.qty || 1})`).join(', ');
-          const statusStyle = o.status === 'Delivered' ? 'background:#dcfce7; color:#15803d;' :
+          const statusStyle = o.status === 'Completed' ? 'background:#d1fae5; color:#047857;' :
+                    o.status === 'Delivered' ? 'background:#dcfce7; color:#15803d;' :
                     o.status === 'Shipped' ? 'background:#dbeafe; color:#2563eb;' :
                     o.status === 'Processing' ? 'background:#fce7f3; color:#be185d;' :
                     o.status === 'Confirmed' ? 'background:#e0e7ff; color:#4338ca;' :
                     o.status === 'Cancelled' ? 'background:#fee2e2; color:#dc2626;' :
+                    o.status === 'Refunded' ? 'background:#f3f4f6; color:#4b5563;' :
                     'background:#fef3c7; color:#d97706;';
-          const statusVN = o.status === 'Delivered' ? 'Đã Giao Hàng' :
+          const statusVN = o.status === 'Completed' ? 'Hoàn Tất' :
+                           o.status === 'Delivered' ? 'Đã Giao Hàng' :
                            o.status === 'Shipped' ? 'Đang Giao' :
                            o.status === 'Processing' ? 'Đang Xử Lý' :
                            o.status === 'Confirmed' ? 'Đã Xác Nhận' :
-                           o.status === 'Cancelled' ? 'Đã Hủy' : 'Chờ Duyệt';
+                           o.status === 'Cancelled' ? 'Đã Hủy' :
+                           o.status === 'Refunded' ? 'Đã Hoàn Tiền' : 'Chờ Duyệt';
           return `
             <div class="order-card-clickable" onclick="openUserOrderModal('${o.orderNumber}')" style="border: 1px solid var(--border-gold); padding: 18px; border-radius: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; background: #fff; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.01);">
               <div>
@@ -429,18 +433,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const status = order.status || 'Pending';
         const isCancelled = status === 'Cancelled';
         
-        const statusVN = status === 'Delivered' ? 'Đã Giao Hàng' :
+        const statusVN = status === 'Completed' ? 'Hoàn Tất' :
+                         status === 'Delivered' ? 'Đã Giao Hàng' :
                          status === 'Shipped' ? 'Đang Giao' :
                          status === 'Processing' ? 'Đang Xử Lý' :
                          status === 'Confirmed' ? 'Đã Xác Nhận' :
-                         status === 'Cancelled' ? 'Đã Hủy' : 'Chờ Duyệt';
+                         status === 'Cancelled' ? 'Đã Hủy' : 
+                         status === 'Refunded' ? 'Đã Hoàn Tiền' : 'Chờ Duyệt';
 
         // Status badge styling
-        const statusStyle = status === 'Delivered' ? 'background:#dcfce7; color:#15803d;' :
+        const statusStyle = status === 'Completed' ? 'background:#d1fae5; color:#047857;' :
+                    status === 'Delivered' ? 'background:#dcfce7; color:#15803d;' :
                     status === 'Shipped' ? 'background:#dbeafe; color:#2563eb;' :
                     status === 'Processing' ? 'background:#fce7f3; color:#be185d;' :
                     status === 'Confirmed' ? 'background:#e0e7ff; color:#4338ca;' :
                     isCancelled ? 'background:#fee2e2; color:#dc2626;' :
+                    status === 'Refunded' ? 'background:#f3f4f6; color:#4b5563;' :
                     'background:#fef3c7; color:#d97706;';
 
         // Items list
@@ -449,27 +457,28 @@ document.addEventListener('DOMContentLoaded', () => {
         ).join('');
 
         let timelineHtml = '';
-        if (isCancelled) {
+        if (isCancelled || status === 'Refunded') {
             timelineHtml = `
                 <div class="timeline-step">
                   <div>
                     <div class="timeline-dot cancelled">✕</div>
                   </div>
                   <div class="timeline-content">
-                    <h4>Đơn Hàng Đã Hủy</h4>
-                    <p>Đơn hàng này đã bị hủy. Vui lòng liên hệ bộ phận hỗ trợ để biết thêm chi tiết.</p>
+                    <h4>Đơn Hàng Đã Hủy / Hoàn Tiền</h4>
+                    <p>Đơn hàng này đã bị hủy hoặc hoàn tiền. Vui lòng liên hệ bộ phận hỗ trợ để biết thêm chi tiết.</p>
                   </div>
                 </div>
             `;
         } else {
-            const steps = ['Pending', 'Confirmed', 'Processing', 'Shipped', 'Delivered'];
-            const titles = ['Chờ Duyệt', 'Đã Xác Nhận', 'Đang Xử Lý', 'Đang Giao Hàng', 'Đã Giao Thành Công'];
+            const steps = ['Pending', 'Confirmed', 'Processing', 'Shipped', 'Delivered', 'Completed'];
+            const titles = ['Chờ Duyệt', 'Đã Xác Nhận', 'Đang Xử Lý', 'Đang Giao Hàng', 'Đã Giao Thành Công', 'Hoàn Tất'];
             const desc = [
                 'Đơn hàng của bạn đã được hệ thống tiếp nhận và đang chờ xử lý.',
                 'Đơn hàng đã được xác nhận. Chúng tôi đang chuẩn bị các bước tiếp theo.',
                 'Món quà của bạn đang được đóng gói cẩn thận tại kho của Gradie.',
                 'Đơn hàng đang trên đường vận chuyển bởi đối tác giao hàng.',
-                'Đơn hàng đã được giao thành công. Hãy tận hưởng khoảnh khắc tuyệt vời cùng Gradie!'
+                'Đơn hàng đã được giao thành công.',
+                'Giao dịch đã hoàn tất và đối soát xong. Cảm ơn bạn!'
             ];
             const currentIndex = steps.indexOf(status) >= 0 ? steps.indexOf(status) : 0;
             

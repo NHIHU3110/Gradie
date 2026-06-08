@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             badgeStyle = 'background: #dcfce7; color: #15803d;';
                         } else if (status === 'Cancelled') {
                             badgeStyle = 'background: #fee2e2; color: #dc2626;';
+                        } else if (status === 'Completed') {
+                            badgeStyle = 'background: #d1fae5; color: #047857;';
+                        } else if (status === 'Refunded') {
+                            badgeStyle = 'background: #f3f4f6; color: #4b5563;';
                         }
                         
                         return `
@@ -58,7 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                         <option value="Processing" ${status === 'Processing'?'selected':''}>Processing</option>
                                         <option value="Shipped" ${status === 'Shipped' || status === 'Dispatched'?'selected':''}>Shipped</option>
                                         <option value="Delivered" ${status === 'Delivered'?'selected':''}>Delivered</option>
+                                        <option value="Completed" ${status === 'Completed'?'selected':''}>Completed</option>
                                         <option value="Cancelled" ${status === 'Cancelled'?'selected':''}>Cancelled</option>
+                                        <option value="Refunded" ${status === 'Refunded'?'selected':''}>Refunded</option>
                                     </select>
                                 </div>
                             </td>
@@ -176,22 +182,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 const timelineContainer = document.getElementById('admin-order-timeline');
                 if (timelineContainer) {
                     const st = o.status || 'Pending';
-                    const isCancelled = st === 'Cancelled';
+                    const isCancelled = st === 'Cancelled' || st === 'Refunded';
                     
                     if (isCancelled) {
                         timelineContainer.innerHTML = `
                             <div style="display:flex; gap:15px; align-items:center; background:#fef2f2; border:1px solid #fca5a5; padding:15px; border-radius:8px;">
                                 <div style="width:30px; height:30px; border-radius:50%; background:#ef4444; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:bold;">✕</div>
                                 <div>
-                                    <div style="font-weight:600; color:#b91c1c;">Cancelled (Đã Hủy)</div>
-                                    <div style="font-size:0.85rem; color:#7f1d1d;">Đơn hàng này đã bị hủy.</div>
+                                    <div style="font-weight:600; color:#b91c1c;">${st} (Đã Hủy/Hoàn Tiền)</div>
+                                    <div style="font-size:0.85rem; color:#7f1d1d;">Đơn hàng này đã bị hủy hoặc hoàn tiền.</div>
                                 </div>
                             </div>
                         `;
                     } else {
-                        const steps = ['Pending', 'Confirmed', 'Processing', 'Shipped', 'Delivered'];
+                        const steps = ['Pending', 'Confirmed', 'Processing', 'Shipped', 'Delivered', 'Completed'];
                         const currentIndex = steps.indexOf(st) >= 0 ? steps.indexOf(st) : 0;
-                        const labels = ['Chờ duyệt', 'Đã xác nhận', 'Đang xử lý', 'Đang giao', 'Đã giao'];
+                        const labels = ['Chờ duyệt', 'Đã xác nhận', 'Đang xử lý', 'Đang giao', 'Đã giao', 'Hoàn tất'];
                         
                         let timelineHtml = '<div style="display:flex; justify-content:space-between; position:relative; padding-bottom:10px;">';
                         timelineHtml += '<div style="position:absolute; top:12px; left:15px; right:15px; height:2px; background:#e2e8f0; z-index:1;"></div>';
