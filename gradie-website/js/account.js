@@ -139,46 +139,52 @@ document.addEventListener('DOMContentLoaded', () => {
       if (profilePhoneInput) profilePhoneInput.value = user.phone || '';
 
       // Render their dynamic order history
-      const orders = window.GradieStore.getOrders();
-      const myOrders = orders.filter(o => o.customerEmail && o.customerEmail.toLowerCase() === user.email.toLowerCase());
-      const orderList = document.getElementById('recent-orders-list');
+      window.renderUserOrdersList = function() {
+        const orders = window.GradieStore.getOrders();
+        const myOrders = orders.filter(o => o.customerEmail && o.customerEmail.toLowerCase() === user.email.toLowerCase());
+        const orderList = document.getElementById('recent-orders-list');
+        if (!orderList) return;
 
-      if (myOrders.length > 0) {
-        orderList.innerHTML = myOrders.map(o => {
-          const itemsSummary = o.items.map(item => `${item.name} (x${item.quantity || item.qty || 1})`).join(', ');
-          const statusStyle = o.status === 'Completed' ? 'background:#d1fae5; color:#047857;' :
-                    o.status === 'Delivered' ? 'background:#dcfce7; color:#15803d;' :
-                    o.status === 'Shipped' ? 'background:#dbeafe; color:#2563eb;' :
-                    o.status === 'Processing' ? 'background:#fce7f3; color:#be185d;' :
-                    o.status === 'Confirmed' ? 'background:#e0e7ff; color:#4338ca;' :
-                    o.status === 'Cancelled' ? 'background:#fee2e2; color:#dc2626;' :
-                    o.status === 'Refunded' ? 'background:#f3f4f6; color:#4b5563;' :
-                    'background:#fef3c7; color:#d97706;';
-          const statusVN = o.status === 'Completed' ? 'Hoàn Tất' :
-                           o.status === 'Delivered' ? 'Đã Giao Hàng' :
-                           o.status === 'Shipped' ? 'Đang Giao' :
-                           o.status === 'Processing' ? 'Đang Xử Lý' :
-                           o.status === 'Confirmed' ? 'Đã Xác Nhận' :
-                           o.status === 'Cancelled' ? 'Đã Hủy' :
-                           o.status === 'Refunded' ? 'Đã Hoàn Tiền' : 'Chờ Duyệt';
-          return `
-            <div class="order-card-clickable" onclick="openUserOrderModal('${o.orderNumber}')" style="border: 1px solid var(--border-gold); padding: 18px; border-radius: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; background: #fff; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.01);">
-              <div>
-                <strong style="color: var(--black); font-size: 1.05rem; letter-spacing: 0.5px;">${o.orderNumber}</strong>
-                <div style="font-size: 0.82rem; color: var(--taupe); margin-top: 4px;">Ngày đặt: ${o.date}</div>
-                <div style="font-size: 0.82rem; color: #777; margin-top: 4px; max-width: 400px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" title="${itemsSummary}">${itemsSummary}</div>
+        if (myOrders.length > 0) {
+          orderList.innerHTML = myOrders.map(o => {
+            const itemsSummary = o.items.map(item => `${item.name} (x${item.quantity || item.qty || 1})`).join(', ');
+            const statusStyle = o.status === 'Completed' ? 'background:#d1fae5; color:#047857;' :
+                      o.status === 'Delivered' ? 'background:#dcfce7; color:#15803d;' :
+                      o.status === 'Shipped' ? 'background:#dbeafe; color:#2563eb;' :
+                      o.status === 'Processing' ? 'background:#fce7f3; color:#be185d;' :
+                      o.status === 'Confirmed' ? 'background:#e0e7ff; color:#4338ca;' :
+                      o.status === 'Cancelled' ? 'background:#fee2e2; color:#dc2626;' :
+                      o.status === 'Refunded' ? 'background:#f3f4f6; color:#4b5563;' :
+                      'background:#fef3c7; color:#d97706;';
+            const statusVN = o.status === 'Completed' ? 'Hoàn Tất' :
+                             o.status === 'Delivered' ? 'Đã Giao Hàng' :
+                             o.status === 'Shipped' ? 'Đang Giao' :
+                             o.status === 'Processing' ? 'Đang Xử Lý' :
+                             o.status === 'Confirmed' ? 'Đã Xác Nhận' :
+                             o.status === 'Cancelled' ? 'Đã Hủy' :
+                             o.status === 'Refunded' ? 'Đã Hoàn Tiền' : 'Chờ Duyệt';
+            return `
+              <div class="order-card-clickable" onclick="openUserOrderModal('${o.orderNumber}')" style="border: 1px solid var(--border-gold); padding: 18px; border-radius: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; background: #fff; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.01);">
+                <div>
+                  <strong style="color: var(--black); font-size: 1.05rem; letter-spacing: 0.5px;">${o.orderNumber}</strong>
+                  <div style="font-size: 0.82rem; color: var(--taupe); margin-top: 4px;">Ngày đặt: ${o.date}</div>
+                  <div style="font-size: 0.82rem; color: #777; margin-top: 4px; max-width: 400px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" title="${itemsSummary}">${itemsSummary}</div>
+                </div>
+                <div style="text-align: right; display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
+                  <strong style="color: var(--black); font-size: 1.05rem;">${Number(o.total).toLocaleString('vi-VN')}đ</strong>
+                  <span class="om-status-badge" style="${statusStyle}">${statusVN}</span>
+                  <span style="font-size:0.72rem; color:var(--champagne, #d8a94f); font-weight:500;">Nhấn để xem chi tiết →</span>
+                </div>
               </div>
-              <div style="text-align: right; display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
-                <strong style="color: var(--black); font-size: 1.05rem;">${Number(o.total).toLocaleString('vi-VN')}đ</strong>
-                <span class="om-status-badge" style="${statusStyle}">${statusVN}</span>
-                <span style="font-size:0.72rem; color:var(--champagne, #d8a94f); font-weight:500;">Nhấn để xem chi tiết →</span>
-              </div>
-            </div>
-          `;
-        }).join('');
-      } else {
-        orderList.innerHTML = '<p style="color: var(--taupe); font-style: italic;">Bạn chưa thực hiện đơn hàng nào.</p>';
-      }
+            `;
+          }).join('');
+        } else {
+          orderList.innerHTML = '<p style="color: var(--taupe); font-style: italic;">Bạn chưa thực hiện đơn hàng nào.</p>';
+        }
+      };
+
+      // Call it on page load
+      window.renderUserOrdersList();
 
       // User Order Detail Modal Functions
       window.openUserOrderModal = function(orderNumber) {
@@ -190,17 +196,21 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('user-modal-title').textContent = 'Đơn Hàng ' + o.orderNumber;
 
         // Info Grid
-        const statusStyle = o.status === 'Delivered' ? 'background:#dcfce7; color:#15803d;' :
-                    o.status === 'Shipped' ? 'background:#dbeafe; color:#2563eb;' :
-                    o.status === 'Processing' ? 'background:#fce7f3; color:#be185d;' :
-                    o.status === 'Confirmed' ? 'background:#e0e7ff; color:#4338ca;' :
-                    o.status === 'Cancelled' ? 'background:#fee2e2; color:#dc2626;' :
+        const statusStyle = o.status === 'Completed'  ? 'background:#d1fae5; color:#047857;'  :
+                    o.status === 'Delivered'  ? 'background:#dcfce7; color:#15803d;'  :
+                    o.status === 'Shipped'    ? 'background:#dbeafe; color:#2563eb;'  :
+                    o.status === 'Processing' ? 'background:#fce7f3; color:#be185d;'  :
+                    o.status === 'Confirmed'  ? 'background:#e0e7ff; color:#4338ca;'  :
+                    o.status === 'Cancelled'  ? 'background:#fee2e2; color:#dc2626;'  :
+                    o.status === 'Refunded'   ? 'background:#f3f4f6; color:#4b5563;'  :
                     'background:#fef3c7; color:#d97706;';
-        const statusVN = o.status === 'Delivered' ? 'Đã Giao Hàng' :
-                         o.status === 'Shipped' ? 'Đang Giao' :
-                         o.status === 'Processing' ? 'Đang Xử Lý' :
-                         o.status === 'Confirmed' ? 'Đã Xác Nhận' :
-                         o.status === 'Cancelled' ? 'Đã Hủy' : 'Chờ Duyệt';
+        const statusVN = o.status === 'Completed'  ? 'Hoàn Tất'       :
+                         o.status === 'Delivered'  ? 'Đã Giao Hàng'   :
+                         o.status === 'Shipped'    ? 'Đang Giao'       :
+                         o.status === 'Processing' ? 'Đang Xử Lý'      :
+                         o.status === 'Confirmed'  ? 'Đã Xác Nhận'    :
+                         o.status === 'Cancelled'  ? 'Đã Hủy'         :
+                         o.status === 'Refunded'   ? 'Đã Hoàn Tiền'   : 'Chờ Duyệt';
 
         const paymentMethodVN = o.paymentMethod === 'COD' || o.paymentMethod === 'COD (Cash on Delivery)' ? 'Thanh toán khi nhận hàng (COD)' : o.paymentMethod || 'COD';
 
@@ -659,6 +669,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Load initial lists
       window.renderAddressBook();
+
+      // Listen for database sync changes to re-render order status reactively
+      window.addEventListener('gradie_data_synced', () => {
+        // 1. Re-render order history list
+        if (window.renderUserOrdersList) {
+          window.renderUserOrdersList();
+        }
+        
+        // 2. Re-render detail modal if currently open
+        const userOrderModal = document.getElementById('userOrderModal');
+        const userModalTitle = document.getElementById('user-modal-title');
+        if (userOrderModal && userOrderModal.style.display === 'block' && userModalTitle) {
+          const currentOrderNum = userModalTitle.textContent.replace('Đơn Hàng ', '').trim();
+          if (currentOrderNum && window.openUserOrderModal) {
+            window.openUserOrderModal(currentOrderNum);
+          }
+        }
+        
+        // 3. Re-run tracking lookup in account profile tab if tracking results are showing
+        const profileTrackInput = document.getElementById('profile-track-input');
+        const profileTrackResult = document.getElementById('profile-track-result');
+        if (profileTrackInput && profileTrackResult && profileTrackResult.innerHTML.trim() !== '') {
+          if (window.profileTrackOrder) {
+            window.profileTrackOrder();
+          }
+        }
+      });
 
     } else {
       dashboard.style.display = 'none';

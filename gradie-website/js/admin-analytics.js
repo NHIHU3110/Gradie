@@ -372,3 +372,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })();
 });
+
+// ── PDF Export Function ────────────────────────────────────────────────────────
+window.exportAnalyticsPDF = function() {
+    // Set the print date
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('vi-VN', {
+        year: 'numeric', month: 'long', day: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+    });
+    const printDateEl = document.getElementById('pdf-print-date');
+    if (printDateEl) printDateEl.textContent = 'Ngày xuất: ' + dateStr;
+
+    // Notify user
+    if (typeof showToast === 'function') {
+        showToast('🖨️ Đang chuẩn bị báo cáo PDF...', 'info');
+    }
+
+    // Short delay to allow toast to show, then print
+    setTimeout(() => {
+        window.print();
+    }, 300);
+};
+

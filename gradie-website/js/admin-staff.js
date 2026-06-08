@@ -154,12 +154,49 @@ window.renderActivityLogs = function() {
     }).join('');
 };
 
+window.reloadActivityLogs = async function() {
+    const btn = document.getElementById('btn-reload-logs');
+    const textEl = document.getElementById('btn-reload-text');
+    if (btn) {
+        btn.disabled = true;
+        btn.classList.add('loading');
+        if (textEl) textEl.innerText = 'Đang tải...';
+    }
+    try {
+        if (window.GradieStore && window.GradieStore.syncWithDB) {
+            await window.GradieStore.syncWithDB('global');
+        }
+        if (window.renderActivityLogs) {
+            window.renderActivityLogs();
+        }
+        if (typeof showToast === 'function') {
+            showToast('Đã làm mới nhật ký hoạt động!', 'success');
+        }
+    } catch (e) {
+        console.error(e);
+        if (typeof showToast === 'function') {
+            showToast('Lỗi khi làm mới nhật ký!', 'error');
+        }
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.classList.remove('loading');
+            if (textEl) textEl.innerText = 'Làm mới';
+        }
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('gradie_data_synced', () => {
         if (window.renderActivityLogs) window.renderActivityLogs();
         if (typeof fetchStaffFromMongo === 'function') fetchStaffFromMongo();
     });
     if(window.renderActivityLogs) window.renderActivityLogs();
+
+    // Background polling for staff list every 8 seconds
+    setInterval(() => {
+        if (typeof fetchStaffFromMongo === 'function') fetchStaffFromMongo();
+    }, 8000);
 });
 
 async function fetchStaffFromMongo() {

@@ -8,7 +8,7 @@ function getAllProducts() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const products = getAllProducts();
+  let products = getAllProducts();
   
   const productGrid = document.getElementById('main-product-grid') 
                    || document.getElementById('products-grid') 
@@ -100,17 +100,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateMainGrid();
 
-  // Attach Event Listeners for Filters/Search
-  const filterBtns = document.querySelectorAll('.category-filter');
-  filterBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          e.target.classList.add('active');
-          currentCategory = e.target.getAttribute('data-category');
-          updateMainGrid();
+  // Dynamic Category Filters rendering
+  function renderCategoryFilters() {
+      const filtersContainer = document.querySelector('.filters');
+      if (!filtersContainer) return;
+
+      const categories = (window.GradieStore && typeof window.GradieStore.getCategories === 'function')
+          ? window.GradieStore.getCategories()
+          : ["Gấu Bông", "Hoa mừng", "Kẹo", "Khung ảnh", "Sổ", "Bình Nước", "Túi", "Balo", "Huy Chương", "Đèn Ngủ", "Đồ tốt nghiệp", "Chậu Cây", "Ví", "Nến Thơm", "Túi Đựng Laptop"];
+
+      const uniqueCategories = [...new Set(categories.map(c => typeof c === 'string' ? c.trim() : ''))].filter(Boolean);
+
+      const currentPath = window.location.pathname.split('/').pop();
+      const btnClass = (currentPath === 'products.html' || currentPath === '') ? 'category-filter' : 'outline-button category-filter';
+
+      const allActive = currentCategory === 'all' ? 'active' : '';
+      let html = `<button class="${btnClass} ${allActive}" data-category="all">Tất Cả</button>`;
+
+      uniqueCategories.forEach(cat => {
+          const isActive = currentCategory.toLowerCase() === cat.toLowerCase() ? 'active' : '';
+          html += `<button class="${btnClass} ${isActive}" data-category="${cat}">${cat}</button>`;
       });
-  });
-  
+
+      filtersContainer.innerHTML = html;
+
+      // Attach Event Listeners for Dynamic Filters
+      const filterBtns = filtersContainer.querySelectorAll('.category-filter');
+      filterBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+              filterBtns.forEach(b => b.classList.remove('active'));
+              e.currentTarget.classList.add('active');
+              currentCategory = e.currentTarget.getAttribute('data-category');
+              updateMainGrid();
+          });
+      });
+  }
+
+  renderCategoryFilters();
+
   const searchInput = document.getElementById('product-search');
   if (searchInput) {
       searchInput.addEventListener('input', updateMainGrid);
@@ -122,12 +149,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // Home Page Specific Grids
-  if (trendingGrid) {
-      renderGrid(trendingGrid, products.filter(p => p.isTrending || p.rating >= 4.8).slice(0, 4));
+  function updateHomeGrids() {
+      if (trendingGrid) {
+          renderGrid(trendingGrid, products.filter(p => p.isTrending || p.rating >= 4.8).slice(0, 4));
+      }
+      if (featuredGrid) {
+          renderGrid(featuredGrid, products.filter(p => p.isFeatured || p.price >= 500000).slice(0, 4));
+      }
   }
-  if (featuredGrid) {
-      renderGrid(featuredGrid, products.filter(p => p.isFeatured || p.price >= 500000).slice(0, 4));
-  }
+  updateHomeGrids();
+
+  // Listen to Database sync events to update categories & products dynamically
+  window.addEventListener('gradie_data_synced', () => {
+      products = getAllProducts();
+      renderCategoryFilters();
+      updateMainGrid();
+      updateHomeGrids();
+  });
   
   // Product Detail Page Logic
   const detailContainer = document.getElementById('product-detail-container');

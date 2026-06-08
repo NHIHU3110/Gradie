@@ -196,5 +196,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         }, 100);
+
+        // Listen to Database sync events to update categories list dynamically
+        window.addEventListener('gradie_data_synced', () => {
+            if (typeof renderAdminCategories === 'function') {
+                renderAdminCategories();
+            }
+        });
     }
 });

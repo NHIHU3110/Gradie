@@ -198,6 +198,20 @@
             </div>
         </div>
     </div>
+
+    <!-- Confirmation Modal for Status Updates -->
+    <div id="statusConfirmModal" class="modal" style="display: none; z-index: 1100;">
+        <div class="modal-content" style="max-width: 480px; margin: 12% auto; padding: 30px; text-align: center; border-radius: 16px; border: 1.5px solid #d8a94f; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15);">
+            <div style="font-size: 3.5rem; color: #d8a94f; margin-bottom: 15px; line-height: 1;">⚠️</div>
+            <h3 style="margin: 0 0 12px; font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #1e293b;">Xác Nhận Cập Nhật</h3>
+            <p id="statusConfirmMessage" style="color: #475569; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6; padding: 0 10px;"></p>
+            <div style="display: flex; justify-content: center; gap: 15px;">
+                <button class="outline-button" id="btnStatusConfirmCancel" style="padding: 10px 24px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s;">Hủy</button>
+                <button class="btn-primary" id="btnStatusConfirmOk" style="padding: 10px 24px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s;">Xác Nhận</button>
+            </div>
+        </div>
+    </div>
+
   <script src="js/icons.js"></script>
   <script src="js/toast.js"></script>
   <script src="js/global-data.js?v=1780167290"></script>

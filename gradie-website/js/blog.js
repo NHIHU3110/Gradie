@@ -21,7 +21,36 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // ── 2. Fallback to localStorage / GradieStore ─────────────────────────────
     if (posts.length === 0 && window.GradieStore) {
+        // Make sure GradieStore is initialized
+        if (typeof window.GradieStore.init === 'function') {
+            window.GradieStore.init();
+        }
         posts = window.GradieStore.getBlogPosts();
+        
+        // If existing posts are missing content/image, refresh from defaults
+        const needsUpdate = posts.some(p => !p.content || !p.image);
+        if (needsUpdate) {
+            const defaultData = window.GradieStore.getDefaultData ? window.GradieStore.getDefaultData() : null;
+            if (defaultData && defaultData.blogPosts) {
+                const data = window.GradieStore.getData();
+                // Merge: keep custom posts but update default ones with missing fields
+                data.blogPosts = data.blogPosts.map(post => {
+                    const defaultPost = defaultData.blogPosts.find(dp => dp.id === post.id);
+                    if (defaultPost && (!post.content || !post.image)) {
+                        return { ...defaultPost, ...post, content: post.content || defaultPost.content, image: post.image || defaultPost.image };
+                    }
+                    return post;
+                });
+                // Add any new default posts not already present
+                defaultData.blogPosts.forEach(dp => {
+                    if (!data.blogPosts.find(p => p.id === dp.id)) {
+                        data.blogPosts.push(dp);
+                    }
+                });
+                window.GradieStore.saveData(data);
+                posts = data.blogPosts;
+            }
+        }
     }
 
     // ── 3. Filter ──────────────────────────────────────────────────────────────
@@ -113,13 +142,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     window.openBlogModal = function(e, id) {
-        // Chặn mọi hành vi mặc định (href scroll, link navigation...)
+        // Prevent default link behavior
         if (e && e.preventDefault) e.preventDefault();
         if (e && e.stopPropagation) e.stopPropagation();
 
-        const post = filtered.find(p => (p.id === id || p._id === id || p._id?.toString() === id));
+        // Search in filtered first, then all posts as fallback
+        let post = filtered.find(p => (p.id === id || p._id === id || p._id?.toString() === id));
+        if (!post) {
+            // Fallback: search in all posts from GradieStore
+            if (window.GradieStore) {
+                const allPosts = window.GradieStore.getBlogPosts();
+                post = allPosts.find(p => (p.id === id || p._id === id || p._id?.toString() === id));
+            }
+        }
         if (!post) {
             console.warn('Blog post not found for ID:', id);
+            if (typeof showToast === 'function') showToast('Không tìm thấy bài viết!', 'error');
             return;
         }
 
@@ -127,30 +165,30 @@ document.addEventListener('DOMContentLoaded', async () => {
         const wrapper = document.getElementById('blog-modal-wrapper');
         const img = document.getElementById('blog-modal-img');
 
-        // 1. Lưu lại vị trí cuộn hiện tại của trang
+        // Save current page scroll position
         _savedScrollY = window.scrollY || window.pageYOffset || 0;
 
-        // 2. Set nội dung
+        // Populate modal content
         document.getElementById('blog-modal-cat').textContent = post.category || '';
         document.getElementById('blog-modal-title').textContent = post.title || '';
-        document.getElementById('blog-modal-content').textContent = post.content || post.excerpt || '';
+        const contentText = post.content || post.excerpt || 'Nội dung bài viết đang được cập nhật. Vui lòng quay lại sau!';
+        document.getElementById('blog-modal-content').textContent = contentText;
         img.src = '';
         img.alt = post.title || '';
-        img.src = post.image || '';
+        img.src = post.image || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80';
 
-        // 3. Reset scroll của WRAPPER (bên trong modal), không phải page
+        // Reset internal scroll
         if (wrapper) wrapper.scrollTop = 0;
 
-        // 4. Lock scroll của body (giữ nguyên vị trí trang)
+        // Lock body scroll
         document.body.classList.add('blog-modal-open');
-        // Giữ body tại đúng vị trí bằng cách set top
         document.body.style.top = `-${_savedScrollY}px`;
         document.body.style.position = 'fixed';
         document.body.style.width = '100%';
 
-        // 5. Hiển thị modal
-        modal.style.display = 'block';
-        // Focus vào modal để hỗ trợ keyboard navigation
+        // Show modal
+        if (modal) modal.style.display = 'block';
+        // Focus close button for accessibility
         setTimeout(() => {
             const closeBtn = document.getElementById('blog-modal-close');
             if (closeBtn) closeBtn.focus();

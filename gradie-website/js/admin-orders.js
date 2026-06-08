@@ -5,10 +5,75 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.renderOrdersTable) window.renderOrdersTable();
     });
 
-    if(!window.GradieStore) return;
-    const ordersBody = document.getElementById('admin-orders-list');
-    
-    if (ordersBody) {
+    // Helper to display modern custom status confirmation modal
+    window.showStatusConfirmModal = function(message) {
+        return new Promise((resolve) => {
+            const modal = document.getElementById('statusConfirmModal');
+            const msgEl = document.getElementById('statusConfirmMessage');
+            const btnOk = document.getElementById('btnStatusConfirmOk');
+            const btnCancel = document.getElementById('btnStatusConfirmCancel');
+            
+            if (!modal || !msgEl || !btnOk || !btnCancel) {
+                // Fallback to standard confirm if modal elements are missing
+                resolve(confirm(message));
+                return;
+            }
+            
+            msgEl.innerText = message;
+            modal.style.display = 'block';
+            
+            const cleanup = () => {
+                modal.style.display = 'none';
+                btnOk.removeEventListener('click', onOk);
+                btnCancel.removeEventListener('click', onCancel);
+            };
+            
+            const onOk = () => {
+                cleanup();
+                resolve(true);
+            };
+            
+            const onCancel = () => {
+                cleanup();
+                resolve(false);
+            };
+            
+            btnOk.addEventListener('click', onOk);
+            btnCancel.addEventListener('click', onCancel);
+        });
+    };
+
+    window.changeOrderStatusFromSelect = async function(sel, orderNum, currentStatus) {
+        const newStatus = sel.value;
+        const confirmed = await window.showStatusConfirmModal(`Bạn có chắc chắn muốn thay đổi trạng thái đơn hàng ${orderNum} thành '${newStatus}'?`);
+        if (confirmed) {
+            try {
+                window.GradieStore.updateOrder(orderNum, { status: newStatus });
+                window.GradieStore.addActivityLog('Cập nhật trạng thái đơn hàng', 'Đã thay đổi trạng thái đơn ' + orderNum + ' thành ' + newStatus);
+                if (typeof showToast === 'function') {
+                    showToast('Đã cập nhật trạng thái đơn ' + orderNum + ' thành ' + newStatus, 'success');
+                }
+                window.renderOrdersTable();
+            } catch (err) {
+                console.error(err);
+                if (typeof showToast === 'function') showToast('Lỗi cập nhật trạng thái!', 'error');
+                sel.value = currentStatus;
+            }
+        } else {
+            sel.value = currentStatus;
+        }
+    };
+
+    function initAdminOrders() {
+        if(!window.GradieStore) {
+            console.warn('GradieStore not ready, retrying in 300ms...');
+            setTimeout(initAdminOrders, 300);
+            return;
+        }
+        setupOrdersUI();
+    }
+
+    function setupOrdersUI() {
         let currentStatusFilter = 'all';
 
         // Add Event Listener for Status Filter
@@ -22,6 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         window.renderOrdersTable = function() {
             try {
+                // Always re-query so we don't rely on a stale closure reference
+                const ordersBody = document.getElementById('admin-orders-list');
+                if (!ordersBody) {
+                    console.warn('renderOrdersTable: #admin-orders-list not found in DOM');
+                    return;
+                }
+
                 let ords = window.GradieStore.getOrders();
                 
                 // Apply status filter
@@ -81,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <button class="outline-button" onclick="openOrderDetailModal('${o.orderNumber}')" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 4px; border: 1px solid #d8a94f; color: #d8a94f; background: transparent; cursor: pointer; font-weight: 500;">
                                         View Details
                                     </button>
-                                    <select onchange="if(confirm('Bạn có chắc chắn muốn thay đổi trạng thái thành \'' + this.value + '\'?')) { window.GradieStore.updateOrder('${o.orderNumber}', {status: this.value}); window.GradieStore.addActivityLog('Cập nhật trạng thái đơn hàng', 'Đã thay đổi trạng thái đơn ' + '${o.orderNumber}' + ' thành ' + this.value); window.renderOrdersTable(); } else { this.value = '${status}'; }" style="padding: 5px; border-radius: 4px; border: 1px solid #cbd5e1; background: #fff; cursor: pointer;">
+                                    <select onchange="window.changeOrderStatusFromSelect(this, '${o.orderNumber}', '${status}')" style="padding: 5px; border-radius: 4px; border: 1px solid #cbd5e1; background: #fff; cursor: pointer;">
                                         <option value="Pending" ${status === 'Pending'?'selected':''}>Pending</option>
                                         <option value="Confirmed" ${status === 'Confirmed'?'selected':''}>Confirmed</option>
                                         <option value="Processing" ${status === 'Processing'?'selected':''}>Processing</option>
@@ -275,20 +347,32 @@ document.addEventListener('DOMContentLoaded', () => {
             if(modal) modal.style.display = 'none';
         };
 
-        window.saveOrderDetailsStatus = function() {
+        window.saveOrderDetailsStatus = async function() {
             try {
                 const orderNumber = document.getElementById('detail-id').innerText;
                 const statusSelect = document.getElementById('detail-status');
                 if (orderNumber && statusSelect) {
-                    if (!confirm(`Bạn có chắc chắn muốn cập nhật trạng thái đơn ${orderNumber} thành '${statusSelect.value}'?`)) return;
+                    const confirmed = await window.showStatusConfirmModal(`Bạn có chắc chắn muốn cập nhật trạng thái đơn ${orderNumber} thành '${statusSelect.value}'?`);
+                    if (!confirmed) return;
                     window.GradieStore.updateOrder(orderNumber, { status: statusSelect.value });
                     window.GradieStore.addActivityLog('Cập nhật trạng thái đơn hàng', 'Đã thay đổi trạng thái đơn ' + orderNumber + ' thành ' + statusSelect.value);
-                    showToast('Đã cập nhật trạng thái đơn hàng!', 'success');
+                    if (typeof showToast === 'function') {
+                        showToast('✅ Đã cập nhật trạng thái đơn hàng thành công!', 'success');
+                    } else {
+                        alert('Đã cập nhật trạng thái đơn hàng thành công!');
+                    }
                     window.closeOrderDetailModal();
                     window.renderOrdersTable();
+                } else {
+                    if (typeof showToast === 'function') showToast('Không tìm thấy đơn hàng để cập nhật!', 'error');
                 }
             } catch (err) {
                 console.error("Error saving status updates:", err);
+                if (typeof showToast === 'function') {
+                    showToast('❌ Lỗi cập nhật trạng thái: ' + err.message, 'error');
+                } else {
+                    alert('Lỗi cập nhật trạng thái: ' + err.message);
+                }
             }
         };
 
@@ -326,7 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const bulkStatusSelect = document.getElementById('bulk-status-select');
         if (bulkStatusSelect) {
-            bulkStatusSelect.addEventListener('change', (e) => {
+            bulkStatusSelect.addEventListener('change', async (e) => {
                 const newStatus = e.target.value;
                 if (!newStatus) return; // User selected the default prompt option
                 
@@ -336,7 +420,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
                 
-                if (confirm(`Bạn có chắc muốn đổi trạng thái ${ids.length} đơn hàng thành "${newStatus}"?`)) {
+                const confirmed = await window.showStatusConfirmModal(`Bạn có chắc muốn đổi trạng thái ${ids.length} đơn hàng thành "${newStatus}"?`);
+                if (confirmed) {
                     ids.forEach(id => {
                         window.GradieStore.updateOrder(id, { status: newStatus });
                     });
@@ -353,7 +438,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        renderOrdersTable();
-    }
-});
+        if (document.getElementById('admin-orders-list')) {
+            renderOrdersTable();
+        }
+    } // end setupOrdersUI
 
+    initAdminOrders();
+});

@@ -20,9 +20,9 @@ window.GradieStore = {
       needsCatalogUpdate = data.products.some(p => placeholders.includes(p.name) || p.name.includes("biến thể"));
     }
     
-    const correctCategories = ["Graduation Gifts", "Scrapbook", "Đồ tốt nghiệp", "Gấu Bông", "Gấu bông", "Khung ảnh", "Đèn Ngủ", "Kẹo", "Huy Chương", "Sổ kế hoạch", "Hoa mừng"];
-    if (!data.categories || data.categories.includes("Hoa hồng gấu bông") || data.categories.includes("Hộp quà") || data.categories.includes("Sash") || data.categories.length !== correctCategories.length) {
-      data.categories = correctCategories;
+    if (!data.categories || data.categories.length === 0) {
+      const correctCategories = ["Graduation Gifts", "Scrapbook", "Đồ tốt nghiệp", "Gấu Bông", "Gấu bông", "Khung ảnh", "Đèn Ngủ", "Kẹo", "Huy Chương", "Sổ kế hoạch", "Hoa mừng"];
+      data.categories = correctCategories.map(c => ({ id: c.toLowerCase().replace(/[^a-z0-9]+/g, '-'), name: c, slug: c.toLowerCase().replace(/[^a-z0-9]+/g, '-') }));
       updated = true;
     }
 
@@ -44,7 +44,7 @@ window.GradieStore = {
     }
     const oldFakeIds = ['gau-bong-teddy', 'hoa-huong-duong', 'scrapbook-ky-niem', 'huy-chuong-danh-du', 'khung-anh-a4'];
     const hasOldFakeIds = data.orders && data.orders.some(o => o.items && o.items.some(i => oldFakeIds.includes(i.id)));
-    if (!data.orders || data.orders.length < 40 || hasOldFakeIds) {
+    if (!data.orders || data.orders.length === 0 || hasOldFakeIds) {
       data.orders = defaultData.orders;
       updated = true;
     }
@@ -213,7 +213,12 @@ window.GradieStore = {
       });
     }
 
-    if (!data.orders || data.orders.length === 0 || data.orders.some(o => !o.customerEmail)) { data.orders = defaults.orders; updated = true; }
+    if (!data.orders || data.orders.length === 0) { data.orders = defaults.orders; updated = true; }
+    // Backfill missing customerEmail without wiping all orders
+    else if (data.orders.some(o => !o.customerEmail)) {
+      data.orders.forEach(o => { if (!o.customerEmail) o.customerEmail = ''; });
+      updated = true;
+    }
     if (!data.blogPosts || data.blogPosts.length === 0) { data.blogPosts = defaults.blogPosts; updated = true; }
     if (!data.gallery || data.gallery.length === 0) { data.gallery = defaults.gallery; updated = true; }
     if (!data.policies || data.policies.length === 0) { data.policies = defaults.policies; updated = true; }
@@ -1604,6 +1609,8 @@ window.GradieStore = {
                       "id": "b1",
                       "title": "Top 5 Món Quà Tốt Nghiệp Ý Nghĩa Nhất",
                       "excerpt": "Khám phá ngay những món quà được săn đón nhất mùa tốt nghiệp...",
+                      "content": "Mùa tốt nghiệp là thời điểm đặc biệt để gửi gắm yêu thương đến những người thân yêu. Dưới đây là top 5 món quà được yêu thích nhất:\n\n1. Gấu Bông Cử Nhân - Biểu tượng dễ thương gắn liền với cột mốc quan trọng. Chú gấu nhỏ mặc trang phục tốt nghiệp sẽ là kỷ niệm không thể quên.\n\n2. Hoa Tươi Kèm Thiệp Chúc Mừng - Bó hoa rực rỡ cùng tấm thiệp viết tay mang lại cảm xúc chân thành nhất.\n\n3. Sổ Tay Cao Cấp & Bút Ký - Đồng hành cùng hành trình mới với những trang nhật ký đầy cảm hứng.\n\n4. Khung Ảnh Kỷ Niệm - Lưu giữ khoảnh khắc tốt nghiệp đáng nhớ trong khung ảnh sang trọng.\n\n5. Hộp Quà Tổng Hợp Gradie - Bộ quà được tuyển chọn kỹ lưỡng, kết hợp nhiều sản phẩm ý nghĩa trong một hộp quà đẹp mắt.\n\nHãy để Gradie giúp bạn chọn món quà hoàn hảo cho ngày trọng đại!",
+                      "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80",
                       "date": "15/05/2026",
                       "author": "Gradie",
                       "category": "Gợi ý Quà Tặng",
@@ -1612,7 +1619,9 @@ window.GradieStore = {
               {
                       "id": "b2",
                       "title": "Tại Sao Nên Chọn Gấu Bông Cử Nhân?",
-                      "excerpt": "Gấu bông cử nhân không chỉ là quà tặng mà còn là kỉ vật...",
+                      "excerpt": "Gấu bông cử nhân không chỉ là quà tặng mà còn là kỉ vật mãi mãi...",
+                      "content": "Gấu bông cử nhân đã trở thành biểu tượng không thể thiếu trong mùa lễ tốt nghiệp. Nhưng điều gì khiến món quà này đặc biệt đến vậy?\n\nGấu bông cử nhân mang trong mình câu chuyện của cả một hành trình học tập gian khổ. Mỗi chiếc gấu nhỏ mặc áo tốt nghiệp là lời nhắc nhở về những năm tháng nỗ lực không ngừng nghỉ.\n\nĐây là món quà phù hợp với mọi đối tượng:\n- Bạn thân thân thiết\n- Anh chị em trong gia đình\n- Con cái, cháu chắt yêu quý\n- Người yêu đặc biệt\n\nTại Gradie, chúng tôi cung cấp đa dạng mẫu gấu bông cử nhân từ kích thước nhỏ xinh đến cỡ đại ôm cực đã, với nhiều màu sắc trang phục khác nhau để bạn dễ dàng lựa chọn.\n\nĐặt gấu bông cử nhân của bạn ngay hôm nay và giao hàng miễn phí cho đơn từ 500k!",
+                      "image": "https://images.unsplash.com/photo-1559181567-c3190ca9be46?w=800&q=80",
                       "date": "20/05/2026",
                       "author": "Admin",
                       "category": "Kinh Nghiệm",
@@ -1621,10 +1630,23 @@ window.GradieStore = {
               {
                       "id": "b3",
                       "title": "Cách Gói Quà Tốt Nghiệp Ghi Điểm Tuyệt Đối",
-                      "excerpt": "Bật mí bí kíp gói quà cực xinh xắn và ý nghĩa...",
+                      "excerpt": "Bật mí bí kíp gói quà cực xinh xắn và ý nghĩa cho ngày tốt nghiệp...",
+                      "content": "Một món quà đẹp không chỉ nằm ở giá trị bên trong mà còn ở cách gói bên ngoài. Hãy cùng Gradie khám phá nghệ thuật gói quà tốt nghiệp đẳng cấp!\n\nBước 1: Chọn Giấy Gói Phù Hợp\nSử dụng giấy kraft nâu vintage hoặc giấy nhung màu trơn cao cấp. Tránh dùng giấy bóng rẻ tiền vì sẽ giảm đi vẻ sang trọng.\n\nBước 2: Ruy Băng & Nơ Trang Trí\nRuy băng vàng ánh kim là lựa chọn hàng đầu cho mùa tốt nghiệp. Buộc thành nơ to với nhiều vòng để tạo điểm nhấn đặc biệt.\n\nBước 3: Thiệp Chúc Mừng Viết Tay\nĐừng bao giờ bỏ qua thiệp viết tay! Một vài dòng chân thành từ trái tim sẽ khiến món quà trở nên vô giá.\n\nBước 4: Thêm Hoa Tươi Nhỏ\nCài thêm 1-2 bông hoa nhỏ hoặc nhánh lá xanh vào ruy băng sẽ tạo nên vẻ đẹp tươi mới, sống động.\n\nBước 5: Hộp Quà Cao Cấp của Gradie\nChọn hộp quà Gradie với thiết kế sang trọng, có thể tái sử dụng làm hộp lưu giữ kỷ niệm sau này.\n\nChúc bạn gói được những món quà thật ý nghĩa cho người thân yêu!",
+                      "image": "https://images.unsplash.com/photo-1513201099705-a9746072f8e9?w=800&q=80",
                       "date": "22/05/2026",
                       "author": "Gradie",
                       "category": "Handmade",
+                      "status": "Published"
+              },
+              {
+                      "id": "b4",
+                      "title": "Ý Nghĩa Của Lễ Tốt Nghiệp Và Những Kỷ Niệm Đáng Trân Trọng",
+                      "excerpt": "Lễ tốt nghiệp không chỉ là ngày kết thúc mà còn là khởi đầu của một hành trình mới đầy hứa hẹn...",
+                      "content": "Lễ tốt nghiệp là một trong những cột mốc quan trọng nhất trong cuộc đời mỗi người. Đây không chỉ là ngày kết thúc một chặng đường học tập mà còn là điểm khởi đầu của vô vàn cơ hội mới.\n\nNhìn lại hành trình:\nBốn năm đại học (hoặc hơn) là quãng thời gian đầy ắp kỷ niệm - những đêm thức khuya ôn thi, những buổi sáng vội vàng đến lớp, những bài tập nhóm căng thẳng và những chuyến đi phượt cùng bạn bè. Tất cả tạo nên một bức tranh tuổi thanh xuân đáng nhớ.\n\nGiá trị của tấm bằng:\nTấm bằng đại học không chỉ là tờ giấy xác nhận kiến thức - đó là chứng nhận cho sự kiên trì, nỗ lực và trưởng thành. Hãy tự hào vì những gì bạn đã đạt được!\n\nLời khuyên cho hành trình tiếp theo:\n- Đừng sợ bắt đầu lại từ đầu\n- Học hỏi không ngừng dù đã ra trường\n- Giữ vững mối quan hệ với bạn bè và thầy cô\n- Luôn biết ơn những người đã đồng hành cùng bạn\n\nGradie tự hào được đồng hành cùng bạn trong ngày trọng đại này với những món quà tốt nghiệp ý nghĩa nhất!",
+                      "image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80",
+                      "date": "01/06/2026",
+                      "author": "Gradie",
+                      "category": "Câu Chuyện",
                       "status": "Published"
               }
       ],
@@ -1742,32 +1764,72 @@ window.GradieStore = {
   getCategories: function() {
     let data = this.getData();
     let storedCats = data.categories || [];
+    const mappedStoredCats = storedCats.map(c => {
+      if (typeof c === 'object' && c !== null) {
+        return c.name || c.title || '';
+      }
+      return c;
+    }).filter(Boolean);
     const products = this.getProducts();
     const prodCats = products.map(p => p.category).filter(c => typeof c === 'string' && c.trim() !== '');
-    return [...new Set([...storedCats, ...prodCats])];
+    return [...new Set([...mappedStoredCats, ...prodCats])];
   },
   
   addCategory: function(name) {
     let data = this.getData();
     if (!data.categories) data.categories = [];
-    if (!data.categories.includes(name)) {
-        data.categories.push(name);
+    
+    const exists = data.categories.some(c => {
+      const cName = (typeof c === 'object' && c !== null) ? (c.name || '') : String(c);
+      return cName.trim().toLowerCase() === name.trim().toLowerCase();
+    });
+
+    if (!exists) {
+        const slug = name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        const newCat = { id: slug || 'cat-' + Date.now(), name: name.trim(), slug: slug || 'cat-' + Date.now() };
+        data.categories.push(newCat);
         this.saveData(data);
+        
+        fetch('/api/categories', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newCat)
+        })
+        .then(() => {
+            window.dispatchEvent(new Event('gradie_data_synced'));
+        })
+        .catch(e => console.error('Category POST sync error', e));
     }
   },
   
   deleteCategory: function(name) {
     let data = this.getData();
+    const slug = name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    
     if (data.categories) {
-        data.categories = data.categories.filter(c => c !== name);
+        data.categories = data.categories.filter(c => {
+            const cName = (typeof c === 'object' && c !== null) ? (c.name || '') : String(c);
+            return cName.trim().toLowerCase() !== name.trim().toLowerCase();
+        });
     }
-    // Remove category from associated products
+    
     if (data.products) {
         data.products.forEach(p => {
-            if(p.category === name) p.category = 'Uncategorized';
+            if (p.category && p.category.trim().toLowerCase() === name.trim().toLowerCase()) {
+                p.category = 'Uncategorized';
+                this.updateProduct(p.id, p);
+            }
         });
     }
     this.saveData(data);
+    
+    fetch('/api/categories?slug=' + encodeURIComponent(slug), {
+        method: 'DELETE'
+    })
+    .then(() => {
+        window.dispatchEvent(new Event('gradie_data_synced'));
+    })
+    .catch(e => console.error('Category DELETE sync error', e));
   },
   
   assignProductsToCategory: function(categoryName, productIds) {
@@ -1949,7 +2011,7 @@ window.GradieStore = {
     this.setCurrentUser(null);
   },
 
-  syncWithDB: async function() {
+  syncWithDB: async function(scope = 'all') {
     try {
       const fetchSafe = async (url) => {
         try {
@@ -1961,12 +2023,34 @@ window.GradieStore = {
         }
       };
 
-      const [resProducts, resGlobal, resUsers, resOrders] = await Promise.all([
-        fetchSafe('/api/products'),
-        fetchSafe('/api/global'),
-        fetchSafe('/api/users'),
-        fetchSafe('/api/orders')
-      ]);
+      let resProducts = null;
+      let resGlobal = null;
+      let resUsers = null;
+      let resOrders = null;
+
+      if (scope === 'orders' || scope === true) {
+        resOrders = await fetchSafe('/api/orders');
+      } else if (scope === 'global') {
+        resGlobal = await fetchSafe('/api/global');
+      } else if (scope === 'orders_and_global') {
+        const results = await Promise.all([
+          fetchSafe('/api/orders'),
+          fetchSafe('/api/global')
+        ]);
+        resOrders = results[0];
+        resGlobal = results[1];
+      } else {
+        const results = await Promise.all([
+          fetchSafe('/api/products'),
+          fetchSafe('/api/global'),
+          fetchSafe('/api/users'),
+          fetchSafe('/api/orders')
+        ]);
+        resProducts = results[0];
+        resGlobal = results[1];
+        resUsers = results[2];
+        resOrders = results[3];
+      }
       
       let data = this.getData();
       let updated = false;
@@ -2118,6 +2202,11 @@ document.addEventListener("DOMContentLoaded", () => {
     window.GradieStore.init();
     if (window.GradieStore.syncWithDB) {
       window.GradieStore.syncWithDB();
+      // Background synchronization every 8 seconds (dynamic based on page type)
+      setInterval(() => {
+        const isAdminPage = window.location.pathname.includes('admin-');
+        window.GradieStore.syncWithDB(isAdminPage ? 'orders_and_global' : 'orders');
+      }, 8000);
     }
   }
 });

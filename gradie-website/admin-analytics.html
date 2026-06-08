@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/admin.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         /* Premium Aesthetics Revamp */
         .analytics-header { margin-bottom: 35px; position: relative; }
@@ -96,7 +97,51 @@
         .badge-danger { background: rgba(239, 68, 68, 0.1); color: #dc2626; }
         .badge-warning { background: rgba(245, 158, 11, 0.1); color: #d97706; }
         .badge-success { background: rgba(16, 185, 129, 0.1); color: #059669; }
+
+        /* Export PDF Button */
+        .export-pdf-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #d8a94f, #c5963e);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(216, 169, 79, 0.35);
+            transition: all 0.3s ease;
+            letter-spacing: 0.02em;
+        }
+        .export-pdf-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(216, 169, 79, 0.5);
+            background: linear-gradient(135deg, #e0b55c, #d8a94f);
+        }
+        .export-pdf-btn:active { transform: translateY(0); }
+
+        /* Print / PDF Styles */
+        @media print {
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            body { margin: 0; font-family: 'Inter', sans-serif; background: white; }
+            .admin-layout { display: block !important; }
+            .sidebar, .topbar, .export-pdf-btn { display: none !important; }
+            .main-content { margin: 0 !important; padding: 0 !important; width: 100% !important; }
+            .content-wrapper { padding: 20px !important; }
+            .kpi-card { break-inside: avoid; box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+            .chart-card, .table-card { break-inside: avoid; box-shadow: none !important; }
+            .charts-grid { grid-template-columns: 1fr 1fr !important; }
+            .tables-grid { grid-template-columns: 1fr 1fr !important; }
+            #pdf-report-header { display: block !important; }
+            #pdf-print-date { display: block !important; }
+        }
+        #pdf-report-header { display: none; }
+        #pdf-print-date { display: none; }
     </style>
+    <link rel="stylesheet" href="css/toast.css">
 </head>
 <body>
     <div class="admin-layout">
@@ -107,8 +152,34 @@
 
             <div class="content-wrapper">
                 <div class="analytics-header">
-                    <h2 class="analytics-title">Tổng Quan Kinh Doanh</h2>
-                    <p class="analytics-subtitle">Phân tích chuyên sâu dựa trên dữ liệu hiện tại của hệ thống.</p>
+                    <!-- PDF Header (only visible when printing) -->
+                    <div id="pdf-report-header" style="border-bottom: 3px solid #d8a94f; padding-bottom: 20px; margin-bottom: 24px;">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #d8a94f, #c5963e); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <span style="color: white; font-weight: 700; font-size: 1.2rem;">G</span>
+                            </div>
+                            <div>
+                                <div style="font-size: 1.5rem; font-weight: 700; color: #0f172a; font-family: 'Playfair Display', serif;">Gradie - Báo Cáo Kinh Doanh</div>
+                                <div style="font-size: 0.9rem; color: #64748b;">Tổng quan phân tích • <span id="pdf-print-date"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+                        <div>
+                            <h2 class="analytics-title">Tổng Quan Kinh Doanh</h2>
+                            <p class="analytics-subtitle">Phân tích chuyên sâu dựa trên dữ liệu hiện tại của hệ thống.</p>
+                        </div>
+                        <button class="export-pdf-btn" onclick="exportAnalyticsPDF()" title="Xuất báo cáo PDF">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10 9 9 9 8 9"/>
+                            </svg>
+                            Xuất Báo Cáo PDF
+                        </button>
+                    </div>
                 </div>
 
                 <!-- KPI Cards -->
@@ -263,6 +334,9 @@
         </main>
     </div>
 
+    <script src="js/icons.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/global-data.js"></script>
     <script src="js/data-store.js"></script>
     <script src="js/admin-auth.js"></script>
     <script src="js/admin.js"></script>
