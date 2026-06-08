@@ -319,7 +319,12 @@
 /* =========================================
    Responsive Breakpoints Override
 ========================================= */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
+  .hero { gap: 32px; padding: 60px 24px; }
+  .hero-content h1 { font-size: 3.2rem; }
+}
+
+@media (max-width: 1024px) {
   .hero {
     flex-direction: column;
     text-align: center;

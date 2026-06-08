@@ -26,6 +26,16 @@ window.GradieStore = {
       updated = true;
     }
 
+    if (data.settings) {
+      if (!data.settings.announcement || 
+          data.settings.announcement.includes("của cô ấy") || 
+          data.settings.announcement.includes("Celebrate her next") ||
+          data.settings.announcement.includes("Grand Opening")) {
+        data.settings.announcement = "Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới";
+        updated = true;
+      }
+    }
+
     const defaultCustomization = {
       sashColors: [{name: 'Classic Black', hex: '#17181d'}, {name: 'Champagne Gold', hex: '#d8a94f'}, {name: 'Peach', hex: '#e9a08d'}],
       embroideryFonts: [{name: 'Elegant Script', price: 50000}, {name: 'Modern Sans', price: 50000}],
@@ -206,7 +216,7 @@ window.GradieStore = {
       categories: ["Graduation Gifts", "Scrapbook", "Đồ tốt nghiệp", "Gấu Bông", "Gấu bông", "Khung ảnh", "Đèn Ngủ", "Kẹo", "Huy Chương", "Sổ kế hoạch", "Hoa mừng"],
       settings: {
         brandName: "Gradie", tagline: "Graduation Gifts", shippingFee: 30000, currency: "VND",
-        announcement: "Grand Opening • Free gift tag with every order • Celebrate her next chapter",
+        announcement: "Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới",
         promoCode: "GRAD2026", promoDiscount: 50000
       },
       products: this.normalizeProducts(window.GRADIE_DATA?.products || []),
