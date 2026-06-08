@@ -118,6 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
 
     topbar.innerHTML = `
+      <button id="sidebar-toggle" style="background:transparent; border:none; color:var(--adm-text); cursor:pointer; margin-right:16px; display:flex; align-items:center; padding:8px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
       <span class="topbar-title">${pageTitle}</span>
       <div class="topbar-spacer"></div>
       <div class="topbar-actions">
@@ -132,7 +135,23 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
-    // Preserve any content that was in topbar before (back links etc.)
+    // Toggle sidebar
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        sidebar.classList.toggle('open');
+        document.querySelector('.admin-layout').classList.toggle('sidebar-open');
+      });
+      
+      // Click outside to close
+      document.addEventListener('click', (e) => {
+        if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target !== toggleBtn) {
+          sidebar.classList.remove('open');
+          document.querySelector('.admin-layout').classList.remove('sidebar-open');
+        }
+      });
+    }
   }
 
   // ── 3. Logout handler ──
