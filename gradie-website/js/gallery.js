@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // ── 3. Filter ──────────────────────────────────────────────────────────────
-    const published = items.filter(p => p.status === 'Published');
+    const published = items.filter(p => !p.status || p.status === 'Published');
     const filtered  = typeFilter
         ? published.filter(p => p.type === typeFilter)
         : published;
