@@ -412,6 +412,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.GradieStore.addOrder(orderObject);
 
+    // Send invoice email to customer (via EmailJS)
+    sendOrderInvoiceEmail(orderObject, cart);
+
     // Clear cart across both possible keys
     localStorage.removeItem('GRADIE_CART');
     localStorage.removeItem('gradie_cart');
@@ -498,7 +501,7 @@ window.generateVietQR = async function() {
     });
     const data = await res.json();
 
-    if (data.qrUrl && qrImg) {
+      if (data.qrUrl && qrImg) {
       qrImg.src = data.qrUrl;
       qrImg.onload = () => {
         if (qrLoading) qrLoading.style.display = 'none';
@@ -508,13 +511,9 @@ window.generateVietQR = async function() {
       qrImg.onerror = () => {
         if (qrLoading) qrLoading.textContent = 'Không tải được mã QR. Vui lòng chọn COD.';
       };
-      // Fill info
-      const bankEl = document.getElementById('qr-bank');
-      const acctEl = document.getElementById('qr-acct');
+      // Fill info text
       const nameEl = document.getElementById('qr-name');
       const descEl = document.getElementById('qr-desc');
-      if (bankEl) bankEl.textContent = data.bankCode;
-      if (acctEl) acctEl.textContent = data.accountNumber;
       if (nameEl) nameEl.textContent = data.accountName;
       if (descEl) descEl.textContent = data.description;
     }
@@ -524,3 +523,73 @@ window.generateVietQR = async function() {
   }
 };
 
+
+// ── Send Order Invoice Email (via EmailJS) ────────────────────────────────────
+// Để bật tính năng: vào emailjs.com, tạo account miễn phí, lấy các key và điền vào đây.
+const EMAILJS_PUBLIC_KEY  = 'YOUR_EMAILJS_PUBLIC_KEY';   // Public Key
+const EMAILJS_SERVICE_ID  = 'YOUR_EMAILJS_SERVICE_ID';   // Service ID (Gmail)
+const EMAILJS_TEMPLATE_ID = 'YOUR_EMAILJS_TEMPLATE_ID';  // Template ID
+
+async function sendOrderInvoiceEmail(order, cartItems) {
+  // Skip if EmailJS is not configured
+  if (!window.emailjs || EMAILJS_PUBLIC_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') {
+    console.info('[Gradie] EmailJS chưa được cấu hình. Bỏ qua gửi email hóa đơn.');
+    return;
+  }
+
+  try {
+    window.emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    // Build items HTML table rows for email
+    let itemsHtml = '';
+    cartItems.forEach(item => {
+      const baseProduct = window.GradieStore ? window.GradieStore.getProductById(item.id) : null;
+      const price = baseProduct ? baseProduct.price : (item.price || 0);
+      const qty   = parseInt(item.quantity || item.qty || 1);
+      const total = price * qty;
+      const imgSrc = (baseProduct && baseProduct.image) ? baseProduct.image : '';
+
+      itemsHtml += `
+        <tr style="border-bottom: 1px solid #f0ebe0;">
+          <td style="padding: 12px 10px; vertical-align: middle;">
+            ${imgSrc
+              ? `<img src="${imgSrc}" alt="${item.name}" style="width:60px; height:60px; object-fit:cover; border-radius:8px; border:1px solid #eee;">`
+              : '<div style="width:60px;height:60px;background:#f5f0e8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">🎁</div>'}
+          </td>
+          <td style="padding: 12px 10px; vertical-align: middle;">
+            <div style="font-weight: 600; color: #1a1a1a; font-size: 0.95rem;">${item.name}</div>
+            ${item.customization && item.customization.embroideryText
+              ? `<div style="font-size:0.8rem; color:#888; margin-top:3px;">Thêu: "${item.customization.embroideryText}"</div>`
+              : ''}
+          </td>
+          <td style="padding: 12px 10px; text-align: center; vertical-align: middle; color: #555;">${qty}</td>
+          <td style="padding: 12px 10px; text-align: right; vertical-align: middle; color: #555;">${price.toLocaleString('vi-VN')}đ</td>
+          <td style="padding: 12px 10px; text-align: right; vertical-align: middle; font-weight: 700; color: #d8a94f;">${total.toLocaleString('vi-VN')}đ</td>
+        </tr>
+      `;
+    });
+
+    const discountRow = order.discountAmount > 0
+      ? `<tr><td colspan="4" style="text-align:right; padding:8px 10px; color:#555;">Giảm giá (${order.couponApplied || ''}):</td><td style="text-align:right; padding:8px 10px; color:#dc2626; font-weight:600;">-${order.discountAmount.toLocaleString('vi-VN')}đ</td></tr>`
+      : '';
+
+    // Build beautiful HTML email body
+    const emailBody = `<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body style="margin:0;padding:0;background:#f8f5f0;font-family:Arial,sans-serif;"><div style="max-width:600px;margin:20px auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 30px rgba(0,0,0,0.08);"><div style="background:linear-gradient(135deg,#1a1a1a,#2d2010);padding:35px 40px;text-align:center;"><div style="font-family:Georgia,serif;font-size:2.2rem;color:#d8a94f;letter-spacing:4px;font-weight:700;">GRADIE</div><div style="color:rgba(216,169,79,0.7);font-size:0.8rem;letter-spacing:3px;margin-top:4px;">QUÀ TẶNG TỐT NGHIỆP</div></div><div style="background:linear-gradient(135deg,#d8a94f,#c4932a);padding:20px 40px;text-align:center;"><div style="font-size:1.1rem;color:#fff;font-weight:600;">🎉 Cảm ơn bạn đã đặt hàng tại Gradie!</div><div style="font-size:0.85rem;color:rgba(255,255,255,0.85);margin-top:5px;">Đơn hàng đã được tiếp nhận và đang được xử lý.</div></div><div style="padding:30px 40px;"><div style="background:#faf8f5;border:1px dashed #d8a94f;border-radius:12px;padding:18px 22px;margin-bottom:28px;"><div style="font-size:0.75rem;color:#999;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Mã Đơn Hàng</div><div style="font-size:1.4rem;font-weight:800;color:#1a1a1a;letter-spacing:1px;">${order.orderNumber}</div><div style="font-size:0.85rem;color:#888;margin-top:6px;">Ngày đặt: ${order.date}</div></div><div style="margin-bottom:24px;"><div style="font-size:0.75rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #f0ebe0;">Chi Tiết Sản Phẩm</div><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:#faf8f5;"><th style="padding:10px;text-align:left;font-size:0.78rem;color:#999;width:70px;">Ảnh</th><th style="padding:10px;text-align:left;font-size:0.78rem;color:#999;">Sản Phẩm</th><th style="padding:10px;text-align:center;font-size:0.78rem;color:#999;">SL</th><th style="padding:10px;text-align:right;font-size:0.78rem;color:#999;">Đơn giá</th><th style="padding:10px;text-align:right;font-size:0.78rem;color:#999;">Thành tiền</th></tr></thead><tbody>${itemsHtml}</tbody></table></div><div style="background:#faf8f5;border-radius:10px;padding:18px 22px;margin-bottom:24px;"><table style="width:100%;border-collapse:collapse;"><tr><td style="padding:6px 0;color:#666;">Tạm tính:</td><td style="text-align:right;padding:6px 0;color:#333;">${order.subtotal.toLocaleString('vi-VN')}đ</td></tr><tr><td style="padding:6px 0;color:#666;">Phí vận chuyển:</td><td style="text-align:right;padding:6px 0;color:#333;">${order.shippingFee.toLocaleString('vi-VN')}đ</td></tr>${discountRow}<tr style="border-top:2px solid #e5e2dd;"><td style="padding:12px 0 6px;font-weight:800;color:#1a1a1a;font-size:1.05rem;">Tổng Thanh Toán:</td><td style="text-align:right;padding:12px 0 6px;font-weight:800;color:#d8a94f;font-size:1.2rem;">${order.total.toLocaleString('vi-VN')}đ</td></tr></table></div><div style="margin-bottom:24px;"><div style="font-size:0.75rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #f0ebe0;">Thông Tin Giao Hàng</div><table style="width:100%;"><tr><td style="padding:5px 0;color:#888;font-size:0.85rem;width:140px;">Người nhận:</td><td style="padding:5px 0;font-weight:600;color:#1a1a1a;">${order.customerName}</td></tr><tr><td style="padding:5px 0;color:#888;font-size:0.85rem;">Điện thoại:</td><td style="padding:5px 0;font-weight:600;color:#1a1a1a;">${order.customerPhone}</td></tr><tr><td style="padding:5px 0;color:#888;font-size:0.85rem;">Địa chỉ:</td><td style="padding:5px 0;font-weight:600;color:#1a1a1a;">${order.shippingAddress}</td></tr><tr><td style="padding:5px 0;color:#888;font-size:0.85rem;">Thanh toán:</td><td style="padding:5px 0;font-weight:600;color:#1a1a1a;">${order.paymentMethod}</td></tr></table></div><div style="text-align:center;margin:30px 0;"><a href="https://gradie-website.vercel.app/order-tracking.html?code=${order.orderNumber}" style="display:inline-block;background:linear-gradient(135deg,#d8a94f,#c4932a);color:#fff;text-decoration:none;padding:14px 32px;border-radius:10px;font-weight:700;font-size:0.95rem;box-shadow:0 4px 15px rgba(216,169,79,0.35);">📦 Theo Dõi Đơn Hàng</a></div></div><div style="background:#1a1a1a;padding:24px 40px;text-align:center;"><div style="font-family:Georgia,serif;font-size:1.3rem;color:#d8a94f;margin-bottom:8px;">Gradie</div><div style="color:#888;font-size:0.78rem;line-height:1.8;">Kỷ niệm hôm nay, trân quý mãi về sau.<br>Cảm ơn bạn đã tin tưởng chọn Gradie! 💛</div></div></div></body></html>`;
+
+    await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email:         order.customerEmail,
+      to_name:          order.customerName,
+      order_number:     order.orderNumber,
+      order_date:       order.date,
+      grand_total:      order.total.toLocaleString('vi-VN') + 'đ',
+      payment_method:   order.paymentMethod,
+      shipping_address: order.shippingAddress,
+      email_body_html:  emailBody,  // Dùng {{{email_body_html}}} trong EmailJS template
+    });
+
+    console.info('[Gradie] Email hóa đơn đã gửi thành công tới', order.customerEmail);
+  } catch (err) {
+    console.warn('[Gradie] Không thể gửi email hóa đơn:', err.message || err);
+    // KHÔNG block luồng đặt hàng — bỏ qua lỗi email
+  }
+}
