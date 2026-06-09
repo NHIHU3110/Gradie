@@ -60,90 +60,99 @@ document.addEventListener('DOMContentLoaded', async () => {
         : published;
 
     // ── 4. Blog Modal ─────────────────────────────────────────────────────────
-    if (!document.getElementById('blog-modal')) {
-        const modalStyle = document.createElement('style');
-        modalStyle.textContent = `
-            #blog-modal {
-                display: none;
-                position: fixed;
-                z-index: 9999;
-                left: 0; top: 0;
-                width: 100%; height: 100%;
-                background: rgba(0,0,0,0.6);
-                backdrop-filter: blur(4px);
-                align-items: center;
-                justify-content: center;
-                box-sizing: border-box;
-            }
-            #blog-modal-inner {
-                background: var(--white, #fff);
-                max-width: 800px;
-                width: 90%;
-                max-height: 85vh;
-                border-radius: 16px;
-                position: relative;
-                overflow: hidden;
-                display: flex;
-                flex-direction: column;
-                box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-                animation: blogModalFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-                box-sizing: border-box;
-            }
-            @keyframes blogModalFadeIn {
-                from { opacity: 0; transform: scale(0.95) translateY(20px); }
-                to { opacity: 1; transform: scale(1) translateY(0); }
-            }
-            #blog-modal-scrollable-content {
-                overflow-y: auto;
-                flex: 1;
-                width: 100%;
-                -webkit-overflow-scrolling: touch;
-                box-sizing: border-box;
-            }
-            #blog-modal-close {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                background: white;
-                border: none;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                cursor: pointer;
-                font-size: 1.5rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-                z-index: 10;
-                transition: transform 0.2s, box-shadow 0.2s;
-            }
-            #blog-modal-close:hover {
-                transform: scale(1.1);
-                box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-            }
-            body.blog-modal-open {
-                overflow: hidden;
-            }
-        `;
-        document.head.appendChild(modalStyle);
+    // Always remove any existing modal elements and style tags to prevent caching issues in the DOM
+    const oldModal = document.getElementById('blog-modal');
+    if (oldModal) oldModal.remove();
+    const oldStyle = document.getElementById('blog-modal-style-tag');
+    if (oldStyle) oldStyle.remove();
 
-        document.body.insertAdjacentHTML('beforeend', `
-            <div id="blog-modal" role="dialog" aria-modal="true">
-                <div id="blog-modal-inner">
-                    <button id="blog-modal-close" onclick="closeBlogModal()" aria-label="Đóng bài viết">✕</button>
-                    <div id="blog-modal-scrollable-content">
-                        <img id="blog-modal-img" src="" alt="" style="width:100%; height:400px; object-fit:cover; display:block;">
-                        <div style="padding:40px;">
-                            <span id="blog-modal-cat" style="font-size:0.9rem; color:var(--champagne); text-transform:uppercase; letter-spacing:1px; font-weight:700;"></span>
-                            <h2 id="blog-modal-title" style="margin:15px 0 25px; font-size:2.2rem; line-height:1.2; font-family:'Playfair Display', serif;"></h2>
-                            <div id="blog-modal-content" style="font-size:1.05rem; line-height:1.9; color:var(--ink); white-space:pre-wrap;"></div>
-                        </div>
+    const modalStyle = document.createElement('style');
+    modalStyle.id = 'blog-modal-style-tag';
+    modalStyle.textContent = `
+        #blog-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: 20px;
+        }
+        #blog-modal-inner {
+            background: var(--white, #fff);
+            max-width: 800px;
+            width: 100%;
+            max-height: 85vh;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+            animation: blogModalFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            box-sizing: border-box;
+        }
+        @keyframes blogModalFadeIn {
+            from { opacity: 0; transform: scale(0.96) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        #blog-modal-scrollable-content {
+            overflow-y: auto;
+            max-height: 85vh;
+            width: 100%;
+            -webkit-overflow-scrolling: touch;
+            box-sizing: border-box;
+        }
+        #blog-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ffffff;
+            color: #17181d !important;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+            z-index: 999999;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #blog-modal-close:hover {
+            transform: scale(1.1);
+            background: #f4f3f0;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        body.blog-modal-open {
+            overflow: hidden !important;
+        }
+    `;
+    document.head.appendChild(modalStyle);
+
+    document.body.insertAdjacentHTML('beforeend', `
+        <div id="blog-modal" role="dialog" aria-modal="true">
+            <div id="blog-modal-inner">
+                <button id="blog-modal-close" onclick="closeBlogModal()" aria-label="Đóng bài viết">✕</button>
+                <div id="blog-modal-scrollable-content">
+                    <img id="blog-modal-img" src="" alt="" style="width:100%; height:400px; object-fit:cover; display:block;">
+                    <div style="padding:40px;">
+                        <span id="blog-modal-cat" style="font-size:0.9rem; color:var(--champagne); text-transform:uppercase; letter-spacing:1px; font-weight:700;"></span>
+                        <h2 id="blog-modal-title" style="margin:15px 0 25px; font-size:2.2rem; line-height:1.2; font-family:'Playfair Display', serif;"></h2>
+                        <div id="blog-modal-content" style="font-size:1.05rem; line-height:1.9; color:var(--ink); white-space:pre-wrap;"></div>
                     </div>
                 </div>
             </div>
-        `);
-    }
+        </div>
+    `);
 
     window.openBlogModal = function(e, id) {
         // Prevent default link behavior
