@@ -34,7 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const addressesWrapper = document.getElementById('checkout-saved-addresses-wrapper');
     const cardsContainer = document.getElementById('checkout-address-cards-container');
     const saveAddressWrapper = document.getElementById('checkout-save-address-profile-wrapper');
+    const saveAddressCheckbox = document.getElementById('checkout-save-address-checkbox');
     const savedAddrs = currentUser.addresses || [];
+
+    // Checked by default for logged-in users to save changes automatically unless they opt-out
+    if (saveAddressCheckbox) saveAddressCheckbox.checked = true;
 
     if (savedAddrs.length > 0) {
       if (addressesWrapper && cardsContainer) {
@@ -42,9 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Find default address
         const defaultAddr = savedAddrs.find(a => a.isDefault) || savedAddrs[0];
+        window._selectedCheckoutAddressId = defaultAddr ? defaultAddr.id : 'new';
 
         // Declare global selectCheckoutAddressCard handler
         window.selectCheckoutAddressCard = function(selectedId) {
+          window._selectedCheckoutAddressId = selectedId;
           const cards = document.querySelectorAll('.checkout-address-card');
           cards.forEach(card => {
             card.style.border = '1px solid #e2e8f0';
@@ -72,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
 
-          // Populate inputs
+          // Populate inputs and ensure they are never locked/readOnly
           if (selectedId === 'new') {
             document.getElementById('shipping-name').value = '';
             document.getElementById('shipping-phone').value = '';
@@ -80,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('shipping-name').readOnly = false;
             document.getElementById('shipping-phone').readOnly = false;
             document.getElementById('shipping-address').readOnly = false;
-            if (saveAddressWrapper) saveAddressWrapper.style.display = 'block';
           } else {
             const selected = savedAddrs.find(a => a.id === selectedId);
             if (selected) {
@@ -88,11 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
               document.getElementById('shipping-phone').value = selected.phone || '';
               document.getElementById('shipping-address').value = selected.detail || '';
             }
-            document.getElementById('shipping-name').readOnly = true;
-            document.getElementById('shipping-phone').readOnly = true;
-            document.getElementById('shipping-address').readOnly = true;
-            if (saveAddressWrapper) saveAddressWrapper.style.display = 'none';
+            document.getElementById('shipping-name').readOnly = false;
+            document.getElementById('shipping-phone').readOnly = false;
+            document.getElementById('shipping-address').readOnly = false;
           }
+          if (saveAddressWrapper) saveAddressWrapper.style.display = 'block';
         };
 
         // Render card buttons
@@ -129,18 +134,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cardsContainer.innerHTML = cardsHtml;
 
-        // Auto-fill inputs initially with default selection details
+        // Auto-fill inputs initially with default selection details and keep editable
         if (defaultAddr) {
           document.getElementById('shipping-name').value = defaultAddr.name || '';
           document.getElementById('shipping-phone').value = defaultAddr.phone || '';
           document.getElementById('shipping-address').value = defaultAddr.detail || '';
-          document.getElementById('shipping-name').readOnly = true;
-          document.getElementById('shipping-phone').readOnly = true;
-          document.getElementById('shipping-address').readOnly = true;
+          document.getElementById('shipping-name').readOnly = false;
+          document.getElementById('shipping-phone').readOnly = false;
+          document.getElementById('shipping-address').readOnly = false;
         }
+        if (saveAddressWrapper) saveAddressWrapper.style.display = 'block';
       }
     } else {
-      // User has no saved addresses, prefill name and phone, show save address checkbox
+      // User has no saved addresses, prefill name and phone, show save address checkbox and keep editable
+      window._selectedCheckoutAddressId = 'new';
       document.getElementById('shipping-name').value = currentUser.username || '';
       document.getElementById('shipping-phone').value = currentUser.phone || '';
       document.getElementById('shipping-address').value = currentUser.shippingAddress || '';
@@ -328,15 +335,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveAddressWrapper = document.getElementById('checkout-save-address-profile-wrapper');
     if (saveAddressWrapper && saveAddressWrapper.style.display !== 'none' && saveAddressCheckbox && saveAddressCheckbox.checked) {
       let addrs = currentUser.addresses || [];
-      addrs.forEach(a => a.isDefault = false);
-      addrs.push({
-        id: 'addr-chk-' + Date.now(),
-        label: 'Địa chỉ đã lưu ' + (addrs.length + 1),
-        name: name,
-        phone: phone,
-        detail: address,
-        isDefault: true
-      });
+      const selectedId = window._selectedCheckoutAddressId || 'new';
+
+      const existingIndex = addrs.findIndex(a => a.id === selectedId);
+      if (existingIndex !== -1 && selectedId !== 'new') {
+        // Update existing address details
+        addrs[existingIndex].name = name;
+        addrs[existingIndex].phone = phone;
+        addrs[existingIndex].detail = address;
+        addrs.forEach(a => a.isDefault = false);
+        addrs[existingIndex].isDefault = true;
+      } else {
+        // Add new address if exact match doesn't exist
+        const exists = addrs.some(a => a.name.trim().toLowerCase() === name.trim().toLowerCase() && 
+                                       a.phone.trim() === phone.trim() && 
+                                       a.detail.trim().toLowerCase() === address.trim().toLowerCase());
+        if (!exists) {
+          addrs.forEach(a => a.isDefault = false);
+          addrs.push({
+            id: 'addr-chk-' + Date.now(),
+            label: 'Địa chỉ đã lưu ' + (addrs.length + 1),
+            name: name,
+            phone: phone,
+            detail: address,
+            isDefault: true
+          });
+        } else {
+          // Set existing matching address to default
+          addrs.forEach(a => {
+            a.isDefault = (a.name.trim().toLowerCase() === name.trim().toLowerCase() && 
+                           a.phone.trim() === phone.trim() && 
+                           a.detail.trim().toLowerCase() === address.trim().toLowerCase());
+          });
+        }
+      }
       window.GradieStore.updateUserProfile(currentUser.email, { addresses: addrs });
     }
 

@@ -205,10 +205,16 @@ window.GradieStore = {
           updated = true;
         }
         if (!u.addresses || !Array.isArray(u.addresses) || u.addresses.length === 0) {
-          u.addresses = [
-            { id: "addr-gen-" + Math.floor(Math.random()*100000), label: "Default Address", name: u.username || "User", phone: u.phone || "", detail: u.address || u.shippingAddress || "", isDefault: true }
-          ];
-          updated = true;
+          const detail = u.address || u.shippingAddress || "";
+          if (detail.trim()) {
+            u.addresses = [
+              { id: "addr-gen-" + Math.floor(Math.random()*100000), label: "Default Address", name: u.username || "User", phone: u.phone || "", detail: detail, isDefault: true }
+            ];
+            updated = true;
+          } else {
+            u.addresses = [];
+            updated = true;
+          }
         }
       });
     }
@@ -1983,16 +1989,7 @@ window.GradieStore = {
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
       addresses: []
     };
-    if (phone) {
-      newUser.addresses.push({
-        id: "addr-gen-" + Date.now(),
-        label: "Default Address",
-        name: username,
-        phone: phone,
-        detail: "",
-        isDefault: true
-      });
-    }
+    // No default empty address detail created on signup, starting with empty address list instead
     data.users.push(newUser);
     this.saveData(data);
     this.setCurrentUser(newUser);

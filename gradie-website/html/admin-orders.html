@@ -77,20 +77,55 @@
                     </div>
                 </div>
 
+                <!-- Status Filter -->
+                <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: center; background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <label for="order-status-filter" style="font-weight: 600; color: #1e293b; margin-bottom: 0;">Lọc theo trạng thái:</label>
+                    <select id="order-status-filter" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; outline: none; font-family: inherit; width: 250px; background: #f8fafc;">
+                        <option value="all">Tất cả trạng thái (All)</option>
+                        <option value="pending">Pending (Chờ duyệt)</option>
+                        <option value="confirmed">Confirmed (Đã xác nhận)</option>
+                        <option value="processing">Processing (Đang chuẩn bị)</option>
+                        <option value="shipped">Shipped (Đang giao)</option>
+                        <option value="delivered">Delivered (Đã giao)</option>
+                        <option value="completed">Completed (Hoàn tất)</option>
+                        <option value="cancelled">Cancelled (Hủy)</option>
+                        <option value="refunded">Refunded (Hoàn tiền)</option>
+                    </select>
+                </div>
+
+                <!-- Bulk Actions -->
+                <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; display: none;" id="bulk-actions-container-orders">
+                    <span style="font-weight: 600; color: #1e293b;"><span id="selected-count-orders">0</span> đã chọn</span>
+                    <div style="height: 20px; width: 1px; background: #cbd5e1;"></div>
+                    <select id="bulk-status-select" class="outline-button" style="padding: 6px 12px; border-color: #cbd5e1;">
+                        <option value="">Đổi trạng thái...</option>
+                        <option value="Pending">Pending (Chờ duyệt)</option>
+                        <option value="Confirmed">Confirmed (Đã xác nhận)</option>
+                        <option value="Processing">Processing (Đang chuẩn bị)</option>
+                        <option value="Shipped">Shipped (Đang giao)</option>
+                        <option value="Delivered">Delivered (Đã giao)</option>
+                        <option value="Completed">Completed (Hoàn tất)</option>
+                        <option value="Cancelled">Cancelled (Hủy)</option>
+                        <option value="Refunded">Refunded (Hoàn tiền)</option>
+                    </select>
+                    <button class="outline-button" id="bulk-delete-orders-btn" style="border-color: #dc2626; color: #dc2626; padding: 6px 12px;">Xóa đơn hàng</button>
+                </div>
+
                 <div class="table-wrapper">
                     <table>
                         <thead>
                             <tr>
-                                <th>Order Number</th>
-                                <th>Date</th>
-                                <th>Customer Name</th>
-                                <th>Total</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th style="width: 40px; text-align: center;"><input type="checkbox" id="select-all-orders"></th>
+                                <th>Mã đơn</th>
+                                <th>Ngày đặt</th>
+                                <th>Khách hàng</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody id="admin-orders-list">
-                            <!-- Auto generated -->
+                            <!-- Populated by JS -->
                         </tbody>
                     </table>
                 </div>
@@ -117,7 +152,12 @@
                 <div class="detail-row"><label>Delivery Notes:</label><span id="detail-customer-notes" style="font-style:italic; color:#64748b;"></span></div>
                 <div class="detail-row"><label>Payment Method:</label><span>COD (Cash on Delivery)</span></div>
                 
-                <h4 style="font-family:'Playfair Display', serif; font-size:1.2rem; margin:25px 0 10px; color:#1e293b; border-bottom:1px solid #f1f5f9; padding-bottom:8px;">Items Breakdown</h4>
+                <h4 style="font-family:'Playfair Display', serif; font-size:1.2rem; margin:25px 0 10px; color:#1e293b; border-bottom:1px solid #f1f5f9; padding-bottom:8px;">Fulfillment Progress</h4>
+                <div id="admin-order-timeline" style="margin-bottom:20px;">
+                    <!-- Rendered by JS -->
+                </div>
+
+                <h4 style="font-family:'Playfair Display', serif; font-size:1.2rem; margin:10px 0 10px; color:#1e293b; border-bottom:1px solid #f1f5f9; padding-bottom:8px;">Items Breakdown</h4>
                 <div id="detail-items-list" style="margin-bottom:20px;">
                     <!-- Rendered dynamically -->
                 </div>
@@ -140,10 +180,14 @@
                 <div class="detail-row" style="border:none; align-items:center;">
                     <label>Fulfillment Status:</label>
                     <select id="detail-status" style="width:200px; padding:8px 12px; border:1px solid #cbd5e1; border-radius:6px; background:#fff; font-family:inherit;">
-                        <option value="Pending">Pending</option>
-                        <option value="Shipped">Shipped</option>
-                        <option value="Delivered">Delivered</option>
-                        <option value="Cancelled">Cancelled</option>
+                        <option value="Pending">Pending (Chờ duyệt)</option>
+                        <option value="Confirmed">Confirmed (Đã xác nhận)</option>
+                        <option value="Processing">Processing (Đang chuẩn bị)</option>
+                        <option value="Shipped">Shipped (Đang giao)</option>
+                        <option value="Delivered">Delivered (Đã giao)</option>
+                        <option value="Completed">Completed (Hoàn tất)</option>
+                        <option value="Cancelled">Cancelled (Hủy)</option>
+                        <option value="Refunded">Refunded (Hoàn tiền)</option>
                     </select>
                 </div>
             </div>
@@ -154,6 +198,20 @@
             </div>
         </div>
     </div>
+
+    <!-- Confirmation Modal for Status Updates -->
+    <div id="statusConfirmModal" class="modal" style="display: none; z-index: 1100;">
+        <div class="modal-content" style="max-width: 480px; margin: 12% auto; padding: 30px; text-align: center; border-radius: 16px; border: 1.5px solid #d8a94f; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15);">
+            <div style="font-size: 3.5rem; color: #d8a94f; margin-bottom: 15px; line-height: 1;">⚠️</div>
+            <h3 style="margin: 0 0 12px; font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #1e293b;">Xác Nhận Cập Nhật</h3>
+            <p id="statusConfirmMessage" style="color: #475569; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6; padding: 0 10px;"></p>
+            <div style="display: flex; justify-content: center; gap: 15px;">
+                <button class="outline-button" id="btnStatusConfirmCancel" style="padding: 10px 24px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s;">Hủy</button>
+                <button class="btn-primary" id="btnStatusConfirmOk" style="padding: 10px 24px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s;">Xác Nhận</button>
+            </div>
+        </div>
+    </div>
+
   <script src="../js/icons.js"></script>
   <script src="../js/toast.js"></script>
   <script src="../js/global-data.js?v=1780167290"></script>

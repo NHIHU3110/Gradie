@@ -60,9 +60,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         : published;
 
     // ── 4. Blog Modal ─────────────────────────────────────────────────────────
-    // Track scroll position to restore when modal closes
-    let _savedScrollY = 0;
-
     if (!document.getElementById('blog-modal')) {
         const modalStyle = document.createElement('style');
         modalStyle.textContent = `
@@ -74,27 +71,34 @@ document.addEventListener('DOMContentLoaded', async () => {
                 width: 100%; height: 100%;
                 background: rgba(0,0,0,0.6);
                 backdrop-filter: blur(4px);
-                /* DO NOT set overflow-y here — we scroll the inner wrapper */
-            }
-            #blog-modal-wrapper {
-                width: 100%;
-                height: 100%;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-                display: flex;
-                align-items: flex-start;
+                align-items: center;
                 justify-content: center;
-                padding: 40px 16px;
                 box-sizing: border-box;
             }
             #blog-modal-inner {
                 background: var(--white, #fff);
                 max-width: 800px;
-                width: 100%;
-                border-radius: 12px;
+                width: 90%;
+                max-height: 85vh;
+                border-radius: 16px;
                 position: relative;
                 overflow: hidden;
-                flex-shrink: 0;
+                display: flex;
+                flex-direction: column;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+                animation: blogModalFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+                box-sizing: border-box;
+            }
+            @keyframes blogModalFadeIn {
+                from { opacity: 0; transform: scale(0.95) translateY(20px); }
+                to { opacity: 1; transform: scale(1) translateY(0); }
+            }
+            #blog-modal-scrollable-content {
+                overflow-y: auto;
+                flex: 1;
+                width: 100%;
+                -webkit-overflow-scrolling: touch;
+                box-sizing: border-box;
             }
             #blog-modal-close {
                 position: absolute;
@@ -126,13 +130,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         document.body.insertAdjacentHTML('beforeend', `
             <div id="blog-modal" role="dialog" aria-modal="true">
-                <div id="blog-modal-wrapper">
-                    <div id="blog-modal-inner">
-                        <button id="blog-modal-close" onclick="closeBlogModal()" aria-label="Đóng bài viết">✕</button>
+                <div id="blog-modal-inner">
+                    <button id="blog-modal-close" onclick="closeBlogModal()" aria-label="Đóng bài viết">✕</button>
+                    <div id="blog-modal-scrollable-content">
                         <img id="blog-modal-img" src="" alt="" style="width:100%; height:400px; object-fit:cover; display:block;">
                         <div style="padding:40px;">
-                            <span id="blog-modal-cat" style="font-size:0.9rem; color:var(--taupe); text-transform:uppercase; letter-spacing:1px;"></span>
-                            <h2 id="blog-modal-title" style="margin:15px 0 25px; font-size:2.2rem; line-height:1.2;"></h2>
+                            <span id="blog-modal-cat" style="font-size:0.9rem; color:var(--champagne); text-transform:uppercase; letter-spacing:1px; font-weight:700;"></span>
+                            <h2 id="blog-modal-title" style="margin:15px 0 25px; font-size:2.2rem; line-height:1.2; font-family:'Playfair Display', serif;"></h2>
                             <div id="blog-modal-content" style="font-size:1.05rem; line-height:1.9; color:var(--ink); white-space:pre-wrap;"></div>
                         </div>
                     </div>
@@ -146,6 +150,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (e && e.preventDefault) e.preventDefault();
         if (e && e.stopPropagation) e.stopPropagation();
 
+        const modal = document.getElementById('blog-modal');
+        const scrollContent = document.getElementById('blog-modal-scrollable-content');
+        const img = document.getElementById('blog-modal-img');
+        const cat = document.getElementById('blog-modal-cat');
+        const title = document.getElementById('blog-modal-title');
+        const content = document.getElementById('blog-modal-content');
+
         // Search in filtered first, then all posts as fallback
         let post = filtered.find(p => (p.id === id || p._id === id || p._id?.toString() === id));
         if (!post) {
@@ -155,39 +166,46 @@ document.addEventListener('DOMContentLoaded', async () => {
                 post = allPosts.find(p => (p.id === id || p._id === id || p._id?.toString() === id));
             }
         }
+
+        // Lock body scroll and prevent layout shift
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.overflow = 'hidden';
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+        const header = document.querySelector('.header');
+        if (header) {
+            header.style.paddingRight = `${scrollbarWidth}px`;
+        }
+        document.body.classList.add('blog-modal-open');
+
+        // Show modal as flex
+        if (modal) modal.style.display = 'flex';
+
         if (!post) {
             console.warn('Blog post not found for ID:', id);
-            if (typeof showToast === 'function') showToast('Không tìm thấy bài viết!', 'error');
+            if (img) img.style.display = 'none';
+            if (cat) cat.textContent = 'Lỗi';
+            if (title) title.textContent = 'Không tìm thấy bài viết';
+            if (content) content.innerHTML = '<p style="color:#b91c1c; font-weight:600; text-align:center;">Xin lỗi, bài viết bạn yêu cầu không tồn tại hoặc đã bị xóa khỏi hệ thống.</p>';
             return;
         }
 
-        const modal = document.getElementById('blog-modal');
-        const wrapper = document.getElementById('blog-modal-wrapper');
-        const img = document.getElementById('blog-modal-img');
-
-        // Save current page scroll position
-        _savedScrollY = window.scrollY || window.pageYOffset || 0;
-
         // Populate modal content
-        document.getElementById('blog-modal-cat').textContent = post.category || '';
-        document.getElementById('blog-modal-title').textContent = post.title || '';
-        const contentText = post.content || post.excerpt || 'Nội dung bài viết đang được cập nhật. Vui lòng quay lại sau!';
-        document.getElementById('blog-modal-content').textContent = contentText;
-        img.src = '';
-        img.alt = post.title || '';
-        img.src = post.image || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80';
+        if (img) {
+            img.style.display = 'block';
+            img.src = '';
+            img.alt = post.title || '';
+            img.src = post.image || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80';
+        }
+        if (cat) cat.textContent = post.category || '';
+        if (title) title.textContent = post.title || '';
+        if (content) {
+            const contentText = post.content || post.excerpt || 'Nội dung bài viết đang được cập nhật. Vui lòng quay lại sau!';
+            content.textContent = contentText;
+        }
 
-        // Reset internal scroll
-        if (wrapper) wrapper.scrollTop = 0;
+        // Reset internal scroll of the scrollable content wrapper
+        if (scrollContent) scrollContent.scrollTop = 0;
 
-        // Lock body scroll
-        document.body.classList.add('blog-modal-open');
-        document.body.style.top = `-${_savedScrollY}px`;
-        document.body.style.position = 'fixed';
-        document.body.style.width = '100%';
-
-        // Show modal
-        if (modal) modal.style.display = 'block';
         // Focus close button for accessibility
         setTimeout(() => {
             const closeBtn = document.getElementById('blog-modal-close');
@@ -199,21 +217,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         const modal = document.getElementById('blog-modal');
         if (modal) modal.style.display = 'none';
 
-        // 1. Bỏ lock scroll
+        // Unlock scroll and reset padding
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+        const header = document.querySelector('.header');
+        if (header) {
+            header.style.paddingRight = '';
+        }
         document.body.classList.remove('blog-modal-open');
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-
-        // 2. Khôi phục đúng vị trí scroll trước khi mở modal
-        window.scrollTo({ top: _savedScrollY, behavior: 'instant' });
     };
 
     // Đóng modal khi click ra ngoài (vào overlay)
     const blogModal = document.getElementById('blog-modal');
     if (blogModal) {
         blogModal.addEventListener('click', function(e) {
-            if (e.target === blogModal || e.target.id === 'blog-modal-wrapper') {
+            if (e.target === blogModal) {
                 window.closeBlogModal();
             }
         });
