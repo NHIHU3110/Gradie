@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           } else if (filterStatus === 'completed') {
             myOrders = myOrders.filter(o => o.status === 'Completed' || o.status === 'Delivered');
           } else if (filterStatus === 'cancelled') {
-            myOrders = myOrders.filter(o => o.status === 'Cancelled' || o.status === 'Refunded');
+            myOrders = myOrders.filter(o => o.status === 'Cancelled' || o.status === 'Refunded' || o.status === 'Cancel Requested');
           }
         }
 
@@ -306,6 +306,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                       o.status === 'Confirmed' ? 'background:#e0e7ff; color:#4338ca;' :
                       o.status === 'Cancelled' ? 'background:#fee2e2; color:#dc2626;' :
                       o.status === 'Refunded' ? 'background:#f3f4f6; color:#4b5563;' :
+                      o.status === 'Cancel Requested' ? 'background:#fffbeb; color:#d97706; border:1px solid #fcd34d;' :
                       'background:#fef3c7; color:#d97706;';
             const statusVN = o.status === 'Completed' ? 'Hoàn Tất' :
                              o.status === 'Delivered' ? 'Đã Giao Hàng' :
@@ -313,7 +314,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                              o.status === 'Processing' ? 'Đang Xử Lý' :
                              o.status === 'Confirmed' ? 'Đã Xác Nhận' :
                              o.status === 'Cancelled' ? 'Đã Hủy' :
-                             o.status === 'Refunded' ? 'Đã Hoàn Tiền' : 'Chờ Duyệt';
+                             o.status === 'Refunded' ? 'Đã Hoàn Tiền' :
+                             o.status === 'Cancel Requested' ? 'Yêu Cầu Hủy' : 'Chờ Duyệt';
             return `
               <div class="order-card-clickable" onclick="openUserOrderModal('${o.orderNumber}')" style="border: 1px solid var(--border-gold); padding: 18px; border-radius: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; background: #fff; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.01);">
                 <div>
@@ -367,6 +369,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     o.status === 'Confirmed'  ? 'background:#e0e7ff; color:#4338ca;'  :
                     o.status === 'Cancelled'  ? 'background:#fee2e2; color:#dc2626;'  :
                     o.status === 'Refunded'   ? 'background:#f3f4f6; color:#4b5563;'  :
+                    o.status === 'Cancel Requested' ? 'background:#fffbeb; color:#d97706; border:1px solid #fde68a;' :
                     'background:#fef3c7; color:#d97706;';
         const statusVN = o.status === 'Completed'  ? 'Hoàn Tất'       :
                          o.status === 'Delivered'  ? 'Đã Giao Hàng'   :
@@ -374,7 +377,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                          o.status === 'Processing' ? 'Đang Xử Lý'      :
                          o.status === 'Confirmed'  ? 'Đã Xác Nhận'    :
                          o.status === 'Cancelled'  ? 'Đã Hủy'         :
-                         o.status === 'Refunded'   ? 'Đã Hoàn Tiền'   : 'Chờ Duyệt';
+                         o.status === 'Refunded'   ? 'Đã Hoàn Tiền'   :
+                         o.status === 'Cancel Requested' ? 'Yêu Cầu Hủy' : 'Chờ Duyệt';
 
         const paymentMethodVN = o.paymentMethod === 'COD' || o.paymentMethod === 'COD (Cash on Delivery)' ? 'Thanh toán khi nhận hàng (COD)' : o.paymentMethod || 'COD';
 
@@ -459,13 +463,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (actionsBar) {
           actionsBar.innerHTML = '';
           
-          if (o.status === 'Pending' || o.status === 'Confirmed') {
+          if (o.status === 'Pending') {
             const cancelBtn = document.createElement('button');
             cancelBtn.className = 'btn-secondary';
             cancelBtn.style.cssText = 'background:#fee2e2; color:#dc2626; border:1px solid #fca5a5; padding:8px 16px; border-radius:8px; font-weight:600; font-family:inherit; cursor:pointer; font-size:0.85rem; transition: all 0.2s ease;';
             cancelBtn.textContent = 'Hủy Đơn Hàng';
             cancelBtn.onclick = () => window.cancelUserOrder(o.orderNumber);
             actionsBar.appendChild(cancelBtn);
+          } else if (o.status === 'Confirmed') {
+            const reqCancelBtn = document.createElement('button');
+            reqCancelBtn.className = 'btn-secondary';
+            reqCancelBtn.style.cssText = 'background:#fffbeb; color:#d97706; border:1px solid #fcd34d; padding:8px 16px; border-radius:8px; font-weight:600; font-family:inherit; cursor:pointer; font-size:0.85rem; transition: all 0.2s ease;';
+            reqCancelBtn.textContent = 'Yêu Cầu Hủy Đơn';
+            reqCancelBtn.onclick = () => window.requestCancelUserOrder(o.orderNumber);
+            actionsBar.appendChild(reqCancelBtn);
+          } else if (o.status === 'Cancel Requested') {
+            const pendingCancelBtn = document.createElement('button');
+            pendingCancelBtn.className = 'btn-secondary';
+            pendingCancelBtn.disabled = true;
+            pendingCancelBtn.style.cssText = 'background:#f1f5f9; color:#94a3b8; border:1px solid #cbd5e1; padding:8px 16px; border-radius:8px; font-weight:600; font-family:inherit; cursor:default; font-size:0.85rem;';
+            pendingCancelBtn.textContent = 'Đang Chờ Duyệt Hủy';
+            actionsBar.appendChild(pendingCancelBtn);
           }
           
           if (o.status === 'Delivered' || o.status === 'Completed') {
@@ -503,6 +521,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             showToast('Đơn hàng đã được hủy thành công!', 'success');
           } else {
             alert('Đơn hàng đã được hủy thành công!');
+          }
+          window.closeUserOrderModal();
+        }
+      };
+
+      window.requestCancelUserOrder = function(orderNumber) {
+        if (confirm("Đơn hàng này đã được xác nhận. Bạn có chắc muốn gửi yêu cầu hủy đơn hàng đến quản trị viên không?")) {
+          window.GradieStore.updateOrder(orderNumber, { status: 'Cancel Requested' });
+          if (typeof showToast === 'function') {
+            showToast('Đã gửi yêu cầu hủy đơn hàng thành công!', 'success');
+          } else {
+            alert('Đã gửi yêu cầu hủy đơn hàng thành công!');
           }
           window.closeUserOrderModal();
         }
@@ -1003,7 +1033,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                          status === 'Processing' ? 'Đang Xử Lý' :
                          status === 'Confirmed' ? 'Đã Xác Nhận' :
                          status === 'Cancelled' ? 'Đã Hủy' : 
-                         status === 'Refunded' ? 'Đã Hoàn Tiền' : 'Chờ Duyệt';
+                         status === 'Refunded' ? 'Đã Hoàn Tiền' : 
+                         status === 'Cancel Requested' ? 'Yêu Cầu Hủy' : 'Chờ Duyệt';
 
         // Status badge styling
         const statusStyle = status === 'Completed' ? 'background:#d1fae5; color:#047857;' :
@@ -1013,6 +1044,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     status === 'Confirmed' ? 'background:#e0e7ff; color:#4338ca;' :
                     isCancelled ? 'background:#fee2e2; color:#dc2626;' :
                     status === 'Refunded' ? 'background:#f3f4f6; color:#4b5563;' :
+                    status === 'Cancel Requested' ? 'background:#fffbeb; color:#d97706; border:1px solid #fcd34d;' :
                     'background:#fef3c7; color:#d97706;';
 
         // Items list
@@ -1021,15 +1053,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         ).join('');
 
         let timelineHtml = '';
-        if (isCancelled || status === 'Refunded') {
+        if (isCancelled || status === 'Refunded' || status === 'Cancel Requested') {
+            let titleText = 'Đơn Hàng Đã Hủy / Hoàn Tiền';
+            let descText = 'Đơn hàng này đã bị hủy hoặc hoàn tiền. Vui lòng liên hệ bộ phận hỗ trợ để biết thêm chi tiết.';
+            let dotText = '✕';
+            let dotClass = 'cancelled';
+            
+            if (status === 'Cancel Requested') {
+                titleText = 'Đang Yêu Cầu Hủy Đơn Hàng';
+                descText = 'Yêu cầu hủy đơn hàng của bạn đã được ghi nhận và đang chờ Quản trị viên phê duyệt.';
+                dotText = '⚠';
+                dotClass = 'warning';
+            }
+            
             timelineHtml = `
                 <div class="timeline-step">
                   <div class="timeline-left-col">
-                    <div class="timeline-dot cancelled">✕</div>
+                    <div class="timeline-dot ${dotClass}">${dotText}</div>
                   </div>
                   <div class="timeline-content">
-                    <h4>Đơn Hàng Đã Hủy / Hoàn Tiền</h4>
-                    <p>Đơn hàng này đã bị hủy hoặc hoàn tiền. Vui lòng liên hệ bộ phận hỗ trợ để biết thêm chi tiết.</p>
+                    <h4>${titleText}</h4>
+                    <p>${descText}</p>
                   </div>
                 </div>
             `;

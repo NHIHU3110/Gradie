@@ -130,6 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             badgeStyle = 'background: #d1fae5; color: #047857;';
                         } else if (status === 'Refunded') {
                             badgeStyle = 'background: #f3f4f6; color: #4b5563;';
+                        } else if (status === 'Cancel Requested') {
+                            badgeStyle = 'background: #fffbeb; color: #d97706; border: 1px solid #fcd34d; font-weight: 700;';
                         }
                         
                         return `
@@ -145,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td style="font-weight: 500;">${total.toLocaleString('vi-VN')} ₫</td>
                             <td>
                                 <span style="${badgeStyle} padding: 6px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; display: inline-block;">
-                                    ${status}
+                                    ${status === 'Cancel Requested' ? 'Yêu Cầu Hủy' : status}
                                 </span>
                             </td>
                             <td>
@@ -155,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     </button>
                                     <select onchange="window.changeOrderStatusFromSelect(this, '${o.orderNumber}', '${status}')" style="padding: 5px; border-radius: 4px; border: 1px solid #cbd5e1; background: #fff; cursor: pointer;">
                                         <option value="Pending" ${status === 'Pending'?'selected':''}>Pending</option>
+                                        <option value="Cancel Requested" ${status === 'Cancel Requested'?'selected':''}>Cancel Requested</option>
                                         <option value="Confirmed" ${status === 'Confirmed'?'selected':''}>Confirmed</option>
                                         <option value="Processing" ${status === 'Processing'?'selected':''}>Processing</option>
                                         <option value="Shipped" ${status === 'Shipped' || status === 'Dispatched'?'selected':''}>Shipped</option>
