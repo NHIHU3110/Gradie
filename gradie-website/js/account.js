@@ -269,10 +269,30 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (profileEmailInput) profileEmailInput.value = user.email || '';
       if (profilePhoneInput) profilePhoneInput.value = user.phone || '';
 
+      // Order status filter state
+      let activeOrderFilter = 'all';
+
       // Render their dynamic order history
-      window.renderUserOrdersList = function() {
+      window.renderUserOrdersList = function(filterStatus = activeOrderFilter) {
+        activeOrderFilter = filterStatus;
         const orders = window.GradieStore.getOrders();
-        const myOrders = orders.filter(o => o.customerEmail && o.customerEmail.toLowerCase() === user.email.toLowerCase());
+        let myOrders = orders.filter(o => o.customerEmail && o.customerEmail.toLowerCase() === user.email.toLowerCase());
+
+        // Apply status filter
+        if (filterStatus !== 'all') {
+          if (filterStatus === 'pending') {
+            myOrders = myOrders.filter(o => o.status === 'Pending' || o.status === 'Confirmed');
+          } else if (filterStatus === 'processing') {
+            myOrders = myOrders.filter(o => o.status === 'Processing');
+          } else if (filterStatus === 'shipped') {
+            myOrders = myOrders.filter(o => o.status === 'Shipped');
+          } else if (filterStatus === 'completed') {
+            myOrders = myOrders.filter(o => o.status === 'Completed' || o.status === 'Delivered');
+          } else if (filterStatus === 'cancelled') {
+            myOrders = myOrders.filter(o => o.status === 'Cancelled' || o.status === 'Refunded');
+          }
+        }
+
         const orderList = document.getElementById('recent-orders-list');
         if (!orderList) return;
 
@@ -310,8 +330,21 @@ document.addEventListener('DOMContentLoaded', async () => {
             `;
           }).join('');
         } else {
-          orderList.innerHTML = '<p style="color: var(--taupe); font-style: italic;">Bạn chưa thực hiện đơn hàng nào.</p>';
+          orderList.innerHTML = `<p style="color: var(--taupe); font-style: italic; text-align: center; padding: 20px;">Không có đơn hàng nào ở trạng thái này.</p>`;
         }
+      };
+
+      // Filter click handler
+      window.filterUserOrders = function(status, btn) {
+        document.querySelectorAll('.order-status-tab-btn').forEach(b => {
+          b.style.background = '#fff';
+          b.style.color = 'var(--ink)';
+        });
+        if (btn) {
+          btn.style.background = 'var(--peach)';
+          btn.style.color = '#fff';
+        }
+        window.renderUserOrdersList(status);
       };
 
       // Call it on page load

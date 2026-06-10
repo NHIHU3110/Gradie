@@ -757,6 +757,17 @@
         <!-- Orders Section -->
         <div id="orders-history-section" style="display:none; padding:35px; background:var(--white); border-radius:16px; border:1px solid var(--border-gold); box-shadow:0 10px 30px rgba(0,0,0,0.02);">
             <h2 style="font-family:'Playfair Display', serif; font-size:1.8rem; margin-bottom:20px; border-bottom:1px solid #f0eeeb; padding-bottom:12px;">Lịch Sử Đơn Hàng</h2>
+            
+            <!-- Order Filter Tabs -->
+            <div class="order-status-tabs" style="display:flex; gap:10px; overflow-x:auto; padding-bottom:12px; margin-bottom:20px; border-bottom:1px solid #f0eeeb; scrollbar-width: none;">
+                <button class="order-status-tab-btn" data-status="all" onclick="window.filterUserOrders('all', this)" style="padding:8px 16px; border-radius:20px; border:1.5px solid var(--border-gold); background:var(--peach); color:#fff; font-size:0.82rem; font-weight:600; font-family:inherit; cursor:pointer; white-space:nowrap; transition:all 0.2s;">Tất Cả</button>
+                <button class="order-status-tab-btn" data-status="pending" onclick="window.filterUserOrders('pending', this)" style="padding:8px 16px; border-radius:20px; border:1.5px solid var(--border-gold); background:#fff; color:var(--ink); font-size:0.82rem; font-weight:600; font-family:inherit; cursor:pointer; white-space:nowrap; transition:all 0.2s;">Chờ Duyệt</button>
+                <button class="order-status-tab-btn" data-status="processing" onclick="window.filterUserOrders('processing', this)" style="padding:8px 16px; border-radius:20px; border:1.5px solid var(--border-gold); background:#fff; color:var(--ink); font-size:0.82rem; font-weight:600; font-family:inherit; cursor:pointer; white-space:nowrap; transition:all 0.2s;">Đang Xử Lý</button>
+                <button class="order-status-tab-btn" data-status="shipped" onclick="window.filterUserOrders('shipped', this)" style="padding:8px 16px; border-radius:20px; border:1.5px solid var(--border-gold); background:#fff; color:var(--ink); font-size:0.82rem; font-weight:600; font-family:inherit; cursor:pointer; white-space:nowrap; transition:all 0.2s;">Đang Giao</button>
+                <button class="order-status-tab-btn" data-status="completed" onclick="window.filterUserOrders('completed', this)" style="padding:8px 16px; border-radius:20px; border:1.5px solid var(--border-gold); background:#fff; color:var(--ink); font-size:0.82rem; font-weight:600; font-family:inherit; cursor:pointer; white-space:nowrap; transition:all 0.2s;">Hoàn Tất</button>
+                <button class="order-status-tab-btn" data-status="cancelled" onclick="window.filterUserOrders('cancelled', this)" style="padding:8px 16px; border-radius:20px; border:1.5px solid var(--border-gold); background:#fff; color:var(--ink); font-size:0.82rem; font-weight:600; font-family:inherit; cursor:pointer; white-space:nowrap; transition:all 0.2s;">Đã Hủy / Đổi Trả</button>
+            </div>
+
             <div id="recent-orders-list" style="margin-top:20px;">
                 <p style="color:var(--taupe);">Bạn chưa thực hiện đơn hàng nào.</p>
             </div>
