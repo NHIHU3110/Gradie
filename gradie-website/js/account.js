@@ -606,7 +606,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (isCancelled || status === 'Refunded') {
             timelineHtml = `
                 <div class="timeline-step">
-                  <div>
+                  <div class="timeline-left-col">
                     <div class="timeline-dot cancelled">✕</div>
                   </div>
                   <div class="timeline-content">
@@ -635,7 +635,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 
                 timelineHtml += `
                 <div class="timeline-step">
-                  <div>
+                  <div class="timeline-left-col">
                     <div class="timeline-dot ${isCompleted ? 'active' : 'inactive'}">${isCompleted ? '✓' : idx + 1}</div>
                     <div class="timeline-line ${isActiveLine ? 'active' : ''}"></div>
                   </div>
