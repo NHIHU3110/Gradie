@@ -231,6 +231,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
+  // 3. Dynamic Shipping Fee based on Province & Coupon Variables
+  const settings = window.GradieStore.getSettings();
+  let shippingFee = settings.shippingFee !== undefined ? Number(settings.shippingFee) : 30000;
+  let activeCouponCode = '';
+  let discountAmount = 0;
+  let subtotal = 0;
+
   // 2. Pre-fill user profile and saved addresses cards if logged in
   if (currentUser) {
     document.getElementById('shipping-email').value = currentUser.email || '';
@@ -354,13 +361,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (saveAddressWrapper) saveAddressWrapper.style.display = 'block';
     }
   }
-
-  // 3. Dynamic Shipping Fee based on Province & Coupon Variables
-  const settings = window.GradieStore.getSettings();
-  let shippingFee = settings.shippingFee !== undefined ? Number(settings.shippingFee) : 30000;
-  let activeCouponCode = '';
-  let discountAmount = 0;
-  let subtotal = 0;
 
   // Recalculate and update pricing layout
   function recalculateTotals() {
