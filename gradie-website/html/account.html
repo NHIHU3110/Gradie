@@ -716,10 +716,33 @@
                       </label>
                     </div>
                 </div>
-                <div>
-                    <label style="display:block; font-size:0.85rem; font-weight:500; margin-bottom:8px;">Địa chỉ giao hàng chi tiết</label>
-                    <input type="text" id="new-address-detail" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố..." required style="width:100%; padding:12px; border:1px solid #dcdad6; border-radius:8px; font-family:inherit;">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                    <div>
+                      <label style="display:block; font-size:0.85rem; font-weight:500; margin-bottom:8px;">Tỉnh / Thành phố *</label>
+                      <select id="new-address-province" required style="width:100%; padding:10px; border:1px solid #dcdad6; border-radius:8px; font-family:inherit; height:45px; background:var(--ivory);">
+                        <option value="">-- Chọn Tỉnh / Thành phố --</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label style="display:block; font-size:0.85rem; font-weight:500; margin-bottom:8px;">Quận / Huyện *</label>
+                      <select id="new-address-district" required disabled style="width:100%; padding:10px; border:1px solid #dcdad6; border-radius:8px; font-family:inherit; height:45px; background:var(--ivory);">
+                        <option value="">-- Chọn Quận / Huyện --</option>
+                      </select>
+                    </div>
                 </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                    <div>
+                      <label style="display:block; font-size:0.85rem; font-weight:500; margin-bottom:8px;">Phường / Xã *</label>
+                      <select id="new-address-ward" required disabled style="width:100%; padding:10px; border:1px solid #dcdad6; border-radius:8px; font-family:inherit; height:45px; background:var(--ivory);">
+                        <option value="">-- Chọn Phường / Xã --</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label style="display:block; font-size:0.85rem; font-weight:500; margin-bottom:8px;">Số nhà, tên đường *</label>
+                      <input type="text" id="new-address-street" placeholder="Ví dụ: 123 Đường Lê Lợi" required style="width:100%; padding:10px; border:1px solid #dcdad6; border-radius:8px; font-family:inherit; height:45px;">
+                    </div>
+                </div>
+                <input type="hidden" id="new-address-detail" required>
                 <button type="submit" class="btn-primary" style="padding:12px; border-radius:8px; font-weight:600; width:100%; margin-top:10px; text-transform:uppercase; letter-spacing:1px;">Thêm Địa Chỉ</button>
             </form>
         </div>

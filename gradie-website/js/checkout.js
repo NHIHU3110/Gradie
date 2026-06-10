@@ -1,5 +1,5 @@
 // js/checkout.js
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   if (!window.GradieStore) return;
 
   // 0. Enforce user authentication
@@ -14,6 +14,210 @@ document.addEventListener('DOMContentLoaded', () => {
   const subtotalEl = document.getElementById('checkout-subtotal');
   const shippingEl = document.getElementById('checkout-shipping');
   const grandTotalEl = document.getElementById('checkout-grand-total');
+
+  // Address selectors
+  const provinceSel = document.getElementById('shipping-province');
+  const districtSel = document.getElementById('shipping-district');
+  const wardSel = document.getElementById('shipping-ward');
+  const streetInput = document.getElementById('shipping-street');
+  const addressHidden = document.getElementById('shipping-address');
+
+  let vnDivisions = null;
+
+  // Fetch and cache Vietnam administrative divisions data
+  async function loadVNDivisions() {
+    const cached = localStorage.getItem('GRADIE_VN_DIVISIONS');
+    if (cached) {
+      try {
+        return JSON.parse(cached);
+      } catch (e) {
+        console.warn('Failed to parse cached divisions, refetching...');
+      }
+    }
+    try {
+      const res = await fetch('https://cdn.jsdelivr.net/gh/daohoangson/dvhcvn@master/data/dvhcvn.json');
+      const json = await res.json();
+      if (json && json.data) {
+        localStorage.setItem('GRADIE_VN_DIVISIONS', JSON.stringify(json.data));
+        return json.data;
+      }
+    } catch (err) {
+      console.error('Failed to fetch Vietnam divisions:', err);
+    }
+    return null;
+  }
+
+  // Clean string for fuzzy comparison
+  function cleanString(str) {
+    if (!str) return '';
+    return str.normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/đ/g, 'd')
+      .replace(/[^a-z0-9\s]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  // Check if string contains standard administrative prefixes
+  function getCoreName(str) {
+    let clean = cleanString(str);
+    const prefixes = [
+      'thanh pho', 'tinh', 'quan', 'huyen', 'thi xa', 'phuong', 'xa', 'thi tran'
+    ];
+    for (const p of prefixes) {
+      if (clean.startsWith(p + ' ')) {
+        clean = clean.substring(p.length + 1).trim();
+        break;
+      }
+    }
+    return clean;
+  }
+
+  function populateDistricts(provinceId, selectId = '') {
+    if (!districtSel || !wardSel) return;
+    if (!provinceId) {
+      districtSel.innerHTML = '<option value="">-- Chọn Quận / Huyện --</option>';
+      districtSel.disabled = true;
+      wardSel.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>';
+      wardSel.disabled = true;
+      return;
+    }
+
+    const province = vnDivisions.find(p => p.level1_id === provinceId);
+    if (province && province.level2s) {
+      districtSel.innerHTML = '<option value="">-- Chọn Quận / Huyện --</option>' +
+        province.level2s.map(d => `<option value="${d.level2_id}">${d.name}</option>`).join('');
+      districtSel.disabled = false;
+      districtSel.value = selectId;
+      
+      if (!selectId) {
+        wardSel.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>';
+        wardSel.disabled = true;
+      }
+    }
+  }
+
+  function populateWards(provinceId, districtId, selectId = '') {
+    if (!wardSel) return;
+    if (!provinceId || !districtId) {
+      wardSel.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>';
+      wardSel.disabled = true;
+      return;
+    }
+
+    const province = vnDivisions.find(p => p.level1_id === provinceId);
+    if (province && province.level2s) {
+      const district = province.level2s.find(d => d.level2_id === districtId);
+      if (district && district.level3s) {
+        wardSel.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>' +
+          district.level3s.map(w => `<option value="${w.level3_id}">${w.name}</option>`).join('');
+        wardSel.disabled = false;
+        wardSel.value = selectId;
+      }
+    }
+  }
+
+  function updateCombinedAddress() {
+    if (!provinceSel || !districtSel || !wardSel || !streetInput || !addressHidden) return;
+    const provinceText = provinceSel.options[provinceSel.selectedIndex]?.text || '';
+    const districtText = districtSel.options[districtSel.selectedIndex]?.text || '';
+    const wardText = wardSel.options[wardSel.selectedIndex]?.text || '';
+    const streetText = streetInput.value.trim();
+
+    if (provinceSel.value && districtSel.value && wardSel.value && streetText) {
+      addressHidden.value = `${streetText}, ${wardText}, ${districtText}, ${provinceText}`;
+    } else {
+      addressHidden.value = '';
+    }
+
+    if (provinceSel.value) {
+      updateShippingByProvince(provinceText);
+    }
+  }
+
+  function setDropdownsFromAddressString(addressStr) {
+    if (!addressStr || !vnDivisions) return;
+    
+    const parts = addressStr.split(',').map(p => p.trim());
+    if (parts.length < 3) {
+      if (streetInput) streetInput.value = addressStr;
+      if (addressHidden) addressHidden.value = addressStr;
+      return;
+    }
+
+    const provName = parts[parts.length - 1];
+    const distName = parts[parts.length - 2];
+    const wardName = parts[parts.length - 3];
+    
+    const streetParts = parts.slice(0, parts.length - 3);
+    const streetText = streetParts.join(', ');
+    if (streetInput) streetInput.value = streetText;
+
+    const cleanProv = getCoreName(provName);
+    const matchedProv = vnDivisions.find(p => getCoreName(p.name) === cleanProv || cleanString(p.name).includes(cleanProv));
+    
+    if (matchedProv) {
+      if (provinceSel) provinceSel.value = matchedProv.level1_id;
+      populateDistricts(matchedProv.level1_id);
+
+      const cleanDist = getCoreName(distName);
+      const matchedDist = matchedProv.level2s.find(d => getCoreName(d.name) === cleanDist || cleanString(d.name).includes(cleanDist));
+      
+      if (matchedDist) {
+        if (districtSel) districtSel.value = matchedDist.level2_id;
+        populateWards(matchedProv.level1_id, matchedDist.level2_id);
+
+        const cleanWard = getCoreName(wardName);
+        const matchedWard = matchedDist.level3s.find(w => getCoreName(w.name) === cleanWard || cleanString(w.name).includes(cleanWard));
+        if (matchedWard) {
+          if (wardSel) wardSel.value = matchedWard.level3_id;
+        }
+      }
+    }
+    
+    if (addressHidden) addressHidden.value = addressStr;
+    updateShippingByProvince(provName);
+  }
+
+  async function initDropdowns() {
+    vnDivisions = await loadVNDivisions();
+    if (!vnDivisions) {
+      showToast('Không tải được dữ liệu địa chính. Vui lòng tải lại trang.', 'error');
+      return;
+    }
+
+    if (provinceSel) {
+      provinceSel.innerHTML = '<option value="">-- Chọn Tỉnh / Thành phố --</option>' +
+        vnDivisions.map(p => `<option value="${p.level1_id}">${p.name}</option>`).join('');
+
+      provinceSel.addEventListener('change', () => {
+        const provId = provinceSel.value;
+        populateDistricts(provId);
+        updateCombinedAddress();
+      });
+    }
+
+    if (districtSel) {
+      districtSel.addEventListener('change', () => {
+        const provId = provinceSel.value;
+        const distId = districtSel.value;
+        populateWards(provId, distId);
+        updateCombinedAddress();
+      });
+    }
+
+    if (wardSel) {
+      wardSel.addEventListener('change', updateCombinedAddress);
+    }
+
+    if (streetInput) {
+      streetInput.addEventListener('input', updateCombinedAddress);
+    }
+  }
+
+  // Initialize dropdowns first
+  await initDropdowns();
   
   // 1. Get Cart Data from both possible keys
   let cart = [];
@@ -37,18 +241,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveAddressCheckbox = document.getElementById('checkout-save-address-checkbox');
     const savedAddrs = currentUser.addresses || [];
 
-    // Checked by default for logged-in users to save changes automatically unless they opt-out
     if (saveAddressCheckbox) saveAddressCheckbox.checked = true;
 
     if (savedAddrs.length > 0) {
       if (addressesWrapper && cardsContainer) {
         addressesWrapper.style.display = 'block';
         
-        // Find default address
         const defaultAddr = savedAddrs.find(a => a.isDefault) || savedAddrs[0];
         window._selectedCheckoutAddressId = defaultAddr ? defaultAddr.id : 'new';
 
-        // Declare global selectCheckoutAddressCard handler
         window.selectCheckoutAddressCard = function(selectedId) {
           window._selectedCheckoutAddressId = selectedId;
           const cards = document.querySelectorAll('.checkout-address-card');
@@ -64,7 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           });
 
-          // Highlight selected card
           const activeCard = document.getElementById('card-' + selectedId);
           if (activeCard) {
             activeCard.style.border = '2px solid var(--champagne, #d8a94f)';
@@ -78,24 +278,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
 
-          // Populate inputs and ensure they are never locked/readOnly
           if (selectedId === 'new') {
             document.getElementById('shipping-name').value = '';
             document.getElementById('shipping-phone').value = '';
-            document.getElementById('shipping-address').value = '';
+            if (provinceSel) provinceSel.value = '';
+            if (districtSel) { districtSel.innerHTML = '<option value="">-- Chọn Quận / Huyện --</option>'; districtSel.disabled = true; }
+            if (wardSel) { wardSel.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>'; wardSel.disabled = true; }
+            if (streetInput) streetInput.value = '';
+            if (addressHidden) addressHidden.value = '';
             document.getElementById('shipping-name').readOnly = false;
             document.getElementById('shipping-phone').readOnly = false;
-            document.getElementById('shipping-address').readOnly = false;
           } else {
             const selected = savedAddrs.find(a => a.id === selectedId);
             if (selected) {
               document.getElementById('shipping-name').value = selected.name || '';
               document.getElementById('shipping-phone').value = selected.phone || '';
-              document.getElementById('shipping-address').value = selected.detail || '';
+              setDropdownsFromAddressString(selected.detail || '');
             }
             document.getElementById('shipping-name').readOnly = false;
             document.getElementById('shipping-phone').readOnly = false;
-            document.getElementById('shipping-address').readOnly = false;
           }
           if (saveAddressWrapper) saveAddressWrapper.style.display = 'block';
         };
@@ -134,26 +335,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cardsContainer.innerHTML = cardsHtml;
 
-        // Auto-fill inputs initially with default selection details and keep editable
         if (defaultAddr) {
           document.getElementById('shipping-name').value = defaultAddr.name || '';
           document.getElementById('shipping-phone').value = defaultAddr.phone || '';
-          document.getElementById('shipping-address').value = defaultAddr.detail || '';
+          setDropdownsFromAddressString(defaultAddr.detail || '');
           document.getElementById('shipping-name').readOnly = false;
           document.getElementById('shipping-phone').readOnly = false;
-          document.getElementById('shipping-address').readOnly = false;
         }
         if (saveAddressWrapper) saveAddressWrapper.style.display = 'block';
       }
     } else {
-      // User has no saved addresses, prefill name and phone, show save address checkbox and keep editable
       window._selectedCheckoutAddressId = 'new';
       document.getElementById('shipping-name').value = currentUser.username || '';
       document.getElementById('shipping-phone').value = currentUser.phone || '';
-      document.getElementById('shipping-address').value = currentUser.shippingAddress || '';
+      setDropdownsFromAddressString(currentUser.shippingAddress || '');
       document.getElementById('shipping-name').readOnly = false;
       document.getElementById('shipping-phone').readOnly = false;
-      document.getElementById('shipping-address').readOnly = false;
       if (saveAddressWrapper) saveAddressWrapper.style.display = 'block';
     }
   }
@@ -212,23 +409,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Get shipping fee by province name
+  function getShippingFeeByProvince(provinceName) {
+    const cleanProv = getCoreName(provinceName);
+    
+    // 20k: Ho Chi Minh City
+    if (cleanProv === 'ho chi minh') return 20000;
+    
+    // 25k: Southern neighboring provinces
+    const southNeighbors = ['binh duong', 'dong nai', 'long an', 'tay ninh', 'ba ria vung tau', 'binh phuoc'];
+    if (southNeighbors.some(prov => cleanProv.includes(prov) || prov.includes(cleanProv))) return 25000;
+    
+    // 30k: Mekong Delta provinces
+    const mekongDelta = ['tien giang', 'ben tre', 'vinh long', 'tra vinh', 'can tho', 'hau giang', 'soc trang', 'bac lieu', 'ca mau', 'kien giang', 'an giang', 'dong thap'];
+    if (mekongDelta.some(prov => cleanProv.includes(prov) || prov.includes(cleanProv))) return 30000;
+    
+    // 35k: Central Highlands & South Central Coast
+    const centralHighlands = ['lam dong', 'dak nong', 'dak lak', 'dac lac', 'gia lai', 'kon tum', 'binh thuan', 'ninh thuan', 'khanh hoa', 'phu yen', 'binh dinh', 'quang ngai'];
+    if (centralHighlands.some(prov => cleanProv.includes(prov) || prov.includes(cleanProv))) return 35000;
+    
+    // 38k: North Central Coast & Danang & Hue
+    const northCentral = ['da nang', 'hue', 'quang nam', 'quang tri', 'quang binh', 'ha tinh', 'nghe an', 'thanh hoa'];
+    if (northCentral.some(prov => cleanProv.includes(prov) || prov.includes(cleanProv))) return 38000;
+    
+    // 40k: Northern provinces & Hanoi
+    const northern = ['ha noi', 'hai phong', 'hai duong', 'hung yen', 'bac ninh', 'vinh phuc', 'thai nguyen', 'phu tho', 'bac giang', 'quang ninh', 'nam dinh', 'thai binh', 'ha nam', 'ninh binh'];
+    if (northern.some(prov => cleanProv.includes(prov) || prov.includes(cleanProv))) return 40000;
+    
+    // 45k: Far North / Mountainous provinces
+    const farNorth = ['hoa binh', 'son la', 'dien bien', 'lai chau', 'lao cai', 'yen bai', 'ha giang', 'tuyen quang', 'cao bang', 'lang son', 'bac kan'];
+    if (farNorth.some(prov => cleanProv.includes(prov) || prov.includes(cleanProv))) return 45000;
+    
+    return 35000; // Fallback default shipping fee
+  }
+
   // Update shipping fee dynamically when address changes
   function updateShippingByProvince(address) {
-    const hcmKeywords = ['hồ chí minh', 'hcm', 'ho chi minh', 'sài gòn', 'sai gon', 'quận', 'quan '];
-    const isHCM = hcmKeywords.some(kw => address.toLowerCase().includes(kw));
-    const newFee = isHCM ? 20000 : 40000;
+    if (!address) return;
+    const parts = address.split(',');
+    const provincePart = parts[parts.length - 1].trim();
+    const newFee = getShippingFeeByProvince(provincePart);
+    
     if (newFee !== shippingFee) {
       shippingFee = newFee;
       recalculateTotals();
-      const label = isHCM ? 'Nội thành HCM (20.000đ)' : 'Ngoại tỉnh (40.000đ)';
-      showToast('Phí vận chuyển: ' + label, 'info');
+      showToast(`Cập nhật phí vận chuyển: ${newFee.toLocaleString('vi-VN')}đ (${provincePart})`, 'info');
     }
-  }
-
-  // Watch address input for province detection
-  const addrInput = document.getElementById('shipping-address');
-  if (addrInput) {
-    addrInput.addEventListener('blur', () => updateShippingByProvince(addrInput.value));
   }
 
   // Apply Coupon Function

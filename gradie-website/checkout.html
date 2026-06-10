@@ -433,10 +433,33 @@
             </div>
           </div>
 
-          <div class="checkout-group">
-            <label for="shipping-address">Địa Chỉ Nhận Hàng *</label>
-            <input type="text" id="shipping-address" placeholder="Số nhà, Tên đường, Phường/Xã, Quận/Huyện, Tỉnh/Thành phố" required>
+          <div class="form-row-2">
+            <div class="checkout-group">
+              <label for="shipping-province">Tỉnh / Thành phố *</label>
+              <select id="shipping-province" required>
+                <option value="">-- Chọn Tỉnh / Thành phố --</option>
+              </select>
+            </div>
+            <div class="checkout-group">
+              <label for="shipping-district">Quận / Huyện *</label>
+              <select id="shipping-district" required disabled>
+                <option value="">-- Chọn Quận / Huyện --</option>
+              </select>
+            </div>
           </div>
+          <div class="form-row-2">
+            <div class="checkout-group">
+              <label for="shipping-ward">Phường / Xã *</label>
+              <select id="shipping-ward" required disabled>
+                <option value="">-- Chọn Phường / Xã --</option>
+              </select>
+            </div>
+            <div class="checkout-group">
+              <label for="shipping-street">Số nhà, tên đường *</label>
+              <input type="text" id="shipping-street" placeholder="Ví dụ: 123 Đường Lê Lợi" required>
+            </div>
+          </div>
+          <input type="hidden" id="shipping-address" required>
 
           <!-- Save address checkbox -->
           <div id="checkout-save-address-profile-wrapper" style="display:none; margin-bottom:18px;">

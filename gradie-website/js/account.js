@@ -1,6 +1,131 @@
 // js/account.js
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   if (!window.GradieStore) return;
+
+  // Address selectors for adding new address
+  const provinceSel = document.getElementById('new-address-province');
+  const districtSel = document.getElementById('new-address-district');
+  const wardSel = document.getElementById('new-address-ward');
+  const streetInput = document.getElementById('new-address-street');
+  const detailHidden = document.getElementById('new-address-detail');
+
+  let vnDivisions = null;
+
+  // Fetch and cache Vietnam administrative divisions data
+  async function loadVNDivisions() {
+    const cached = localStorage.getItem('GRADIE_VN_DIVISIONS');
+    if (cached) {
+      try {
+        return JSON.parse(cached);
+      } catch (e) {
+        console.warn('Failed to parse cached divisions, refetching...');
+      }
+    }
+    try {
+      const res = await fetch('https://cdn.jsdelivr.net/gh/daohoangson/dvhcvn@master/data/dvhcvn.json');
+      const json = await res.json();
+      if (json && json.data) {
+        localStorage.setItem('GRADIE_VN_DIVISIONS', JSON.stringify(json.data));
+        return json.data;
+      }
+    } catch (err) {
+      console.error('Failed to fetch Vietnam divisions:', err);
+    }
+    return null;
+  }
+
+  function populateDistricts(provinceId, selectId = '') {
+    if (!districtSel || !wardSel) return;
+    if (!provinceId) {
+      districtSel.innerHTML = '<option value="">-- Chọn Quận / Huyện --</option>';
+      districtSel.disabled = true;
+      wardSel.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>';
+      wardSel.disabled = true;
+      return;
+    }
+
+    const province = vnDivisions.find(p => p.level1_id === provinceId);
+    if (province && province.level2s) {
+      districtSel.innerHTML = '<option value="">-- Chọn Quận / Huyện --</option>' +
+        province.level2s.map(d => `<option value="${d.level2_id}">${d.name}</option>`).join('');
+      districtSel.disabled = false;
+      districtSel.value = selectId;
+      
+      if (!selectId) {
+        wardSel.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>';
+        wardSel.disabled = true;
+      }
+    }
+  }
+
+  function populateWards(provinceId, districtId, selectId = '') {
+    if (!wardSel) return;
+    if (!provinceId || !districtId) {
+      wardSel.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>';
+      wardSel.disabled = true;
+      return;
+    }
+
+    const province = vnDivisions.find(p => p.level1_id === provinceId);
+    if (province && province.level2s) {
+      const district = province.level2s.find(d => d.level2_id === districtId);
+      if (district && district.level3s) {
+        wardSel.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>' +
+          district.level3s.map(w => `<option value="${w.level3_id}">${w.name}</option>`).join('');
+        wardSel.disabled = false;
+        wardSel.value = selectId;
+      }
+    }
+  }
+
+  function updateCombinedAddress() {
+    if (!provinceSel || !districtSel || !wardSel || !streetInput || !detailHidden) return;
+    const provinceText = provinceSel.options[provinceSel.selectedIndex]?.text || '';
+    const districtText = districtSel.options[districtSel.selectedIndex]?.text || '';
+    const wardText = wardSel.options[wardSel.selectedIndex]?.text || '';
+    const streetText = streetInput.value.trim();
+
+    if (provinceSel.value && districtSel.value && wardSel.value && streetText) {
+      detailHidden.value = `${streetText}, ${wardText}, ${districtText}, ${provinceText}`;
+    } else {
+      detailHidden.value = '';
+    }
+  }
+
+  async function initDropdowns() {
+    vnDivisions = await loadVNDivisions();
+    if (!vnDivisions) return;
+
+    if (provinceSel) {
+      provinceSel.innerHTML = '<option value="">-- Chọn Tỉnh / Thành phố --</option>' +
+        vnDivisions.map(p => `<option value="${p.level1_id}">${p.name}</option>`).join('');
+
+      provinceSel.addEventListener('change', () => {
+        const provId = provinceSel.value;
+        populateDistricts(provId);
+        updateCombinedAddress();
+      });
+    }
+
+    if (districtSel) {
+      districtSel.addEventListener('change', () => {
+        const provId = provinceSel.value;
+        const distId = districtSel.value;
+        populateWards(provId, distId);
+        updateCombinedAddress();
+      });
+    }
+
+    if (wardSel) {
+      wardSel.addEventListener('change', updateCombinedAddress);
+    }
+
+    if (streetInput) {
+      streetInput.addEventListener('input', updateCombinedAddress);
+    }
+  }
+
+  await initDropdowns();
 
   // 1. Login Handler
   const loginForm = document.getElementById('user-login-form');
@@ -599,6 +724,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (res.success) {
           showToast('Đã thêm địa chỉ mới thành công!', 'success');
           document.getElementById('address-add-form').reset();
+          if (districtSel) { districtSel.innerHTML = '<option value="">-- Chọn Quận / Huyện --</option>'; districtSel.disabled = true; }
+          if (wardSel) { wardSel.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>'; wardSel.disabled = true; }
           window.selectAddressLabel('Home'); // Reset active label to Home
           window.renderAddressBook();
         }
