@@ -1,7 +1,7 @@
 // js/admin-auth.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    const isAuth = localStorage.getItem('GRADIE_ADMIN_AUTH') === 'true';
+    const isAuth = sessionStorage.getItem('GRADIE_ADMIN_AUTH') === 'true';
     const currentPath = window.location.pathname.split('/').pop();
     
     if (!isAuth && currentPath !== 'login.html') {
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Role-based Access Control (RBAC) Logic
-    const activeRole = localStorage.getItem('GRADIE_ACTIVE_ROLE') || 'Admin';
+    const activeRole = sessionStorage.getItem('GRADIE_ACTIVE_ROLE') || 'Admin';
     
     // Define which pages each role is NOT allowed to access
     const roleRestrictions = {

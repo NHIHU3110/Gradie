@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 1. Login Handler
   const loginForm = document.getElementById('user-login-form');
   if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('login-email').value.trim();
       const pass = document.getElementById('login-password').value;
@@ -147,9 +147,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       const matchedStaff = staffList.find(s => s.email === email && (s.password === pass || (!s.password && pass === '123456')));
 
       if (matchedStaff) {
-        localStorage.setItem('GRADIE_ADMIN_AUTH', 'true');
-        localStorage.setItem('GRADIE_ACTIVE_ROLE', matchedStaff.role);
-        localStorage.setItem('GRADIE_ACTIVE_USER', matchedStaff.name);
+        sessionStorage.setItem('GRADIE_ADMIN_AUTH', 'true');
+        sessionStorage.setItem('GRADIE_ACTIVE_ROLE', matchedStaff.role);
+        sessionStorage.setItem('GRADIE_ACTIVE_USER', matchedStaff.name);
         msg.textContent = `Đăng nhập hệ thống thành công! Xin chào ${matchedStaff.name}...`;
         msg.style.color = 'var(--champagne)';
         setTimeout(() => window.location.href = 'admin-dashboard.html', 1000);
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       // User Authentication
-      const result = window.GradieStore.loginUser(email, pass);
+      const result = await window.GradieStore.loginUser(email, pass);
       if (result.success) {
         msg.textContent = `Chào mừng ${result.user.username || 'Khách'} đến với Gradie! Đang chuyển hướng...`;
         msg.style.color = 'green';
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 2. Signup Handler
   const signupForm = document.getElementById('user-signup-form');
   if (signupForm) {
-    signupForm.addEventListener('submit', (e) => {
+    signupForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = document.getElementById('signup-name').value.trim();
       const email = document.getElementById('signup-email').value.trim();
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       const phone = document.getElementById('signup-phone') ? document.getElementById('signup-phone').value.trim() : '';
-      const result = window.GradieStore.registerUser(name, email, pass, phone);
+      const result = await window.GradieStore.registerUser(name, email, pass, phone);
       if (result.success) {
         msg.textContent = `Chào mừng ${result.user.username || 'Khách'} đến với Gradie! Đăng ký tài khoản thành công! Đang chuyển hướng...`;
         msg.style.color = 'green';
@@ -1338,9 +1338,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 4. Logout Action
   if (logoutBtn) {
-    logoutBtn.addEventListener('click', (e) => {
+    logoutBtn.addEventListener('click', async (e) => {
       e.preventDefault();
-      window.GradieStore.logoutUser();
+      await window.GradieStore.logoutUser();
       window.location.href = 'login.html';
     });
   }

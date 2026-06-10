@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof renderRecentUsers === 'function') renderRecentUsers();
     });
 
-  const activeRole = localStorage.getItem('GRADIE_ACTIVE_ROLE') || 'Admin';
+  const activeRole = sessionStorage.getItem('GRADIE_ACTIVE_ROLE') || 'Admin';
 
   // ── 1. Build Sidebar ──
   const sidebar = document.querySelector('.sidebar');
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     // Populate topbar user info
-    const activeUser = localStorage.getItem('GRADIE_ACTIVE_USER') || 'Admin';
+    const activeUser = sessionStorage.getItem('GRADIE_ACTIVE_USER') || 'Admin';
     document.getElementById('topbar-username').textContent = activeUser;
     document.getElementById('topbar-role-name').textContent = activeRole;
 
@@ -169,10 +169,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('admin-logout-btn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('GRADIE_ADMIN_AUTH');
-            localStorage.removeItem('GRADIE_ACTIVE_ROLE');
-            localStorage.removeItem('GRADIE_ACTIVE_USER');
+          if (confirm('Bạn có chắc muốn đăng xuất?')) {
+            sessionStorage.removeItem('GRADIE_ADMIN_AUTH');
+            sessionStorage.removeItem('GRADIE_ACTIVE_ROLE');
+            sessionStorage.removeItem('GRADIE_ACTIVE_USER');
             window.location.href = 'login.html';
+          }
         });
     }
 
@@ -198,7 +200,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── 3. Logout handler ──
   document.body.addEventListener('click', (e) => {
     if (e.target && (e.target.id === 'admin-logout-btn' || e.target.closest('#admin-logout-btn'))) {
-      localStorage.removeItem('GRADIE_ADMIN_AUTH');
+      sessionStorage.removeItem('GRADIE_ADMIN_AUTH');
+      sessionStorage.removeItem('GRADIE_ACTIVE_ROLE');
+      sessionStorage.removeItem('GRADIE_ACTIVE_USER');
       window.location.href = 'login.html';
     }
   });

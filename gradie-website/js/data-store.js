@@ -1978,7 +1978,7 @@ window.GradieStore = {
 
   // USER AUTHENTICATION & SESSIONS
   getUsers: function() { return this.getData().users || []; },
-  registerUser: function(username, email, password, phone = '') {
+  registerUser: async function(username, email, password, phone = '') {
     let data = this.getData();
     if (!data.users) data.users = [];
     if (data.users.some(u => u.email.toLowerCase() === email.toLowerCase())) return { success: false, message: "Email is already registered." };
@@ -1991,23 +1991,72 @@ window.GradieStore = {
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
       addresses: []
     };
-    // No default empty address detail created on signup, starting with empty address list instead
-    data.users.push(newUser);
-    this.saveData(data);
-    this.setCurrentUser(newUser);
-    fetch('/api/users', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newUser) }).catch(e => console.error('Sync error', e));
-    return { success: true, user: newUser };
-  },
-  loginUser: function(email, password) {
-    const user = this.getUsers().find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
-    if (user) {
-      this.setCurrentUser(user);
-      return { success: true, user };
+    try {
+      const res = await fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newUser)
+      });
+      if (res.ok) {
+        data.users.push(newUser);
+        this.saveData(data);
+        this.setCurrentUser(newUser);
+        return { success: true, user: newUser };
+      }
+      return { success: false, message: "Server registration failed." };
+    } catch(e) {
+      return { success: false, message: "Mạng lỗi, vui lòng thử lại." };
     }
-    return { success: false, message: "Invalid email or password." };
   },
-  logoutUser: function() {
+  loginUser: async function(email, password) {
+    try {
+      const res = await fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'login', email, password })
+      });
+      const resData = await res.json();
+      if (resData.success) {
+        this.setCurrentUser(resData.user);
+        return { success: true, user: resData.user };
+      }
+      return { success: false, message: resData.message || "Invalid email or password." };
+    } catch(e) {
+      return { success: false, message: "Mạng lỗi. Vui lòng thử lại." };
+    }
+  },
+  logoutUser: async function() {
     this.setCurrentUser(null);
+    try {
+      await fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'logout' })
+      });
+    } catch(e) {
+      console.warn("Server logout call failed", e);
+    }
+  },
+  verifySessionWithServer: async function() {
+    try {
+      const res = await fetch('/api/users?action=me');
+      if (res.ok) {
+        const resData = await res.json();
+        if (resData.loggedIn && resData.user) {
+          this.setCurrentUser(resData.user);
+          return resData.user;
+        } else {
+          // If server session expired but client still has user, clear & refresh
+          if (localStorage.getItem('GRADIE_USER_SESSION')) {
+            this.setCurrentUser(null);
+            window.location.reload();
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('Session verification failed:', e);
+    }
+    return null;
   },
 
   syncWithDB: async function(scope = 'all') {
@@ -2146,17 +2195,30 @@ window.GradieStore = {
       console.warn('API sync failed. Falling back to local storage.', e);
     }
   },
-  getCurrentUser: function() {
+    getCurrentUser: function() {
     try {
-      const sess = localStorage.getItem('GRADIE_USER_SESSION');
+      const sess = sessionStorage.getItem('GRADIE_USER_SESSION');
       return sess ? JSON.parse(sess) : null;
     } catch(e) { return null; }
   },
   setCurrentUser: function(user) {
-    localStorage.setItem('GRADIE_USER_SESSION', JSON.stringify(user));
+    if (user) {
+      sessionStorage.setItem('GRADIE_USER_SESSION', JSON.stringify(user));
+    } else {
+      sessionStorage.removeItem('GRADIE_USER_SESSION');
+    }
   },
-  logoutUser: function() {
-    localStorage.removeItem('GRADIE_USER_SESSION');
+  logoutUser: async function() {
+    this.setCurrentUser(null);
+    try {
+      await fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'logout' })
+      });
+    } catch(e) {
+      console.warn("Server logout call failed", e);
+    }
   },
   updateUserProfile: function(email, updatedData) {
     let data = this.getData();
@@ -2229,6 +2291,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   if (window.GradieStore) {
     window.GradieStore.init();
+    
+    // Verify HTTP-Only Cookie session on load
+    if (window.GradieStore.verifySessionWithServer) {
+      window.GradieStore.verifySessionWithServer();
+    }
+    
     if (window.GradieStore.syncWithDB) {
       window.GradieStore.syncWithDB();
       // Background synchronization every 8 seconds (dynamic based on page type)
