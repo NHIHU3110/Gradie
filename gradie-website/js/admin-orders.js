@@ -95,6 +95,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 let ords = window.GradieStore.getOrders();
+
+                // Sort orders from newest to oldest
+                const getOrderTimestamp = (o) => {
+                    if (o.createdAt) {
+                        const t = new Date(o.createdAt).getTime();
+                        if (!isNaN(t)) return t;
+                    }
+                    if (o.date) {
+                        const cleanDate = o.date.replace(/,/g, '').trim();
+                        const parts = cleanDate.split(' ');
+                        if (parts.length >= 1) {
+                            const datePart = parts[0];
+                            const timePart = parts[1] || '00:00:00';
+                            const dParts = datePart.split('/');
+                            const tParts = timePart.split(':');
+                            if (dParts.length === 3) {
+                                const day = parseInt(dParts[0], 10);
+                                const month = parseInt(dParts[1], 10) - 1;
+                                const year = parseInt(dParts[2], 10);
+                                const hour = tParts[0] ? parseInt(tParts[0], 10) : 0;
+                                const minute = tParts[1] ? parseInt(tParts[1], 10) : 0;
+                                const second = tParts[2] ? parseInt(tParts[2], 10) : 0;
+                                const d = new Date(year, month, day, hour, minute, second);
+                                if (!isNaN(d.getTime())) return d.getTime();
+                            }
+                        }
+                        const t = new Date(o.date).getTime();
+                        if (!isNaN(t)) return t;
+                    }
+                    return 0;
+                };
+                ords.sort((a, b) => getOrderTimestamp(b) - getOrderTimestamp(a));
                 
                 // Apply status filter
                 if (currentStatusFilter !== 'all') {
