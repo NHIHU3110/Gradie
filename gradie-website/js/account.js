@@ -421,6 +421,37 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="om-price-row total"><span>Tổng cộng</span><span>${total.toLocaleString('vi-VN')}đ</span></div>
         `;
 
+        // Populate Actions Bar dynamically
+        const actionsBar = document.getElementById('user-order-actions-bar');
+        if (actionsBar) {
+          actionsBar.innerHTML = '';
+          
+          if (o.status === 'Pending' || o.status === 'Confirmed') {
+            const cancelBtn = document.createElement('button');
+            cancelBtn.className = 'btn-secondary';
+            cancelBtn.style.cssText = 'background:#fee2e2; color:#dc2626; border:1px solid #fca5a5; padding:8px 16px; border-radius:8px; font-weight:600; font-family:inherit; cursor:pointer; font-size:0.85rem; transition: all 0.2s ease;';
+            cancelBtn.textContent = 'Hủy Đơn Hàng';
+            cancelBtn.onclick = () => window.cancelUserOrder(o.orderNumber);
+            actionsBar.appendChild(cancelBtn);
+          }
+          
+          if (o.status === 'Delivered' || o.status === 'Completed') {
+            const returnBtn = document.createElement('button');
+            returnBtn.className = 'btn-secondary';
+            returnBtn.style.cssText = 'background:#faf8f5; color:var(--ink); border:1.5px solid var(--border-gold); padding:8px 16px; border-radius:8px; font-weight:600; font-family:inherit; cursor:pointer; font-size:0.85rem; transition: all 0.2s ease;';
+            returnBtn.textContent = 'Yêu Cầu Đổi Trả';
+            returnBtn.onclick = () => window.showReturnModal(o.orderNumber);
+            actionsBar.appendChild(returnBtn);
+          }
+          
+          const printBtn = document.createElement('button');
+          printBtn.className = 'btn-primary';
+          printBtn.style.cssText = 'background:var(--champagne); color:#fff; border:none; padding:8px 16px; border-radius:8px; font-weight:600; font-family:inherit; cursor:pointer; font-size:0.85rem; transition: all 0.2s ease;';
+          printBtn.textContent = 'In Hóa Đơn';
+          printBtn.onclick = () => window.printUserInvoice(o.orderNumber);
+          actionsBar.appendChild(printBtn);
+        }
+
         // Show modal
         document.getElementById('userOrderModal').style.display = 'block';
         document.body.style.overflow = 'hidden';
@@ -431,16 +462,370 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.body.style.overflow = '';
       };
 
+      // Order action handlers
+      window.cancelUserOrder = function(orderNumber) {
+        if (confirm("Bạn có chắc chắn muốn hủy đơn hàng này không? Quá trình này sẽ hoàn trả số tồn kho sản phẩm.")) {
+          window.GradieStore.updateOrder(orderNumber, { status: 'Cancelled' });
+          if (typeof showToast === 'function') {
+            showToast('Đơn hàng đã được hủy thành công!', 'success');
+          } else {
+            alert('Đơn hàng đã được hủy thành công!');
+          }
+          window.closeUserOrderModal();
+        }
+      };
+
+      window.showReturnModal = function(orderNumber) {
+        const orderNumInput = document.getElementById('return-order-number');
+        if (orderNumInput) {
+          orderNumInput.value = orderNumber;
+        }
+        const reasonInput = document.getElementById('return-reason');
+        const bankInput = document.getElementById('return-bank');
+        if (reasonInput) reasonInput.value = '';
+        if (bankInput) bankInput.value = '';
+        
+        const returnModal = document.getElementById('userReturnModal');
+        if (returnModal) {
+          returnModal.style.display = 'block';
+        }
+      };
+
+      window.closeUserReturnModal = function() {
+        const returnModal = document.getElementById('userReturnModal');
+        if (returnModal) {
+          returnModal.style.display = 'none';
+        }
+      };
+
+      window.submitReturnRequest = function() {
+        const orderNumber = document.getElementById('return-order-number')?.value;
+        const reason = document.getElementById('return-reason')?.value.trim();
+        const bank = document.getElementById('return-bank')?.value.trim();
+        
+        if (!orderNumber || !reason || !bank) {
+          if (typeof showToast === 'function') {
+            showToast('Vui lòng điền đầy đủ các trường thông tin.', 'error');
+          } else {
+            alert('Vui lòng điền đầy đủ các trường thông tin.');
+          }
+          return;
+        }
+        
+        const allOrders = window.GradieStore.getOrders();
+        const o = allOrders.find(ord => ord.orderNumber === orderNumber);
+        if (!o) return;
+        
+        const newNotes = [
+          o.notes || '',
+          `[Yêu cầu đổi trả: ${reason} | Hoàn tiền: ${bank}]`
+        ].filter(Boolean).join(' ');
+
+        window.GradieStore.updateOrder(orderNumber, { 
+          status: 'Refunded', 
+          notes: newNotes 
+        });
+        
+        if (typeof showToast === 'function') {
+          showToast('Đã gửi yêu cầu đổi trả thành công!', 'success');
+        } else {
+          alert('Đã gửi yêu cầu đổi trả thành công!');
+        }
+        window.closeUserReturnModal();
+        window.closeUserOrderModal();
+      };
+
+      window.printUserInvoice = function(orderNumber) {
+        const allOrders = window.GradieStore.getOrders();
+        const o = allOrders.find(ord => ord.orderNumber === orderNumber);
+        if (!o) return;
+
+        const invoiceWindow = window.open('', '_blank', 'width=800,height=900');
+        if (!invoiceWindow) {
+          alert('Vui lòng cho phép trình duyệt mở popup để in hóa đơn.');
+          return;
+        }
+        
+        // Format items rows
+        const itemsHtml = o.items.map(item => {
+          const price = Number(item.price) || 0;
+          const qty = parseInt(item.quantity || item.qty || 1);
+          const itemTotal = price * qty;
+          
+          let customHtml = '';
+          if (item.customization) {
+            const c = item.customization;
+            let parts = [];
+            if (c.embroideryText) parts.push('Thêu chữ: "' + c.embroideryText + '"');
+            if (c.threadColor) parts.push('Màu chỉ: ' + c.threadColor);
+            if (c.boxColor) parts.push('Hộp quà: ' + c.boxColor);
+            if (c.ribbonColor) parts.push('Ruy băng: ' + c.ribbonColor);
+            if (c.waxSeal) parts.push('Dấu sáp: ' + c.waxSeal);
+            if (c.sashColor) parts.push('Dải băng: ' + c.sashColor);
+            if (c.sashText) parts.push('Chữ dải băng: "' + c.sashText + '"');
+            if (parts.length > 0) {
+              customHtml = `<div style="font-size: 11px; color: #777; margin-top: 4px; font-style: italic;">${parts.join(' · ')}</div>`;
+            }
+          }
+          
+          return `
+            <tr style="border-bottom: 1px solid #f0eeeb;">
+              <td style="padding: 12px 0; font-weight: 500; color: #17181d; font-size: 13.5px;">
+                ${item.name}
+                ${customHtml}
+              </td>
+              <td style="padding: 12px 0; text-align: center; color: #777; font-size: 13.5px;">${qty}</td>
+              <td style="padding: 12px 0; text-align: right; color: #777; font-size: 13.5px;">${price.toLocaleString('vi-VN')}đ</td>
+              <td style="padding: 12px 0; text-align: right; font-weight: 600; color: #17181d; font-size: 13.5px;">${itemTotal.toLocaleString('vi-VN')}đ</td>
+            </tr>
+          `;
+        }).join('');
+
+        const subtotal = Number(o.subtotal) || Number(o.total) || 0;
+        const shipping = Number(o.shippingFee) || 0;
+        const total = Number(o.total) || 0;
+
+        invoiceWindow.document.write(`
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>Hoa Don ${o.orderNumber}</title>
+            <meta charset="utf-8">
+            <style>
+              @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
+              body {
+                font-family: 'Inter', sans-serif;
+                color: #17181d;
+                background: #ffffff;
+                margin: 0;
+                padding: 40px;
+                line-height: 1.5;
+              }
+              .invoice-card {
+                max-width: 700px;
+                margin: 0 auto;
+                border: 1px solid #e2e8f0;
+                padding: 40px;
+                border-radius: 16px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+              }
+              .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                border-bottom: 2px solid #f4e8d1;
+                padding-bottom: 24px;
+                margin-bottom: 30px;
+              }
+              .logo-section h1 {
+                font-family: 'Playfair Display', serif;
+                font-size: 28px;
+                margin: 0;
+                color: #d8a94f;
+                letter-spacing: 0.5px;
+              }
+              .logo-section p {
+                margin: 4px 0 0;
+                font-size: 12px;
+                color: #777;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+              }
+              .title-section {
+                text-align: right;
+              }
+              .title-section h2 {
+                margin: 0;
+                font-size: 24px;
+                font-weight: 700;
+                color: #17181d;
+              }
+              .title-section p {
+                margin: 6px 0 0;
+                font-size: 14px;
+                color: #d8a94f;
+                font-weight: 600;
+              }
+              .details-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+                margin-bottom: 40px;
+              }
+              .details-block h3 {
+                font-size: 12px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #777;
+                margin: 0 0 10px;
+                border-bottom: 1px solid #f0eeeb;
+                padding-bottom: 6px;
+              }
+              .details-block p {
+                margin: 4px 0;
+                font-size: 13.5px;
+                color: #333;
+              }
+              .details-block strong {
+                color: #17181d;
+              }
+              table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 30px;
+              }
+              th {
+                border-bottom: 2px solid #17181d;
+                text-align: left;
+                padding: 10px 0;
+                font-size: 12px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #777;
+              }
+              .summary-section {
+                display: flex;
+                justify-content: flex-end;
+                border-top: 2px solid #f0eeeb;
+                padding-top: 20px;
+                margin-bottom: 40px;
+              }
+              .summary-table {
+                width: 300px;
+              }
+              .summary-row {
+                display: flex;
+                justify-content: space-between;
+                padding: 6px 0;
+                font-size: 14px;
+              }
+              .summary-row.total {
+                border-top: 1.5px solid #d8a94f;
+                margin-top: 8px;
+                padding-top: 12px;
+                font-weight: 700;
+                font-size: 17px;
+                color: #17181d;
+              }
+              .footer {
+                text-align: center;
+                color: #777;
+                font-size: 12px;
+                margin-top: 50px;
+                border-top: 1px solid #f0eeeb;
+                padding-top: 20px;
+              }
+              @media print {
+                body {
+                  padding: 0;
+                }
+                .invoice-card {
+                  border: none;
+                  padding: 0;
+                  box-shadow: none;
+                }
+                .no-print {
+                  display: none;
+                }
+              }
+            </style>
+          </head>
+          <body>
+            <div class="invoice-card">
+              <div class="header">
+                <div class="logo-section">
+                  <h1>Gradie</h1>
+                  <p>Premium Graduation Gifts</p>
+                </div>
+                <div class="title-section">
+                  <h2>HÓA ĐƠN</h2>
+                  <p>${o.orderNumber}</p>
+                </div>
+              </div>
+
+              <div class="details-grid">
+                <div class="details-block">
+                  <h3>Thông tin khách hàng</h3>
+                  <p><strong>Họ tên:</strong> ${o.customerName}</p>
+                  <p><strong>SĐT:</strong> ${o.customerPhone || 'N/A'}</p>
+                  <p><strong>Email:</strong> ${o.customerEmail || 'N/A'}</p>
+                  <p><strong>Địa chỉ:</strong> ${o.shippingAddress}</p>
+                </div>
+                <div class="details-block">
+                  <h3>Chi tiết hóa đơn</h3>
+                  <p><strong>Ngày đặt hàng:</strong> ${o.date}</p>
+                  <p><strong>Phương thức TT:</strong> ${o.paymentMethod === 'COD' || o.paymentMethod === 'COD (Cash on Delivery)' ? 'Thanh toán COD' : o.paymentMethod || 'COD'}</p>
+                  <p><strong>Trạng thái:</strong> ${o.status === 'Completed' ? 'Hoàn Tất' : o.status === 'Delivered' ? 'Đã Giao Hàng' : o.status === 'Shipped' ? 'Đang Giao' : o.status === 'Processing' ? 'Đang Xử Lý' : o.status === 'Confirmed' ? 'Đã Xác Nhận' : o.status === 'Cancelled' ? 'Đã Hủy' : o.status === 'Refunded' ? 'Đã Hoàn Tiền' : 'Chờ Duyệt'}</p>
+                </div>
+              </div>
+
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width: 50%;">Sản phẩm</th>
+                    <th style="width: 15%; text-align: center;">SL</th>
+                    <th style="width: 15%; text-align: right;">Đơn giá</th>
+                    <th style="width: 20%; text-align: right;">Thành tiền</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${itemsHtml}
+                </tbody>
+              </table>
+
+              <div class="summary-section">
+                <div class="summary-table">
+                  <div class="summary-row">
+                    <span style="color:#777;">Tạm tính:</span>
+                    <span style="font-weight: 500;">${subtotal.toLocaleString('vi-VN')}đ</span>
+                  </div>
+                  <div class="summary-row">
+                    <span style="color:#777;">Phí vận chuyển:</span>
+                    <span style="font-weight: 500;">${shipping.toLocaleString('vi-VN')}đ</span>
+                  </div>
+                  <div class="summary-row total">
+                    <span>Tổng thanh toán:</span>
+                    <span style="color: #d8a94f;">${total.toLocaleString('vi-VN')}đ</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="footer">
+                <p>Cảm ơn bạn đã lựa chọn món quà tốt nghiệp ý nghĩa tại Gradie!</p>
+                <p style="font-size: 10px; color: #aaa; margin-top: 5px;">Hóa đơn được tạo tự động • gradie-website.vercel.app</p>
+              </div>
+            </div>
+            <script>
+              window.onload = function() {
+                window.print();
+              };
+            </script>
+          </body>
+          </html>
+        `);
+        invoiceWindow.document.close();
+      };
+
       // Close on overlay click
       document.getElementById('userOrderModal').addEventListener('click', function(e) {
         if (e.target === this) closeUserOrderModal();
       });
+
+      // Close return modal on overlay click
+      const returnModalEl = document.getElementById('userReturnModal');
+      if (returnModalEl) {
+        returnModalEl.addEventListener('click', function(e) {
+          if (e.target === this) window.closeUserReturnModal();
+        });
+      }
 
       // Close on Escape key
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           const modal = document.getElementById('userOrderModal');
           if (modal && modal.style.display === 'block') closeUserOrderModal();
+          const retModal = document.getElementById('userReturnModal');
+          if (retModal && retModal.style.display === 'block') window.closeUserReturnModal();
         }
       });
 

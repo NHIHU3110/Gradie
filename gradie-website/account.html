@@ -843,6 +843,33 @@
         <h4 class="om-items-title">Sản Phẩm Đã Đặt</h4>
         <div id="user-order-items"></div>
         <div class="om-price-summary" id="user-order-pricing"></div>
+        <div id="user-order-actions-bar" style="margin-top:20px; display:flex; justify-content:flex-end; gap:12px; border-top:1px solid #f0eeeb; padding-top:18px;">
+          <!-- Dynamically populated buttons -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Return/Refund Modal -->
+  <div id="userReturnModal" class="order-modal-overlay">
+    <div class="order-modal-box" style="max-width: 500px; margin: 10% auto;">
+      <div class="order-modal-header">
+        <h3>Yêu Cầu Đổi Trả / Hoàn Tiền</h3>
+        <button class="order-modal-close" onclick="closeUserReturnModal()">&times;</button>
+      </div>
+      <div class="order-modal-body">
+        <form id="return-request-form" onsubmit="event.preventDefault(); submitReturnRequest();">
+          <input type="hidden" id="return-order-number">
+          <div style="margin-bottom:18px;">
+            <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:8px; color:var(--ink);">Lý do đổi trả / hoàn tiền *</label>
+            <textarea id="return-reason" required placeholder="Ví dụ: Sản phẩm bị rách chỉ thêu ở cổ áo gấu bông, giao sai màu ruy băng..." style="width:100%; min-height:90px; padding:12px; border:1.5px solid var(--border-gold); border-radius:10px; font-family:inherit; font-size:0.9rem; outline:none; background:var(--ivory);" onfocus="this.style.borderColor='var(--champagne)'" onblur="this.style.borderColor='var(--border-gold)'"></textarea>
+          </div>
+          <div style="margin-bottom:22px;">
+            <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:8px; color:var(--ink);">Thông tin tài khoản nhận hoàn tiền *</label>
+            <input type="text" id="return-bank" required placeholder="Tên ngân hàng - Số tài khoản - Họ tên chủ thẻ" style="width:100%; padding:12px; border:1.5px solid var(--border-gold); border-radius:10px; font-family:inherit; font-size:0.9rem; outline:none; background:var(--ivory);" onfocus="this.style.borderColor='var(--champagne)'" onblur="this.style.borderColor='var(--border-gold)'">
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%; padding:14px; border-radius:10px; font-weight:600; text-transform:uppercase; font-size:0.88rem; letter-spacing:0.5px;">Gửi Yêu Cầu Đổi Trả</button>
+        </form>
       </div>
     </div>
   </div>

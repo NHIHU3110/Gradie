@@ -6,13 +6,14 @@ module.exports = async (req, res) => {
     
     if (req.method === 'GET') {
       // Fetch all global configuration data concurrently
-      const [categories, customizations, gallery, blogPosts, settings, activityLogs] = await Promise.all([
+      const [categories, customizations, gallery, blogPosts, settings, activityLogs, reviews] = await Promise.all([
         db.collection('categories').find({}).toArray(),
         db.collection('customizations').findOne({}), // Assuming only 1 document holds the customization object
         db.collection('gallery').find({}).toArray(),
         db.collection('blogPosts').find({}).toArray(),
         db.collection('settings').findOne({}), // Assuming 1 document holds the settings
-        db.collection('activityLogs').find({}).sort({ timestamp: -1 }).limit(200).toArray()
+        db.collection('activityLogs').find({}).sort({ timestamp: -1 }).limit(200).toArray(),
+        db.collection('reviews').find({}).toArray()
       ]);
 
       res.status(200).json({
@@ -21,7 +22,8 @@ module.exports = async (req, res) => {
         gallery,
         blogPosts,
         settings: settings || {},
-        activityLogs
+        activityLogs,
+        reviews: reviews || []
       });
     } else if (req.method === 'POST') {
       const payload = req.body; // Expects { type: 'settings', data: {...} }
@@ -41,6 +43,11 @@ module.exports = async (req, res) => {
         await db.collection('activityLogs').deleteMany({});
         if (payload.data && payload.data.length > 0) {
           await db.collection('activityLogs').insertMany(payload.data);
+        }
+      } else if (payload.type === 'reviews') {
+        await db.collection('reviews').deleteMany({});
+        if (payload.data && payload.data.length > 0) {
+          await db.collection('reviews').insertMany(payload.data);
         }
       }
       res.status(200).json({ success: true });

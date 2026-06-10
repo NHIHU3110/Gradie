@@ -251,6 +251,7 @@ window.GradieStore = {
 
   getDefaultData: function() {
     return {
+      reviews: [],
       categories: ["Graduation Gifts", "Scrapbook", "Đồ tốt nghiệp", "Gấu Bông", "Gấu bông", "Khung ảnh", "Đèn Ngủ", "Kẹo", "Huy Chương", "Sổ kế hoạch", "Hoa mừng"],
       settings: {
         brandName: "Gradie", tagline: "Graduation Gifts", shippingFee: 30000, currency: "VND",
@@ -1897,8 +1898,9 @@ window.GradieStore = {
       const oldStatus = data.orders[i].status || 'Pending';
       data.orders[i] = { ...data.orders[i], ...order }; 
       
-      // Phép tính riêng khi cập nhật từ completed sang refund: hoàn lại số lượng tồn kho (restock)
-      if ((oldStatus === 'Completed' || oldStatus === 'Delivered') && order.status === 'Refunded') {
+      // Phép tính riêng khi cập nhật từ completed sang refund HOẶC từ chưa hoàn tất sang huỷ: hoàn lại số lượng tồn kho (restock)
+      if (((oldStatus === 'Completed' || oldStatus === 'Delivered') && order.status === 'Refunded') ||
+          ((oldStatus === 'Pending' || oldStatus === 'Confirmed' || oldStatus === 'Processing') && order.status === 'Cancelled')) {
         if (data.orders[i].items && data.products) {
           data.orders[i].items.forEach(item => {
             let pIndex = data.products.findIndex(p => p.id === item.id);
@@ -2069,6 +2071,7 @@ window.GradieStore = {
           if (globalData.blogPosts && globalData.blogPosts.length > 0) data.blogPosts = globalData.blogPosts;
           if (globalData.settings && Object.keys(globalData.settings).length > 0) data.settings = globalData.settings;
           if (globalData.activityLogs && globalData.activityLogs.length > 0) data.activityLogs = globalData.activityLogs;
+          if (globalData.reviews) data.reviews = globalData.reviews;
           updated = true;
         }
       }
@@ -2187,6 +2190,35 @@ window.GradieStore = {
     }
   },
   
+  // REVIEWS
+  getReviews: function() { return this.getData().reviews || []; },
+  addReview: function(review) {
+    let data = this.getData();
+    if (!data.reviews) data.reviews = [];
+    data.reviews.unshift(review);
+    
+    // Update product rating and reviews count in the product object itself
+    const pIndex = data.products.findIndex(p => p.id === review.productId);
+    if (pIndex !== -1) {
+      const pReviews = data.reviews.filter(r => r.productId === review.productId);
+      const avgRating = pReviews.reduce((sum, r) => sum + r.rating, 0) / pReviews.length;
+      data.products[pIndex].rating = parseFloat(avgRating.toFixed(1));
+      data.products[pIndex].reviews = pReviews.length;
+      
+      // Sync updated product to server
+      fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data.products[pIndex]) }).catch(e => console.error('Sync product error', e));
+    }
+    
+    this.saveData(data);
+    
+    // Sync review globally
+    fetch('/api/global', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'reviews', data: data.reviews }) })
+      .then(() => {
+        window.dispatchEvent(new CustomEvent('gradie_data_synced'));
+      })
+      .catch(e => console.error('Sync review error', e));
+  },
+
   exportData: function() { return JSON.stringify(this.getData(), null, 2); },
   importData: function(jsonData) { try { const p = JSON.parse(jsonData); if (p && p.products) { this.saveData(p); return true; } } catch (e) {} return false; }
 };
