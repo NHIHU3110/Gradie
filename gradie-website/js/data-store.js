@@ -2047,9 +2047,13 @@ window.GradieStore = {
           return resData.user;
         } else {
           // If server session expired but client still has user, clear & refresh
-          if (localStorage.getItem('GRADIE_USER_SESSION')) {
+          if (sessionStorage.getItem('GRADIE_USER_SESSION')) {
             this.setCurrentUser(null);
             window.location.reload();
+          }
+          // Clear legacy localStorage to prevent loops for existing users
+          if (localStorage.getItem('GRADIE_USER_SESSION')) {
+            localStorage.removeItem('GRADIE_USER_SESSION');
           }
         }
       }
