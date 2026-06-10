@@ -232,14 +232,30 @@ window.togglePasswordVisibility = function(inputId, btn) {
   }
 };
 
-// Tawk.to Chatbot Integration
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+// Tawk.to Chatbot Integration — luôn hiển thị ở góc phải dưới
+var Tawk_API = Tawk_API || {};
+var Tawk_LoadStart = new Date();
+
+// Khi Tawk.to load xong: hiện widget, không cho ẩn
+Tawk_API.onLoad = function() {
+  // Hiện widget ngay khi load
+  Tawk_API.showWidget();
+
+  // Nếu người dùng thu nhỏ chat, tự động mở lại sau 1s
+  Tawk_API.onChatMinimized = function() {
+    setTimeout(function() {
+      Tawk_API.showWidget();
+    }, 800);
+  };
+};
+
 (function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-if(!s0) { s0=document.createElement("script"); document.head.appendChild(s0); }
-s1.async=true;
-s1.src='https://embed.tawk.to/6a2666706766561c2e4b4aeb/1jqj00aa1';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
+  var s1 = document.createElement("script");
+  var s0 = document.getElementsByTagName("script")[0];
+  if (!s0) { s0 = document.createElement("script"); document.head.appendChild(s0); }
+  s1.async = true;
+  s1.src = 'https://embed.tawk.to/6a2666706766561c2e4b4aeb/1jqj00aa1';
+  s1.charset = 'UTF-8';
+  s1.setAttribute('crossorigin', '*');
+  s0.parentNode.insertBefore(s1, s0);
 })();
