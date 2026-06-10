@@ -232,8 +232,23 @@ window.togglePasswordVisibility = function(inputId, btn) {
   }
 };
 
-// Tawk.to Chatbot Integration — luôn hiển thị ở góc phải dưới
+// Tawk.to Chatbot Integration — luôn hiển thị cố định ở góc phải dưới
 var Tawk_API = Tawk_API || {};
+Tawk_API.customStyle = {
+  zIndex: 999999,
+  visibility: {
+    desktop: {
+      position: 'br', // bottom right
+      xOffset: 20,
+      yOffset: 20
+    },
+    mobile: {
+      position: 'br',
+      xOffset: 15,
+      yOffset: 15
+    }
+  }
+};
 var Tawk_LoadStart = new Date();
 
 // Khi Tawk.to load xong: hiện widget, không cho ẩn

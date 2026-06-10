@@ -100,6 +100,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (user) {
       dashboard.style.display = 'grid';
       prompt.style.display = 'none';
+      
+      // Show page titles
+      const pageTitle = document.querySelector('.account-page-title');
+      const pageSubtitle = document.querySelector('.account-page-subtitle');
+      if (pageTitle) pageTitle.style.display = '';
+      if (pageSubtitle) pageSubtitle.style.display = '';
 
       // Load Profile Fields & Avatar
       document.getElementById('dash-name').textContent = user.username || 'User';
@@ -699,7 +705,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     } else {
       dashboard.style.display = 'none';
-      prompt.style.display = 'block';
+      prompt.style.display = 'flex';
+      
+      // Hide page titles when not logged in to center the card perfectly
+      const pageTitle = document.querySelector('.account-page-title');
+      const pageSubtitle = document.querySelector('.account-page-subtitle');
+      if (pageTitle) pageTitle.style.display = 'none';
+      if (pageSubtitle) pageSubtitle.style.display = 'none';
     }
   }
 

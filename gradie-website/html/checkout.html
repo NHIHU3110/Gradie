@@ -110,13 +110,6 @@
       box-shadow: 0 0 0 4px rgba(216,169,79,0.1);
     }
     .checkout-group textarea { resize: vertical; min-height: 100px; }
-    .checkout-group input[readonly],
-    .checkout-group textarea[readonly] {
-      background: var(--champagne-light);
-      opacity: 0.9;
-      cursor: not-allowed;
-      border-color: var(--border-gold);
-    }
 
     .form-row-2 {
       display: grid;
@@ -481,18 +474,40 @@
           </div>
 
           <!-- VietQR Section (hidden until QR selected) -->
-          <div id="vietqr-section" style="display:none; margin-top:20px; padding:20px; background:linear-gradient(135deg,#f9f7ff,#fff); border:1px solid var(--border-gold); border-radius:14px; text-align:center;">
-            <div style="font-size:0.85rem; color:var(--taupe); margin-bottom:12px; text-transform:uppercase; letter-spacing:1px;">Mã QR Thanh Toán</div>
-            <div id="qr-loading" style="padding:20px; color:var(--taupe); font-style:italic;">Đang tạo mã QR...</div>
-            <img id="qr-image" src="" alt="VietQR" loading="lazy"
-               style="display:none; width:220px; height:220px; border-radius:12px; border:3px solid var(--champagne); box-shadow:0 8px 24px rgba(216,169,79,0.2); margin:0 auto;">
-            <div id="qr-info" style="display:none; margin-top:14px; font-size:0.88rem; color:var(--ink); line-height:1.8;">
-              <strong>Ngân hàng:</strong> <span id="qr-bank"></span><br>
-              <strong>Số tài khoản:</strong> <span id="qr-acct"></span><br>
-              <strong>Chủ tài khoản:</strong> <span id="qr-name"></span><br>
-              <strong>Nội dung CK:</strong> <span id="qr-desc" style="color:var(--champagne); font-weight:700;"></span>
+          <div id="vietqr-section" style="display:none; margin-top:20px;">
+            <!-- Techcombank Header -->
+            <div style="display:flex; align-items:center; justify-content:center; gap:12px; background:linear-gradient(135deg,#e31e24,#c0121a); padding:14px 20px; border-radius:12px 12px 0 0;">
+              <div style="background:#fff; border-radius:6px; padding:4px 10px; font-weight:900; font-size:1rem; color:#e31e24; letter-spacing:1px; font-family:'Arial Black',sans-serif;">TCB</div>
+              <div style="color:#fff; font-weight:700; font-size:1rem;">Techcombank</div>
+              <div style="background:rgba(255,255,255,0.2); border-radius:4px; padding:2px 8px; color:#fff; font-size:0.75rem; font-weight:600;">VietQR</div>
             </div>
-            <p style="margin-top:14px; font-size:0.8rem; color:var(--taupe);">⚠️ Vui lòng chuyển đúng số tiền và nội dung để đơn hàng được xác nhận nhanh nhất.</p>
+            <div style="background:linear-gradient(135deg,#fff9f5,#fffdf9); border:1px solid var(--border-gold); border-top:none; border-radius:0 0 14px 14px; padding:20px; text-align:center;">
+              <div id="qr-loading" style="padding:20px; color:var(--taupe); font-style:italic;">Đang tạo mã QR...</div>
+              <img id="qr-image" src="" alt="VietQR Techcombank" loading="lazy"
+                 style="display:none; width:230px; height:230px; border-radius:12px; border:3px solid var(--champagne); box-shadow:0 8px 24px rgba(216,169,79,0.25); margin:0 auto;">
+              <div id="qr-info" style="display:none; margin-top:16px;">
+                <!-- Bank info card -->
+                <div style="background:#fff; border:1px solid #f0ebe0; border-radius:10px; padding:14px 18px; text-align:left; margin-bottom:12px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <span style="font-size:0.78rem; color:#999; text-transform:uppercase; letter-spacing:0.5px;">Ngân hàng</span>
+                    <span style="font-weight:700; color:#e31e24; font-size:0.92rem;">Techcombank (TCB)</span>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <span style="font-size:0.78rem; color:#999; text-transform:uppercase; letter-spacing:0.5px;">Số tài khoản</span>
+                    <span style="font-weight:700; color:#1a1a1a; font-size:1.05rem; letter-spacing:1.5px;">3331102005</span>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <span style="font-size:0.78rem; color:#999; text-transform:uppercase; letter-spacing:0.5px;">Chủ tài khoản</span>
+                    <span id="qr-name" style="font-weight:600; color:#1a1a1a; font-size:0.9rem;"></span>
+                  </div>
+                  <div style="background:var(--warm-cream,#fef4e8); border-radius:8px; padding:10px 14px; margin-top:4px;">
+                    <div style="font-size:0.75rem; color:#888; margin-bottom:3px;">Nội dung chuyển khoản</div>
+                    <div id="qr-desc" style="color:var(--champagne); font-weight:800; font-size:1rem; letter-spacing:0.5px;"></div>
+                  </div>
+                </div>
+                <p style="font-size:0.78rem; color:#e31e24; font-weight:600;">⚠️ Nhập đúng nội dung chuyển khoản để đơn hàng được xác nhận tự động.</p>
+              </div>
+            </div>
           </div>
 
           <button type="submit" class="btn-place-order" id="btn-place-order">
@@ -578,6 +593,9 @@
       &copy; 2026 Gradie - Quà Tặng Tốt Nghiệp. Toàn bộ bản quyền được bảo lưu.
     </div>
   </footer>
+  <!-- EmailJS SDK - để gửi email hóa đơn tự động khi đặt hàng -->
+  <!-- Bật tính năng: vào emailjs.com tạo account miễn phí, điền Public Key vào js/checkout.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="../js/icons.js"></script>
   <script src="../js/toast.js"></script>
   <script src="../js/global-data.js?v=1780167435"></script>
