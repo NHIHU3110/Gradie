@@ -512,7 +512,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   summaryList.innerHTML = cart.map(item => {
     // Find base price
     const baseProduct = window.GradieStore.getProductById(item.id);
-    const price = baseProduct ? baseProduct.price : (item.price || 0);
+    const price = Number(item.price) || (baseProduct ? Number(baseProduct.price) : 0);
     const qty = parseInt(item.quantity || item.qty || 1);
     const itemTotal = price * qty;
     subtotal += itemTotal;
@@ -770,7 +770,7 @@ async function sendOrderInvoiceEmail(order, cartItems) {
     let itemsHtml = '';
     cartItems.forEach(item => {
       const baseProduct = window.GradieStore ? window.GradieStore.getProductById(item.id) : null;
-      const price = baseProduct ? baseProduct.price : (item.price || 0);
+      const price = Number(item.price) || (baseProduct ? Number(baseProduct.price) : 0);
       const qty   = parseInt(item.quantity || item.qty || 1);
       const total = price * qty;
       const imgSrc = (baseProduct && baseProduct.image) ? baseProduct.image : '';
