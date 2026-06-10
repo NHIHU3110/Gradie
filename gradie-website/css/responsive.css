@@ -593,10 +593,10 @@
 @media (max-width: 768px) {
   .cart-grid-container {
     padding: 0 16px !important;
-    margin-bottom: 40px !important;
+    margin: 0 auto 40px !important;
   }
   .cart-grid {
-    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
     gap: 24px !important;
   }
   .cart-grid > div {

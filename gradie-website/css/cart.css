@@ -1,7 +1,7 @@
 /* css/cart.css - Shopping Cart Layouts & Alignment */
 .cart-grid-container {
   max-width: 1060px;
-  margin: 0 auto 40px;
+  margin: 0 auto 40px !important;
   padding: 0 24px;
 }
 
