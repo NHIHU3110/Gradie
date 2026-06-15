@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradie Admin | Orders</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css?v=2">
+    <link rel="stylesheet" href="css/icons.css">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+        }
+        .modal-content {
+            background: #ffffff;
+            margin: 5% auto;
+            padding: 35px;
+            width: 100%;
+            max-width: 700px;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid #d8a94f;
+        }
+        .detail-row {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .detail-row label {
+            font-weight: 600;
+            color: #475569;
+        }
+        .item-breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        .clickable-order {
+            color: var(--admin-primary, #d8a94f);
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .clickable-order:hover {
+            color: var(--admin-primary-hover, #c5963e);
+        }
+    </style>
+  <link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/toast.css?v=1780167435">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar"></aside>
+        <main class="main-content">
+            <header class="topbar"></header>
+            <div class="content-wrapper">
+                
+                <div class="dashboard-header" style="margin-bottom: 30px;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 style="margin:0; font-size: 2rem;">Orders Manager</h2>
+                            <p style="color: var(--admin-muted); margin-top: 5px;">Track and fulfill customer orders.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status Filter -->
+                <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: center; background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <label for="order-status-filter" style="font-weight: 600; color: #1e293b; margin-bottom: 0;">Lọc theo trạng thái:</label>
+                    <select id="order-status-filter" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; outline: none; font-family: inherit; width: 250px; background: #f8fafc;">
+                        <option value="all">Tất cả trạng thái (All)</option>
+                        <option value="pending">Pending (Chờ duyệt)</option>
+                        <option value="cancel requested">Cancel Requested (Yêu cầu hủy)</option>
+                        <option value="confirmed">Confirmed (Đã xác nhận)</option>
+                        <option value="processing">Processing (Đang chuẩn bị)</option>
+                        <option value="shipped">Shipped (Đang giao)</option>
+                        <option value="delivered">Delivered (Đã giao)</option>
+                        <option value="completed">Completed (Hoàn tất)</option>
+                        <option value="cancelled">Cancelled (Hủy)</option>
+                        <option value="refunded">Refunded (Hoàn tiền)</option>
+                    </select>
+                </div>
+
+                <!-- Bulk Actions -->
+                <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; display: none;" id="bulk-actions-container-orders">
+                    <span style="font-weight: 600; color: #1e293b;"><span id="selected-count-orders">0</span> đã chọn</span>
+                    <div style="height: 20px; width: 1px; background: #cbd5e1;"></div>
+                    <select id="bulk-status-select" class="outline-button" style="padding: 6px 12px; border-color: #cbd5e1;">
+                        <option value="">Đổi trạng thái...</option>
+                        <option value="Pending">Pending (Chờ duyệt)</option>
+                        <option value="Cancel Requested">Cancel Requested (Yêu cầu hủy)</option>
+                        <option value="Confirmed">Confirmed (Đã xác nhận)</option>
+                        <option value="Processing">Processing (Đang chuẩn bị)</option>
+                        <option value="Shipped">Shipped (Đang giao)</option>
+                        <option value="Delivered">Delivered (Đã giao)</option>
+                        <option value="Completed">Completed (Hoàn tất)</option>
+                        <option value="Cancelled">Cancelled (Hủy)</option>
+                        <option value="Refunded">Refunded (Hoàn tiền)</option>
+                    </select>
+                    <button class="outline-button" id="bulk-delete-orders-btn" style="border-color: #dc2626; color: #dc2626; padding: 6px 12px;">Xóa đơn hàng</button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 40px; text-align: center;"><input type="checkbox" id="select-all-orders"></th>
+                                <th>Mã đơn</th>
+                                <th>Nguồn</th>
+                                <th>Ngày đặt</th>
+                                <th>Khách hàng</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-orders-list">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+        
+            </div>
+        </main>
+    </div>
+
+    <!-- Order Detail Modal -->
+    <div id="orderDetailModal" class="modal">
+        <div class="modal-content">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #eaeaea; padding-bottom:15px; margin-bottom:20px;">
+                <h3 id="modal-order-title" style="margin:0; font-family:'Playfair Display', serif; font-size:1.6rem; color:#1e293b;">Order Details</h3>
+                <button onclick="closeOrderDetailModal()" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:#94a3b8;">&times;</button>
+            </div>
+            
+            <div style="display:flex; flex-direction:column; gap:8px;">
+                <div class="detail-row"><label>Order ID:</label><span id="detail-id" style="font-weight:600;"></span></div>
+                <div class="detail-row"><label>Order Source:</label><span id="detail-source" style="font-weight:600;"></span></div>
+                <div class="detail-row"><label>Creation Date:</label><span id="detail-date"></span></div>
+                <div class="detail-row"><label>Customer Name:</label><span id="detail-customer-name"></span></div>
+                <div class="detail-row"><label>Email Address:</label><span id="detail-customer-email"></span></div>
+                <div class="detail-row"><label>Phone Number:</label><span id="detail-customer-phone"></span></div>
+                <div class="detail-row"><label>Shipping Address:</label><span id="detail-customer-address"></span></div>
+                <div class="detail-row"><label>Delivery Notes:</label><span id="detail-customer-notes" style="font-style:italic; color:#64748b;"></span></div>
+                <div class="detail-row"><label>Payment Method:</label><span>COD (Cash on Delivery)</span></div>
+                
+                <h4 style="font-family:'Playfair Display', serif; font-size:1.2rem; margin:25px 0 10px; color:#1e293b; border-bottom:1px solid #f1f5f9; padding-bottom:8px;">Fulfillment Progress</h4>
+                <div id="admin-order-timeline" style="margin-bottom:20px;">
+                    <!-- Rendered by JS -->
+                </div>
+
+                <h4 style="font-family:'Playfair Display', serif; font-size:1.2rem; margin:10px 0 10px; color:#1e293b; border-bottom:1px solid #f1f5f9; padding-bottom:8px;">Items Breakdown</h4>
+                <div id="detail-items-list" style="margin-bottom:20px;">
+                    <!-- Rendered dynamically -->
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:8px; background:#fafbfd; padding:15px; border-radius:8px; border:1px solid #e2e8f0; margin-bottom:20px;">
+                    <div style="display:flex; justify-content:space-between; font-size:0.9rem; color:#64748b;">
+                        <span>Subtotal:</span>
+                        <span id="detail-subtotal">0đ</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; font-size:0.9rem; color:#64748b;">
+                        <span>Shipping Fee:</span>
+                        <span id="detail-shipping">0đ</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem; color:#1e293b; border-top:1px solid #e2e8f0; padding-top:8px;">
+                        <span>Total Paid:</span>
+                        <span id="detail-total">0đ</span>
+                    </div>
+                </div>
+
+                <div class="detail-row" style="border:none; align-items:center;">
+                    <label>Fulfillment Status:</label>
+                    <select id="detail-status" style="width:200px; padding:8px 12px; border:1px solid #cbd5e1; border-radius:6px; background:#fff; font-family:inherit;">
+                        <option value="Pending">Pending (Chờ duyệt)</option>
+                        <option value="Cancel Requested">Cancel Requested (Yêu cầu hủy)</option>
+                        <option value="Confirmed">Confirmed (Đã xác nhận)</option>
+                        <option value="Processing">Processing (Đang chuẩn bị)</option>
+                        <option value="Shipped">Shipped (Đang giao)</option>
+                        <option value="Delivered">Delivered (Đã giao)</option>
+                        <option value="Completed">Completed (Hoàn tất)</option>
+                        <option value="Cancelled">Cancelled (Hủy)</option>
+                        <option value="Refunded">Refunded (Hoàn tiền)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="margin-top:30px; text-align:right; border-top:1px solid #f1f5f9; padding-top:15px;">
+                <button class="outline-button" onclick="closeOrderDetailModal()" style="margin-right:10px;">Close</button>
+                <button class="btn-primary" onclick="saveOrderDetailsStatus()">Save Status</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal for Status Updates -->
+    <div id="statusConfirmModal" class="modal" style="display: none; z-index: 1100;">
+        <div class="modal-content" style="max-width: 480px; margin: 12% auto; padding: 30px; text-align: center; border-radius: 16px; border: 1.5px solid #d8a94f; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15);">
+            <div style="font-size: 3.5rem; color: #d8a94f; margin-bottom: 15px; line-height: 1;">⚠️</div>
+            <h3 style="margin: 0 0 12px; font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #1e293b;">Xác Nhận Cập Nhật</h3>
+            <p id="statusConfirmMessage" style="color: #475569; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6; padding: 0 10px;"></p>
+            <div style="display: flex; justify-content: center; gap: 15px;">
+                <button class="outline-button" id="btnStatusConfirmCancel" style="padding: 10px 24px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s;">Hủy</button>
+                <button class="btn-primary" id="btnStatusConfirmOk" style="padding: 10px 24px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s;">Xác Nhận</button>
+            </div>
+        </div>
+    </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/global-data.js?v=1780167290"></script>
+    <script src="js/data-store.js?v=1780167290"></script>
+    <script src="js/admin-auth.js?v=1780167290"></script>
+    <script src="js/admin.js?v=2"></script>
+    <script src="js/admin-orders.js?v=1780167290"></script>
+</body>
+</html>

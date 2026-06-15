@@ -1,0 +1,9 @@
+.account-container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+.auth-form { background: var(--white); padding: 40px; border-radius: 12px; border: 1px solid var(--border-gold); box-shadow: 0 10px 20px rgba(0,0,0,0.02); }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+.form-group input { width: 100%; padding: 12px; border: 1px solid var(--border-gold); border-radius: 4px; font-family: inherit; }
+.dashboard-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 30px; }
+.dashboard-menu { background: var(--ivory); padding: 20px; border-radius: 12px; border: 1px solid var(--border-gold); }
+.dashboard-menu button { display: block; width: 100%; text-align: left; padding: 10px; margin-bottom: 5px; background: none; border: none; font-size: 1rem; border-radius: 4px; }
+.dashboard-menu button.active { background: var(--warm-cream); color: var(--champagne); font-weight: 600; }

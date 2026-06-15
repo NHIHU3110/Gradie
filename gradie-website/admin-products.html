@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradie Admin | Products</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css?v=2">
+    <link rel="stylesheet" href="css/icons.css">
+  <link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/toast.css?v=1780167435">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar"></aside>
+        <main class="main-content">
+            <header class="topbar"></header>
+            <div class="content-wrapper">
+                <div class="dashboard-header" style="margin-bottom: 30px;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 style="margin:0; font-size: 2rem;">Product Manager</h2>
+                            <p style="color: var(--admin-muted); margin-top: 5px;">Manage your inventory, prices, and product details.</p>
+                        </div>
+                        <div style="display:flex; gap:10px; align-items: center;">
+                            <button id="btn-export-csv" class="outline-button" style="padding: 10px 18px; border: 1px solid var(--admin-border); background: var(--admin-bg-card); color: var(--admin-text); border-radius: 6px; font-weight: 500; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px;">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                Export CSV
+                            </button>
+                            <button id="btn-export-xlsx" class="outline-button" style="padding: 10px 18px; border: 1px solid var(--admin-border); background: var(--admin-bg-card); color: var(--admin-text); border-radius: 6px; font-weight: 500; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px;">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                Export XLSX
+                            </button>
+                            <a href="admin-product-form.html" class="btn-primary">Add Product</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bulk Actions -->
+                <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; display: none;" id="bulk-actions-container">
+                    <span style="font-weight: 600; color: #1e293b;"><span id="selected-count">0</span> đã chọn</span>
+                    <div style="height: 20px; width: 1px; background: #cbd5e1;"></div>
+                    <button class="outline-button" id="bulk-delete-btn" style="border-color: #dc2626; color: #dc2626; padding: 6px 12px;">Xóa hàng loạt</button>
+                    <button class="outline-button" id="bulk-feature-btn" style="border-color: #d8a94f; color: #d8a94f; padding: 6px 12px;">Đánh dấu Nổi bật</button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 40px; text-align: center;"><input type="checkbox" id="select-all-products"></th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-product-list">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/global-data.js?v=1780167290"></script>
+    <script src="js/data-store.js?v=1780167290"></script>
+    <script src="js/admin-auth.js?v=1780167290"></script>
+    <script src="js/admin.js?v=2"></script>
+    <script src="js/admin-products.js"></script>
+</body>
+</html>
