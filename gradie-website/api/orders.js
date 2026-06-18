@@ -23,6 +23,7 @@ module.exports = async (req, res) => {
     const collection = db.collection('orders');
     const cookies = parseCookies(req);
     const sessionEmail = cookies['gradie_session'];
+    const isAdminSession = req.headers['x-admin-auth'] === 'true' || cookies['gradie_admin_session'] === 'true';
     
     if (req.method === 'GET') {
       const orders = await collection.find({}).toArray();
@@ -30,32 +31,35 @@ module.exports = async (req, res) => {
     } else if (req.method === 'POST') {
       const newOrder = req.body;
       
-      // Security Check: Enforce session matches order customer email
-      if (!sessionEmail || sessionEmail.toLowerCase() !== newOrder.customerEmail.toLowerCase()) {
+      // Security Check: Enforce session matches order customer email (admins bypass this)
+      if (!isAdminSession && (!sessionEmail || sessionEmail.toLowerCase() !== newOrder.customerEmail.toLowerCase())) {
         return res.status(401).json({ message: 'Unauthorized. Session does not match customer email.' });
       }
       
-      // Security Check: Server-side price recalculation (Option 1)
-      const productsCollection = db.collection('products');
-      let calculatedSubtotal = 0;
-      
-      for (const item of newOrder.items) {
-        const prod = await productsCollection.findOne({ id: item.id });
-        let itemPrice = prod ? Number(prod.price) : 0;
+      // Security Check: Server-side price recalculation (Option 1) - bypassed for admins/TikTok orders
+      const isTikTokOrder = newOrder.source === 'TikTok Shop';
+      if (!isAdminSession && !isTikTokOrder) {
+        const productsCollection = db.collection('products');
+        let calculatedSubtotal = 0;
         
-        // Account for customizations in pricing if item price is custom
-        if (item.customization) {
-          const c = item.customization;
-          if (c.embroideryText) itemPrice += 50000;
-          if (c.boxColor || c.ribbonColor || c.waxSeal) itemPrice += 30000;
+        for (const item of newOrder.items) {
+          const prod = await productsCollection.findOne({ id: item.id });
+          let itemPrice = prod ? Number(prod.price) : 0;
+          
+          // Account for customizations in pricing if item price is custom
+          if (item.customization) {
+            const c = item.customization;
+            if (c.embroideryText) itemPrice += 50000;
+            if (c.boxColor || c.ribbonColor || c.waxSeal) itemPrice += 30000;
+          }
+          
+          calculatedSubtotal += itemPrice * (Number(item.quantity) || 1);
         }
         
-        calculatedSubtotal += itemPrice * (Number(item.quantity) || 1);
-      }
-      
-      // Enforce recalculated total matches subtotal sent
-      if (Math.abs(calculatedSubtotal - Number(newOrder.subtotal)) > 100) { // allow small rounding diff
-        return res.status(400).json({ message: 'Bad request. Order total mismatch.' });
+        // Enforce recalculated total matches subtotal sent
+        if (Math.abs(calculatedSubtotal - Number(newOrder.subtotal)) > 100) { // allow small rounding diff
+          return res.status(400).json({ message: 'Bad request. Order total mismatch.' });
+        }
       }
       
       const result = await collection.insertOne(newOrder);
@@ -70,7 +74,6 @@ module.exports = async (req, res) => {
         return res.status(404).json({ message: 'Order not found' });
       }
       
-      const isAdminSession = req.headers['x-admin-auth'] === 'true' || cookies['gradie_admin_session'] === 'true'; 
       if (!isAdminSession && (!sessionEmail || sessionEmail.toLowerCase() !== existingOrder.customerEmail.toLowerCase())) {
         return res.status(401).json({ message: 'Unauthorized.' });
       }

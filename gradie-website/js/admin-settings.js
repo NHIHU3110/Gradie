@@ -93,52 +93,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 syncOrdersBtn.disabled = true;
                 syncOrdersBtn.innerHTML = '<span>⏳</span> Importing...';
                 
-                try {
-                    const settings = window.GradieStore.getSettings();
-                    const res = await fetch('/api/tiktok', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            action: 'sync_orders',
-                            appKey: settings.tiktokAppKey,
-                            appSecret: settings.tiktokAppSecret
-                        })
-                    });
-                    const data = await res.json();
-                    if (res.ok && data.success) {
-                        // Append orders to LocalStorage
-                        if (data.orders && data.orders.length > 0) {
-                            const currentOrders = window.GradieStore.getOrders() || [];
-                            const newOrders = data.orders.filter(o => !currentOrders.some(co => co.orderNumber === o.orderNumber));
-                            if (newOrders.length > 0) {
-                                window.GradieStore.saveOrders([...newOrders, ...currentOrders]);
-                                // Sync new orders to MongoDB Atlas API
-                                for (const o of newOrders) {
-                                    try {
-                                        await fetch('/api/orders', {
-                                            method: 'POST',
-                                            headers: { 'Content-Type': 'application/json' },
-                                            body: JSON.stringify(o)
-                                        });
-                                    } catch (e) {
-                                        console.warn('Sync order to MongoDB failed:', e);
-                                    }
-                                }
-                            }
-                        }
-                        showToast(`Đã nhập thành công ${data.importedCount} đơn hàng mới từ TikTok Shop!`, 'success');
-                        window.GradieStore.addActivityLog('TikTok Sync', `Nhập thành công ${data.importedCount} đơn hàng.`);
+                await window.GradieStore.syncTikTokOrders(
+                    (res) => {
+                        showToast(`Đã đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ TikTok Shop!`, 'success');
                         updateTiktokStatus();
-                    } else {
-                        showToast(`Lỗi nhập đơn hàng: ${data.message || 'Không rõ nguyên nhân'}`, 'error');
+                    },
+                    (err) => {
+                        showToast(`Lỗi nhập đơn hàng: ${err}`, 'error');
+                    },
+                    (loading) => {
+                        if (!loading) {
+                            syncOrdersBtn.disabled = false;
+                            syncOrdersBtn.innerHTML = origText;
+                        }
                     }
-                } catch (err) {
-                    console.error(err);
-                    showToast('Lỗi mạng khi nhập đơn hàng.', 'error');
-                } finally {
-                    syncOrdersBtn.disabled = false;
-                    syncOrdersBtn.innerHTML = origText;
-                }
+                );
             });
         }
         
@@ -148,6 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast('Đã reset database thành công!', 'info');
                 window.location.reload();
             }
-        }
+        };
     }
 });

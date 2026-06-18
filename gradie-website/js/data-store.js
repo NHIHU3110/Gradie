@@ -1875,8 +1875,44 @@ window.GradieStore = {
   getProducts: function() { const p = this.getData().products; return (p && p.length > 0) ? p : this.normalizeProducts(window.GRADIE_DATA?.products || []); },
   saveProducts: function(products) { let data = this.getData(); data.products = this.normalizeProducts(products); this.saveData(data); },
   getProductById: function(id) { return this.getProducts().find(p => p.id === id); },
-  addProduct: function(product) { let data = this.getData(); let norm = this.normalizeProduct(product); if(!norm.id) { norm.id = norm.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now(); } data.products.push(norm); this.saveData(data); fetch('/api/products', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(norm) }).then(() => { window.dispatchEvent(new Event('gradie_data_synced')); }).catch(e => console.error('Sync error', e)); },
-  updateProduct: function(id, updatedProduct) { let data = this.getData(); let index = data.products.findIndex(p => p.id === id); if (index !== -1) { let merged = { ...data.products[index], ...updatedProduct }; data.products[index] = this.normalizeProduct(merged); this.saveData(data); fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data.products[index]) }).then(() => { window.dispatchEvent(new Event('gradie_data_synced')); }).catch(e => console.error('Sync error', e)); } },
+  addProduct: async function(product) { 
+    let data = this.getData(); 
+    let norm = this.normalizeProduct(product); 
+    if(!norm.id) { 
+      norm.id = norm.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now(); 
+    } 
+    data.products.push(norm); 
+    this.saveData(data); 
+    try {
+      await fetch('/api/products', { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify(norm) 
+      });
+      window.dispatchEvent(new Event('gradie_data_synced')); 
+    } catch (e) {
+      console.error('Sync error', e);
+    }
+  },
+  updateProduct: async function(id, updatedProduct) { 
+    let data = this.getData(); 
+    let index = data.products.findIndex(p => p.id === id); 
+    if (index !== -1) { 
+      let merged = { ...data.products[index], ...updatedProduct }; 
+      data.products[index] = this.normalizeProduct(merged); 
+      this.saveData(data); 
+      try {
+        await fetch('/api/products', { 
+          method: 'PUT', 
+          headers: { 'Content-Type': 'application/json' }, 
+          body: JSON.stringify(data.products[index]) 
+        });
+        window.dispatchEvent(new Event('gradie_data_synced'));
+      } catch (e) {
+        console.error('Sync error', e);
+      }
+    } 
+  },
   deleteProduct: function(id) { let data = this.getData(); data.products = data.products.filter(p => p.id !== id); this.saveData(data); fetch('/api/products?id=' + id, { method: 'DELETE' }).then(() => { window.dispatchEvent(new Event('gradie_data_synced')); }).catch(e => console.error('Sync error', e)); },
   
   normalizeProduct: function(p) {
@@ -1890,7 +1926,7 @@ window.GradieStore = {
     p.image = p.gallery[0];
     if(!Array.isArray(p.variants)) p.variants = [];
     p.variants.forEach(v => {
-      v.name = v.name || v.color || '';
+      v.name = v.name || (v.options && Array.isArray(v.options) ? v.options.join(' / ') : '') || v.color || '';
       v.color = v.color || v.name || '';
       v.price = Number(v.price) || p.price;
     });
@@ -2296,6 +2332,123 @@ window.GradieStore = {
         window.dispatchEvent(new CustomEvent('gradie_data_synced'));
       })
       .catch(e => console.error('Sync review error', e));
+  },
+
+  syncTikTokOrders: async function(onSuccess, onError, onProgress) {
+    try {
+      const settings = this.getSettings();
+      if (onProgress) onProgress(true);
+      const res = await fetch('/api/tiktok', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'sync_orders',
+          appKey: settings.tiktokAppKey,
+          appSecret: settings.tiktokAppSecret
+        })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        if (data.orders && data.orders.length > 0) {
+          const currentOrders = this.getOrders() || [];
+          let updatedCount = 0;
+          let addedCount = 0;
+          
+          const updatedOrdersList = [...currentOrders];
+
+          for (const o of data.orders) {
+            const existingIndex = updatedOrdersList.findIndex(co => co.orderNumber === o.orderNumber);
+            if (existingIndex !== -1) {
+              const currentOrderObj = updatedOrdersList[existingIndex];
+              if (currentOrderObj.status !== o.status || JSON.stringify(currentOrderObj) !== JSON.stringify(o)) {
+                updatedOrdersList[existingIndex] = { ...currentOrderObj, ...o };
+                updatedCount++;
+                
+                // Sync updated order to MongoDB
+                try {
+                  await fetch('/api/orders', {
+                    method: 'PUT',
+                    headers: { 
+                      'Content-Type': 'application/json',
+                      'x-admin-auth': 'true'
+                    },
+                    body: JSON.stringify(updatedOrdersList[existingIndex])
+                  });
+                } catch (e) {
+                  console.warn('Sync updated order to MongoDB failed:', e);
+                }
+              }
+            } else {
+              updatedOrdersList.unshift(o);
+              addedCount++;
+              
+              // Sync new order to MongoDB
+              try {
+                await fetch('/api/orders', {
+                  method: 'POST',
+                  headers: { 
+                    'Content-Type': 'application/json',
+                    'x-admin-auth': 'true'
+                  },
+                  body: JSON.stringify(o)
+                });
+              } catch (e) {
+                console.warn('Sync new order to MongoDB failed:', e);
+              }
+            }
+          }
+
+          if (updatedCount > 0 || addedCount > 0) {
+            this.saveOrders(updatedOrdersList);
+            // Dispatch event so UI components can re-render with fresh data
+            window.dispatchEvent(new Event('gradie_data_synced'));
+          }
+
+          this.addActivityLog('TikTok Sync', `Cập nhật từ TikTok Shop: Thêm ${addedCount} đơn mới, Cập nhật ${updatedCount} đơn cũ.`);
+          if (onSuccess) onSuccess({ addedCount, updatedCount, totalCount: data.importedCount });
+        } else {
+          if (onSuccess) onSuccess({ addedCount: 0, updatedCount: 0, totalCount: 0 });
+        }
+      } else {
+        if (onError) onError(data.message || 'Không rõ nguyên nhân');
+      }
+    } catch (err) {
+      console.error(err);
+      if (onError) onError('Lỗi kết nối mạng.');
+    } finally {
+      if (onProgress) onProgress(false);
+    }
+  },
+
+  updateTikTokProductPrice: async function(productId, price) {
+    try {
+      const settings = this.getSettings();
+      if (!settings.tiktokAppKey || !settings.tiktokAppSecret) {
+        console.warn('TikTok integration not configured.');
+        return { success: false, message: 'TikTok integration not configured.' };
+      }
+      const res = await fetch('/api/tiktok', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'update_product_price',
+          appKey: settings.tiktokAppKey,
+          appSecret: settings.tiktokAppSecret,
+          productId: productId,
+          price: price
+        })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        this.addActivityLog('TikTok Sync', `Đã cập nhật giá sản phẩm ${productId} thành ${price.toLocaleString('vi-VN')}đ trên TikTok Shop.`);
+        return { success: true, message: data.message };
+      } else {
+        return { success: false, message: data.message || 'Không rõ nguyên nhân' };
+      }
+    } catch (err) {
+      console.error('Failed to update TikTok product price:', err);
+      return { success: false, message: 'Lỗi kết nối mạng.' };
+    }
   },
 
   exportData: function() { return JSON.stringify(this.getData(), null, 2); },

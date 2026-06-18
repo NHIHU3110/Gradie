@@ -75,6 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setupOrdersUI() {
         let currentStatusFilter = 'all';
+        let currentSourceFilter = 'all';
+        let currentSearchQuery = '';
 
         // Add Event Listener for Status Filter
         const filterEl = document.getElementById('order-status-filter');
@@ -82,6 +84,58 @@ document.addEventListener('DOMContentLoaded', () => {
             filterEl.addEventListener('change', (e) => {
                 currentStatusFilter = e.target.value;
                 window.renderOrdersTable();
+            });
+        }
+
+        // Add Event Listener for Source Filter
+        const sourceFilterEl = document.getElementById('order-source-filter');
+        if (sourceFilterEl) {
+            sourceFilterEl.addEventListener('change', (e) => {
+                currentSourceFilter = e.target.value;
+                window.renderOrdersTable();
+            });
+        }
+
+        // Add Event Listener for Search Filter
+        const searchFilterEl = document.getElementById('order-search-filter');
+        if (searchFilterEl) {
+            searchFilterEl.addEventListener('input', (e) => {
+                currentSearchQuery = e.target.value.toLowerCase().trim();
+                window.renderOrdersTable();
+            });
+        }
+
+        // Add Event Listener for TikTok Direct Sync Button
+        const syncDirectBtn = document.getElementById('btn-sync-tiktok-orders-direct');
+        if (syncDirectBtn) {
+            syncDirectBtn.addEventListener('click', async () => {
+                const origText = syncDirectBtn.innerHTML;
+                syncDirectBtn.disabled = true;
+                syncDirectBtn.innerHTML = '<span>⏳</span> Cập nhật...';
+                
+                await window.GradieStore.syncTikTokOrders(
+                    (res) => {
+                        if (typeof showToast === 'function') {
+                            showToast(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng.`, 'success');
+                        } else {
+                            alert(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng.`);
+                        }
+                        window.renderOrdersTable();
+                    },
+                    (err) => {
+                        if (typeof showToast === 'function') {
+                            showToast(`Lỗi đồng bộ: ${err}`, 'error');
+                        } else {
+                            alert(`Lỗi đồng bộ: ${err}`);
+                        }
+                    },
+                    (loading) => {
+                        if (!loading) {
+                            syncDirectBtn.disabled = false;
+                            syncDirectBtn.innerHTML = origText;
+                        }
+                    }
+                );
             });
         }
 
@@ -133,6 +187,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     ords = ords.filter(o => {
                         const status = (o.status || 'Pending').toLowerCase();
                         return status === currentStatusFilter.toLowerCase();
+                    });
+                }
+
+                // Apply source filter
+                if (currentSourceFilter !== 'all') {
+                    ords = ords.filter(o => {
+                        const source = (o.source || 'Website').toLowerCase();
+                        return source === currentSourceFilter.toLowerCase();
+                    });
+                }
+
+                // Apply search filter
+                if (currentSearchQuery) {
+                    ords = ords.filter(o => {
+                        const orderNumber = (o.orderNumber || '').toLowerCase();
+                        const customerName = (o.customerName || (o.customer && o.customer.name) || '').toLowerCase();
+                        const customerPhone = (o.customerPhone || (o.customer && o.customer.phone) || '').toLowerCase();
+                        const customerEmail = (o.customerEmail || (o.customer && o.customer.email) || '').toLowerCase();
+                        const shippingAddress = (o.shippingAddress || (o.customer && o.customer.address) || '').toLowerCase();
+                        return orderNumber.includes(currentSearchQuery) ||
+                               customerName.includes(currentSearchQuery) ||
+                               customerPhone.includes(currentSearchQuery) ||
+                               customerEmail.includes(currentSearchQuery) ||
+                               shippingAddress.includes(currentSearchQuery);
                     });
                 }
 

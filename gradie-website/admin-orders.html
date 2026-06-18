@@ -77,21 +77,42 @@
                     </div>
                 </div>
 
-                <!-- Status Filter -->
-                <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: center; background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                    <label for="order-status-filter" style="font-weight: 600; color: #1e293b; margin-bottom: 0;">Lọc theo trạng thái:</label>
-                    <select id="order-status-filter" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; outline: none; font-family: inherit; width: 250px; background: #f8fafc;">
-                        <option value="all">Tất cả trạng thái (All)</option>
-                        <option value="pending">Pending (Chờ duyệt)</option>
-                        <option value="cancel requested">Cancel Requested (Yêu cầu hủy)</option>
-                        <option value="confirmed">Confirmed (Đã xác nhận)</option>
-                        <option value="processing">Processing (Đang chuẩn bị)</option>
-                        <option value="shipped">Shipped (Đang giao)</option>
-                        <option value="delivered">Delivered (Đã giao)</option>
-                        <option value="completed">Completed (Hoàn tất)</option>
-                        <option value="cancelled">Cancelled (Hủy)</option>
-                        <option value="refunded">Refunded (Hoàn tiền)</option>
-                    </select>
+                <!-- Status & Search Filters -->
+                <div style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <label for="order-status-filter" style="font-weight: 600; color: #1e293b; margin-bottom: 0;">Trạng thái:</label>
+                        <select id="order-status-filter" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; outline: none; font-family: inherit; width: 200px; background: #f8fafc;">
+                            <option value="all">Tất cả (All)</option>
+                            <option value="pending">Pending (Chờ duyệt)</option>
+                            <option value="cancel requested">Cancel Requested (Yêu cầu hủy)</option>
+                            <option value="confirmed">Confirmed (Đã xác nhận)</option>
+                            <option value="processing">Processing (Đang chuẩn bị)</option>
+                            <option value="shipped">Shipped (Đang giao)</option>
+                            <option value="delivered">Delivered (Đã giao)</option>
+                            <option value="completed">Completed (Hoàn tất)</option>
+                            <option value="cancelled">Cancelled (Hủy)</option>
+                            <option value="refunded">Refunded (Hoàn tiền)</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <label for="order-source-filter" style="font-weight: 600; color: #1e293b; margin-bottom: 0;">Nguồn:</label>
+                        <select id="order-source-filter" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; outline: none; font-family: inherit; width: 150px; background: #f8fafc;">
+                            <option value="all">Tất cả nguồn</option>
+                            <option value="website">Website</option>
+                            <option value="tiktok shop">TikTok Shop</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; align-items: center; flex-grow: 1; min-width: 250px;">
+                        <label for="order-search-filter" style="font-weight: 600; color: #1e293b; margin-bottom: 0;">Tìm kiếm:</label>
+                        <input type="text" id="order-search-filter" placeholder="Mã đơn, Tên, SĐT khách..." style="padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; outline: none; font-family: inherit; flex-grow: 1; background: #f8fafc;">
+                    </div>
+
+                    <!-- Sync from TikTok Button -->
+                    <button type="button" id="btn-sync-tiktok-orders-direct" class="btn-primary" style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; padding: 8px 16px; background: #1e293b; color: #fff; border-radius: 6px; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s;">
+                        <span>🔄</span> Cập nhật từ TikTok
+                    </button>
                 </div>
 
                 <!-- Bulk Actions -->

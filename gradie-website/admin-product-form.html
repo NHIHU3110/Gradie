@@ -138,7 +138,7 @@
             }
             renderVariants();
             
-            form.addEventListener('submit', (e) => {
+            form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const idInput = document.getElementById('product-id').value;
                 const name = document.getElementById('p-name').value;
@@ -149,25 +149,56 @@
                 // Filter out variants without a name
                 const cleanVariants = currentVariants.filter(v => v.name.trim() !== '');
                 
+                const newPrice = Number(document.getElementById('p-price').value);
                 const productData = {
                     id: newId,
                     name: name,
                     category: document.getElementById('p-category').value,
-                    price: Number(document.getElementById('p-price').value),
+                    price: newPrice,
                     stock: Number(document.getElementById('p-stock').value),
                     description: document.getElementById('p-desc').value,
                     gallery: galleryArr,
                     variants: cleanVariants
                 };
                 
-                if (idInput) {
-                    window.GradieStore.updateProduct(newId, productData);
-                } else {
-                    window.GradieStore.addProduct(productData);
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const origText = submitBtn.innerText;
+                submitBtn.disabled = true;
+                submitBtn.innerText = 'Saving...';
+
+                try {
+                    let priceChanged = false;
+                    if (idInput) {
+                        const oldProduct = window.GradieStore.getProductById(newId);
+                        if (oldProduct && oldProduct.price !== newPrice) {
+                            priceChanged = true;
+                        }
+                        await window.GradieStore.updateProduct(newId, productData);
+                    } else {
+                        await window.GradieStore.addProduct(productData);
+                    }
+
+                    if (priceChanged) {
+                        showToast('Đang cập nhật giá lên TikTok Shop...', 'info');
+                        const tiktokResult = await window.GradieStore.updateTikTokProductPrice(newId, newPrice);
+                        if (tiktokResult.success) {
+                            showToast('Đã cập nhật giá thành công trên TikTok Shop!', 'success');
+                        } else {
+                            showToast(`Không thể cập nhật giá lên TikTok Shop: ${tiktokResult.message}`, 'warning');
+                        }
+                        // Allow toast to be read
+                        await new Promise(r => setTimeout(r, 1500));
+                    } else {
+                        showToast('Đã lưu sản phẩm thành công!', 'success');
+                        await new Promise(r => setTimeout(r, 1000));
+                    }
+                    window.location.href = 'admin-products.html';
+                } catch (err) {
+                    console.error(err);
+                    showToast('Lỗi khi lưu sản phẩm.', 'error');
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = origText;
                 }
-                
-                alert('Product saved successfully!');
-                window.location.href = 'admin-products.html';
             });
         });
     </script>

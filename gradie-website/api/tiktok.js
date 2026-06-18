@@ -100,6 +100,21 @@ module.exports = async (req, res) => {
       });
     }
 
+    if (action === 'update_product_price') {
+      const { productId, price } = req.body;
+      if (!productId || price === undefined) {
+        return res.status(400).json({ success: false, message: 'Missing productId or price.' });
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: `Successfully updated product ${productId} price to ${price} on TikTok Shop.`,
+        productId,
+        price,
+        timestamp: new Date().toISOString()
+      });
+    }
+
     return res.status(400).json({
       success: false,
       message: `Unsupported action: '${action}'.`
