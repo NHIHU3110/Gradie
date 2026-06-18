@@ -10,29 +10,50 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('set-ship').value = s.shippingFee || 30000;
         document.getElementById('set-tiktok-key').value = s.tiktokAppKey || '';
         document.getElementById('set-tiktok-secret').value = s.tiktokAppSecret || '';
+        document.getElementById('set-lazada-key').value = s.lazadaAppKey || '';
+        document.getElementById('set-lazada-secret').value = s.lazadaAppSecret || '';
+        document.getElementById('set-lazada-base-url').value = s.lazadaApiBaseUrl || 'https://api.lazada.vn/rest';
         
         // Update connection status and sync counts
-        const updateTiktokStatus = () => {
+        const updateMarketplaceStatus = () => {
             const currentSettings = window.GradieStore.getSettings();
-            const hasCredentials = currentSettings.tiktokAppKey && currentSettings.tiktokAppSecret;
-            const statusEl = document.getElementById('tiktok-conn-status');
-            if (statusEl) {
-                if (hasCredentials) {
-                    statusEl.textContent = '● Connected';
-                    statusEl.style.color = '#10b981';
+            const tiktokConnected = currentSettings.tiktokAppKey && currentSettings.tiktokAppSecret;
+            const lazadaConnected = currentSettings.lazadaAppKey && currentSettings.lazadaAppSecret;
+
+            const tiktokStatusEl = document.getElementById('tiktok-conn-status');
+            if (tiktokStatusEl) {
+                if (tiktokConnected) {
+                    tiktokStatusEl.textContent = '● Connected';
+                    tiktokStatusEl.style.color = '#10b981';
                 } else {
-                    statusEl.textContent = '○ Disconnected';
-                    statusEl.style.color = '#ef4444';
+                    tiktokStatusEl.textContent = '○ Disconnected';
+                    tiktokStatusEl.style.color = '#ef4444';
                 }
             }
-            
+
+            const lazadaStatusEl = document.getElementById('lazada-conn-status');
+            if (lazadaStatusEl) {
+                if (lazadaConnected) {
+                    lazadaStatusEl.textContent = '● Connected';
+                    lazadaStatusEl.style.color = '#10b981';
+                } else {
+                    lazadaStatusEl.textContent = '○ Disconnected';
+                    lazadaStatusEl.style.color = '#ef4444';
+                }
+            }
+
             const productsEl = document.getElementById('tiktok-synced-products');
             const ordersEl = document.getElementById('tiktok-synced-orders');
             if (productsEl) productsEl.textContent = window.GradieStore.getProducts().length;
             if (ordersEl) ordersEl.textContent = window.GradieStore.getOrders().length;
+
+            const lazadaProductsEl = document.getElementById('lazada-synced-products');
+            const lazadaOrdersEl = document.getElementById('lazada-synced-orders');
+            if (lazadaProductsEl) lazadaProductsEl.textContent = window.GradieStore.getProducts().length;
+            if (lazadaOrdersEl) lazadaOrdersEl.textContent = window.GradieStore.getOrders().length;
         };
         
-        updateTiktokStatus();
+        updateMarketplaceStatus();
         
         settingsForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -42,9 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 announcement: document.getElementById('set-ann').value,
                 shippingFee: Number(document.getElementById('set-ship').value),
                 tiktokAppKey: document.getElementById('set-tiktok-key').value,
-                tiktokAppSecret: document.getElementById('set-tiktok-secret').value
+                tiktokAppSecret: document.getElementById('set-tiktok-secret').value,
+                lazadaAppKey: document.getElementById('set-lazada-key').value,
+                lazadaAppSecret: document.getElementById('set-lazada-secret').value,
+                lazadaApiBaseUrl: document.getElementById('set-lazada-base-url').value
             });
-            updateTiktokStatus();
+            updateMarketplaceStatus();
             showToast('Đã lưu cài đặt! Thay đổi sẽ được áp dụng ngay lập tức.', 'success');
         });
         
@@ -71,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (res.ok && data.success) {
                         showToast(`Đã đồng bộ thành công ${data.syncedCount} sản phẩm với TikTok Shop!`, 'success');
                         window.GradieStore.addActivityLog('TikTok Sync', `Đồng bộ thành công ${data.syncedCount} sản phẩm.`);
-                        updateTiktokStatus();
+                        updateMarketplaceStatus();
                     } else {
                         showToast(`Lỗi đồng bộ: ${data.message || 'Không rõ nguyên nhân'}`, 'error');
                     }
@@ -81,6 +105,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 } finally {
                     syncProductsBtn.disabled = false;
                     syncProductsBtn.innerHTML = origText;
+                }
+            });
+        }
+
+        const syncLazadaProductsBtn = document.getElementById('btn-sync-lazada-products');
+        if (syncLazadaProductsBtn) {
+            syncLazadaProductsBtn.addEventListener('click', async () => {
+                const origText = syncLazadaProductsBtn.innerHTML;
+                syncLazadaProductsBtn.disabled = true;
+                syncLazadaProductsBtn.innerHTML = '<span>⏳</span> Synchronizing...';
+                
+                try {
+                    const result = await window.GradieStore.syncLazadaProducts();
+                    if (result.success) {
+                        showToast(`Đã đồng bộ thành công ${result.syncedCount} sản phẩm với Lazada!`, 'success');
+                        updateMarketplaceStatus();
+                    } else {
+                        showToast(`Lỗi đồng bộ Lazada: ${result.message || 'Không rõ nguyên nhân'}`, 'error');
+                    }
+                } catch (err) {
+                    console.error(err);
+                    showToast('Lỗi mạng khi đồng bộ sản phẩm Lazada.', 'error');
+                } finally {
+                    syncLazadaProductsBtn.disabled = false;
+                    syncLazadaProductsBtn.innerHTML = origText;
                 }
             });
         }
@@ -96,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 await window.GradieStore.syncTikTokOrders(
                     (res) => {
                         showToast(`Đã đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ TikTok Shop!`, 'success');
-                        updateTiktokStatus();
+                        updateMarketplaceStatus();
                     },
                     (err) => {
                         showToast(`Lỗi nhập đơn hàng: ${err}`, 'error');
@@ -105,6 +154,31 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (!loading) {
                             syncOrdersBtn.disabled = false;
                             syncOrdersBtn.innerHTML = origText;
+                        }
+                    }
+                );
+            });
+        }
+
+        const syncLazadaOrdersBtn = document.getElementById('btn-sync-lazada-orders');
+        if (syncLazadaOrdersBtn) {
+            syncLazadaOrdersBtn.addEventListener('click', async () => {
+                const origText = syncLazadaOrdersBtn.innerHTML;
+                syncLazadaOrdersBtn.disabled = true;
+                syncLazadaOrdersBtn.innerHTML = '<span>⏳</span> Importing...';
+
+                await window.GradieStore.syncLazadaOrders(
+                    (res) => {
+                        showToast(`Đã đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ Lazada!`, 'success');
+                        updateMarketplaceStatus();
+                    },
+                    (err) => {
+                        showToast(`Lỗi nhập đơn Lazada: ${err}`, 'error');
+                    },
+                    (loading) => {
+                        if (!loading) {
+                            syncLazadaOrdersBtn.disabled = false;
+                            syncLazadaOrdersBtn.innerHTML = origText;
                         }
                     }
                 );

@@ -42,6 +42,18 @@ window.GradieStore = {
         data.settings.tiktokAppSecret = "0be1815a89587fe0ac03da26dc1b800359fc3ea4";
         updated = true;
       }
+      if (data.settings.lazadaAppKey === undefined) {
+        data.settings.lazadaAppKey = "";
+        updated = true;
+      }
+      if (data.settings.lazadaAppSecret === undefined) {
+        data.settings.lazadaAppSecret = "";
+        updated = true;
+      }
+      if (data.settings.lazadaApiBaseUrl === undefined) {
+        data.settings.lazadaApiBaseUrl = "https://api.lazada.vn/rest";
+        updated = true;
+      }
     }
 
     // Force update mock data if missing
@@ -2405,6 +2417,119 @@ window.GradieStore = {
           }
 
           this.addActivityLog('TikTok Sync', `Cập nhật từ TikTok Shop: Thêm ${addedCount} đơn mới, Cập nhật ${updatedCount} đơn cũ.`);
+          if (onSuccess) onSuccess({ addedCount, updatedCount, totalCount: data.importedCount });
+        } else {
+          if (onSuccess) onSuccess({ addedCount: 0, updatedCount: 0, totalCount: 0 });
+        }
+      } else {
+        if (onError) onError(data.message || 'Không rõ nguyên nhân');
+      }
+    } catch (err) {
+      console.error(err);
+      if (onError) onError('Lỗi kết nối mạng.');
+    } finally {
+      if (onProgress) onProgress(false);
+    }
+  },
+
+  syncLazadaProducts: async function() {
+    try {
+      const settings = this.getSettings();
+      if (!settings.lazadaAppKey || !settings.lazadaAppSecret) {
+        return { success: false, message: 'Lazada integration not configured.' };
+      }
+      const res = await fetch('/api/lazada', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'sync_products',
+          appKey: settings.lazadaAppKey,
+          appSecret: settings.lazadaAppSecret,
+          baseUrl: settings.lazadaApiBaseUrl
+        })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        this.addActivityLog('Lazada Sync', `Đã đồng bộ ${data.syncedCount} sản phẩm Lazada.`);
+        return { success: true, message: data.message, syncedCount: data.syncedCount };
+      }
+      return { success: false, message: data.message || 'Không rõ nguyên nhân' };
+    } catch (err) {
+      console.error('Failed to sync Lazada products:', err);
+      return { success: false, message: 'Lỗi kết nối mạng.' };
+    }
+  },
+
+  syncLazadaOrders: async function(onSuccess, onError, onProgress) {
+    try {
+      const settings = this.getSettings();
+      if (!settings.lazadaAppKey || !settings.lazadaAppSecret) {
+        if (onError) onError('Lazada integration not configured.');
+        return;
+      }
+      if (onProgress) onProgress(true);
+      const res = await fetch('/api/lazada', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'sync_orders',
+          appKey: settings.lazadaAppKey,
+          appSecret: settings.lazadaAppSecret,
+          baseUrl: settings.lazadaApiBaseUrl
+        })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        if (data.orders && data.orders.length > 0) {
+          const currentOrders = this.getOrders() || [];
+          let updatedCount = 0;
+          let addedCount = 0;
+          const updatedOrdersList = [...currentOrders];
+
+          for (const o of data.orders) {
+            const existingIndex = updatedOrdersList.findIndex(co => co.orderNumber === o.orderNumber);
+            if (existingIndex !== -1) {
+              const currentOrderObj = updatedOrdersList[existingIndex];
+              if (currentOrderObj.status !== o.status || JSON.stringify(currentOrderObj) !== JSON.stringify(o)) {
+                updatedOrdersList[existingIndex] = { ...currentOrderObj, ...o };
+                updatedCount++;
+                try {
+                  await fetch('/api/orders', {
+                    method: 'PUT',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'x-admin-auth': 'true'
+                    },
+                    body: JSON.stringify(updatedOrdersList[existingIndex])
+                  });
+                } catch (e) {
+                  console.warn('Sync updated order to MongoDB failed:', e);
+                }
+              }
+            } else {
+              updatedOrdersList.unshift(o);
+              addedCount++;
+              try {
+                await fetch('/api/orders', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'x-admin-auth': 'true'
+                  },
+                  body: JSON.stringify(o)
+                });
+              } catch (e) {
+                console.warn('Sync new order to MongoDB failed:', e);
+              }
+            }
+          }
+
+          if (updatedCount > 0 || addedCount > 0) {
+            this.saveOrders(updatedOrdersList);
+            window.dispatchEvent(new Event('gradie_data_synced'));
+          }
+
+          this.addActivityLog('Lazada Sync', `Cập nhật từ Lazada: Thêm ${addedCount} đơn mới, cập nhật ${updatedCount} đơn cũ.`);
           if (onSuccess) onSuccess({ addedCount, updatedCount, totalCount: data.importedCount });
         } else {
           if (onSuccess) onSuccess({ addedCount: 0, updatedCount: 0, totalCount: 0 });
