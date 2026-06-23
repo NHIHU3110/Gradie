@@ -1,0 +1,8 @@
+.blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+.blog-card { background: var(--white); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-gold); transition: transform 0.3s; }
+.blog-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+.blog-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+.blog-content { padding: 20px; }
+.blog-category { color: var(--champagne); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+.blog-title { margin: 10px 0; font-size: 1.2rem; }
+.blog-date { color: var(--taupe); font-size: 0.85rem; margin-top: 15px; }

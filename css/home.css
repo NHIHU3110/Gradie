@@ -1,0 +1,351 @@
+/* css/home.css - Homepage Specific Layouts (Premium Upgrade) */
+
+/* Keyframes for animations */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(1.5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   Hero Section
+========================================= */
+.hero {
+  display: flex;
+  align-items: center;
+  padding: 80px 24px;
+  max-width: 1250px;
+  margin: 0 auto;
+  gap: 64px; /* Optimized gap for better layout balance */
+  min-height: 80vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Premium background blobs for hero */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -150px; left: -200px;
+  width: 650px; height: 650px;
+  background: radial-gradient(circle, rgba(216,169,79,0.10) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: blob1 12s ease-in-out infinite alternate;
+  z-index: 0; pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; right: -150px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(233,160,141,0.09) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: blob1 16s ease-in-out infinite alternate-reverse;
+  z-index: 0; pointer-events: none;
+}
+
+@keyframes blob1 {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(50px,30px) scale(1.15); }
+}
+
+.hero-content,
+.hero-img { position: relative; z-index: 1; }
+
+.hero-content h1 {
+  font-size: 4rem; /* Highly elegant and avoids wrapping issues */
+  line-height: 1.12;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #17181D 0%, #3d2f20 55%, #D8A94F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--ink); /* fallback */
+  letter-spacing: -1px;
+}
+.hero-content p {
+  font-size: 1.15rem;
+  color: var(--taupe);
+  margin-bottom: 36px;
+  max-width: 95%;
+  line-height: 1.8;
+}
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.hero-img {
+  flex: 0.9;
+  position: relative;
+}
+.hero-img img {
+  width: 100%;
+  border-radius: 32px 100px 32px 32px;
+  object-fit: cover;
+  box-shadow: 0 36px 80px rgba(216,169,79,0.18), 0 0 0 1px rgba(255,255,255,0.5) inset;
+  transition: var(--tr);
+}
+.hero-img:hover img {
+  transform: translateY(-10px);
+  box-shadow: 0 48px 100px rgba(216,169,79,0.24), 0 0 0 1px rgba(255,255,255,0.5) inset;
+}
+.hero-badge {
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 20px;
+  border-radius: 50%;
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 16px 48px rgba(216,169,79,0.22), inset 0 1px 0 rgba(255,255,255,0.6);
+  border: 1.5px solid rgba(216,169,79,0.25);
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.5rem;
+  color: var(--champagne);
+  line-height: 1.2;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* =========================================
+   Category Showcase
+========================================= */
+.category-showcase {
+  padding: 100px 24px;
+  background: linear-gradient(180deg, var(--white) 0%, var(--ivory) 100%);
+}
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: 1200px;
+  margin: 48px auto 0;
+}
+.cat-card {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  display: block;
+  aspect-ratio: 4/5;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.06);
+  transition: var(--tr);
+  border: 1px solid rgba(216,169,79,0.1);
+}
+.cat-card:hover {
+  transform: translateY(-14px);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.14);
+}
+.cat-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.cat-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(23,24,29,0.94) 0%, rgba(23,24,29,0.30) 60%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 36px;
+  transition: padding 0.5s ease;
+}
+.cat-card:hover .cat-overlay {
+  padding-bottom: 44px;
+}
+.cat-overlay h3 {
+  color: var(--white);
+  font-size: 1.9rem;
+  margin-bottom: 8px;
+  font-family: 'Playfair Display', serif;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+}
+.cat-overlay span {
+  color: var(--champagne-light);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  display: inline-block;
+  transition: transform 0.5s ease;
+}
+.cat-card:hover .cat-overlay span {
+  transform: translateX(4px);
+}
+.cat-card:hover img {
+  transform: scale(1.06);
+}
+
+/* =========================================
+   Story Section
+========================================= */
+.story-section {
+  padding: 100px 24px;
+  background-color: var(--ivory);
+  position: relative;
+}
+.story-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+.story-img {
+  flex: 1;
+  position: relative;
+}
+.story-img img {
+  width: 100%;
+  border-radius: 24px;
+  box-shadow: -28px 28px 0 rgba(216,169,79,0.16), 0 0 0 1px rgba(216,169,79,0.12);
+  transition: var(--tr);
+  border: 1px solid var(--border-gold);
+}
+.story-img:hover img {
+  transform: translateX(8px) translateY(-8px);
+  box-shadow: -36px 36px 0 rgba(216,169,79,0.20), 0 0 0 1px rgba(216,169,79,0.15);
+}
+.story-text {
+  flex: 1.2;
+  text-align: left;
+}
+.story-text h2 {
+  font-size: 3rem;
+  margin-bottom: 24px;
+  font-family: 'Playfair Display', serif;
+  line-height: 1.18;
+  letter-spacing: -0.5px;
+}
+.story-text p {
+  color: var(--taupe);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/* =========================================
+   Testimonials
+========================================= */
+.testimonials {
+  padding: 100px 24px;
+  background: linear-gradient(135deg, #b8853a 0%, #D8A94F 45%, #c49040 100%);
+  color: var(--white);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+/* Glassmorphism pattern behind testimonials */
+.testimonials::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+}
+.testimonials .section-title, .testimonials .section-kicker {
+  color: var(--white);
+  position: relative;
+  z-index: 2;
+}
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: 1200px;
+  margin: 60px auto 0;
+  position: relative;
+  z-index: 2;
+}
+.testi-card {
+  background: rgba(255, 255, 255, 0.13);
+  padding: 48px 36px;
+  border-radius: 24px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.18);
+  transition: var(--tr);
+  text-align: center;
+}
+.testi-card:hover {
+  transform: translateY(-12px);
+  background: rgba(255, 255, 255, 0.20);
+  box-shadow: 0 24px 56px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+.testi-stars {
+  color: #fff;
+  margin-bottom: 24px;
+  letter-spacing: 4px;
+  font-size: 1.25rem;
+}
+.testi-text {
+  font-size: 1.08rem;
+  font-style: italic;
+  margin-bottom: 24px;
+  line-height: 1.78;
+  color: rgba(255,255,255,0.9);
+}
+.testi-author {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--white);
+}
+
+/* =========================================
+   Trending Section
+========================================= */
+.trending-section {
+  padding: 100px 24px;
+  background-color: var(--white);
+}
+
+/* =========================================
+   Responsive Breakpoints Override
+========================================= */
+@media (max-width: 1200px) {
+  .hero { gap: 32px; padding: 60px 24px; }
+  .hero-content h1 { font-size: 3.2rem; }
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+    padding: 60px 20px;
+  }
+  .hero-content h1 { font-size: 2.8rem; }
+  .hero-content p { margin: 0 auto 24px; }
+  .hero-actions { justify-content: center; }
+  .story-inner { flex-direction: column; text-align: center; gap: 40px; }
+  .cat-grid { grid-template-columns: 1fr; gap: 24px; }
+  .testi-grid { grid-template-columns: 1fr; gap: 24px; }
+  .story-img img { box-shadow: none; }
+  .story-img:hover img { transform: none; box-shadow: none; }
+}
+
+@media (max-width: 768px) {
+  .hero-content h1 { font-size: 2.2rem; letter-spacing: -0.5px; }
+  .testi-card { padding: 36px 24px; }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 { font-size: 1.9rem; }
+}

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Gradie Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        /* Premium Aesthetics Revamp */
+        .analytics-header { margin-bottom: 35px; position: relative; }
+        .analytics-title { font-size: 2.5rem; font-weight: 700; color: #0f172a; margin-bottom: 8px; letter-spacing: -0.03em; font-family: 'Playfair Display', serif; }
+        .analytics-subtitle { color: #64748b; font-size: 1.05rem; max-width: 600px; }
+        
+        /* KPI Cards Grid - Glassmorphism */
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-bottom: 45px; }
+        .kpi-card { 
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px; 
+            padding: 28px; 
+            display: flex; flex-direction: column; position: relative; overflow: hidden; 
+            border: 1px solid rgba(255, 255, 255, 0.8); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,1); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        .kpi-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,1); }
+        .kpi-card::before { 
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px; 
+            background: linear-gradient(90deg, var(--kpi-color, #cbd5e1), transparent); 
+            opacity: 0.8;
+        }
+        /* Animated glow behind icon on hover */
+        .kpi-card::after {
+            content: ''; position: absolute; top: -20px; right: -20px; width: 100px; height: 100px;
+            background: var(--kpi-color); filter: blur(50px); opacity: 0; transition: opacity 0.5s ease;
+            z-index: 0; border-radius: 50%;
+        }
+        .kpi-card:hover::after { opacity: 0.15; }
+
+        .kpi-title { position: relative; z-index: 1; font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .kpi-icon { padding: 10px; border-radius: 12px; background: rgba(255,255,255,0.8); box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
+        .kpi-card:hover .kpi-icon { transform: scale(1.1) rotate(5deg); }
+        .kpi-value { position: relative; z-index: 1; font-size: 2.6rem; font-weight: 700; color: #0f172a; margin-bottom: 10px; font-family: 'Playfair Display', serif; letter-spacing: -0.02em; }
+        .kpi-trend { position: relative; z-index: 1; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; width: fit-content; background: rgba(0,0,0,0.03); }
+        .kpi-trend.up { color: #059669; background: rgba(16, 185, 129, 0.1); }
+        .kpi-trend.down { color: #dc2626; background: rgba(239, 68, 68, 0.1); }
+        .kpi-trend.neutral { color: #6366f1; background: rgba(99, 102, 241, 0.1); }
+
+        /* Charts Section */
+        .charts-grid { display: grid; grid-template-columns: 2.5fr 1fr; gap: 24px; margin-bottom: 45px; }
+        @media (max-width: 1200px) { .charts-grid { grid-template-columns: 1fr; } }
+        .chart-card { 
+            background: linear-gradient(145deg, #ffffff, #fafafa); 
+            padding: 32px; border-radius: 20px; 
+            border: 1px solid rgba(226, 232, 240, 0.8); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+            transition: box-shadow 0.3s ease;
+        }
+        .chart-card:hover { box-shadow: 0 15px 40px rgba(0,0,0,0.06); }
+        .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .chart-title { font-size: 1.3rem; font-weight: 700; color: #0f172a; margin: 0; font-family: 'Playfair Display', serif; }
+        .chart-actions select { 
+            padding: 10px 16px; border-radius: 12px; border: 1px solid #e2e8f0; 
+            outline: none; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 500;
+            color: #475569; background: #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: all 0.2s ease;
+        }
+        .chart-actions select:hover { border-color: #cbd5e1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+
+        /* Tables Section */
+        .tables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
+        @media (max-width: 1024px) { .tables-grid { grid-template-columns: 1fr; } }
+        .table-card { 
+            background: #fff; padding: 32px; border-radius: 20px; 
+            border: 1px solid rgba(226, 232, 240, 0.8); box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+        }
+        .table-title { font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; font-family: 'Playfair Display', serif; }
+        
+        .premium-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+        .premium-table th { text-align: left; padding: 14px 16px; font-weight: 700; color: #64748b; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 2px solid #f1f5f9; }
+        .premium-table td { padding: 18px 16px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; transition: background 0.2s ease; }
+        .premium-table tr:last-child td { border-bottom: none; }
+        .premium-table tr:hover td { background: #f8fafc; cursor: default; }
+        
+        .product-cell { display: flex; align-items: center; gap: 16px; }
+        .product-img { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.08); transition: transform 0.3s ease; }
+        .premium-table tr:hover .product-img { transform: scale(1.05); box-shadow: 0 6px 15px rgba(0,0,0,0.12); }
+        .product-info { display: flex; flex-direction: column; }
+        .product-name { font-weight: 600; color: #0f172a; font-size: 0.95rem; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+        .product-cat { font-size: 0.8rem; color: #94a3b8; margin-top: 4px; font-weight: 500; }
+        
+        .badge { padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; }
+        .badge-danger { background: rgba(239, 68, 68, 0.1); color: #dc2626; }
+        .badge-warning { background: rgba(245, 158, 11, 0.1); color: #d97706; }
+        .badge-success { background: rgba(16, 185, 129, 0.1); color: #059669; }
+        /* Export PDF Button */
+        .export-pdf-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #d8a94f, #c5963e);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(216, 169, 79, 0.35);
+            transition: all 0.3s ease;
+            letter-spacing: 0.02em;
+        }
+        .export-pdf-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(216, 169, 79, 0.5);
+            background: linear-gradient(135deg, #e0b55c, #d8a94f);
+        }
+        .export-pdf-btn:active { transform: translateY(0); }
+
+        /* AI Analysis Button */
+        .ai-analysis-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #7c3aed, #db2777);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);
+            transition: all 0.3s ease;
+            letter-spacing: 0.02em;
+            animation: pulse-glow 2s infinite;
+        }
+        .ai-analysis-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+        }
+        .ai-analysis-btn:active { transform: translateY(0); }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
+            70% { box-shadow: 0 0 0 8px rgba(124, 58, 237, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+        }
+
+        .ai-spinner {
+            width: 44px;
+            height: 44px;
+            border: 4px solid rgba(124, 58, 237, 0.1);
+            border-top: 4px solid #7c3aed;
+            border-radius: 50%;
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Print / PDF Styles */
+        @media print {
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            body { margin: 0; font-family: 'Inter', sans-serif; background: white; }
+            .admin-layout { display: block !important; }
+            .sidebar, .topbar, .export-pdf-btn, .ai-analysis-btn, #toast-container { display: none !important; }
+            .main-content { margin: 0 !important; padding: 0 !important; width: 100% !important; }
+            .content-wrapper { padding: 20px !important; }
+            .kpi-card { break-inside: avoid; box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+            .chart-card, .table-card { break-inside: avoid; box-shadow: none !important; }
+            .charts-grid { grid-template-columns: 1fr 1fr !important; }
+            .tables-grid { grid-template-columns: 1fr 1fr !important; }
+            #pdf-report-header { display: block !important; }
+            #pdf-print-date { display: block !important; }
+            
+            /* Clean separation when printing AI report vs main dashboard */
+            body.printing-ai .admin-layout { display: none !important; }
+            body.printing-ai #aiModal { display: block !important; position: static !important; background: transparent !important; padding: 0 !important; box-shadow: none !important; }
+            body.printing-ai #aiModal .modal-content { border: none !important; box-shadow: none !important; width: 100% !important; max-width: 100% !important; }
+            body.printing-ai #aiModal button, body.printing-ai #aiModal span { display: none !important; }
+            body.printing-ai #aiModalBody { max-height: none !important; overflow-y: visible !important; padding: 0 !important; }
+            body:not(.printing-ai) #aiModal { display: none !important; }
+        }
+        #pdf-report-header { display: none; }
+        #pdf-print-date { display: none; }
+    </style>
+    <link rel="stylesheet" href="css/toast.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar" id="admin-sidebar"></aside>
+
+        <main class="main-content">
+            <header class="topbar"></header>
+
+            <div class="content-wrapper">
+                <div class="analytics-header">
+                    <!-- PDF Header (only visible when printing) -->
+                    <div id="pdf-report-header" style="border-bottom: 3px solid #d8a94f; padding-bottom: 20px; margin-bottom: 24px;">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #d8a94f, #c5963e); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <span style="color: white; font-weight: 700; font-size: 1.2rem;">G</span>
+                            </div>
+                            <div>
+                                <div style="font-size: 1.5rem; font-weight: 700; color: #0f172a; font-family: 'Playfair Display', serif;">Gradie - Báo Cáo Kinh Doanh</div>
+                                <div style="font-size: 0.9rem; color: #64748b;">Tổng quan phân tích • <span id="pdf-print-date"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+                        <div>
+                            <h2 class="analytics-title">Tổng Quan Kinh Doanh</h2>
+                            <p class="analytics-subtitle">Phân tích chuyên sâu dựa trên dữ liệu hiện tại của hệ thống.</p>
+                        </div>
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <button class="ai-analysis-btn" onclick="openAiAnalysis()" title="Phân tích tình hình kinh doanh bằng AI">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+                                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                                    <path d="m5 3 1 2.5L8.5 6 6 7 5 9.5 4 7 1.5 6 4 5 5 3Z"/>
+                                    <path d="m19 17 1 2.5 2.5.5-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1 1-2.5Z"/>
+                                </svg>
+                                Phân Tích AI
+                            </button>
+                            <button class="export-pdf-btn" onclick="exportAnalyticsPDF()" title="Xuất báo cáo PDF">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                    <polyline points="10 9 9 9 8 9"/>
+                                </svg>
+                                Xuất Báo Cáo PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI Cards -->
+                <div class="kpi-grid">
+                    <div class="kpi-card" style="--kpi-color: #d8a94f;">
+                        <div class="kpi-title">
+                            <span class="kpi-icon" style="color: #d8a94f;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></span>
+                            Tổng Doanh Thu
+                        </div>
+                        <div class="kpi-value" id="total-revenue">0đ</div>
+                        <div class="kpi-trend up">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                            <span>Dựa trên đơn hàng hoàn tất</span>
+                        </div>
+                    </div>
+                    
+                    <div class="kpi-card" style="--kpi-color: #3b82f6;">
+                        <div class="kpi-title">
+                            <span class="kpi-icon" style="color: #3b82f6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></span>
+                            Đơn Thành Công
+                        </div>
+                        <div class="kpi-value" id="total-orders">0</div>
+                        <div class="kpi-trend neutral">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            <span>Chỉ các đơn đã Completed</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card" style="--kpi-color: #10b981;">
+                        <div class="kpi-title">
+                            <span class="kpi-icon" style="color: #10b981;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
+                            Tổng Khách Hàng
+                        </div>
+                        <div class="kpi-value" id="total-customers">0</div>
+                        <div class="kpi-trend up" style="color: #10b981;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <span id="vip-count">0 Khách VIP</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card" style="--kpi-color: #8b5cf6;">
+                        <div class="kpi-title">
+                            <span class="kpi-icon" style="color: #8b5cf6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="12" y1="12" x2="12" y2="12.01"></line></svg></span>
+                            Giá Trị Đơn TB (AOV)
+                        </div>
+                        <div class="kpi-value" id="avg-order-value">0đ</div>
+                        <div class="kpi-trend neutral" style="color: #64748b;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                            <span>Dựa trên tổng đơn</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commission Report -->
+                <div class="table-card" style="margin-bottom: 40px;">
+                    <div class="table-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d8a94f" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        Báo Cáo Doanh Số & Hoa Hồng (Sales)
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table class="premium-table">
+                            <thead>
+                                <tr>
+                                    <th>Nhân Viên Sales</th>
+                                    <th>Tổng Doanh Số Chốt</th>
+                                    <th>Tiến Độ KPI</th>
+                                    <th>Hoa Hồng Tạm Tính</th>
+                                </tr>
+                            </thead>
+                            <tbody id="commission-table-body">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Charts Area -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Biểu Đồ Doanh Thu Thực Tế</h3>
+                            <div class="chart-actions">
+                                <select id="revenue-timeframe">
+                                    <option value="all">Tất cả thời gian</option>
+                                    <option value="recent">Các ngày có đơn gần nhất</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="position: relative; height: 320px; width: 100%;">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Tỷ Trọng Danh Mục</h3>
+                        </div>
+                        <div style="position: relative; height: 320px; width: 100%; display: flex; justify-content: center; align-items: center;">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tables Area -->
+                <div class="tables-grid">
+                    <!-- Top Sellers -->
+                    <div class="table-card">
+                        <h3 class="table-title">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d8a94f" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            Top Sản Phẩm Bán Chạy
+                        </h3>
+                        <div style="overflow-x: auto;">
+                            <table class="premium-table">
+                                <thead>
+                                    <tr>
+                                        <th>Sản Phẩm</th>
+                                        <th style="text-align: center;">Đã Bán</th>
+                                        <th style="text-align: right;">Doanh Thu</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="best-sellers-list">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Dead Stock -->
+                    <div class="table-card">
+                        <h3 class="table-title">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            Sản Phẩm Tồn Đọng (Dead Stock)
+                        </h3>
+                        <div style="overflow-x: auto;">
+                            <table class="premium-table">
+                                <thead>
+                                    <tr>
+                                        <th>Sản Phẩm</th>
+                                        <th style="text-align: center;">Tồn Kho</th>
+                                        <th style="text-align: center;">Trạng Thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dead-stock-list">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- Closes .content-wrapper -->
+        </main> <!-- Closes .main-content -->
+    </div> <!-- Closes .admin-layout -->
+
+    <!-- AI Insights Modal -->
+    <div id="aiModal" class="modal" style="display:none;">
+        <div class="modal-content" style="max-width: 800px; border-radius: 20px; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.2); background: #ffffff; display: flex; flex-direction: column; max-height: 90vh;">
+            <!-- Header with AI gradient background -->
+            <div style="background: linear-gradient(135deg, #1c1917 0%, #292524 100%); padding: 30px 40px; color: white; position: relative; border-bottom: 2px solid #d8a94f;">
+                <h3 style="margin: 0; font-size: 1.6rem; font-family: 'Playfair Display', serif; display: flex; align-items: center; gap: 12px; color: white;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d8a94f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                    </svg>
+                    Báo Cáo Phân Tích & Tư Vấn Chiến Lược AI
+                </h3>
+                <p style="margin: 8px 0 0 36px; color: rgba(255,255,255,0.7); font-size: 0.95rem;">Được tổng hợp tự động từ dữ liệu bán hàng và tồn kho thực tế.</p>
+                <span onclick="closeAiModal()" style="position: absolute; top: 25px; right: 30px; font-size: 1.8rem; cursor: pointer; color: rgba(255,255,255,0.5); transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">&times;</span>
+            </div>
+            
+            <!-- Body -->
+            <div id="aiModalBody" style="padding: 40px; flex: 1; overflow-y: auto; background: #fafafa; font-family: 'Inter', sans-serif; line-height: 1.7; color: #334155;">
+                <!-- Loading Animation initially -->
+                <div id="ai-loading" style="text-align: center; padding: 40px 0;">
+                    <div class="ai-spinner"></div>
+                    <p style="margin-top: 20px; font-weight: 600; color: #7c3aed; font-size: 1rem; letter-spacing: 0.05em;">Đang phân tích dữ liệu bán hàng...</p>
+                </div>
+                
+                <!-- AI Report Content -->
+                <div id="ai-content" style="display: none;"></div>
+            </div>
+            
+            <!-- Footer -->
+            <div style="padding: 20px 40px; background: #fff; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 15px;">
+                <button class="outline-button" onclick="closeAiModal()" style="border-radius: 10px; padding: 10px 20px; font-weight: 600;">Đóng</button>
+                <button class="export-pdf-btn" onclick="exportAiReport()" style="border-radius: 10px; padding: 10px 20px; font-weight: 600;">In Báo Cáo AI</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/icons.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/global-data.js"></script>
+    <script src="js/data-store.js"></script>
+    <script src="js/admin-auth.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/admin-analytics.js"></script>
+</body>
+</html>
