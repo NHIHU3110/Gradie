@@ -1,0 +1,159 @@
+/* css/icons.css — Gradie Icon Polish
+   Đảm bảo tất cả SVG icon trong system hiển thị đúng kích thước,
+   căn chỉnh, màu sắc và không bị pixelated.
+*/
+
+/* ── Global SVG reset ── */
+svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* ── Header icon buttons ── */
+.header-icons .icon-btn svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.5;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.header-icons .icon-btn:hover svg {
+  transform: scale(1.1);
+}
+
+/* ── Password toggle eye icon ── */
+.password-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--taupe);
+  transition: color 0.2s;
+  width: 36px;
+  height: 36px;
+}
+
+.password-toggle-btn .eye-open,
+.password-toggle-btn .eye-closed {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.password-toggle-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.password-toggle-btn:hover {
+  color: var(--champagne);
+}
+
+/* ── Favorite button heart icon ── */
+.btn-favorite {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-favorite svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.btn-favorite:hover svg {
+  transform: scale(1.15);
+}
+
+/* ── Trash / delete icon in cart ── */
+.delete-item-btn svg,
+button[onclick*="removeFromCart"] svg,
+button[onclick*="removeItem"] svg {
+  width: 16px;
+  height: 16px;
+  color: var(--taupe);
+  transition: color 0.2s, transform 0.2s;
+}
+
+.delete-item-btn:hover svg,
+button[onclick*="removeFromCart"]:hover svg,
+button[onclick*="removeItem"]:hover svg {
+  color: var(--dusty-rose);
+  transform: scale(1.1);
+}
+
+/* ── Form title icons in checkout ── */
+.form-title-icon svg {
+  width: 18px;
+  height: 18px;
+  color: var(--champagne);
+}
+
+/* ── Secure badge lock icon ── */
+.secure-badge svg {
+  width: 14px;
+  height: 14px;
+  color: var(--champagne);
+  flex-shrink: 0;
+}
+
+/* ── Social login button icons ── */
+.social-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ── Step/progress icon circles ── */
+.step-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Checkout order summary icons ── */
+.summary-icon svg {
+  width: 16px;
+  height: 16px;
+  color: var(--champagne);
+}
+
+/* ── Success screen check icon ── */
+.success-icon svg {
+  width: 56px;
+  height: 56px;
+  color: var(--success);
+}
+
+/* ── Admin sidebar nav icons ── */
+.sidebar-nav a svg,
+.sidebar-nav button svg {
+  width: 18px;
+  height: 18px;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.sidebar-nav a:hover svg,
+.sidebar-nav a.active svg {
+  opacity: 1;
+}
+
+/* ── Smooth icon color inheritance ── */
+.icon-btn,
+.btn-favorite,
+.delete-item-btn,
+.password-toggle-btn {
+  color: inherit;
+  line-height: 0;
+}
+
+/* ── Cart count badge position fine-tune ── */
+.icon-btn .cart-count-badge,
+.icon-btn #cart-count {
+  pointer-events: none;
+  font-family: 'Montserrat', sans-serif;
+}

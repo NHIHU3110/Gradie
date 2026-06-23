@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradie Admin | Edit Product</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/admin.css?v=2">
+    <link rel="stylesheet" href="../css/icons.css">
+    <style>
+        .variant-row { display: flex; gap: 10px; align-items: center; background: #f9f9f9; padding: 10px; border-radius: 4px; border: 1px solid #eee; }
+        .variant-row input { margin-bottom: 0; padding: 8px; flex: 1; }
+        .variant-row .btn-remove { background: #fee; color: red; border: 1px solid #fcc; padding: 8px; border-radius: 4px; cursor: pointer; }
+    </style>
+  <link rel="stylesheet" href="../css/responsive.css">
+<link rel="stylesheet" href="../css/toast.css?v=1780167435">
+</head>
+
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar"></aside>
+        <main class="main-content">
+            <header class="topbar"><a href="admin-products.html">← Back to Products</a></header>
+            <div class="content-wrapper">
+                <div class="dashboard-header" style="margin-bottom: 30px;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 id="form-title" style="margin:0; font-size: 2rem;">Add / Edit Product</h2>
+                            <p style="color: var(--admin-muted); margin-top: 5px;">Enter product details, pricing, and variants.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-card">
+                    <form id="product-form">
+                        <input type="hidden" id="product-id">
+                        
+                        <div class="form-row">
+                            <div class="form-group"><label>Name *</label><input type="text" id="p-name" required></div>
+                            <div class="form-group">
+                                <label>Category *</label>
+                                <input type="text" id="p-category" list="category-list" required autocomplete="off" placeholder="Select or type new category">
+                                <datalist id="category-list"></datalist>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group"><label>Price *</label><input type="number" id="p-price" required></div>
+                            <div class="form-group"><label>Stock</label><input type="number" id="p-stock" value="20"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Gallery Images (Comma separated URLs) * Minimum 3</label>
+                            <textarea id="p-gallery" rows="4" placeholder="https://img1.jpg, https://img2.jpg, https://img3.jpg" required></textarea>
+                            <small style="color:var(--admin-muted)">The first image will be used as the main image.</small>
+                        </div>
+                        
+                        
+                        <div class="form-group">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                                <label style="margin:0;">Product Variants</label>
+                                <button type="button" class="outline-button" style="padding:5px 10px; font-size:0.8rem;" onclick="addVariantRow()">+ Add Variant</button>
+                            </div>
+                            <div id="variants-container" style="display:flex; flex-direction:column; gap:10px;">
+                                <p style="color:var(--admin-muted); font-size:0.9rem;">No variants added. Product will be treated as a single item.</p>
+                            </div>
+                        </div>
+
+                        
+                        <div class="form-group"><label>Description</label><textarea id="p-desc" rows="4"></textarea></div>
+                        
+                        <button type="submit" class="btn-primary">Save Product</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+  <script src="../js/icons.js"></script>
+  <script src="../js/toast.js"></script>
+  <script src="../js/global-data.js?v=1780167290"></script>
+    <script src="../js/data-store.js?v=1780167290"></script>
+    <script src="../js/admin-auth.js?v=1780167290"></script>
+    <script src="../js/admin.js?v=2"></script>
+    <script>
+
+        let currentVariants = [];
+        
+        window.renderVariants = function() {
+            const container = document.getElementById('variants-container');
+            if (currentVariants.length === 0) {
+                container.innerHTML = '<p style="color:var(--admin-muted); font-size:0.9rem; padding:10px; background:#f9f9f9; border-radius:4px; text-align:center;">No variants added.</p>';
+                return;
+            }
+            container.innerHTML = currentVariants.map((v, i) => `
+                <div class="variant-row">
+                    <input type="text" placeholder="Variant Name (e.g. Size M)" value="${v.name || ''}" onchange="currentVariants[${i}].name = this.value">
+                    <input type="number" placeholder="Price (VND)" value="${v.price || 0}" onchange="currentVariants[${i}].price = Number(this.value)">
+                    <input type="number" placeholder="Stock" value="${v.stock || 0}" onchange="currentVariants[${i}].stock = Number(this.value)">
+                    <button type="button" class="btn-remove" onclick="removeVariantRow(${i})">X</button>
+                </div>
+            `).join('');
+        };
+        
+        window.addVariantRow = function() {
+            currentVariants.push({ name: '', price: 0, stock: 10 });
+            renderVariants();
+        };
+        
+        window.removeVariantRow = function(index) {
+            currentVariants.splice(index, 1);
+            renderVariants();
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            const form = document.getElementById('product-form');
+            
+            const categories = window.GradieStore.getCategories() || [];
+            const dataList = document.getElementById('category-list');
+            if (dataList) {
+                dataList.innerHTML = categories.map(c => `<option value="${c}">`).join('');
+            }
+            
+            if (productId) {
+                document.getElementById('form-title').innerText = "Edit Product";
+                const product = window.GradieStore.getProductById(productId);
+                if (product) {
+                    document.getElementById('product-id').value = product.id;
+                    document.getElementById('p-name').value = product.name || '';
+                    document.getElementById('p-category').value = product.category || '';
+                    document.getElementById('p-price').value = product.price || 0;
+                    document.getElementById('p-stock').value = product.stock || 0;
+                    document.getElementById('p-gallery').value = (product.gallery || []).join(', ');
+                    currentVariants = product.variants || [];
+                    document.getElementById('p-desc').value = product.description || '';
+                }
+            }
+            renderVariants();
+            
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const idInput = document.getElementById('product-id').value;
+                const name = document.getElementById('p-name').value;
+                const newId = idInput || name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now();
+                
+                let galleryArr = document.getElementById('p-gallery').value.split(',').map(s => s.trim()).filter(s => s);
+                
+                // Filter out variants without a name
+                const cleanVariants = currentVariants.filter(v => v.name.trim() !== '');
+                
+                const newPrice = Number(document.getElementById('p-price').value);
+                const productData = {
+                    id: newId,
+                    name: name,
+                    category: document.getElementById('p-category').value,
+                    price: newPrice,
+                    stock: Number(document.getElementById('p-stock').value),
+                    description: document.getElementById('p-desc').value,
+                    gallery: galleryArr,
+                    variants: cleanVariants
+                };
+                
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const origText = submitBtn.innerText;
+                submitBtn.disabled = true;
+                submitBtn.innerText = 'Saving...';
+
+                try {
+                    let priceChanged = false;
+                    if (idInput) {
+                        const oldProduct = window.GradieStore.getProductById(newId);
+                        if (oldProduct && oldProduct.price !== newPrice) {
+                            priceChanged = true;
+                        }
+                        await window.GradieStore.updateProduct(newId, productData);
+                    } else {
+                        await window.GradieStore.addProduct(productData);
+                    }
+
+                    if (priceChanged) {
+                        showToast('Đang cập nhật giá lên TikTok Shop...', 'info');
+                        const tiktokResult = await window.GradieStore.updateTikTokProductPrice(newId, newPrice);
+                        if (tiktokResult.success) {
+                            showToast('Đã cập nhật giá thành công trên TikTok Shop!', 'success');
+                        } else {
+                            showToast(`Không thể cập nhật giá lên TikTok Shop: ${tiktokResult.message}`, 'warning');
+                        }
+                        // Allow toast to be read
+                        await new Promise(r => setTimeout(r, 1500));
+                    } else {
+                        showToast('Đã lưu sản phẩm thành công!', 'success');
+                        await new Promise(r => setTimeout(r, 1000));
+                    }
+                    window.location.href = 'admin-products.html';
+                } catch (err) {
+                    console.error(err);
+                    showToast('Lỗi khi lưu sản phẩm.', 'error');
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = origText;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

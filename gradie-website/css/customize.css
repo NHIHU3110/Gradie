@@ -1,0 +1,5 @@
+.customizer-container { max-width: 1000px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.preview-box { background: var(--ivory); border: 1px dashed var(--champagne); border-radius: 12px; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+.options-panel { display: flex; flex-direction: column; gap: 20px; }
+.option-group label { font-weight: 600; margin-bottom: 8px; display: block; color: var(--ink); }
+.option-group select, .option-group input { width: 100%; padding: 12px; border: 1px solid var(--border-gold); border-radius: 4px; font-family: 'Montserrat', sans-serif; }

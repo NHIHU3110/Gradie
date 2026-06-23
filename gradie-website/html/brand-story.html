@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradie | Câu Chuyện Thương Hiệu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/icons.css?v=1780166734">
+  <link rel="stylesheet" href="../css/responsive.css">
+  
+<link rel="stylesheet" href="../css/toast.css?v=1780167435">
+</head>
+<body>
+  <div class="announcement-bar">Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới</div>
+  
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img loading="lazy" src="../images/Gradie_logo.jpeg" alt="Gradie Logo">
+        Gradie
+        <span class="tagline">Quà Tặng Tốt Nghiệp</span>
+      </a>
+      <nav class="nav">
+        <a href="about.html">Về Chúng Tôi</a>
+        <a href="products.html">Sản Phẩm</a>
+        <a href="customize.html">Cá Nhân Hóa</a>
+        <a href="gallery.html">Bộ Sưu Tập</a>
+        <a href="blog.html">Bài Viết</a>
+        <a href="contact.html">Liên Hệ</a>
+      </nav>
+      <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <div class="header-icons">
+        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <button class="icon-btn" onclick="showToast('Tính năng tìm kiếm đang được phát triển!', 'info')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width:1200px; margin:60px auto; padding:0 20px;">
+    <div style="max-width:800px; margin:0 auto; text-align:center;">
+      <h1 style="color:var(--champagne); margin-bottom:30px;">Câu Chuyện Của Chúng Tôi</h1>
+      <img loading="lazy" src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80" style="width:100%; border-radius:12px; margin-bottom:30px;">
+      <p style="font-size:1.1rem; line-height:1.8; color:var(--soft-black); text-align:justify;">Gradie khởi đầu từ một ý tưởng đơn giản: lễ tốt nghiệp không chỉ là một nghi thức—đó là khoảnh khắc bước sang "chương mới" quan trọng của cuộc đời, xứng đáng được kỷ niệm bằng sự thanh lịch và cảm xúc trọn vẹn nhất. Từ một dự án nhỏ đầy đam mê thêu tay những dải băng tốt nghiệp xinh xắn, chúng tôi đã phát triển thành một cửa hàng quà tặng toàn diện. Gradie chuyên về gấu bông cá nhân hóa, những hộp quà trang nhã và các kỷ vật ý nghĩa để giúp bạn gửi gắm trọn vẹn niềm tự hào của mình.</p>
+    </div>
+  </main>
+  
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="footer-logo">Gradie</div>
+        <p style="font-family:'Great Vibes', cursive; font-size:1.5rem; color:var(--champagne); margin-top:10px;">Kỷ niệm hôm nay, trân quý mãi về sau.</p>
+      </div>
+      <div class="footer-col"><h4>Liên Kết Nhanh</h4><a href="about.html">Về Chúng Tôi</a><a href="products.html">Cửa Hàng</a><a href="contact.html">Liên Hệ</a></div>
+      <div class="footer-col"><h4>Chăm Sóc Khách Hàng</h4><a href="store-policy.html">Chính Sách Cửa Hàng</a><a href="order-tracking.html">Theo Dõi Đơn Hàng</a><a href="account.html">Tài Khoản Của Tôi</a></div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Gradie - Quà Tặng Tốt Nghiệp. Toàn bộ bản quyền được bảo lưu.
+    </div>
+  </footer>
+  <script src="../js/icons.js"></script>
+  <script src="../js/toast.js"></script>
+  <script src="../js/global-data.js?v=1780167435"></script>
+  <script src="../js/data-store.js?v=1780167435"></script>
+  <script src="../js/main.js?v=1780167435"></script>
+</body>
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradie | Thanh Toán</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/icons.css?v=1780166734">
+  <link rel="stylesheet" href="../css/responsive.css">
+  
+  <style>
+    /* ── Checkout Layout ── */
+    .checkout-page-header {
+      padding: 60px 24px 30px;
+      text-align: center;
+      background: linear-gradient(to bottom, #fdfbf7 0%, #ffffff 100%);
+      border-bottom: 1px solid var(--border-gold);
+    }
+    .checkout-page-header .section-kicker { 
+      margin-bottom: 8px; 
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--champagne);
+    }
+    .checkout-page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      color: var(--soft-black);
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+
+    .checkout-container {
+      max-width: 1160px;
+      margin: 40px auto 80px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* ── Form Section ── */
+    .checkout-form-section {
+      background: var(--white);
+      padding: 40px;
+      border-radius: 24px;
+      border: 1px solid var(--border-gold);
+      box-shadow: 0 12px 40px rgba(216, 169, 79, 0.05);
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+    }
+
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--soft-black);
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .form-title-icon {
+      width: 36px; height: 36px;
+      background: var(--champagne-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(216,169,79,0.1);
+    }
+
+    .checkout-group {
+      margin-bottom: 20px;
+    }
+    .checkout-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--ink);
+      letter-spacing: 0.3px;
+    }
+    .checkout-group input,
+    .checkout-group textarea,
+    .checkout-group select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid var(--border-gold);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--ink);
+      background: var(--ivory);
+      outline: none;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
+      transition: all 0.25s ease;
+    }
+    .checkout-group input:focus,
+    .checkout-group textarea:focus {
+      border-color: var(--champagne);
+      background: var(--white);
+      box-shadow: 0 0 0 4px rgba(216,169,79,0.1);
+    }
+    .checkout-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* ── Payment ── */
+    .payment-method-title {
+      margin-top: 40px;
+    }
+    .payment-card {
+      border: 1.5px solid #e2e8f0;
+      background: var(--white);
+      padding: 20px;
+      border-radius: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-top: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.01);
+    }
+    .payment-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(216,169,79,0.06);
+      border-color: var(--champagne);
+    }
+    .payment-card input[type="radio"] {
+      width: auto;
+      margin-top: 4px;
+      accent-color: var(--champagne);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .payment-card-label {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    .payment-card-desc {
+      font-size: 0.85rem;
+      color: var(--taupe);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .btn-place-order {
+      width: 100%;
+      padding: 18px;
+      font-size: 1.05rem;
+      border-radius: 14px;
+      margin-top: 32px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      background: linear-gradient(135deg, var(--peach), var(--dusty-rose));
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 24px rgba(233,160,141,0.3);
+    }
+    .btn-place-order:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(194,139,139,0.35);
+    }
+
+    /* ── Order Summary ── */
+    .order-summary-section {
+      background: linear-gradient(160deg, #fdfbf7 0%, #fffbf2 100%);
+      padding: 36px;
+      border-radius: 24px;
+      border: 1px solid var(--border-gold);
+      box-shadow: 0 12px 40px rgba(216,169,79,0.05);
+      position: sticky;
+      top: 100px;
+    }
+
+    .summary-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 0;
+      border-bottom: 1px dashed #e5e2dd;
+      font-size: 0.95rem;
+    }
+    .summary-item-name {
+      color: var(--ink);
+      font-weight: 500;
+      flex: 1;
+      line-height: 1.4;
+    }
+    .summary-item-price {
+      color: var(--champagne);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .summary-fee-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      font-size: 0.92rem;
+      color: var(--taupe);
+      border-bottom: 1px solid #e5e2dd;
+    }
+
+    .grand-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0 0;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--soft-black);
+      margin-top: 10px;
+    }
+    .grand-total-row .total-amount {
+      color: var(--champagne);
+      font-size: 1.45rem;
+    }
+
+    .secure-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+      padding: 12px;
+      background: rgba(216,169,79,0.06);
+      border-radius: 10px;
+      font-size: 0.8rem;
+      color: var(--taupe);
+      letter-spacing: 0.3px;
+    }
+
+    /* ── Success State ── */
+    .success-container {
+      max-width: 600px;
+      margin: 80px auto;
+      padding: 60px 48px;
+      text-align: center;
+      background: var(--white);
+      border-radius: 28px;
+      border: 1px solid var(--border-gold);
+      box-shadow: 0 24px 70px rgba(216,169,79,0.08);
+    }
+
+    /* ── Mobile Responsive ── */
+    @media (max-width: 768px) {
+      .checkout-page-header {
+        padding: 40px 16px 20px;
+      }
+      .checkout-page-header h1 {
+        font-size: 2rem;
+      }
+
+      .checkout-container {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+        margin: 20px auto 60px !important;
+        padding: 0 16px !important;
+      }
+
+      .order-summary-section {
+        order: 1 !important; /* Summary on top */
+        padding: 26px 20px !important;
+        border-radius: 20px !important;
+        position: static !important;
+      }
+
+      .checkout-form-section {
+        order: 2 !important; /* Form on bottom */
+        padding: 26px 20px !important;
+        border-radius: 20px !important;
+      }
+
+      .form-row-2 {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .btn-place-order {
+        padding: 16px;
+        font-size: 0.95rem;
+        margin-top: 24px;
+      }
+
+      .success-container {
+        margin: 40px 16px;
+        padding: 40px 24px;
+      }
+    }
+
+    /* ── Progress Bar ── */
+    .checkout-progress {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--taupe);
+      flex-wrap: wrap;
+    }
+
+    .progress-step {
+      color: var(--taupe);
+      transition: color 0.2s;
+    }
+
+    .progress-step--done {
+      color: var(--champagne);
+      text-decoration: none;
+    }
+    .progress-step--done:hover {
+      color: var(--peach);
+      text-decoration: underline;
+    }
+
+    .progress-step--active {
+      color: var(--ink);
+      padding: 6px 16px;
+      background: var(--champagne-light);
+      border-radius: 20px;
+      border: 1.5px solid var(--champagne);
+      box-shadow: 0 2px 8px rgba(216, 169, 79, 0.08);
+    }
+
+    .progress-arrow {
+      color: var(--border-gold);
+      font-size: 1rem;
+    }
+  </style>
+<link rel="stylesheet" href="../css/toast.css?v=1780167435">
+</head>
+<body>
+  <div class="announcement-bar">
+    Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img loading="lazy" src="../images/Gradie_logo.jpeg" alt="Gradie Logo">
+        Gradie
+        <span class="tagline">Quà Tặng Tốt Nghiệp</span>
+      </a>
+      <nav class="nav">
+        <a href="about.html">Về Chúng Tôi</a>
+        <a href="products.html">Sản Phẩm</a>
+        <a href="customize.html">Cá Nhân Hóa</a>
+        <a href="gallery.html">Bộ Sưu Tập</a>
+        <a href="blog.html">Bài Viết</a>
+        <a href="contact.html">Liên Hệ</a>
+      </nav>
+      <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <div class="header-icons">
+        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <button class="icon-btn" onclick="showToast('Tính năng tìm kiếm đang được phát triển!', 'info')"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span id="cart-count" class="cart-count-badge">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main id="checkout-main-content">
+
+    <!-- Page Header -->
+    <div class="checkout-page-header">
+      <span class="section-kicker">Cổng Thanh Toán Bảo Mật</span>
+      <h1>Thông Tin Thanh Toán</h1>
+      
+      <!-- Progress Bar -->
+      <div class="checkout-progress">
+        <a href="cart.html" class="progress-step progress-step--done">Giỏ Hàng</a>
+        <span class="progress-arrow">⟶</span>
+        <span class="progress-step progress-step--active">Thanh Toán</span>
+        <span class="progress-arrow">⟶</span>
+        <span class="progress-step">Hoàn Tất</span>
+      </div>
+    </div>
+
+    <!-- Checkout Container -->
+    <div class="checkout-container" id="checkout-form-container">
+
+      <!-- Left: Shipping Form -->
+      <section class="checkout-form-section">
+
+        <h2 class="form-title">
+          <span class="form-title-icon">📦</span>
+          Giao Hàng & Liên Hệ
+        </h2>
+
+        <form id="shipping-form" onsubmit="event.preventDefault(); submitOrder();">
+
+          <!-- Saved Address Cards -->
+          <div id="checkout-saved-addresses-wrapper" style="display:none; margin-bottom:20px;">
+            <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:10px; color:var(--ink);">Địa Chỉ Giao Hàng Đã Lưu</label>
+            <div id="checkout-address-cards-container" style="display:flex; flex-direction:column; gap:10px;"></div>
+          </div>
+
+          <div class="checkout-group">
+            <label for="shipping-name">Họ và Tên người nhận *</label>
+            <input type="text" id="shipping-name" placeholder="Ví dụ: Huỳnh Thảo Nhi" required>
+          </div>
+
+          <div class="form-row-2">
+            <div class="checkout-group">
+              <label for="shipping-phone">Số Điện Thoại liên hệ *</label>
+              <input type="tel" id="shipping-phone" placeholder="0901 234 567" required>
+            </div>
+            <div class="checkout-group">
+              <label for="shipping-email">Địa chỉ Email xác nhận *</label>
+              <input type="email" id="shipping-email" placeholder="nhi@example.com" required>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="checkout-group">
+              <label for="shipping-province">Tỉnh / Thành phố *</label>
+              <select id="shipping-province" required>
+                <option value="">-- Chọn Tỉnh / Thành phố --</option>
+              </select>
+            </div>
+            <div class="checkout-group">
+              <label for="shipping-district">Quận / Huyện *</label>
+              <select id="shipping-district" required disabled>
+                <option value="">-- Chọn Quận / Huyện --</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row-2">
+            <div class="checkout-group">
+              <label for="shipping-ward">Phường / Xã *</label>
+              <select id="shipping-ward" required disabled>
+                <option value="">-- Chọn Phường / Xã --</option>
+              </select>
+            </div>
+            <div class="checkout-group">
+              <label for="shipping-street">Số nhà, tên đường *</label>
+              <input type="text" id="shipping-street" placeholder="Ví dụ: 123 Đường Lê Lợi" required>
+            </div>
+          </div>
+          <input type="hidden" id="shipping-address" required>
+
+          <!-- Save address checkbox -->
+          <div id="checkout-save-address-profile-wrapper" style="display:none; margin-bottom:18px;">
+            <label style="display:flex; align-items:center; font-size:0.85rem; cursor:pointer; gap:8px;">
+              <input type="checkbox" id="checkout-save-address-checkbox" style="width:16px; height:16px; accent-color:var(--champagne); flex-shrink:0;">
+              Lưu địa chỉ này vào hồ sơ của tôi
+            </label>
+          </div>
+
+          <div class="checkout-group">
+            <label for="shipping-notes">Ghi chú giao hàng / Lời chúc viết tay</label>
+            <textarea id="shipping-notes" placeholder="Yêu cầu đặc biệt, nội dung viết thiệp, ghi chú vị trí nhà cho shipper..."></textarea>
+          </div>
+
+          <!-- Payment -->
+          <h2 class="form-title payment-method-title">
+            <span class="form-title-icon">💳</span>
+            Phương Thức Thanh Toán
+          </h2>
+
+          <div class="payment-card" onclick="selectPayment('cod')" id="payment-card-cod" style="border-color:var(--champagne); background: linear-gradient(135deg, #fdfaf5 0%, #fff9f0 100%);">
+            <input type="radio" id="payment-cod" name="payment-method" value="cod" checked onchange="selectPayment('cod')">
+            <div>
+              <div class="payment-card-label">💵 Thanh toán khi nhận hàng (COD)</div>
+              <p class="payment-card-desc">Thanh toán bằng tiền mặt khi nhận hàng. Không cần đặt cọc.</p>
+            </div>
+          </div>
+
+          <div class="payment-card" onclick="selectPayment('qr')" id="payment-card-qr">
+            <input type="radio" id="payment-qr" name="payment-method" value="qr" onchange="selectPayment('qr')">
+            <div>
+              <div class="payment-card-label">📱 Chuyển khoản ngân hàng (QR Code)</div>
+              <p class="payment-card-desc">Quét mã QR bằng App ngân hàng bất kỳ. Hệ thống tự điền số tiền và nội dung chuyển khoản.</p>
+            </div>
+          </div>
+
+          <!-- VietQR Section (hidden until QR selected) -->
+          <div id="vietqr-section" style="display:none; margin-top:20px;">
+            <!-- Techcombank Header -->
+            <div style="display:flex; align-items:center; justify-content:center; gap:12px; background:linear-gradient(135deg,#e31e24,#c0121a); padding:14px 20px; border-radius:12px 12px 0 0;">
+              <div style="background:#fff; border-radius:6px; padding:4px 10px; font-weight:900; font-size:1rem; color:#e31e24; letter-spacing:1px; font-family:'Arial Black',sans-serif;">TCB</div>
+              <div style="color:#fff; font-weight:700; font-size:1rem;">Techcombank</div>
+              <div style="background:rgba(255,255,255,0.2); border-radius:4px; padding:2px 8px; color:#fff; font-size:0.75rem; font-weight:600;">VietQR</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#fff9f5,#fffdf9); border:1px solid var(--border-gold); border-top:none; border-radius:0 0 14px 14px; padding:20px; text-align:center;">
+              <div id="qr-loading" style="padding:20px; color:var(--taupe); font-style:italic;">Đang tạo mã QR...</div>
+              <img id="qr-image" src="" alt="VietQR Techcombank" loading="lazy"
+                 style="display:none; width:230px; height:230px; border-radius:12px; border:3px solid var(--champagne); box-shadow:0 8px 24px rgba(216,169,79,0.25); margin:0 auto;">
+              <div id="qr-info" style="display:none; margin-top:16px;">
+                <!-- Bank info card -->
+                <div style="background:#fff; border:1px solid #f0ebe0; border-radius:10px; padding:14px 18px; text-align:left; margin-bottom:12px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <span style="font-size:0.78rem; color:#999; text-transform:uppercase; letter-spacing:0.5px;">Ngân hàng</span>
+                    <span style="font-weight:700; color:#e31e24; font-size:0.92rem;">Techcombank (TCB)</span>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <span style="font-size:0.78rem; color:#999; text-transform:uppercase; letter-spacing:0.5px;">Số tài khoản</span>
+                    <span style="font-weight:700; color:#1a1a1a; font-size:1.05rem; letter-spacing:1.5px;">3331102005</span>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <span style="font-size:0.78rem; color:#999; text-transform:uppercase; letter-spacing:0.5px;">Chủ tài khoản</span>
+                    <span id="qr-name" style="font-weight:600; color:#1a1a1a; font-size:0.9rem;"></span>
+                  </div>
+                  <div style="background:var(--warm-cream,#fef4e8); border-radius:8px; padding:10px 14px; margin-top:4px;">
+                    <div style="font-size:0.75rem; color:#888; margin-bottom:3px;">Nội dung chuyển khoản</div>
+                    <div id="qr-desc" style="color:var(--champagne); font-weight:800; font-size:1rem; letter-spacing:0.5px;"></div>
+                  </div>
+                </div>
+                <p style="font-size:0.78rem; color:#e31e24; font-weight:600;">⚠️ Nhập đúng nội dung chuyển khoản để đơn hàng được xác nhận tự động.</p>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-place-order" id="btn-place-order">
+            🎁 Xác Nhận Đặt Hàng
+          </button>
+
+        </form>
+      </section>
+
+
+      <!-- Right: Order Summary -->
+      <section class="order-summary-section">
+        <h2 class="form-title">
+          <span class="form-title-icon">🛍️</span>
+          Tóm Tắt Đơn Hàng
+        </h2>
+
+        <div id="checkout-summary-list">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- Coupon Input Section -->
+        <div class="coupon-section" style="margin: 20px 0; padding: 18px 0; border-top: 1px solid #e5e2dd; border-bottom: 1px solid #e5e2dd;">
+          <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:10px; color:var(--ink);">Mã Giảm Giá</label>
+          <div style="display:flex; gap:10px;">
+            <input type="text" id="coupon-code-input" placeholder="Nhập mã (Ví dụ: GRAD2026)" style="flex:1; padding:12px 14px; border:1.5px solid var(--border-gold); border-radius:10px; font-family:inherit; font-size:0.9rem; outline:none; background:#fff; text-transform:uppercase; transition:all 0.25s;" onfocus="this.style.borderColor='var(--champagne)'" onblur="this.style.borderColor='var(--border-gold)'">
+            <button type="button" id="apply-coupon-btn" onclick="applyCoupon()" style="padding:12px 18px; background:var(--champagne); color:#fff; border:none; border-radius:10px; font-weight:600; font-family:inherit; font-size:0.88rem; cursor:pointer; transition:all 0.25s;">Áp Dụng</button>
+          </div>
+          <div id="coupon-message" style="margin-top:8px; font-size:0.82rem; font-weight:500; display:none;"></div>
+        </div>
+
+        <div class="summary-fee-row">
+          <span>Tạm tính</span>
+          <span id="checkout-subtotal">0đ</span>
+        </div>
+        <div class="summary-fee-row" id="discount-row" style="display:none; color:#dc2626; font-weight:600;">
+          <span>Giảm giá (<span id="active-coupon-label"></span>)</span>
+          <span id="checkout-discount">-0đ</span>
+        </div>
+        <div class="summary-fee-row">
+          <span>Phí vận chuyển</span>
+          <span id="checkout-shipping">0đ</span>
+        </div>
+        <div class="grand-total-row">
+          <span>Tổng thanh toán</span>
+          <span class="total-amount" id="checkout-grand-total">0đ</span>
+        </div>
+
+        <div class="secure-badge">
+          🔒 Thanh toán được mã hóa & bảo mật
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="footer-logo">Gradie</div>
+        <p class="footer-tagline">Kỷ niệm hôm nay, trân quý mãi về sau.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Liên Kết Nhanh</h4>
+        <a href="about.html">Về Chúng Tôi</a>
+        <a href="products.html">Cửa Hàng</a>
+        <a href="contact.html">Liên Hệ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Chăm Sóc Khách Hàng</h4>
+        <a href="store-policy.html">Chính Sách Cửa Hàng</a>
+        <a href="order-tracking.html">Theo Dõi Đơn Hàng</a>
+        <a href="account.html">Tài Khoản Của Tôi</a>
+      </div>
+      <div class="footer-col">
+        <h4>Theo Dõi Chúng Tôi</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Gradie - Quà Tặng Tốt Nghiệp. Toàn bộ bản quyền được bảo lưu.
+    </div>
+  </footer>
+  <!-- EmailJS SDK - để gửi email hóa đơn tự động khi đặt hàng -->
+  <!-- Bật tính năng: vào emailjs.com tạo account miễn phí, điền Public Key vào js/checkout.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/toast.js"></script>
+  <script src="../js/global-data.js?v=1780167435"></script>
+  <script src="../js/data-store.js?v=1780167435"></script>
+  <script src="../js/main.js?v=1780167435"></script>
+  <script src="../js/products.js?v=1780167435"></script>
+  <script src="../js/cart.js?v=1780167435"></script>
+  <script src="../js/checkout.js?v=1780167435"></script>
+</body>
+</html>

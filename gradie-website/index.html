@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradie | Quà Tặng Tốt Nghiệp Cao Cấp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/icons.css?v=1780166734">
+  <link rel="stylesheet" href="css/products.css?v=1780166734">
+  <link rel="stylesheet" href="css/home.css?v=1780166734">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <link rel="stylesheet" href="css/toast.css?v=1780167435">
+</head>
+
+<body>
+  <div class="announcement-bar">
+    Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img loading="lazy" src="images/Gradie_logo.jpeg" alt="Gradie Logo"
+          style="height:48px; width:auto; border-radius:50%; object-fit:cover; margin-right:10px;">
+        Gradie
+        <span class="tagline">Quà Tặng Tốt Nghiệp</span>
+      </a>
+      <nav class="nav">
+        <a href="about.html">Về Chúng Tôi</a>
+        <a href="products.html">Sản Phẩm</a>
+        <a href="customize.html">Cá Nhân Hóa</a>
+        <a href="gallery.html">Bộ Sưu Tập</a>
+        <a href="blog.html">Bài Viết</a>
+        <a href="contact.html">Liên Hệ</a>
+      </nav>
+      <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <div class="header-icons">
+        <a href="account.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"
+           >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg></a>
+        <button class="icon-btn" onclick="showToast('Tính năng tìm kiếm đang được phát triển!', 'info')"><svg width="18" height="18"
+            fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg></button>
+        <a href="cart.html" class="icon-btn"><svg width="18" height="18" fill="none" stroke="currentColor"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"
+           >
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg> <span id="cart-count" class="cart-count-badge">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- 1. Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1 style="font-family: 'Playfair Display', serif;">Kỷ Niệm Hành Trình Mới</h1>
+        <p>Những món quà tốt nghiệp ý nghĩa, quà lưu niệm vượt thời gian và phụ kiện được thiết kế để trân trọng mãi mãi.</p>
+        <div class="hero-actions">
+          <a href="products.html" class="btn-primary">Khám Phá Bộ Sưu Tập</a>
+          <a href="customize.html" class="outline-button">Thiết Kế Quà Tự Chọn</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img loading="lazy" src="images/hero_image.jpg" alt="Graduation Celebration">
+        <div class="hero-badge">Niên khóa<br>2026</div>
+      </div>
+    </section>
+
+    <!-- 2. Category Showcase -->
+    <section class="category-showcase">
+      <div class="section-header">
+        <span class="section-kicker">Lựa chọn dành riêng cho bạn</span>
+        <h2 class="section-title">Mua Sắm Theo Danh Mục</h2>
+      </div>
+      <div class="cat-grid">
+        <a href="products.html?category=Sash" class="cat-card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80" alt="Graduation Sashes">
+          <div class="cat-overlay">
+            <div>
+              <h3>Băng Đeo Thiết Kế</h3>
+              <span>Tự thiết kế riêng</span>
+            </div>
+          </div>
+        </a>
+        <a href="products.html?category=Gấu Bông" class="cat-card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1559454403-b8fb88521f11?w=600&q=80" alt="Plushies">
+          <div class="cat-overlay">
+            <div>
+              <h3>Gấu Bông Tốt Nghiệp</h3>
+              <span>Quà tặng mềm mịn</span>
+            </div>
+          </div>
+        </a>
+        <a href="products.html?category=Hoa mừng" class="cat-card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=600&q=80" alt="Flowers">
+          <div class="cat-overlay">
+            <div>
+              <h3>Bó Hoa Chúc Mừng</h3>
+              <span>Rực rỡ ngày vui</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 3. Our Story -->
+    <section class="story-section">
+      <div class="story-inner">
+        <div class="story-img">
+          <img loading="lazy" src="https://asamahelmet.vn/wp-content/uploads/2024/04/qua-tang-tot-nghiep11.jpg" alt="Boutique Details">
+        </div>
+        <div class="story-text">
+          <span class="section-kicker">Về Gradie</span>
+          <h2>Nghệ Thuật Tặng Quà</h2>
+          <p>Lễ tốt nghiệp không chỉ là một nghi thức; đó là cột mốc đánh dấu sự khởi đầu của một hành trình tuyệt đẹp.
+            Tại Gradie, chúng tôi tin rằng mỗi cử nhân đều xứng đáng nhận được món quà phản chiếu những nỗ lực và ước mơ của họ.</p>
+          <p>Từ những dải băng đeo cá nhân hóa đến các hộp quà được tuyển chọn kỹ lưỡng, cửa hàng của chúng tôi mang đến những món quà lưu niệm cao cấp được thiết kế
+            bằng tình yêu, sự trang nhã và một chút sang trọng chuẩn tone champagne.</p>
+          <a href="about.html" class="outline-button" style="margin-top: 16px;">Đọc Câu Chuyện Của Chúng Tôi</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Trending Products -->
+    <section class="trending-section">
+      <div class="section-header">
+        <span class="section-kicker">Được Yêu Thích Nhất</span>
+        <h2 class="section-title">Quà Lưu Niệm Thịnh Hành</h2>
+      </div>
+      <div class="product-grid" id="trending-grid">
+        <!-- Rendered by JS -->
+      </div>
+      <div class="section-cta">
+        <a href="products.html" class="btn-primary">Xem Tất Cả Sản Phẩm</a>
+      </div>
+    </section>
+
+    <!-- 5. Testimonials -->
+    <section class="testimonials">
+      <span class="section-kicker">Đánh giá từ khách hàng</span>
+      <h2 class="section-title">Ý Kiến Khách Hàng</h2>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Dải băng đeo thiết kế tôi đặt thực sự quá đẹp. Sản phẩm được giao trong hộp champagne sang trọng và làm cho ngày tốt nghiệp của tôi trở nên vô cùng đặc biệt."</p>
+          <div class="testi-author">Sarah Nguyễn</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Gradie có những món quà tốt nghiệp trang nhã nhất tôi từng thấy. Chất lượng gấu bông và sự chăm chút đến từng chi tiết nhỏ là không thể so sánh."</p>
+          <div class="testi-author">Emily R.</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Tôi đã đặt một khung ảnh thiết kế và một bó hoa cho con gái mình. Con bé đã khóc khi nhìn thấy nó. Cảm ơn Gradie vì một món quà hoàn hảo!"</p>
+          <div class="testi-author">Michelle T.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="footer-logo">Gradie</div>
+        <p class="footer-tagline">
+          Kỷ niệm hôm nay, trân quý mãi về sau.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Liên Kết Nhanh</h4>
+        <a href="about.html">Về Chúng Tôi</a>
+        <a href="products.html">Cửa Hàng</a>
+        <a href="contact.html">Liên Hệ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Chăm Sóc Khách Hàng</h4>
+        <a href="store-policy.html">Chính Sách Cửa Hàng</a>
+        <a href="order-tracking.html">Theo Dõi Đơn Hàng</a>
+        <a href="account.html">Tài Khoản Của Tôi</a>
+      </div>
+      <div class="footer-col">
+        <h4>Theo Dõi Chúng Tôi</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Gradie - Quà Tặng Tốt Nghiệp. Toàn bộ bản quyền được bảo lưu.
+    </div>
+  </footer>
+  <script src="js/icons.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/global-data.js?v=1780167435"></script>
+  <script src="js/data-store.js?v=1780167435"></script>
+  <script src="js/main.js?v=1780167435"></script>
+  <script src="js/products.js?v=1780167435"></script>
+  <script src="js/cart.js?v=1780167435"></script>
+  <script>
+    // Scroll-reveal: fade-up sections on scroll
+    const revealEls = document.querySelectorAll('.category-showcase, .story-section, .testimonials, .trending-section, .values-section, .stats-banner, .quick-nav-section, .craft-section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('fade-up'); observer.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+
+</html>
