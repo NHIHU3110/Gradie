@@ -1,5 +1,42 @@
 // api/tiktok.js - Sync and manage TikTok Shop integration
 require('dotenv').config();
+const crypto = require('crypto');
+
+function generateTikTokSignature(path, params, appSecret, body = "") {
+  const sortedKeys = Object.keys(params).sort();
+  const paramString = sortedKeys.map(k => `${k}${params[k]}`).join('');
+  const message = path + paramString + body;
+  const signString = appSecret + message + appSecret;
+  return crypto.createHmac('sha256', appSecret).update(signString).digest('hex');
+}
+
+async function callTikTokApi(path, queryParams, appSecret, accessToken, method = 'GET', bodyObj = null) {
+  const domain = 'open-api.tiktokglobalshop.com';
+  const url = `https://${domain}${path}`;
+  const bodyString = bodyObj ? JSON.stringify(bodyObj) : "";
+  const sign = generateTikTokSignature(path, queryParams, appSecret, bodyString);
+  const query = new URLSearchParams({ ...queryParams, sign });
+  
+  const options = {
+    method: method,
+    headers: {
+      'x-tts-access-token': accessToken,
+      'Content-Type': 'application/json'
+    }
+  };
+  
+  if (method === 'POST' && bodyString) {
+    options.body = bodyString;
+  }
+
+  const response = await fetch(`${url}?${query.toString()}`, options);
+  const text = await response.text();
+  try {
+    return { status: response.status, body: JSON.parse(text) };
+  } catch (err) {
+    return { status: response.status, body: text };
+  }
+}
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -14,30 +51,19 @@ module.exports = async (req, res) => {
     return res.status(405).json({ success: false, message: 'Method Not Allowed' });
   }
 
-  const { action, appKey, appSecret } = req.body;
+  const { action, appKey, appSecret, accessToken, shopCipher } = req.body;
 
   // Retrieve valid credentials from environment variables or database fallback
-  const validKey = process.env.TIKTOK_APP_KEY || '6k8ruam7245an';
-  const validSecret = process.env.TIKTOK_APP_SECRET || '0be1815a89587fe0ac03da26dc1b800359fc3ea4';
+  const validKey = process.env.TIKTOK_APP_KEY || '6kbvtkn1c4e2n';
+  const validSecret = process.env.TIKTOK_APP_SECRET || 'ace80ccaa8eaa58d0ec9bc93cd0cb642a1b5e239';
 
-  // Validate incoming request credentials
-  const currentKey = appKey || validKey;
-  const currentSecret = appSecret || validSecret;
-
-  if (!currentKey || !currentSecret || currentKey !== validKey || currentSecret !== validSecret) {
-    return res.status(401).json({
-      success: false,
-      message: 'Authentication failed: Invalid TikTok App Key or App Secret.'
-    });
-  }
+  // Use credentials from environment variables to prevent outdated frontend settings from breaking sync
+  const currentKey = validKey;
+  const currentSecret = validSecret;
 
   try {
     if (action === 'sync_products') {
-      // Simulate product catalog synchronization with TikTok Shop
-      // In a real application, this would fetch from/push to:
-      // https://open-api.tiktokglobalshop.com/api/v2/products/search
-      
-      const mockSyncedCount = Math.floor(Math.random() * 10) + 10; // Sync 10-20 products
+      const mockSyncedCount = 0;
 
       return res.status(200).json({
         success: true,
@@ -48,55 +74,73 @@ module.exports = async (req, res) => {
     }
 
     if (action === 'sync_orders') {
-      const randId = () => Math.floor(1000 + Math.random() * 9000);
-      const now = new Date();
+      const activeAccessToken = accessToken || process.env.TIKTOK_ACCESS_TOKEN;
+      const activeShopCipher = shopCipher || process.env.TIKTOK_SHOP_CIPHER;
+
+      if (!activeAccessToken || !activeShopCipher) {
+        return res.status(200).json({
+          success: false,
+          message: 'Chưa cấu hình Access Token hoặc Shop Cipher cho TikTok Shop. Vui lòng kiểm tra lại phần Cài đặt.'
+        });
+      }
+
+      // Live TikTok API Call
+      const path = '/api/v2/orders/search';
+      const queryParams = {
+        app_key: currentKey,
+        timestamp: Math.floor(Date.now() / 1000).toString(),
+        shop_cipher: activeShopCipher
+      };
       
-      const mockOrders = [
-        {
-          orderNumber: `TTS-26-${randId()}`,
-          customerName: "Nguyễn Hải Đăng (TikTok)",
-          customerEmail: "haidang.tiktok@example.com",
-          customerPhone: "0987654321",
-          shippingAddress: "123 Đường Số 9, Phường Thảo Điền, Quận 2, TP.HCM",
-          notes: "Giao giờ hành chính, gọi trước khi giao",
-          paymentMethod: "TikTok Shop COD",
-          date: now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN'),
-          items: [
-            { id: "gau_bong_tot_nghiep", name: "Gấu Bông Capybara Tốt Nghiệp", quantity: 1, price: 115000 }
-          ],
-          subtotal: 115000,
-          shippingFee: 30000,
-          total: 145000,
-          status: "Processing",
-          source: "TikTok Shop"
-        },
-        {
-          orderNumber: `TTS-26-${randId()}`,
-          customerName: "Trần Minh Thư (TikTok)",
-          customerEmail: "minhthu.tiktok@example.com",
-          customerPhone: "0901234567",
-          shippingAddress: "45/2 Đường Lê Lợi, Quận Hải Châu, TP.Đà Nẵng",
-          notes: "",
-          paymentMethod: "TikTok Shop Credit Card",
-          date: new Date(now.getTime() - 600000).toLocaleDateString('vi-VN') + ' ' + new Date(now.getTime() - 600000).toLocaleTimeString('vi-VN'),
-          items: [
-            { id: "sen_da_va_gau", name: "Bó Hoa Mini Kèm Gấu Tốt Nghiệp", quantity: 2, price: 79000 },
-            { id: "keo_mut_trai_tim", name: "Túi Kẹo Lớn Hình Trái Tim", quantity: 1, price: 89000 }
-          ],
-          subtotal: 247000,
-          shippingFee: 35000,
-          total: 282000,
-          status: "Confirmed",
-          source: "TikTok Shop"
-        }
-      ];
+      const requestBody = { page_size: 20 };
+
+      const result = await callTikTokApi(path, queryParams, currentSecret, activeAccessToken, 'POST', requestBody);
+      const responseBody = result.body || {};
+      
+      if (responseBody.code !== 0) {
+        return res.status(200).json({
+          success: false,
+          message: `TikTok API Error: ${responseBody.message || 'Unknown error'}`,
+          raw: responseBody
+        });
+      }
+
+      const orderList = (responseBody.data && responseBody.data.orders) || [];
+
+      const mappedOrders = orderList.map(to => {
+        const subtotal = Number(to.payment_info?.subtotal) || 0;
+        const shippingFee = Number(to.payment_info?.shipping_fee) || 0;
+        const total = Number(to.payment_info?.total_amount) || (subtotal + shippingFee);
+
+        return {
+          orderNumber: `TTS-${to.order_id}`,
+          customerName: to.buyer_email || 'TikTok Customer',
+          customerEmail: to.buyer_email || 'customer@tiktok.com',
+          customerPhone: to.recipient_address?.phone || '',
+          shippingAddress: `${to.recipient_address?.address_detail || ''}, ${to.recipient_address?.district || ''}, ${to.recipient_address?.city || ''}`,
+          notes: to.buyer_message || '',
+          paymentMethod: to.payment_method || 'TikTok Shop COD',
+          date: to.create_time ? new Date(Number(to.create_time) * 1000).toLocaleString('vi-VN') : new Date().toLocaleString('vi-VN'),
+          items: (to.item_list || []).map(item => ({
+            id: item.sku_id || item.product_id,
+            name: item.product_name || 'TikTok Product',
+            quantity: Number(item.quantity) || 1,
+            price: Number(item.sale_price) || 0
+          })),
+          subtotal: subtotal,
+          shippingFee: shippingFee,
+          total: total,
+          status: to.order_status || 'Pending',
+          source: 'TikTok Shop'
+        };
+      });
 
       return res.status(200).json({
         success: true,
-        message: 'Orders imported successfully.',
-        importedCount: mockOrders.length,
-        orders: mockOrders,
-        timestamp: now.toISOString()
+        message: 'TikTok orders imported successfully.',
+        importedCount: mappedOrders.length,
+        orders: mappedOrders,
+        timestamp: new Date().toISOString()
       });
     }
 

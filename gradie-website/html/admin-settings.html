@@ -37,13 +37,16 @@
                     </h3>
                     <div class="form-group"><label>TikTok App Key</label><input type="text" id="set-tiktok-key"></div>
                     <div class="form-group"><label>TikTok App Secret</label><input type="password" id="set-tiktok-secret"></div>
+                    <div class="form-group"><label>TikTok Access Token</label><input type="text" id="set-tiktok-token"></div>
+                    <div class="form-group"><label>TikTok Shop Cipher</label><input type="text" id="set-tiktok-shop-cipher"></div>
+
                     <hr style="margin: 25px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">
                     <h3 style="margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
                         🔗 Lazada Integration
                     </h3>
                     <div class="form-group"><label>Lazada App Key</label><input type="text" id="set-lazada-key"></div>
                     <div class="form-group"><label>Lazada App Secret</label><input type="password" id="set-lazada-secret"></div>
-                    <div class="form-group"><label>Lazada API Base URL</label><input type="text" id="set-lazada-base-url" placeholder="https://api.lazada.vn/rest"></div>
+                    <div class="form-group"><label>Lazada API Base URL</label><input type="text" id="set-lazada-base-url"></div>
 
                     <button type="submit" class="btn-primary">Save Settings</button>
                 </form>
@@ -80,15 +83,17 @@
                     </div>
                 </div>
 
-                <div class="lazada-sync-panel" style="padding: 20px; background: rgba(0,0,0,0.02); border-radius: 8px; border: 1px solid rgba(0,0,0,0.08); margin-top: 30px;">
+                <hr style="margin: 40px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">
+                <div class="lazada-sync-panel" style="padding: 20px; background: rgba(0,0,0,0.02); border-radius: 8px; border: 1px solid rgba(0,0,0,0.08);">
                     <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px; font-size: 1.25rem;">
-                        🛒 Lazada Live Sync
+                        🛍️ Lazada Live Sync
                     </h3>
-                    <p style="margin-bottom: 20px; font-size: 0.9rem; color: #64748b;">Sync products and import orders directly from your connected Lazada marketplace.</p>
+                    <p style="margin-bottom: 20px; font-size: 0.9rem; color: #64748b;">Sync products and import orders directly from your connected Lazada store.</p>
+                    
                     <div class="sync-status-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 25px;">
                         <div class="status-card" style="padding: 15px; background: #fff; border-radius: 6px; border: 1px solid rgba(0,0,0,0.05); text-align: center;">
                             <div style="font-size: 0.85rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">Connection Status</div>
-                            <div id="lazada-conn-status" style="font-weight: 600; color: #10b981;">● Connected</div>
+                            <div id="lazada-conn-status" style="font-weight: 600; color: #ef4444;">○ Disconnected</div>
                         </div>
                         <div class="status-card" style="padding: 15px; background: #fff; border-radius: 6px; border: 1px solid rgba(0,0,0,0.05); text-align: center;">
                             <div style="font-size: 0.85rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">Synced Products</div>
@@ -99,6 +104,7 @@
                             <div id="lazada-synced-orders" style="font-size: 1.5rem; font-weight: 600; color: #3b82f6;">--</div>
                         </div>
                     </div>
+
                     <div style="display: flex; gap: 15px; flex-wrap: wrap;">
                         <button type="button" id="btn-sync-lazada-products" class="btn-primary" style="display: flex; align-items: center; gap: 8px;">
                             🔄 Sync Products to Lazada

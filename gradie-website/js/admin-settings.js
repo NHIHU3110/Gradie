@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('set-ship').value = s.shippingFee || 30000;
         document.getElementById('set-tiktok-key').value = s.tiktokAppKey || '';
         document.getElementById('set-tiktok-secret').value = s.tiktokAppSecret || '';
+        document.getElementById('set-tiktok-token').value = s.tiktokAccessToken || '';
+        document.getElementById('set-tiktok-shop-cipher').value = s.tiktokShopCipher || '';
         document.getElementById('set-lazada-key').value = s.lazadaAppKey || '';
         document.getElementById('set-lazada-secret').value = s.lazadaAppSecret || '';
         document.getElementById('set-lazada-base-url').value = s.lazadaApiBaseUrl || 'https://api.lazada.vn/rest';
@@ -64,6 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 shippingFee: Number(document.getElementById('set-ship').value),
                 tiktokAppKey: document.getElementById('set-tiktok-key').value,
                 tiktokAppSecret: document.getElementById('set-tiktok-secret').value,
+                tiktokAccessToken: document.getElementById('set-tiktok-token').value,
+                tiktokShopCipher: document.getElementById('set-tiktok-shop-cipher').value,
                 lazadaAppKey: document.getElementById('set-lazada-key').value,
                 lazadaAppSecret: document.getElementById('set-lazada-secret').value,
                 lazadaApiBaseUrl: document.getElementById('set-lazada-base-url').value

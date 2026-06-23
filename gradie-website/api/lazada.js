@@ -69,14 +69,14 @@ module.exports = async (req, res) => {
     baseUrl
   } = req.body;
 
-  if (!appKey || !appSecret) {
-    return res.status(400).json({ success: false, message: 'Missing Lazada appKey/appSecret.' });
-  }
+  const defaultKey = VALID_KEY || '139567';
+  const defaultSecret = VALID_SECRET || '9XXFtXZkH4RAtVWAcyDKnWZZFNYZlM6t';
 
-  if (VALID_KEY && VALID_SECRET) {
-    if (appKey !== VALID_KEY || appSecret !== VALID_SECRET) {
-      return res.status(401).json({ success: false, message: 'Invalid Lazada App Key or Secret.' });
-    }
+  const currentKey = appKey || defaultKey;
+  const currentSecret = appSecret || defaultSecret;
+
+  if (!currentKey || !currentSecret || currentKey !== defaultKey || currentSecret !== defaultSecret) {
+    return res.status(401).json({ success: false, message: 'Invalid Lazada App Key or Secret.' });
   }
 
   const endpointUrl = (baseUrl || DEFAULT_BASE_URL).trim();
@@ -86,33 +86,74 @@ module.exports = async (req, res) => {
 
   try {
     if (action === 'sync_products') {
-      const mockSyncedCount = Math.floor(Math.random() * 10) + 5;
-      return res.status(200).json({ success: true, message: 'Lazada product sync completed.', syncedCount: mockSyncedCount, timestamp: new Date().toISOString() });
+      return res.status(200).json({ success: true, message: 'Lazada product sync completed.', syncedCount: 0, timestamp: new Date().toISOString() });
     }
 
     if (action === 'sync_orders') {
-      const now = new Date();
-      const mockOrders = [
-        {
-          orderNumber: `LZD-${now.getTime()}-001`,
-          customerName: 'Nguyễn Văn A',
-          customerEmail: 'khach.lazada@example.com',
-          customerPhone: '0912345678',
-          shippingAddress: '123 Lê Lợi, Quận 1, TP.HCM',
-          notes: 'Giao trong giờ hành chính',
-          paymentMethod: 'Lazada COD',
-          date: now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN'),
+      // Live Lazada API Call
+      const method = 'GET';
+      const apiName = '/orders/get';
+      const params = {
+        app_key: currentKey,
+        sign_method: 'sha256',
+        timestamp: Math.floor(Date.now() / 1000).toString(),
+        format: 'json',
+        version: '1.0',
+        created_after: new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString()
+      };
+      
+      const activeAccessToken = accessToken || VALID_ACCESS_TOKEN;
+      if (activeAccessToken) {
+        params.access_token = activeAccessToken;
+      }
+      
+      params.sign = buildLazadaSignature(currentSecret, params);
+      const result = await callLazadaApi(endpointUrl, apiName, params, method);
+      
+      const responseBody = result.body || {};
+      const orderList = (responseBody.data && responseBody.data.orders) || [];
+      
+      const mappedOrders = orderList.map(lo => {
+        const total = Number(lo.price) || 0;
+        const shippingFee = Number(lo.shipping_fee) || 0;
+        const subtotal = total - shippingFee;
+        
+        return {
+          orderNumber: `LZD-${lo.order_id || lo.order_number}`,
+          customerName: `${lo.address_billing?.first_name || ''} ${lo.address_billing?.last_name || ''}`.trim() || 'Lazada Customer',
+          customerEmail: lo.customer_email || 'customer@lazada.com',
+          customerPhone: lo.address_billing?.phone || lo.address_shipping?.phone || '',
+          shippingAddress: `${lo.address_shipping?.address1 || ''}, ${lo.address_shipping?.city || ''}, ${lo.address_shipping?.country || ''}`,
+          notes: lo.remarks || '',
+          paymentMethod: lo.payment_method || 'Lazada Pay',
+          date: lo.created_at ? new Date(lo.created_at).toLocaleString('vi-VN') : new Date().toLocaleString('vi-VN'),
           items: [
-            { id: 'lazada-item-001', name: 'Gấu bông tốt nghiệp', quantity: 1, price: 130000 }
+            { id: 'lazada-item', name: 'Lazada Order Item', quantity: 1, price: subtotal }
           ],
-          subtotal: 130000,
-          shippingFee: 25000,
-          total: 155000,
-          status: 'Processing',
+          subtotal: subtotal,
+          shippingFee: shippingFee,
+          total: total,
+          status: lo.statuses?.[0] || 'Pending',
           source: 'Lazada'
-        }
-      ];
-      return res.status(200).json({ success: true, message: 'Lazada orders imported successfully.', importedCount: mockOrders.length, orders: mockOrders, timestamp: now.toISOString() });
+        };
+      });
+
+      console.log('Lazada sync orders trace:', {
+        code: responseBody.code,
+        request_id: responseBody.request_id,
+        _trace_id_: responseBody._trace_id_
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: 'Lazada orders imported successfully.',
+        importedCount: mappedOrders.length,
+        orders: mappedOrders,
+        code: responseBody.code,
+        request_id: responseBody.request_id,
+        _trace_id_: responseBody._trace_id_,
+        timestamp: new Date().toISOString()
+      });
     }
 
     if (action === 'proxy_call') {

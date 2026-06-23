@@ -116,23 +116,57 @@ document.addEventListener('DOMContentLoaded', () => {
                 await window.GradieStore.syncTikTokOrders(
                     (res) => {
                         if (typeof showToast === 'function') {
-                            showToast(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng.`, 'success');
+                            showToast(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ TikTok Shop.`, 'success');
                         } else {
-                            alert(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng.`);
+                            alert(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ TikTok Shop.`);
                         }
                         window.renderOrdersTable();
                     },
                     (err) => {
                         if (typeof showToast === 'function') {
-                            showToast(`Lỗi đồng bộ: ${err}`, 'error');
+                            showToast(`Lỗi đồng bộ TikTok: ${err}`, 'error');
                         } else {
-                            alert(`Lỗi đồng bộ: ${err}`);
+                            alert(`Lỗi đồng bộ TikTok: ${err}`);
                         }
                     },
                     (loading) => {
                         if (!loading) {
                             syncDirectBtn.disabled = false;
                             syncDirectBtn.innerHTML = origText;
+                        }
+                    }
+                );
+            });
+        }
+
+        // Add Event Listener for Lazada Direct Sync Button
+        const syncLazadaDirectBtn = document.getElementById('btn-sync-lazada-orders-direct');
+        if (syncLazadaDirectBtn) {
+            syncLazadaDirectBtn.addEventListener('click', async () => {
+                const origText = syncLazadaDirectBtn.innerHTML;
+                syncLazadaDirectBtn.disabled = true;
+                syncLazadaDirectBtn.innerHTML = '<span>⏳</span> Cập nhật...';
+                
+                await window.GradieStore.syncLazadaOrders(
+                    (res) => {
+                        if (typeof showToast === 'function') {
+                            showToast(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ Lazada.`, 'success');
+                        } else {
+                            alert(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ Lazada.`);
+                        }
+                        window.renderOrdersTable();
+                    },
+                    (err) => {
+                        if (typeof showToast === 'function') {
+                            showToast(`Lỗi đồng bộ Lazada: ${err}`, 'error');
+                        } else {
+                            alert(`Lỗi đồng bộ Lazada: ${err}`);
+                        }
+                    },
+                    (loading) => {
+                        if (!loading) {
+                            syncLazadaDirectBtn.disabled = false;
+                            syncLazadaDirectBtn.innerHTML = origText;
                         }
                     }
                 );
@@ -248,6 +282,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         let sourceBadgeStyle = 'background: #e2e8f0; color: #475569;';
                         if (source === 'TikTok Shop') {
                             sourceBadgeStyle = 'background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca;';
+                        } else if (source === 'Lazada') {
+                            sourceBadgeStyle = 'background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd;';
                         }
                         
                         return `
