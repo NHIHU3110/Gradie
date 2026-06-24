@@ -50,18 +50,22 @@ window.GradieStore = {
         data.settings.tiktokShopCipher = "";
         updated = true;
       }
-      if (data.settings.lazadaAppKey === undefined) {
-        data.settings.lazadaAppKey = "139567";
-        updated = true;
-      }
-      if (data.settings.lazadaAppSecret === undefined) {
-        data.settings.lazadaAppSecret = "9XXFtXZkH4RAtVWAcyDKnWZZFNYZlM6t";
-        updated = true;
-      }
+      data.settings.lazadaAppKey = "139567";
+      data.settings.lazadaAppSecret = "9XXFtXZkH4RAtVWAcyDKnWZZFNYZlM6t";
+      data.settings.lazadaAccessToken = "50000900409yYDfbrNITj13f1ee6aI9N4sxEgcgyFKPbrvfejFQ5N0XcHGfmZcR3";
+      updated = true;
       if (data.settings.lazadaApiBaseUrl === undefined) {
         data.settings.lazadaApiBaseUrl = "https://api.lazada.vn/rest";
         updated = true;
       }
+      if (data.settings.tikiAppId === undefined) {
+        data.settings.tikiAppId = "8179278584636139";
+        updated = true;
+      }
+      
+      // Force update secret to the latest one shown in the screenshot
+      data.settings.tikiAppSecret = "SciY64mOb0b6pHaCRZBg8KMmh7DwI3M-";
+      updated = true;
     }
 
     // Force update mock data if missing
@@ -2467,6 +2471,7 @@ window.GradieStore = {
           action: 'sync_products',
           appKey: settings.lazadaAppKey,
           appSecret: settings.lazadaAppSecret,
+          accessToken: settings.lazadaAccessToken,
           baseUrl: settings.lazadaApiBaseUrl
         })
       });
@@ -2493,6 +2498,7 @@ window.GradieStore = {
           action: 'sync_orders',
           appKey: settings.lazadaAppKey,
           appSecret: settings.lazadaAppSecret,
+          accessToken: settings.lazadaAccessToken,
           baseUrl: settings.lazadaApiBaseUrl
         })
       });

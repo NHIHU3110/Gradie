@@ -6,44 +6,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Helper to display modern custom status confirmation modal
-    window.showStatusConfirmModal = function(message) {
+    window.showStatusConfirmModal = function (message) {
         return new Promise((resolve) => {
             const modal = document.getElementById('statusConfirmModal');
             const msgEl = document.getElementById('statusConfirmMessage');
             const btnOk = document.getElementById('btnStatusConfirmOk');
             const btnCancel = document.getElementById('btnStatusConfirmCancel');
-            
+
             if (!modal || !msgEl || !btnOk || !btnCancel) {
                 // Fallback to standard confirm if modal elements are missing
                 resolve(confirm(message));
                 return;
             }
-            
+
             msgEl.innerText = message;
             modal.style.display = 'block';
-            
+
             const cleanup = () => {
                 modal.style.display = 'none';
                 btnOk.removeEventListener('click', onOk);
                 btnCancel.removeEventListener('click', onCancel);
             };
-            
+
             const onOk = () => {
                 cleanup();
                 resolve(true);
             };
-            
+
             const onCancel = () => {
                 cleanup();
                 resolve(false);
             };
-            
+
             btnOk.addEventListener('click', onOk);
             btnCancel.addEventListener('click', onCancel);
         });
     };
 
-    window.changeOrderStatusFromSelect = async function(sel, orderNum, currentStatus) {
+    window.changeOrderStatusFromSelect = async function (sel, orderNum, currentStatus) {
         const newStatus = sel.value;
         const confirmed = await window.showStatusConfirmModal(`Bạn có chắc chắn muốn thay đổi trạng thái đơn hàng ${orderNum} thành '${newStatus}'?`);
         if (confirmed) {
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function initAdminOrders() {
-        if(!window.GradieStore) {
+        if (!window.GradieStore) {
             console.warn('GradieStore not ready, retrying in 300ms...');
             setTimeout(initAdminOrders, 300);
             return;
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const origText = syncDirectBtn.innerHTML;
                 syncDirectBtn.disabled = true;
                 syncDirectBtn.innerHTML = '<span>⏳</span> Cập nhật...';
-                
+
                 await window.GradieStore.syncTikTokOrders(
                     (res) => {
                         if (typeof showToast === 'function') {
@@ -145,35 +145,46 @@ document.addEventListener('DOMContentLoaded', () => {
             syncLazadaDirectBtn.addEventListener('click', async () => {
                 const origText = syncLazadaDirectBtn.innerHTML;
                 syncLazadaDirectBtn.disabled = true;
-                syncLazadaDirectBtn.innerHTML = '<span>⏳</span> Cập nhật...';
-                
-                await window.GradieStore.syncLazadaOrders(
-                    (res) => {
-                        if (typeof showToast === 'function') {
-                            showToast(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ Lazada.`, 'success');
-                        } else {
-                            alert(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ Lazada.`);
-                        }
-                        window.renderOrdersTable();
-                    },
-                    (err) => {
-                        if (typeof showToast === 'function') {
-                            showToast(`Lỗi đồng bộ Lazada: ${err}`, 'error');
-                        } else {
-                            alert(`Lỗi đồng bộ Lazada: ${err}`);
-                        }
-                    },
-                    (loading) => {
-                        if (!loading) {
-                            syncLazadaDirectBtn.disabled = false;
-                            syncLazadaDirectBtn.innerHTML = origText;
-                        }
-                    }
-                );
+                syncLazadaDirectBtn.innerHTML = '<span>⏳</span> Tải dữ liệu Lazada...';
+
+                cachedLazadaOrders = null; // force refetch
+                await window.renderOrdersTable();
+
+                syncLazadaDirectBtn.disabled = false;
+                syncLazadaDirectBtn.innerHTML = origText;
+
+                if (typeof showToast === 'function') {
+                    showToast(`Đã lấy dữ liệu trực tiếp từ Lazada!`, 'success');
+                }
             });
         }
 
-        window.renderOrdersTable = function() {
+        const syncTikiDirectBtn = document.getElementById('btn-sync-tiki-orders-direct');
+        if (syncTikiDirectBtn) {
+            syncTikiDirectBtn.addEventListener('click', async () => {
+                const origText = syncTikiDirectBtn.innerHTML;
+                syncTikiDirectBtn.disabled = true;
+                syncTikiDirectBtn.innerHTML = '<span>⏳</span> Đang tải...';
+
+                cachedTikiOrders = null; // force refetch
+                await window.renderOrdersTable();
+
+                syncTikiDirectBtn.disabled = false;
+                syncTikiDirectBtn.innerHTML = origText;
+
+                if (typeof showToast === 'function') {
+                    showToast(`Đã lấy dữ liệu trực tiếp từ Tiki!`, 'success');
+                }
+            });
+        }
+
+        let cachedLazadaOrders = null;
+        let isFetchingLazada = false;
+
+        let cachedTikiOrders = null;
+        let isFetchingTiki = false;
+
+        window.renderOrdersTable = async function () {
             try {
                 // Always re-query so we don't rely on a stale closure reference
                 const ordersBody = document.getElementById('admin-orders-list');
@@ -182,7 +193,69 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                let ords = window.GradieStore.getOrders();
+                if (cachedLazadaOrders === null && !isFetchingLazada) {
+                    isFetchingLazada = true;
+                    try {
+                        const settings = window.GradieStore.getSettings() || {};
+                        const res = await fetch('/api/lazada', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                action: 'sync_orders',
+                                appKey: settings.lazadaAppKey,
+                                appSecret: settings.lazadaAppSecret,
+                                accessToken: settings.lazadaAccessToken,
+                                baseUrl: settings.lazadaApiBaseUrl
+                            })
+                        });
+                        const data = await res.json();
+                        if (res.ok && data.success) {
+                            cachedLazadaOrders = data.orders || [];
+                        } else {
+                            cachedLazadaOrders = [];
+                            console.error("Lazada API Error:", data.message);
+                        }
+                    } catch (err) {
+                        console.error("Failed to fetch Lazada orders:", err);
+                        cachedLazadaOrders = [];
+                    }
+                    isFetchingLazada = false;
+                }
+
+                if (cachedTikiOrders === null && !isFetchingTiki) {
+                    isFetchingTiki = true;
+                    try {
+                        const settings = window.GradieStore.getSettings() || {};
+                        const res = await fetch('/api/tiki', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                action: 'sync_orders',
+                                appId: settings.tikiAppId,
+                                appSecret: settings.tikiAppSecret
+                            })
+                        });
+                        const data = await res.json();
+                        if (res.ok && data.success) {
+                            cachedTikiOrders = data.orders || [];
+                        } else {
+                            cachedTikiOrders = [];
+                            console.error("Tiki API Error:", data.message);
+                        }
+                    } catch (err) {
+                        console.error("Failed to fetch Tiki orders:", err);
+                        cachedTikiOrders = [];
+                    }
+                    isFetchingTiki = false;
+                }
+
+                if (isFetchingLazada || isFetchingTiki) {
+                    ordersBody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 30px; color: #64748b;">Đang kết nối API để lấy đơn hàng trực tiếp...</td></tr>';
+                    return;
+                }
+
+                let dbOrders = window.GradieStore.getOrders().filter(o => o.source !== 'Lazada' && o.source !== 'Tiki');
+                let ords = [...dbOrders, ...(cachedLazadaOrders || []), ...(cachedTikiOrders || [])];
 
                 // Sort orders from newest to oldest
                 const getOrderTimestamp = (o) => {
@@ -215,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     return 0;
                 };
                 ords.sort((a, b) => getOrderTimestamp(b) - getOrderTimestamp(a));
-                
+
                 // Apply status filter
                 if (currentStatusFilter !== 'all') {
                     ords = ords.filter(o => {
@@ -241,10 +314,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         const customerEmail = (o.customerEmail || (o.customer && o.customer.email) || '').toLowerCase();
                         const shippingAddress = (o.shippingAddress || (o.customer && o.customer.address) || '').toLowerCase();
                         return orderNumber.includes(currentSearchQuery) ||
-                               customerName.includes(currentSearchQuery) ||
-                               customerPhone.includes(currentSearchQuery) ||
-                               customerEmail.includes(currentSearchQuery) ||
-                               shippingAddress.includes(currentSearchQuery);
+                            customerName.includes(currentSearchQuery) ||
+                            customerPhone.includes(currentSearchQuery) ||
+                            customerEmail.includes(currentSearchQuery) ||
+                            shippingAddress.includes(currentSearchQuery);
                     });
                 }
 
@@ -257,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const cName = o.customerName || (o.customer && o.customer.name) ? (o.customerName || o.customer.name) : 'Unknown';
                         const oDate = o.date || new Date(o.createdAt || Date.now()).toLocaleDateString('vi-VN');
                         const status = o.status || 'Pending';
-                        
+
                         // Gorgeous status badges
                         let badgeStyle = 'background: #fef3c7; color: #d97706;'; // Pending
                         if (status === 'Confirmed') {
@@ -285,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         } else if (source === 'Lazada') {
                             sourceBadgeStyle = 'background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd;';
                         }
-                        
+
                         return `
                         <tr style="cursor: pointer;">
                             <td style="text-align:center;" onclick="event.stopPropagation();">
@@ -313,15 +386,15 @@ document.addEventListener('DOMContentLoaded', () => {
                                         View Details
                                     </button>
                                     <select onchange="window.changeOrderStatusFromSelect(this, '${o.orderNumber}', '${status}')" style="padding: 5px; border-radius: 4px; border: 1px solid #cbd5e1; background: #fff; cursor: pointer;">
-                                        <option value="Pending" ${status === 'Pending'?'selected':''}>Pending</option>
-                                        <option value="Cancel Requested" ${status === 'Cancel Requested'?'selected':''}>Cancel Requested</option>
-                                        <option value="Confirmed" ${status === 'Confirmed'?'selected':''}>Confirmed</option>
-                                        <option value="Processing" ${status === 'Processing'?'selected':''}>Processing</option>
-                                        <option value="Shipped" ${status === 'Shipped' || status === 'Dispatched'?'selected':''}>Shipped</option>
-                                        <option value="Delivered" ${status === 'Delivered'?'selected':''}>Delivered</option>
-                                        <option value="Completed" ${status === 'Completed'?'selected':''}>Completed</option>
-                                        <option value="Cancelled" ${status === 'Cancelled'?'selected':''}>Cancelled</option>
-                                        <option value="Refunded" ${status === 'Refunded'?'selected':''}>Refunded</option>
+                                        <option value="Pending" ${status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                        <option value="Cancel Requested" ${status === 'Cancel Requested' ? 'selected' : ''}>Cancel Requested</option>
+                                        <option value="Confirmed" ${status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+                                        <option value="Processing" ${status === 'Processing' ? 'selected' : ''}>Processing</option>
+                                        <option value="Shipped" ${status === 'Shipped' || status === 'Dispatched' ? 'selected' : ''}>Shipped</option>
+                                        <option value="Delivered" ${status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                                        <option value="Completed" ${status === 'Completed' ? 'selected' : ''}>Completed</option>
+                                        <option value="Cancelled" ${status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                                        <option value="Refunded" ${status === 'Refunded' ? 'selected' : ''}>Refunded</option>
                                     </select>
                                 </div>
                             </td>
@@ -350,11 +423,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         const updateBulkUI = () => {
                             const checkedCount = document.querySelectorAll('.order-select-cb:checked').length;
                             if (checkedCount > 0) {
-                                if(bulkContainer) bulkContainer.style.display = 'flex';
-                                if(selectedCountEl) selectedCountEl.innerText = checkedCount;
+                                if (bulkContainer) bulkContainer.style.display = 'flex';
+                                if (selectedCountEl) selectedCountEl.innerText = checkedCount;
                             } else {
-                                if(bulkContainer) bulkContainer.style.display = 'none';
-                                if(selectAllCb) selectAllCb.checked = false;
+                                if (bulkContainer) bulkContainer.style.display = 'none';
+                                if (selectAllCb) selectAllCb.checked = false;
                             }
                         };
 
@@ -372,16 +445,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     }, 0);
                 }
-            } catch(e) { console.error("Error rendering orders:", e); }
+            } catch (e) { console.error("Error rendering orders:", e); }
         };
 
         // Modal Action Handlers
-        window.openOrderDetailModal = function(orderNumber) {
+        window.openOrderDetailModal = function (orderNumber) {
             try {
-                const ords = window.GradieStore.getOrders();
+                let dbOrders = window.GradieStore.getOrders().filter(o => o.source !== 'Lazada');
+                const ords = [...dbOrders, ...(cachedLazadaOrders || [])];
                 const o = ords.find(order => order.orderNumber === orderNumber);
-                if(!o) return;
-                
+                if (!o) return;
+
                 document.getElementById('detail-id').innerText = o.orderNumber;
                 document.getElementById('detail-source').innerText = o.source || 'Website';
                 document.getElementById('detail-date').innerText = o.date || new Date(o.createdAt || Date.now()).toLocaleString('vi-VN');
@@ -390,7 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('detail-customer-phone').innerText = o.customerPhone || (o.customer && o.customer.phone) || 'N/A';
                 document.getElementById('detail-customer-address').innerText = o.shippingAddress || (o.customer && o.customer.address) || 'N/A';
                 document.getElementById('detail-customer-notes').innerText = o.notes || o.customerNotes || 'None';
-                
+
                 // Render items list dynamically
                 const itemsList = document.getElementById('detail-items-list');
                 if (itemsList) {
@@ -401,7 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             const price = Number(item.price) || 0;
                             const qty = parseInt(item.quantity || item.qty || 1);
                             const itemTotal = price * qty;
-                            
+
                             let customDetails = '';
                             if (item.customization) {
                                 const c = item.customization;
@@ -412,7 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     customDetails += `<div style="font-size:0.8rem; color:#8d6e63; margin-top:3px; padding-left:10px; border-left:2px solid #8d6e63; font-family: inherit;">Luxury Gift Wrapping: Box (${c.boxColor || 'Cream'}), Ribbon (${c.ribbonColor || 'Gold'}), Wax Seal (${c.waxSeal || 'None'})</div>`;
                                 }
                             }
-                            
+
                             return `
                             <div class="item-breakdown-row" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f1f5f9;">
                                 <div>
@@ -426,22 +500,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         }).join('');
                     }
                 }
-                
+
                 // Total breakdown
                 const subtotal = Number(o.subtotal) || 0;
                 const shippingFee = Number(o.shippingFee) || 0;
                 const grandTotal = Number(o.total) || 0;
-                
+
                 document.getElementById('detail-subtotal').innerText = subtotal.toLocaleString('vi-VN') + 'đ';
                 document.getElementById('detail-shipping').innerText = shippingFee.toLocaleString('vi-VN') + 'đ';
                 document.getElementById('detail-total').innerText = grandTotal.toLocaleString('vi-VN') + 'đ';
-                
+
                 // Render Timeline
                 const timelineContainer = document.getElementById('admin-order-timeline');
                 if (timelineContainer) {
                     const st = o.status || 'Pending';
                     const isCancelled = st === 'Cancelled' || st === 'Refunded';
-                    
+
                     if (isCancelled) {
                         timelineContainer.innerHTML = `
                             <div style="display:flex; gap:15px; align-items:center; background:#fef2f2; border:1px solid #fca5a5; padding:15px; border-radius:8px;">
@@ -456,10 +530,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         const steps = ['Pending', 'Confirmed', 'Processing', 'Shipped', 'Delivered', 'Completed'];
                         const currentIndex = steps.indexOf(st) >= 0 ? steps.indexOf(st) : 0;
                         const labels = ['Chờ duyệt', 'Đã xác nhận', 'Đang xử lý', 'Đang giao', 'Đã giao', 'Hoàn tất'];
-                        
+
                         let timelineHtml = '<div style="display:flex; justify-content:space-between; position:relative; padding-bottom:10px;">';
                         timelineHtml += '<div style="position:absolute; top:12px; left:15px; right:15px; height:2px; background:#e2e8f0; z-index:1;"></div>';
-                        
+
                         steps.forEach((step, idx) => {
                             const isCompleted = idx <= currentIndex;
                             const isCurrent = idx === currentIndex;
@@ -467,7 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             const bgColor = isCompleted ? '#22c55e' : '#f1f5f9';
                             const textColor = isCurrent ? '#15803d' : (isCompleted ? '#16a34a' : '#94a3b8');
                             const fw = isCurrent ? '700' : (isCompleted ? '600' : '500');
-                            
+
                             // progress line override
                             if (idx < steps.length - 1 && isCompleted && idx < currentIndex) {
                                 const w = 100 / (steps.length - 1);
@@ -494,21 +568,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (statusSelect) {
                     statusSelect.value = o.status || 'Pending';
                 }
-                
+
                 // Show modal
                 const modal = document.getElementById('orderDetailModal');
-                if(modal) modal.style.display = 'block';
+                if (modal) modal.style.display = 'block';
             } catch (err) {
                 console.error("Error opening order details modal:", err);
             }
         };
 
-        window.closeOrderDetailModal = function() {
+        window.closeOrderDetailModal = function () {
             const modal = document.getElementById('orderDetailModal');
-            if(modal) modal.style.display = 'none';
+            if (modal) modal.style.display = 'none';
         };
 
-        window.saveOrderDetailsStatus = async function() {
+        window.saveOrderDetailsStatus = async function () {
             try {
                 const orderNumber = document.getElementById('detail-id').innerText;
                 const statusSelect = document.getElementById('detail-status');
@@ -559,12 +633,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     let data = window.GradieStore.getData();
                     data.orders = data.orders.filter(o => !ids.includes(o.orderNumber));
                     window.GradieStore.saveData(data);
-                    
+
                     window.GradieStore.addActivityLog('Xóa hàng loạt đơn hàng', `Đã xóa ${ids.length} đơn hàng khỏi hệ thống.`);
-                    
+
                     window.renderOrdersTable();
                     document.getElementById('bulk-actions-container-orders').style.display = 'none';
-                    if(document.getElementById('select-all-orders')) document.getElementById('select-all-orders').checked = false;
+                    if (document.getElementById('select-all-orders')) document.getElementById('select-all-orders').checked = false;
                 }
             });
         }
@@ -574,26 +648,26 @@ document.addEventListener('DOMContentLoaded', () => {
             bulkStatusSelect.addEventListener('change', async (e) => {
                 const newStatus = e.target.value;
                 if (!newStatus) return; // User selected the default prompt option
-                
+
                 const ids = getSelectedOrderIds();
                 if (ids.length === 0) {
                     e.target.value = "";
                     return;
                 }
-                
+
                 const confirmed = await window.showStatusConfirmModal(`Bạn có chắc muốn đổi trạng thái ${ids.length} đơn hàng thành "${newStatus}"?`);
                 if (confirmed) {
                     ids.forEach(id => {
                         window.GradieStore.updateOrder(id, { status: newStatus });
                     });
-                    
+
                     window.GradieStore.addActivityLog('Cập nhật trạng thái hàng loạt', `Đã đổi ${ids.length} đơn hàng sang trạng thái ${newStatus}.`);
-                    
+
                     window.renderOrdersTable();
                     document.getElementById('bulk-actions-container-orders').style.display = 'none';
-                    if(document.getElementById('select-all-orders')) document.getElementById('select-all-orders').checked = false;
+                    if (document.getElementById('select-all-orders')) document.getElementById('select-all-orders').checked = false;
                 }
-                
+
                 // Reset select back to default
                 e.target.value = "";
             });

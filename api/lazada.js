@@ -14,10 +14,12 @@ function collectParameters(params) {
     .join('');
 }
 
-function buildLazadaSignature(secret, params) {
-  const text = collectParameters(params);
+function buildLazadaSignature(apiName, secret, params) {
+  const text = apiName + collectParameters(params);
   return crypto.createHmac('sha256', secret).update(text).digest('hex').toUpperCase();
 }
+
+const https = require('https');
 
 async function callLazadaApi(apiUrl, apiName, params, method = 'GET') {
   const base = apiUrl.replace(/\/$/g, '');
@@ -30,19 +32,45 @@ async function callLazadaApi(apiUrl, apiName, params, method = 'GET') {
   });
 
   const endpoint = `${url}?${query.toString()}`;
-  const options = { method };
-  if (method === 'POST') {
-    options.headers = { 'Content-Type': 'application/json' };
-    options.body = JSON.stringify(params);
-  }
+  
+  return new Promise((resolve) => {
+    const parsedUrl = new URL(endpoint);
+    const options = {
+      hostname: parsedUrl.hostname,
+      path: parsedUrl.pathname + parsedUrl.search,
+      method: method,
+      headers: {}
+    };
 
-  const response = await fetch(endpoint, options);
-  const text = await response.text();
-  try {
-    return { status: response.status, body: JSON.parse(text) };
-  } catch (err) {
-    return { status: response.status, body: text };
-  }
+    let postData = '';
+    if (method === 'POST') {
+      options.headers['Content-Type'] = 'application/json';
+      postData = JSON.stringify(params);
+      options.headers['Content-Length'] = Buffer.byteLength(postData);
+    }
+
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        try {
+          resolve({ status: res.statusCode, body: JSON.parse(data) });
+        } catch (e) {
+          resolve({ status: res.statusCode, body: data });
+        }
+      });
+    });
+
+    req.on('error', (e) => {
+      console.error("Lazada HTTPS request error:", e);
+      resolve({ status: 500, body: { error: e.message } });
+    });
+
+    if (method === 'POST') {
+      req.write(postData);
+    }
+    req.end();
+  });
 }
 
 module.exports = async (req, res) => {
@@ -75,8 +103,8 @@ module.exports = async (req, res) => {
   const currentKey = appKey || defaultKey;
   const currentSecret = appSecret || defaultSecret;
 
-  if (!currentKey || !currentSecret || currentKey !== defaultKey || currentSecret !== defaultSecret) {
-    return res.status(401).json({ success: false, message: 'Invalid Lazada App Key or Secret.' });
+  if (!currentKey || !currentSecret) {
+    return res.status(401).json({ success: false, message: 'Missing Lazada App Key or Secret.' });
   }
 
   const endpointUrl = (baseUrl || DEFAULT_BASE_URL).trim();
@@ -96,7 +124,7 @@ module.exports = async (req, res) => {
       const params = {
         app_key: currentKey,
         sign_method: 'sha256',
-        timestamp: Math.floor(Date.now() / 1000).toString(),
+        timestamp: Date.now().toString(), // Lazada requires milliseconds, not seconds
         format: 'json',
         version: '1.0',
         created_after: new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString()
@@ -107,7 +135,7 @@ module.exports = async (req, res) => {
         params.access_token = activeAccessToken;
       }
       
-      params.sign = buildLazadaSignature(currentSecret, params);
+      params.sign = buildLazadaSignature(apiName, currentSecret, params);
       const result = await callLazadaApi(endpointUrl, apiName, params, method);
       
       const responseBody = result.body || {};
@@ -140,6 +168,7 @@ module.exports = async (req, res) => {
 
       console.log('Lazada sync orders trace:', {
         code: responseBody.code,
+        message: responseBody.message,
         request_id: responseBody.request_id,
         _trace_id_: responseBody._trace_id_
       });
@@ -164,7 +193,7 @@ module.exports = async (req, res) => {
       const params = {
         app_key: appKey,
         sign_method: 'sha256',
-        timestamp: Math.floor(Date.now() / 1000).toString(),
+        timestamp: Date.now().toString(), // Lazada requires milliseconds
         format: 'json',
         version: '1.0',
         ...apiParameters
@@ -173,14 +202,14 @@ module.exports = async (req, res) => {
       if (activeAccessToken) {
         params.access_token = activeAccessToken;
       }
-      params.sign = buildLazadaSignature(appSecret, params);
+      params.sign = buildLazadaSignature(apiName, appSecret, params);
       const result = await callLazadaApi(endpointUrl, apiName, params, method);
       return res.status(result.status || 200).json({ success: true, data: result.body });
     }
 
-    return res.status(400).json({ success: false, message: `Unsupported action: '${action}'.` });
+    return res.status(400).json({ success: false, message: 'Invalid action.' });
   } catch (error) {
-    console.error('Lazada API sync error:', error);
-    return res.status(500).json({ success: false, message: 'Internal server error during Lazada sync.', error: error.message });
+    console.error('Lazada API Error:', error);
+    return res.status(500).json({ success: false, message: 'Internal Server Error', error: error.message });
   }
 };

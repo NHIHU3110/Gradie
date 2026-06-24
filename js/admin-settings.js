@@ -14,7 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('set-tiktok-shop-cipher').value = s.tiktokShopCipher || '';
         document.getElementById('set-lazada-key').value = s.lazadaAppKey || '';
         document.getElementById('set-lazada-secret').value = s.lazadaAppSecret || '';
+        document.getElementById('set-lazada-token').value = s.lazadaAccessToken || '';
         document.getElementById('set-lazada-base-url').value = s.lazadaApiBaseUrl || 'https://api.lazada.vn/rest';
+        
+        document.getElementById('set-tiki-key').value = s.tikiAppId || '';
+        document.getElementById('set-tiki-secret').value = s.tikiAppSecret || '';
         
         // Update connection status and sync counts
         const updateMarketplaceStatus = () => {
@@ -70,7 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 tiktokShopCipher: document.getElementById('set-tiktok-shop-cipher').value,
                 lazadaAppKey: document.getElementById('set-lazada-key').value,
                 lazadaAppSecret: document.getElementById('set-lazada-secret').value,
-                lazadaApiBaseUrl: document.getElementById('set-lazada-base-url').value
+                lazadaAccessToken: document.getElementById('set-lazada-token').value,
+                lazadaApiBaseUrl: document.getElementById('set-lazada-base-url').value,
+                tikiAppId: document.getElementById('set-tiki-key').value,
+                tikiAppSecret: document.getElementById('set-tiki-secret').value
             });
             updateMarketplaceStatus();
             showToast('Đã lưu cài đặt! Thay đổi sẽ được áp dụng ngay lập tức.', 'success');
