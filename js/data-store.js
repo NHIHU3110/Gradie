@@ -79,7 +79,7 @@ window.GradieStore = {
         }
       }
 
-      // Auto-migrate product names
+      // Auto-migrate product names and website stock
       if (data.products && data.products.length > 0) {
         let updatedNames = false;
         data.products.forEach(p => {
@@ -96,6 +96,10 @@ window.GradieStore = {
                 if (p.name.length < 26) {
                      p.name = p.name + ' tuyệt đẹp cho ngày tốt nghiệp';
                 }
+                updatedNames = true;
+            }
+            if (p.stock === undefined || p.stock === 0) {
+                p.stock = Math.floor(Math.random() * 50) + 10;
                 updatedNames = true;
             }
         });

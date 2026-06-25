@@ -19,11 +19,11 @@ function renderAdminProducts() {
     
     // Áp dụng bộ lọc
     if (window.currentProductFilter === 'tiki') {
-        products = products.filter(p => p.tikiStock !== undefined);
+        products = products.filter(p => p.tikiStock !== undefined && p.tikiStock > 0);
     } else if (window.currentProductFilter === 'lazada') {
-        products = products.filter(p => p.lazadaStock !== undefined);
+        products = products.filter(p => p.lazadaStock !== undefined && p.lazadaStock > 0);
     } else if (window.currentProductFilter === 'website') {
-        products = products.filter(p => p.stock > 0 || (p.tikiStock === undefined && p.lazadaStock === undefined));
+        products = products.filter(p => p.stock !== undefined && p.stock > 0);
     }
 
     console.log("GradieStore products count (Admin):", products.length);
