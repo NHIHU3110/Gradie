@@ -31,7 +31,7 @@ function renderAdminProducts() {
                 <td>
                     <div style="display:flex; flex-direction:column; font-size:0.85rem; line-height:1.4;">
                         <span style="color:#3b82f6;" title="Website Stock">🌐 ${p.stock || 0}</span>
-                        <span style="color:#000000;" title="Tiki Stock">🎵 ${p.tikiStock !== undefined ? p.tikiStock : (p.stock || 0)}</span>
+                        <span style="color:#1A94FF;" title="Tiki Stock">🛒 ${p.tikiStock !== undefined ? p.tikiStock : (p.stock || 0)}</span>
                         <span style="color:#f97316;" title="Lazada Stock">🛍️ ${p.lazadaStock !== undefined ? p.lazadaStock : (p.stock || 0)}</span>
                     </div>
                 </td>

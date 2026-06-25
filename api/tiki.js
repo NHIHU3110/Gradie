@@ -114,13 +114,14 @@ module.exports = async (req, res) => {
 
   try {
     if (action === 'sync_products') {
-      // Mocking returning some products with random stock
-      const mockProducts = [
-        { id: 'gau_bong_tot_nghiep', stock: Math.floor(Math.random() * 50) + 1 },
-        { id: 'hop_qua_tot_nghiep_1', stock: Math.floor(Math.random() * 50) + 1 },
-        { id: 'hoa_sap_tot_nghiep_2', stock: Math.floor(Math.random() * 50) + 1 },
-        { id: '1734260341774', stock: Math.floor(Math.random() * 50) + 1 }
+      // Create mock products based on the product IDs passed from the frontend
+      const productIds = req.body.productIds || [
+        'gau_bong_tot_nghiep', 'hop_qua_tot_nghiep_1', 'hoa_sap_tot_nghiep_2', '1734260341774'
       ];
+      const mockProducts = productIds.map(id => ({
+        id: id,
+        stock: Math.floor(Math.random() * 50) + 1
+      }));
 
       return res.status(200).json({
         success: true,

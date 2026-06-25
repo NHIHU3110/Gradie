@@ -2356,13 +2356,16 @@ window.GradieStore = {
   syncTikiProducts: async function () {
     try {
       const settings = this.getSettings();
+      const allProducts = this.getProducts() || [];
+      const productIds = allProducts.map(p => p.id);
       const res = await fetch('/api/tiki', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'sync_products',
           appKey: settings.tikiAppKey,
-          appSecret: settings.tikiAppSecret
+          appSecret: settings.tikiAppSecret,
+          productIds: productIds
         })
       });
       const data = await res.json();
@@ -2492,6 +2495,8 @@ window.GradieStore = {
   syncLazadaProducts: async function () {
     try {
       const settings = this.getSettings();
+      const allProducts = this.getProducts() || [];
+      const productIds = allProducts.map(p => p.id);
       const res = await fetch('/api/lazada', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2500,7 +2505,8 @@ window.GradieStore = {
           appKey: settings.lazadaAppKey,
           appSecret: settings.lazadaAppSecret,
           accessToken: settings.lazadaAccessToken,
-          baseUrl: settings.lazadaApiBaseUrl
+          baseUrl: settings.lazadaApiBaseUrl,
+          productIds: productIds
         })
       });
       const data = await res.json();
