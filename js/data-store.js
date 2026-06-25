@@ -2391,8 +2391,6 @@ window.GradieStore = {
       if (res.ok && data.success) {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
-          // Xoá stock ảo Tiki
-          all.forEach(p => p.tikiStock = 0);
             data.products.forEach(ttp => {
                let p = all.find(x => {
                  let matchId = String(x.id) === String(ttp.id);
@@ -2541,8 +2539,6 @@ window.GradieStore = {
       if (res.ok && data.success) {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
-          // Xoá stock ảo Lazada
-          all.forEach(p => p.lazadaStock = 0);
             data.products.forEach(lzdp => {
                let p = all.find(x => {
                  let matchId = String(x.id) === String(lzdp.id);
