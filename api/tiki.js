@@ -115,21 +115,41 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, orders: formattedOrders });
     }
 
-    // Step 3: Mock Products
+    // Step 3: Fetch Real Products
     if (action === 'sync_products') {
-      const productIds = req.body.productIds || [
-        'gau_bong_tot_nghiep', 'hop_qua_tot_nghiep_1', 'hoa_sap_tot_nghiep_2', '1734260341774'
-      ];
-      const mockProducts = productIds.map(id => ({
-        id: id,
-        stock: Math.floor(Math.random() * 50) + 1
-      }));
+      const productsResponse = await fetch('https://api.tiki.vn/integration/v2/products?include=inventory', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+
+      if (!productsResponse.ok) {
+        return res.status(productsResponse.status).json({ success: false, message: 'Failed to fetch products from Tiki' });
+      }
+
+      const productsData = await productsResponse.json();
+      const tikiProducts = productsData.data || [];
+
+      // Transform to Gradie format
+      const formattedProducts = tikiProducts.map(product => {
+        let stock = 0;
+        if (product.inventory) {
+          stock = product.inventory.quantity_available || 0;
+        }
+        return {
+          id: String(product.product_id || product.id),
+          sku: product.sku || product.original_sku,
+          name: product.name,
+          stock: stock
+        };
+      });
 
       return res.status(200).json({
         success: true,
         message: 'Product synchronization successful.',
-        syncedCount: mockProducts.length,
-        products: mockProducts,
+        syncedCount: formattedProducts.length,
+        products: formattedProducts,
         timestamp: new Date().toISOString()
       });
     }
