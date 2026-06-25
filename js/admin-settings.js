@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('set-tagline').value = s.tagline || '';
         document.getElementById('set-ann').value = s.announcement || '';
         document.getElementById('set-ship').value = s.shippingFee || 30000;
-        document.getElementById('set-tiktok-key').value = s.tiktokAppKey || '';
-        document.getElementById('set-tiktok-secret').value = s.tiktokAppSecret || '';
-        document.getElementById('set-tiktok-token').value = s.tiktokAccessToken || '';
-        document.getElementById('set-tiktok-shop-cipher').value = s.tiktokShopCipher || '';
+        document.getElementById('set-tiki-key').value = s.tikiAppKey || '';
+        document.getElementById('set-tiki-secret').value = s.tikiAppSecret || '';
+        document.getElementById('set-tiki-token').value = s.tikiAccessToken || '';
+        document.getElementById('set-tiki-shop-cipher').value = s.tikiShopCipher || '';
         document.getElementById('set-lazada-key').value = s.lazadaAppKey || '';
         document.getElementById('set-lazada-secret').value = s.lazadaAppSecret || '';
         document.getElementById('set-lazada-token').value = s.lazadaAccessToken || '';
@@ -21,17 +21,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update connection status and sync counts
         const updateMarketplaceStatus = () => {
             const currentSettings = window.GradieStore.getSettings();
-            const tiktokConnected = currentSettings.tiktokAppKey && currentSettings.tiktokAppSecret;
+            const tikiConnected = currentSettings.tikiAppKey && currentSettings.tikiAppSecret;
             const lazadaConnected = currentSettings.lazadaAppKey && currentSettings.lazadaAppSecret;
 
-            const tiktokStatusEl = document.getElementById('tiktok-conn-status');
-            if (tiktokStatusEl) {
-                if (tiktokConnected) {
-                    tiktokStatusEl.textContent = '● Connected';
-                    tiktokStatusEl.style.color = '#10b981';
+            const tikiStatusEl = document.getElementById('tiki-conn-status');
+            if (tikiStatusEl) {
+                if (tikiConnected) {
+                    tikiStatusEl.textContent = '● Connected';
+                    tikiStatusEl.style.color = '#10b981';
                 } else {
-                    tiktokStatusEl.textContent = '○ Disconnected';
-                    tiktokStatusEl.style.color = '#ef4444';
+                    tikiStatusEl.textContent = '○ Disconnected';
+                    tikiStatusEl.style.color = '#ef4444';
                 }
             }
 
@@ -49,10 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const allProducts = window.GradieStore.getProducts();
             const allOrders = window.GradieStore.getOrders();
 
-            const productsEl = document.getElementById('tiktok-synced-products');
-            const ordersEl = document.getElementById('tiktok-synced-orders');
-            if (productsEl) productsEl.textContent = allProducts.filter(p => p.tiktokStock !== undefined).length || allProducts.length;
-            if (ordersEl) ordersEl.textContent = allOrders.filter(o => o.source === 'TikTok').length;
+            const productsEl = document.getElementById('tiki-synced-products');
+            const ordersEl = document.getElementById('tiki-synced-orders');
+            if (productsEl) productsEl.textContent = allProducts.filter(p => p.tikiStock !== undefined).length || allProducts.length;
+            if (ordersEl) ordersEl.textContent = allOrders.filter(o => o.source === 'Tiki').length;
 
             const lazadaProductsEl = document.getElementById('lazada-synced-products');
             const lazadaOrdersEl = document.getElementById('lazada-synced-orders');
@@ -69,10 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 tagline: document.getElementById('set-tagline').value,
                 announcement: document.getElementById('set-ann').value,
                 shippingFee: Number(document.getElementById('set-ship').value),
-                tiktokAppKey: document.getElementById('set-tiktok-key').value,
-                tiktokAppSecret: document.getElementById('set-tiktok-secret').value,
-                tiktokAccessToken: document.getElementById('set-tiktok-token').value,
-                tiktokShopCipher: document.getElementById('set-tiktok-shop-cipher').value,
+                tikiAppKey: document.getElementById('set-tiki-key').value,
+                tikiAppSecret: document.getElementById('set-tiki-secret').value,
+                tikiAccessToken: document.getElementById('set-tiki-token').value,
+                tikiShopCipher: document.getElementById('set-tiki-shop-cipher').value,
                 lazadaAppKey: document.getElementById('set-lazada-key').value,
                 lazadaAppSecret: document.getElementById('set-lazada-secret').value,
                 lazadaAccessToken: document.getElementById('set-lazada-token').value,
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         // Sync Products Button
-        const syncProductsBtn = document.getElementById('btn-sync-tiktok-products');
+        const syncProductsBtn = document.getElementById('btn-sync-tiki-products');
         if (syncProductsBtn) {
             syncProductsBtn.addEventListener('click', async () => {
                 const origText = syncProductsBtn.innerHTML;
@@ -92,19 +92,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 try {
                     const settings = window.GradieStore.getSettings();
-                    const res = await fetch('/api/tiktok', {
+                    const res = await fetch('/api/tiki', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             action: 'sync_products',
-                            appKey: settings.tiktokAppKey,
-                            appSecret: settings.tiktokAppSecret
+                            appKey: settings.tikiAppKey,
+                            appSecret: settings.tikiAppSecret
                         })
                     });
                     const data = await res.json();
                     if (res.ok && data.success) {
-                        showToast(`Đã đồng bộ thành công ${data.syncedCount} sản phẩm với TikTok Shop!`, 'success');
-                        window.GradieStore.addActivityLog('TikTok Sync', `Đồng bộ thành công ${data.syncedCount} sản phẩm.`);
+                        showToast(`Đã đồng bộ thành công ${data.syncedCount} sản phẩm với Tiki!`, 'success');
+                        window.GradieStore.addActivityLog('Tiki Sync', `Đồng bộ thành công ${data.syncedCount} sản phẩm.`);
                         updateMarketplaceStatus();
                     } else {
                         showToast(`Lỗi đồng bộ: ${data.message || 'Không rõ nguyên nhân'}`, 'error');
@@ -145,16 +145,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Sync Orders Button
-        const syncOrdersBtn = document.getElementById('btn-sync-tiktok-orders');
+        const syncOrdersBtn = document.getElementById('btn-sync-tiki-orders');
         if (syncOrdersBtn) {
             syncOrdersBtn.addEventListener('click', async () => {
                 const origText = syncOrdersBtn.innerHTML;
                 syncOrdersBtn.disabled = true;
                 syncOrdersBtn.innerHTML = '<span>⏳</span> Importing...';
                 
-                await window.GradieStore.syncTikTokOrders(
+                await window.GradieStore.syncTikiOrders(
                     (res) => {
-                        showToast(`Đã đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ TikTok Shop!`, 'success');
+                        showToast(`Đã đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ Tiki!`, 'success');
                         updateMarketplaceStatus();
                     },
                     (err) => {

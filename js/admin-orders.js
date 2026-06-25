@@ -105,28 +105,28 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Add Event Listener for TikTok Direct Sync Button
-        const syncDirectBtn = document.getElementById('btn-sync-tiktok-orders-direct');
+        // Add Event Listener for Tiki Direct Sync Button
+        const syncDirectBtn = document.getElementById('btn-sync-tiki-orders-direct');
         if (syncDirectBtn) {
             syncDirectBtn.addEventListener('click', async () => {
                 const origText = syncDirectBtn.innerHTML;
                 syncDirectBtn.disabled = true;
                 syncDirectBtn.innerHTML = '<span>⏳</span> Cập nhật...';
 
-                await window.GradieStore.syncTikTokOrders(
+                await window.GradieStore.syncTikiOrders(
                     (res) => {
                         if (typeof showToast === 'function') {
-                            showToast(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ TikTok Shop.`, 'success');
+                            showToast(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ Tiki.`, 'success');
                         } else {
-                            alert(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ TikTok Shop.`);
+                            alert(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ Tiki.`);
                         }
                         window.renderOrdersTable();
                     },
                     (err) => {
                         if (typeof showToast === 'function') {
-                            showToast(`Lỗi đồng bộ TikTok: ${err}`, 'error');
+                            showToast(`Lỗi đồng bộ Tiki: ${err}`, 'error');
                         } else {
-                            alert(`Lỗi đồng bộ TikTok: ${err}`);
+                            alert(`Lỗi đồng bộ Tiki: ${err}`);
                         }
                     },
                     (loading) => {
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         const source = o.source || 'Website';
                         let sourceBadgeStyle = 'background: #e2e8f0; color: #475569;';
-                        if (source === 'TikTok Shop') {
+                        if (source === 'Tiki') {
                             sourceBadgeStyle = 'background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca;';
                         } else if (source === 'Lazada') {
                             sourceBadgeStyle = 'background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd;';

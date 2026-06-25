@@ -31,7 +31,7 @@ function renderAdminProducts() {
                 <td>
                     <div style="display:flex; flex-direction:column; font-size:0.85rem; line-height:1.4;">
                         <span style="color:#3b82f6;" title="Website Stock">🌐 ${p.stock || 0}</span>
-                        <span style="color:#000000;" title="TikTok Stock">🎵 ${p.tiktokStock !== undefined ? p.tiktokStock : (p.stock || 0)}</span>
+                        <span style="color:#000000;" title="Tiki Stock">🎵 ${p.tikiStock !== undefined ? p.tikiStock : (p.stock || 0)}</span>
                         <span style="color:#f97316;" title="Lazada Stock">🛍️ ${p.lazadaStock !== undefined ? p.lazadaStock : (p.stock || 0)}</span>
                     </div>
                 </td>
@@ -105,7 +105,7 @@ function getProductExportData(products) {
             "Price": p.price || 0,
             "Old Price": p.oldPrice !== null && p.oldPrice !== undefined ? p.oldPrice : '',
             "Website Stock": p.stock || 0,
-            "TikTok Stock": p.tiktokStock !== undefined ? p.tiktokStock : (p.stock || 0),
+            "Tiki Stock": p.tikiStock !== undefined ? p.tikiStock : (p.stock || 0),
             "Lazada Stock": p.lazadaStock !== undefined ? p.lazadaStock : (p.stock || 0),
             "Rating": p.rating || '',
             "Reviews Count": p.reviews || '',
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const btnCSV = document.getElementById('btn-export-csv');
     const btnXLSX = document.getElementById('btn-export-xlsx');
-    const btnSyncTiktokProducts = document.getElementById('btn-sync-tiktok-products');
+    const btnSyncTiktokProducts = document.getElementById('btn-sync-tiki-products');
     const btnSyncLazadaProducts = document.getElementById('btn-sync-lazada-products');
     
     if (btnCSV) btnCSV.addEventListener('click', exportToCSV);
@@ -196,15 +196,15 @@ document.addEventListener('DOMContentLoaded', () => {
             btnSyncTiktokProducts.innerHTML = 'Đang đồng bộ...';
             btnSyncTiktokProducts.disabled = true;
             try {
-                const res = await window.GradieStore.syncTikTokProducts();
+                const res = await window.GradieStore.syncTikiProducts();
                 if (res && res.success) {
-                    showToast(`Đồng bộ thành công ${res.syncedCount || 0} sản phẩm từ TikTok`, 'success');
+                    showToast(`Đồng bộ thành công ${res.syncedCount || 0} sản phẩm từ Tiki`, 'success');
                     renderAdminProducts();
                 } else {
                     showToast(res?.message || 'Đồng bộ thất bại', 'error');
                 }
             } catch (err) {
-                showToast('Lỗi khi đồng bộ TikTok', 'error');
+                showToast('Lỗi khi đồng bộ Tiki', 'error');
             } finally {
                 btnSyncTiktokProducts.innerHTML = originalText;
                 btnSyncTiktokProducts.disabled = false;

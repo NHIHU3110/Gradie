@@ -47,7 +47,7 @@
                         <div class="form-row">
                             <div class="form-group"><label>Price *</label><input type="number" id="p-price" required></div>
                             <div class="form-group"><label>Website Stock</label><input type="number" id="p-stock" value="20"></div>
-                            <div class="form-group"><label>TikTok Stock</label><input type="number" id="p-stock-tiktok" value="20"></div>
+                            <div class="form-group"><label>Tiki Stock</label><input type="number" id="p-stock-tiki" value="20"></div>
                             <div class="form-group"><label>Lazada Stock</label><input type="number" id="p-stock-lazada" value="20"></div>
                         </div>
                         
@@ -133,7 +133,7 @@
                     document.getElementById('p-category').value = product.category || '';
                     document.getElementById('p-price').value = product.price || 0;
                     document.getElementById('p-stock').value = product.stock || 0;
-                    document.getElementById('p-stock-tiktok').value = product.tiktokStock !== undefined ? product.tiktokStock : (product.stock || 0);
+                    document.getElementById('p-stock-tiki').value = product.tikiStock !== undefined ? product.tikiStock : (product.stock || 0);
                     document.getElementById('p-stock-lazada').value = product.lazadaStock !== undefined ? product.lazadaStock : (product.stock || 0);
                     document.getElementById('p-gallery').value = (product.gallery || []).join(', ');
                     currentVariants = product.variants || [];
@@ -160,7 +160,7 @@
                     category: document.getElementById('p-category').value,
                     price: newPrice,
                     stock: Number(document.getElementById('p-stock').value),
-                    tiktokStock: Number(document.getElementById('p-stock-tiktok').value),
+                    tikiStock: Number(document.getElementById('p-stock-tiki').value),
                     lazadaStock: Number(document.getElementById('p-stock-lazada').value),
                     description: document.getElementById('p-desc').value,
                     gallery: galleryArr,
@@ -185,12 +185,12 @@
                     }
 
                     if (priceChanged) {
-                        showToast('Đang cập nhật giá lên TikTok Shop...', 'info');
-                        const tiktokResult = await window.GradieStore.updateTikTokProductPrice(newId, newPrice);
-                        if (tiktokResult.success) {
-                            showToast('Đã cập nhật giá thành công trên TikTok Shop!', 'success');
+                        showToast('Đang cập nhật giá lên Tiki...', 'info');
+                        const tikiResult = await window.GradieStore.updateTikiProductPrice(newId, newPrice);
+                        if (tikiResult.success) {
+                            showToast('Đã cập nhật giá thành công trên Tiki!', 'success');
                         } else {
-                            showToast(`Không thể cập nhật giá lên TikTok Shop: ${tiktokResult.message}`, 'warning');
+                            showToast(`Không thể cập nhật giá lên Tiki: ${tikiResult.message}`, 'warning');
                         }
                         // Allow toast to be read
                         await new Promise(r => setTimeout(r, 1500));

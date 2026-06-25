@@ -34,20 +34,20 @@ window.GradieStore = {
         data.settings.announcement = "Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới";
         updated = true;
       }
-      if (data.settings.tiktokAppKey === undefined) {
-        data.settings.tiktokAppKey = "6k8ruam7245an";
+      if (data.settings.tikiAppKey === undefined) {
+        data.settings.tikiAppKey = "6k8ruam7245an";
         updated = true;
       }
-      if (data.settings.tiktokAppSecret === undefined) {
-        data.settings.tiktokAppSecret = "0be1815a89587fe0ac03da26dc1b800359fc3ea4";
+      if (data.settings.tikiAppSecret === undefined) {
+        data.settings.tikiAppSecret = "0be1815a89587fe0ac03da26dc1b800359fc3ea4";
         updated = true;
       }
-      if (data.settings.tiktokAccessToken === undefined) {
-        data.settings.tiktokAccessToken = "";
+      if (data.settings.tikiAccessToken === undefined) {
+        data.settings.tikiAccessToken = "";
         updated = true;
       }
-      if (data.settings.tiktokShopCipher === undefined) {
-        data.settings.tiktokShopCipher = "";
+      if (data.settings.tikiShopCipher === undefined) {
+        data.settings.tikiShopCipher = "";
         updated = true;
       }
       data.settings.lazadaAppKey = "139567";
@@ -285,10 +285,10 @@ window.GradieStore = {
         brandName: "Gradie", tagline: "Graduation Gifts", shippingFee: 30000, currency: "VND",
         announcement: "Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới",
         promoCode: "GRAD2026", promoDiscount: 50000,
-        tiktokAppKey: "6k8ruam7245an",
-        tiktokAppSecret: "0be1815a89587fe0ac03da26dc1b800359fc3ea4",
-        tiktokAccessToken: "",
-        tiktokShopCipher: ""
+        tikiAppKey: "6k8ruam7245an",
+        tikiAppSecret: "0be1815a89587fe0ac03da26dc1b800359fc3ea4",
+        tikiAccessToken: "",
+        tikiShopCipher: ""
       },
       products: this.normalizeProducts(window.GRADIE_DATA?.products || []),
       users: [
@@ -1886,7 +1886,7 @@ window.GradieStore = {
     });
     this.saveData(data);
   },
-  // SETTINGS
+  // SETKINGS
   getSettings: function () { return this.getData().settings || this.resetData(false).settings; },
   saveSettings: function (settings) { let data = this.getData(); data.settings = { ...data.settings, ...settings }; this.saveData(data); fetch('/api/global', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'settings', data: data.settings }) }).catch(e => console.error('Sync error', e)); },
 
@@ -2353,16 +2353,16 @@ window.GradieStore = {
       .catch(e => console.error('Sync review error', e));
   },
 
-  syncTikTokProducts: async function () {
+  syncTikiProducts: async function () {
     try {
       const settings = this.getSettings();
-      const res = await fetch('/api/tiktok', {
+      const res = await fetch('/api/tiki', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'sync_products',
-          appKey: settings.tiktokAppKey,
-          appSecret: settings.tiktokAppSecret
+          appKey: settings.tikiAppKey,
+          appSecret: settings.tikiAppSecret
         })
       });
       const data = await res.json();
@@ -2371,36 +2371,36 @@ window.GradieStore = {
           let all = this.getProducts();
           data.products.forEach(ttp => {
              let p = all.find(x => String(x.id) === String(ttp.id));
-             if (p) p.tiktokStock = ttp.stock;
+             if (p) p.tikiStock = ttp.stock;
           });
           let currentData = this.getData();
           currentData.products = all;
           this.saveData(currentData);
           window.dispatchEvent(new Event('gradie_data_synced'));
         }
-        this.addActivityLog('TikTok Sync', `Đã đồng bộ tồn kho ${data.syncedCount || data.products?.length || 0} sản phẩm TikTok.`);
+        this.addActivityLog('Tiki Sync', `Đã đồng bộ tồn kho ${data.syncedCount || data.products?.length || 0} sản phẩm Tiki.`);
         return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0 };
       }
       return { success: false, message: data.message || 'Không rõ nguyên nhân' };
     } catch (err) {
-      console.error('Failed to sync TikTok products:', err);
+      console.error('Failed to sync Tiki products:', err);
       return { success: false, message: 'Lỗi kết nối mạng.' };
     }
   },
 
-  syncTikTokOrders: async function (onSuccess, onError, onProgress) {
+  syncTikiOrders: async function (onSuccess, onError, onProgress) {
     try {
       const settings = this.getSettings();
       if (onProgress) onProgress(true);
-      const res = await fetch('/api/tiktok', {
+      const res = await fetch('/api/tiki', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'sync_orders',
-          appKey: settings.tiktokAppKey,
-          appSecret: settings.tiktokAppSecret,
-          accessToken: settings.tiktokAccessToken,
-          shopCipher: settings.tiktokShopCipher
+          appKey: settings.tikiAppKey,
+          appSecret: settings.tikiAppSecret,
+          accessToken: settings.tikiAccessToken,
+          shopCipher: settings.tikiShopCipher
         })
       });
       const data = await res.json();
@@ -2460,18 +2460,18 @@ window.GradieStore = {
             window.dispatchEvent(new Event('gradie_data_synced'));
           }
 
-          let logMsg = `Cập nhật từ TikTok Shop: Thêm ${addedCount} đơn mới, Cập nhật ${updatedCount} đơn cũ.`;
+          let logMsg = `Cập nhật từ Tiki: Thêm ${addedCount} đơn mới, Cập nhật ${updatedCount} đơn cũ.`;
           if (data.request_id) {
             logMsg += ` [Request ID: ${data.request_id}]`;
           }
-          this.addActivityLog('TikTok Sync', logMsg);
+          this.addActivityLog('Tiki Sync', logMsg);
           if (onSuccess) onSuccess({ addedCount, updatedCount, totalCount: data.importedCount });
         } else {
-          let logMsg = `Đồng bộ TikTok Shop hoàn tất (0 đơn mới).`;
+          let logMsg = `Đồng bộ Tiki hoàn tất (0 đơn mới).`;
           if (data.request_id) {
             logMsg += ` [Request ID: ${data.request_id}]`;
           }
-          this.addActivityLog('TikTok Sync', logMsg);
+          this.addActivityLog('Tiki Sync', logMsg);
           if (onSuccess) onSuccess({ addedCount: 0, updatedCount: 0, totalCount: 0 });
         }
       } else {
@@ -2624,33 +2624,33 @@ window.GradieStore = {
     }
   },
 
-  updateTikTokProductPrice: async function (productId, price) {
+  updateTikiProductPrice: async function (productId, price) {
     try {
       const settings = this.getSettings();
-      if (!settings.tiktokAppKey || !settings.tiktokAppSecret) {
-        console.warn('TikTok integration not configured.');
-        return { success: false, message: 'TikTok integration not configured.' };
+      if (!settings.tikiAppKey || !settings.tikiAppSecret) {
+        console.warn('Tiki integration not configured.');
+        return { success: false, message: 'Tiki integration not configured.' };
       }
-      const res = await fetch('/api/tiktok', {
+      const res = await fetch('/api/tiki', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'update_product_price',
-          appKey: settings.tiktokAppKey,
-          appSecret: settings.tiktokAppSecret,
+          appKey: settings.tikiAppKey,
+          appSecret: settings.tikiAppSecret,
           productId: productId,
           price: price
         })
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        this.addActivityLog('TikTok Sync', `Đã cập nhật giá sản phẩm ${productId} thành ${price.toLocaleString('vi-VN')}đ trên TikTok Shop.`);
+        this.addActivityLog('Tiki Sync', `Đã cập nhật giá sản phẩm ${productId} thành ${price.toLocaleString('vi-VN')}đ trên Tiki.`);
         return { success: true, message: data.message };
       } else {
         return { success: false, message: data.message || 'Không rõ nguyên nhân' };
       }
     } catch (err) {
-      console.error('Failed to update TikTok product price:', err);
+      console.error('Failed to update Tiki product price:', err);
       return { success: false, message: 'Lỗi kết nối mạng.' };
     }
   },
@@ -2666,7 +2666,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.GradieStore) {
     window.GradieStore.init();
 
-    // Verify HTTP-Only Cookie session on load
+    // Verify HTKP-Only Cookie session on load
     if (window.GradieStore.verifySessionWithServer) {
       window.GradieStore.verifySessionWithServer();
     }

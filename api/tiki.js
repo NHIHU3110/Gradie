@@ -1,8 +1,8 @@
-// api/tiktok.js - Sync and manage TikTok Shop integration
+// api/tiki.js - Sync and manage Tiki integration
 require('dotenv').config();
 const crypto = require('crypto');
 
-function generateTikTokSignature(path, params, appSecret, body = "") {
+function generateTikiSignature(path, params, appSecret, body = "") {
   const sortedKeys = Object.keys(params).sort();
   const paramString = sortedKeys.map(k => `${k}${params[k]}`).join('');
   const message = path + paramString + body;
@@ -10,11 +10,11 @@ function generateTikTokSignature(path, params, appSecret, body = "") {
   return crypto.createHmac('sha256', appSecret).update(signString).digest('hex');
 }
 
-async function callTikTokApi(path, queryParams, appSecret, accessToken, method = 'GET', bodyObj = null) {
-  const domain = 'open-api.tiktokglobalshop.com';
+async function callTikiApi(path, queryParams, appSecret, accessToken, method = 'GET', bodyObj = null) {
+  const domain = 'open-api.tikiglobalshop.com';
   const url = `https://${domain}${path}`;
   const bodyString = bodyObj ? JSON.stringify(bodyObj) : "";
-  const sign = generateTikTokSignature(path, queryParams, appSecret, bodyString);
+  const sign = generateTikiSignature(path, queryParams, appSecret, bodyString);
   const query = new URLSearchParams({ ...queryParams, sign });
   
   const options = {
@@ -47,15 +47,15 @@ module.exports = async (req, res) => {
     return res.status(200).end();
   }
 
-  // --- Xử lý Callback Đăng nhập TikTok (GET) ---
+  // --- Xử lý Callback Đăng nhập Tiki (GET) ---
   if (req.method === 'GET') {
     const { code } = req.query;
     if (!code) {
       return res.status(400).json({ error: 'Missing code parameter in URL' });
     }
 
-    const appKey = process.env.TIKTOK_APP_KEY || '6kbvtkn1c4e2n';
-    const appSecret = process.env.TIKTOK_APP_SECRET || 'ace80ccaa8eaa58d0ec9bc93cd0cb642a1b5e239';
+    const appKey = process.env.TIKI_APP_KEY || '6kbvtkn1c4e2n';
+    const appSecret = process.env.TIKI_APP_SECRET || 'ace80ccaa8eaa58d0ec9bc93cd0cb642a1b5e239';
 
     try {
       const urlParams = new URLSearchParams();
@@ -64,7 +64,7 @@ module.exports = async (req, res) => {
       urlParams.append('auth_code', code);
       urlParams.append('grant_type', 'authorized_code');
 
-      const apiUrl = `https://auth.tiktok-shops.com/api/v2/token/get?${urlParams.toString()}`;
+      const apiUrl = `https://auth.tiki-shops.com/api/v2/token/get?${urlParams.toString()}`;
 
       const response = await fetch(apiUrl, {
         method: 'GET',
@@ -77,13 +77,13 @@ module.exports = async (req, res) => {
       
       if (data.code !== 0) {
         return res.status(400).json({ 
-          error: 'TikTok API Error', 
+          error: 'Tiki API Error', 
           details: data 
         });
       }
 
       return res.status(200).json({
-        message: 'Kết nối TikTok Shop thành công!',
+        message: 'Kết nối Tiki thành công!',
         tokens: {
           access_token: data.data.access_token,
           refresh_token: data.data.refresh_token,
@@ -92,7 +92,7 @@ module.exports = async (req, res) => {
         }
       });
     } catch (error) {
-      console.error('TikTok Callback Error:', error);
+      console.error('Tiki Callback Error:', error);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
@@ -105,8 +105,8 @@ module.exports = async (req, res) => {
   const { action, appKey, appSecret, accessToken, shopCipher } = req.body;
 
   // Retrieve valid credentials from environment variables or database fallback
-  const validKey = process.env.TIKTOK_APP_KEY || '6kbvtkn1c4e2n';
-  const validSecret = process.env.TIKTOK_APP_SECRET || 'ace80ccaa8eaa58d0ec9bc93cd0cb642a1b5e239';
+  const validKey = process.env.TIKI_APP_KEY || '6kbvtkn1c4e2n';
+  const validSecret = process.env.TIKI_APP_SECRET || 'ace80ccaa8eaa58d0ec9bc93cd0cb642a1b5e239';
 
   // Use credentials from environment variables to prevent outdated frontend settings from breaking sync
   const currentKey = validKey;
@@ -132,17 +132,17 @@ module.exports = async (req, res) => {
     }
 
     if (action === 'sync_orders') {
-      const activeAccessToken = accessToken || process.env.TIKTOK_ACCESS_TOKEN;
-      const activeShopCipher = shopCipher || process.env.TIKTOK_SHOP_CIPHER;
+      const activeAccessToken = accessToken || process.env.TIKI_ACCESS_TOKEN;
+      const activeShopCipher = shopCipher || process.env.TIKI_SHOP_CIPHER;
 
       if (!activeAccessToken || !activeShopCipher) {
         return res.status(200).json({
           success: false,
-          message: 'Chưa cấu hình Access Token hoặc Shop Cipher cho TikTok Shop. Vui lòng kiểm tra lại phần Cài đặt.'
+          message: 'Chưa cấu hình Access Token hoặc Shop Cipher cho Tiki. Vui lòng kiểm tra lại phần Cài đặt.'
         });
       }
 
-      // Live TikTok API Call
+      // Live Tiki API Call
       const path = '/api/v2/orders/search';
       const queryParams = {
         app_key: currentKey,
@@ -152,13 +152,13 @@ module.exports = async (req, res) => {
       
       const requestBody = { page_size: 20 };
 
-      const result = await callTikTokApi(path, queryParams, currentSecret, activeAccessToken, 'POST', requestBody);
+      const result = await callTikiApi(path, queryParams, currentSecret, activeAccessToken, 'POST', requestBody);
       const responseBody = result.body || {};
       
       if (responseBody.code !== 0) {
         return res.status(200).json({
           success: false,
-          message: `TikTok API Error: ${responseBody.message || 'Unknown error'}`,
+          message: `Tiki API Error: ${responseBody.message || 'Unknown error'}`,
           raw: responseBody
         });
       }
@@ -171,17 +171,17 @@ module.exports = async (req, res) => {
         const total = Number(to.payment_info?.total_amount) || (subtotal + shippingFee);
 
         return {
-          orderNumber: `TTS-${to.order_id}`,
-          customerName: to.buyer_email || 'TikTok Customer',
-          customerEmail: to.buyer_email || 'customer@tiktok.com',
+          orderNumber: `TKS-${to.order_id}`,
+          customerName: to.buyer_email || 'Tiki Customer',
+          customerEmail: to.buyer_email || 'customer@tiki.com',
           customerPhone: to.recipient_address?.phone || '',
           shippingAddress: `${to.recipient_address?.address_detail || ''}, ${to.recipient_address?.district || ''}, ${to.recipient_address?.city || ''}`,
           notes: to.buyer_message || '',
-          paymentMethod: to.payment_method || 'TikTok Shop COD',
+          paymentMethod: to.payment_method || 'Tiki COD',
           date: to.create_time ? new Date(Number(to.create_time) * 1000).toLocaleString('vi-VN') : new Date().toLocaleString('vi-VN'),
           items: (to.item_list || []).map(item => ({
             id: item.sku_id || item.product_id,
-            name: item.product_name || 'TikTok Product',
+            name: item.product_name || 'Tiki Product',
             quantity: Number(item.quantity) || 1,
             price: Number(item.sale_price) || 0
           })),
@@ -189,13 +189,13 @@ module.exports = async (req, res) => {
           shippingFee: shippingFee,
           total: total,
           status: to.order_status || 'Pending',
-          source: 'TikTok Shop'
+          source: 'Tiki'
         };
       });
 
       return res.status(200).json({
         success: true,
-        message: 'TikTok orders imported successfully.',
+        message: 'Tiki orders imported successfully.',
         importedCount: mappedOrders.length,
         orders: mappedOrders,
         timestamp: new Date().toISOString()
@@ -210,7 +210,7 @@ module.exports = async (req, res) => {
 
       return res.status(200).json({
         success: true,
-        message: `Successfully updated product ${productId} price to ${price} on TikTok Shop.`,
+        message: `Successfully updated product ${productId} price to ${price} on Tiki.`,
         productId,
         price,
         timestamp: new Date().toISOString()
@@ -223,7 +223,7 @@ module.exports = async (req, res) => {
     });
 
   } catch (error) {
-    console.error('TikTok API sync error:', error);
+    console.error('Tiki API sync error:', error);
     return res.status(500).json({
       success: false,
       message: 'Internal server error during synchronization.',
