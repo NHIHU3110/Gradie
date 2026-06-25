@@ -2391,10 +2391,17 @@ window.GradieStore = {
       if (res.ok && data.success) {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
-          data.products.forEach(ttp => {
-             let p = all.find(x => String(x.id) === String(ttp.id));
-             if (p) p.tikiStock = ttp.stock;
-          });
+            data.products.forEach(ttp => {
+               let p = all.find(x => {
+                 let matchId = String(x.id) === String(ttp.id);
+                 let matchSku = x.sku && ttp.sku && String(x.sku).trim().toLowerCase() === String(ttp.sku).trim().toLowerCase();
+                 let n1 = x.name ? x.name.trim().toLowerCase() : '';
+                 let n2 = ttp.name ? ttp.name.trim().toLowerCase() : '';
+                 let matchName = n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1));
+                 return matchId || matchSku || matchName;
+               });
+               if (p) p.tikiStock = ttp.stock;
+            });
           let currentData = this.getData();
           currentData.products = all;
           this.saveData(currentData);
@@ -2533,11 +2540,14 @@ window.GradieStore = {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
             data.products.forEach(lzdp => {
-               let p = all.find(x => 
-                 String(x.id) === String(lzdp.id) || 
-                 (x.sku && lzdp.sku && String(x.sku) === String(lzdp.sku)) || 
-                 (x.name && lzdp.name && x.name.trim().toLowerCase() === lzdp.name.trim().toLowerCase())
-               );
+               let p = all.find(x => {
+                 let matchId = String(x.id) === String(lzdp.id);
+                 let matchSku = x.sku && lzdp.sku && String(x.sku).trim().toLowerCase() === String(lzdp.sku).trim().toLowerCase();
+                 let n1 = x.name ? x.name.trim().toLowerCase() : '';
+                 let n2 = lzdp.name ? lzdp.name.trim().toLowerCase() : '';
+                 let matchName = n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1));
+                 return matchId || matchSku || matchName;
+               });
                if (p) p.lazadaStock = lzdp.stock;
             });
           let currentData = this.getData();
