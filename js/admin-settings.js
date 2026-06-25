@@ -48,15 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            const allProducts = window.GradieStore.getProducts();
+            const allOrders = window.GradieStore.getOrders();
+
             const productsEl = document.getElementById('tiktok-synced-products');
             const ordersEl = document.getElementById('tiktok-synced-orders');
-            if (productsEl) productsEl.textContent = window.GradieStore.getProducts().length;
-            if (ordersEl) ordersEl.textContent = window.GradieStore.getOrders().length;
+            if (productsEl) productsEl.textContent = allProducts.filter(p => p.tiktokStock !== undefined).length || allProducts.length;
+            if (ordersEl) ordersEl.textContent = allOrders.filter(o => o.source === 'TikTok').length;
 
             const lazadaProductsEl = document.getElementById('lazada-synced-products');
             const lazadaOrdersEl = document.getElementById('lazada-synced-orders');
-            if (lazadaProductsEl) lazadaProductsEl.textContent = window.GradieStore.getProducts().length;
-            if (lazadaOrdersEl) lazadaOrdersEl.textContent = window.GradieStore.getOrders().length;
+            if (lazadaProductsEl) lazadaProductsEl.textContent = allProducts.filter(p => p.lazadaStock !== undefined).length || allProducts.length;
+            if (lazadaOrdersEl) lazadaOrdersEl.textContent = allOrders.filter(o => o.source === 'Lazada').length;
         };
         
         updateMarketplaceStatus();

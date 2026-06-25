@@ -28,7 +28,13 @@ function renderAdminProducts() {
                 <td><strong>${p.name || 'Untitled'}</strong>${featuredBadge}<br><small style="color:var(--admin-muted)">ID: ${safeId}</small></td>
                 <td>${p.category || 'Uncategorized'}</td>
                 <td>${price.toLocaleString('vi-VN')} ₫</td>
-                <td>${p.stock || 0}</td>
+                <td>
+                    <div style="display:flex; flex-direction:column; font-size:0.85rem; line-height:1.4;">
+                        <span style="color:#3b82f6;" title="Website Stock">🌐 ${p.stock || 0}</span>
+                        <span style="color:#000000;" title="TikTok Stock">🎵 ${p.tiktokStock !== undefined ? p.tiktokStock : (p.stock || 0)}</span>
+                        <span style="color:#f97316;" title="Lazada Stock">🛍️ ${p.lazadaStock !== undefined ? p.lazadaStock : (p.stock || 0)}</span>
+                    </div>
+                </td>
                 <td class="actions">
                     <div style="display: flex; gap: 6px; align-items: center;">
                         <button onclick="window.location.href='admin-product-form.html?id=${encodedId}'">Edit</button>
@@ -98,7 +104,9 @@ function getProductExportData(products) {
             "Category": p.category || '',
             "Price": p.price || 0,
             "Old Price": p.oldPrice !== null && p.oldPrice !== undefined ? p.oldPrice : '',
-            "Stock": p.stock || 0,
+            "Website Stock": p.stock || 0,
+            "TikTok Stock": p.tiktokStock !== undefined ? p.tiktokStock : (p.stock || 0),
+            "Lazada Stock": p.lazadaStock !== undefined ? p.lazadaStock : (p.stock || 0),
             "Rating": p.rating || '',
             "Reviews Count": p.reviews || '',
             "Main Image": p.image || '',

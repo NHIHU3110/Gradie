@@ -46,7 +46,9 @@
                         
                         <div class="form-row">
                             <div class="form-group"><label>Price *</label><input type="number" id="p-price" required></div>
-                            <div class="form-group"><label>Stock</label><input type="number" id="p-stock" value="20"></div>
+                            <div class="form-group"><label>Website Stock</label><input type="number" id="p-stock" value="20"></div>
+                            <div class="form-group"><label>TikTok Stock</label><input type="number" id="p-stock-tiktok" value="20"></div>
+                            <div class="form-group"><label>Lazada Stock</label><input type="number" id="p-stock-lazada" value="20"></div>
                         </div>
                         
                         <div class="form-group">
@@ -131,6 +133,8 @@
                     document.getElementById('p-category').value = product.category || '';
                     document.getElementById('p-price').value = product.price || 0;
                     document.getElementById('p-stock').value = product.stock || 0;
+                    document.getElementById('p-stock-tiktok').value = product.tiktokStock !== undefined ? product.tiktokStock : (product.stock || 0);
+                    document.getElementById('p-stock-lazada').value = product.lazadaStock !== undefined ? product.lazadaStock : (product.stock || 0);
                     document.getElementById('p-gallery').value = (product.gallery || []).join(', ');
                     currentVariants = product.variants || [];
                     document.getElementById('p-desc').value = product.description || '';
@@ -156,6 +160,8 @@
                     category: document.getElementById('p-category').value,
                     price: newPrice,
                     stock: Number(document.getElementById('p-stock').value),
+                    tiktokStock: Number(document.getElementById('p-stock-tiktok').value),
+                    lazadaStock: Number(document.getElementById('p-stock-lazada').value),
                     description: document.getElementById('p-desc').value,
                     gallery: galleryArr,
                     variants: cleanVariants
