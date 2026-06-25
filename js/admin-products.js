@@ -29,11 +29,20 @@ function renderAdminProducts() {
                 <td>${p.category || 'Uncategorized'}</td>
                 <td>${price.toLocaleString('vi-VN')} ₫</td>
                 <td>
-                    <div style="display:flex; flex-direction:column; font-size:0.85rem; line-height:1.4;">
-                        <span style="color:#3b82f6;" title="Website Stock">🌐 ${p.stock || 0}</span>
-                        <span style="color:#1A94FF;" title="Tiki Stock">🛒 ${p.tikiStock !== undefined ? p.tikiStock : (p.stock || 0)}</span>
-                        <span style="color:#f97316;" title="Lazada Stock">🛍️ ${p.lazadaStock !== undefined ? p.lazadaStock : (p.stock || 0)}</span>
-                    </div>
+                      <div style="display:flex; flex-direction:column; font-size:0.85rem; line-height:1.4; gap: 4px;">
+                          <div style="display:flex; align-items:center; gap:6px;" title="Website Stock">
+                              <img src="images/web.png" alt="Web" style="width:16px; height:16px; object-fit:contain; border-radius:50%;">
+                              <span style="color:#3b82f6;">${p.stock || 0}</span>
+                          </div>
+                          <div style="display:flex; align-items:center; gap:6px;" title="Tiki Stock">
+                              <img src="images/tiki.png" alt="Tiki" style="width:16px; height:16px; object-fit:contain; border-radius:4px;">
+                              <span style="color:#1A94FF;">${p.tikiStock !== undefined ? p.tikiStock : (p.stock || 0)}</span>
+                          </div>
+                          <div style="display:flex; align-items:center; gap:6px;" title="Lazada Stock">
+                              <img src="images/lazada.png" alt="Lazada" style="width:16px; height:16px; object-fit:contain; border-radius:4px;">
+                              <span style="color:#f97316;">${p.lazadaStock !== undefined ? p.lazadaStock : (p.stock || 0)}</span>
+                          </div>
+                      </div>
                 </td>
                 <td class="actions">
                     <div style="display: flex; gap: 6px; align-items: center;">
