@@ -61,6 +61,18 @@ window.GradieStore = {
 
     }
 
+    if (data.orders && data.orders.length > 0) {
+      const initialLen = data.orders.length;
+      data.orders = data.orders.filter(o => {
+        const isFakeTiki = (o.orderNumber && o.orderNumber.startsWith('TKI-')) || o.customerName === 'Nguyễn Văn Tiki' || o.customerName === 'Trần Thị Tiki';
+        const isFakeLaz = o.customerName === 'Nguyễn Văn A' || o.customerName === 'Khách hàng Lazada' || o.customerName === 'Nguyễn Hải Đăng (TikTok)';
+        return !isFakeTiki && !isFakeLaz;
+      });
+      if (data.orders.length !== initialLen) {
+        updated = true;
+      }
+    }
+
     // Force update mock data if missing
     let defaultData = this.getDefaultData();
     if (!data.users || data.users.length < 10) {

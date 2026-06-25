@@ -14,9 +14,9 @@ function collectParameters(params) {
     .join('');
 }
 
-function buildLazadaSignature(secret, params) {
+function buildLazadaSignature(apiName, secret, params) {
   const text = collectParameters(params);
-  return crypto.createHmac('sha256', secret).update(text).digest('hex').toUpperCase();
+  return crypto.createHmac('sha256', secret).update(apiName + text).digest('hex').toUpperCase();
 }
 
 async function callLazadaApi(apiUrl, apiName, params, method = 'GET') {
@@ -121,7 +121,7 @@ module.exports = async (req, res) => {
         params.access_token = activeAccessToken;
       }
       
-      params.sign = buildLazadaSignature(currentSecret, params);
+      params.sign = buildLazadaSignature(apiName, currentSecret, params);
       const result = await callLazadaApi(endpointUrl, apiName, params, method);
       
       const responseBody = result.body || {};
@@ -187,7 +187,7 @@ module.exports = async (req, res) => {
       if (activeAccessToken) {
         params.access_token = activeAccessToken;
       }
-      params.sign = buildLazadaSignature(appSecret, params);
+      params.sign = buildLazadaSignature(apiName, appSecret, params);
       const result = await callLazadaApi(endpointUrl, apiName, params, method);
       return res.status(result.status || 200).json({ success: true, data: result.body });
     }
