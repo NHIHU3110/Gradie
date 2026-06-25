@@ -184,9 +184,55 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const btnCSV = document.getElementById('btn-export-csv');
     const btnXLSX = document.getElementById('btn-export-xlsx');
+    const btnSyncTiktokProducts = document.getElementById('btn-sync-tiktok-products');
+    const btnSyncLazadaProducts = document.getElementById('btn-sync-lazada-products');
     
     if (btnCSV) btnCSV.addEventListener('click', exportToCSV);
     if (btnXLSX) btnXLSX.addEventListener('click', exportToXLSX);
+
+    if (btnSyncTiktokProducts) {
+        btnSyncTiktokProducts.addEventListener('click', async () => {
+            const originalText = btnSyncTiktokProducts.innerHTML;
+            btnSyncTiktokProducts.innerHTML = 'Đang đồng bộ...';
+            btnSyncTiktokProducts.disabled = true;
+            try {
+                const res = await window.GradieStore.syncTikTokProducts();
+                if (res && res.success) {
+                    showToast(`Đồng bộ thành công ${res.syncedCount || 0} sản phẩm từ TikTok`, 'success');
+                    renderAdminProducts();
+                } else {
+                    showToast(res?.message || 'Đồng bộ thất bại', 'error');
+                }
+            } catch (err) {
+                showToast('Lỗi khi đồng bộ TikTok', 'error');
+            } finally {
+                btnSyncTiktokProducts.innerHTML = originalText;
+                btnSyncTiktokProducts.disabled = false;
+            }
+        });
+    }
+
+    if (btnSyncLazadaProducts) {
+        btnSyncLazadaProducts.addEventListener('click', async () => {
+            const originalText = btnSyncLazadaProducts.innerHTML;
+            btnSyncLazadaProducts.innerHTML = 'Đang đồng bộ...';
+            btnSyncLazadaProducts.disabled = true;
+            try {
+                const res = await window.GradieStore.syncLazadaProducts();
+                if (res && res.success) {
+                    showToast(`Đồng bộ thành công ${res.syncedCount || 0} sản phẩm từ Lazada`, 'success');
+                    renderAdminProducts();
+                } else {
+                    showToast(res?.message || 'Đồng bộ thất bại', 'error');
+                }
+            } catch (err) {
+                showToast('Lỗi khi đồng bộ Lazada', 'error');
+            } finally {
+                btnSyncLazadaProducts.innerHTML = originalText;
+                btnSyncLazadaProducts.disabled = false;
+            }
+        });
+    }
 
     // Bulk Actions Handlers
     const bulkDeleteBtn = document.getElementById('bulk-delete-btn');
