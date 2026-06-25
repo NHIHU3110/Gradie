@@ -66,6 +66,41 @@ window.GradieStore = {
         data.settings.lazadaApiBaseUrl = "https://api.lazada.vn/rest";
         updated = true;
       }
+      
+      if (data.orders && data.orders.length > 0) {
+        const initialLen = data.orders.length;
+        data.orders = data.orders.filter(o => {
+          const isFakeTiki = (o.orderNumber && o.orderNumber.startsWith('TKI-')) || o.customerName === 'Nguyễn Văn Tiki' || o.customerName === 'Trần Thị Tiki';
+          const isFakeLaz = o.customerName === 'Nguyễn Văn A' || o.customerName === 'Khách hàng Lazada' || o.customerName === 'Nguyễn Hải Đăng (TikTok)';
+          return !isFakeTiki && !isFakeLaz;
+        });
+        if (data.orders.length !== initialLen) {
+          updated = true;
+        }
+      }
+
+      // Auto-migrate product names
+      if (data.products && data.products.length > 0) {
+        let updatedNames = false;
+        data.products.forEach(p => {
+            if (p.name && !p.name.includes('Gradie')) {
+                let features = '';
+                if (p.category === 'Gấu Bông') features = ' siêu cấp đáng yêu, mềm mịn';
+                else if (p.category === 'Hoa Mừng') features = ' rực rỡ, ý nghĩa sâu sắc';
+                else if (p.category === 'Khung Ảnh') features = ' lưu giữ kỷ niệm vĩnh cửu';
+                else if (p.category === 'Đèn Ngủ') features = ' ánh sáng ấm áp, thư giãn';
+                else if (p.category === 'Sổ') features = ' bìa da cao cấp, giấy xịn';
+                else features = ' chính hãng, chất lượng cao';
+                
+                p.name = 'Gradie - ' + p.name + features;
+                if (p.name.length < 26) {
+                     p.name = p.name + ' tuyệt đẹp cho ngày tốt nghiệp';
+                }
+                updatedNames = true;
+            }
+        });
+        if (updatedNames) updated = true;
+      }
     }
 
     if (data.orders && data.orders.length > 0) {

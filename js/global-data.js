@@ -92,7 +92,7 @@ window.GRADIE_DATA = {
   "products": [
     {
       "id": "gau_bong_tot_nghiep",
-      "name": "Gấu Bông Capybara Tốt Nghiệp",
+      "name": "Gradie - Gấu Bông Capybara Tốt Nghiệp siêu cấp đáng yêu, mềm mịn",
       "description": "Nếu bạn đang tìm một món quà tốt nghiệp vừa độc đáo, vừa hài hước thì gấu Tốt Nghiệp chính là lựa chọn hoàn hảo. Với khuôn mặt “điềm tĩnh vô tri” kết hợp áo choàng, mũ cử nhân và băng Congratulations, chú gấu mang lại cảm giác vừa trang trọng vừa buồn cười khó cưỡng. Chất liệu bông gòn 7D trắng muốt cùng vải miniso mềm mịn giúp ôm cực thích, không lo rụng lông hay phai màu. Đây không chỉ là món quà dễ thương mà còn gửi gắm thông điệp ý nghĩa: tốt nghiệp xong rồi, hãy cứ thong dong và yêu đời như “chiến thần chuột nước”.\n\n📏 Gấu có đủ 2 size để bạn lựa chọn: 20cm nhỏ gọn xinh xắn, 35cm vừa vặn để ôm và giá hợp lý.",
       "category": "Gấu Bông",
       "price": "115000",
@@ -236,7 +236,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "qua_tang_bup_be_tot_nghiep",
-      "name": "Búp Bê Móc Len Tốt Nghiệp",
+      "name": "Gradie - Búp Bê Móc Len Tốt Nghiệp chính hãng, chất lượng cao",
       "description": "Gấu bông tốt nghiệp với chiều cao 20–23cm là món quà thủ công 100% đầy ý nghĩa, ghi dấu khoảnh khắc quan trọng trong đời sinh viên. Ngoài kích thước tiêu chuẩn, shop còn nhận làm size lớn hoặc theo mẫu riêng, khách chỉ cần inbox để đặt. Sản phẩm chưa bao gồm trang trí hộp mica, hoa hay các kiểu hộp khác. Do đặc thù len thủ công, màu sắc có thể chênh lệch nhẹ giữa các lô, tạo nên sự độc đáo riêng cho từng sản phẩm",
       "category": "Gấu bông",
       "price": "419000",
@@ -322,7 +322,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "bo_hoa_len_tot_nghiep",
-      "name": "Bó Hoa Móc Len Hướng Dương",
+      "name": "Gradie - Bó Hoa Móc Len Hướng Dương chính hãng, chất lượng cao",
       "description": "Bó hoa len handmade được làm hoàn toàn thủ công, mang vẻ đẹp độc đáo và ý nghĩa, rất phù hợp làm quà tặng tốt nghiệp. Sản phẩm có chiều cao 50cm, gồm 1 chú gấu nhỏ đáng yêu kết hợp cùng 5 bông hướng dương rực rỡ, tạo nên tổng thể vừa trang trọng vừa tươi vui. ",
       "category": "Hoa mừng",
       "price": "149000",
@@ -370,7 +370,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "bo_hoa_sap_ecuado",
-      "name": "Bó Hoa Hồng Hồng",
+      "name": "Gradie - Bó Hoa Hồng Hồng chính hãng, chất lượng cao",
       "description": "Bó hoa sáp Ecuador 15 bông giấy kiếng từ Paris Florist là món quà tinh tế, phù hợp cho nhiều dịp đặc biệt. Với sự kết hợp giữa hoa sáp và hoa nhũ kim tuyến, sản phẩm mang biểu tượng tình yêu vĩnh cửu bởi vẻ đẹp không tàn, không phai, đồng thời có giá thành dễ tiếp cận hơn hoa tươi. Hoa được làm thủ công tỉ mỉ, thể hiện tâm huyết của người thợ. Mỗi sản phẩm khi đến tay khách hàng đều được chăm chút để giữ nguyên vẻ xinh đẹp, trở thành món quà ý nghĩa và bền lâu cho người nhận.",
       "category": "Hoa mừng",
       "price": "209000",
@@ -418,7 +418,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "bo_hoa_bong_bong",
-      "name": "Bó Hoa Bóng Bay Tốt Nghiệp",
+      "name": "Gradie - Bó Hoa Bóng Bay Tốt Nghiệp chính hãng, chất lượng cao",
       "description": "Hoa bong bóng là lựa chọn quà tặng độc đáo, phù hợp cho ngày tốt nghiệp, chụp ảnh kỷ yếu hay làm quà tặng người yêu. Sản phẩm được thiết kế từ những quả bóng cao cấp, có độ dai tốt, màu sắc chuẩn và đẹp mắt, tạo nên tổng thể vừa trẻ trung vừa sang trọng. Đây là món quà vừa mang tính trang trí, vừa giúp lưu giữ kỷ niệm đáng nhớ trong những dịp đặc biệt.",
       "category": "Hoa mừng",
       "price": "359000",
@@ -466,7 +466,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "keo_khong_lo",
-      "name": "Túi Kẹo Quà Tặng",
+      "name": "Gradie - Túi Kẹo Quà Tặng chính hãng, chất lượng cao",
       "description": "Kẹo khổng lồ vừa ngon – xinh – giá yêu, là món quà cực kỳ phù hợp để tặng bé, bạn bè hay cả tập thể lớp trong những dịp đặc biệt. Sản phẩm gồm nhiều loại bánh kẹo, bim bim và snack mix được phối theo tông màu bắt mắt, tạo nên một tổng thể vừa vui nhộn vừa hấp dẫn. Khi mua, khách sẽ được tặng kèm túi đựng và thiệp, giúp món quà thêm phần trọn vẹn.\nHạn sử dụng sản phẩm từ 3 đến 6 tháng, đảm bảo an toàn và chất lượng cho người dùng. Đây chắc chắn là món quà ngọt ngào, độc đáo và đầy bất ngờ dành cho người nhận.",
       "category": "Kẹo",
       "price": "49000",
@@ -537,7 +537,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "keo_mut_trai_tim",
-      "name": "Túi Kẹo Lớn Hình Trái Tim",
+      "name": "Gradie - Túi Kẹo Lớn Hình Trái Tim chính hãng, chất lượng cao",
       "description": "Bó kẹo mút hình trái tim siêu xinh là món quà “ngọt ngào” và độc đáo nhất mùa này. Với thiết kế trong suốt, gói cực kỳ dễ thương, sản phẩm được mix trên 10 loại bánh kẹo khác nhau, tạo nên sự đa dạng và hấp dẫn. Mỗi bó kẹo đều được trang trí bằng nơ ruy băng cùng họa tiết hoạt hình đáng yêu, mang lại cảm giác vừa vui nhộn vừa tinh tế.",
       "category": "Kẹo",
       "price": "89000",
@@ -595,7 +595,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "khung_anh_ghep_do_tot_nghiep",
-      "name": "Khung Ảnh Tốt Nghiệp Chibi",
+      "name": "Gradie - Khung Ảnh Tốt Nghiệp Chibi chính hãng, chất lượng cao",
       "description": "Khung ảnh ghép đồ tốt nghiệp chibi là món quà độc đáo và ý nghĩa dành cho ngày tốt nghiệp. Với thiết kế chibi dễ thương, sản phẩm mang đến lời chúc mừng tốt nghiệp một cách sinh động và vui nhộn, giúp lưu giữ khoảnh khắc quan trọng trong đời sinh viên. Khung ảnh được làm tỉ mỉ, phối hợp cùng các chi tiết lễ phục, mũ cử nhân và dòng chữ chúc mừng, tạo nên tổng thể vừa trang trọng vừa đáng yêu. ",
       "category": "Khung ảnh",
       "price": "64000",
@@ -654,7 +654,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "khung_anh_3d_totnghiep",
-      "name": "Khung Ảnh Tốt Nghiệp",
+      "name": "Gradie - Khung Ảnh Tốt Nghiệp chính hãng, chất lượng cao",
       "description": "Khung ảnh tốt nghiệp chibi được thiết kế theo yêu cầu, là món quà ý nghĩa dành tặng bạn bè trong ngày tốt nghiệp. Sản phẩm gồm khung ảnh, chân chống, móc treo tường, đèn LED và được tặng thêm 1 ảnh đi kèm. Khung làm từ nhựa giả gỗ composite nhẹ, bền, không cong vênh, chống mối mọt, mặt kính sáng bóng.",
       "category": "Khung ảnh",
       "price": "139000",
@@ -713,7 +713,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "so-dan-anh-scrapbook",
-      "name": "Sổ lưu kỉ niệm Pieces of Memories",
+      "name": "Gradie - Sổ lưu kỉ niệm Pieces of Memories bìa da cao cấp, giấy xịn",
       "description": "Các cuốn sổ tay \"Pieces of Memories\" có thiết kế đơn giản nhưng không kém phần tinh tế, là lựa chọn hoàn hảo để ghi chép hoặc làm album ảnh lưu giữ kỷ niệm. Sản phẩm nổi bật với bìa màu kem nhã nhặn, gáy lò xo tiện lợi và điểm nhấn là những chiếc nơ ruy băng nhỏ xinh được phối màu khéo léo. Cuốn sổ mang lại cảm giác nhẹ nhàng, ấm áp, rất phù hợp để làm quà tặng cho bạn bè hoặc tự thưởng cho bản thân trong những dịp đặc biệt.",
       "category": "Sổ",
       "price": "146000",
@@ -775,7 +775,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "so-len-ke-hoach",
-      "name": "Sổ Lên Kế Hoạch",
+      "name": "Gradie - Sổ Lên Kế Hoạch bìa da cao cấp, giấy xịn",
       "description": "Sổ kế hoạch \"The Essential Planner\" là người bạn đồng hành hoàn hảo giúp bạn sắp xếp công việc và quản lý thời gian hiệu quả mỗi ngày. Sản phẩm sở hữu thiết kế thanh lịch với bìa da màu xanh dương dịu mát, đi kèm dây thun cố định chắc chắn và dây đánh dấu trang tiện lợi. Bên trong sổ được chia sẵn các mục rõ ràng như lịch tháng, danh sách việc cần làm (checklist) và phần ghi chú, giúp bạn dễ dàng theo dõi mục tiêu. Cuốn sổ mang lại cảm giác ngăn nắp, hiện đại, rất thích hợp cho học sinh, sinh viên và dân văn phòng sử dụng hàng ngày.",
       "category": "Sổ",
       "price": "139000",
@@ -837,7 +837,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "so-tay-bia-cung",
-      "name": "Sổ tay dot grid",
+      "name": "Gradie - Sổ tay dot grid bìa da cao cấp, giấy xịn",
       "description": "Bộ sưu tập sổ tay ghi chép độc đáo được lấy cảm hứng từ các loại hạt cà phê quen thuộc, mang đến cảm giác mộc mạc và đầy cảm hứng cho người sử dụng. Sản phẩm có thiết kế tối giản với các tông màu trung tính như kem, xám và nâu đen, đi kèm dây thun bản nhỏ màu đen để cố định sổ chắc chắn. Điểm đặc biệt là trên bìa mỗi cuốn sổ đều in những đoạn thông tin ngắn, thú vị về nguồn gốc và đặc điểm của từng loại hạt cà phê. Đây sẽ là món quà tuyệt vời dành cho những ai vừa yêu thích việc viết lách, vừa đam mê hương vị cà phê mỗi ngày.",
       "category": "Sổ",
       "price": "79000",
@@ -909,7 +909,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "so-tay-a5-vintage",
-      "name": "Sổ Tay A5 Vintage",
+      "name": "Gradie - Sổ Tay A5 Vintage bìa da cao cấp, giấy xịn",
       "description": "Cuốn sổ tay ghi chép mang phong cách cổ điển (vintage) đầy nghệ thuật, là món quà tuyệt vời cho những ai yêu thích nét đẹp hoài niệm. Điểm nhấn của sản phẩm là phần bìa được thiết kế độc đáo giống như một bức tranh ghép từ các mảnh hóa đơn, vé tàu và tem thư cũ kỹ. Với tông màu trầm ấm kết hợp cùng chất liệu giấy dày dặn, cuốn sổ không chỉ dùng để viết nhật ký, vẽ phác thảo mà còn có thể làm phụ kiện chụp ảnh trang trí vô cùng bắt mắt, đem lại cảm giác mộc mạc và khơi nguồn cảm hứng sáng tạo.",
       "category": "Sổ",
       "price": "60000",
@@ -971,7 +971,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "so-tay-bia-da",
-      "name": "Sổ Tay Bìa Da Trang Trí",
+      "name": "Gradie - Sổ Tay Bìa Da Trang Trí bìa da cao cấp, giấy xịn",
       "description": "Cuốn sổ tay ghi chép nghệ thuật mang hơi hướng cổ điển, là lựa chọn lý tưởng cho những ai yêu thích cái đẹp và hội họa. Sản phẩm gây ấn tượng mạnh với phần bìa được in các bức tranh sơn dầu đầy tinh tế, sử dụng gam màu xanh dương và xanh lá làm chủ đạo, kết hợp cùng những dòng chữ thơ mộng. Điểm cộng lớn của cuốn sổ là phần quai gài bằng chất liệu vải lụa mềm màu xanh thẫm, đi kèm nam châm hít chắc chắn giúp bảo vệ ruột sổ bên trong luôn phẳng phiu. Đây sẽ là món phụ kiện độc đáo khơi nguồn cảm hứng viết lách và sáng tạo mỗi ngày.",
       "category": "Sổ",
       "price": "79000",
@@ -1033,7 +1033,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "so-ghi-chi-davinci",
-      "name": "Sổ ghi chú",
+      "name": "Gradie - Sổ ghi chú bìa da cao cấp, giấy xịn",
       "description": "Cuốn sổ tay ghi chép nghệ thuật sở hữu vẻ đẹp lãng mạn và thơ mộng, mang lại nguồn cảm hứng ngập tràn cho không gian học tập và làm việc. Sản phẩm gây ấn tượng với thiết kế bìa cứng màu tím pastel dịu nhẹ, kết hợp hài hòa giữa các nét vẽ phong cảnh sơn dầu độc đáo và những họa tiết viền hoa mạ vàng lấp lánh. Sổ được trang bị quai gài nam châm chắc chắn giúp bảo vệ các trang giấy bên trong luôn phẳng phiu. Đây sẽ là món quà tuyệt vời dành cho những ai yêu thích phong cách nhẹ nhàng, tinh tế và đam mê viết lách.",
       "category": "Sổ",
       "price": "35000",
@@ -1105,7 +1105,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "binh-dung-nuoc-cute",
-      "name": "Bình Đựng Nước 2L",
+      "name": "Gradie - Bình Đựng Nước 2L chính hãng, chất lượng cao",
       "description": "Bình nước thể thao dung tích lớn tích hợp vạch nhắc giờ uống nước thông minh, là giải pháp tuyệt vời giúp bạn duy trì thói quen uống đủ nước mỗi ngày. Sản phẩm được làm từ chất liệu nhựa trong suốt cao cấp, an toàn cho sức khỏe và đi kèm ống hút tiện lợi. Thân bình in sẵn các mốc thời gian cùng những lời nhắc nhở, động viên cực kỳ dễ thương để bạn không quên nạp nước khi đi học, đi làm hay tập luyện. Với thiết kế quai xách chắc chắn và nắp bấm chống tràn, chiếc bình mang lại cảm giác năng động, hiện đại và vô cùng tiện ích.",
       "category": "Bình nước",
       "price": "48000",
@@ -1152,7 +1152,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "binh-nuoc-the-thao",
-      "name": "Bình Nước Thể Thao 2 Lít",
+      "name": "Gradie - Bình Nước Thể Thao 2 Lít chính hãng, chất lượng cao",
       "description": "Bình nước thể thao dung tích lớn 1.5L được làm từ chất liệu cao cấp, an toàn và bền bỉ, là người bạn đồng hành lý tưởng cho các hoạt động thể thao, đi học hay đi làm. Sản phẩm có thiết kế nắp bấm tiện lợi chống tràn, tích hợp ống hút thông minh và quai xách chắc chắn. Điểm thu hút nhất của chiếc bình là các phụ kiện sticker nổi (charm 3D) hình gấu, thỏ, ếch và các loại quả siêu dễ thương được đính quanh thân, tạo nên vẻ ngoài cá tính, vui nhộn, giúp việc uống nước mỗi ngày trở nên thú vị hơn rất nhiều.",
       "category": "Bình nước",
       "price": "48000",
@@ -1222,7 +1222,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "binh-giu-nhiet-du-lich",
-      "name": "Bình Giữ Nhiệt Đi Du Lịch 500ml",
+      "name": "Gradie - Bình Giữ Nhiệt Đi Du Lịch 500ml chính hãng, chất lượng cao",
       "description": "Ly giữ nhiệt inox cao cấp với thiết kế hoa nhí ngọt ngào là phụ kiện hoàn hảo để bạn mang theo đồ uống yêu thích khi đi học, đi làm. Sản phẩm có tông màu trắng kem trang nhã, điểm xuyết các bông hoa màu hồng và lá xanh nhỏ xinh mang lại cảm giác nhẹ nhàng, dễ thương. Ly được trang bị nắp đậy trong suốt chống tràn tiện lợi, đi kèm lỗ cắm ống hút và nút che thông minh. Một chiếc ly vừa có khả năng giữ nhiệt tốt, vừa sở hữu ngoại hình bắt mắt chắc chắn sẽ làm góc học tập hay làm việc của bạn thêm phần sinh động.",
       "category": "Bình nước",
       "price": "100000",
@@ -1284,7 +1284,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "binh-pha-ca-phe",
-      "name": "Bình Pha Cafe Cold Brew",
+      "name": "Gradie - Bình Pha Cafe Cold Brew chính hãng, chất lượng cao",
       "description": "Bình pha cà phê Cold Brew là sản phẩm tuyệt vời dành cho những ai yêu thích hương vị cà phê ủ lạnh thanh mát ngay tại nhà. Bình có thiết kế dáng cao tối giản bằng chất liệu thủy tinh hoặc nhựa chịu lực trong suốt, đi kèm một lõi lọc mắt siêu nhỏ ở chính giữa giúp giữ lại tối đa bã cà phê, cho ra chất nước trong và thơm ngon nhất. Với phần nắp đậy tích hợp vòi rót tiện lợi và kín khít, bạn có thể dễ dàng ủ cà phê trong tủ lạnh qua đêm. Sản phẩm mang lại sự tiện nghi, hiện đại và vô cùng tiết kiệm cho những tín đồ \"nghiện\" cà phê.",
       "category": "Bình nước",
       "price": "120000",
@@ -1331,7 +1331,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "binh_pha-ca-phe-cold-brew",
-      "name": "Bình Pha Cà Phê Cold Brew 1400ml",
+      "name": "Gradie - Bình Pha Cà Phê Cold Brew 1400ml chính hãng, chất lượng cao",
       "description": "Bình pha cà phê Cold Brew thủy tinh cao cấp là món đồ gia dụng không thể thiếu cho những ai yêu thích tự tay pha chế đồ uống mát lạnh tại nhà. Sản phẩm nổi bật với chất liệu thủy tinh chịu nhiệt trong suốt, đi kèm quai cầm chữ chữ D chắc chắn và nắp đậy bằng thép không gỉ sang trọng. Thân bình được in sẵn các vạch chia dung tích rõ ràng, giúp bạn dễ dàng căn chỉnh lượng nước chính xác. Bên trong bình tích hợp lõi lọc dài bằng inox với lưới siêu mịn, đảm bảo lọc sạch bã mà vẫn giữ trọn vẹn hương vị thơm ngon, đậm đà của cà phê ủ lạnh hay các loại trà trái cây.",
       "category": "Bình nước",
       "price": "239000",
@@ -1393,7 +1393,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "coc-giu-nhiet",
-      "name": "LY giữ nhiệt hoa lá cành",
+      "name": "Gradie - LY giữ nhiệt hoa lá cành chính hãng, chất lượng cao",
       "description": "Bình giữ nhiệt Cherry Blossom sở hữu thiết kế màu kem nhã nhặn cùng họa tiết hoa anh đào hồng tinh tế. Bình có nắp chống tràn tiện lợi và quai xách vải thêu chữ \"Coffee\" sang trọng, dễ dàng mang đi học, đi làm. Với khả năng giữ nóng, lạnh vượt trội, đây là món phụ kiện vừa tiện ích vừa thời trang cho bạn.",
       "category": "Bình nước",
       "price": "99000",
@@ -1447,7 +1447,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "tui-tote-nu-da",
-      "name": "Túi Tote Nữ Da Cao Cấp",
+      "name": "Gradie - Túi Tote Nữ Da Cao Cấp chính hãng, chất lượng cao",
       "description": "Túi xách tote dáng lớn là giải pháp lưu trữ hoàn hảo cho nhu cầu đi học, đi làm hay đi chơi hàng ngày. Sản phẩm gây ấn tượng với bề mặt dập họa tiết vân caro chìm tinh tế, tạo điểm nhấn hiện đại và thanh lịch.",
       "category": "Túi",
       "price": "70000",
@@ -1509,7 +1509,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "tui-deo-vai-nu",
-      "name": "Túi đeo vai nữ kiểu dáng mới",
+      "name": "Gradie - Túi đeo vai nữ kiểu dáng mới chính hãng, chất lượng cao",
       "description": "Túi đeo vai thời trang sở hữu phom dáng mềm mại, hiện đại với hiệu ứng xếp ly tự nhiên đầy cá tính. Sản phẩm được làm từ chất liệu da bóng mượt, mang lại vẻ ngoài thời thượng và khả năng kháng bụi bẩn, dễ dàng lau chùi, vệ sinh.",
       "category": "Túi",
       "price": "67000",
@@ -1581,7 +1581,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "tui-tote-balo-nu",
-      "name": "Túi Tote Balo nữ da PU",
+      "name": "Gradie - Túi Tote Balo nữ da PU chính hãng, chất lượng cao",
       "description": "Túi đeo vai bản lớn mang phong cách cá tính, bụi bặm và hiện đại với phom dáng túi hobo mềm mại. Sản phẩm được làm từ chất liệu da giả cổ có độ bóng nhẹ, tạo hiệu ứng sần tự nhiên mang hơi hướng cổ điển, đồng thời có khả năng kháng nước và dễ lau chùi.",
       "category": "Túi",
       "price": "70000",
@@ -1635,7 +1635,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "tui-xach-tote-nu-hoa-tiet",
-      "name": "Túi xách Tote nữ họa tiết gấu",
+      "name": "Gradie - Túi xách Tote nữ họa tiết gấu chính hãng, chất lượng cao",
       "description": "Túi đeo vai canvas mang phong cách trẻ trung, năng động và vô cùng dễ thương, là phụ kiện lý tưởng cho học sinh, sinh viên hoặc các chuyến dạo phố hàng ngày. Sản phẩm được làm từ chất liệu vải canvas dày dặn, bền bỉ, kết hợp hài hòa với các chi tiết giả da mềm mại tạo nên kết cấu chắc chắn mà vẫn giữ được sự nhẹ nhàng khi sử dụng.",
       "category": "Túi",
       "price": "70000",
@@ -1689,7 +1689,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "tui-tote-nu-vai-canvas",
-      "name": "Túi tote nữ vải canvas",
+      "name": "Gradie - Túi tote nữ vải canvas chính hãng, chất lượng cao",
       "description": "Túi tote vải cỡ lớn mang phong cách tối giản, năng động, là lựa chọn tuyệt vời cho môi trường học tập, làm việc hoặc những chuyến du lịch ngắn ngày. Sản phẩm được may từ chất liệu vải canvas hoặc oxford dày dặn, đứng phom và có độ bền cao, giúp chịu lực tốt khi mang nhiều đồ đạc.",
       "category": "Túi",
       "price": "65000",
@@ -1748,7 +1748,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "tui-toe-cong-so",
-      "name": "Túi tote túi công sở",
+      "name": "Gradie - Túi tote túi công sở chính hãng, chất lượng cao",
       "description": "Túi xách tote da dáng lớn mang phong cách cổ điển, thanh lịch và sang trọng, là lựa chọn tuyệt vời cho môi trường công sở, giảng đường hoặc sử dụng hàng ngày. Sản phẩm được làm từ chất liệu da tổng hợp cao cấp với bề mặt giả cổ có độ bóng nhẹ, tạo hiệu ứng vân da tự nhiên và khả năng chống bám bẩn tốt.",
       "category": "Túi",
       "price": "85000",
@@ -1807,7 +1807,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "balo-vai-da",
-      "name": "Balo đi học, đi chơi vải dạ",
+      "name": "Gradie - Balo đi học, đi chơi vải dạ chính hãng, chất lượng cao",
       "description": "Balo thời trang nữ mang phong cách sang trọng, thanh lịch và hiện đại, rất thích hợp cho việc đi học, đi làm hoặc đi chơi dạo phố. Sản phẩm gây ấn tượng mạnh với bề mặt được làm từ chất liệu vải dạ tweed đan dệt tinh xảo, tạo hiệu ứng vân kẻ ô nhỏ đan xen có chiều sâu, mang lại vẻ ngoài cao cấp và thời thượng.",
       "category": "Balo",
       "price": "73000",
@@ -1866,7 +1866,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "balo-mini",
-      "name": "Balo mini dành cho nữ",
+      "name": "Gradie - Balo mini dành cho nữ chính hãng, chất lượng cao",
       "description": "Balo mini nữ mang phong cách ngọt ngào, trẻ trung và năng động, là món phụ kiện tuyệt vời cho những chuyến đi chơi, dạo phố hay hẹn hò. Sản phẩm gây ấn tượng độc đáo với bề mặt chất liệu da được xử lý tạo hiệu ứng vân nhăn, giả giấy sần nhẹ lạ mắt, mang lại vẻ ngoài cá tính nhưng vẫn không kém phần tinh tế.",
       "category": "Balo",
       "price": "71000",
@@ -1928,7 +1928,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "huy_chuong_chuc_mung_tot_nghiep",
-      "name": "Huy Chương Tốt Nghiệp",
+      "name": "Gradie - Huy Chương Tốt Nghiệp chính hãng, chất lượng cao",
       "description": "Huy chương chúc mừng tốt nghiệp là món quà độc đáo, mang ý nghĩa ghi dấu hành trình học tập và thành công của bạn bè, người thân. Với thiết kế trang trọng, nổi bật cùng dòng chữ chúc mừng, sản phẩm vừa là kỷ niệm đáng nhớ vừa là lời động viên tinh thần.",
       "category": "Huy Chương",
       "price": "69000",
@@ -2000,7 +2000,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "den_ngu_gau_tot_nghiep",
-      "name": "Hộp Tuyết Thủy Tinh",
+      "name": "Gradie - Hộp Tuyết Thủy Tinh ánh sáng ấm áp, thư giãn",
       "description": "Mỗi bộ sản phẩm bao gồm: trụ đáy gỗ & dây đèn LED, hoa và lá đính kèm, hạt pha lê trong trang trí, pin, nắp chụp thủy tinh, keo nến và gấu tốt nghiệp. Thiết kế tinh tế, ánh sáng dịu nhẹ cùng chi tiết trang trí độc đáo giúp chiếc đèn trở thành món quà vừa đẹp mắt vừa mang giá trị kỷ niệm.",
       "category": "Đèn Ngủ",
       "price": "159000",
@@ -2086,7 +2086,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "den_guong_tulip",
-      "name": "Hộp Thủy Tinh Vuông",
+      "name": "Gradie - Hộp Thủy Tinh Vuông ánh sáng ấm áp, thư giãn",
       "description": "Đèn ngủ hoa tulip 2-in-1 vừa là chiếc đèn ngủ ấm áp, vừa kiêm gương soi tiện lợi, mang lại trải nghiệm đa năng cho người dùng. Khi bật sáng, hiệu ứng thị giác lung linh tạo cảm giác không gian vô cực với những bông hoa rực rỡ, giúp căn phòng thêm phần lãng mạn và thư giãn. Sản phẩm mang tính DIY độc đáo, cho phép bạn tự tay lắp ráp để tạo nên “vườn hoa” riêng, tăng sự cá nhân hóa và ý nghĩa.",
       "category": "Đèn Ngủ",
       "price": "49000",
@@ -2171,7 +2171,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "den_ngu_silicon",
-      "name": "Đèn LED Thú Dễ Thương",
+      "name": "Gradie - Đèn LED Thú Dễ Thương ánh sáng ấm áp, thư giãn",
       "description": "Đèn ngủ mini được thiết kế nhỏ gọn, tiện lợi với thông số kỹ thuật hiện đại: điện áp định mức 5V / 0,3A, công suất 1W, dung lượng pin 1200mAh cho thời gian sử dụng dài. Ở mức sáng cao nhất, đèn có thể hoạt động 6–7 giờ, còn mức sáng thấp nhất kéo dài tới 12 giờ. Thời gian sạc nhanh chỉ 2–3 giờ, giúp bạn dễ dàng sử dụng liên tục.",
       "category": "Đèn Ngủ",
       "price": "109000",
@@ -2243,7 +2243,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "non_tot_nghiep_hoa_lua",
-      "name": "Mũ Cử Nhân Trang Trí Hoa Lụa",
+      "name": "Gradie - Mũ Cử Nhân Trang Trí Hoa Lụa chính hãng, chất lượng cao",
       "description": "Chiếc mũ cử nhân được trang trí tỉ mỉ và cẩn thận, thiết kế riêng dành cho bạn, giúp ngày tốt nghiệp thêm phần đặc biệt. Đây không chỉ là phụ kiện ý nghĩa mà còn là điểm nhấn để lưu lại những bức hình ấn tượng, ghi dấu kỷ niệm khó quên trong hành trình học tập. Món quà tinh tế này sẽ mang đến sự tự hào và niềm vui trọn vẹn cho người nhận.",
       "category": "Đồ tốt nghiệp",
       "price": "189000",
@@ -2317,7 +2317,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "ao_cu_nhan",
-      "name": "Đồ tốt nghiệp",
+      "name": "Gradie - Đồ tốt nghiệp chính hãng, chất lượng cao",
       "description": "Bộ lễ phục cử nhân quốc tế màu đen trang trọng, phù hợp cho lễ tốt nghiệp đại học, thạc sĩ hay giảng viên. Sản phẩm gồm áo cử nhân và mũ tốt nghiệp, mang thiết kế chuẩn mực, giúp lưu giữ khoảnh khắc quan trọng trong hành trình học tập. Với chất liệu bền đẹp và kiểu dáng truyền thống, bộ lễ phục không chỉ thể hiện sự tự hào mà còn tạo nên hình ảnh chuyên nghiệp, trang nghiêm trong ngày trọng đại.",
       "category": "Đồ tốt nghiệp",
       "price": "339000",
@@ -2376,7 +2376,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "sash_tot_nghiep",
-      "name": "Sash Tốt Nghiệp",
+      "name": "Gradie - Sash Tốt Nghiệp chính hãng, chất lượng cao",
       "description": "Sash đeo chéo tốt nghiệp là phụ kiện trang trọng, giúp tôn vinh khoảnh khắc quan trọng trong ngày lễ ra trường. Với thiết kế tinh tế, màu sắc nổi bật, sash mang lại vẻ tự tin và phong cách cho người mặc, đồng thời tạo điểm nhấn trong những bức ảnh kỷ yếu. ",
       "category": "Đồ tốt nghiệp",
       "price": "149000",
@@ -2424,7 +2424,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "gau_bong_chim_canh_cut",
-      "name": "Gấu Bông Penguin Tốt Nghiệp",
+      "name": "Gradie - Gấu Bông Penguin Tốt Nghiệp siêu cấp đáng yêu, mềm mịn",
       "description": "Gấu bông tốt nghiệp đáng yêu là món quà ý nghĩa, phù hợp để tặng bé, bạn bè hoặc người yêu trong ngày trọng đại. Với thiết kế dễ thương cùng trang phục cử nhân, sản phẩm không chỉ mang lại niềm vui mà còn giúp lưu giữ kỷ niệm tốt nghiệp một cách đặc biệt và đáng nhớ.",
       "category": "Gấu Bông",
       "price": "129000",
@@ -2472,7 +2472,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "the_keo_mu_tot_nghiep",
-      "name": "Mũ Tốt Nghiệp Hộp Kẹo",
+      "name": "Gradie - Mũ Tốt Nghiệp Hộp Kẹo chính hãng, chất lượng cao",
       "description": "Thiệp chúc mừng tốt nghiệp độc đáo với thiết kế hình mũ cử nhân, vừa mang không khí lễ tốt nghiệp vừa tạo sự thú vị khi kết hợp cùng hộp đựng kẹo bên trong. Trông giống như một chiếc mũ tốt nghiệp chứa đầy kẹo ngọt ngào, sản phẩm mang lại sự bất ngờ và vui nhộn cho người nhận.",
       "category": "Kẹo",
       "price": "149000",
@@ -2520,7 +2520,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "hop_keo_mu_bac_si",
-      "name": "Hộp Quà Tốt Nghiệp Hình Mũ Cử Nhân",
+      "name": "Gradie - Hộp Quà Tốt Nghiệp Hình Mũ Cử Nhân chính hãng, chất lượng cao",
       "description": "Hộp kẹo mũ bác sĩ được thiết kế độc đáo, làm từ giấy cao cấp, màu sắc như hình hiển thị, mang lại cảm giác vừa đáng yêu vừa trang trọng. Với kích thước nhỏ gọn 9 x 6 x 6 cm (3,54 x 2,36 x 2,36 in), sản phẩm thích hợp dùng để đựng thực phẩm, kẹo hoặc quà tặng trong các dịp đặc biệt.",
       "category": "Kẹo",
       "price": "79000",
@@ -2592,7 +2592,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "khung_anh_mica_de_",
-      "name": "Mô Hình Tốt Nghiệp",
+      "name": "Gradie - Mô Hình Tốt Nghiệp chính hãng, chất lượng cao",
       "description": "Khung ảnh mica trong suốt dày 3mm, kết hợp cùng đế LED USB ánh sáng dịu nhẹ, giúp hình ảnh nổi bật và lung linh hơn. Sản phẩm được in ảnh theo yêu cầu, phù hợp làm quà tặng tốt nghiệp đầy ý nghĩa.",
       "category": "Khung ảnh",
       "price": "259000",
@@ -2640,7 +2640,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "khung_anh_bang_khen",
-      "name": "khung ảnh khung bằng khen",
+      "name": "Gradie - khung ảnh khung bằng khen chính hãng, chất lượng cao",
       "description": "Khung ảnh được thiết kế vừa vặn cho giấy khen chuẩn A4, giúp bảo quản và trưng bày giấy khen một cách trang trọng. Phần kính phủ viền ngoài thêm 1,5cm mỗi cạnh, tạo cảm giác chắc chắn và sang trọng.",
       "category": "Khung ảnh",
       "price": "259000",
@@ -2688,7 +2688,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "ky_niem_chuong_chibi",
-      "name": "Khung Pha Lê",
+      "name": "Gradie - Khung Pha Lê chính hãng, chất lượng cao",
       "description": "Kỷ niệm chương được chế tác từ thủy tinh cao cấp, mang vẻ đẹp sang trọng và tinh tế, thích hợp để vinh danh trong các dịp tốt nghiệp, kỷ niệm hay trao tặng thành tích. Sản phẩm có hai kiểu dáng: tròn đường kính 14cm và các mẫu khác với chiều cao 19cm, tạo sự đa dạng cho lựa chọn.",
       "category": "Huy Chương",
       "price": "299000",
@@ -2760,7 +2760,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "huy_chuong_moc_khoa",
-      "name": "Huy Chương Tốt Nghiệp",
+      "name": "Gradie - Huy Chương Tốt Nghiệp chính hãng, chất lượng cao",
       "description": "Huy chương được làm từ mica bền đẹp, với kích thước mặt 8cm, độ dày 3mm chắc chắn, tạo cảm giác sang trọng và tinh tế. Dây huy chương rộng 2,5cm, giúp đeo thoải mái và nổi bật trong các buổi lễ tốt nghiệp hay sự kiện vinh danh. Đây là món quà ý nghĩa, vừa trang trí vừa lưu giữ kỷ niệm đáng nhớ.",
       "category": "Huy Chương",
       "price": "89000",
@@ -2819,7 +2819,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "bo_hoa_banh_keo",
-      "name": "Bó Quà Tốt Nghiệp",
+      "name": "Gradie - Bó Quà Tốt Nghiệp chính hãng, chất lượng cao",
       "description": "Bó hoa bánh kẹo gồm 18 món cao cấp, chất lượng, đa dạng hương vị, mang đến sự ngọt ngào và bất ngờ cho người nhận. Với thiết kế sáng tạo dạng bó hoa đứng được, sản phẩm vừa đẹp mắt vừa tiện lợi để trưng bày trong các buổi lễ tốt nghiệp, chụp kỷ yếu hay làm quà sinh nhật ý nghĩa. Đây là món quà độc đáo, vừa thể hiện lời chúc ngọt ngào vừa lưu giữ kỷ niệm đáng nhớ, thích hợp dành tặng bạn bè, người thân trong những dịp đặc biệt.",
       "category": "Hoa mừng",
       "price": "189000",
@@ -2878,7 +2878,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "den_ngu_hoa_huong_duong",
-      "name": "Đèn Ngủ Hoa Hướng Dương",
+      "name": "Gradie - Đèn Ngủ Hoa Hướng Dương ánh sáng ấm áp, thư giãn",
       "description": "Sản phẩm được thiết kế độc đáo với hoa hướng dương khô – biểu tượng của sự lạc quan và thành công. Kết hợp cùng đèn LED ánh sáng vàng ấm, tạo nên không gian lung linh, ấm áp, thích hợp làm quà tặng tốt nghiệp đầy ý nghĩa.",
       "category": "Đèn Ngủ",
       "price": "89000",
@@ -2950,7 +2950,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "den_ngu_hoa_cam_tu_cau",
-      "name": "Đèn Ngủ Hoa Cẩm Tú Cầu",
+      "name": "Gradie - Đèn Ngủ Hoa Cẩm Tú Cầu ánh sáng ấm áp, thư giãn",
       "description": "Đèn ngủ handmade được làm từ nguyên liệu độc đáo, gồm 30 bông cẩm tú cầu kèm lá, mang lại vẻ đẹp nhẹ nhàng và tinh tế. Bộ sản phẩm đi kèm set đế đèn + pin AAA, cùng keo và đầy đủ phụ kiện, giúp bạn dễ dàng tự tay hoàn thiện chiếc đèn.",
       "category": "Đèn Ngủ",
       "price": "269000",
@@ -3022,7 +3022,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "lich_tot_nghiep",
-      "name": "Lịch Tốt Nghiệp",
+      "name": "Gradie - Lịch Tốt Nghiệp chính hãng, chất lượng cao",
       "description": "Lịch tốt nghiệp được thiết kế như một món quà tặng độc đáo, mang phong cách troll vui nhộn dành cho bạn bè. Với hình ảnh và chi tiết gắn liền không khí lễ tốt nghiệp, sản phẩm vừa tạo tiếng cười vừa lưu giữ kỷ niệm đáng nhớ. Đây là lựa chọn thú vị để tặng bạn bè trong ngày tốt nghiệp, giúp không khí thêm phần hài hước và ý nghĩa.",
       "category": "Khung ảnh",
       "price": "69000",
@@ -3081,7 +3081,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "sen_da_va_gau",
-      "name": "Bó Hoa Mini Kèm Gấu Tốt Nghiệp",
+      "name": "Gradie - Bó Hoa Mini Kèm Gấu Tốt Nghiệp chính hãng, chất lượng cao",
       "description": "Set quà tặng tốt nghiệp độc đáo và ý nghĩa, mang đến sự tươi mới và may mắn cho người nhận. Mỗi set sen đá/xương rồng đi kèm chậu tráng men hoặc đất nung trắng đường kính 8cm, kết hợp cùng mô hình gấu tốt nghiệp dễ thương và túi giấy đựng quà sang trọng, thích hợp làm quà tặng bạn bè, người thân trong dịp tốt nghiệp.",
       "category": "Chậu cây",
       "price": "79000",
@@ -3140,7 +3140,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "chau_cay_may_man",
-      "name": "Bó Xương Rồng Mini Tốt Nghiệp",
+      "name": "Gradie - Bó Xương Rồng Mini Tốt Nghiệp chính hãng, chất lượng cao",
       "description": "Chậu cây được vẽ tay 100% thủ công, mang nét độc đáo và tinh tế, thích hợp làm quà tặng tốt nghiệp ý nghĩa. Với kích thước đường kính 8cm, sản phẩm nhỏ gọn, dễ dàng trưng bày trên bàn học, bàn làm việc hoặc góc trang trí. Đây là món quà vừa mang tính thẩm mỹ vừa gửi gắm lời chúc may mắn, thành công đến người nhận.",
       "category": "Chậu cây",
       "price": "159000",
@@ -3199,7 +3199,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "balo-da-en",
-      "name": "Balo mini thời trang DA ÉN",
+      "name": "Gradie - Balo mini thời trang DA ÉN chính hãng, chất lượng cao",
       "description": "Balo mini nữ mang phong cách sang trọng, cổ điển pha chút hiện đại, là phụ kiện lý tưởng cho các buổi dạo phố, đi chơi hay hẹn hò. Sản phẩm gây ấn tượng mạnh mẽ với bề mặt được làm từ chất liệu vải dạ dệt họa tiết răng sói (houndstooth) tinh tế, mang lại vẻ ngoài thời thượng và không bao giờ lỗi mốt.",
       "category": "Balo",
       "price": "69000",
@@ -3253,7 +3253,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "vi-nam-canvas",
-      "name": "Ví nam dáng đứng vải canvas",
+      "name": "Gradie - Ví nam dáng đứng vải canvas chính hãng, chất lượng cao",
       "description": "Ví đứng nam mang phong cách tối giản, hiện đại và thanh lịch, là phụ kiện lý tưởng cho những ai yêu thích sự gọn gàng, tinh tế. Sản phẩm được làm từ chất liệu vải giả canvas cao cấp với bề mặt vân dệt mịn màng, mang lại độ bền cao, khả năng chống sờn rách và tạo cảm giác cầm nắm chắc chắn, êm tay.",
       "category": "Ví",
       "price": "60000",
@@ -3312,7 +3312,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "vi-dung-the",
-      "name": "Ví Đựng Thẻ Zootopia",
+      "name": "Gradie - Ví Đựng Thẻ Zootopia chính hãng, chất lượng cao",
       "description": "Ví đứng mang phong cách hoạt hình trẻ trung, năng động và cá tính, là phụ kiện lý tưởng cho các bạn trẻ yêu thích sự độc đáo. Sản phẩm được hoàn thiện từ chất liệu vải giả canvas bền bỉ với bề mặt vân dệt rõ nét, mang lại khả năng chống trầy xước tốt và cảm giác cầm nắm chắc chắn.",
       "category": "Ví",
       "price": "80000",
@@ -3371,7 +3371,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "vi-dung-the-sang-tao",
-      "name": "Ví đựng thẻ",
+      "name": "Gradie - Ví đựng thẻ chính hãng, chất lượng cao",
       "description": "Ví vải gấp ba mang phong cách trẻ trung, hài hước và cá tính, là phụ kiện hoàn hảo cho học sinh, sinh viên hoặc những ai yêu thích sự độc lạ. Sản phẩm được hoàn thiện từ chất liệu vải canvas giả denim dày dặn, bền bỉ, mang lại khả năng chống sờn rách cao và cảm giác cầm nắm chắc chắn, thân thiện.",
       "category": "Ví",
       "price": "85000",
@@ -3430,7 +3430,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "vi-gap-in-hinh",
-      "name": "Ví Gập được in hình mèo con",
+      "name": "Gradie - Ví Gập được in hình mèo con chính hãng, chất lượng cao",
       "description": "Ví ngắn cầm tay nữ sở hữu phong cách đáng yêu, ngọt ngào và vô cùng tiện dụng, rất thích hợp cho các bạn học sinh, sinh viên sử dụng hàng ngày. Sản phẩm được làm từ chất liệu da mềm mịn, đứng dáng, mang lại độ bền cao và cảm giác êm ái khi cầm trên tay.",
       "category": "Ví",
       "price": "45000",
@@ -3515,7 +3515,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "vi-mini-khoa-keo",
-      "name": "Ví mini 2 khoá kéo",
+      "name": "Gradie - Ví mini 2 khoá kéo chính hãng, chất lượng cao",
       "description": "Ví ngắn cầm tay nữ mang phong cách hiện đại, thanh lịch và sang trọng, là lựa chọn lý tưởng cho phái đẹp sử dụng hàng ngày hoặc mang theo trong các buổi tiệc. Sản phẩm được làm từ chất liệu da mịn cao cấp, đứng phom với bề mặt tạo điểm nhấn bằng các đường chỉ may trần hình quả trám đan dệt tạo hiệu ứng hình khối ba chiều độc đáo.",
       "category": "Ví",
       "price": "45000",
@@ -3587,7 +3587,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "nen-thom-hoa-kho",
-      "name": "Nến Thơm Trang Trí Hoa Khô",
+      "name": "Gradie - Nến Thơm Trang Trí Hoa Khô chính hãng, chất lượng cao",
       "description": "Nến thơm nghệ thuật cao cấp mang phong cách thiên nhiên thanh lịch, là món đồ decor hoàn hảo giúp làm ấm không gian sống và mang lại cảm giác thư giãn, dễ chịu. Sản phẩm nổi bật với thiết kế đặt trong một chiếc lồng kính thủy tinh vòm tròn suốt tinh tế, đi kèm phần đế lót bằng lát gỗ mộc tự nhiên nguyên vỏ.",
       "category": "Nến thơm",
       "price": "119000",
@@ -3659,7 +3659,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "nen-thom-vo-so",
-      "name": "Nến thơm ốc biển",
+      "name": "Gradie - Nến thơm ốc biển chính hãng, chất lượng cao",
       "description": "Nến thơm nghệ thuật đại dương mang thiết kế độc đáo và tràn đầy hơi thở của biển cả, là món đồ decor lý tưởng cho những ai yêu thích phong cách lãng mạn, phóng khoáng. Sản phẩm gây ấn tượng mạnh với phần vỏ nến được tạo hình phỏng sinh học theo một chiếc vỏ sò gai uốn lượn tự nhiên, có kết cấu bề mặt nhám nhẹ chân thực.",
       "category": "Nến thơm",
       "price": "80000",
@@ -3721,7 +3721,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "nen-thom-hop",
-      "name": "Nến thơm hộp quà",
+      "name": "Gradie - Nến thơm hộp quà chính hãng, chất lượng cao",
       "description": "Nến thơm hũ thủy tinh nghệ thuật mang phong cách hiện đại và tinh tế, là lựa chọn hoàn hảo để làm ấm không gian sống hoặc làm quà tặng chỉn chu trong các dịp đặc biệt. Thân hũ dán nhãn tối giản hiển thị rõ nét thông tin tên mùi hương mang hương vị thức uống ngọt ngào, tạo cảm giác thư giãn, dễ chịu ngay từ cái nhìn đầu tiên.",
       "category": "Nến thơm",
       "price": "25000",
@@ -3775,7 +3775,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "tui-dung-laptop",
-      "name": "Túi đựng laptop chống sốc",
+      "name": "Gradie - Túi đựng laptop chống sốc chính hãng, chất lượng cao",
       "description": "Túi chống sốc đựng laptop và máy tính bảng sở hữu thiết kế vuông vắn, tối giản và hiện đại, mang lại sự bảo vệ tối ưu cho các thiết bị công nghệ của bạn. Sản phẩm được làm từ chất liệu vải sợi cao cấp dày dặn, có khả năng kháng nước nhẹ, chống trầy xước và chống bám bụi hiệu quả.",
       "category": "Túi đựng laptop",
       "price": "138000",
@@ -3847,7 +3847,7 @@ window.GRADIE_DATA = {
     },
     {
       "id": "tui-dung-laptop-notebook",
-      "name": "TÚI ĐỰNG laptop notebook",
+      "name": "Gradie - TÚI ĐỰNG laptop notebook chính hãng, chất lượng cao",
       "description": "Túi xách đựng laptop chống sốc chuyên dụng sở hữu thiết kế vuông vắn, thanh lịch và mang tính ứng dụng cao, là trợ thủ đắc lực bảo vệ thiết bị công nghệ cho dân văn phòng, doanh nhân hay học sinh, sinh viên. Sản phẩm được may từ chất liệu vải sợi dệt cao cấp bền bỉ, bề mặt tạo vân mịn có khả năng kháng nước nhẹ, chống trầy xước và chống bám bụi cực tốt.",
       "category": "Túi đựng laptop",
       "price": "140000",
