@@ -82,19 +82,63 @@ module.exports = async (req, res) => {
 
   try {
     if (action === 'sync_products') {
-      const productIds = req.body.productIds || [
-        'gau_bong_tot_nghiep', 'hop_qua_tot_nghiep_1', 'hoa_sap_tot_nghiep_2', '1734260341774'
-      ];
-      const mockProducts = productIds.map(id => ({
-        id: id,
-        stock: Math.floor(Math.random() * 50) + 1
-      }));
+      const apiName = '/products/get';
+      const params = {
+        app_key: currentKey,
+        access_token: accessToken,
+        sign_method: 'sha256',
+        timestamp: Date.now().toString(),
+        format: 'json',
+        version: '1.0',
+        filter: 'all'
+      };
+
+      params.sign = buildLazadaSignature(apiName, currentSecret, params);
+
+      const url = new URL(endpointUrl + apiName);
+      Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+      const response = await fetch(url, { method: 'GET' });
+      const lazadaData = await response.json();
+
+      if (!response.ok || lazadaData.code !== "0") {
+        return res.status(400).json({ 
+          success: false, 
+          message: lazadaData.message || 'Failed to fetch products from Lazada',
+          details: lazadaData
+        });
+      }
+
+      let realProducts = [];
+      if (lazadaData.data && lazadaData.data.products) {
+         lazadaData.data.products.forEach(p => {
+             let totalStock = 0;
+             if (p.skus) p.skus.forEach(s => totalStock += (s.quantity || s.Available || 0));
+             
+             let name = '';
+             if (p.attributes && p.attributes.name) name = p.attributes.name;
+
+             let skuStr = '';
+             if (p.skus && p.skus[0] && p.skus[0].SellerSku) {
+                 skuStr = p.skus[0].SellerSku;
+                 // Sometimes SKU has a suffix like -1, let's also pass a base sku
+                 if (skuStr.includes('-')) skuStr = skuStr.split('-')[0];
+             }
+             
+             realProducts.push({
+                 id: String(p.item_id),
+                 sku: skuStr,
+                 name: name,
+                 stock: totalStock
+             });
+         });
+      }
 
       return res.status(200).json({ 
         success: true, 
         message: 'Lazada product sync completed.', 
-        syncedCount: mockProducts.length, 
-        products: mockProducts,
+        syncedCount: realProducts.length, 
+        products: realProducts,
         timestamp: new Date().toISOString() 
       });
     }

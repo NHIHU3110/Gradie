@@ -2532,10 +2532,14 @@ window.GradieStore = {
       if (res.ok && data.success) {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
-          data.products.forEach(lzdp => {
-             let p = all.find(x => String(x.id) === String(lzdp.id));
-             if (p) p.lazadaStock = lzdp.stock;
-          });
+            data.products.forEach(lzdp => {
+               let p = all.find(x => 
+                 String(x.id) === String(lzdp.id) || 
+                 (x.sku && lzdp.sku && String(x.sku) === String(lzdp.sku)) || 
+                 (x.name && lzdp.name && x.name.trim().toLowerCase() === lzdp.name.trim().toLowerCase())
+               );
+               if (p) p.lazadaStock = lzdp.stock;
+            });
           let currentData = this.getData();
           currentData.products = all;
           this.saveData(currentData);
