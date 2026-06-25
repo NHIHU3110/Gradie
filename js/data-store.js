@@ -50,15 +50,22 @@ window.GradieStore = {
         data.settings.tikiShopCipher = "";
         updated = true;
       }
-      data.settings.lazadaAppKey = "139567";
-      data.settings.lazadaAppSecret = "9XXFtXZkH4RAtVWAcyDKnWZZFNYZlM6t";
-      data.settings.lazadaAccessToken = "50000900409yYDfbrNITj13f1ee6aI9N4sxEgcgyFKPbrvfejFQ5N0XcHGfmZcR3";
-      updated = true;
+      if (data.settings.lazadaAppKey === undefined) {
+        data.settings.lazadaAppKey = "139567";
+        updated = true;
+      }
+      if (data.settings.lazadaAppSecret === undefined) {
+        data.settings.lazadaAppSecret = "9XXFtXZkH4RAtVWAcyDKnWZZFNYZlM6t";
+        updated = true;
+      }
+      if (data.settings.lazadaAccessToken === undefined || data.settings.lazadaAccessToken === "50000900409yYDfbrNITj13f1ee6aI9N4sxEgcgyFKPbrvfejFQ5N0XcHGfmZcR3") {
+        data.settings.lazadaAccessToken = "500009000102fLewUqEDSv16216d78dQFnHS3QqeBbFvcoshzTDYEjT3MUFiJcur";
+        updated = true;
+      }
       if (data.settings.lazadaApiBaseUrl === undefined) {
         data.settings.lazadaApiBaseUrl = "https://api.lazada.vn/rest";
         updated = true;
       }
-
     }
 
     if (data.orders && data.orders.length > 0) {
