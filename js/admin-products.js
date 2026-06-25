@@ -23,7 +23,7 @@ function renderAdminProducts() {
     } else if (window.currentProductFilter === 'lazada') {
         products = products.filter(p => p.lazadaStock !== undefined && p.lazadaStock > 0);
     } else if (window.currentProductFilter === 'website') {
-        products = products.filter(p => p.stock !== undefined && p.stock > 0);
+        products = products.filter(p => (!p.tikiStock || p.tikiStock === 0) && (!p.lazadaStock || p.lazadaStock === 0));
     }
 
     console.log("GradieStore products count (Admin):", products.length);
