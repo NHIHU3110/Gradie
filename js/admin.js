@@ -221,3 +221,25 @@ document.addEventListener('DOMContentLoaded', () => {
     sel.addEventListener('change', updateColor);
   });
 });
+
+// Listen for cross-tab changes (e.g. new orders from checkout)
+window.addEventListener('storage', (e) => {
+  if (e.key === 'GRADIE_CMS_DATA') {
+    try {
+      const oldData = JSON.parse(e.oldValue || '{}');
+      const newData = JSON.parse(e.newValue || '{}');
+      const oldOrders = oldData.orders || [];
+      const newOrders = newData.orders || [];
+      if (newOrders.length > oldOrders.length) {
+        if (typeof showToast === 'function') {
+          showToast('🎉 Có đơn hàng mới vừa được đặt!', 'success');
+        }
+        const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
+        audio.play().catch(err => console.log('Audio error:', err));
+        // Trigger re-render if on orders page
+        window.dispatchEvent(new Event('gradie_data_synced'));
+      }
+    } catch (err) {}
+  }
+});
+
