@@ -141,7 +141,9 @@ export default async function handler(req, res) {
           id: String(product.product_id || product.id),
           sku: product.sku || product.original_sku,
           name: product.name,
-          stock: stock
+          stock: stock,
+          price: product.price || 0,
+          image: product.thumbnail || ''
         };
       });
 

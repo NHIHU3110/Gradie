@@ -2400,7 +2400,21 @@ window.GradieStore = {
                  let matchName = n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1));
                  return matchId || matchSku || matchName;
                });
-               if (p) p.tikiStock = ttp.stock;
+               if (p) {
+                   p.tikiStock = ttp.stock;
+               } else {
+                   all.push({
+                       id: String(Date.now() + Math.floor(Math.random() * 1000)),
+                       sku: ttp.sku || '',
+                       name: ttp.name || 'Sản phẩm mới từ Tiki',
+                       price: ttp.price || 0,
+                       stock: 0,
+                       tikiStock: ttp.stock,
+                       category: 'Uncategorized',
+                       image: ttp.image || '',
+                       dateAdded: new Date().toISOString()
+                   });
+               }
             });
           let currentData = this.getData();
           currentData.products = all;
@@ -2548,7 +2562,21 @@ window.GradieStore = {
                  let matchName = n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1));
                  return matchId || matchSku || matchName;
                });
-               if (p) p.lazadaStock = lzdp.stock;
+               if (p) {
+                   p.lazadaStock = lzdp.stock;
+               } else {
+                   all.push({
+                       id: String(Date.now() + Math.floor(Math.random() * 1000)),
+                       sku: lzdp.sku || '',
+                       name: lzdp.name || 'Sản phẩm mới từ Lazada',
+                       price: lzdp.price || 0,
+                       stock: 0,
+                       lazadaStock: lzdp.stock,
+                       category: 'Uncategorized',
+                       image: lzdp.image || '',
+                       dateAdded: new Date().toISOString()
+                   });
+               }
             });
           let currentData = this.getData();
           currentData.products = all;

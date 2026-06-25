@@ -125,11 +125,18 @@ module.exports = async (req, res) => {
                  if (skuStr.includes('-')) skuStr = skuStr.split('-')[0];
              }
              
+             let price = 0;
+             let image = '';
+             if (p.images && p.images.length > 0) image = p.images[0];
+             if (p.skus && p.skus.length > 0 && p.skus[0].price) price = p.skus[0].price;
+
              realProducts.push({
                  id: String(p.item_id),
                  sku: skuStr,
                  name: name,
-                 stock: totalStock
+                 stock: totalStock,
+                 price: price,
+                 image: image
              });
          });
       }
