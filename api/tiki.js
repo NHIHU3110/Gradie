@@ -1,120 +1,122 @@
-// api/tiki.js - Sync and manage Tiki integration
-require('dotenv').config();
-const crypto = require('crypto');
-
-function generateTikiSignature(path, params, appSecret, body = "") {
-  const sortedKeys = Object.keys(params).sort();
-  const paramString = sortedKeys.map(k => `${k}${params[k]}`).join('');
-  const message = path + paramString + body;
-  const signString = appSecret + message + appSecret;
-  return crypto.createHmac('sha256', appSecret).update(signString).digest('hex');
-}
-
-async function callTikiApi(path, queryParams, appSecret, accessToken, method = 'GET', bodyObj = null) {
-  const domain = 'open-api.tikiglobalshop.com';
-  const url = `https://${domain}${path}`;
-  const bodyString = bodyObj ? JSON.stringify(bodyObj) : "";
-  const sign = generateTikiSignature(path, queryParams, appSecret, bodyString);
-  const query = new URLSearchParams({ ...queryParams, sign });
-  
-  const options = {
-    method: method,
-    headers: {
-      'x-tts-access-token': accessToken,
-      'Content-Type': 'application/json'
-    }
-  };
-  
-  if (method === 'POST' && bodyString) {
-    options.body = bodyString;
-  }
-
-  const response = await fetch(`${url}?${query.toString()}`, options);
-  const text = await response.text();
-  try {
-    return { status: response.status, body: JSON.parse(text) };
-  } catch (err) {
-    return { status: response.status, body: text };
-  }
-}
-
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
+  // CORS headers
+  res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    res.status(200).end();
+    return;
   }
 
-  // --- Xử lý Callback Đăng nhập Tiki (GET) ---
-  if (req.method === 'GET') {
-    const { code } = req.query;
-    if (!code) {
-      return res.status(400).json({ error: 'Missing code parameter in URL' });
-    }
-
-    const appKey = process.env.TIKI_APP_KEY || '6kbvtkn1c4e2n';
-    const appSecret = process.env.TIKI_APP_SECRET || 'ace80ccaa8eaa58d0ec9bc93cd0cb642a1b5e239';
-
-    try {
-      const urlParams = new URLSearchParams();
-      urlParams.append('app_key', appKey);
-      urlParams.append('app_secret', appSecret);
-      urlParams.append('auth_code', code);
-      urlParams.append('grant_type', 'authorized_code');
-
-      const apiUrl = `https://auth.tiki-shops.com/api/v2/token/get?${urlParams.toString()}`;
-
-      const response = await fetch(apiUrl, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-
-      const data = await response.json();
-      
-      if (data.code !== 0) {
-        return res.status(400).json({ 
-          error: 'Tiki API Error', 
-          details: data 
-        });
-      }
-
-      return res.status(200).json({
-        message: 'Kết nối Tiki thành công!',
-        tokens: {
-          access_token: data.data.access_token,
-          refresh_token: data.data.refresh_token,
-          seller_name: data.data.seller_name,
-          open_id: data.data.open_id
-        }
-      });
-    } catch (error) {
-      console.error('Tiki Callback Error:', error);
-      return res.status(500).json({ error: 'Internal Server Error' });
-    }
-  }
-
-  // Nếu không phải GET hoặc POST thì chặn
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Method Not Allowed' });
   }
 
-  const { action, appKey, appSecret, accessToken, shopCipher } = req.body;
-
-  // Retrieve valid credentials from environment variables or database fallback
-  const validKey = process.env.TIKI_APP_KEY || '6kbvtkn1c4e2n';
-  const validSecret = process.env.TIKI_APP_SECRET || 'ace80ccaa8eaa58d0ec9bc93cd0cb642a1b5e239';
-
-  // Use credentials from environment variables to prevent outdated frontend settings from breaking sync
-  const currentKey = validKey;
-  const currentSecret = validSecret;
-
   try {
+    const { action, appId, appKey, appSecret } = req.body;
+    const currentAppId = appId || appKey;
+
+    if (!currentAppId || !appSecret) {
+      return res.status(400).json({ success: false, message: 'Missing Tiki App ID or App Secret' });
+    }
+
+    // Step 1: Get Access Token
+    const tokenParams = new URLSearchParams();
+    tokenParams.append('grant_type', 'client_credentials');
+    tokenParams.append('client_id', currentAppId);
+    tokenParams.append('client_secret', appSecret);
+
+    const tokenResponse = await fetch('https://api.tiki.vn/sc/oauth2/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: tokenParams.toString()
+    });
+
+    if (!tokenResponse.ok) {
+      const errorData = await tokenResponse.json().catch(() => ({}));
+      return res.status(401).json({ 
+        success: false, 
+        message: 'Tiki Authentication Failed. Vui l├▓ng kiß╗âm tra lß║íi App ID, App Secret v├á chß║»c chß║»n bß║ín ─æ├ú Chß║Ñp nhß║¡n kß║┐t nß╗æi tr├¬n Tiki Seller Center.',
+        details: errorData
+      });
+    }
+
+    const tokenData = await tokenResponse.json();
+    const accessToken = tokenData.access_token;
+
+    if (!accessToken) {
+      return res.status(401).json({ success: false, message: 'Failed to retrieve access token from Tiki' });
+    }
+
+    // Step 2: Fetch Orders
+    if (action === 'sync_orders') {
+      const ordersResponse = await fetch('https://api.tiki.vn/integration/v2/orders?limit=50', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+
+      if (!ordersResponse.ok) {
+        return res.status(ordersResponse.status).json({ success: false, message: 'Failed to fetch orders from Tiki' });
+      }
+
+      const ordersData = await ordersResponse.json();
+      const tikiOrders = ordersData.data || [];
+
+      // Transform to Gradie format
+      const formattedOrders = tikiOrders.map(order => {
+        // Map Tiki statuses to Gradie statuses
+        let status = 'Pending';
+        const tikiStatus = (order.status || '').toLowerCase();
+        if (tikiStatus === 'processing' || tikiStatus === 'packaging') status = 'Processing';
+        else if (tikiStatus === 'shipping' || tikiStatus === 'shipped') status = 'Shipped';
+        else if (tikiStatus === 'successful' || tikiStatus === 'delivered') status = 'Delivered';
+        else if (tikiStatus === 'canceled' || tikiStatus === 'returned') status = 'Cancelled';
+
+        let customerName = 'Kh├ích Tiki';
+        let customerPhone = '';
+        let address = '';
+        
+        if (order.shipping && order.shipping.address) {
+          customerName = order.shipping.address.full_name || customerName;
+          customerPhone = order.shipping.address.phone || '';
+          address = order.shipping.address.street || '';
+        }
+
+        const items = (order.items || []).map(item => ({
+          id: item.product && item.product.sku ? item.product.sku : 'tiki-item',
+          name: item.product && item.product.name ? item.product.name : 'Sß║ún phß║⌐m Tiki',
+          price: item.price || 0,
+          quantity: item.qty || 1,
+          image: ''
+        }));
+
+        return {
+          id: order.code,
+          orderNumber: 'TIKI-' + order.code,
+          customerName: customerName,
+          customerEmail: '',
+          customerPhone: customerPhone,
+          shippingAddress: address,
+          date: order.created_at || new Date().toISOString(),
+          status: status,
+          total: (order.invoice && order.invoice.grand_total) ? order.invoice.grand_total : 0,
+          paymentMethod: 'Tiki',
+          source: 'Tiki',
+          items: items
+        };
+      });
+
+      return res.status(200).json({ success: true, orders: formattedOrders });
+    }
+
+    // Step 3: Mock Products
     if (action === 'sync_products') {
-      // Create mock products based on the product IDs passed from the frontend
       const productIds = req.body.productIds || [
         'gau_bong_tot_nghiep', 'hop_qua_tot_nghiep_1', 'hoa_sap_tot_nghiep_2', '1734260341774'
       ];
@@ -132,81 +134,10 @@ module.exports = async (req, res) => {
       });
     }
 
-    if (action === 'sync_orders') {
-      const mockOrders = [
-        {
-          orderNumber: `TKI-${Math.floor(Math.random() * 100000)}`,
-          customerName: 'Nguyễn Văn Tiki',
-          customerEmail: 'tiki_customer@example.com',
-          customerPhone: '0901234567',
-          shippingAddress: '123 Đường Tiki, Quận 1, TP.HCM',
-          notes: 'Giao trong giờ hành chính',
-          paymentMethod: 'Tiki COD',
-          date: new Date().toLocaleString('vi-VN'),
-          items: [
-            { id: 'gau_bong_tot_nghiep', name: 'Gấu Bông Tốt Nghiệp Gradie', quantity: 1, price: 65000 }
-          ],
-          subtotal: 65000,
-          shippingFee: 15000,
-          total: 80000,
-          status: 'Pending',
-          source: 'Tiki'
-        },
-        {
-          orderNumber: `TKI-${Math.floor(Math.random() * 100000)}`,
-          customerName: 'Trần Thị Tiki',
-          customerEmail: 'tiki_kh@example.com',
-          customerPhone: '0987654321',
-          shippingAddress: '456 Phố Phường, Hà Nội',
-          notes: '',
-          paymentMethod: 'TikiPay',
-          date: new Date(Date.now() - 86400000).toLocaleString('vi-VN'),
-          items: [
-            { id: 'gau_bong_tot_nghiep', name: 'Gấu Bông Tốt Nghiệp Gradie', quantity: 2, price: 65000 }
-          ],
-          subtotal: 130000,
-          shippingFee: 0,
-          total: 130000,
-          status: 'Processing',
-          source: 'Tiki'
-        }
-      ];
-
-      return res.status(200).json({
-        success: true,
-        message: 'Tiki orders imported successfully.',
-        importedCount: mockOrders.length,
-        orders: mockOrders,
-        timestamp: new Date().toISOString()
-      });
-    }
-
-    if (action === 'update_product_price') {
-      const { productId, price } = req.body;
-      if (!productId || price === undefined) {
-        return res.status(400).json({ success: false, message: 'Missing productId or price.' });
-      }
-
-      return res.status(200).json({
-        success: true,
-        message: `Successfully updated product ${productId} price to ${price} on Tiki.`,
-        productId,
-        price,
-        timestamp: new Date().toISOString()
-      });
-    }
-
-    return res.status(400).json({
-      success: false,
-      message: `Unsupported action: '${action}'.`
-    });
+    return res.status(400).json({ success: false, message: 'Invalid action' });
 
   } catch (error) {
-    console.error('Tiki API sync error:', error);
-    return res.status(500).json({
-      success: false,
-      message: 'Internal server error during synchronization.',
-      error: error.message
-    });
+    console.error('Tiki API error:', error);
+    return res.status(500).json({ success: false, message: 'Internal server error', error: error.message });
   }
-};
+}

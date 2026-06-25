@@ -34,12 +34,12 @@ window.GradieStore = {
         data.settings.announcement = "Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới";
         updated = true;
       }
-      if (data.settings.tikiAppKey === undefined) {
-        data.settings.tikiAppKey = "6k8ruam7245an";
+      if (data.settings.tikiAppKey === undefined || data.settings.tikiAppKey === "6k8ruam7245an") {
+        data.settings.tikiAppKey = "8179278584636139";
         updated = true;
       }
-      if (data.settings.tikiAppSecret === undefined) {
-        data.settings.tikiAppSecret = "0be1815a89587fe0ac03da26dc1b800359fc3ea4";
+      if (data.settings.tikiAppSecret === undefined || data.settings.tikiAppSecret === "0be1815a89587fe0ac03da26dc1b800359fc3ea4") {
+        data.settings.tikiAppSecret = "SciY64mOb0b6pHaCRZBg8KMmh7DwI3M-";
         updated = true;
       }
       if (data.settings.tikiAccessToken === undefined) {
@@ -285,8 +285,8 @@ window.GradieStore = {
         brandName: "Gradie", tagline: "Graduation Gifts", shippingFee: 30000, currency: "VND",
         announcement: "Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới",
         promoCode: "GRAD2026", promoDiscount: 50000,
-        tikiAppKey: "6k8ruam7245an",
-        tikiAppSecret: "0be1815a89587fe0ac03da26dc1b800359fc3ea4",
+        tikiAppKey: "8179278584636139",
+        tikiAppSecret: "SciY64mOb0b6pHaCRZBg8KMmh7DwI3M-",
         tikiAccessToken: "",
         tikiShopCipher: ""
       },
