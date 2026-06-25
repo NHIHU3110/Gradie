@@ -110,7 +110,7 @@ module.exports = async (req, res) => {
       const params = {
         app_key: currentKey,
         sign_method: 'sha256',
-        timestamp: Math.floor(Date.now() / 1000).toString(),
+        timestamp: Date.now().toString(),
         format: 'json',
         version: '1.0',
         created_after: new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString()
