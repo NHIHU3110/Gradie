@@ -114,12 +114,18 @@ module.exports = async (req, res) => {
 
   try {
     if (action === 'sync_products') {
-      const mockSyncedCount = 0;
+      // Mocking returning some products with random stock
+      const mockProducts = [
+        { id: '1734260341774', stock: Math.floor(Math.random() * 50) + 1 },
+        { id: '1734260341775', stock: Math.floor(Math.random() * 50) + 1 },
+        { id: '1734260341776', stock: Math.floor(Math.random() * 50) + 1 }
+      ];
 
       return res.status(200).json({
         success: true,
         message: 'Product synchronization successful.',
-        syncedCount: mockSyncedCount,
+        syncedCount: mockProducts.length,
+        products: mockProducts,
         timestamp: new Date().toISOString()
       });
     }

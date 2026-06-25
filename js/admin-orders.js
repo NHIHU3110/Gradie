@@ -159,30 +159,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        const syncTikiDirectBtn = document.getElementById('btn-sync-tiki-orders-direct');
-        if (syncTikiDirectBtn) {
-            syncTikiDirectBtn.addEventListener('click', async () => {
-                const origText = syncTikiDirectBtn.innerHTML;
-                syncTikiDirectBtn.disabled = true;
-                syncTikiDirectBtn.innerHTML = '<span>⏳</span> Đang tải...';
-
-                cachedTikiOrders = null; // force refetch
-                await window.renderOrdersTable();
-
-                syncTikiDirectBtn.disabled = false;
-                syncTikiDirectBtn.innerHTML = origText;
-
-                if (typeof showToast === 'function') {
-                    showToast(`Đã lấy dữ liệu trực tiếp từ Tiki!`, 'success');
-                }
-            });
-        }
 
         let cachedLazadaOrders = null;
         let isFetchingLazada = false;
 
-        let cachedTikiOrders = null;
-        let isFetchingTiki = false;
+
 
         window.renderOrdersTable = async function () {
             try {
@@ -222,40 +203,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     isFetchingLazada = false;
                 }
 
-                if (cachedTikiOrders === null && !isFetchingTiki) {
-                    isFetchingTiki = true;
-                    try {
-                        const settings = window.GradieStore.getSettings() || {};
-                        const res = await fetch('/api/tiki', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                action: 'sync_orders',
-                                appId: settings.tikiAppId,
-                                appSecret: settings.tikiAppSecret
-                            })
-                        });
-                        const data = await res.json();
-                        if (res.ok && data.success) {
-                            cachedTikiOrders = data.orders || [];
-                        } else {
-                            cachedTikiOrders = [];
-                            console.error("Tiki API Error:", data.message);
-                        }
-                    } catch (err) {
-                        console.error("Failed to fetch Tiki orders:", err);
-                        cachedTikiOrders = [];
-                    }
-                    isFetchingTiki = false;
-                }
 
-                if (isFetchingLazada || isFetchingTiki) {
+                if (isFetchingLazada) {
                     ordersBody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 30px; color: #64748b;">Đang kết nối API để lấy đơn hàng trực tiếp...</td></tr>';
                     return;
                 }
 
-                let dbOrders = window.GradieStore.getOrders().filter(o => o.source !== 'Lazada' && o.source !== 'Tiki');
-                let ords = [...dbOrders, ...(cachedLazadaOrders || []), ...(cachedTikiOrders || [])];
+                let dbOrders = window.GradieStore.getOrders().filter(o => o.source !== 'Lazada');
+                let ords = [...dbOrders, ...(cachedLazadaOrders || [])];
 
                 // Sort orders from newest to oldest
                 const getOrderTimestamp = (o) => {

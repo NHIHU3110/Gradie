@@ -58,14 +58,7 @@ window.GradieStore = {
         data.settings.lazadaApiBaseUrl = "https://api.lazada.vn/rest";
         updated = true;
       }
-      if (data.settings.tikiAppId === undefined) {
-        data.settings.tikiAppId = "8179278584636139";
-        updated = true;
-      }
-      
-      // Force update secret to the latest one shown in the screenshot
-      data.settings.tikiAppSecret = "SciY64mOb0b6pHaCRZBg8KMmh7DwI3M-";
-      updated = true;
+
     }
 
     // Force update mock data if missing
@@ -2360,6 +2353,41 @@ window.GradieStore = {
       .catch(e => console.error('Sync review error', e));
   },
 
+  syncTikTokProducts: async function () {
+    try {
+      const settings = this.getSettings();
+      const res = await fetch('/api/tiktok', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'sync_products',
+          appKey: settings.tiktokAppKey,
+          appSecret: settings.tiktokAppSecret
+        })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        if (data.products && Array.isArray(data.products)) {
+          let all = this.getProducts();
+          data.products.forEach(ttp => {
+             let p = all.find(x => String(x.id) === String(ttp.id));
+             if (p) p.tiktokStock = ttp.stock;
+          });
+          let currentData = this.getData();
+          currentData.products = all;
+          this.saveData(currentData);
+          window.dispatchEvent(new Event('gradie_data_synced'));
+        }
+        this.addActivityLog('TikTok Sync', `Đã đồng bộ tồn kho ${data.syncedCount || data.products?.length || 0} sản phẩm TikTok.`);
+        return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0 };
+      }
+      return { success: false, message: data.message || 'Không rõ nguyên nhân' };
+    } catch (err) {
+      console.error('Failed to sync TikTok products:', err);
+      return { success: false, message: 'Lỗi kết nối mạng.' };
+    }
+  },
+
   syncTikTokOrders: async function (onSuccess, onError, onProgress) {
     try {
       const settings = this.getSettings();
@@ -2477,8 +2505,19 @@ window.GradieStore = {
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        this.addActivityLog('Lazada Sync', `Đã đồng bộ ${data.syncedCount} sản phẩm Lazada.`);
-        return { success: true, message: data.message, syncedCount: data.syncedCount };
+        if (data.products && Array.isArray(data.products)) {
+          let all = this.getProducts();
+          data.products.forEach(lzdp => {
+             let p = all.find(x => String(x.id) === String(lzdp.id));
+             if (p) p.lazadaStock = lzdp.stock;
+          });
+          let currentData = this.getData();
+          currentData.products = all;
+          this.saveData(currentData);
+          window.dispatchEvent(new Event('gradie_data_synced'));
+        }
+        this.addActivityLog('Lazada Sync', `Đã đồng bộ tồn kho ${data.syncedCount || data.products?.length || 0} sản phẩm Lazada.`);
+        return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0 };
       }
       return { success: false, message: data.message || 'Không rõ nguyên nhân' };
     } catch (err) {
