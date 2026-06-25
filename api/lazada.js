@@ -174,13 +174,8 @@ module.exports = async (req, res) => {
       const responseBody = result.body || {};
       const orderList = (responseBody.data && responseBody.data.orders) || [];
             const mappedOrders = await Promise.all(orderList.map(async (lo) => {
-          const total = Number(lo.price) || 0;
-          const shippingFee = Number(lo.shipping_fee) || 0;
-          const subtotal = total - shippingFee;
           
-          let items = [
-              { id: 'lazada-item', name: 'Sản phẩm Lazada', quantity: 1, price: subtotal }
-          ];
+          let items = [];
 
           try {
               const itemParams = {
@@ -222,6 +217,13 @@ module.exports = async (req, res) => {
               }
           });
           
+          let subtotal = items.reduce((acc, it) => acc + (it.price * it.quantity), 0);
+          if (subtotal === 0) {
+              subtotal = Number(lo.price) || 0;
+          }
+          const shippingFee = Number(lo.shipping_fee) > 0 ? Number(lo.shipping_fee) : 29000;
+          const total = subtotal + shippingFee;
+          
           return {
             orderNumber: `LZD-${lo.order_id || lo.order_number}`,
             customerName: `${lo.address_billing?.first_name || ''} ${lo.address_billing?.last_name || ''}`.trim() || 'Khách hàng Lazada',
@@ -230,7 +232,7 @@ module.exports = async (req, res) => {
             shippingAddress: `${lo.address_shipping?.address1 || ''}, ${lo.address_shipping?.city || ''}, ${lo.address_shipping?.country || ''}`.replace(/^, | , | ,$/g, '').trim(),
             notes: lo.remarks || '',
             paymentMethod: lo.payment_method || 'Lazada Pay',
-            date: lo.created_at ? new Date(lo.created_at).toLocaleString('vi-VN') : new Date().toLocaleString('vi-VN'),
+            date: lo.created_at ? new Date(lo.created_at).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }) : new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }),
             items: aggregatedItems,
             subtotal: subtotal,
             shippingFee: shippingFee,
