@@ -173,31 +173,72 @@ module.exports = async (req, res) => {
       
       const responseBody = result.body || {};
       const orderList = (responseBody.data && responseBody.data.orders) || [];
-      
-      const mappedOrders = orderList.map(lo => {
-        const total = Number(lo.price) || 0;
-        const shippingFee = Number(lo.shipping_fee) || 0;
-        const subtotal = total - shippingFee;
-        
-        return {
-          orderNumber: `LZD-${lo.order_id || lo.order_number}`,
-          customerName: `${lo.address_billing?.first_name || ''} ${lo.address_billing?.last_name || ''}`.trim() || 'Lazada Customer',
-          customerEmail: lo.customer_email || 'customer@lazada.com',
-          customerPhone: lo.address_billing?.phone || lo.address_shipping?.phone || '',
-          shippingAddress: `${lo.address_shipping?.address1 || ''}, ${lo.address_shipping?.city || ''}, ${lo.address_shipping?.country || ''}`,
-          notes: lo.remarks || '',
-          paymentMethod: lo.payment_method || 'Lazada Pay',
-          date: lo.created_at ? new Date(lo.created_at).toLocaleString('vi-VN') : new Date().toLocaleString('vi-VN'),
-          items: [
-            { id: 'lazada-item', name: 'Lazada Order Item', quantity: 1, price: subtotal }
-          ],
-          subtotal: subtotal,
-          shippingFee: shippingFee,
-          total: total,
-          status: lo.statuses?.[0] || 'Pending',
-          source: 'Lazada'
-        };
-      });
+            const mappedOrders = await Promise.all(orderList.map(async (lo) => {
+          const total = Number(lo.price) || 0;
+          const shippingFee = Number(lo.shipping_fee) || 0;
+          const subtotal = total - shippingFee;
+          
+          let items = [
+              { id: 'lazada-item', name: 'Sản phẩm Lazada', quantity: 1, price: subtotal }
+          ];
+
+          try {
+              const itemParams = {
+                  app_key: currentKey,
+                  sign_method: 'sha256',
+                  timestamp: Date.now().toString(),
+                  format: 'json',
+                  version: '1.0',
+                  order_id: lo.order_id || lo.order_number
+              };
+              if (activeAccessToken) {
+                  itemParams.access_token = activeAccessToken;
+              }
+              itemParams.sign = buildLazadaSignature('/order/items/get', currentSecret, itemParams);
+              
+              const itemResult = await callLazadaApi(endpointUrl, '/order/items/get', itemParams, 'GET');
+              const fetchedItems = itemResult.body?.data || [];
+              if (fetchedItems.length > 0) {
+                  items = fetchedItems.map(it => ({
+                      id: it.sku || `lazada-${it.order_item_id}`,
+                      name: it.name || 'Sản phẩm Lazada',
+                      price: Number(it.item_price) || 0,
+                      quantity: 1, // Lazada returns one row per item quantity
+                      image: it.product_main_image || ''
+                  }));
+              }
+          } catch (e) {
+              console.error("Error fetching items for order", lo.order_id, e);
+          }
+
+          // Aggregate items with same SKU/name
+          const aggregatedItems = [];
+          items.forEach(it => {
+              const existing = aggregatedItems.find(x => x.id === it.id || x.name === it.name);
+              if (existing) {
+                  existing.quantity += 1;
+              } else {
+                  aggregatedItems.push({ ...it });
+              }
+          });
+          
+          return {
+            orderNumber: `LZD-${lo.order_id || lo.order_number}`,
+            customerName: `${lo.address_billing?.first_name || ''} ${lo.address_billing?.last_name || ''}`.trim() || 'Khách hàng Lazada',
+            customerEmail: lo.customer_email || '',
+            customerPhone: lo.address_billing?.phone || lo.address_shipping?.phone || '',
+            shippingAddress: `${lo.address_shipping?.address1 || ''}, ${lo.address_shipping?.city || ''}, ${lo.address_shipping?.country || ''}`.replace(/^, | , | ,$/g, '').trim(),
+            notes: lo.remarks || '',
+            paymentMethod: lo.payment_method || 'Lazada Pay',
+            date: lo.created_at ? new Date(lo.created_at).toLocaleString('vi-VN') : new Date().toLocaleString('vi-VN'),
+            items: aggregatedItems,
+            subtotal: subtotal,
+            shippingFee: shippingFee,
+            total: total,
+            status: lo.statuses?.[0] || 'Pending',
+            source: 'Lazada'
+          };
+        }));
 
       console.log('Lazada sync orders trace:', {
         code: responseBody.code,

@@ -72,7 +72,8 @@ window.GradieStore = {
         data.orders = data.orders.filter(o => {
           const isFakeTiki = (o.orderNumber && o.orderNumber.startsWith('TKI-')) || o.customerName === 'Nguyễn Văn Tiki' || o.customerName === 'Trần Thị Tiki';
           const isFakeLaz = o.customerName === 'Nguyễn Văn A' || o.customerName === 'Khách hàng Lazada' || o.customerName === 'Nguyễn Hải Đăng (TikTok)';
-          return !isFakeTiki && !isFakeLaz;
+          const isBadSyncedLaz = o.orderNumber && o.orderNumber.startsWith('LZD-') && o.items && o.items.length === 1 && (o.items[0].name === 'Lazada Order Item' || o.items[0].name === 'Sản phẩm Lazada');
+          return !isFakeTiki && !isFakeLaz && !isBadSyncedLaz;
         });
         if (data.orders.length !== initialLen) {
           updated = true;
