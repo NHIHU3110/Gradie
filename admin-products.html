@@ -43,6 +43,18 @@
                         </div>
                     </div>
                 </div>
+                <!-- Product Tabs -->
+                <div class="product-tabs" style="margin-bottom: 20px; display: flex; gap: 10px; border-bottom: 1px solid var(--admin-border);">
+                    <style>
+                        .tab-btn { padding: 10px 20px; border: none; background: transparent; cursor: pointer; font-weight: 500; color: var(--admin-text); border-bottom: 2px solid transparent; transition: 0.2s; font-size: 0.95rem; }
+                        .tab-btn:hover { color: var(--admin-primary); }
+                        .tab-btn.active { font-weight: 600; color: var(--admin-primary); border-bottom: 2px solid var(--admin-primary); }
+                    </style>
+                    <button class="tab-btn active" data-filter="all" onclick="setProductFilter('all')">Tất cả sản phẩm</button>
+                    <button class="tab-btn" data-filter="website" onclick="setProductFilter('website')">Website</button>
+                    <button class="tab-btn" data-filter="tiki" onclick="setProductFilter('tiki')">Tiki</button>
+                    <button class="tab-btn" data-filter="lazada" onclick="setProductFilter('lazada')">Lazada</button>
+                </div>
                 <!-- Bulk Actions -->
                 <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; display: none;" id="bulk-actions-container">
                     <span style="font-weight: 600; color: #1e293b;"><span id="selected-count">0</span> đã chọn</span>

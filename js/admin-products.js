@@ -1,14 +1,35 @@
 // js/admin-products.js
 
+window.currentProductFilter = window.currentProductFilter || 'all';
+
+window.setProductFilter = function(filter) {
+    window.currentProductFilter = filter;
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if(btn.dataset.filter === filter) btn.classList.add('active');
+    });
+    renderAdminProducts();
+}
+
 function renderAdminProducts() {
     const tbody = document.getElementById('admin-product-list');
     if(!tbody) return;
     
-    const products = window.GradieStore.getProducts();
+    let products = window.GradieStore.getProducts() || [];
+    
+    // Áp dụng bộ lọc
+    if (window.currentProductFilter === 'tiki') {
+        products = products.filter(p => p.tikiStock !== undefined);
+    } else if (window.currentProductFilter === 'lazada') {
+        products = products.filter(p => p.lazadaStock !== undefined);
+    } else if (window.currentProductFilter === 'website') {
+        products = products.filter(p => p.stock > 0 || (p.tikiStock === undefined && p.lazadaStock === undefined));
+    }
+
     console.log("GradieStore products count (Admin):", products.length);
     
     if (!products || products.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No products found.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No products found for this category.</td></tr>';
         return;
     }
     
