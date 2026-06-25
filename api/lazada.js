@@ -75,10 +75,6 @@ module.exports = async (req, res) => {
   const currentKey = appKey || defaultKey;
   const currentSecret = appSecret || defaultSecret;
 
-  if (!currentKey || !currentSecret || currentKey !== defaultKey || currentSecret !== defaultSecret) {
-    return res.status(401).json({ success: false, message: 'Invalid Lazada App Key or Secret.' });
-  }
-
   const endpointUrl = (baseUrl || DEFAULT_BASE_URL).trim();
   if (!endpointUrl) {
     return res.status(400).json({ success: false, message: 'Missing Lazada API base URL.' });
