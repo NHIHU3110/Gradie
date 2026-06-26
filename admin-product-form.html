@@ -169,14 +169,17 @@
                 }
 
                 const newPrice = Number(document.getElementById('p-price').value);
+                const oldPriceEl = document.getElementById('p-old-price');
+                const ratingEl = document.getElementById('p-rating');
+                
                 const productData = {
                     id: newId,
                     name: name,
                     category: document.getElementById('p-category').value,
                     price: newPrice,
-                    compare_at_price: Number(document.getElementById('p-old-price').value),
+                    compare_at_price: oldPriceEl ? Number(oldPriceEl.value) : null,
                     stock: finalStock,
-                    rating: Number(document.getElementById('p-rating').value),
+                    rating: ratingEl ? Number(ratingEl.value) : 4.8,
                     image: galleryArr.length > 0 ? galleryArr[0] : '',
                     gallery: galleryArr,
                     tikiStock: Number(document.getElementById('p-stock-tiki').value),
