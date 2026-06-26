@@ -52,9 +52,9 @@
                         </div>
                         
                         <div class="form-group">
-                            <label>Gallery Images (Comma separated URLs) * Minimum 3</label>
-                            <textarea id="p-gallery" rows="4" placeholder="https://img1.jpg, https://img2.jpg, https://img3.jpg" required></textarea>
-                            <small style="color:var(--admin-muted)">The first image will be used as the main image.</small>
+                            <label>Gallery Images (Enter each URL on a new line or separated by comma) * Minimum 3</label>
+                            <textarea id="p-gallery" rows="4" placeholder="https://img1.jpg&#10;https://img2.jpg&#10;https://img3.jpg" required></textarea>
+                            <small style="color:var(--admin-muted)">The first image will be used as the main image. Cloudinary URLs are supported.</small>
                         </div>
                         
                         
@@ -148,7 +148,8 @@
                 const name = document.getElementById('p-name').value;
                 const newId = idInput || name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now();
                 
-                let galleryArr = document.getElementById('p-gallery').value.split(',').map(s => s.trim()).filter(s => s);
+                // Split by newline OR comma followed by http (to preserve Cloudinary commas like f_auto,q_auto)
+                let galleryArr = document.getElementById('p-gallery').value.split(/[\n]+|,(?=\s*http)/).map(s => s.trim()).filter(s => s);
                 
                 // Filter out variants without a name
                 const cleanVariants = currentVariants.filter(v => v.name.trim() !== '');
@@ -164,6 +165,7 @@
                     lazadaStock: Number(document.getElementById('p-stock-lazada').value),
                     description: document.getElementById('p-desc').value,
                     gallery: galleryArr,
+                    image: galleryArr.length > 0 ? galleryArr[0] : '',
                     variants: cleanVariants
                 };
                 
