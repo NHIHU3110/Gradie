@@ -93,7 +93,7 @@ export default async function handler(req, res) {
           name: item.product && item.product.name ? item.product.name : 'Sß║ún phß║⌐m Tiki',
           price: item.price || 0,
           quantity: item.qty || 1,
-          image: ''
+          image: (item.product && (item.product.thumbnail || item.product.thumbnail_url || item.product.image_url)) || ''
         }));
 
         return {
