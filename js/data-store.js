@@ -2442,6 +2442,7 @@ window.GradieStore = {
                });
                if (p) {
                    p.tikiStock = ttp.stock;
+                   if (ttp.image) p.image = ttp.image;
                } else {
                    all.push({
                        id: String(Date.now() + Math.floor(Math.random() * 1000)),

@@ -95,7 +95,7 @@
             }
             container.innerHTML = currentVariants.map((v, i) => `
                 <div class="variant-row">
-                    <input type="text" placeholder="Variant Name (e.g. Size M)" value="${v.name || ''}" onchange="currentVariants[${i}].name = this.value">
+                    <input type="text" placeholder="Variant Name (e.g. Size M)" value="${v.name || (v.options ? v.options.join(' / ') : '')}" onchange="currentVariants[${i}].name = this.value">
                     <input type="number" placeholder="Price (VND)" value="${v.price || 0}" onchange="currentVariants[${i}].price = Number(this.value)">
                     <input type="number" placeholder="Stock" value="${v.stock || 0}" onchange="currentVariants[${i}].stock = Number(this.value)">
                     <button type="button" class="btn-remove" onclick="removeVariantRow(${i})">X</button>
@@ -132,10 +132,19 @@
                     document.getElementById('p-name').value = product.name || '';
                     document.getElementById('p-category').value = product.category || '';
                     document.getElementById('p-price').value = product.price || 0;
-                    document.getElementById('p-stock').value = product.stock || 0;
-                    document.getElementById('p-stock-tiki').value = product.tikiStock !== undefined ? product.tikiStock : (product.stock || 0);
-                    document.getElementById('p-stock-lazada').value = product.lazadaStock !== undefined ? product.lazadaStock : (product.stock || 0);
-                    document.getElementById('p-gallery').value = (product.gallery || []).join(', ');
+                    
+                    let v_sum = 0;
+                    if (product.variants && product.variants.length > 0) {
+                        v_sum = product.variants.reduce((sum, v) => sum + (Number(v.stock) || 0), 0);
+                    }
+                    const displayStock = v_sum > 0 ? v_sum : (product.stock || 0);
+                    
+                    document.getElementById('p-stock').value = displayStock;
+                    document.getElementById('p-stock-tiki').value = product.tikiStock !== undefined ? product.tikiStock : displayStock;
+                    document.getElementById('p-stock-lazada').value = product.lazadaStock !== undefined ? product.lazadaStock : displayStock;
+                    
+                    // Join with newline to avoid comma issues, though Cloudinary URLs support is added in split
+                    document.getElementById('p-gallery').value = (product.gallery || []).join('\n');
                     currentVariants = product.variants || [];
                     document.getElementById('p-desc').value = product.description || '';
                 }
@@ -151,8 +160,8 @@
                 // Split by newline OR comma followed by http (to preserve Cloudinary commas like f_auto,q_auto)
                 let galleryArr = document.getElementById('p-gallery').value.split(/[\n]+|,(?=\s*http)/).map(s => s.trim()).filter(s => s);
                 
-                // Filter out variants without a name
-                const cleanVariants = currentVariants.filter(v => v.name.trim() !== '');
+                // Filter out variants without a name or options
+                const cleanVariants = currentVariants.filter(v => (v.name || (v.options ? v.options.join(' / ') : '')).trim() !== '');
                 
                 const newPrice = Number(document.getElementById('p-price').value);
                 const productData = {
