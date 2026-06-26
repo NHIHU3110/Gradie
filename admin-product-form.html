@@ -51,11 +51,11 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label style="display:flex; justify-content:space-between;">Tiki Stock <a href="#" id="btn-sync-tiki" style="color:var(--admin-primary); font-size:0.85em; text-decoration:none;">🔄 Sync API</a></label>
+                                <label style="display:flex; justify-content:space-between;">Tiki Stock <a href="#" id="btn-sync-tiki" style="color:var(--admin-primary); font-size:0.85em; text-decoration:none;">🔄 Sync Ảnh</a></label>
                                 <input type="number" id="p-stock-tiki" value="20">
                             </div>
                             <div class="form-group">
-                                <label style="display:flex; justify-content:space-between;">Lazada Stock <a href="#" id="btn-sync-lazada" style="color:var(--admin-primary); font-size:0.85em; text-decoration:none;">🔄 Sync API</a></label>
+                                <label style="display:flex; justify-content:space-between;">Lazada Stock <a href="#" id="btn-sync-lazada" style="color:var(--admin-primary); font-size:0.85em; text-decoration:none;">🔄 Sync Ảnh</a></label>
                                 <input type="number" id="p-stock-lazada" value="20">
                             </div>
                         </div>
@@ -262,14 +262,13 @@
                 if (data.success && data.products) {
                     const match = data.products.find(p => p.sku === sku || p.id === sku);
                     if (match) {
-                        document.getElementById('p-stock-tiki').value = match.stock;
                         if (match.image) {
                             const galleryEl = document.getElementById('p-gallery');
                             let images = galleryEl.value.split(/[\n]+|,(?=\s*http)/).map(s => s.trim()).filter(s => s);
                             images = [match.image, ...images.filter(img => img !== match.image)];
                             galleryEl.value = images.join('\n');
                         }
-                        showToast(`Đã đồng bộ Ảnh & Tồn kho từ Tiki!`, 'success');
+                        showToast(`Đã đồng bộ Ảnh từ Tiki!`, 'success');
                     } else {
                         showToast('Không tìm thấy SKU này trên Tiki', 'error');
                     }
@@ -296,14 +295,13 @@
                 if (data.success && data.products) {
                     const match = data.products.find(p => p.sku === sku || p.id === sku);
                     if (match) {
-                        document.getElementById('p-stock-lazada').value = match.stock;
                         if (match.image) {
                             const galleryEl = document.getElementById('p-gallery');
                             let images = galleryEl.value.split(/[\n]+|,(?=\s*http)/).map(s => s.trim()).filter(s => s);
                             images = [match.image, ...images.filter(img => img !== match.image)];
                             galleryEl.value = images.join('\n');
                         }
-                        showToast(`Đã đồng bộ Ảnh & Tồn kho từ Lazada!`, 'success');
+                        showToast(`Đã đồng bộ Ảnh từ Lazada!`, 'success');
                     } else {
                         showToast('Không tìm thấy SKU này trên Lazada', 'error');
                     }
