@@ -263,7 +263,13 @@
                     const match = data.products.find(p => p.sku === sku || p.id === sku);
                     if (match) {
                         document.getElementById('p-stock-tiki').value = match.stock;
-                        showToast(`Đã đồng bộ Tồn kho Tiki: ${match.stock}`, 'success');
+                        if (match.image) {
+                            const galleryEl = document.getElementById('p-gallery');
+                            let images = galleryEl.value.split(/[\n]+|,(?=\s*http)/).map(s => s.trim()).filter(s => s);
+                            images = [match.image, ...images.filter(img => img !== match.image)];
+                            galleryEl.value = images.join('\n');
+                        }
+                        showToast(`Đã đồng bộ Ảnh & Tồn kho từ Tiki!`, 'success');
                     } else {
                         showToast('Không tìm thấy SKU này trên Tiki', 'error');
                     }
@@ -291,7 +297,13 @@
                     const match = data.products.find(p => p.sku === sku || p.id === sku);
                     if (match) {
                         document.getElementById('p-stock-lazada').value = match.stock;
-                        showToast(`Đã đồng bộ Tồn kho Lazada: ${match.stock}`, 'success');
+                        if (match.image) {
+                            const galleryEl = document.getElementById('p-gallery');
+                            let images = galleryEl.value.split(/[\n]+|,(?=\s*http)/).map(s => s.trim()).filter(s => s);
+                            images = [match.image, ...images.filter(img => img !== match.image)];
+                            galleryEl.value = images.join('\n');
+                        }
+                        showToast(`Đã đồng bộ Ảnh & Tồn kho từ Lazada!`, 'success');
                     } else {
                         showToast('Không tìm thấy SKU này trên Lazada', 'error');
                     }
