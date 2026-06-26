@@ -80,11 +80,12 @@ const server = http.createServer(async (req, res) => {
     }
     
     // Serve static files
-    let filePath = path.join(PUBLIC_DIR, req.url === '/' ? 'index.html' : req.url);
+    let urlWithoutQuery = req.url.split('?')[0];
+    let filePath = path.join(PUBLIC_DIR, urlWithoutQuery === '/' ? 'index.html' : urlWithoutQuery);
     const extname = String(path.extname(filePath)).toLowerCase();
     
     // If no extension, assume it's an API call not handled or a route
-    if (req.url.startsWith('/api/')) {
+    if (urlWithoutQuery.startsWith('/api/')) {
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ success: true, dummy: true }));
         return;
