@@ -97,7 +97,7 @@
                 <div class="variant-row">
                     <input type="text" placeholder="Variant Name (e.g. Size M)" value="${v.name || (v.options ? v.options.join(' / ') : '')}" onchange="currentVariants[${i}].name = this.value">
                     <input type="number" placeholder="Price (VND)" value="${v.price || 0}" onchange="currentVariants[${i}].price = Number(this.value)">
-                    <input type="number" placeholder="Stock" value="${v.stock || 0}" onchange="currentVariants[${i}].stock = Number(this.value)">
+                    <input type="number" placeholder="Stock" value="${v.stock || 0}" onchange="currentVariants[${i}].stock = Number(this.value); updateTotalStock();">
                     <button type="button" class="btn-remove" onclick="removeVariantRow(${i})">X</button>
                 </div>
             `).join('');
@@ -106,11 +106,28 @@
         window.addVariantRow = function() {
             currentVariants.push({ name: '', price: 0, stock: 10 });
             renderVariants();
+            updateTotalStock();
         };
         
         window.removeVariantRow = function(index) {
             currentVariants.splice(index, 1);
             renderVariants();
+            updateTotalStock();
+        };
+
+        window.updateTotalStock = function() {
+            const stockInput = document.getElementById('p-stock');
+            if (currentVariants.length > 0) {
+                const total = currentVariants.reduce((sum, v) => sum + (Number(v.stock) || 0), 0);
+                stockInput.value = total;
+                stockInput.readOnly = true;
+                stockInput.style.backgroundColor = '#f0f0f0';
+                stockInput.title = "Tổng tồn kho được cộng tự động từ các phân loại bên dưới";
+            } else {
+                stockInput.readOnly = false;
+                stockInput.style.backgroundColor = '';
+                stockInput.title = "";
+            }
         };
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -145,11 +162,12 @@
                     
                     // Join with newline to avoid comma issues, though Cloudinary URLs support is added in split
                     document.getElementById('p-gallery').value = (product.gallery || []).join('\n');
-                    currentVariants = product.variants || [];
+                    currentVariants = JSON.parse(JSON.stringify(product.variants || []));
                     document.getElementById('p-desc').value = product.description || '';
                 }
             }
             renderVariants();
+            updateTotalStock();
             
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();

@@ -262,13 +262,6 @@ window.GradieStore = {
           if (localIndex === -1) {
             data.products.push(gp);
             hasUpdates = true;
-          } else {
-            // Update the existing product to ensure it has the latest variants and gallery
-            if (JSON.stringify(data.products[localIndex].variants) !== JSON.stringify(gp.variants) ||
-              JSON.stringify(data.products[localIndex].gallery) !== JSON.stringify(gp.gallery)) {
-              data.products[localIndex] = gp;
-              hasUpdates = true;
-            }
           }
         });
         if (hasUpdates) updated = true;
