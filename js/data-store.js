@@ -2434,7 +2434,6 @@ window.GradieStore = {
                  return matchId || matchSku || matchName;
                });
                if (p) {
-                   p.tikiStock = ttp.stock;
                    if (ttp.image) p.image = ttp.image;
                } else {
                    all.push({
@@ -2597,7 +2596,7 @@ window.GradieStore = {
                  return matchId || matchSku || matchName;
                });
                if (p) {
-                   p.lazadaStock = lzdp.stock;
+                   if (lzdp.image) p.image = lzdp.image;
                } else {
                    all.push({
                        id: String(Date.now() + Math.floor(Math.random() * 1000)),
