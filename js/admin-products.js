@@ -51,18 +51,21 @@ function renderAdminProducts() {
                 <td>${price.toLocaleString('vi-VN')} ₫</td>
                 <td>
                       <div style="display:flex; flex-direction:column; font-size:0.85rem; line-height:1.4; gap: 4px;">
+                          ${(window.currentProductFilter === 'all' || window.currentProductFilter === 'website') ? `
                           <div style="display:flex; align-items:center; gap:6px;" title="Website Stock">
                               <img src="images/12953846.png" alt="Web" style="width:16px; height:16px; object-fit:contain; border-radius:50%;">
                               <span style="color:#3b82f6;">${p.stock || 0}</span>
-                          </div>
+                          </div>` : ''}
+                          ${(window.currentProductFilter === 'all' || window.currentProductFilter === 'tiki') ? `
                           <div style="display:flex; align-items:center; gap:6px;" title="Tiki Stock">
                               <img src="images/tiki-logo.png" alt="Tiki" style="width:16px; height:16px; object-fit:contain; border-radius:4px;">
                               <span style="color:#1A94FF;">${p.tikiStock !== undefined ? p.tikiStock : (p.stock || 0)}</span>
-                          </div>
+                          </div>` : ''}
+                          ${(window.currentProductFilter === 'all' || window.currentProductFilter === 'lazada') ? `
                           <div style="display:flex; align-items:center; gap:6px;" title="Lazada Stock">
                               <img src="images/lazada-seeklogo.png" alt="Lazada" style="width:16px; height:16px; object-fit:contain; border-radius:4px;">
                               <span style="color:#f97316;">${p.lazadaStock !== undefined ? p.lazadaStock : (p.stock || 0)}</span>
-                          </div>
+                          </div>` : ''}
                       </div>
                 </td>
                 <td class="actions">
