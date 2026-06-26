@@ -55,6 +55,22 @@
                 </form>
                 
                 <hr style="margin: 40px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">
+                <div class="export-panel" style="padding: 20px; background: rgba(0,0,0,0.02); border-radius: 8px; border: 1px solid rgba(0,0,0,0.08);">
+                    <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px; font-size: 1.25rem;">
+                        💾 Export System Data (Vercel Fix)
+                    </h3>
+                    <p style="margin-bottom: 20px; font-size: 0.9rem; color: #64748b;">Because Vercel is a read-only environment without a Database, your edits are only saved in your browser. Use these buttons to download your edits and commit them to GitHub!</p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <button type="button" onclick="exportProductsJson()" class="btn-secondary" style="display: flex; align-items: center; gap: 8px;">
+                            Download products.json
+                        </button>
+                        <button type="button" onclick="exportGlobalDataJs()" class="btn-secondary" style="display: flex; align-items: center; gap: 8px;">
+                            Download global-data.js
+                        </button>
+                    </div>
+                </div>
+
+                <hr style="margin: 40px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">
                 <div class="tiki-sync-panel" style="padding: 20px; background: rgba(0,0,0,0.02); border-radius: 8px; border: 1px solid rgba(0,0,0,0.08);">
                     <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px; font-size: 1.25rem;">
                         🎵 Tiki Live Sync

@@ -91,23 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 syncProductsBtn.innerHTML = '<span>⏳</span> Synchronizing...';
                 
                 try {
-                    const settings = window.GradieStore.getSettings();
-                    const res = await fetch('/api/tiki', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            action: 'sync_products',
-                            appKey: settings.tikiAppKey,
-                            appSecret: settings.tikiAppSecret
-                        })
-                    });
-                    const data = await res.json();
-                    if (res.ok && data.success) {
-                        showToast(`Đã đồng bộ thành công ${data.syncedCount} sản phẩm với Tiki!`, 'success');
-                        window.GradieStore.addActivityLog('Tiki Sync', `Đồng bộ thành công ${data.syncedCount} sản phẩm.`);
+                    const res = await window.GradieStore.syncTikiProducts();
+                    if (res && res.success) {
+                        showToast(`Đã đồng bộ thành công ${res.syncedCount || 0} sản phẩm với Tiki!`, 'success');
                         updateMarketplaceStatus();
                     } else {
-                        showToast(`Lỗi đồng bộ: ${data.message || 'Không rõ nguyên nhân'}`, 'error');
+                        showToast(`Lỗi đồng bộ: ${res?.message || 'Không rõ nguyên nhân'}`, 'error');
                     }
                 } catch (err) {
                     console.error(err);
@@ -201,6 +190,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast('Đã reset database thành công!', 'info');
                 window.location.reload();
             }
+        };
+
+        window.exportProductsJson = function() {
+            const data = window.GradieStore.getData();
+            const products = data.products || [];
+            const jsonStr = JSON.stringify(products, null, 2);
+            const blob = new Blob([jsonStr], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "products.json";
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast("Đã tải xuống products.json. Hãy copy đè vào file data/products.json!", "success");
+        };
+
+        window.exportGlobalDataJs = function() {
+            const data = window.GradieStore.getData();
+            const jsStr = "window.GRADIE_DATA = " + JSON.stringify(data, null, 2) + ";";
+            const blob = new Blob([jsStr], { type: "application/javascript" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "global-data.js";
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast("Đã tải xuống global-data.js. Hãy copy đè vào file js/global-data.js!", "success");
         };
     }
 });
