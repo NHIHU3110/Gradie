@@ -79,8 +79,13 @@
   gap: 16px;
   align-items: center;
 }
+.hero-content {
+  flex: 1.1;
+  min-width: 0;
+}
 .hero-img {
   flex: 0.9;
+  min-width: 0;
   position: relative;
 }
 .hero-img img {
