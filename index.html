@@ -70,36 +70,40 @@
 
     <!-- 1. Hero Section -->
     <section class="hero">
-      <div class="hero-content">
-        <h1 style="font-family: 'Playfair Display', serif;">Kỷ Niệm Hành Trình Mới</h1>
-        <p>Những món quà tốt nghiệp ý nghĩa, quà lưu niệm vượt thời gian và phụ kiện được thiết kế để trân trọng mãi mãi.</p>
-        <div class="hero-actions">
-          <a href="products.html" class="btn-primary">Khám Phá Bộ Sưu Tập</a>
-          <a href="customize.html" class="outline-button">Thiết Kế Quà Tự Chọn</a>
+      <!-- Background Slider -->
+      <div class="hero-bg-slider-container">
+        <div class="hero-slider">
+          <div class="hero-slide active">
+            <img src="images/hero_image.jpg" alt="Graduation Celebration">
+          </div>
+          <a href="account.html" class="hero-slide">
+            <img src="images/signup_promo_banner.png" alt="Đăng Ký Tài Khoản Mới Nhận Ưu Đãi 30%">
+          </a>
+        </div>
+        <div class="slider-overlay"></div>
+        <button class="slider-btn prev-btn" aria-label="Slide trước">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="slider-btn next-btn" aria-label="Slide tiếp theo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+        <div class="slider-dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
         </div>
       </div>
-      <div class="hero-img">
-        <div class="slider-container">
-          <div class="hero-slider">
-            <div class="hero-slide active">
-              <img src="images/hero_image.jpg" alt="Graduation Celebration">
-            </div>
-            <a href="account.html" class="hero-slide">
-              <img src="images/signup_promo_banner.png" alt="Đăng Ký Tài Khoản Mới Nhận Ưu Đãi 30%">
-            </a>
+
+      <!-- Hero Content Card -->
+      <div class="hero-content-wrapper">
+        <div class="hero-content">
+          <h1 style="font-family: 'Playfair Display', serif;">Kỷ Niệm Hành Trình Mới</h1>
+          <p>Những món quà tốt nghiệp ý nghĩa, quà lưu niệm vượt thời gian và phụ kiện được thiết kế để trân trọng mãi mãi.</p>
+          <div class="hero-actions">
+            <a href="products.html" class="btn-primary">Khám Phá Bộ Sưu Tập</a>
+            <a href="customize.html" class="outline-button">Thiết Kế Quà Tự Chọn</a>
           </div>
-          <button class="slider-btn prev-btn" aria-label="Slide trước">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-          </button>
-          <button class="slider-btn next-btn" aria-label="Slide tiếp theo">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-          <div class="slider-dots">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-          </div>
+          <div class="hero-badge">Niên khóa<br>2026</div>
         </div>
-        <div class="hero-badge">Niên khóa<br>2026</div>
       </div>
     </section>
 
