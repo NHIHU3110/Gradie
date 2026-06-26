@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (title) title.textContent = post.title || '';
         if (content) {
             const contentText = post.content || post.excerpt || 'Nội dung bài viết đang được cập nhật. Vui lòng quay lại sau!';
-            content.textContent = contentText;
+            content.innerHTML = contentText;
         }
 
         // Reset internal scroll of the scrollable content wrapper
