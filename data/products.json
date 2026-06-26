@@ -7,10 +7,10 @@
     "price": "115000",
     "compare_at_price": "145000",
     "sku": "SP001-1",
-    "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg",
+    "image": "https://res.cloudinary.com/dvxxkygip/image/upload/f_auto,q_auto/changing_the_angle_other_brand_202606251939_1_gwjvch",
     "gallery": [
-      "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg",
-      "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg"
+      "https://res.cloudinary.com/dvxxkygip/image/upload/f_auto,q_auto/changing_the_angle_other_brand_202606251939_1_gwjvch",
+      "https://res.cloudinary.com/dvxxkygip/image/upload/f_auto,q_auto/img-20260626-wa0000-1_y1z1wz"
     ],
     "options": [
       {
@@ -43,7 +43,8 @@
           "35cm",
           "Bông gòn 7D, vải miniso"
         ],
-        "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg"
+        "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg",
+        "stock": 14
       },
       {
         "sku": "SP001-2",
@@ -54,9 +55,11 @@
           "20cm",
           "Bông gòn 7D, vải miniso"
         ],
-        "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg"
+        "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg",
+        "stock": 14
       }
-    ]
+    ],
+    "stock": 28
   },
   {
     "id": "gau_bong_tot_nghiep_in_logo",

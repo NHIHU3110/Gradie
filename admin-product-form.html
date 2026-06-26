@@ -163,19 +163,26 @@
                 // Filter out variants without a name or options
                 const cleanVariants = currentVariants.filter(v => (v.name || (v.options ? v.options.join(' / ') : '')).trim() !== '');
                 
+                let finalStock = Number(document.getElementById('p-stock').value);
+                if (cleanVariants.length > 0) {
+                    finalStock = cleanVariants.reduce((sum, v) => sum + (Number(v.stock) || 0), 0);
+                }
+
                 const newPrice = Number(document.getElementById('p-price').value);
                 const productData = {
                     id: newId,
                     name: name,
                     category: document.getElementById('p-category').value,
                     price: newPrice,
-                    stock: Number(document.getElementById('p-stock').value),
+                    compare_at_price: Number(document.getElementById('p-old-price').value),
+                    stock: finalStock,
+                    rating: Number(document.getElementById('p-rating').value),
+                    image: galleryArr.length > 0 ? galleryArr[0] : '',
+                    gallery: galleryArr,
                     tikiStock: Number(document.getElementById('p-stock-tiki').value),
                     lazadaStock: Number(document.getElementById('p-stock-lazada').value),
-                    description: document.getElementById('p-desc').value,
-                    gallery: galleryArr,
-                    image: galleryArr.length > 0 ? galleryArr[0] : '',
-                    variants: cleanVariants
+                    variants: cleanVariants,
+                    description: document.getElementById('p-desc').value
                 };
                 
                 const submitBtn = form.querySelector('button[type="submit"]');

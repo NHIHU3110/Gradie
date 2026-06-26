@@ -134,7 +134,8 @@ window.GRADIE_DATA = {
             "35cm",
             "Bông gòn 7D, vải miniso"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg"
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg",
+          "stock": 14
         },
         {
           "sku": "SP001-2",
@@ -145,9 +146,11 @@ window.GRADIE_DATA = {
             "20cm",
             "Bông gòn 7D, vải miniso"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg"
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg",
+          "stock": 14
         }
-      ]
+      ],
+      "stock": 28
     },
     {
       "id": "gau_bong_tot_nghiep_in_logo",
