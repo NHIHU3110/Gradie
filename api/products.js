@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     } else if (req.method === 'PUT') {
       const updatedProduct = req.body;
       const { _id, ...updateData } = updatedProduct; // Remove _id if it exists to avoid Mongo immutable field error
-      await collection.updateOne({ id: updatedProduct.id }, { $set: updateData });
+      await collection.updateOne({ id: updatedProduct.id }, { $set: updateData }, { upsert: true });
       res.status(200).json({ success: true });
     } else if (req.method === 'DELETE') {
       const { id } = req.query; // e.g. /api/products?id=abc
