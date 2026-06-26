@@ -88,6 +88,12 @@
               <img src="images/signup_promo_banner.png" alt="Đăng Ký Tài Khoản Mới Nhận Ưu Đãi 30%">
             </a>
           </div>
+          <button class="slider-btn prev-btn" aria-label="Slide trước">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button class="slider-btn next-btn" aria-label="Slide tiếp theo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
           <div class="slider-dots">
             <span class="dot active"></span>
             <span class="dot"></span>
@@ -264,6 +270,23 @@
         slideInterval = setInterval(nextSlide, 4000);
       });
     });
+
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        clearInterval(slideInterval);
+        goToSlide(currentSlide - 1);
+        slideInterval = setInterval(nextSlide, 4000);
+      });
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        clearInterval(slideInterval);
+        goToSlide(currentSlide + 1);
+        slideInterval = setInterval(nextSlide, 4000);
+      });
+    }
   </script>
 </body>
 

@@ -150,6 +150,42 @@
   width: 24px;
   border-radius: 4px;
 }
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(216, 169, 79, 0.3);
+  color: #17181D;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  opacity: 0;
+  pointer-events: auto;
+}
+.slider-container:hover .slider-btn {
+  opacity: 1;
+}
+.slider-btn:hover {
+  background: #ffffff;
+  color: #D8A94F;
+  box-shadow: 0 4px 12px rgba(216, 169, 79, 0.2);
+  transform: translateY(-50%) scale(1.05);
+}
+.prev-btn {
+  left: 20px;
+}
+.next-btn {
+  right: 20px;
+}
 .hero-badge {
   position: absolute;
   bottom: -20px;
