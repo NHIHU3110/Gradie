@@ -70,27 +70,14 @@
 
     <!-- 1. Hero Section -->
     <section class="hero">
-      <!-- Background Slider -->
+      <!-- Background Slider (Static) -->
       <div class="hero-bg-slider-container">
         <div class="hero-slider">
           <div class="hero-slide active">
             <img src="images/hero_image.jpg" alt="Graduation Celebration">
           </div>
-          <a href="account.html" class="hero-slide">
-            <img src="images/signup_promo_banner.png" alt="Đăng Ký Tài Khoản Mới Nhận Ưu Đãi 30%">
-          </a>
         </div>
         <div class="slider-overlay"></div>
-        <button class="slider-btn prev-btn" aria-label="Slide trước">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        </button>
-        <button class="slider-btn next-btn" aria-label="Slide tiếp theo">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </button>
-        <div class="slider-dots">
-          <span class="dot active"></span>
-          <span class="dot"></span>
-        </div>
       </div>
 
       <!-- Hero Content Card -->
@@ -105,6 +92,13 @@
           <div class="hero-badge">Niên khóa<br>2026</div>
         </div>
       </div>
+    </section>
+
+    <!-- Promotional Banner Section -->
+    <section class="promo-banner-section">
+      <a href="account.html" class="promo-banner-card">
+        <img loading="lazy" src="images/signup_promo_banner.png" alt="Đăng Ký Tài Khoản Mới Nhận Ưu Đãi 30%">
+      </a>
     </section>
 
     <!-- 2. Category Showcase -->
@@ -259,52 +253,54 @@
       heroEl.classList.add('hide-content-card');
     }
 
-    let slideInterval = setInterval(nextSlide, 4000);
+    if (slides.length > 1 && dots.length > 0) {
+      let slideInterval = setInterval(nextSlide, 4000);
 
-    function nextSlide() {
-      goToSlide(currentSlide + 1);
-    }
+      function nextSlide() {
+        goToSlide(currentSlide + 1);
+      }
 
-    function goToSlide(n) {
-      if (!slides.length || !dots.length) return;
-      slides[currentSlide].classList.remove('active');
-      dots[currentSlide].classList.remove('active');
-      currentSlide = (n + slides.length) % slides.length;
-      slides[currentSlide].classList.add('active');
-      dots[currentSlide].classList.add('active');
+      function goToSlide(n) {
+        if (!slides.length || !dots.length) return;
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        currentSlide = (n + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
 
-      if (heroEl) {
-        if (slides[currentSlide].tagName === 'A') {
-          heroEl.classList.add('hide-content-card');
-        } else {
-          heroEl.classList.remove('hide-content-card');
+        if (heroEl) {
+          if (slides[currentSlide].tagName === 'A') {
+            heroEl.classList.add('hide-content-card');
+          } else {
+            heroEl.classList.remove('hide-content-card');
+          }
         }
       }
-    }
 
-    dots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => {
-        clearInterval(slideInterval);
-        goToSlide(idx);
-        slideInterval = setInterval(nextSlide, 4000);
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+          clearInterval(slideInterval);
+          goToSlide(idx);
+          slideInterval = setInterval(nextSlide, 4000);
+        });
       });
-    });
 
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    if (prevBtn && nextBtn) {
-      prevBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        clearInterval(slideInterval);
-        goToSlide(currentSlide - 1);
-        slideInterval = setInterval(nextSlide, 4000);
-      });
-      nextBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        clearInterval(slideInterval);
-        goToSlide(currentSlide + 1);
-        slideInterval = setInterval(nextSlide, 4000);
-      });
+      const prevBtn = document.querySelector('.prev-btn');
+      const nextBtn = document.querySelector('.next-btn');
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          clearInterval(slideInterval);
+          goToSlide(currentSlide - 1);
+          slideInterval = setInterval(nextSlide, 4000);
+        });
+        nextBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          clearInterval(slideInterval);
+          goToSlide(currentSlide + 1);
+          slideInterval = setInterval(nextSlide, 4000);
+        });
+      }
     }
   </script>
 </body>

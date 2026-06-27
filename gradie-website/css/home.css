@@ -441,3 +441,41 @@
 @media (max-width: 480px) {
   .hero-content h1 { font-size: 1.9rem; }
 }
+
+/* =========================================
+   Promo Banner Section
+========================================= */
+.promo-banner-section {
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  padding: 0 60px;
+  box-sizing: border-box;
+}
+.promo-banner-card {
+  display: block;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.04);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(216, 169, 79, 0.15);
+}
+.promo-banner-card img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.promo-banner-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 50px rgba(216, 169, 79, 0.12);
+}
+.promo-banner-card:hover img {
+  transform: scale(1.02);
+}
+
+@media (max-width: 1024px) {
+  .promo-banner-section {
+    padding: 0 20px;
+    margin-bottom: 30px;
+  }
+}
