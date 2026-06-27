@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="css/admin.css?v=2">
     <link rel="stylesheet" href="css/icons.css">
     <style>
-        .variant-row { display: flex; gap: 10px; align-items: center; background: #f9f9f9; padding: 10px; border-radius: 4px; border: 1px solid #eee; }
-        .variant-row input { margin-bottom: 0; padding: 8px; flex: 1; }
+        .variant-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; background: #f9f9f9; padding: 10px; border-radius: 4px; border: 1px solid #eee; }
+        .variant-row input { margin-bottom: 0; padding: 8px; flex: 1 1 120px; }
+        .variant-row .variant-sku { flex-basis: 100px; font-family: monospace; font-weight: 600; }
+        .variant-row .variant-image { flex-basis: 240px; }
         .variant-row .btn-remove { background: #fee; color: red; border: 1px solid #fcc; padding: 8px; border-radius: 4px; cursor: pointer; }
     </style>
   <link rel="stylesheet" href="css/responsive.css">
@@ -34,26 +36,6 @@
                 <div class="form-card">
                     <form id="product-form">
                         <input type="hidden" id="product-id">
-
-                        <!-- IMPORT FROM MARKETPLACE BANNER (only shown for new products) -->
-                        <div id="marketplace-import-banner" style="display:none; background:linear-gradient(135deg,#f0f7ff,#e8f0fe); border:1px solid #c5d8f6; border-radius:10px; padding:16px 20px; margin-bottom:20px;">
-                            <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-                                <span style="font-size:1.3em;">🛍️</span>
-                                <strong style="color:#1a56db;">Nhập sản phẩm từ Tiki / Lazada</strong>
-                                <span id="marketplace-loading" style="display:none; font-size:0.8em; color:#666;">⏳ Đang tải...</span>
-                            </div>
-                            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-                                <select id="marketplace-product-select" style="flex:1; min-width:200px; padding:9px 12px; border:1px solid #c5d8f6; border-radius:6px; font-size:0.95em; background:white; cursor:pointer;">
-                                    <option value="">-- Chọn sản phẩm từ sàn --</option>
-                                </select>
-                                <button type="button" id="btn-import-marketplace" style="padding:9px 18px; background:#1a56db; color:white; border:none; border-radius:6px; cursor:pointer; font-weight:600; white-space:nowrap;">
-                                    ✅ Nhập thông tin
-                                </button>
-                                <button type="button" id="btn-refresh-marketplace" style="padding:9px 14px; background:white; color:#1a56db; border:1px solid #c5d8f6; border-radius:6px; cursor:pointer;" title="Tải lại danh sách">
-                                    🔄
-                                </button>
-                            </div>
-                        </div>
                         
                         <div class="form-row">
                             <div class="form-group"><label>Name *</label><input type="text" id="p-name" required></div>
@@ -71,11 +53,11 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label style="display:flex; justify-content:space-between;">Tiki Stock <a href="#" id="btn-sync-tiki" style="color:var(--admin-primary); font-size:0.85em; text-decoration:none;">🔄 Đồng bộ API</a></label>
+                                <label style="display:flex; justify-content:space-between;">Tiki Stock <a href="#" id="btn-sync-tiki" style="color:var(--admin-primary); font-size:0.85em; text-decoration:none;">🔄 Sync Ảnh</a></label>
                                 <input type="number" id="p-stock-tiki" value="20">
                             </div>
                             <div class="form-group">
-                                <label style="display:flex; justify-content:space-between;">Lazada Stock <a href="#" id="btn-sync-lazada" style="color:var(--admin-primary); font-size:0.85em; text-decoration:none;">🔄 Đồng bộ API</a></label>
+                                <label style="display:flex; justify-content:space-between;">Lazada Stock <a href="#" id="btn-sync-lazada" style="color:var(--admin-primary); font-size:0.85em; text-decoration:none;">🔄 Sync Ảnh</a></label>
                                 <input type="number" id="p-stock-lazada" value="20">
                             </div>
                         </div>
@@ -109,7 +91,7 @@
   <script src="js/icons.js"></script>
   <script src="js/toast.js"></script>
   <script src="js/global-data.js?v=1780167290"></script>
-    <script src="js/data-store.js?v=1780167290"></script>
+    <script src="js/data-store.js?v=1782402300"></script>
     <script src="js/admin-auth.js?v=1780167290"></script>
     <script src="js/admin.js?v=2"></script>
     <script>
@@ -124,16 +106,20 @@
             }
             container.innerHTML = currentVariants.map((v, i) => `
                 <div class="variant-row">
+                    <input class="variant-sku" type="text" placeholder="SKU" value="${v.sku || ''}" onchange="currentVariants[${i}].sku = this.value">
                     <input type="text" placeholder="Variant Name (e.g. Size M)" value="${v.name || (v.options ? v.options.join(' / ') : '')}" onchange="currentVariants[${i}].name = this.value">
                     <input type="number" placeholder="Price (VND)" value="${v.price || 0}" onchange="currentVariants[${i}].price = Number(this.value)">
-                    <input type="number" placeholder="Stock" value="${v.stock || 0}" onchange="currentVariants[${i}].stock = Number(this.value); updateTotalStock();">
+                    <input type="number" placeholder="Web Stock" value="${v.stock || 0}" onchange="currentVariants[${i}].stock = Number(this.value); updateTotalStock();">
+                    <input type="number" placeholder="Tiki" value="${v.tikiStock || 0}" onchange="currentVariants[${i}].tikiStock = Number(this.value)">
+                    <input type="number" placeholder="Lazada" value="${v.lazadaStock || 0}" onchange="currentVariants[${i}].lazadaStock = Number(this.value)">
+                    <input class="variant-image" type="text" placeholder="Variant image URL" value="${v.image || ''}" onchange="currentVariants[${i}].image = this.value">
                     <button type="button" class="btn-remove" onclick="removeVariantRow(${i})">X</button>
                 </div>
             `).join('');
         };
         
         window.addVariantRow = function() {
-            currentVariants.push({ name: '', price: 0, stock: 10 });
+            currentVariants.push({ sku: '', name: '', price: 0, stock: 10, tikiStock: 0, lazadaStock: 0, image: '' });
             renderVariants();
             updateTotalStock();
         };
@@ -162,7 +148,51 @@
             
             if (productId) {
                 document.getElementById('form-title').innerText = "Edit Product";
-                const product = window.GradieStore.getProductById(productId);
+                let product = window.GradieStore.getProductById(productId);
+                
+                // If product found but missing key fields, try to fill from GRADIE_DATA
+                if (product && (!product.name || !product.category || !product.sku)) {
+                    const origProducts = window.GRADIE_DATA?.products || [];
+                    const normSku = s => String(s || '').replace(/[\s\-_]/g, '').toLowerCase();
+                    const rootSku = s => normSku(String(s || '').trim().replace(/[-_]\d+$/i, ''));
+                    const skuRelated = (a, b) => {
+                        const aNorm = normSku(a);
+                        const bNorm = normSku(b);
+                        const aRoot = rootSku(a);
+                        const bRoot = rootSku(b);
+                        return Boolean(aNorm && bNorm && (
+                            aNorm === bNorm ||
+                            (aRoot && bRoot && aRoot === bRoot) ||
+                            (aRoot && bNorm && aRoot === bNorm) ||
+                            (bRoot && aNorm && bRoot === aNorm)
+                        ));
+                    };
+                    const origMatch = origProducts.find(op => {
+                        if (op.id === product.id) return true;
+                        if (op.sku && product.sku && skuRelated(op.sku, product.sku)) return true;
+                        if (Array.isArray(op.variants) && product.sku && op.variants.some(v => skuRelated(v.sku, product.sku))) return true;
+                        // Match by image URL
+                        if (op.image && product.image && op.image === product.image) return true;
+                        if (op.gallery && product.gallery) {
+                            const hasCommonImg = op.gallery.some(g => product.gallery.includes(g));
+                            if (hasCommonImg) return true;
+                        }
+                        return false;
+                    });
+                    if (origMatch) {
+                        if (!product.name && origMatch.name) product.name = origMatch.name;
+                        if (!product.sku && origMatch.sku) product.sku = origMatch.sku;
+                        if ((!product.category || product.category === 'Uncategorized') && origMatch.category) product.category = origMatch.category;
+                        if ((!product.price || product.price === 0) && origMatch.price) product.price = origMatch.price;
+                        if (!product.description && origMatch.description) product.description = origMatch.description;
+                        if ((!product.variants || product.variants.length === 0) && origMatch.variants) product.variants = origMatch.variants;
+                        if ((!product.gallery || product.gallery.length === 0) && origMatch.gallery) product.gallery = origMatch.gallery;
+                        if ((!product.image || !String(product.image).startsWith('http')) && origMatch.image) product.image = origMatch.image;
+                        // Save the enriched product back to store
+                        window.GradieStore.updateProduct(product.id, product);
+                    }
+                }
+                
                 if (product) {
                     document.getElementById('product-id').value = product.id;
                     document.getElementById('p-name').value = product.name || '';
@@ -181,135 +211,17 @@
                     document.getElementById('p-stock-lazada').value = product.lazadaStock !== undefined ? product.lazadaStock : displayStock;
                     
                     // Join with newline to avoid comma issues, though Cloudinary URLs support is added in split
-                    document.getElementById('p-gallery').value = (product.gallery || []).join('\n');
+                    const gallery = Array.isArray(product.gallery) ? [...product.gallery] : [];
+                    (product.variants || []).forEach(v => {
+                        if (v.image && String(v.image).startsWith('http') && !gallery.includes(v.image)) gallery.push(v.image);
+                    });
+                    document.getElementById('p-gallery').value = gallery.join('\n');
                     currentVariants = JSON.parse(JSON.stringify(product.variants || []));
                     document.getElementById('p-desc').value = product.description || '';
                 }
             }
             renderVariants();
             updateTotalStock();
-
-            // --- AUTO SYNC API WHEN FORM LOADS ---
-            async function autoSyncFromAPI() {
-                const settings = window.GradieStore.getSettings();
-                const hasTiki = settings.tikiAppKey && settings.tikiAppSecret;
-                const hasLazada = settings.lazadaAppKey && settings.lazadaAppSecret;
-                if (!hasTiki && !hasLazada) return;
-
-                const currentSku = document.getElementById('p-sku').value;
-                const currentName = document.getElementById('p-name').value;
-                if (!currentSku && !currentName) return; // nothing to match
-
-                // Helper: find matching product in API list by SKU or name
-                function findMatch(products, sku, name) {
-                    const normSku = s => (s || '').replace(/[\s\-_]/g, '').toLowerCase();
-                    const normName = s => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
-                    const rSku = normSku(sku);
-                    const rName = normName(name);
-                    return products.find(p => {
-                        if (rSku && normSku(p.sku) === rSku) return true;
-                        if (rSku && p.id && normSku(String(p.id)) === rSku) return true;
-                        if (rName && normName(p.name) === rName) return true;
-                        if (rName && normName(p.name) && (normName(p.name).includes(rName) || rName.includes(normName(p.name)))) return true;
-                        return false;
-                    });
-                }
-
-                // Helper: fill form — stock + gallery ALWAYS overwrite, others only if empty
-                function fillForm(match, source) {
-                    if (!match) return false;
-                    // Name, price, desc: fill only if currently empty
-                    if (match.name && !document.getElementById('p-name').value) 
-                        document.getElementById('p-name').value = match.name;
-                    if (match.price && !document.getElementById('p-price').value) 
-                        document.getElementById('p-price').value = match.price;
-                    if (match.description && !document.getElementById('p-desc').value) 
-                        document.getElementById('p-desc').value = match.description;
-
-                    // Stock: ALWAYS update tiki/lazada stock from API
-                    if (match.stock !== undefined) {
-                        if (source === 'tiki') {
-                            document.getElementById('p-stock-tiki').value = match.stock;
-                        }
-                        if (source === 'lazada') {
-                            document.getElementById('p-stock-lazada').value = match.stock;
-                        }
-                        // Update website stock if currently 0 or not set
-                        const ws = document.getElementById('p-stock');
-                        if (!ws.value || ws.value === '0' || ws.value === '20') {
-                            ws.value = match.stock;
-                        }
-                    }
-
-                    // Gallery: ALWAYS update with API images (fresher data)
-                    if (match.gallery && match.gallery.length > 0) {
-                        document.getElementById('p-gallery').value = match.gallery.join('\n');
-                    } else if (match.image) {
-                        const curGallery = document.getElementById('p-gallery').value;
-                        if (!curGallery || curGallery.includes('img1.jpg')) {
-                            document.getElementById('p-gallery').value = match.image;
-                        }
-                    }
-
-                    // SKU: fill if empty
-                    if (!document.getElementById('p-sku').value && match.sku)
-                        document.getElementById('p-sku').value = match.sku;
-
-                    // Variants: fill if none added yet
-                    if (match.variants && match.variants.length > 0 && currentVariants.length === 0) {
-                        currentVariants = JSON.parse(JSON.stringify(match.variants));
-                        renderVariants();
-                    }
-                    return true;
-                }
-
-                // Sync Tiki
-                if (hasTiki) {
-                    try {
-                        showToast('Đang đồng bộ từ Tiki...', 'info');
-                        const res = await fetch('/api/tiki', {
-                            method: 'POST', headers: {'Content-Type': 'application/json'},
-                            body: JSON.stringify({ action: 'sync_products', appId: settings.tikiAppKey, appSecret: settings.tikiAppSecret })
-                        });
-                        const data = await res.json();
-                        if (data.success && data.products) {
-                            const sku = document.getElementById('p-sku').value;
-                            const name = document.getElementById('p-name').value;
-                            const match = findMatch(data.products, sku, name);
-                            if (fillForm(match, 'tiki')) {
-                                showToast('✅ Đã đồng bộ đầy đủ từ Tiki!', 'success');
-                            } else {
-                                showToast('Không tìm thấy sản phẩm trên Tiki', 'warning');
-                            }
-                        }
-                    } catch(e) { console.warn('Auto-sync Tiki failed', e); }
-                }
-
-                // Sync Lazada
-                if (hasLazada) {
-                    try {
-                        showToast('Đang đồng bộ từ Lazada...', 'info');
-                        const res = await fetch('/api/lazada', {
-                            method: 'POST', headers: {'Content-Type': 'application/json'},
-                            body: JSON.stringify({ action: 'sync_products', appKey: settings.lazadaAppKey, appSecret: settings.lazadaAppSecret, accessToken: settings.lazadaAccessToken, baseUrl: settings.lazadaApiBaseUrl })
-                        });
-                        const data = await res.json();
-                        if (data.success && data.products) {
-                            const sku = document.getElementById('p-sku').value;
-                            const name = document.getElementById('p-name').value;
-                            const match = findMatch(data.products, sku, name);
-                            if (fillForm(match, 'lazada')) {
-                                showToast('✅ Đã đồng bộ đầy đủ từ Lazada!', 'success');
-                            } else {
-                                showToast('Không tìm thấy sản phẩm trên Lazada', 'warning');
-                            }
-                        }
-                    } catch(e) { console.warn('Auto-sync Lazada failed', e); }
-                }
-            }
-
-            // Trigger auto-sync after short delay (let form finish rendering)
-            setTimeout(() => autoSyncFromAPI(), 800);
             
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -321,7 +233,7 @@
                 let galleryArr = document.getElementById('p-gallery').value.split(/[\n]+|,(?=\s*http)/).map(s => s.trim()).filter(s => s);
                 
                 // Filter out variants without a name or options
-                const cleanVariants = currentVariants.filter(v => (v.name || (v.options ? v.options.join(' / ') : '')).trim() !== '');
+                const cleanVariants = currentVariants.filter(v => (v.sku || v.name || (v.options ? v.options.join(' / ') : '') || v.image || '').trim() !== '');
                 
                 let finalStock = Number(document.getElementById('p-stock').value);
 
@@ -386,58 +298,87 @@
                 }
             });
         });
-
         // --- SYNC API LOGIC ---
         document.getElementById('btn-sync-tiki').addEventListener('click', async (e) => {
             e.preventDefault();
             const sku = document.getElementById('p-sku').value;
             if (!sku) return showToast('Vui lòng nhập SKU trước khi đồng bộ', 'error');
-            const settings = window.GradieStore.getSettings();
-            if (!settings.tikiAppKey || !settings.tikiAppSecret) return showToast('Vui lòng cấu hình API Tiki trong Settings trước', 'error');
+            const settings = JSON.parse(localStorage.getItem('gradie_settings') || '{}');
+            if (!settings.tikiAppId && !settings.tikiAppKey && !settings.tikiAppSecret) return showToast('Vui lòng cấu hình API Tiki trong Settings trước', 'error');
             
             showToast('Đang lấy dữ liệu từ Tiki...', 'info');
             try {
                 const res = await fetch('/api/tiki', {
                     method: 'POST', headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ action: 'sync_products', appId: settings.tikiAppKey, appSecret: settings.tikiAppSecret })
+                    body: JSON.stringify({ action: 'sync_products', appId: settings.tikiAppId, appKey: settings.tikiAppKey, appSecret: settings.tikiAppSecret })
                 });
                 const data = await res.json();
                 if (data.success && data.products) {
-                    const match = data.products.find(p => p.sku === sku || p.id === sku);
+                    const normSku = s => String(s || '').replace(/[\s\-_]/g, '').toLowerCase();
+                    const rootSku = s => normSku(String(s || '').trim().replace(/[-_]\d+$/i, ''));
+                    const skuRelated = (a, b) => {
+                        const aNorm = normSku(a);
+                        const bNorm = normSku(b);
+                        const aRoot = rootSku(a);
+                        const bRoot = rootSku(b);
+                        return Boolean(aNorm && bNorm && (
+                            aNorm === bNorm ||
+                            (aRoot && bRoot && aRoot === bRoot) ||
+                            (aRoot && bNorm && aRoot === bNorm) ||
+                            (bRoot && aNorm && bRoot === aNorm)
+                        ));
+                    };
+                    const match = data.products.find(p => skuRelated(p.sku, sku) || skuRelated(p.original_sku, sku) || String(p.id) === String(sku));
                     if (match) {
-                        if (match.name) document.getElementById('p-name').value = match.name;
-                        if (match.price) document.getElementById('p-price').value = match.price;
-                        if (match.stock !== undefined) {
-                            document.getElementById('p-stock-tiki').value = match.stock;
-                            document.getElementById('p-stock').value = match.stock;
+                        // Fill all available fields
+                        if (match.name && !document.getElementById('p-name').value) {
+                            document.getElementById('p-name').value = match.name;
                         }
-                        if (match.gallery && match.gallery.length > 0) {
-                            document.getElementById('p-gallery').value = match.gallery.join('\n');
-                        } else if (match.image) {
-                            document.getElementById('p-gallery').value = match.image;
+                        if (match.sku && !document.getElementById('p-sku').value) {
+                            document.getElementById('p-sku').value = match.sku;
                         }
-                        if (match.description) {
+                        const catEl = document.getElementById('p-category');
+                        if (match.category && (!catEl.value || catEl.value === 'Uncategorized')) {
+                            catEl.value = match.category;
+                        }
+                        if (match.price && (!document.getElementById('p-price').value || Number(document.getElementById('p-price').value) === 0)) {
+                            document.getElementById('p-price').value = match.price;
+                        }
+                        if (match.description && !document.getElementById('p-desc').value) {
                             document.getElementById('p-desc').value = match.description;
                         }
-                        if (match.variants && match.variants.length > 0) {
+                        if (match.stock !== undefined) {
+                            document.getElementById('p-stock-tiki').value = match.stock;
+                        }
+                        if (match.variants && match.variants.length > 0 && currentVariants.length === 0) {
                             currentVariants = JSON.parse(JSON.stringify(match.variants));
                             renderVariants();
                         }
-                        showToast(`Đã đồng bộ thông tin từ Tiki!`, 'success');
+                        // Sync images
+                        const galleryEl = document.getElementById('p-gallery');
+                        let images = galleryEl.value.split(/[\n]+|,(?=\s*http)/).map(s => s.trim()).filter(s => s);
+                        if (match.gallery && match.gallery.length > 0) {
+                            const newImages = match.gallery.filter(img => !images.includes(img));
+                            images = [...newImages, ...images];
+                        } else if (match.image) {
+                            images = [match.image, ...images.filter(img => img !== match.image)];
+                        }
+                        galleryEl.value = images.join('\n');
+                        showToast('Đã đồng bộ dữ liệu từ Tiki!', 'success');
                     } else {
                         showToast('Không tìm thấy SKU này trên Tiki', 'error');
                     }
                 } else {
                     showToast('Lỗi khi lấy dữ liệu Tiki', 'error');
                 }
-            } catch (err) { console.error(err); showToast('Lỗi kết nối Tiki', 'error'); }
+            } catch (err) { showToast('Lỗi kết nối Tiki', 'error'); }
         });
 
         document.getElementById('btn-sync-lazada').addEventListener('click', async (e) => {
             e.preventDefault();
             const sku = document.getElementById('p-sku').value;
             if (!sku) return showToast('Vui lòng nhập SKU trước khi đồng bộ', 'error');
-            const settings = window.GradieStore.getSettings();
+            const settings = JSON.parse(localStorage.getItem('gradie_settings') || '{}');
             if (!settings.lazadaAppKey || !settings.lazadaAppSecret) return showToast('Vui lòng cấu hình API Lazada trong Settings trước', 'error');
             
             showToast('Đang lấy dữ liệu từ Lazada...', 'info');
@@ -447,41 +388,80 @@
                     body: JSON.stringify({ 
                         action: 'sync_products', 
                         appKey: settings.lazadaAppKey, 
-                        appSecret: settings.lazadaAppSecret, 
-                        accessToken: settings.lazadaAccessToken, 
-                        baseUrl: settings.lazadaApiBaseUrl 
+                        appSecret: settings.lazadaAppSecret,
+                        accessToken: settings.lazadaAccessToken,
+                        baseUrl: settings.lazadaApiBaseUrl
                     })
                 });
                 const data = await res.json();
                 if (data.success && data.products) {
-                    const match = data.products.find(p => p.sku === sku || p.id === sku);
+                    const normSku = s => String(s || '').replace(/[\s\-_]/g, '').toLowerCase();
+                    const rootSku = s => normSku(String(s || '').trim().replace(/[-_]\d+$/i, ''));
+                    const skuRelated = (a, b) => {
+                        const aNorm = normSku(a);
+                        const bNorm = normSku(b);
+                        const aRoot = rootSku(a);
+                        const bRoot = rootSku(b);
+                        return Boolean(aNorm && bNorm && (
+                            aNorm === bNorm ||
+                            (aRoot && bRoot && aRoot === bRoot) ||
+                            (aRoot && bNorm && aRoot === bNorm) ||
+                            (bRoot && aNorm && bRoot === aNorm)
+                        ));
+                    };
+                    const match = data.products.find(p => {
+                        const targetSkuNorm = normSku(sku);
+                        const pSkuNorm = normSku(p.sku);
+                        if (pSkuNorm && (pSkuNorm === targetSkuNorm || skuRelated(p.sku, sku) || skuRelated(p.baseSku, sku))) return true;
+                        if (p.variants && p.variants.length > 0) {
+                            return p.variants.some(v => normSku(v.sku) === targetSkuNorm || skuRelated(v.sku, sku));
+                        }
+                        return String(p.id) === String(sku);
+                    });
+                    
                     if (match) {
-                        if (match.name) document.getElementById('p-name').value = match.name;
-                        if (match.price) document.getElementById('p-price').value = match.price;
-                        if (match.stock !== undefined) {
-                            document.getElementById('p-stock-lazada').value = match.stock;
-                            document.getElementById('p-stock').value = match.stock;
+                        // Fill all available fields
+                        if (match.name && !document.getElementById('p-name').value) {
+                            document.getElementById('p-name').value = match.name;
                         }
-                        if (match.gallery && match.gallery.length > 0) {
-                            document.getElementById('p-gallery').value = match.gallery.join('\n');
-                        } else if (match.image) {
-                            document.getElementById('p-gallery').value = match.image;
+                        if (match.sku && !document.getElementById('p-sku').value) {
+                            document.getElementById('p-sku').value = match.sku;
                         }
-                        if (match.description) {
+                        const catEl = document.getElementById('p-category');
+                        if (match.category && (!catEl.value || catEl.value === 'Uncategorized')) {
+                            catEl.value = match.category;
+                        }
+                        if (match.price && (!document.getElementById('p-price').value || Number(document.getElementById('p-price').value) === 0)) {
+                            document.getElementById('p-price').value = match.price;
+                        }
+                        if (match.description && !document.getElementById('p-desc').value) {
                             document.getElementById('p-desc').value = match.description;
                         }
-                        if (match.variants && match.variants.length > 0) {
+                        if (match.stock !== undefined) {
+                            document.getElementById('p-stock-lazada').value = match.stock;
+                        }
+                        if (match.variants && match.variants.length > 0 && currentVariants.length === 0) {
                             currentVariants = JSON.parse(JSON.stringify(match.variants));
                             renderVariants();
                         }
-                        showToast(`Đã đồng bộ thông tin từ Lazada!`, 'success');
+                        // Sync images
+                        const galleryEl = document.getElementById('p-gallery');
+                        let images = galleryEl.value.split(/[\n]+|,(?=\s*http)/).map(s => s.trim()).filter(s => s);
+                        if (match.gallery && match.gallery.length > 0) {
+                            const newImages = match.gallery.filter(img => !images.includes(img));
+                            images = [...newImages, ...images];
+                        } else if (match.image) {
+                            images = [match.image, ...images.filter(img => img !== match.image)];
+                        }
+                        galleryEl.value = images.join('\n');
+                        showToast('Đã đồng bộ dữ liệu từ Lazada!', 'success');
                     } else {
                         showToast('Không tìm thấy SKU này trên Lazada', 'error');
                     }
                 } else {
                     showToast('Lỗi khi lấy dữ liệu Lazada', 'error');
                 }
-            } catch (err) { console.error(err); showToast('Lỗi kết nối Lazada', 'error'); }
+            } catch (err) { showToast('Lỗi kết nối Lazada', 'error'); }
         });
     </script>
 </body>

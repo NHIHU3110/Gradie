@@ -31,6 +31,14 @@ module.exports = async (req, res) => {
     } else if (req.method === 'POST') {
       const newOrder = req.body;
       
+      // Idempotency Check: Prevent duplicate orders from syncing twice (e.g., Tiki/Lazada webhooks)
+      if (newOrder.orderNumber) {
+        const existingOrder = await collection.findOne({ orderNumber: newOrder.orderNumber });
+        if (existingOrder) {
+          return res.status(200).json({ success: true, message: 'Order already exists, skipping duplicate insertion.' });
+        }
+      }
+      
       // Security Check: Enforce session matches order customer email (admins bypass this)
       if (!isAdminSession && (!sessionEmail || sessionEmail.toLowerCase() !== newOrder.customerEmail.toLowerCase())) {
         return res.status(401).json({ message: 'Unauthorized. Session does not match customer email.' });

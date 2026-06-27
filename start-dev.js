@@ -13,7 +13,7 @@ async function start() {
 
   const mongod = await MongoMemoryServer.create({
     instance: {
-      port: 27017,
+      port: 27018,
       dbPath: dbPath,
       storageEngine: 'wiredTiger'
     }
@@ -37,7 +37,7 @@ async function start() {
   console.log('Updated .env with MONGODB_URI');
 
   console.log('Starting Vercel Dev...');
-  const child = spawn('npx', ['vercel', 'dev'], {
+  const child = spawn('npx', ['vercel', 'dev', '--local'], {
     stdio: 'inherit',
     shell: true,
     env: { ...process.env, MONGODB_URI: uri }

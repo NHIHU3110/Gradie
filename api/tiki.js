@@ -1,4 +1,9 @@
-export default async function handler(req, res) {
+require('dotenv').config();
+
+const VALID_TIKI_APP_ID = process.env.TIKI_APP_KEY || process.env.TIKI_APP_ID;
+const VALID_TIKI_APP_SECRET = process.env.TIKI_APP_SECRET;
+
+module.exports = async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -15,18 +20,25 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { action, appId, appKey, appSecret } = req.body;
-    const currentAppId = appId || appKey;
+    let body = req.body;
+    if (typeof body === 'string' && body.trim().startsWith('{')) {
+      try { body = JSON.parse(body); } catch(e) {}
+    }
+    console.log("DEBUG: Tiki API received body:", body);
+    const { action, appId, appKey, appSecret } = body || {};
+    const currentAppId = appId || appKey || VALID_TIKI_APP_ID;
+    const currentAppSecret = appSecret || VALID_TIKI_APP_SECRET;
 
-    if (!currentAppId || !appSecret) {
-      return res.status(400).json({ success: false, message: 'Missing Tiki App ID or App Secret' });
+    if (!currentAppId || !currentAppSecret) {
+      console.log("DEBUG: Tiki validation failed. appId/appKey:", currentAppId, "appSecret:", currentAppSecret ? "PRESENT" : "MISSING");
+      return res.status(400).json({ success: false, message: 'Missing Tiki App ID or App Secret. Vui lòng nhập trong Admin Settings hoặc cấu hình TIKI_APP_KEY và TIKI_APP_SECRET trong .env' });
     }
 
     // Step 1: Get Access Token
     const tokenParams = new URLSearchParams();
     tokenParams.append('grant_type', 'client_credentials');
     tokenParams.append('client_id', currentAppId);
-    tokenParams.append('client_secret', appSecret);
+    tokenParams.append('client_secret', currentAppSecret);
 
     const tokenResponse = await fetch('https://api.tiki.vn/sc/oauth2/token', {
       method: 'POST',
@@ -54,52 +66,77 @@ export default async function handler(req, res) {
 
     // Step 2: Fetch Orders
     if (action === 'sync_orders') {
-
-      const allOrders = [];
+      const tikiOrders = [];
+      const pageLimit = 50;
       let page = 1;
-      const limit = 100; // adjust as needed
-      while (true) {
-        const ordersResponse = await fetch(`https://api.tiki.vn/integration/v2/orders?limit=${limit}&page=${page}`, {
+      let lastStatus = 200;
+
+      while (page <= 50) {
+        const ordersResponse = await fetch(`https://api.tiki.vn/integration/v2/orders?limit=${pageLimit}&page=${page}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }
         });
+
+        lastStatus = ordersResponse.status;
+        const ordersData = await ordersResponse.json().catch(() => ({}));
+
+        console.log('[TIKI ORDERS RAW]', {
+          status: ordersResponse.status,
+          page,
+          count: ordersData.data?.length || 0,
+          paging: ordersData.paging || ordersData.meta || null
+        });
+
         if (!ordersResponse.ok) {
-          return res.status(ordersResponse.status).json({ success: false, message: 'Failed to fetch orders from Tiki' });
+          return res.status(ordersResponse.status).json({
+            success: false,
+            message: 'Failed to fetch orders from Tiki',
+            details: ordersData
+          });
         }
-        const ordersData = await ordersResponse.json();
+
         const batch = ordersData.data || [];
-        if (batch.length === 0) break;
-        allOrders.push(...batch);
-        if (batch.length < limit) break;
+        tikiOrders.push(...batch);
+
+        const totalPages = ordersData.paging?.total_pages || ordersData.paging?.last_page || ordersData.meta?.total_pages || ordersData.meta?.last_page;
+        if (totalPages && page >= totalPages) break;
+        if (batch.length < pageLimit) break;
         page += 1;
       }
+
       // Transform to Gradie format
-      const formattedOrders = allOrders.map(order => {
+      const formattedOrders = tikiOrders.map(order => {
         // Map Tiki statuses to Gradie statuses
         let status = 'Pending';
-        const tikiStatus = (order.status || '').toLowerCase();
-        if (tikiStatus === 'processing' || tikiStatus === 'packaging') status = 'Processing';
-        else if (tikiStatus === 'shipping' || tikiStatus === 'shipped') status = 'Shipped';
-        else if (tikiStatus === 'successful' || tikiStatus === 'delivered') status = 'Delivered';
-        else if (tikiStatus === 'canceled' || tikiStatus === 'returned') status = 'Cancelled';
+        const tikiStatus = (order.status || order.status_code || '').toLowerCase().replace(/[\s-]+/g, '_');
+        if (['processing', 'packaging', 'picking', 'packed'].includes(tikiStatus)) status = 'Processing';
+        else if (['shipping', 'shipped', 'handover_to_partner'].includes(tikiStatus)) status = 'Shipped';
+        else if (['successful', 'delivered', 'complete', 'completed'].includes(tikiStatus)) status = 'Delivered';
+        else if (
+          tikiStatus.includes('cancel') ||
+          ['returned', 'returning', 'rejected', 'closed'].includes(tikiStatus)
+        ) status = 'Cancelled';
 
-        let customerName = 'Khách Tiki';
+        let customerName = 'Kh├ích Tiki';
         let customerPhone = '';
         let address = '';
+        
         if (order.shipping && order.shipping.address) {
           customerName = order.shipping.address.full_name || customerName;
           customerPhone = order.shipping.address.phone || '';
           address = order.shipping.address.street || '';
         }
+
         const items = (order.items || []).map(item => ({
           id: item.product && item.product.sku ? item.product.sku : 'tiki-item',
-          name: item.product && item.product.name ? item.product.name : 'Sản phẩm Tiki',
+          name: item.product && item.product.name ? item.product.name : 'Sß║ún phß║⌐m Tiki',
           price: item.price || 0,
           quantity: item.qty || 1,
           image: (item.product && (item.product.thumbnail || item.product.thumbnail_url || item.product.image_url)) || ''
         }));
+
         return {
           id: order.code,
           orderNumber: 'TIKI-' + order.code,
@@ -115,44 +152,105 @@ export default async function handler(req, res) {
           items: items
         };
       });
-      return res.status(200).json({ success: true, orders: formattedOrders });
+
+      return res.status(lastStatus === 200 ? 200 : lastStatus).json({
+        success: true,
+        importedCount: formattedOrders.length,
+        orders: formattedOrders,
+        timestamp: new Date().toISOString()
+      });
     }
 
     // Step 3: Fetch Real Products
     if (action === 'sync_products') {
-      const productsResponse = await fetch('https://api.tiki.vn/integration/v2/products?include=inventory', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`
+      const extractTikiStock = (inventory) => {
+        if (!inventory) return 0;
+        if (typeof inventory.quantity_sellable === 'number') return inventory.quantity_sellable;
+        if (typeof inventory.quantity_available === 'number') return inventory.quantity_available;
+        if (Array.isArray(inventory.warehouse_quantities) && inventory.warehouse_quantities.length > 0) {
+          return inventory.warehouse_quantities.reduce((sum, w) => sum + (Number(w.qty_available) || 0), 0);
         }
-      });
+        return 0;
+      };
 
-      if (!productsResponse.ok) {
-        return res.status(productsResponse.status).json({ success: false, message: 'Failed to fetch products from Tiki' });
+      const extractTikiImage = (product) => {
+        if (product.thumbnail && String(product.thumbnail).startsWith('http')) return product.thumbnail;
+        if (Array.isArray(product.images) && product.images.length > 0) {
+          const img = product.images.find(i => i && i.url && String(i.url).startsWith('http'));
+          if (img) return img.url;
+        }
+        return '';
+      };
+
+      const sellerSku = (product) =>
+        product.original_sku || product.originalSku || product.seller_sku || '';
+
+      const tikiProducts = [];
+      let page = 1;
+      let lastStatus = 200;
+
+      const pageLimit = 50;
+      while (page <= 50) {
+        const pageQuery = `https://api.tiki.vn/integration/v2/products?include=inventory&limit=${pageLimit}&page=${page}`;
+        const productsResponse = await fetch(pageQuery, {
+            method: 'GET',
+            headers: { 'Authorization': `Bearer ${accessToken}` }
+          }
+        );
+
+        lastStatus = productsResponse.status;
+        const productsData = await productsResponse.json().catch(() => ({}));
+
+        console.log('[TIKI INVENTORY RAW]', {
+          status: productsResponse.status,
+          page,
+          count: productsData.data?.length || 0,
+          paging: productsData.paging || productsData.meta || null,
+          sample: (productsData.data || []).slice(0, 2).map(p => ({
+            product_id: p.product_id || p.id,
+            sku: p.sku,
+            original_sku: sellerSku(p),
+            name: p.name,
+            inventory: p.inventory
+          }))
+        });
+
+        if (!productsResponse.ok) {
+          return res.status(productsResponse.status).json({
+            success: false,
+            message: 'Failed to fetch products from Tiki',
+            details: productsData
+          });
+        }
+
+        const batch = productsData.data || [];
+        if (batch.length === 0) break;
+        tikiProducts.push(...batch);
+
+        const totalPages = productsData.paging?.total_pages || productsData.paging?.last_page;
+        if (totalPages && page >= totalPages) break;
+        if (batch.length < pageLimit) break;
+        page += 1;
       }
 
-      const productsData = await productsResponse.json();
-      const tikiProducts = productsData.data || [];
-
-      // Transform to Gradie format
       const formattedProducts = tikiProducts.map(product => {
-        let stock = 0;
-        if (product.inventory) {
-          stock = product.inventory.quantity_available || 0;
-        }
+        const stock = extractTikiStock(product.inventory);
+        const origSku = sellerSku(product);
         return {
           id: String(product.product_id || product.id),
-          sku: product.sku || product.original_sku,
+          sku: origSku || product.sku || '',
+          original_sku: origSku,
+          tiki_sku: product.sku || '',
           name: product.name,
-          stock: stock,
+          stock,
           price: product.price || 0,
-          image: product.thumbnail || '',
-          gallery: product.images ? product.images.map(img => typeof img === 'string' ? img : (img.url || img.thumbnail_url || img.image_url)) : (product.thumbnail ? [product.thumbnail] : []),
-          description: product.description || product.short_description || ''
+          image: extractTikiImage(product),
+          master_id: product.master_id || null,
+          master_sku: product.master_sku || null
         };
       });
 
-      return res.status(200).json({
+      return res.status(lastStatus === 200 ? 200 : lastStatus).json({
         success: true,
         message: 'Product synchronization successful.',
         syncedCount: formattedProducts.length,
@@ -167,4 +265,4 @@ export default async function handler(req, res) {
     console.error('Tiki API error:', error);
     return res.status(500).json({ success: false, message: 'Internal server error', error: error.message });
   }
-}
+};

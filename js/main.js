@@ -134,7 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const products = window.GradieStore.getProducts();
+      const products = window.GradieStore.getProducts().filter(p => {
+        if (p.isSyncOnly) return false;
+        if (!isNaN(p.id) && String(p.id).length >= 10) return false;
+        if (p.name && (p.name.includes('Sản phẩm mới từ') || p.name.includes('Untitled Product'))) return false;
+        return true;
+      });
       const matches = products.filter(p => 
         p.name.toLowerCase().includes(query) || 
         p.category.toLowerCase().includes(query)
@@ -144,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchDropdown.innerHTML = '<p style="color:#888; font-style:italic; text-align:center; font-size:0.9rem; margin:10px 0;">No products found.</p>';
       } else {
         searchDropdown.innerHTML = matches.map(p => `
-          <a href="product-detail.html?id=${p.id}" style="display:flex; gap:12px; align-items:center; text-decoration:none; margin-bottom:12px; border-bottom:1px solid #f2effa; padding-bottom:8px;">
+          <a href="product-detail?id=${p.id}" style="display:flex; gap:12px; align-items:center; text-decoration:none; margin-bottom:12px; border-bottom:1px solid #f2effa; padding-bottom:8px;">
             <img src="${p.image}" style="width:50px; height:50px; object-fit:cover; border-radius:6px; border:1px solid #eee;">
             <div style="flex:1;">
               <div style="font-weight:600; font-size:0.9rem; color:#1a1a1a;">${p.name}</div>

@@ -527,6 +527,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         customDetails += `<div style="font-size:0.8rem; color:#888;">Hộp quà: Hộp (${c.boxColor || 'Kem'}), Ruy băng (${c.ribbonColor || 'Vàng'}), Con dấu (${c.waxSeal || 'Không'})</div>`;
       }
     }
+    if (item.variant) {
+      customDetails = `<div style="font-size:0.8rem; color:#666; margin-top:3px;">Phân loại: ${item.variant}</div>` + customDetails;
+    }
 
     return `
       <div class="summary-item-row">
@@ -620,6 +623,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         name: item.name,
         quantity: parseInt(item.quantity || item.qty || 1),
         price: item.price,
+        variant: item.variant || '',
+        variantSku: item.variantSku || '',
         customization: item.customization || null
       })),
       subtotal: subtotal,
@@ -634,7 +639,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Deduct stock and record order
     cart.forEach(item => {
       const qty = parseInt(item.quantity || item.qty || 1);
-      window.GradieStore.deductStock(item.id, qty);
+      window.GradieStore.deductStock(item.id, qty, item.variantSku || '', item.variant || '');
     });
 
     window.GradieStore.addOrder(orderObject);

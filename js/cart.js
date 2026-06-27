@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let variantHtml = '';
       if (item.variant) {
         const allProducts = window.GradieStore ? window.GradieStore.getProducts() : [];
-        const p = allProducts.find(x => x.id === item.id);
+        const p = allProducts.find(x => String(x.id) === String(item.id));
         if (p && p.variants && p.variants.length > 0) {
           variantHtml = `<select class="cart-item-variant" onchange="updateVariant(${index}, this.value)">`;
           p.variants.forEach(v => {
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.updateVariant = function(index, newVariantName) {
     const products = window.GradieStore ? window.GradieStore.getProducts() : [];
-    let p = products.find(x => x.id === cart[index].id);
+    let p = products.find(x => String(x.id) === String(cart[index].id));
     if (p && p.variants) {
       const vObj = p.variants.find(v => {
         let label = "Mặc định";

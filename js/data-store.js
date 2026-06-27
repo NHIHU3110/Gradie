@@ -2,6 +2,23 @@
 window.GradieStore = {
   storageKey: "GRADIE_CMS_DATA",
 
+  isValidProductImageUrl: function (url) {
+    if (!url || typeof url !== 'string') return false;
+    const cleaned = url.trim().replace(/^[`'"]+|[`'"]+$/g, '');
+    const lower = cleaned.toLowerCase();
+    if (!lower.startsWith('http')) return false;
+    if (
+      lower.includes('ui-avatars.com') ||
+      lower.includes('placeholder') ||
+      lower.includes('via.placeholder') ||
+      lower.includes('unsplash.com') ||
+      lower.includes('lazada.vn/products') ||
+      lower.includes('tiki.vn/p/') ||
+      lower.includes('shopee.vn/product')
+    ) return false;
+    if (/\.html(\?|#|$)/i.test(lower)) return false;
+    return true;
+  },
 
   init: function () {
     let data = this.getData();
@@ -256,12 +273,45 @@ window.GradieStore = {
       if (window.GRADIE_DATA && window.GRADIE_DATA.products) {
         let hasUpdates = false;
         const globalProducts = window.GRADIE_DATA.products;
+        const isRealImage = url => this.isValidProductImageUrl(url);
 
         globalProducts.forEach(gp => {
           const localIndex = data.products.findIndex(p => p.id === gp.id);
           if (localIndex === -1) {
-            data.products.push(gp);
+            data.products.push(this.normalizeProduct({ ...gp }));
             hasUpdates = true;
+          } else {
+            const lp = data.products[localIndex];
+            const localHasRealImage = isRealImage(lp.image) || (Array.isArray(lp.gallery) && lp.gallery.some(isRealImage));
+            const globalImages = [gp.image, ...(Array.isArray(gp.gallery) ? gp.gallery : [])].filter(isRealImage);
+            if (!localHasRealImage && globalImages.length > 0) {
+              lp.image = globalImages[0];
+              lp.gallery = globalImages;
+              hasUpdates = true;
+            }
+            if ((!lp.options || (Array.isArray(lp.options) && lp.options.length === 0)) && gp.options) {
+              lp.options = gp.options;
+              hasUpdates = true;
+            }
+            if (Array.isArray(lp.variants) && Array.isArray(gp.variants)) {
+              gp.variants.forEach(gv => {
+                const lv = lp.variants.find(v => String(v.sku || '').trim().toLowerCase() === String(gv.sku || '').trim().toLowerCase());
+                if (lv && !isRealImage(lv.image) && isRealImage(gv.image)) {
+                  lv.image = gv.image;
+                  hasUpdates = true;
+                }
+              });
+              // Also heal the parent product image if it's broken but any variant has a real image
+              if (!isRealImage(lp.image)) {
+                const firstVariantImg = lp.variants.find(v => isRealImage(v.image));
+                if (firstVariantImg) {
+                  lp.image = firstVariantImg.image;
+                  if (!Array.isArray(lp.gallery)) lp.gallery = [];
+                  lp.variants.forEach(v => { if (isRealImage(v.image) && !lp.gallery.includes(v.image)) lp.gallery.push(v.image); });
+                  hasUpdates = true;
+                }
+              }
+            }
           }
         });
         if (hasUpdates) updated = true;
@@ -1739,61 +1789,6 @@ window.GradieStore = {
           "author": "Gradie",
           "category": "Câu Chuyện",
           "status": "Published"
-        },
-        {
-          "id": "b5",
-          "title": "Bộ Sưu Tập Quà Tặng Tốt Nghiệp Cao Cấp Bán Chạy Nhất Tại Gradie Mùa Lễ 2026",
-          "excerpt": "Khám phá những món quà tốt nghiệp độc đáo, ý nghĩa và được thiết kế cá nhân hóa tinh tế nhất từ Gradie để ghi dấu ngày trọng đại của người thương yêu.",
-          "content": "<p>Lễ tốt nghiệp là cột mốc thiêng liêng đánh dấu sự trưởng thành, khép lại hành trình học tập nỗ lực và mở ra cánh cổng tương lai tươi sáng. Để giúp bạn gửi gắm trọn vẹn tình cảm và sự tự hào đến những tân cử nhân trong ngày đặc biệt này, Gradie mang đến bộ sưu tập quà tặng tốt nghiệp độc đáo, cao cấp và đầy ý nghĩa. Hãy cùng điểm qua bốn món quà tặng đang dẫn đầu xu hướng và được yêu thích nhất tại Gradie trong mùa lễ tốt nghiệp năm nay.</p>\n\n<p>Đầu tiên phải kể đến dòng sản phẩm quà cá nhân hóa tinh tế, nơi mỗi món quà là một tác phẩm độc nhất vô nhị dành riêng cho người nhận. Nổi bật trong dòng sản phẩm này là những chiếc túi vải cao cấp thêu tên thủ công tỉ mỉ với họa tiết hoa nhã nhặn trên nền vải mịn màng. Với mức giá chỉ từ 199.000đ, món quà thêu tên cá nhân không chỉ mang giá trị sử dụng cao nhưng còn thể hiện sự tinh tế của người tặng, khẳng định rằng người nhận là duy nhất và món quà dành cho họ cũng độc đáo không ai giống ai.</p>\n<img src=\"images/blog_personalized_gift.jpg\" alt=\"Quà Cá Nhân Hóa Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Bên cạnh những món quà cá nhân hóa thêu tên, bó hoa len tốt nghiệp thủ công cũng là sự lựa chọn hoàn hảo được đông đảo khách hàng săn đón. Nếu như những đóa hoa tươi chỉ lưu giữ được vẻ đẹp trong khoảnh khắc ngắn ngủi, thì đóa hoa len được móc tay tỉ mỉ từ những sợi len mềm mại sẽ lưu giữ trọn vẹn ký ức của ngày ra trường mãi về sau. Mỗi bó hoa len tốt nghiệp tại Gradie có giá chỉ từ 149.000đ, được phối màu pastel nhẹ nhàng sang trọng, đi kèm thiệp chúc mừng thiết kế tinh xảo và đóng gói vô cùng chỉn chu. Đây thực sự là món quà bền vững theo thời gian, gửi gắm thông điệp chân thành rằng tình cảm chân thành sẽ không bao giờ nhạt phai.</p>\n<img src=\"images/blog_crochet_flowers.jpg\" alt=\"Bó Hoa Len Tốt Nghiệp Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Một biểu tượng không thể thiếu trong ngày lễ nhận bằng chính là những chú gấu bông tốt nghiệp đáng yêu. Chú gấu bông cử nhân của Gradie được chế tác từ chất liệu lông mềm mịn cao cấp, khoác lên mình bộ lễ phục cử nhân thắt nơ lịch lãm và tay cầm bó hoa len mini xinh xắn. Với mức giá từ 189.000đ, chú gấu bông nhỏ nhắn này sẽ là người bạn đồng hành ấm áp để ôm khi vui, để nhớ khi buồn, và để nhắc nhở các tân cử nhân về ngày họ đã tỏa sáng rực rỡ dưới mái trường thân yêu. Hộp quà tặng đi kèm gấu bông được thiết kế tinh tế giúp bạn dễ dàng trao gửi lời chúc tự hào đến người thương yêu một cách trang trọng nhất.</p>\n<img src=\"images/blog_graduation_teddy.jpg\" alt=\"Gấu Bông Tốt Nghiệp Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Cuối cùng, nếu bạn muốn món quà của mình trở nên thật nổi bật và lung linh giữa hàng trăm bức ảnh kỷ niệm, hoa bóng bay tốt nghiệp chính là sự lựa chọn đột phá nhất. Sản phẩm là sự kết hợp độc đáo giữa chú gấu bông cử nhân đáng yêu đặt bên trong quả bóng bay trong suốt cỡ lớn in chữ chúc mừng nổi bật, xung quanh là những đóa hồng tươi tắn và bóng bay pastel đồng điệu. Với mức giá từ 359.000đ, mẫu hoa bóng bay này mang thiết kế vô cùng sang trọng và bắt mắt, chắc chắn sẽ giúp người thương yêu của bạn chiếm trọn mọi ánh nhìn và tạo nên những bức ảnh kỷ yếu độc đáo, biến ngày lễ tốt nghiệp trở thành một ký ức lộng lẫy khó quên.</p>\n<img src=\"images/blog_graduation_balloon.jpg\" alt=\"Hoa Bóng Bay Tốt Nghiệp Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Với bộ sưu tập đa dạng từ túi cá nhân hóa thêu tên, bó hoa len lưu niệm, gấu bông cử nhân đến hoa bóng bay sang trọng, Gradie cam kết mang lại sự hài lòng tuyệt đối nhờ vào quy trình đóng gói chỉn chu, tỉ mỉ và giao hàng nhanh chóng. Hãy ghé cửa hàng Gradie hoặc liên hệ trực tuyến ngay hôm nay để chọn lựa những món quà tốt nghiệp đong đầy tình cảm nhất cho những người thân yêu của bạn!</p>",
-          "image": "images/blog_personalized_gift.jpg",
-          "date": "26/06/2026",
-          "author": "Gradie",
-          "category": "Gợi ý Quà Tặng",
-          "status": "Published"
-        },
-        {
-          "id": "b6",
-          "title": "Checklist Tốt Nghiệp: Lưu Ngay Kẻo Đến Ngày Lại Quên!",
-          "excerpt": "Ngày tốt nghiệp cận kề với bao nhiêu việc phải lo toan? Hãy lưu ngay checklist chuẩn bị chi tiết từ Gradie dưới đây để có một ngày nhận bằng trọn vẹn và không lo thiếu sót nhé!",
-          "content": "<p>Ngày lễ nhận bằng tốt nghiệp là một trong những cột mốc trọng đại nhất của thời sinh viên. Để ngày vui này diễn ra trọn vẹn và hoàn hảo nhất, việc chuẩn bị kỹ lưỡng từ trước là vô cùng quan trọng. Hãy cùng Gradie điểm qua checklist những việc cần làm ngay dưới đây để không bỏ sót bất kỳ chi tiết nào trong ngày trọng đại của mình nhé!</p>\n\n<p>Trước hết, hãy chắc chắn rằng bạn đã kiểm tra kỹ thời gian và địa điểm tổ chức lễ tốt nghiệp của trường mình. Hãy nắm rõ khung giờ tập trung, giờ làm lễ chính thức và sơ đồ hội trường để tránh việc đi muộn hoặc lạc đường. Tiếp theo là chuẩn bị sẵn sàng áo tốt nghiệp (áo cử nhân), nón tốt nghiệp và các phụ kiện đi kèm như dải sash hay bằng tốt nghiệp giả để chụp ảnh. Đừng quên lựa chọn trang phục lịch sự và thoải mái để mặc bên trong áo cử nhân, giúp bạn tự tin và nổi bật suốt cả ngày dài.</p>\n<img src=\"images/blog_checklist_tot_nghiep.jpg\" alt=\"Checklist Tốt Nghiệp Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Bên cạnh trang phục, việc chuẩn bị các thiết bị công nghệ cũng quan trọng không kém. Hãy sạc đầy pin điện thoại, máy ảnh cá nhân và mang theo pin sạc dự phòng để đảm bảo bạn không bị gián đoạn khi lưu lại những khoảnh khắc đẹp. Ngoài ra, hãy chuẩn bị đầy đủ các loại giấy tờ cần thiết như thẻ sinh viên, phiếu nhận bằng hoặc chứng minh nhân dân theo yêu cầu của nhà trường. Cuối cùng, hãy chuẩn bị trước những bó hoa tươi thắm, những món quà ý nghĩa cùng những lời chúc chân thành, đồng thời hẹn trước giờ giấc với hội bạn thân để cùng nhau chụp những bức hình kỷ niệm thật rực rỡ. Gradie tự hào được đồng hành cùng bạn trên mọi nẻo đường của mùa tốt nghiệp ý nghĩa!</p>",
-          "image": "images/blog_checklist_tot_nghiep.jpg",
-          "date": "26/06/2026",
-          "author": "Gradie",
-          "category": "Kinh Nghiệm",
-          "status": "Published"
-        },
-        {
-          "id": "b7",
-          "title": "5 Mẹo Đơn Giản Để Có Bộ Ảnh Tốt Nghiệp Lung Linh Nhất",
-          "excerpt": "Làm sao để lên hình thật xinh xắn và rạng rỡ trong ngày lễ tốt nghiệp? Gradie bật mí cho bạn 5 mẹo đơn giản từ trang phục, makeup đến dáng chụp để có những bức ảnh kỷ niệm để đời.",
-          "content": "<p>Lễ tốt nghiệp là dịp để bạn ghi lại những khoảnh khắc rạng rỡ nhất bên thầy cô, gia đình và bạn bè. Để tấm hình kỷ niệm nào của bạn cũng lung linh và đầy sức sống, hãy lưu lại ngay 5 bí quyết chụp ảnh cực kỳ đơn giản và hiệu quả mà Gradie chia sẻ dưới đây nhé!</p>\n\n<p>Bí quyết đầu tiên là lựa chọn trang phục mặc bên trong áo cử nhân. Bạn nên ưu tiên những bộ cánh có tông màu sáng như trắng, kem, pastel và hạn chế tối đa các họa tiết cầu kỳ để tổng thể trang phục khi khoác áo cử nhân trông thanh lịch, gọn gàng nhất. Thứ hai, hãy trang điểm nhẹ nhàng theo phong cách tự nhiên và sử dụng lớp nền lâu trôi vì bạn sẽ phải hoạt động ngoài trời và dưới thời tiết nóng bức suốt nhiều giờ liền. Mẹo thứ ba là hãy làm tóc thật gọn gàng, có thể chọn kiểu tóc xõa tự nhiên hoặc buộc nửa đầu tinh tế để khi đội chiếc nón cử nhân lên trông gương mặt bạn vẫn thanh thoát và ăn ảnh.</p>\n<img src=\"images/blog_anh_tot_nghiep_xinh.jpg\" alt=\"Mẹo Chụp Ảnh Tốt Nghiệp Xinh Hơn\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Mẹo thứ tư vô cùng quan trọng đó là hãy chuẩn bị và tập trước từ 3 đến 5 dáng chụp ảnh cơ bản trước gương. Việc này giúp bạn không bị bỡ ngỡ, đơ cứng khi đứng trước ống kính và có thể nhanh chóng tạo dáng tự nhiên nhất. Cuối cùng, thời điểm chụp ảnh lý tưởng nhất là vào lúc sáng sớm (khoảng 7h - 9h) hoặc chiều muộn (khoảng 15h - 17h) khi ánh sáng mặt trời dịu nhẹ, tạo nên màu sắc ấm áp và không bị bóng mắt. Đừng quên chuẩn bị những phụ kiện xinh xắn từ Gradie để bức ảnh của bạn thêm phần sinh động và ý nghĩa nhé!</p>",
-          "image": "images/blog_anh_tot_nghiep_xinh.jpg",
-          "date": "26/06/2026",
-          "author": "Admin",
-          "category": "Mẹo Chọn Quà",
-          "status": "Published"
-        },
-        {
-          "id": "b8",
-          "title": "Tặng Gì Cho Bestie Trong Ngày Tốt Nghiệp Ý Nghĩa Nhất?",
-          "excerpt": "Bạn thân sắp ra trường và bạn đang băn khoăn không biết nên tặng món quà gì để chúc mừng cột mốc quan trọng này? Hãy để Gradie gợi ý cho bạn 5 món quà tốt nghiệp đong đầy tình cảm nhé!",
-          "content": "<p>Ngày tốt nghiệp của người bạn thân thiết (bestie) là dịp đặc biệt để bạn bày tỏ sự chúc mừng chân thành và gửi gắm những lời chúc tốt đẹp nhất cho chặng đường tương lai của họ. Nếu bạn vẫn đang phân vân chưa biết chọn món quà nào vừa ý nghĩa vừa thiết thực, hãy cùng tham khảo 5 gợi ý quà tặng được yêu thích nhất từ Gradie dưới đây.</p>\n\n<p>Món quà truyền thống nhưng không bao giờ lỗi thời chính là những đóa hoa tốt nghiệp rực rỡ. Bạn có thể chọn hoa len thủ công bền vững hoặc hoa bóng bay nổi bật để người bạn của mình trông thật lung linh khi chụp ảnh kỷ yếu. Gợi ý thứ hai là những chú gấu bông tốt nghiệp cử nhân đáng yêu - người bạn đồng hành tinh thần biểu tượng cho sự đỗ đạt và thành công. Tiếp theo là những chiếc khung ảnh hoặc album kỷ niệm lưu giữ lại những tấm hình chung của cả hai suốt năm tháng ngồi trên giảng đường đại học, một món quà mang giá trị tinh thần vô cùng lớn lao.</p>\n<img src=\"images/blog_tang_gi_bestie.jpg\" alt=\"Quà Tốt Nghiệp Cho Bestie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Nếu muốn tạo sự khác biệt, quà cá nhân hóa thêu tên riêng của bestie lên những chiếc túi vải, phụ kiện thời trang sẽ là lựa chọn tuyệt vời, chứng minh sự chu đáo và tỉ mỉ của bạn dành riêng cho họ. Cuối cùng, những bộ gift box nhỏ xinh được kết hợp tinh tế giữa nến thơm, phụ kiện và thiệp chúc mừng viết tay từ Gradie sẽ là lời chúc ngọt ngào, tiếp thêm động lực cho người bạn thân yêu trên hành trình mới. Hãy ghé Gradie ngay hôm nay để chọn lựa món quà hoàn hảo nhất cho bestie của mình nhé!</p>",
-          "image": "images/blog_tang_gi_bestie.jpg",
-          "date": "26/06/2026",
-          "author": "Gradie",
-          "category": "Ý Nghĩa Quà Tặng",
-          "status": "Published"
-        },
-        {
-          "id": "b9",
-          "title": "Sau Tốt Nghiệp, Bắt Đầu Từ Đâu? 5 Bước Để Bớt Overthinking",
-          "excerpt": "Vừa mới ra trường và cảm thấy mông lung, lo lắng trước tương lai phía trước? Hãy tham khảo ngay 5 bước nhỏ dưới đây từ Gradie để sắp xếp lại cuộc sống và giảm bớt sự lo âu quá mức nhé!",
-          "content": "<p>Cảm giác mông lung, lo lắng và có chút \"overthinking\" sau khi tốt nghiệp đại học là điều hoàn toàn bình thường mà hầu hết các tân cử nhân đều trải qua. Để giúp bản thân giữ được sự bình tĩnh, chủ động và tràn đầy năng lượng khi bắt đầu chặng đường mới, hãy thử thực hiện theo 5 bước nhỏ cực kỳ thiết thực mà Gradie chia sẻ dưới đây.</p>\n\n<p>Bước đầu tiên bạn cần làm là dành thời gian cập nhật lại CV (hồ sơ xin việc) và portfolio (hồ sơ năng lực) của mình. Hãy hệ thống hóa các kiến thức đã học, các dự án thực tế và kỹ năng mềm tích lũy được trong suốt thời gian học tập để sẵn sàng gửi tới nhà tuyển dụng. Bước thứ hai là lập một danh sách các công việc hoặc lĩnh vực mà bạn thực sự muốn thử sức, từ đó giúp bạn định hình rõ nét hơn về mục tiêu nghề nghiệp. Bước thứ ba, hãy tranh thủ học thêm một kỹ năng mới hữu ích phục vụ cho công việc như ngoại ngữ, tin học văn phòng nâng cao, thiết kế đồ họa hoặc kỹ năng giao tiếp.</p>\n<img src=\"images/blog_sau_tot_nghiep.jpg\" alt=\"Vượt Qua Lo Âu Sau Tốt Nghiệp\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Bước thứ tư là tích cực kết nối, trò chuyện với các anh chị đi trước hoặc bạn bè đồng trang lứa đang làm việc trong ngành để lắng nghe những chia sẻ thực tế và có thêm định hướng đúng đắn. Cuối cùng, hãy đặt ra những mục tiêu nhỏ và cụ thể cho 30 ngày đầu tiên sau khi ra trường, thay vì tạo áp lực quá lớn cho bản thân phải có ngay công việc mơ ước. Hãy nhớ rằng tốt nghiệp không phải là vạch đích mà là điểm khởi đầu của một hành trình thú vị. Gradie luôn đồng hành và tiếp thêm động lực cho bạn tự tin vững bước kiến tạo tương lai!</p>",
-          "image": "images/blog_sau_tot_nghiep.jpg",
-          "date": "26/06/2026",
-          "author": "Gradie",
-          "category": "Câu Chuyện",
-          "status": "Published"
         }
       ],
       gallery: [
@@ -1998,7 +1993,282 @@ window.GradieStore = {
   saveSettings: function (settings) { let data = this.getData(); data.settings = { ...data.settings, ...settings }; this.saveData(data); fetch('/api/global', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'settings', data: data.settings }) }).catch(e => console.error('Sync error', e)); },
 
   // PRODUCTS
-  getProducts: function () { const p = this.getData().products; return (p && p.length > 0) ? p : this.normalizeProducts(window.GRADIE_DATA?.products || []); },
+  cleanupDuplicateProducts: function() {
+    let dataStr = localStorage.getItem(this.storageKey);
+    let data = null;
+    try {
+      data = dataStr ? JSON.parse(dataStr) : JSON.parse(JSON.stringify(window.GRADIE_DATA || {}));
+    } catch (e) { return; }
+    if (!data || !data.products) return;
+
+    const norm = s => String(s || '').replace(/[\s\-_]/g, '').toLowerCase();
+    const rootSku = s => norm(String(s || '').trim().replace(/[-_]\d+$/i, ''));
+    const skuRelated = (a, b) => {
+        const aNorm = norm(a);
+        const bNorm = norm(b);
+        const aRoot = rootSku(a);
+        const bRoot = rootSku(b);
+        return Boolean(
+            aNorm && bNorm && (
+                aNorm === bNorm ||
+                (aRoot && bRoot && aRoot === bRoot) ||
+                (aRoot && bNorm && aRoot === bNorm) ||
+                (bRoot && aNorm && bRoot === aNorm)
+            )
+        );
+    };
+    const isRealImage = url => this.isValidProductImageUrl(url);
+    const addImage = (product, image) => {
+        if (!isRealImage(image)) return false;
+        let changed = false;
+        if (!Array.isArray(product.gallery)) product.gallery = [];
+        if (!product.gallery.includes(image)) {
+            product.gallery.push(image);
+            changed = true;
+        }
+        if (!isRealImage(product.image)) {
+            product.image = image;
+            changed = true;
+        }
+        return changed;
+    };
+    
+    // Separate products into parent products (have variants) and simple products
+    let parents = data.products.filter(p => p.variants && p.variants.length > 0);
+    const simples = data.products.filter(p => !p.variants || p.variants.length === 0);
+    
+    const duplicateProductIds = [];
+    let dataChanged = false;
+
+    // 1. Merge duplicate parent products that share variant SKUs
+    for (let i = 0; i < parents.length; i++) {
+        for (let j = i + 1; j < parents.length; j++) {
+            const p1 = parents[i];
+            const p2 = parents[j];
+            if (duplicateProductIds.includes(p1.id) || duplicateProductIds.includes(p2.id)) continue;
+            
+            const p1Skus = new Set([p1.sku, ...p1.variants.map(v => v.sku)].map(rootSku).filter(Boolean));
+            const p2Skus = new Set([p2.sku, ...p2.variants.map(v => v.sku)].map(rootSku).filter(Boolean));
+            
+            let sharesSku = false;
+            for (let sku of p1Skus) {
+                if (p2Skus.has(sku)) {
+                    sharesSku = true;
+                    break;
+                }
+            }
+            
+            if (sharesSku) {
+                const isP1Numeric = /^\d+$/.test(p1.id);
+                const isP2Numeric = /^\d+$/.test(p2.id);
+                
+                let target = p1;
+                let duplicate = p2;
+                
+                if (isP1Numeric && !isP2Numeric) {
+                    target = p2;
+                    duplicate = p1;
+                }
+                
+                // Merge duplicate variants into target variants
+                duplicate.variants.forEach(dv => {
+                    const dvSkuNorm = norm(dv.sku);
+                    const tv = target.variants.find(v => norm(v.sku) === dvSkuNorm || skuRelated(v.sku, dv.sku));
+                    if (tv) {
+                        if (dv.tikiStock !== undefined) tv.tikiStock = dv.tikiStock;
+                        if (dv.lazadaStock !== undefined) tv.lazadaStock = dv.lazadaStock;
+                        if (dv.stock !== undefined && dv.stock > 0) tv.stock = dv.stock;
+                        if (dv.image && dv.image.startsWith('http') && (!tv.image || !tv.image.startsWith('http') || tv.image.includes('placeholder'))) {
+                            tv.image = dv.image;
+                        }
+                        addImage(target, dv.image);
+                    }
+                });
+                
+                target.tikiStock = (target.variants || []).reduce((sum, v) => sum + (v.tikiStock || 0), 0);
+                target.lazadaStock = (target.variants || []).reduce((sum, v) => sum + (v.lazadaStock || 0), 0);
+                target.stock = (target.variants || []).reduce((sum, v) => sum + (v.stock || 0), 0);
+                
+                duplicateProductIds.push(duplicate.id);
+                dataChanged = true;
+            }
+        }
+    }
+
+    // Refresh parents list after merges
+    parents = parents.filter(p => !duplicateProductIds.includes(p.id));
+
+    // 2. Merge simples into parents
+    simples.forEach(simpleP => {
+        if (duplicateProductIds.includes(simpleP.id)) return;
+        
+        let bestParent = null;
+        let bestVariant = null;
+        let maxScore = 0;
+        
+        const simpleNameNorm = String(simpleP.name || '').toLowerCase();
+        const simpleSkuNorm = norm(simpleP.sku);
+
+        parents.forEach(parent => {
+            parent.variants.forEach(v => {
+                let score = 0;
+                
+                // 1. SKU Match (High priority)
+                const vSkuNorm = norm(v.sku);
+                if (vSkuNorm && simpleSkuNorm) {
+                    if (skuRelated(v.sku, simpleP.sku)) {
+                        score += 30;
+                    } else if (vSkuNorm.includes(simpleSkuNorm) || simpleSkuNorm.includes(vSkuNorm)) {
+                        score += 10;
+                    }
+                }
+                
+                // 2. Option Values in Name Match (Medium priority)
+                if (v.options && Array.isArray(v.options)) {
+                    v.options.forEach(opt => {
+                        const optNorm = String(opt).toLowerCase();
+                        if (simpleNameNorm.includes(optNorm)) {
+                            score += 4;
+                        }
+                    });
+                }
+
+                // 2b. Match seller SKU on simple Tiki/Lazada imports (original_sku stored as sku)
+                if (vSkuNorm && simpleSkuNorm && skuRelated(v.sku, simpleP.sku)) {
+                    score += 20;
+                }
+                
+                // 3. Name Similarity / Overlap
+                const pNameNorm = norm(parent.name);
+                const sNameNorm = norm(simpleP.name);
+                if (pNameNorm && sNameNorm && (sNameNorm.includes(pNameNorm) || pNameNorm.includes(sNameNorm))) {
+                    score += 2;
+                }
+
+                // 4. Category Match
+                if (parent.category && simpleP.category && parent.category.toLowerCase() === simpleP.category.toLowerCase()) {
+                    score += 1;
+                }
+                
+                if (score > maxScore) {
+                    maxScore = score;
+                    bestParent = parent;
+                    bestVariant = v;
+                }
+            });
+        });
+
+        if (bestParent && bestVariant && maxScore >= 4) {
+            let variantChanged = false;
+            
+            if (simpleP.tikiStock !== undefined) {
+                bestVariant.tikiStock = simpleP.tikiStock;
+                variantChanged = true;
+            }
+            if (simpleP.lazadaStock !== undefined) {
+                bestVariant.lazadaStock = simpleP.lazadaStock;
+                variantChanged = true;
+            }
+            if (simpleP.stock !== undefined && simpleP.stock > 0) {
+                bestVariant.stock = simpleP.stock;
+                variantChanged = true;
+            }
+            if (simpleP.image && simpleP.image.startsWith('http') && (!bestVariant.image || !bestVariant.image.startsWith('http') || bestVariant.image.includes('placeholder'))) {
+                bestVariant.image = simpleP.image;
+                variantChanged = true;
+            }
+            if (addImage(bestParent, simpleP.image)) {
+                variantChanged = true;
+            }
+            if (Array.isArray(simpleP.gallery)) {
+                simpleP.gallery.forEach(img => {
+                    if (addImage(bestParent, img)) variantChanged = true;
+                });
+            }
+
+            if (variantChanged) {
+                bestParent.tikiStock = (bestParent.variants || []).reduce((sum, v) => sum + (v.tikiStock || 0), 0);
+                bestParent.lazadaStock = (bestParent.variants || []).reduce((sum, v) => sum + (v.lazadaStock || 0), 0);
+                bestParent.stock = (bestParent.variants || []).reduce((sum, v) => sum + (v.stock || 0), 0);
+                if ((!bestParent.category || bestParent.category === 'Uncategorized') && simpleP.category && simpleP.category !== 'Uncategorized') bestParent.category = simpleP.category;
+                if (!bestParent.description && simpleP.description) bestParent.description = simpleP.description;
+                dataChanged = true;
+            }
+
+            duplicateProductIds.push(simpleP.id);
+        }
+    });
+
+    // 3. Clean up placeholder images and promote real images for all products
+    const modifiedProducts = [];
+    data.products.forEach(p => {
+        let productModified = false;
+        
+        // Collect all real images from gallery and variants
+        let realImages = [];
+        if (Array.isArray(p.gallery)) {
+            realImages = p.gallery.filter(isRealImage);
+        }
+        if (Array.isArray(p.variants)) {
+            p.variants.forEach(v => {
+                if (v.image && isRealImage(v.image) && !realImages.includes(v.image)) {
+                    realImages.push(v.image);
+                }
+            });
+        }
+        
+        if (realImages.length > 0) {
+            // If the featured image is not real, promote the first real image
+            if (!isRealImage(p.image)) {
+                p.image = realImages[0];
+                productModified = true;
+            }
+            
+            // Rebuild gallery: only keep real images!
+            const newGallery = realImages;
+            if (JSON.stringify(p.gallery) !== JSON.stringify(newGallery)) {
+                p.gallery = newGallery;
+                productModified = true;
+            }
+        }
+
+        if (Array.isArray(p.variants)) {
+            p.variants.forEach(v => {
+                if (v.image && !isRealImage(v.image)) {
+                    v.image = isRealImage(p.image) ? p.image : (realImages[0] || '');
+                    productModified = true;
+                }
+            });
+        }
+        
+        if (productModified) {
+            modifiedProducts.push(p);
+            dataChanged = true;
+        }
+    });
+
+    if (duplicateProductIds.length > 0) {
+        data.products = data.products.filter(p => !duplicateProductIds.includes(p.id));
+        dataChanged = true;
+    }
+
+    if (dataChanged) {
+        localStorage.setItem(this.storageKey, JSON.stringify(data));
+        // Sync modified products to server sequentially in the background
+        modifiedProducts.forEach(p => {
+            fetch('/api/products', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(p)
+            }).catch(e => console.error('Error syncing cleaned product:', e));
+        });
+    }
+  },
+  getProducts: function () {
+    this.cleanupDuplicateProducts();
+    const p = this.getData().products;
+    return (p && p.length > 0) ? p : this.normalizeProducts(window.GRADIE_DATA?.products || []);
+  },
   saveProducts: function (products) { let data = this.getData(); data.products = this.normalizeProducts(products); this.saveData(data); },
   getProductById: function (id) { return this.getProducts().find(p => p.id === id); },
   addProduct: async function (product) {
@@ -2042,28 +2312,23 @@ window.GradieStore = {
   deleteProduct: function (id) { let data = this.getData(); data.products = data.products.filter(p => p.id !== id); this.saveData(data); fetch('/api/products?id=' + id, { method: 'DELETE' }).then(() => { window.dispatchEvent(new Event('gradie_data_synced')); }).catch(e => console.error('Sync error', e)); },
 
   normalizeProduct: function (p) {
-    p.id = p.id || '';
-        p.name = p.name || 'Untitled Product';
-        p.category = p.category || 'Uncategorized';
-        p.price = Number(p.price) || 0;
-        p.sku = p.sku || '';
-        p.description = p.description || '';
-    p.oldPrice = p.oldPrice ? Number(p.oldPrice) : null;
-        p.stock = Number(p.stock) || 0;
-        p.tikiStock = p.tikiStock !== undefined ? Number(p.tikiStock) : p.stock;
-        p.lazadaStock = p.lazadaStock !== undefined ? Number(p.lazadaStock) : p.stock;
-        p.rating = Math.max(0, Math.min(5, Number(p.rating) || 4.8));
-    if (!p.gallery || !Array.isArray(p.gallery)) { p.gallery = p.image ? [p.image] : []; }
-    p.gallery = p.gallery.filter(img => img && typeof img === 'string' && img.trim() !== '');
+    p.id = p.id || ''; p.name = p.name || 'Untitled Product'; p.category = p.category || 'Uncategorized'; p.price = Number(p.price) || 0;
+    p.oldPrice = p.oldPrice ? Number(p.oldPrice) : null; p.stock = Number(p.stock) || 0; p.rating = Math.max(0, Math.min(5, Number(p.rating) || 4.8));
+    const sanitizeImageUrl = (url) => this.isValidProductImageUrl(url)
+      ? url.trim().replace(/^[`'"]+|[`'"]+$/g, '')
+      : '';
+    const rawGallery = Array.isArray(p.gallery) ? p.gallery : [];
+    p.gallery = [p.image, ...rawGallery].map(sanitizeImageUrl).filter(Boolean);
     p.gallery = [...new Set(p.gallery)];
-    const fallback = 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80';
+    const fallback = 'images/logo.png';
     if (p.gallery.length === 0) p.gallery.push(fallback);
-    p.image = p.gallery[0];
+    p.image = p.gallery[0] || fallback;
     if (!Array.isArray(p.variants)) p.variants = [];
     p.variants.forEach(v => {
       v.name = v.name || (v.options && Array.isArray(v.options) ? v.options.join(' / ') : '') || v.color || '';
       v.color = v.color || v.name || '';
       v.price = Number(v.price) || p.price;
+      if (v.image) v.image = sanitizeImageUrl(v.image) || p.image;
     });
     if (!Array.isArray(p.tags)) p.tags = []; if (!p.options) p.options = { colors: [], sizes: [], personalization: [] };
     p.isTrending = Boolean(p.isTrending); p.isFeatured = Boolean(p.isFeatured);
@@ -2430,12 +2695,27 @@ window.GradieStore = {
   },
 
   // STOCK MANIPULATION
-  deductStock: function (productId, quantity) {
+  deductStock: function (productId, quantity, variantSku = '', variantName = '') {
     let data = this.getData();
     if (!data.products) return;
-    let index = data.products.findIndex(p => p.id === productId);
+    let index = data.products.findIndex(p => String(p.id) === String(productId));
     if (index !== -1) {
-      data.products[index].stock = Math.max(0, (data.products[index].stock || 0) - quantity);
+      const product = data.products[index];
+      if (Array.isArray(product.variants) && product.variants.length > 0) {
+        const variant = product.variants.find(v => {
+          const label = v.name || (Array.isArray(v.options) ? v.options.join(' / ') : '') || v.color || v.title || v.sku || '';
+          return (variantSku && String(v.sku || '') === String(variantSku)) ||
+            (variantName && String(label) === String(variantName));
+        });
+        if (variant) {
+          variant.stock = Math.max(0, (Number(variant.stock) || 0) - quantity);
+          product.stock = product.variants.reduce((sum, v) => sum + (Number(v.stock) || 0), 0);
+        } else {
+          product.stock = Math.max(0, (Number(product.stock) || 0) - quantity);
+        }
+      } else {
+        product.stock = Math.max(0, (Number(product.stock) || 0) - quantity);
+      }
       this.saveData(data);
     }
   },
@@ -2448,9 +2728,9 @@ window.GradieStore = {
     data.reviews.unshift(review);
 
     // Update product rating and reviews count in the product object itself
-    const pIndex = data.products.findIndex(p => p.id === review.productId);
+    const pIndex = data.products.findIndex(p => String(p.id) === String(review.productId));
     if (pIndex !== -1) {
-      const pReviews = data.reviews.filter(r => r.productId === review.productId);
+      const pReviews = data.reviews.filter(r => String(r.productId) === String(review.productId));
       const avgRating = pReviews.reduce((sum, r) => sum + r.rating, 0) / pReviews.length;
       data.products[pIndex].rating = parseFloat(avgRating.toFixed(1));
       data.products[pIndex].reviews = pReviews.length;
@@ -2470,8 +2750,47 @@ window.GradieStore = {
   },
 
   syncTikiProducts: async function () {
+    if (window.location.protocol === 'file:') {
+      return { success: false, message: 'Bạn đang mở file trực tiếp. Hãy mở qua http://localhost:3001/admin-products.html để dùng API sync.' };
+    }
+    const normSku = s => String(s || '').replace(/[\s\-_]/g, '').toLowerCase();
+    const rootSku = s => normSku(String(s || '').trim().replace(/[-_]\d+$/i, ''));
+    const skuRelated = (a, b) => {
+      const aNorm = normSku(a);
+      const bNorm = normSku(b);
+      const aRoot = rootSku(a);
+      const bRoot = rootSku(b);
+      return Boolean(aNorm && bNorm && (
+        aNorm === bNorm ||
+        (aRoot && bRoot && aRoot === bRoot) ||
+        (aRoot && bNorm && aRoot === bNorm) ||
+        (bRoot && aNorm && bRoot === aNorm)
+      ));
+    };
+    const normName = s => String(s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+
+    const findTikiVariantMatch = (product, ttp) => {
+      if (!product.variants || product.variants.length === 0) return null;
+      const ttpSkuNorm = normSku(ttp.sku);
+      const ttpOrigSkuNorm = normSku(ttp.original_sku);
+      const ttpNameLower = String(ttp.name || '').toLowerCase();
+
+      const bySku = product.variants.find(v => {
+        return (ttpSkuNorm && skuRelated(v.sku, ttp.sku)) || (ttpOrigSkuNorm && skuRelated(v.sku, ttp.original_sku));
+      });
+      if (bySku) return bySku;
+
+      return product.variants.find(v => {
+        if (!v.options || !Array.isArray(v.options) || v.options.length === 0) return false;
+        return v.options.every(opt => ttpNameLower.includes(String(opt).toLowerCase()));
+      }) || null;
+    };
+
     try {
       const settings = this.getSettings();
+      if (!settings.tikiAppKey || !settings.tikiAppSecret) {
+        return { success: false, message: 'Thiếu Tiki App Key hoặc App Secret trong Settings.' };
+      }
       const allProducts = this.getProducts() || [];
       const productIds = allProducts.map(p => p.id);
       const res = await fetch('/api/tiki', {
@@ -2488,66 +2807,98 @@ window.GradieStore = {
       if (res.ok && data.success) {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
-            let updatedImageCount = 0;
-          const normSku = s => (s || '').replace(/[\s\-_]/g, '').toLowerCase();
-          const normName = s => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
-          data.products.forEach(ttp => {
-            if (!ttp.image) return;
-            const rSku = normSku(ttp.sku);
-            const rName = normName(ttp.name);
-            let p = all.find(x => {
-              const pSku = normSku(x.sku);
-              if (String(x.id) === String(ttp.id)) return true;
-              if (pSku && rSku && pSku === rSku) return true;
-              if (pSku && rSku && (pSku.startsWith(rSku) || rSku.startsWith(pSku))) return true;
-              if (x.variants && x.variants.some(v => normSku(v.sku) === rSku)) return true;
-              const pName = normName(x.name);
-              if (pName && rName && (pName === rName || pName.includes(rName) || rName.includes(pName))) return true;
-              return false;
+            data.products.forEach(ttp => {
+                let matchedVariant = null;
+                
+                let p = all.find(x => {
+                  if (String(x.id) === String(ttp.id)) return true;
+                  
+                  // Prioritize variant matching if variants exist
+                  if (x.variants && x.variants.length > 0) {
+                      const vMatch = findTikiVariantMatch(x, ttp);
+                      if (vMatch) {
+                          matchedVariant = vMatch;
+                          return true;
+                      }
+                      return false;
+                  }
+                  
+                  const ttpSkuNorm = normSku(ttp.sku);
+                  const ttpOrigSkuNorm = normSku(ttp.original_sku);
+                  if (ttpSkuNorm && skuRelated(x.sku, ttp.sku)) return true;
+                  if (ttpOrigSkuNorm && skuRelated(x.sku, ttp.original_sku)) return true;
+                  
+                  const n1 = normName(x.name);
+                  const n2 = normName(ttp.name);
+                  if (n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1))) return true;
+                  return false;
+                });
+
+                if (p) {
+                    const isWebsiteProduct = !p.marketplaceSource || p.marketplaceSource === 'Website';
+                    if (matchedVariant) {
+                        matchedVariant.tikiStock = ttp.stock;
+                        if (!isWebsiteProduct) {
+                            if (ttp.price) matchedVariant.price = ttp.price;
+                            if (ttp.image && String(ttp.image).startsWith('http')) {
+                                matchedVariant.image = ttp.image;
+                                if (p.gallery && Array.isArray(p.gallery)) {
+                                    if (!p.gallery.includes(ttp.image)) p.gallery.push(ttp.image);
+                                }
+                            }
+                        }
+                        
+                        const parentName = String(p.name).toLowerCase();
+                        const ttpName = String(ttp.name);
+                        let extractedVarName = ttpName;
+                        if (ttpName.toLowerCase().startsWith(parentName)) {
+                            extractedVarName = ttpName.substring(parentName.length).replace(/^[\s\-_|/]+|[\s\-_|/]+$/g, '').trim();
+                        }
+                        if (extractedVarName && (!matchedVariant.name || matchedVariant.name === 'Phân loại' || matchedVariant.name === '')) {
+                            matchedVariant.name = extractedVarName;
+                            if (!matchedVariant.options || matchedVariant.options.length === 0) {
+                                matchedVariant.options = extractedVarName.split(/\s*[\-/|]\s*/).filter(Boolean);
+                            }
+                        }
+                        
+                        p.tikiStock = (p.variants || []).reduce((sum, v) => sum + (v.tikiStock || 0), 0);
+                    } else if (!p.variants || p.variants.length === 0) {
+                        p.tikiStock = ttp.stock;
+                        if (!isWebsiteProduct) {
+                            if (ttp.image && String(ttp.image).startsWith('http')) p.image = ttp.image;
+                            if (ttp.image && String(ttp.image).startsWith('http')) p.gallery = [ttp.image, ...(Array.isArray(p.gallery) ? p.gallery : []).filter(img => img !== ttp.image)];
+                            if (ttp.name && (!p.name || p.name === 'Sản phẩm mới từ Tiki')) p.name = ttp.name;
+                            if (ttp.sku && !p.sku) p.sku = ttp.sku;
+                            if (ttp.price && (!p.price || p.price === 0)) p.price = ttp.price;
+                        }
+                    }
+                } else {
+                    all.push({
+                        id: String(Date.now() + Math.floor(Math.random() * 1000)),
+                        sku: ttp.sku || ttp.original_sku || '',
+                        name: ttp.name || 'Sản phẩm mới từ Tiki',
+                        price: ttp.price || 0,
+                        stock: 0,
+                        tikiStock: ttp.stock,
+                        category: 'Uncategorized',
+                        image: (ttp.image && String(ttp.image).startsWith('http')) ? ttp.image : '',
+                        gallery: (ttp.image && String(ttp.image).startsWith('http')) ? [ttp.image] : [],
+                        dateAdded: new Date().toISOString(),
+                        isSyncOnly: true,
+                        marketplaceSource: 'Tiki',
+                        showOnWebsite: false
+                    });
+                }
             });
-            if (p) {
-              const oldImage = p.image;
-              p.name = ttp.name || p.name;
-              p.price = ttp.price || p.price;
-              p.tikiStock = ttp.stock !== undefined ? ttp.stock : p.tikiStock;
-              p.stock = ttp.stock !== undefined ? ttp.stock : p.stock;
-              if (ttp.gallery && ttp.gallery.length > 0) {
-                p.gallery = ttp.gallery;
-              } else if (ttp.image && (!p.gallery || !p.gallery.includes(ttp.image))) {
-                if (!p.gallery) p.gallery = [];
-                p.gallery.unshift(ttp.image);
-              }
-              p.image = ttp.image || p.image;
-              if (ttp.description) p.description = ttp.description;
-              if (oldImage !== ttp.image) updatedImageCount++;
-              fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) })
-                .catch(e => console.error('Sync product error', e));
-            } else {
-              all.push({
-                id: String(Date.now() + Math.floor(Math.random() * 1000)),
-                sku: ttp.sku || '',
-                name: ttp.name || 'Sản phẩm mới từ Tiki',
-                price: ttp.price || 0,
-                stock: ttp.stock || 0,
-                tikiStock: ttp.stock || 0,
-                category: 'Uncategorized',
-                image: ttp.image || '',
-                gallery: ttp.gallery && ttp.gallery.length > 0 ? ttp.gallery : (ttp.image ? [ttp.image] : []),
-                description: ttp.description || '',
-                dateAdded: new Date().toISOString()
-              });
-              updatedImageCount++;
-            }
-          });
           let currentData = this.getData();
           currentData.products = all;
           this.saveData(currentData);
-          window.dispatchEvent(new Event('gradie_data_synced'));
-          this.addActivityLog('Tiki Sync', `Đã đồng bộ ${data.syncedCount || data.products?.length || 0} sản phẩm, cập nhật ${updatedImageCount} ảnh từ Tiki.`);
-          return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0, updatedImageCount };
+          fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(all) })
+            .then(() => { window.dispatchEvent(new Event('gradie_data_synced')); })
+            .catch(e => console.error('Sync products error', e));
         }
-        this.addActivityLog('Tiki Sync', `Tiki trả về 0 sản phẩm.`);
-        return { success: true, message: data.message, syncedCount: 0, updatedImageCount: 0 };
+        this.addActivityLog('Tiki Sync', `Đã đồng bộ tồn kho ${data.syncedCount || data.products?.length || 0} sản phẩm Tiki.`);
+        return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0 };
       }
       return { success: false, message: data.message || 'Không rõ nguyên nhân' };
     } catch (err) {
@@ -2558,7 +2909,15 @@ window.GradieStore = {
 
   syncTikiOrders: async function (onSuccess, onError, onProgress) {
     try {
+      if (window.location.protocol === 'file:') {
+        if (onError) onError('Bạn đang mở file trực tiếp. Hãy mở qua http://localhost:3001/admin-settings.html để nhập đơn.');
+        return;
+      }
       const settings = this.getSettings();
+      if (!settings.tikiAppKey || !settings.tikiAppSecret) {
+        if (onError) onError('Thiếu Tiki App Key hoặc App Secret trong Settings.');
+        return;
+      }
       if (onProgress) onProgress(true);
       const res = await fetch('/api/tiki', {
         method: 'POST',
@@ -2603,8 +2962,20 @@ window.GradieStore = {
                 }
               }
             } else {
+              // IDEMPOTENCY GUARD: Check localStorage to ensure this order hasn't already been processed
+              const processedKey = 'GRADIE_TIKI_PROCESSED_ORDERS';
+              const processedOrders = JSON.parse(localStorage.getItem(processedKey) || '[]');
+              if (processedOrders.includes(o.orderNumber)) {
+                console.warn('[Tiki Sync] Skipping already-processed order:', o.orderNumber);
+                continue;
+              }
               updatedOrdersList.unshift(o);
               addedCount++;
+
+              // Mark as processed to prevent future double-deduction
+              processedOrders.push(o.orderNumber);
+              if (processedOrders.length > 1000) processedOrders.splice(0, processedOrders.length - 1000);
+              localStorage.setItem(processedKey, JSON.stringify(processedOrders));
 
               // Sync new order to MongoDB
               try {
@@ -2624,6 +2995,15 @@ window.GradieStore = {
 
           if (updatedCount > 0 || addedCount > 0) {
             this.saveOrders(updatedOrdersList);
+            // Track processed Tiki order numbers in localStorage to prevent double-deduction
+            const processedKey = 'GRADIE_TIKI_PROCESSED_ORDERS';
+            const processed = JSON.parse(localStorage.getItem(processedKey) || '[]');
+            for (const o of data.orders) {
+              if (!processed.includes(o.orderNumber)) processed.push(o.orderNumber);
+            }
+            // Keep only last 1000 entries to prevent localStorage bloat
+            if (processed.length > 1000) processed.splice(0, processed.length - 1000);
+            localStorage.setItem(processedKey, JSON.stringify(processed));
             // Dispatch event so UI components can re-render with fresh data
             window.dispatchEvent(new Event('gradie_data_synced'));
           }
@@ -2658,8 +3038,87 @@ window.GradieStore = {
   },
 
   syncLazadaProducts: async function () {
+    if (window.location.protocol === 'file:') {
+      return { success: false, message: 'Bạn đang mở file trực tiếp. Hãy mở qua http://localhost:3001/admin-products.html để dùng API sync.' };
+    }
+    const normSku = s => String(s || '').replace(/[\s\-_]/g, '').toLowerCase();
+    const rootSku = s => normSku(String(s || '').trim().replace(/[-_]\d+$/i, ''));
+    const skuRelated = (a, b) => {
+      const aNorm = normSku(a);
+      const bNorm = normSku(b);
+      const aRoot = rootSku(a);
+      const bRoot = rootSku(b);
+      return Boolean(aNorm && bNorm && (
+        aNorm === bNorm ||
+        (aRoot && bRoot && aRoot === bRoot) ||
+        (aRoot && bNorm && aRoot === bNorm) ||
+        (bRoot && aNorm && bRoot === aNorm)
+      ));
+    };
+    const normName = s => String(s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    const isRealImage = url => this.isValidProductImageUrl(url);
+    const getFallbackImage = () => 'images/logo.png'; // Use default logo instead of text placeholder
+    const addImage = (product, image, prepend = false) => {
+      if (!isRealImage(image)) return false;
+      if (!Array.isArray(product.gallery)) product.gallery = [];
+      const existed = product.gallery.includes(image);
+      if (!existed) {
+        if (prepend) product.gallery.unshift(image);
+        else product.gallery.push(image);
+      }
+      if (!isRealImage(product.image)) {
+        product.image = image;
+        return true;
+      }
+      return !existed;
+    };
+    const mergeLazadaDetails = (target, source) => {
+      if (!target || !source) return;
+      // STRICT ISOLATION: Only merge name/price/description if product is Lazada-only.
+      // Website products (no marketplaceSource or 'Website') are NEVER overwritten.
+      const isWebsiteProduct = !target.marketplaceSource || target.marketplaceSource === 'Website';
+      if (!isWebsiteProduct) {
+        if (source.name && (!target.name || target.name === 'Untitled Product' || target.name === 'Sản phẩm mới từ Lazada')) target.name = source.name;
+        if (source.price && (!target.price || target.price === 0)) target.price = source.price;
+        if (source.description && !target.description) target.description = source.description;
+      }
+      if (source.sku && !target.sku) target.sku = source.sku;
+      if (source.category && (!target.category || target.category === 'Uncategorized' || /^\d+$/.test(String(target.category)))) target.category = source.category;
+      if (Array.isArray(source.gallery)) source.gallery.forEach(img => addImage(target, img));
+      addImage(target, source.image, true);
+      if (!isRealImage(target.image) && Array.isArray(target.gallery)) {
+        const firstRealImage = target.gallery.find(isRealImage);
+        if (firstRealImage) target.image = firstRealImage;
+      }
+    };
+
+    const findLazadaVariantMatch = (product, lzdp) => {
+      if (!product.variants || product.variants.length === 0) return null;
+      const lzdpSkuNorm = normSku(lzdp.sku);
+      const lzdpBaseNorm = normSku(lzdp.baseSku);
+
+      const bySku = product.variants.find(v => {
+        const vSkuNorm = normSku(v.sku);
+        return (lzdpSkuNorm && skuRelated(v.sku, lzdp.sku)) ||
+          (lzdpBaseNorm && (skuRelated(v.sku, lzdp.baseSku) || vSkuNorm.startsWith(lzdpBaseNorm)));
+      });
+      if (bySku) return bySku;
+
+      if (lzdp.variants && lzdp.variants.length > 0) {
+        for (const lv of lzdp.variants) {
+          const lvSkuNorm = normSku(lv.sku);
+          const vMatch = product.variants.find(v => normSku(v.sku) === lvSkuNorm || skuRelated(v.sku, lv.sku));
+          if (vMatch) return vMatch;
+        }
+      }
+      return null;
+    };
+
     try {
       const settings = this.getSettings();
+      if (!settings.lazadaAppKey || !settings.lazadaAppSecret || !settings.lazadaAccessToken) {
+        return { success: false, message: 'Thiếu Lazada App Key, App Secret hoặc Access Token trong Settings.' };
+      }
       const allProducts = this.getProducts() || [];
       const productIds = allProducts.map(p => p.id);
       const res = await fetch('/api/lazada', {
@@ -2678,73 +3137,145 @@ window.GradieStore = {
       if (res.ok && data.success) {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
-            let updatedImageCount = 0;
-          const normSku = s => (s || '').replace(/[\s\-_]/g, '').toLowerCase();
-          const normName = s => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
-          data.products.forEach(lzdp => {
-            if (!lzdp.image && !lzdp.name) return;
-            const lSku = normSku(lzdp.sku);
-            const lName = normName(lzdp.name);
-            let p = all.find(x => {
-              const xs = normSku(x.sku);
-              if (String(x.id) === String(lzdp.id)) return true;
-              if (xs && lSku && xs === lSku) return true;
-              if (xs && lSku && (xs.startsWith(lSku) || lSku.startsWith(xs))) return true;
-              if (x.variants && x.variants.some(v => normSku(v.sku) === lSku)) return true;
-              const xn = normName(x.name);
-              if (xn && lName && (xn === lName || xn.includes(lName) || lName.includes(xn))) return true;
-              return false;
+            data.products.forEach(lzdp => {
+                let matchedVariant = null;
+                
+                let p = all.find(x => {
+                  if (String(x.id) === String(lzdp.id)) return true;
+                  
+                  // Prioritize variant matching if variants exist
+                  if (x.variants && x.variants.length > 0) {
+                      const vMatch = findLazadaVariantMatch(x, lzdp);
+                      if (vMatch) {
+                          matchedVariant = vMatch;
+                          return true;
+                      }
+                      return false;
+                  }
+                  
+                  const lzdpSkuNorm = normSku(lzdp.sku);
+                  const lzdpBaseNorm = normSku(lzdp.baseSku);
+                  const xSkuNorm = normSku(x.sku);
+                  if (lzdpSkuNorm && skuRelated(x.sku, lzdp.sku)) return true;
+                  if (lzdpBaseNorm && (skuRelated(x.sku, lzdp.baseSku) || xSkuNorm.startsWith(lzdpBaseNorm))) return true;
+                  
+                  const n1 = normName(x.name);
+                  const n2 = normName(lzdp.name);
+                  if (n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1))) return true;
+                  return false;
+                });
+
+                if (p) {
+                    mergeLazadaDetails(p, lzdp);
+                    if (lzdp.variants && lzdp.variants.length > 0) {
+                        if (p.variants && p.variants.length > 0) {
+                            lzdp.variants.forEach(lv => {
+                                const lvSkuNorm = normSku(lv.sku);
+                                const vMatch = p.variants.find(v => normSku(v.sku) === lvSkuNorm || skuRelated(v.sku, lv.sku));
+                                if (vMatch) {
+                                    vMatch.lazadaStock = lv.lazadaStock ?? lv.stock;
+                                    // Do NOT overwrite price and image if product is from Website
+                                    if (!p.marketplaceSource || p.marketplaceSource === 'Lazada') {
+                                        if (lv.price) vMatch.price = lv.price;
+                                        if (lv.image && String(lv.image).startsWith('http')) vMatch.image = lv.image;
+                                        if (lv.image && String(lv.image).startsWith('http')) {
+                                            addImage(p, lv.image);
+                                        }
+                                    }
+                                    
+                                    if (lv.name && (!vMatch.name || vMatch.name === 'Phân loại' || vMatch.name === '')) {
+                                        vMatch.name = lv.name;
+                                        if (!vMatch.options || vMatch.options.length === 0) {
+                                            vMatch.options = lv.name.split(/\s*[\-/|]\s*/).filter(Boolean);
+                                        }
+                                    }
+                                }
+                            });
+                        } else {
+                            p.variants = lzdp.variants.map(lv => ({
+                                ...lv,
+                                stock: 0,
+                                lazadaStock: lv.lazadaStock ?? lv.stock ?? 0
+                            }));
+                        }
+                        p.lazadaStock = (p.variants || []).reduce((sum, v) => sum + (v.lazadaStock || 0), 0);
+                    } else if (matchedVariant) {
+                        matchedVariant.lazadaStock = lzdp.lazadaStock ?? lzdp.stock;
+                        if (!p.marketplaceSource || p.marketplaceSource === 'Lazada') {
+                            if (lzdp.price) matchedVariant.price = lzdp.price;
+                            if (lzdp.image && String(lzdp.image).startsWith('http')) {
+                                matchedVariant.image = lzdp.image;
+                                addImage(p, lzdp.image);
+                            }
+                        }
+                        p.lazadaStock = (p.variants || []).reduce((sum, v) => sum + (v.lazadaStock || 0), 0);
+                    } else if (!p.variants || p.variants.length === 0) {
+                        if (lzdp.image && String(lzdp.image).startsWith('http')) p.image = lzdp.image;
+                        if (lzdp.name && (!p.name || p.name === 'Sản phẩm mới từ Lazada')) p.name = lzdp.name;
+                        if (lzdp.sku && !p.sku) p.sku = lzdp.sku;
+                        if (lzdp.category && (!p.category || p.category === 'Uncategorized')) p.category = lzdp.category;
+                        if (lzdp.price && (!p.price || p.price === 0)) p.price = lzdp.price;
+                        if (lzdp.description && !p.description) p.description = lzdp.description;
+                        if (lzdp.gallery && lzdp.gallery.length > 0 && (!p.gallery || p.gallery.length < lzdp.gallery.length)) {
+                            p.gallery = lzdp.gallery;
+                            if (!p.image || !p.image.startsWith('http')) p.image = lzdp.gallery[0];
+                        }
+                        p.lazadaStock = lzdp.lazadaStock ?? lzdp.stock;
+                    }
+
+                    // Tự động kéo thông tin chi tiết của Haravan gốc nếu sản phẩm bị thiếu
+                    const isNumeric = s => /^\d+$/.test(String(s || '').trim());
+                    if (!p.name || !p.sku || !p.category || p.category === 'Uncategorized' || isNumeric(p.category)) {
+                        const origProducts = window.GRADIE_DATA?.products || [];
+                        const origMatch = origProducts.find(op => {
+                            if (op.id === p.id) return true;
+                            if (op.sku && p.sku && String(op.sku).trim().toLowerCase() === String(p.sku).trim().toLowerCase()) return true;
+                            if (op.image && p.image && op.image === p.image) return true;
+                            if (op.gallery && p.gallery) { if (op.gallery.some(g => p.gallery.includes(g))) return true; }
+                            return false;
+                        });
+                        if (origMatch) {
+                            if (!p.name && origMatch.name) p.name = origMatch.name;
+                            if (!p.sku && origMatch.sku) p.sku = origMatch.sku;
+                            if ((!p.category || p.category === 'Uncategorized' || isNumeric(p.category)) && origMatch.category) p.category = origMatch.category;
+                            if ((!p.price || p.price === 0) && origMatch.price) p.price = origMatch.price;
+                            if (!p.description && origMatch.description) p.description = origMatch.description;
+                            if ((!p.variants || p.variants.length === 0) && origMatch.variants) p.variants = origMatch.variants;
+                        }
+                    }
+                } else {
+                    all.push({
+                        id: String(Date.now() + Math.floor(Math.random() * 1000)),
+                        sku: lzdp.sku || '',
+                        name: lzdp.name || 'Sản phẩm mới từ Lazada',
+                        price: lzdp.price || 0,
+                        stock: 0,
+                        lazadaStock: lzdp.stock,
+                        category: lzdp.category || 'Uncategorized',
+                        image: lzdp.image || '',
+                        gallery: lzdp.gallery || [],
+                        description: lzdp.description || '',
+                        variants: (lzdp.variants || []).map(lv => ({
+                            ...lv,
+                            stock: 0,
+                            lazadaStock: lv.lazadaStock ?? lv.stock ?? 0
+                        })),
+                        dateAdded: new Date().toISOString(),
+                        isSyncOnly: true,
+                        marketplaceSource: 'Lazada',
+                        showOnWebsite: false
+                    });
+                }
             });
-            if (p) {
-              const oldImage = p.image;
-              // Update ALL fields, not just image
-              p.name = lzdp.name || p.name;
-              p.price = lzdp.price || p.price;
-              p.lazadaStock = lzdp.stock !== undefined ? lzdp.stock : p.lazadaStock;
-              p.stock = lzdp.stock !== undefined ? lzdp.stock : p.stock;
-              if (lzdp.gallery && lzdp.gallery.length > 0) {
-                p.gallery = lzdp.gallery;
-              } else if (lzdp.image && (!p.gallery || !p.gallery.includes(lzdp.image))) {
-                if (!p.gallery) p.gallery = [];
-                p.gallery.unshift(lzdp.image);
-              }
-              p.image = lzdp.image || p.image;
-              if (lzdp.description) p.description = lzdp.description;
-              if (oldImage !== lzdp.image) updatedImageCount++;
-              fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) })
-                .catch(e => console.error('Sync product error', e));
-            } else {
-              all.push({
-                id: String(Date.now() + Math.floor(Math.random() * 1000)),
-                sku: lzdp.sku || '',
-                name: lzdp.name || 'Sản phẩm mới từ Lazada',
-                price: lzdp.price || 0,
-                stock: lzdp.stock || 0,
-                lazadaStock: lzdp.stock || 0,
-                category: 'Uncategorized',
-                image: lzdp.image || '',
-                gallery: lzdp.gallery && lzdp.gallery.length > 0 ? lzdp.gallery : (lzdp.image ? [lzdp.image] : []),
-                description: lzdp.description || '',
-                dateAdded: new Date().toISOString()
-              });
-              updatedImageCount++;
-            }
-          });
-          const crossFallback = all.filter(p =>
-            p.lazadaStock > 0 && p.image && p.image.includes('salt.tikicdn.com') && !p.image.includes('slatic.net')
-          );
-          if (crossFallback.length > 0) {
-            console.log(`[Lazada Sync] ${crossFallback.length} sản phẩm dùng ảnh Tiki làm fallback cho Lazada.`);
-          }
           let currentData = this.getData();
           currentData.products = all;
           this.saveData(currentData);
-          window.dispatchEvent(new Event('gradie_data_synced'));
-          this.addActivityLog('Lazada Sync', `Đã đồng bộ ${data.syncedCount || data.products?.length || 0} sản phẩm, cập nhật ${updatedImageCount} ảnh từ Lazada.`);
-          return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0, updatedImageCount };
+          fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(all) })
+            .then(() => { window.dispatchEvent(new Event('gradie_data_synced')); })
+            .catch(e => console.error('Sync products error', e));
         }
-        this.addActivityLog('Lazada Sync', `Lazada trả về 0 sản phẩm.`);
-        return { success: true, message: data.message, syncedCount: 0, updatedImageCount: 0 };
+        this.addActivityLog('Lazada Sync', `Đã đồng bộ tồn kho ${data.syncedCount || data.products?.length || 0} sản phẩm Lazada.`);
+        return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0 };
       }
       return { success: false, message: data.message || 'Không rõ nguyên nhân' };
     } catch (err) {
@@ -2755,7 +3286,15 @@ window.GradieStore = {
 
   syncLazadaOrders: async function (onSuccess, onError, onProgress) {
     try {
+      if (window.location.protocol === 'file:') {
+        if (onError) onError('Bạn đang mở file trực tiếp. Hãy mở qua http://localhost:3001/admin-settings.html để nhập đơn.');
+        return;
+      }
       const settings = this.getSettings();
+      if (!settings.lazadaAppKey || !settings.lazadaAppSecret || !settings.lazadaAccessToken) {
+        if (onError) onError('Thiếu Lazada App Key, App Secret hoặc Access Token trong Settings.');
+        return;
+      }
       if (onProgress) onProgress(true);
       const res = await fetch('/api/lazada', {
         method: 'POST',

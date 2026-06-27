@@ -82,13 +82,71 @@ const server = http.createServer(async (req, res) => {
     // Serve static files
     let urlWithoutQuery = req.url.split('?')[0];
     let filePath = path.join(PUBLIC_DIR, urlWithoutQuery === '/' ? 'index.html' : urlWithoutQuery);
-    const extname = String(path.extname(filePath)).toLowerCase();
+    let extname = String(path.extname(filePath)).toLowerCase();
     
     // If no extension, assume it's an API call not handled or a route
     if (urlWithoutQuery.startsWith('/api/')) {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: true, dummy: true }));
+        const apiName = urlWithoutQuery.replace('/api/', '');
+        const apiFilePath = path.join(PUBLIC_DIR, 'api', apiName + '.js');
+        if (fs.existsSync(apiFilePath)) {
+            try {
+                // Buffer the request body
+                let body = '';
+                await new Promise((resolve) => {
+                    req.on('data', chunk => { body += chunk.toString(); });
+                    req.on('end', resolve);
+                });
+                
+                if (req.headers['content-type']?.includes('application/json') && body) {
+                    try {
+                        req.body = JSON.parse(body);
+                    } catch (e) {
+                        req.body = body;
+                    }
+                } else {
+                    req.body = body;
+                }
+
+                // Decorate res
+                res.status = function(code) {
+                    res.statusCode = code;
+                    return res;
+                };
+                res.json = function(data) {
+                    if (!res.headersSent) {
+                        res.setHeader('Content-Type', 'application/json');
+                    }
+                    res.end(JSON.stringify(data));
+                    return res;
+                };
+                res.send = function(data) {
+                    res.end(data);
+                    return res;
+                };
+
+                // Load and run handler
+                const fileUrl = 'file://' + apiFilePath;
+                const apiModule = await import(fileUrl);
+                const handler = apiModule.default || apiModule;
+                
+                await handler(req, res);
+                return;
+            } catch (err) {
+                console.error(`Error executing API ${apiName}:`, err);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: false, error: err.message }));
+                return;
+            }
+        }
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: 'API not found' }));
         return;
+    }
+
+    // Support clean URLs (e.g., /admin-product-form -> /admin-product-form.html)
+    if (!extname && !fs.existsSync(filePath) && fs.existsSync(filePath + '.html')) {
+        filePath += '.html';
+        extname = '.html';
     }
 
     try {

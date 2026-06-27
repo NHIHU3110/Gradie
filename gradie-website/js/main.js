@@ -134,7 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const products = window.GradieStore.getProducts();
+      const products = window.GradieStore.getProducts().filter(p => {
+        if (p.isSyncOnly) return false;
+        if (!isNaN(p.id) && String(p.id).length >= 10) return false;
+        if (p.name && (p.name.includes('Sản phẩm mới từ') || p.name.includes('Untitled Product'))) return false;
+        return true;
+      });
       const matches = products.filter(p => 
         p.name.toLowerCase().includes(query) || 
         p.category.toLowerCase().includes(query)

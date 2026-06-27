@@ -13,10 +13,27 @@ module.exports = async (req, res) => {
       await collection.insertOne(newProduct);
       res.status(201).json({ success: true });
     } else if (req.method === 'PUT') {
-      const updatedProduct = req.body;
-      const { _id, ...updateData } = updatedProduct; // Remove _id if it exists to avoid Mongo immutable field error
-      await collection.updateOne({ id: updatedProduct.id }, { $set: updateData }, { upsert: true });
-      res.status(200).json({ success: true });
+      if (Array.isArray(req.body)) {
+        const bulkOps = req.body.map(p => {
+          const { _id, ...updateData } = p;
+          return {
+            updateOne: {
+              filter: { id: p.id },
+              update: { $set: updateData },
+              upsert: true
+            }
+          };
+        });
+        if (bulkOps.length > 0) {
+          await collection.bulkWrite(bulkOps);
+        }
+        res.status(200).json({ success: true, message: 'Bulk update successful' });
+      } else {
+        const updatedProduct = req.body;
+        const { _id, ...updateData } = updatedProduct; // Remove _id if it exists to avoid Mongo immutable field error
+        await collection.updateOne({ id: updatedProduct.id }, { $set: updateData }, { upsert: true });
+        res.status(200).json({ success: true });
+      }
     } else if (req.method === 'DELETE') {
       const { id } = req.query; // e.g. /api/products?id=abc
       await collection.deleteOne({ id: id });

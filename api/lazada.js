@@ -19,6 +19,60 @@ function buildLazadaSignature(apiName, secret, params) {
   return crypto.createHmac('sha256', secret).update(apiName + text).digest('hex').toUpperCase();
 }
 
+function isLikelyProductImageUrl(url) {
+  if (!url || typeof url !== 'string') return false;
+  const lower = url.trim().toLowerCase();
+  if (!lower.startsWith('http')) return false;
+  if (
+    lower.includes('ui-avatars.com') ||
+    lower.includes('placeholder') ||
+    lower.includes('via.placeholder') ||
+    lower.includes('unsplash.com') ||
+    lower.includes('lazada.vn/products') ||
+    lower.includes('tiki.vn/p/') ||
+    lower.includes('shopee.vn/product')
+  ) return false;
+  if (/\.html(\?|#|$)/i.test(lower)) return false;
+  return true;
+}
+
+function collectImageUrls(value, urls = []) {
+  if (!value) return urls;
+
+  if (typeof value === 'string') {
+    const cleaned = value.trim();
+    if (cleaned.startsWith('http')) {
+      if (isLikelyProductImageUrl(cleaned)) urls.push(cleaned);
+      return urls;
+    }
+    const embeddedUrls = cleaned.match(/https?:\/\/[^"' <>)\\]+/g);
+    if (embeddedUrls) {
+      embeddedUrls.forEach(url => urls.push(url));
+      return urls;
+    }
+    if ((cleaned.startsWith('[') && cleaned.endsWith(']')) || (cleaned.startsWith('{') && cleaned.endsWith('}'))) {
+      try {
+        collectImageUrls(JSON.parse(cleaned), urls);
+      } catch (err) {}
+    }
+    return urls;
+  }
+
+  if (Array.isArray(value)) {
+    value.forEach(item => collectImageUrls(item, urls));
+    return urls;
+  }
+
+  if (typeof value === 'object') {
+    ['url', 'image', 'image_url', 'src', 'Url', 'Image', 'Link'].forEach(key => collectImageUrls(value[key], urls));
+    Object.values(value).forEach(item => {
+      if (item && (Array.isArray(item) || typeof item === 'object')) collectImageUrls(item, urls);
+    });
+  }
+
+  return urls;
+}
+
 async function callLazadaApi(apiUrl, apiName, params, method = 'GET') {
   const base = apiUrl.replace(/\/$/g, '');
   const path = apiName.startsWith('/') ? apiName : '/' + apiName;
@@ -80,211 +134,253 @@ module.exports = async (req, res) => {
     return res.status(400).json({ success: false, message: 'Missing Lazada API base URL.' });
   }
 
+  const formatLazadaProduct = (p) => {
+    const extractSkuStock = (s) =>
+      Number(s.sellableQuantity ?? s.quantity ?? s.Available ?? s.available ?? 0) || 0;
+
+    let totalStock = 0;
+    if (p.skus) p.skus.forEach(s => { totalStock += extractSkuStock(s); });
+
+    let name = '';
+    if (p.attributes && p.attributes.name) name = p.attributes.name;
+
+    let skuStr = '';
+    let baseSku = '';
+    if (p.skus && p.skus[0] && p.skus[0].SellerSku) {
+      skuStr = p.skus[0].SellerSku;
+      baseSku = skuStr.includes('-') ? skuStr.split('-')[0] : skuStr;
+    }
+
+    let price = 0;
+    const candidates = [];
+    collectImageUrls(p.images, candidates);
+    collectImageUrls(p.image, candidates);
+    collectImageUrls(p.main_image, candidates);
+    collectImageUrls(p.product_main_image, candidates);
+    collectImageUrls(p.attributes?.image, candidates);
+    collectImageUrls(p.attributes?.images, candidates);
+    collectImageUrls(p.attributes?.description, candidates);
+    collectImageUrls(p.attributes?.short_description, candidates);
+    collectImageUrls(p.attributes?.description_images, candidates);
+
+    if (p.skus && p.skus.length > 0) {
+      p.skus.forEach(sku => {
+        collectImageUrls(sku.Images, candidates);
+        collectImageUrls(sku.images, candidates);
+        collectImageUrls(sku.image, candidates);
+        collectImageUrls(sku.Url, candidates);
+        collectImageUrls(sku.url, candidates);
+      });
+    }
+
+    const gallery = [...new Set(candidates.filter(c => typeof c === 'string' && isLikelyProductImageUrl(c)))];
+    const image = gallery[0] || '';
+
+    if (p.skus && p.skus.length > 0 && p.skus[0].price) price = p.skus[0].price;
+
+    let description = '';
+    if (p.attributes) {
+      description = p.attributes.description || p.attributes.short_description || '';
+    }
+
+    let category = '';
+    if (p.primary_category) {
+      category = String(p.primary_category);
+    } else if (p.attributes && p.attributes.primary_category) {
+      category = String(p.attributes.primary_category);
+    }
+
+    let variants = [];
+    if (p.skus && p.skus.length > 0) {
+      variants = p.skus.map(s => {
+        let variantName = '';
+        if (s.saleProp) {
+          variantName = Object.values(s.saleProp).join(' / ');
+        } else if (s.color_family || s.size) {
+          variantName = [s.color_family, s.size].filter(Boolean).join(' / ');
+        } else {
+          variantName = s.SellerSku || s.ShopSku || '';
+        }
+        let variantImage = [
+          ...collectImageUrls(s.Images),
+          ...collectImageUrls(s.images),
+          ...collectImageUrls(s.image),
+          ...collectImageUrls(s.Url),
+          ...collectImageUrls(s.url)
+        ].find(img => typeof img === 'string' && img.startsWith('http')) || '';
+        if (!variantImage && s.image && String(s.image).startsWith('http')) variantImage = s.image;
+        const stock = extractSkuStock(s);
+        return {
+          name: variantName,
+          sku: s.SellerSku || '',
+          price: Number(s.price) || price,
+          stock,
+          lazadaStock: stock,
+          image: variantImage
+        };
+      });
+    }
+
+    return {
+      id: String(p.item_id),
+      sku: skuStr,
+      baseSku: baseSku,
+      name: name,
+      stock: totalStock,
+      price: price,
+      image: image,
+      gallery: gallery,
+      description: description,
+      category: category,
+      variants: variants
+    };
+  };
+
   try {
     if (action === 'sync_products') {
       const apiName = '/products/get';
-      const params = {
-        app_key: currentKey,
-        access_token: accessToken,
-        sign_method: 'sha256',
-        timestamp: Date.now().toString(),
-        format: 'json',
-        version: '1.0',
-        filter: 'all'
-      };
+      const activeAccessToken = accessToken || VALID_ACCESS_TOKEN;
+      if (!activeAccessToken) {
+        return res.status(400).json({ success: false, message: 'Missing Lazada access token.' });
+      }
 
-      params.sign = buildLazadaSignature(apiName, currentSecret, params);
+      const pageLimit = 50;
+      let offset = 0;
+      let totalProducts = null;
+      const rawProducts = [];
 
-      const url = new URL(endpointUrl + apiName);
-      Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+      while (offset <= 10000) {
+        const params = {
+          app_key: currentKey,
+          access_token: activeAccessToken,
+          sign_method: 'sha256',
+          timestamp: Date.now().toString(),
+          format: 'json',
+          version: '1.0',
+          filter: 'all',
+          offset: String(offset),
+          limit: String(pageLimit)
+        };
 
-      const response = await fetch(url, { method: 'GET' });
-      const lazadaData = await response.json();
+        params.sign = buildLazadaSignature(apiName, currentSecret, params);
 
-      if (!response.ok || lazadaData.code !== "0") {
-        return res.status(400).json({ 
-          success: false, 
-          message: lazadaData.message || 'Failed to fetch products from Lazada',
-          details: lazadaData
+        const url = new URL(endpointUrl + apiName);
+        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+        const response = await fetch(url, { method: 'GET' });
+        const lazadaData = await response.json();
+
+        console.log('[LAZADA INVENTORY RAW]', {
+          status: response.status,
+          code: lazadaData.code,
+          offset,
+          pageCount: lazadaData.data?.products?.length || 0,
+          totalProducts: lazadaData.data?.total_products,
+          sample: (lazadaData.data?.products || []).slice(0, 2).map(p => ({
+            item_id: p.item_id,
+            name: p.attributes?.name,
+            skus: (p.skus || []).map(s => ({
+              SellerSku: s.SellerSku,
+              quantity: s.quantity,
+              Available: s.Available,
+              sellableQuantity: s.sellableQuantity
+            }))
+          }))
         });
+
+        if (!response.ok || lazadaData.code !== '0') {
+          return res.status(400).json({
+            success: false,
+            message: lazadaData.message || 'Failed to fetch products from Lazada',
+            details: lazadaData
+          });
+        }
+
+        const batch = lazadaData.data?.products || [];
+        if (totalProducts === null) {
+          totalProducts = Number(lazadaData.data?.total_products) || batch.length;
+        }
+        rawProducts.push(...batch);
+
+        if (batch.length < pageLimit) break;
+        if (totalProducts && rawProducts.length >= totalProducts) break;
+        offset += pageLimit;
       }
 
-      let realProducts = [];
-      if (lazadaData.data && lazadaData.data.products) {
-         lazadaData.data.products.forEach(p => {
-             let totalStock = 0;
-             if (p.skus) p.skus.forEach(s => totalStock += (s.quantity || s.Available || 0));
-             
-             let name = '';
-             if (p.attributes && p.attributes.name) name = p.attributes.name;
+      const realProducts = rawProducts.map(formatLazadaProduct);
 
-             let skuStr = '';
-             if (p.skus && p.skus[0] && p.skus[0].SellerSku) {
-                 skuStr = p.skus[0].SellerSku;
-             }
-             
-             let price = 0;
-             let image = '';
-             const gallery = p.images || [];
-             if (gallery.length > 0) image = gallery[0];
-             if (p.skus && p.skus.length > 0 && p.skus[0].price) price = p.skus[0].price;
-
-             let description = '';
-             if (p.attributes) {
-                 description = p.attributes.description || p.attributes.short_description || '';
-             }
-
-             const variants = [];
-             if (p.skus && p.skus.length > 1) {
-                 p.skus.forEach(s => {
-                     variants.push({
-                         name: s.SaleProp ? Object.values(s.SaleProp).join(' / ') : (s.color_family || s.size || 'Variant'),
-                         price: Number(s.price) || price,
-                         stock: Number(s.quantity || s.Available) || 0,
-                         sku: s.SellerSku || ''
-                     });
-                 });
-             }
-
-             realProducts.push({
-                 id: String(p.item_id),
-                 sku: skuStr,
-                 name: name,
-                 stock: totalStock,
-                 price: price,
-                 image: image,
-                 gallery: gallery,
-                 description: description,
-                 variants: variants
-             });
-         });
+      if (realProducts.length === 1) {
+        const firstRaw = rawProducts[0];
+        console.log('DEBUG: First Lazada product raw images field:', firstRaw.images);
+        console.log('DEBUG: First Lazada product skus[0].Images:', firstRaw.skus && firstRaw.skus[0] ? firstRaw.skus[0].Images : undefined);
+        console.log('DEBUG: First Lazada product skus[0].image:', firstRaw.skus && firstRaw.skus[0] ? firstRaw.skus[0].image : undefined);
       }
 
-      return res.status(200).json({ 
-        success: true, 
-        message: 'Lazada product sync completed.', 
-        syncedCount: realProducts.length, 
+      return res.status(200).json({
+        success: true,
+        message: 'Lazada product sync completed.',
+        syncedCount: realProducts.length,
+        totalProducts: totalProducts ?? realProducts.length,
         products: realProducts,
-        timestamp: new Date().toISOString() 
+        timestamp: new Date().toISOString()
       });
     }
 
     if (action === 'sync_orders') {
-  // Live Lazada API Call
-  const method = 'GET';
-  const apiName = '/orders/get';
-  const params = {
-    app_key: currentKey,
-    sign_method: 'sha256',
-    timestamp: Date.now().toString(),
-    format: 'json',
-    version: '1.0',
-    created_after: new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString()
-  };
-
-  const activeAccessToken = accessToken || VALID_ACCESS_TOKEN;
-  if (activeAccessToken) {
-    params.access_token = activeAccessToken;
-  }
-
-  params.sign = buildLazadaSignature(apiName, currentSecret, params);
-  const result = await callLazadaApi(endpointUrl, apiName, params, method);
-
-  const responseBody = result.body || {};
-  const orderList = (responseBody.data && responseBody.data.orders) || [];
-  const mappedOrders = await Promise.all(orderList.map(async (lo) => {
-    let items = [];
-    try {
-      const itemParams = {
-        app_key: currentKey,
-        sign_method: 'sha256',
-        timestamp: Date.now().toString(),
-        format: 'json',
-        version: '1.0',
-        order_id: lo.order_id || lo.order_number
-      };
-      if (activeAccessToken) {
-        itemParams.access_token = activeAccessToken;
-      }
-      itemParams.sign = buildLazadaSignature('/order/items/get', currentSecret, itemParams);
-
-      const itemResult = await callLazadaApi(endpointUrl, '/order/items/get', itemParams, 'GET');
-      const fetchedItems = itemResult.body?.data || [];
-      if (fetchedItems.length > 0) {
-        items = fetchedItems.map(it => ({
-          id: it.sku || `lazada-${it.order_item_id}`,
-          name: it.name || 'Sản phẩm Lazada',
-          price: Number(it.item_price) || 0,
-          quantity: 1,
-          image: it.product_main_image || ''
-        }));
-      }
-    } catch (e) {
-      console.error("Error fetching items for order", lo.order_id, e);
-    }
-
-    // Aggregate items with same SKU/name
-    const aggregatedItems = [];
-    items.forEach(it => {
-      const existing = aggregatedItems.find(x => x.id === it.id || x.name === it.name);
-      if (existing) {
-        existing.quantity += it.quantity;
-      } else {
-        aggregatedItems.push({ ...it });
-      }
-    });
-
-    let subtotal = aggregatedItems.reduce((acc, it) => acc + (it.price * it.quantity), 0);
-    if (subtotal === 0) {
-      subtotal = Number(lo.price) || 0;
-    }
-    const shippingFee = Number(lo.shipping_fee) > 0 ? Number(lo.shipping_fee) : 29000;
-    const total = subtotal + shippingFee;
-
-    return {
-      id: lo.order_id || lo.order_number,
-      orderNumber: `LZD-${lo.order_id || lo.order_number}`,
-      customerName: `${lo.address_billing?.first_name || ''} ${lo.address_billing?.last_name || ''}`.trim() || 'Khách hàng Lazada',
-      customerEmail: lo.customer_email || '',
-      customerPhone: lo.address_billing?.phone || lo.address_shipping?.phone || '',
-      shippingAddress: `${lo.address_shipping?.address1 || ''}, ${lo.address_shipping?.city || ''}, ${lo.address_shipping?.country || ''}`.replace(/^, | , | ,$/g, '').trim(),
-      notes: lo.remarks || '',
-      paymentMethod: lo.payment_method || 'Lazada Pay',
-      date: lo.created_at ? new Date(lo.created_at).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }) : new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }),
-      items: aggregatedItems,
-      subtotal: subtotal,
-      shippingFee: shippingFee,
-      total: total,
-      status: lo.statuses?.[0] || 'Pending',
-      source: 'Lazada'
-    };
-  }));
-
-  // Standardized success response matching Tiki's format
-  return res.status(200).json({ success: true, orders: mappedOrders });
-}
-      // Live Lazada API Call
       const method = 'GET';
       const apiName = '/orders/get';
-      const params = {
-        app_key: currentKey,
-        sign_method: 'sha256',
-        timestamp: Date.now().toString(),
-        format: 'json',
-        version: '1.0',
-        created_after: new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString()
-      };
-      
       const activeAccessToken = accessToken || VALID_ACCESS_TOKEN;
-      if (activeAccessToken) {
-        params.access_token = activeAccessToken;
+      if (!activeAccessToken) {
+        return res.status(400).json({ success: false, message: 'Missing Lazada access token.' });
       }
-      
-      params.sign = buildLazadaSignature(apiName, currentSecret, params);
-      const result = await callLazadaApi(endpointUrl, apiName, params, method);
-      
-      const responseBody = result.body || {};
-      const orderList = (responseBody.data && responseBody.data.orders) || [];
+
+      const pageLimit = 100;
+      let offset = 0;
+      let countTotal = null;
+      const allOrders = [];
+      let lastResponseBody = {};
+
+      while (offset <= 10000) {
+        const params = {
+          app_key: currentKey,
+          access_token: activeAccessToken,
+          sign_method: 'sha256',
+          timestamp: Date.now().toString(),
+          format: 'json',
+          version: '1.0',
+          created_after: new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString(),
+          offset: String(offset),
+          limit: String(pageLimit)
+        };
+
+        params.sign = buildLazadaSignature(apiName, currentSecret, params);
+        const result = await callLazadaApi(endpointUrl, apiName, params, method);
+        const responseBody = result.body || {};
+        lastResponseBody = responseBody;
+
+        if (responseBody.code && responseBody.code !== '0') {
+          return res.status(400).json({
+            success: false,
+            message: responseBody.message || responseBody.msg || `Lazada API error: ${responseBody.code}`,
+            code: responseBody.code,
+            request_id: responseBody.request_id,
+            _trace_id_: responseBody._trace_id_,
+            details: responseBody
+          });
+        }
+
+        const batch = (responseBody.data && responseBody.data.orders) || [];
+        if (countTotal === null) {
+          countTotal = Number(responseBody.data?.countTotal ?? responseBody.data?.count) || batch.length;
+        }
+        allOrders.push(...batch);
+
+        if (batch.length < pageLimit) break;
+        if (countTotal && allOrders.length >= countTotal) break;
+        offset += pageLimit;
+      }
+
+      const orderList = allOrders;
             const mappedOrders = await Promise.all(orderList.map(async (lo) => {
           
           let items = [];
@@ -355,9 +451,11 @@ module.exports = async (req, res) => {
         }));
 
       console.log('Lazada sync orders trace:', {
-        code: responseBody.code,
-        request_id: responseBody.request_id,
-        _trace_id_: responseBody._trace_id_
+        code: lastResponseBody.code,
+        request_id: lastResponseBody.request_id,
+        _trace_id_: lastResponseBody._trace_id_,
+        importedCount: mappedOrders.length,
+        countTotal
       });
 
       return res.status(200).json({
@@ -365,9 +463,9 @@ module.exports = async (req, res) => {
         message: 'Lazada orders imported successfully.',
         importedCount: mappedOrders.length,
         orders: mappedOrders,
-        code: responseBody.code,
-        request_id: responseBody.request_id,
-        _trace_id_: responseBody._trace_id_,
+        code: lastResponseBody.code,
+        request_id: lastResponseBody.request_id,
+        _trace_id_: lastResponseBody._trace_id_,
         timestamp: new Date().toISOString()
       });
     }

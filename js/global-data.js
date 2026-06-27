@@ -38,15 +38,18 @@ window.GRADIE_DATA = {
   "products": [
     {
       "id": "gau_bong_tot_nghiep",
-      "name": "Gradie - Gấu Bông Capybara Tốt Nghiệp siêu cấp đáng yêu, mềm mịn",
+      "name": "Gấu Bông Capybara Tốt Nghiệp",
       "description": "Nếu bạn đang tìm một món quà tốt nghiệp vừa độc đáo, vừa hài hước thì gấu Tốt Nghiệp chính là lựa chọn hoàn hảo. Với khuôn mặt “điềm tĩnh vô tri” kết hợp áo choàng, mũ cử nhân và băng Congratulations, chú gấu mang lại cảm giác vừa trang trọng vừa buồn cười khó cưỡng. Chất liệu bông gòn 7D trắng muốt cùng vải miniso mềm mịn giúp ôm cực thích, không lo rụng lông hay phai màu. Đây không chỉ là món quà dễ thương mà còn gửi gắm thông điệp ý nghĩa: tốt nghiệp xong rồi, hãy cứ thong dong và yêu đời như “chiến thần chuột nước”.\n\n📏 Gấu có đủ 2 size để bạn lựa chọn: 20cm nhỏ gọn xinh xắn, 35cm vừa vặn để ôm và giá hợp lý.",
       "category": "Gấu Bông",
       "price": 115000,
-      "compare_at_price": null,
+      "compare_at_price": "145000",
       "sku": "SP001-1",
       "image": "https://res.cloudinary.com/dvxxkygip/image/upload/f_auto,q_auto/changing_the_angle_other_brand_202606251939_1_gwjvch",
       "gallery": [
-        "https://res.cloudinary.com/dvxxkygip/image/upload/f_auto,q_auto/changing_the_angle_other_brand_202606251939_1_gwjvch"
+        "https://res.cloudinary.com/dvxxkygip/image/upload/f_auto,q_auto/changing_the_angle_other_brand_202606251939_1_gwjvch",
+        "https://res.cloudinary.com/dvxxkygip/image/upload/f_auto,q_auto/img-20260626-wa0000-1_y1z1wz",
+        "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg"
       ],
       "options": [
         {
@@ -80,9 +83,9 @@ window.GRADIE_DATA = {
             "Bông gòn 7D, vải miniso"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg",
-          "stock": 14,
           "name": "Capybara / 35cm / Bông gòn 7D, vải miniso",
-          "color": "Capybara / 35cm / Bông gòn 7D, vải miniso"
+          "color": "Capybara / 35cm / Bông gòn 7D, vải miniso",
+          "stock": 100
         },
         {
           "sku": "SP001-2",
@@ -94,23 +97,23 @@ window.GRADIE_DATA = {
             "Bông gòn 7D, vải miniso"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg",
-          "stock": 14,
           "name": "Capybara / 20cm / Bông gòn 7D, vải miniso",
-          "color": "Capybara / 20cm / Bông gòn 7D, vải miniso"
+          "color": "Capybara / 20cm / Bông gòn 7D, vải miniso",
+          "stock": 100
         }
       ],
-      "stock": 28,
+      "isFeatured": false,
+      "isTrending": false,
       "oldPrice": null,
       "rating": 4.8,
+      "stock": 200,
       "tags": [],
-      "isTrending": false,
-      "isFeatured": false,
-      "tikiStock": 0,
-      "lazadaStock": 0
+      "lazadaStock": 0,
+      "tikiStock": 0
     },
     {
       "id": "gau_bong_tot_nghiep_in_logo",
-      "name": "Gấu Bông Tốt Nghiệp Gradie Dễ Thương Nhỏ Nhắn Xinh Xắn",
+      "name": "Gấu Bông Tốt Nghiệp Gradie",
       "description": "Gấu bông tốt nghiệp là món quà ý nghĩa dành cho sinh viên, ghi dấu khoảnh khắc quan trọng trong cuộc đời. Với kích thước 20cm khi ngồi (18cm), chú gấu nhỏ nhắn, dễ thương, khoác áo choàng và đội mũ cử nhân, mang thông điệp chúc mừng trang trọng nhưng vẫn đáng yêu. Sản phẩm được làm từ bông gòn nhân tạo 3 chiều, mềm mại, an toàn tuyệt đối, ôm cực thích. Khi mua tại Gradie, bạn sẽ được tặng kèm giấy gói quà sang trọng và bảo hành đường chỉ may trọn đời, đảm bảo chất lượng lâu dài. Đây chính là món quà tinh tế, vừa lưu giữ kỷ niệm tốt nghiệp, vừa mang lại niềm vui cho người nhận.",
       "category": "Gấu Bông",
       "price": 65000,
@@ -158,7 +161,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_1.jpg",
           "name": "Có kính, không in / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
-          "color": "Có kính, không in / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều"
+          "color": "Có kính, không in / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
+          "stock": 100
         },
         {
           "sku": "SP002-2",
@@ -171,7 +175,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_2.jpg",
           "name": "Có kính, in tên / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
-          "color": "Có kính, in tên / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều"
+          "color": "Có kính, in tên / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
+          "stock": 100
         },
         {
           "sku": "SP002-3",
@@ -184,7 +189,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_3.jpg",
           "name": "Không kính, không in / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
-          "color": "Không kính, không in / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều"
+          "color": "Không kính, không in / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
+          "stock": 100
         },
         {
           "sku": "SP002-4",
@@ -197,21 +203,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_4.jpg",
           "name": "Không kính, in tên / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
-          "color": "Không kính, in tên / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều"
+          "color": "Không kính, in tên / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 53,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 400,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "qua_tang_bup_be_tot_nghiep",
-      "name": "Gradie - Búp Bê Móc Len Tốt Nghiệp chính hãng, chất lượng cao",
+      "name": "Búp Bê Móc Len Tốt Nghiệp",
       "description": "Gấu bông tốt nghiệp với chiều cao 20–23cm là món quà thủ công 100% đầy ý nghĩa, ghi dấu khoảnh khắc quan trọng trong đời sinh viên. Ngoài kích thước tiêu chuẩn, shop còn nhận làm size lớn hoặc theo mẫu riêng, khách chỉ cần inbox để đặt. Sản phẩm chưa bao gồm trang trí hộp mica, hoa hay các kiểu hộp khác. Do đặc thù len thủ công, màu sắc có thể chênh lệch nhẹ giữa các lô, tạo nên sự độc đáo riêng cho từng sản phẩm",
       "category": "Gấu bông",
       "price": 419000,
@@ -260,7 +267,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_1.jpg",
           "name": "Nữ, có đế / 23cm / Len",
-          "color": "Nữ, có đế / 23cm / Len"
+          "color": "Nữ, có đế / 23cm / Len",
+          "stock": 100
         },
         {
           "sku": "SP003-2",
@@ -273,7 +281,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_2.jpg",
           "name": "Nữ, không đế / 20cm / Len",
-          "color": "Nữ, không đế / 20cm / Len"
+          "color": "Nữ, không đế / 20cm / Len",
+          "stock": 100
         },
         {
           "sku": "SP003-3",
@@ -286,7 +295,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_3.jpg",
           "name": "Nam, có đế / 23cm / Len",
-          "color": "Nam, có đế / 23cm / Len"
+          "color": "Nam, có đế / 23cm / Len",
+          "stock": 100
         },
         {
           "sku": "SP003-4",
@@ -299,21 +309,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_4.jpg",
           "name": "Nam, không đế / 20cm / Len",
-          "color": "Nam, không đế / 20cm / Len"
+          "color": "Nam, không đế / 20cm / Len",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 42,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 400,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "bo_hoa_len_tot_nghiep",
-      "name": "Gradie - Bó Hoa Móc Len Hướng Dương chính hãng, chất lượng cao",
+      "name": "Bó Hoa Móc Len Hướng Dương",
       "description": "Bó hoa len handmade được làm hoàn toàn thủ công, mang vẻ đẹp độc đáo và ý nghĩa, rất phù hợp làm quà tặng tốt nghiệp. Sản phẩm có chiều cao 50cm, gồm 1 chú gấu nhỏ đáng yêu kết hợp cùng 5 bông hướng dương rực rỡ, tạo nên tổng thể vừa trang trọng vừa tươi vui. ",
       "category": "Hoa mừng",
       "price": 149000,
@@ -357,21 +368,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp004_1.jpg",
           "name": "Bó hoa / 50cm / Len",
-          "color": "Bó hoa / 50cm / Len"
+          "color": "Bó hoa / 50cm / Len",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 42,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 100,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "bo_hoa_sap_ecuado",
-      "name": "Gradie - Bó Hoa Hồng Hồng chính hãng, chất lượng cao",
+      "name": "Bó Hoa Hồng Hồng",
       "description": "Bó hoa sáp Ecuador 15 bông giấy kiếng từ Paris Florist là món quà tinh tế, phù hợp cho nhiều dịp đặc biệt. Với sự kết hợp giữa hoa sáp và hoa nhũ kim tuyến, sản phẩm mang biểu tượng tình yêu vĩnh cửu bởi vẻ đẹp không tàn, không phai, đồng thời có giá thành dễ tiếp cận hơn hoa tươi. Hoa được làm thủ công tỉ mỉ, thể hiện tâm huyết của người thợ. Mỗi sản phẩm khi đến tay khách hàng đều được chăm chút để giữ nguyên vẻ xinh đẹp, trở thành món quà ý nghĩa và bền lâu cho người nhận.",
       "category": "Hoa mừng",
       "price": 209000,
@@ -415,21 +427,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp005_1.jpg",
           "name": "Bó hoa / 30cm / Hoa sáp",
-          "color": "Bó hoa / 30cm / Hoa sáp"
+          "color": "Bó hoa / 30cm / Hoa sáp",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 50,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 100,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "bo_hoa_bong_bong",
-      "name": "Gradie - Bó Hoa Bóng Bay Tốt Nghiệp chính hãng, chất lượng cao",
+      "name": "Bó Hoa Bóng Bay Tốt Nghiệp",
       "description": "Hoa bong bóng là lựa chọn quà tặng độc đáo, phù hợp cho ngày tốt nghiệp, chụp ảnh kỷ yếu hay làm quà tặng người yêu. Sản phẩm được thiết kế từ những quả bóng cao cấp, có độ dai tốt, màu sắc chuẩn và đẹp mắt, tạo nên tổng thể vừa trẻ trung vừa sang trọng. Đây là món quà vừa mang tính trang trí, vừa giúp lưu giữ kỷ niệm đáng nhớ trong những dịp đặc biệt.",
       "category": "Hoa mừng",
       "price": 359000,
@@ -473,21 +486,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp006_1.jpg",
           "name": "Bó hoa / 80cm / Bong Bóng",
-          "color": "Bó hoa / 80cm / Bong Bóng"
+          "color": "Bó hoa / 80cm / Bong Bóng",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 25,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 100,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "keo_khong_lo",
-      "name": "Gradie - Túi Kẹo Quà Tặng chính hãng, chất lượng cao",
+      "name": "Túi Kẹo Quà Tặng",
       "description": "Kẹo khổng lồ vừa ngon – xinh – giá yêu, là món quà cực kỳ phù hợp để tặng bé, bạn bè hay cả tập thể lớp trong những dịp đặc biệt. Sản phẩm gồm nhiều loại bánh kẹo, bim bim và snack mix được phối theo tông màu bắt mắt, tạo nên một tổng thể vừa vui nhộn vừa hấp dẫn. Khi mua, khách sẽ được tặng kèm túi đựng và thiệp, giúp món quà thêm phần trọn vẹn.\nHạn sử dụng sản phẩm từ 3 đến 6 tháng, đảm bảo an toàn và chất lượng cho người dùng. Đây chắc chắn là món quà ngọt ngào, độc đáo và đầy bất ngờ dành cho người nhận.",
       "category": "Kẹo",
       "price": 49000,
@@ -496,7 +510,10 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp007_1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg",
+        "https://sg-test-11.slatic.net/p/63ac0d422e7b19015a8e2ff9102e246f.jpg",
+        "https://sg-test-11.slatic.net/p/44180391096d2ee5b581c2f646d003ff.jpg",
+        "https://sg-test-11.slatic.net/p/c3405ac7a568234c2098690cf7bf20cb.jpg"
       ],
       "options": [
         {
@@ -530,9 +547,11 @@ window.GRADIE_DATA = {
             "30cm",
             "Kẹo"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/63ac0d422e7b19015a8e2ff9102e246f.jpg",
           "name": "Hồng / 30cm / Kẹo",
-          "color": "Hồng / 30cm / Kẹo"
+          "color": "Hồng / 30cm / Kẹo",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP007-2",
@@ -545,7 +564,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg",
           "name": "Đỏ / 30cm / Kẹo",
-          "color": "Đỏ / 30cm / Kẹo"
+          "color": "Đỏ / 30cm / Kẹo",
+          "stock": 100
         },
         {
           "sku": "SP007-3",
@@ -558,21 +578,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg",
           "name": "Xanh / 30cm / Kẹo",
-          "color": "Xanh / 30cm / Kẹo"
+          "color": "Xanh / 30cm / Kẹo",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 14,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
-      "lazadaStock": 300,
+      "isTrending": false,
+      "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "keo_mut_trai_tim",
-      "name": "Gradie - Túi Kẹo Lớn Hình Trái Tim chính hãng, chất lượng cao",
+      "name": "Túi Kẹo Lớn Hình Trái Tim",
       "description": "Bó kẹo mút hình trái tim siêu xinh là món quà “ngọt ngào” và độc đáo nhất mùa này. Với thiết kế trong suốt, gói cực kỳ dễ thương, sản phẩm được mix trên 10 loại bánh kẹo khác nhau, tạo nên sự đa dạng và hấp dẫn. Mỗi bó kẹo đều được trang trí bằng nơ ruy băng cùng họa tiết hoạt hình đáng yêu, mang lại cảm giác vừa vui nhộn vừa tinh tế.",
       "category": "Kẹo",
       "price": 89000,
@@ -580,7 +601,10 @@ window.GRADIE_DATA = {
       "sku": "SP008-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg",
+        "https://vn-live.slatic.net/p/6fc3596b8b50753438138177ae01d0c8.jpg",
+        "https://vn-live.slatic.net/p/1e1d25d8046ebf30d431eabbc4bb4e7a.jpg",
+        "https://vn-live.slatic.net/p/3e5f463f82a01cca31e7b885e3849b08.jpg"
       ],
       "options": [
         {
@@ -613,9 +637,11 @@ window.GRADIE_DATA = {
             "90cm",
             "Kẹo"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg",
+          "image": "https://vn-live.slatic.net/p/1e1d25d8046ebf30d431eabbc4bb4e7a.jpg",
           "name": "Hồng / 90cm / Kẹo",
-          "color": "Hồng / 90cm / Kẹo"
+          "color": "Hồng / 90cm / Kẹo",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP008-2",
@@ -628,21 +654,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg",
           "name": "Xanh / 90cm / Kẹo",
-          "color": "Xanh / 90cm / Kẹo"
+          "color": "Xanh / 90cm / Kẹo",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 24,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
-      "lazadaStock": 200,
+      "isTrending": false,
+      "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "khung_anh_ghep_do_tot_nghiep",
-      "name": "Gradie - Khung Ảnh Tốt Nghiệp Chibi chính hãng, chất lượng cao",
+      "name": "Khung Ảnh Tốt Nghiệp Chibi",
       "description": "Khung ảnh ghép đồ tốt nghiệp chibi là món quà độc đáo và ý nghĩa dành cho ngày tốt nghiệp. Với thiết kế chibi dễ thương, sản phẩm mang đến lời chúc mừng tốt nghiệp một cách sinh động và vui nhộn, giúp lưu giữ khoảnh khắc quan trọng trong đời sinh viên. Khung ảnh được làm tỉ mỉ, phối hợp cùng các chi tiết lễ phục, mũ cử nhân và dòng chữ chúc mừng, tạo nên tổng thể vừa trang trọng vừa đáng yêu. ",
       "category": "Khung ảnh",
       "price": 64000,
@@ -686,7 +713,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg",
           "name": "Khung chữ nhật / 10x15cm / Nhựa",
-          "color": "Khung chữ nhật / 10x15cm / Nhựa"
+          "color": "Khung chữ nhật / 10x15cm / Nhựa",
+          "stock": 100
         },
         {
           "sku": "SP009-2",
@@ -699,21 +727,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp009_2.jpg",
           "name": "Khung chữ nhật / 13x18cm / Nhựa",
-          "color": "Khung chữ nhật / 13x18cm / Nhựa"
+          "color": "Khung chữ nhật / 13x18cm / Nhựa",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 33,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "khung_anh_3d_totnghiep",
-      "name": "Gradie - Khung Ảnh Tốt Nghiệp chính hãng, chất lượng cao",
+      "name": "Khung Ảnh Tốt Nghiệp",
       "description": "Khung ảnh tốt nghiệp chibi được thiết kế theo yêu cầu, là món quà ý nghĩa dành tặng bạn bè trong ngày tốt nghiệp. Sản phẩm gồm khung ảnh, chân chống, móc treo tường, đèn LED và được tặng thêm 1 ảnh đi kèm. Khung làm từ nhựa giả gỗ composite nhẹ, bền, không cong vênh, chống mối mọt, mặt kính sáng bóng.",
       "category": "Khung ảnh",
       "price": 139000,
@@ -721,7 +750,10 @@ window.GRADIE_DATA = {
       "sku": "SP029-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg",
       "gallery": [
-        "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp029-1.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp029-2.jpg",
+        "https://cdn.hstatic.net/files/200001178391/file/sp029-3.jpg"
       ],
       "options": [
         {
@@ -757,7 +789,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg",
           "name": "Khung chữ nhật / 15x21cm / Nhựa",
-          "color": "Khung chữ nhật / 15x21cm / Nhựa"
+          "color": "Khung chữ nhật / 15x21cm / Nhựa",
+          "stock": 100
         },
         {
           "sku": "SP029-2",
@@ -770,21 +803,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg",
           "name": "Khung vuông / 18x18cm / Nhựa",
-          "color": "Khung vuông / 18x18cm / Nhựa"
+          "color": "Khung vuông / 18x18cm / Nhựa",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 57,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "so-dan-anh-scrapbook",
-      "name": "Gradie - Sổ lưu kỉ niệm Pieces of Memories bìa da cao cấp, giấy xịn",
+      "name": "Sổ lưu kỉ niệm Pieces of Memories",
       "description": "Các cuốn sổ tay \"Pieces of Memories\" có thiết kế đơn giản nhưng không kém phần tinh tế, là lựa chọn hoàn hảo để ghi chép hoặc làm album ảnh lưu giữ kỷ niệm. Sản phẩm nổi bật với bìa màu kem nhã nhặn, gáy lò xo tiện lợi và điểm nhấn là những chiếc nơ ruy băng nhỏ xinh được phối màu khéo léo. Cuốn sổ mang lại cảm giác nhẹ nhàng, ấm áp, rất phù hợp để làm quà tặng cho bạn bè hoặc tự thưởng cho bản thân trong những dịp đặc biệt.",
       "category": "Sổ",
       "price": 146000,
@@ -828,7 +862,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp010-1.jpg",
           "name": "Hình chữ nhật / 19x19cm / Giấy",
-          "color": "Hình chữ nhật / 19x19cm / Giấy"
+          "color": "Hình chữ nhật / 19x19cm / Giấy",
+          "stock": 100
         },
         {
           "sku": "SP010-2",
@@ -837,7 +872,8 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp010-2.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         },
         {
           "sku": "SP010-3",
@@ -846,21 +882,22 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp010-3.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 15,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
-      "tikiStock": 100
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
+      "tikiStock": 0
     },
     {
       "id": "so-len-ke-hoach",
-      "name": "Gradie - Sổ Lên Kế Hoạch bìa da cao cấp, giấy xịn",
+      "name": "Sổ Lên Kế Hoạch",
       "description": "Sổ kế hoạch \"The Essential Planner\" là người bạn đồng hành hoàn hảo giúp bạn sắp xếp công việc và quản lý thời gian hiệu quả mỗi ngày. Sản phẩm sở hữu thiết kế thanh lịch với bìa da màu xanh dương dịu mát, đi kèm dây thun cố định chắc chắn và dây đánh dấu trang tiện lợi. Bên trong sổ được chia sẵn các mục rõ ràng như lịch tháng, danh sách việc cần làm (checklist) và phần ghi chú, giúp bạn dễ dàng theo dõi mục tiêu. Cuốn sổ mang lại cảm giác ngăn nắp, hiện đại, rất thích hợp cho học sinh, sinh viên và dân văn phòng sử dụng hàng ngày.",
       "category": "Sổ",
       "price": 139000,
@@ -904,7 +941,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp011-1.jpg",
           "name": "Hình chữ nhật / 19x19cm / Giấy",
-          "color": "Hình chữ nhật / 19x19cm / Giấy"
+          "color": "Hình chữ nhật / 19x19cm / Giấy",
+          "stock": 100
         },
         {
           "sku": "SP011-2",
@@ -913,7 +951,8 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp011-2.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         },
         {
           "sku": "SP011-3",
@@ -922,21 +961,22 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp011-3.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 47,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
-      "tikiStock": 100
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
+      "tikiStock": 0
     },
     {
       "id": "so-tay-bia-cung",
-      "name": "Gradie - Sổ tay dot grid bìa da cao cấp, giấy xịn",
+      "name": "Sổ tay dot grid",
       "description": "Bộ sưu tập sổ tay ghi chép độc đáo được lấy cảm hứng từ các loại hạt cà phê quen thuộc, mang đến cảm giác mộc mạc và đầy cảm hứng cho người sử dụng. Sản phẩm có thiết kế tối giản với các tông màu trung tính như kem, xám và nâu đen, đi kèm dây thun bản nhỏ màu đen để cố định sổ chắc chắn. Điểm đặc biệt là trên bìa mỗi cuốn sổ đều in những đoạn thông tin ngắn, thú vị về nguồn gốc và đặc điểm của từng loại hạt cà phê. Đây sẽ là món quà tuyệt vời dành cho những ai vừa yêu thích việc viết lách, vừa đam mê hương vị cà phê mỗi ngày.",
       "category": "Sổ",
       "price": 79000,
@@ -982,7 +1022,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp012-1.jpg",
           "name": "Xám / 19x19cm / Giấy",
-          "color": "Xám / 19x19cm / Giấy"
+          "color": "Xám / 19x19cm / Giấy",
+          "stock": 100
         },
         {
           "sku": "SP012-2",
@@ -995,7 +1036,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp012-2.jpg",
           "name": "Nâu / 19x19cm / Giấy",
-          "color": "Nâu / 19x19cm / Giấy"
+          "color": "Nâu / 19x19cm / Giấy",
+          "stock": 100
         },
         {
           "sku": "SP012-3",
@@ -1008,21 +1050,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp012-3.jpg",
           "name": "Trắng / 19x19cm / Giấy",
-          "color": "Trắng / 19x19cm / Giấy"
+          "color": "Trắng / 19x19cm / Giấy",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 38,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
-      "tikiStock": 100
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
+      "tikiStock": 0
     },
     {
       "id": "so-tay-a5-vintage",
-      "name": "Gradie - Sổ Tay A5 Vintage bìa da cao cấp, giấy xịn",
+      "name": "Sổ Tay A5 Vintage",
       "description": "Cuốn sổ tay ghi chép mang phong cách cổ điển (vintage) đầy nghệ thuật, là món quà tuyệt vời cho những ai yêu thích nét đẹp hoài niệm. Điểm nhấn của sản phẩm là phần bìa được thiết kế độc đáo giống như một bức tranh ghép từ các mảnh hóa đơn, vé tàu và tem thư cũ kỹ. Với tông màu trầm ấm kết hợp cùng chất liệu giấy dày dặn, cuốn sổ không chỉ dùng để viết nhật ký, vẽ phác thảo mà còn có thể làm phụ kiện chụp ảnh trang trí vô cùng bắt mắt, đem lại cảm giác mộc mạc và khơi nguồn cảm hứng sáng tạo.",
       "category": "Sổ",
       "price": 60000,
@@ -1066,7 +1109,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp013-1.jpg",
           "name": "Hình chữ nhật / 19x25cm / Giấy",
-          "color": "Hình chữ nhật / 19x25cm / Giấy"
+          "color": "Hình chữ nhật / 19x25cm / Giấy",
+          "stock": 100
         },
         {
           "sku": "SP013-2",
@@ -1075,7 +1119,8 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp013-2.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         },
         {
           "sku": "SP013-3",
@@ -1084,21 +1129,22 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp013-3.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 21,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
-      "tikiStock": 100
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
+      "tikiStock": 0
     },
     {
       "id": "so-tay-bia-da",
-      "name": "Gradie - Sổ Tay Bìa Da Trang Trí bìa da cao cấp, giấy xịn",
+      "name": "Sổ Tay Bìa Da Trang Trí",
       "description": "Cuốn sổ tay ghi chép nghệ thuật mang hơi hướng cổ điển, là lựa chọn lý tưởng cho những ai yêu thích cái đẹp và hội họa. Sản phẩm gây ấn tượng mạnh với phần bìa được in các bức tranh sơn dầu đầy tinh tế, sử dụng gam màu xanh dương và xanh lá làm chủ đạo, kết hợp cùng những dòng chữ thơ mộng. Điểm cộng lớn của cuốn sổ là phần quai gài bằng chất liệu vải lụa mềm màu xanh thẫm, đi kèm nam châm hít chắc chắn giúp bảo vệ ruột sổ bên trong luôn phẳng phiu. Đây sẽ là món phụ kiện độc đáo khơi nguồn cảm hứng viết lách và sáng tạo mỗi ngày.",
       "category": "Sổ",
       "price": 79000,
@@ -1142,7 +1188,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp014-1.jpg",
           "name": "Hình chữ nhật / 18x23cm / Giấy",
-          "color": "Hình chữ nhật / 18x23cm / Giấy"
+          "color": "Hình chữ nhật / 18x23cm / Giấy",
+          "stock": 100
         },
         {
           "sku": "SP014-2",
@@ -1151,7 +1198,8 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp014-2.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         },
         {
           "sku": "SP014-3",
@@ -1160,21 +1208,22 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp014-3.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 56,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
-      "tikiStock": 100
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
+      "tikiStock": 0
     },
     {
       "id": "so-ghi-chi-davinci",
-      "name": "Gradie - Sổ ghi chú bìa da cao cấp, giấy xịn",
+      "name": "Sổ ghi chú",
       "description": "Cuốn sổ tay ghi chép nghệ thuật sở hữu vẻ đẹp lãng mạn và thơ mộng, mang lại nguồn cảm hứng ngập tràn cho không gian học tập và làm việc. Sản phẩm gây ấn tượng với thiết kế bìa cứng màu tím pastel dịu nhẹ, kết hợp hài hòa giữa các nét vẽ phong cảnh sơn dầu độc đáo và những họa tiết viền hoa mạ vàng lấp lánh. Sổ được trang bị quai gài nam châm chắc chắn giúp bảo vệ các trang giấy bên trong luôn phẳng phiu. Đây sẽ là món quà tuyệt vời dành cho những ai yêu thích phong cách nhẹ nhàng, tinh tế và đam mê viết lách.",
       "category": "Sổ",
       "price": 35000,
@@ -1220,7 +1269,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp015-1.jpg",
           "name": "Monet Claude / 18x23cm / Giấy",
-          "color": "Monet Claude / 18x23cm / Giấy"
+          "color": "Monet Claude / 18x23cm / Giấy",
+          "stock": 100
         },
         {
           "sku": "SP015-2",
@@ -1233,7 +1283,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp015-2.jpg",
           "name": "Bridge / 18x23cm / Giấy",
-          "color": "Bridge / 18x23cm / Giấy"
+          "color": "Bridge / 18x23cm / Giấy",
+          "stock": 100
         },
         {
           "sku": "SP015-3",
@@ -1246,21 +1297,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp015-3.jpg",
           "name": "Monet / 18x23cm / Giấy",
-          "color": "Monet / 18x23cm / Giấy"
+          "color": "Monet / 18x23cm / Giấy",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 47,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "binh-dung-nuoc-cute",
-      "name": "Gradie - Bình Đựng Nước 2L chính hãng, chất lượng cao",
+      "name": "Bình Đựng Nước 2L",
       "description": "Bình nước thể thao dung tích lớn tích hợp vạch nhắc giờ uống nước thông minh, là giải pháp tuyệt vời giúp bạn duy trì thói quen uống đủ nước mỗi ngày. Sản phẩm được làm từ chất liệu nhựa trong suốt cao cấp, an toàn cho sức khỏe và đi kèm ống hút tiện lợi. Thân bình in sẵn các mốc thời gian cùng những lời nhắc nhở, động viên cực kỳ dễ thương để bạn không quên nạp nước khi đi học, đi làm hay tập luyện. Với thiết kế quai xách chắc chắn và nắp bấm chống tràn, chiếc bình mang lại cảm giác năng động, hiện đại và vô cùng tiện ích.",
       "category": "Bình nước",
       "price": 48000,
@@ -1303,21 +1355,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp016-1.jpg",
           "name": "Hình trụ / 2L / Nhựa",
-          "color": "Hình trụ / 2L / Nhựa"
+          "color": "Hình trụ / 2L / Nhựa",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 59,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
-      "tikiStock": 99
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 100,
+      "tags": [],
+      "tikiStock": 0
     },
     {
       "id": "binh-nuoc-the-thao",
-      "name": "Gradie - Bình Nước Thể Thao 2 Lít chính hãng, chất lượng cao",
+      "name": "Bình Nước Thể Thao 2 Lít",
       "description": "Bình nước thể thao dung tích lớn 1.5L được làm từ chất liệu cao cấp, an toàn và bền bỉ, là người bạn đồng hành lý tưởng cho các hoạt động thể thao, đi học hay đi làm. Sản phẩm có thiết kế nắp bấm tiện lợi chống tràn, tích hợp ống hút thông minh và quai xách chắc chắn. Điểm thu hút nhất của chiếc bình là các phụ kiện sticker nổi (charm 3D) hình gấu, thỏ, ếch và các loại quả siêu dễ thương được đính quanh thân, tạo nên vẻ ngoài cá tính, vui nhộn, giúp việc uống nước mỗi ngày trở nên thú vị hơn rất nhiều.",
       "category": "Bình nước",
       "price": 48000,
@@ -1362,7 +1415,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-1.jpg",
           "name": "Hình trụ / 2L / Nhựa",
-          "color": "Hình trụ / 2L / Nhựa"
+          "color": "Hình trụ / 2L / Nhựa",
+          "stock": 100
         },
         {
           "sku": "SP017-2",
@@ -1371,7 +1425,8 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-2.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         },
         {
           "sku": "SP017-3",
@@ -1380,7 +1435,8 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-3.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         },
         {
           "sku": "SP017-4",
@@ -1389,21 +1445,22 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-4.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 33,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
-      "tikiStock": 92
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 400,
+      "tags": [],
+      "tikiStock": 0
     },
     {
       "id": "binh-giu-nhiet-du-lich",
-      "name": "Gradie - Bình Giữ Nhiệt Đi Du Lịch 500ml chính hãng, chất lượng cao",
+      "name": "Bình Giữ Nhiệt Đi Du Lịch 500ml",
       "description": "Ly giữ nhiệt inox cao cấp với thiết kế hoa nhí ngọt ngào là phụ kiện hoàn hảo để bạn mang theo đồ uống yêu thích khi đi học, đi làm. Sản phẩm có tông màu trắng kem trang nhã, điểm xuyết các bông hoa màu hồng và lá xanh nhỏ xinh mang lại cảm giác nhẹ nhàng, dễ thương. Ly được trang bị nắp đậy trong suốt chống tràn tiện lợi, đi kèm lỗ cắm ống hút và nút che thông minh. Một chiếc ly vừa có khả năng giữ nhiệt tốt, vừa sở hữu ngoại hình bắt mắt chắc chắn sẽ làm góc học tập hay làm việc của bạn thêm phần sinh động.",
       "category": "Bình nước",
       "price": 100000,
@@ -1447,7 +1504,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp018-1.jpg",
           "name": "Hình trụ / 480ml / Thép không gỉ 316 + nhựa PP",
-          "color": "Hình trụ / 480ml / Thép không gỉ 316 + nhựa PP"
+          "color": "Hình trụ / 480ml / Thép không gỉ 316 + nhựa PP",
+          "stock": 100
         },
         {
           "sku": "SP018-2",
@@ -1456,7 +1514,8 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp018-2.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         },
         {
           "sku": "SP018-3",
@@ -1465,21 +1524,22 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp018-3.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 41,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "binh-pha-ca-phe",
-      "name": "Gradie - Bình Pha Cafe Cold Brew chính hãng, chất lượng cao",
+      "name": "Bình Pha Cafe Cold Brew",
       "description": "Bình pha cà phê Cold Brew là sản phẩm tuyệt vời dành cho những ai yêu thích hương vị cà phê ủ lạnh thanh mát ngay tại nhà. Bình có thiết kế dáng cao tối giản bằng chất liệu thủy tinh hoặc nhựa chịu lực trong suốt, đi kèm một lõi lọc mắt siêu nhỏ ở chính giữa giúp giữ lại tối đa bã cà phê, cho ra chất nước trong và thơm ngon nhất. Với phần nắp đậy tích hợp vòi rót tiện lợi và kín khít, bạn có thể dễ dàng ủ cà phê trong tủ lạnh qua đêm. Sản phẩm mang lại sự tiện nghi, hiện đại và vô cùng tiết kiệm cho những tín đồ \"nghiện\" cà phê.",
       "category": "Bình nước",
       "price": 120000,
@@ -1522,21 +1582,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp019-1.jpg",
           "name": "Hình trụ / 2L / Nhựa",
-          "color": "Hình trụ / 2L / Nhựa"
+          "color": "Hình trụ / 2L / Nhựa",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 18,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
-      "tikiStock": 100
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 100,
+      "tags": [],
+      "tikiStock": 0
     },
     {
       "id": "binh_pha-ca-phe-cold-brew",
-      "name": "Gradie - Bình Pha Cà Phê Cold Brew 1400ml chính hãng, chất lượng cao",
+      "name": "Bình Pha Cà Phê Cold Brew 1400ml",
       "description": "Bình pha cà phê Cold Brew thủy tinh cao cấp là món đồ gia dụng không thể thiếu cho những ai yêu thích tự tay pha chế đồ uống mát lạnh tại nhà. Sản phẩm nổi bật với chất liệu thủy tinh chịu nhiệt trong suốt, đi kèm quai cầm chữ chữ D chắc chắn và nắp đậy bằng thép không gỉ sang trọng. Thân bình được in sẵn các vạch chia dung tích rõ ràng, giúp bạn dễ dàng căn chỉnh lượng nước chính xác. Bên trong bình tích hợp lõi lọc dài bằng inox với lưới siêu mịn, đảm bảo lọc sạch bã mà vẫn giữ trọn vẹn hương vị thơm ngon, đậm đà của cà phê ủ lạnh hay các loại trà trái cây.",
       "category": "Bình nước",
       "price": 239000,
@@ -1580,7 +1641,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp020-1.jpg",
           "name": "Hình trụ / 1,4L / Nhựa",
-          "color": "Hình trụ / 1,4L / Nhựa"
+          "color": "Hình trụ / 1,4L / Nhựa",
+          "stock": 100
         },
         {
           "sku": "SP020-2",
@@ -1589,7 +1651,8 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp020-2.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         },
         {
           "sku": "SP020-3",
@@ -1598,21 +1661,22 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp020-3.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 30,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
-      "tikiStock": 100
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
+      "tikiStock": 0
     },
     {
       "id": "coc-giu-nhiet",
-      "name": "Gradie - LY giữ nhiệt hoa lá cành chính hãng, chất lượng cao",
+      "name": "LY giữ nhiệt hoa lá cành",
       "description": "Bình giữ nhiệt Cherry Blossom sở hữu thiết kế màu kem nhã nhặn cùng họa tiết hoa anh đào hồng tinh tế. Bình có nắp chống tràn tiện lợi và quai xách vải thêu chữ \"Coffee\" sang trọng, dễ dàng mang đi học, đi làm. Với khả năng giữ nóng, lạnh vượt trội, đây là món phụ kiện vừa tiện ích vừa thời trang cho bạn.",
       "category": "Bình nước",
       "price": 99000,
@@ -1621,7 +1685,10 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp021-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp021-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp021-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp021-2.jpg",
+        "https://sg-test-11.slatic.net/p/80bed301415519aede0c4dc7146e589d.png",
+        "https://sg-test-11.slatic.net/p/4ab8b5949a6ba87dc7dd1baae18af156.png",
+        "https://vn-live.slatic.net/p/80bed301415519aede0c4dc7146e589d.png"
       ],
       "options": [
         {
@@ -1653,9 +1720,11 @@ window.GRADIE_DATA = {
             "500ml",
             "Inox"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp021-1.jpg",
+          "image": "https://vn-live.slatic.net/p/80bed301415519aede0c4dc7146e589d.png",
           "name": "Hình trụ / 500ml / Inox",
-          "color": "Hình trụ / 500ml / Inox"
+          "color": "Hình trụ / 500ml / Inox",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP021-2",
@@ -1664,21 +1733,22 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp021-2.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 42,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "tui-tote-nu-da",
-      "name": "Gradie - Túi Tote Nữ Da Cao Cấp chính hãng, chất lượng cao",
+      "name": "Túi Tote Nữ Da Cao Cấp",
       "description": "Túi xách tote dáng lớn là giải pháp lưu trữ hoàn hảo cho nhu cầu đi học, đi làm hay đi chơi hàng ngày. Sản phẩm gây ấn tượng với bề mặt dập họa tiết vân caro chìm tinh tế, tạo điểm nhấn hiện đại và thanh lịch.",
       "category": "Túi",
       "price": 70000,
@@ -1688,7 +1758,8 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp022-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp022-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp022-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp022-3.jpg",
+        "https://sg-test-11.slatic.net/p/9beeabe7514607463a2d40e2768083a9.jpg"
       ],
       "options": [
         {
@@ -1720,9 +1791,11 @@ window.GRADIE_DATA = {
             "32* 12*26",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp022-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/9beeabe7514607463a2d40e2768083a9.jpg",
           "name": "Hình chữ nhật / 32* 12*26 / Da pu",
-          "color": "Hình chữ nhật / 32* 12*26 / Da pu"
+          "color": "Hình chữ nhật / 32* 12*26 / Da pu",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP022-2",
@@ -1731,7 +1804,8 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp022-2.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         },
         {
           "sku": "SP022-3",
@@ -1740,21 +1814,22 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp022-3.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 47,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "tui-deo-vai-nu",
-      "name": "Gradie - Túi đeo vai nữ kiểu dáng mới chính hãng, chất lượng cao",
+      "name": "Túi đeo vai nữ kiểu dáng mới",
       "description": "Túi đeo vai thời trang sở hữu phom dáng mềm mại, hiện đại với hiệu ứng xếp ly tự nhiên đầy cá tính. Sản phẩm được làm từ chất liệu da bóng mượt, mang lại vẻ ngoài thời thượng và khả năng kháng bụi bẩn, dễ dàng lau chùi, vệ sinh.",
       "category": "Túi",
       "price": 67000,
@@ -1764,7 +1839,10 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp023-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp023-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp023-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp023-3.jpg",
+        "https://sg-test-11.slatic.net/p/f1710922d8a5e6e32dae436ce8edcd5b.jpg",
+        "https://sg-test-11.slatic.net/p/73110741a54be8753d6df89397d8c57b.jpg",
+        "https://sg-test-11.slatic.net/p/39f5ec89562452f0cbe6462274371342.jpg"
       ],
       "options": [
         {
@@ -1798,9 +1876,11 @@ window.GRADIE_DATA = {
             "32* 12*26",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp023-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/39f5ec89562452f0cbe6462274371342.jpg",
           "name": "Đen / 32* 12*26 / Da pu",
-          "color": "Đen / 32* 12*26 / Da pu"
+          "color": "Đen / 32* 12*26 / Da pu",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP023-2",
@@ -1813,7 +1893,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp023-2.jpg",
           "name": "Trắng / 32* 12*26 / Da pu",
-          "color": "Trắng / 32* 12*26 / Da pu"
+          "color": "Trắng / 32* 12*26 / Da pu",
+          "stock": 100
         },
         {
           "sku": "SP023-3",
@@ -1826,21 +1907,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp023-3.jpg",
           "name": "Hồng / 32* 12*26 / Da pu",
-          "color": "Hồng / 32* 12*26 / Da pu"
+          "color": "Hồng / 32* 12*26 / Da pu",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 39,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
-      "lazadaStock": 0,
+      "isTrending": false,
+      "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "tui-tote-balo-nu",
-      "name": "Gradie - Túi Tote Balo nữ da PU chính hãng, chất lượng cao",
+      "name": "Túi Tote Balo nữ da PU",
       "description": "Túi đeo vai bản lớn mang phong cách cá tính, bụi bặm và hiện đại với phom dáng túi hobo mềm mại. Sản phẩm được làm từ chất liệu da giả cổ có độ bóng nhẹ, tạo hiệu ứng sần tự nhiên mang hơi hướng cổ điển, đồng thời có khả năng kháng nước và dễ lau chùi.",
       "category": "Túi",
       "price": 70000,
@@ -1849,7 +1931,8 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp024-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp024-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp024-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp024-2.jpg",
+        "https://sg-test-11.slatic.net/p/7bd3eea3356757acdbe4de0a4a1deb42.jpg"
       ],
       "options": [
         {
@@ -1881,9 +1964,11 @@ window.GRADIE_DATA = {
             "15* 12*26",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp024-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/7bd3eea3356757acdbe4de0a4a1deb42.jpg",
           "name": "Hình chữ nhật / 15* 12*26 / Da pu",
-          "color": "Hình chữ nhật / 15* 12*26 / Da pu"
+          "color": "Hình chữ nhật / 15* 12*26 / Da pu",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP024-2",
@@ -1892,21 +1977,22 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp024-2.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 43,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "tui-xach-tote-nu-hoa-tiet",
-      "name": "Gradie - Túi xách Tote nữ họa tiết gấu chính hãng, chất lượng cao",
+      "name": "Túi xách Tote nữ họa tiết gấu",
       "description": "Túi đeo vai canvas mang phong cách trẻ trung, năng động và vô cùng dễ thương, là phụ kiện lý tưởng cho học sinh, sinh viên hoặc các chuyến dạo phố hàng ngày. Sản phẩm được làm từ chất liệu vải canvas dày dặn, bền bỉ, kết hợp hài hòa với các chi tiết giả da mềm mại tạo nên kết cấu chắc chắn mà vẫn giữ được sự nhẹ nhàng khi sử dụng.",
       "category": "Túi",
       "price": 70000,
@@ -1915,7 +2001,10 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp025-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp025-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp025-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp025-2.jpg",
+        "https://sg-test-11.slatic.net/p/42d9aec9c820c8b0efb6b62196549e6b.png",
+        "https://sg-test-11.slatic.net/p/ac23b0353e4205c4dedfad4e903eec54.png",
+        "https://sg-test-11.slatic.net/p/3075df0ef2347ff85778a2b5f7305334.jpg"
       ],
       "options": [
         {
@@ -1947,9 +2036,11 @@ window.GRADIE_DATA = {
             "15* 12*26",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp025-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/3075df0ef2347ff85778a2b5f7305334.jpg",
           "name": "Hình chữ nhật / 15* 12*26 / Da pu",
-          "color": "Hình chữ nhật / 15* 12*26 / Da pu"
+          "color": "Hình chữ nhật / 15* 12*26 / Da pu",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP025-2",
@@ -1958,21 +2049,22 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp025-2.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 19,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "tui-tote-nu-vai-canvas",
-      "name": "Gradie - Túi tote nữ vải canvas chính hãng, chất lượng cao",
+      "name": "Túi tote nữ vải canvas",
       "description": "Túi tote vải cỡ lớn mang phong cách tối giản, năng động, là lựa chọn tuyệt vời cho môi trường học tập, làm việc hoặc những chuyến du lịch ngắn ngày. Sản phẩm được may từ chất liệu vải canvas hoặc oxford dày dặn, đứng phom và có độ bền cao, giúp chịu lực tốt khi mang nhiều đồ đạc.",
       "category": "Túi",
       "price": 65000,
@@ -1981,7 +2073,9 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp026-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp026-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp026-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp026-2.jpg",
+        "https://sg-test-11.slatic.net/p/d27d9fdffcee903a6515d5482cc9108e.jpg",
+        "https://sg-test-11.slatic.net/p/cdb42336d60834b5f34ad62fbe4c310f.jpg"
       ],
       "options": [
         {
@@ -2014,9 +2108,11 @@ window.GRADIE_DATA = {
             "15* 12*26",
             "Canvas"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp026-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/d27d9fdffcee903a6515d5482cc9108e.jpg",
           "name": "Trắng / 15* 12*26 / Canvas",
-          "color": "Trắng / 15* 12*26 / Canvas"
+          "color": "Trắng / 15* 12*26 / Canvas",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP026-2",
@@ -2029,21 +2125,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp026-2.jpg",
           "name": "Đen / 15* 12*26 / Canvas",
-          "color": "Đen / 15* 12*26 / Canvas"
+          "color": "Đen / 15* 12*26 / Canvas",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 48,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
-      "lazadaStock": 0,
+      "isTrending": false,
+      "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "tui-toe-cong-so",
-      "name": "Gradie - Túi tote túi công sở chính hãng, chất lượng cao",
+      "name": "Túi tote túi công sở",
       "description": "Túi xách tote da dáng lớn mang phong cách cổ điển, thanh lịch và sang trọng, là lựa chọn tuyệt vời cho môi trường công sở, giảng đường hoặc sử dụng hàng ngày. Sản phẩm được làm từ chất liệu da tổng hợp cao cấp với bề mặt giả cổ có độ bóng nhẹ, tạo hiệu ứng vân da tự nhiên và khả năng chống bám bẩn tốt.",
       "category": "Túi",
       "price": 85000,
@@ -2052,7 +2149,9 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp027-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp027-1.jpg",
-        "`https://cdn.hstatic.net/files/200001178391/file/sp027-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp027-2.jpg",
+        "https://sg-test-11.slatic.net/p/1d3e44a8f1f0b9135adf1345c7907deb.jpg",
+        "https://sg-test-11.slatic.net/p/2364a87c72963232ab65278496d5d9c4.jpg"
       ],
       "options": [
         {
@@ -2085,9 +2184,11 @@ window.GRADIE_DATA = {
             "20*20*25",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp027-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/2364a87c72963232ab65278496d5d9c4.jpg",
           "name": "Nâu / 20*20*25 / Da pu",
-          "color": "Nâu / 20*20*25 / Da pu"
+          "color": "Nâu / 20*20*25 / Da pu",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP027-2",
@@ -2098,23 +2199,24 @@ window.GRADIE_DATA = {
             "20*20*25",
             "Da pu"
           ],
-          "image": "`https://cdn.hstatic.net/files/200001178391/file/sp027-2.jpg",
+          "image": "https://cdn.hstatic.net/files/200001178391/file/sp027-2.jpg",
           "name": "Đen / 20*20*25 / Da pu",
-          "color": "Đen / 20*20*25 / Da pu"
+          "color": "Đen / 20*20*25 / Da pu",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 37,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
-      "lazadaStock": 0,
+      "isTrending": false,
+      "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "balo-vai-da",
-      "name": "Gradie - Balo đi học, đi chơi vải dạ chính hãng, chất lượng cao",
+      "name": "Balo đi học, đi chơi vải dạ",
       "description": "Balo thời trang nữ mang phong cách sang trọng, thanh lịch và hiện đại, rất thích hợp cho việc đi học, đi làm hoặc đi chơi dạo phố. Sản phẩm gây ấn tượng mạnh với bề mặt được làm từ chất liệu vải dạ tweed đan dệt tinh xảo, tạo hiệu ứng vân kẻ ô nhỏ đan xen có chiều sâu, mang lại vẻ ngoài cao cấp và thời thượng.",
       "category": "Balo",
       "price": 73000,
@@ -2123,7 +2225,9 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp028-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp028-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp028-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp028-2.jpg",
+        "https://sg-test-11.slatic.net/p/cdc437ba584af44e8cea060f05a9307c.jpg",
+        "https://sg-test-11.slatic.net/p/5b626816a7006ea58cfdc6a17bb93c34.jpg"
       ],
       "options": [
         {
@@ -2156,9 +2260,11 @@ window.GRADIE_DATA = {
             "15*15*30",
             "Vải dạ"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp028-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/5b626816a7006ea58cfdc6a17bb93c34.jpg",
           "name": "Trắng / 15*15*30 / Vải dạ",
-          "color": "Trắng / 15*15*30 / Vải dạ"
+          "color": "Trắng / 15*15*30 / Vải dạ",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP028-2",
@@ -2171,24 +2277,25 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp028-2.jpg",
           "name": "Đen / 15*15*30 / Vải dạ",
-          "color": "Đen / 15*15*30 / Vải dạ"
+          "color": "Đen / 15*15*30 / Vải dạ",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 11,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
-      "lazadaStock": 0,
+      "isTrending": false,
+      "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "balo-mini",
-      "name": "Gradie - Balo mini dành cho nữ chính hãng, chất lượng cao",
+      "name": "Balo mini dành cho nữ",
       "description": "Balo mini nữ mang phong cách ngọt ngào, trẻ trung và năng động, là món phụ kiện tuyệt vời cho những chuyến đi chơi, dạo phố hay hẹn hò. Sản phẩm gây ấn tượng độc đáo với bề mặt chất liệu da được xử lý tạo hiệu ứng vân nhăn, giả giấy sần nhẹ lạ mắt, mang lại vẻ ngoài cá tính nhưng vẫn không kém phần tinh tế.",
       "category": "Balo",
-      "price": 71000,
+      "price": "71000",
       "compare_at_price": "90000",
       "sku": "SP029-1",
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp029-1.jpg",
@@ -2220,7 +2327,7 @@ window.GRADIE_DATA = {
       "variants": [
         {
           "sku": "SP029-1",
-          "price": 71000,
+          "price": "71000",
           "compare_at_price": "90000",
           "options": [
             "Hình chữ nhật",
@@ -2228,40 +2335,30 @@ window.GRADIE_DATA = {
             "Da nhung"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp029-1.jpg",
-          "name": "Hình chữ nhật / 15*15*30 / Da nhung",
-          "color": "Hình chữ nhật / 15*15*30 / Da nhung"
+          "stock": 100
         },
         {
           "sku": "SP029-2",
-          "price": 71000,
+          "price": "71000",
           "compare_at_price": "90000",
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp029-2.jpg",
-          "name": "",
-          "color": ""
+          "stock": 100
         },
         {
           "sku": "SP029-3",
-          "price": 71000,
+          "price": "71000",
           "compare_at_price": "90000",
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp029-3.jpg",
-          "name": "",
-          "color": ""
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 42,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
-      "isFeatured": false,
-      "lazadaStock": 100,
-      "tikiStock": 0
+      "stock": 300
     },
     {
       "id": "huy_chuong_chuc_mung_tot_nghiep",
-      "name": "Gradie - Huy Chương Tốt Nghiệp chính hãng, chất lượng cao",
+      "name": "Huy Chương Tốt Nghiệp",
       "description": "Huy chương chúc mừng tốt nghiệp là món quà độc đáo, mang ý nghĩa ghi dấu hành trình học tập và thành công của bạn bè, người thân. Với thiết kế trang trọng, nổi bật cùng dòng chữ chúc mừng, sản phẩm vừa là kỷ niệm đáng nhớ vừa là lời động viên tinh thần.",
       "category": "Huy Chương",
       "price": 69000,
@@ -2307,7 +2404,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_1.jpg",
           "name": "Xanh đen / Hình tròn / Đồng",
-          "color": "Xanh đen / Hình tròn / Đồng"
+          "color": "Xanh đen / Hình tròn / Đồng",
+          "stock": 100
         },
         {
           "sku": "SP030-2",
@@ -2320,7 +2418,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_2.jpg",
           "name": "Vàng cam / Hình tròn / Đồng",
-          "color": "Vàng cam / Hình tròn / Đồng"
+          "color": "Vàng cam / Hình tròn / Đồng",
+          "stock": 100
         },
         {
           "sku": "SP030-3",
@@ -2333,21 +2432,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_3.jpg",
           "name": "Da trời / Hình tròn / Đồng",
-          "color": "Da trời / Hình tròn / Đồng"
+          "color": "Da trời / Hình tròn / Đồng",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 37,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "den_ngu_gau_tot_nghiep",
-      "name": "Gradie - Hộp Tuyết Thủy Tinh ánh sáng ấm áp, thư giãn",
+      "name": "Hộp Tuyết Thủy Tinh",
       "description": "Mỗi bộ sản phẩm bao gồm: trụ đáy gỗ & dây đèn LED, hoa và lá đính kèm, hạt pha lê trong trang trí, pin, nắp chụp thủy tinh, keo nến và gấu tốt nghiệp. Thiết kế tinh tế, ánh sáng dịu nhẹ cùng chi tiết trang trí độc đáo giúp chiếc đèn trở thành món quà vừa đẹp mắt vừa mang giá trị kỷ niệm.",
       "category": "Đèn Ngủ",
       "price": 159000,
@@ -2396,7 +2496,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_1.jpg",
           "name": "Vàng / Hướng dương, nam / Nhựa",
-          "color": "Vàng / Hướng dương, nam / Nhựa"
+          "color": "Vàng / Hướng dương, nam / Nhựa",
+          "stock": 100
         },
         {
           "sku": "SP031-2",
@@ -2409,7 +2510,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_2.jpg",
           "name": "Vàng / Hướng dương, nữ / Nhựa",
-          "color": "Vàng / Hướng dương, nữ / Nhựa"
+          "color": "Vàng / Hướng dương, nữ / Nhựa",
+          "stock": 100
         },
         {
           "sku": "SP031-3",
@@ -2422,7 +2524,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_3.jpg",
           "name": "Hồng / Tulip Gấu / Nhựa",
-          "color": "Hồng / Tulip Gấu / Nhựa"
+          "color": "Hồng / Tulip Gấu / Nhựa",
+          "stock": 100
         },
         {
           "sku": "SP031-4",
@@ -2435,21 +2538,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_4.jpg",
           "name": "Xanh / Tulip Gấu / Nhựa",
-          "color": "Xanh / Tulip Gấu / Nhựa"
+          "color": "Xanh / Tulip Gấu / Nhựa",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 51,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 400,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "den_guong_tulip",
-      "name": "Gradie - Hộp Thủy Tinh Vuông ánh sáng ấm áp, thư giãn",
+      "name": "Hộp Thủy Tinh Vuông",
       "description": "Đèn ngủ hoa tulip 2-in-1 vừa là chiếc đèn ngủ ấm áp, vừa kiêm gương soi tiện lợi, mang lại trải nghiệm đa năng cho người dùng. Khi bật sáng, hiệu ứng thị giác lung linh tạo cảm giác không gian vô cực với những bông hoa rực rỡ, giúp căn phòng thêm phần lãng mạn và thư giãn. Sản phẩm mang tính DIY độc đáo, cho phép bạn tự tay lắp ráp để tạo nên “vườn hoa” riêng, tăng sự cá nhân hóa và ý nghĩa.",
       "category": "Đèn Ngủ",
       "price": 49000,
@@ -2497,7 +2601,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_1.jpg",
           "name": "Hồng / Vuông / Nhựa",
-          "color": "Hồng / Vuông / Nhựa"
+          "color": "Hồng / Vuông / Nhựa",
+          "stock": 100
         },
         {
           "sku": "SP032-2",
@@ -2510,7 +2615,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_2.jpg",
           "name": "Xanh / Vuông / Nhựa",
-          "color": "Xanh / Vuông / Nhựa"
+          "color": "Xanh / Vuông / Nhựa",
+          "stock": 100
         },
         {
           "sku": "SP032-3",
@@ -2523,7 +2629,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_3.jpg",
           "name": "Tím / Vuông / Nhựa",
-          "color": "Tím / Vuông / Nhựa"
+          "color": "Tím / Vuông / Nhựa",
+          "stock": 100
         },
         {
           "sku": "SP032-4",
@@ -2536,21 +2643,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_4.jpg",
           "name": "Nhiều màu / Vuông / Nhựa",
-          "color": "Nhiều màu / Vuông / Nhựa"
+          "color": "Nhiều màu / Vuông / Nhựa",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 36,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 400,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "den_ngu_silicon",
-      "name": "Gradie - Đèn LED Thú Dễ Thương ánh sáng ấm áp, thư giãn",
+      "name": "Đèn LED Thú Dễ Thương",
       "description": "Đèn ngủ mini được thiết kế nhỏ gọn, tiện lợi với thông số kỹ thuật hiện đại: điện áp định mức 5V / 0,3A, công suất 1W, dung lượng pin 1200mAh cho thời gian sử dụng dài. Ở mức sáng cao nhất, đèn có thể hoạt động 6–7 giờ, còn mức sáng thấp nhất kéo dài tới 12 giờ. Thời gian sạc nhanh chỉ 2–3 giờ, giúp bạn dễ dàng sử dụng liên tục.",
       "category": "Đèn Ngủ",
       "price": 109000,
@@ -2596,7 +2704,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_1.jpg",
           "name": "Thỏ / Trằng, vàng / Silicon",
-          "color": "Thỏ / Trằng, vàng / Silicon"
+          "color": "Thỏ / Trằng, vàng / Silicon",
+          "stock": 100
         },
         {
           "sku": "SP033-2",
@@ -2609,7 +2718,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_2.jpg",
           "name": "Vịt / Trằng, vàng / Silicon",
-          "color": "Vịt / Trằng, vàng / Silicon"
+          "color": "Vịt / Trằng, vàng / Silicon",
+          "stock": 100
         },
         {
           "sku": "SP033-3",
@@ -2622,21 +2732,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_3.jpg",
           "name": "Rồng / Trằng, vàng / Silicon",
-          "color": "Rồng / Trằng, vàng / Silicon"
+          "color": "Rồng / Trằng, vàng / Silicon",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 10,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "non_tot_nghiep_hoa_lua",
-      "name": "Gradie - Mũ Cử Nhân Trang Trí Hoa Lụa chính hãng, chất lượng cao",
+      "name": "Mũ Cử Nhân Trang Trí Hoa Lụa",
       "description": "Chiếc mũ cử nhân được trang trí tỉ mỉ và cẩn thận, thiết kế riêng dành cho bạn, giúp ngày tốt nghiệp thêm phần đặc biệt. Đây không chỉ là phụ kiện ý nghĩa mà còn là điểm nhấn để lưu lại những bức hình ấn tượng, ghi dấu kỷ niệm khó quên trong hành trình học tập. Món quà tinh tế này sẽ mang đến sự tự hào và niềm vui trọn vẹn cho người nhận.",
       "category": "Đồ tốt nghiệp",
       "price": 189000,
@@ -2684,7 +2795,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_1.jpg",
           "name": "Bướm / Xanh / Giấy, Hoa lụa, Ngọc trai",
-          "color": "Bướm / Xanh / Giấy, Hoa lụa, Ngọc trai"
+          "color": "Bướm / Xanh / Giấy, Hoa lụa, Ngọc trai",
+          "stock": 100
         },
         {
           "sku": "SP034-2",
@@ -2697,7 +2809,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_2.jpg",
           "name": "Hoa hồng / Đỏ / Giấy, Hoa lụa, Ngọc trai",
-          "color": "Hoa hồng / Đỏ / Giấy, Hoa lụa, Ngọc trai"
+          "color": "Hoa hồng / Đỏ / Giấy, Hoa lụa, Ngọc trai",
+          "stock": 100
         },
         {
           "sku": "SP034-3",
@@ -2710,21 +2823,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_3.jpg",
           "name": "Hoa Tulip / Hồng / Giấy, Hoa lụa, Ngọc trai",
-          "color": "Hoa Tulip / Hồng / Giấy, Hoa lụa, Ngọc trai"
+          "color": "Hoa Tulip / Hồng / Giấy, Hoa lụa, Ngọc trai",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 35,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "ao_cu_nhan",
-      "name": "Gradie - Đồ tốt nghiệp chính hãng, chất lượng cao",
+      "name": "Đồ tốt nghiệp",
       "description": "Bộ lễ phục cử nhân quốc tế màu đen trang trọng, phù hợp cho lễ tốt nghiệp đại học, thạc sĩ hay giảng viên. Sản phẩm gồm áo cử nhân và mũ tốt nghiệp, mang thiết kế chuẩn mực, giúp lưu giữ khoảnh khắc quan trọng trong hành trình học tập. Với chất liệu bền đẹp và kiểu dáng truyền thống, bộ lễ phục không chỉ thể hiện sự tự hào mà còn tạo nên hình ảnh chuyên nghiệp, trang nghiêm trong ngày trọng đại.",
       "category": "Đồ tốt nghiệp",
       "price": 339000,
@@ -2768,7 +2882,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg",
           "name": "Bộ áo mũ / Xanh, trắng / Cotton",
-          "color": "Bộ áo mũ / Xanh, trắng / Cotton"
+          "color": "Bộ áo mũ / Xanh, trắng / Cotton",
+          "stock": 100
         },
         {
           "sku": "SP035-2",
@@ -2781,21 +2896,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_2.jpg",
           "name": "Bộ áo mũ, nơ / Xanh, trắng / Cotton",
-          "color": "Bộ áo mũ, nơ / Xanh, trắng / Cotton"
+          "color": "Bộ áo mũ, nơ / Xanh, trắng / Cotton",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 28,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "sash_tot_nghiep",
-      "name": "Gradie - Sash Tốt Nghiệp chính hãng, chất lượng cao",
+      "name": "Sash Tốt Nghiệp",
       "description": "Sash đeo chéo tốt nghiệp là phụ kiện trang trọng, giúp tôn vinh khoảnh khắc quan trọng trong ngày lễ ra trường. Với thiết kế tinh tế, màu sắc nổi bật, sash mang lại vẻ tự tin và phong cách cho người mặc, đồng thời tạo điểm nhấn trong những bức ảnh kỷ yếu. ",
       "category": "Đồ tốt nghiệp",
       "price": 149000,
@@ -2839,21 +2955,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp036_1.jpg",
           "name": "Sash tên / Trắng / 170x120cm",
-          "color": "Sash tên / Trắng / 170x120cm"
+          "color": "Sash tên / Trắng / 170x120cm",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 27,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 100,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "gau_bong_chim_canh_cut",
-      "name": "Gradie - Gấu Bông Penguin Tốt Nghiệp siêu cấp đáng yêu, mềm mịn",
+      "name": "Gấu Bông Penguin Tốt Nghiệp",
       "description": "Gấu bông tốt nghiệp đáng yêu là món quà ý nghĩa, phù hợp để tặng bé, bạn bè hoặc người yêu trong ngày trọng đại. Với thiết kế dễ thương cùng trang phục cử nhân, sản phẩm không chỉ mang lại niềm vui mà còn giúp lưu giữ kỷ niệm tốt nghiệp một cách đặc biệt và đáng nhớ.",
       "category": "Gấu Bông",
       "price": 129000,
@@ -2897,21 +3014,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp037-1_89a66e29e1b74c988e6075b6f4562b2c.jpg",
           "name": "Cánh cụt / Chất nhung, lông xù / 24-25cm",
-          "color": "Cánh cụt / Chất nhung, lông xù / 24-25cm"
+          "color": "Cánh cụt / Chất nhung, lông xù / 24-25cm",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 21,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 100,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "the_keo_mu_tot_nghiep",
-      "name": "Gradie - Mũ Tốt Nghiệp Hộp Kẹo chính hãng, chất lượng cao",
+      "name": "Mũ Tốt Nghiệp Hộp Kẹo",
       "description": "Thiệp chúc mừng tốt nghiệp độc đáo với thiết kế hình mũ cử nhân, vừa mang không khí lễ tốt nghiệp vừa tạo sự thú vị khi kết hợp cùng hộp đựng kẹo bên trong. Trông giống như một chiếc mũ tốt nghiệp chứa đầy kẹo ngọt ngào, sản phẩm mang lại sự bất ngờ và vui nhộn cho người nhận.",
       "category": "Kẹo",
       "price": 149000,
@@ -2955,21 +3073,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp038-1.jpg",
           "name": "Mũ tốt nghiệp / thi và bìa cứng / 24-25cm",
-          "color": "Mũ tốt nghiệp / thi và bìa cứng / 24-25cm"
+          "color": "Mũ tốt nghiệp / thi và bìa cứng / 24-25cm",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 53,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 100,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "hop_keo_mu_bac_si",
-      "name": "Gradie - Hộp Quà Tốt Nghiệp Hình Mũ Cử Nhân chính hãng, chất lượng cao",
+      "name": "Hộp Quà Tốt Nghiệp Hình Mũ Cử Nhân",
       "description": "Hộp kẹo mũ bác sĩ được thiết kế độc đáo, làm từ giấy cao cấp, màu sắc như hình hiển thị, mang lại cảm giác vừa đáng yêu vừa trang trọng. Với kích thước nhỏ gọn 9 x 6 x 6 cm (3,54 x 2,36 x 2,36 in), sản phẩm thích hợp dùng để đựng thực phẩm, kẹo hoặc quà tặng trong các dịp đặc biệt.",
       "category": "Kẹo",
       "price": 79000,
@@ -3015,7 +3134,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp039-1.jpg",
           "name": "Đỏ / Giấy / 9x6x6 cm",
-          "color": "Đỏ / Giấy / 9x6x6 cm"
+          "color": "Đỏ / Giấy / 9x6x6 cm",
+          "stock": 100
         },
         {
           "sku": "SP039-2",
@@ -3028,7 +3148,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp039-2.jpg",
           "name": "Xanh / Giấy / 9x6x6 cm",
-          "color": "Xanh / Giấy / 9x6x6 cm"
+          "color": "Xanh / Giấy / 9x6x6 cm",
+          "stock": 100
         },
         {
           "sku": "SP039-3",
@@ -3041,21 +3162,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp039-3.jpg",
           "name": "Tím / Giấy / 9x6x6 cm",
-          "color": "Tím / Giấy / 9x6x6 cm"
+          "color": "Tím / Giấy / 9x6x6 cm",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 20,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "khung_anh_mica_de_",
-      "name": "Gradie - Mô Hình Tốt Nghiệp chính hãng, chất lượng cao",
+      "name": "Mô Hình Tốt Nghiệp",
       "description": "Khung ảnh mica trong suốt dày 3mm, kết hợp cùng đế LED USB ánh sáng dịu nhẹ, giúp hình ảnh nổi bật và lung linh hơn. Sản phẩm được in ảnh theo yêu cầu, phù hợp làm quà tặng tốt nghiệp đầy ý nghĩa.",
       "category": "Khung ảnh",
       "price": 259000,
@@ -3099,21 +3221,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp040-1.jpg",
           "name": "Tự do, phụ thuộc ảnh gửi / 15-20cm / Mica",
-          "color": "Tự do, phụ thuộc ảnh gửi / 15-20cm / Mica"
+          "color": "Tự do, phụ thuộc ảnh gửi / 15-20cm / Mica",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 36,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 100,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "khung_anh_bang_khen",
-      "name": "Gradie - khung ảnh khung bằng khen chính hãng, chất lượng cao",
+      "name": "khung ảnh khung bằng khen",
       "description": "Khung ảnh được thiết kế vừa vặn cho giấy khen chuẩn A4, giúp bảo quản và trưng bày giấy khen một cách trang trọng. Phần kính phủ viền ngoài thêm 1,5cm mỗi cạnh, tạo cảm giác chắc chắn và sang trọng.",
       "category": "Khung ảnh",
       "price": 259000,
@@ -3157,21 +3280,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp041-1.jpg",
           "name": "Hình chữ nhật / 21x29.7cm / Kính trong suốt",
-          "color": "Hình chữ nhật / 21x29.7cm / Kính trong suốt"
+          "color": "Hình chữ nhật / 21x29.7cm / Kính trong suốt",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 58,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 100,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "ky_niem_chuong_chibi",
-      "name": "Gradie - Khung Pha Lê chính hãng, chất lượng cao",
+      "name": "Khung Pha Lê",
       "description": "Kỷ niệm chương được chế tác từ thủy tinh cao cấp, mang vẻ đẹp sang trọng và tinh tế, thích hợp để vinh danh trong các dịp tốt nghiệp, kỷ niệm hay trao tặng thành tích. Sản phẩm có hai kiểu dáng: tròn đường kính 14cm và các mẫu khác với chiều cao 19cm, tạo sự đa dạng cho lựa chọn.",
       "category": "Huy Chương",
       "price": 299000,
@@ -3217,7 +3341,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp042-1.jpg",
           "name": "Lá / 19cm / Thủy tinh",
-          "color": "Lá / 19cm / Thủy tinh"
+          "color": "Lá / 19cm / Thủy tinh",
+          "stock": 100
         },
         {
           "sku": "SP042-2",
@@ -3230,7 +3355,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp042-2.jpg",
           "name": "Trái tim / 19cm / Thủy tinh",
-          "color": "Trái tim / 19cm / Thủy tinh"
+          "color": "Trái tim / 19cm / Thủy tinh",
+          "stock": 100
         },
         {
           "sku": "SP042-3",
@@ -3243,21 +3369,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp042-3.jpg",
           "name": "Xéo / 19cm / Thủy tinh",
-          "color": "Xéo / 19cm / Thủy tinh"
+          "color": "Xéo / 19cm / Thủy tinh",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 48,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "huy_chuong_moc_khoa",
-      "name": "Gradie - Huy Chương Tốt Nghiệp chính hãng, chất lượng cao",
+      "name": "Huy Chương Tốt Nghiệp",
       "description": "Huy chương được làm từ mica bền đẹp, với kích thước mặt 8cm, độ dày 3mm chắc chắn, tạo cảm giác sang trọng và tinh tế. Dây huy chương rộng 2,5cm, giúp đeo thoải mái và nổi bật trong các buổi lễ tốt nghiệp hay sự kiện vinh danh. Đây là món quà ý nghĩa, vừa trang trí vừa lưu giữ kỷ niệm đáng nhớ.",
       "category": "Huy Chương",
       "price": 89000,
@@ -3301,7 +3428,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp043-2.jpg",
           "name": "Tròn - Nam / 8,5cm / Mica",
-          "color": "Tròn - Nam / 8,5cm / Mica"
+          "color": "Tròn - Nam / 8,5cm / Mica",
+          "stock": 100
         },
         {
           "sku": "SP043-2",
@@ -3314,21 +3442,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp043-3.jpg",
           "name": "Tròn - / 8,5cm / Mica",
-          "color": "Tròn - / 8,5cm / Mica"
+          "color": "Tròn - / 8,5cm / Mica",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 20,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "bo_hoa_banh_keo",
-      "name": "Gradie - Bó Quà Tốt Nghiệp chính hãng, chất lượng cao",
+      "name": "Bó Quà Tốt Nghiệp",
       "description": "Bó hoa bánh kẹo gồm 18 món cao cấp, chất lượng, đa dạng hương vị, mang đến sự ngọt ngào và bất ngờ cho người nhận. Với thiết kế sáng tạo dạng bó hoa đứng được, sản phẩm vừa đẹp mắt vừa tiện lợi để trưng bày trong các buổi lễ tốt nghiệp, chụp kỷ yếu hay làm quà sinh nhật ý nghĩa. Đây là món quà độc đáo, vừa thể hiện lời chúc ngọt ngào vừa lưu giữ kỷ niệm đáng nhớ, thích hợp dành tặng bạn bè, người thân trong những dịp đặc biệt.",
       "category": "Hoa mừng",
       "price": 189000,
@@ -3372,7 +3501,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp044-1.jpg",
           "name": "Hồng / 80cm / Bánh kẹo,sữa, gấu bông",
-          "color": "Hồng / 80cm / Bánh kẹo,sữa, gấu bông"
+          "color": "Hồng / 80cm / Bánh kẹo,sữa, gấu bông",
+          "stock": 100
         },
         {
           "sku": "SP044-2",
@@ -3385,21 +3515,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp044-2.jpg",
           "name": "Xanh / 80cm / Bánh kẹo,sữa, gấu bông",
-          "color": "Xanh / 80cm / Bánh kẹo,sữa, gấu bông"
+          "color": "Xanh / 80cm / Bánh kẹo,sữa, gấu bông",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 30,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "den_ngu_hoa_huong_duong",
-      "name": "Gradie - Đèn Ngủ Hoa Hướng Dương ánh sáng ấm áp, thư giãn",
+      "name": "Đèn Ngủ Hoa Hướng Dương",
       "description": "Sản phẩm được thiết kế độc đáo với hoa hướng dương khô – biểu tượng của sự lạc quan và thành công. Kết hợp cùng đèn LED ánh sáng vàng ấm, tạo nên không gian lung linh, ấm áp, thích hợp làm quà tặng tốt nghiệp đầy ý nghĩa.",
       "category": "Đèn Ngủ",
       "price": 89000,
@@ -3445,7 +3576,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp045-1.jpg",
           "name": "Gấu / Trằng, vàng / Thủy tinh",
-          "color": "Gấu / Trằng, vàng / Thủy tinh"
+          "color": "Gấu / Trằng, vàng / Thủy tinh",
+          "stock": 100
         },
         {
           "sku": "SP045-2",
@@ -3458,7 +3590,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp045-2.jpg",
           "name": "Nam / Trằng, vàng / Thủy tinh",
-          "color": "Nam / Trằng, vàng / Thủy tinh"
+          "color": "Nam / Trằng, vàng / Thủy tinh",
+          "stock": 100
         },
         {
           "sku": "SP045-3",
@@ -3471,21 +3604,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp045-3.jpg",
           "name": "Nữ / Trằng, vàng / Thủy tinh",
-          "color": "Nữ / Trằng, vàng / Thủy tinh"
+          "color": "Nữ / Trằng, vàng / Thủy tinh",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 59,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "den_ngu_hoa_cam_tu_cau",
-      "name": "Gradie - Đèn Ngủ Hoa Cẩm Tú Cầu ánh sáng ấm áp, thư giãn",
+      "name": "Đèn Ngủ Hoa Cẩm Tú Cầu",
       "description": "Đèn ngủ handmade được làm từ nguyên liệu độc đáo, gồm 30 bông cẩm tú cầu kèm lá, mang lại vẻ đẹp nhẹ nhàng và tinh tế. Bộ sản phẩm đi kèm set đế đèn + pin AAA, cùng keo và đầy đủ phụ kiện, giúp bạn dễ dàng tự tay hoàn thiện chiếc đèn.",
       "category": "Đèn Ngủ",
       "price": 269000,
@@ -3531,7 +3665,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp046-1.jpg",
           "name": "Cẩm Tú Cầu / Vàng hồng đào / Thủy tinh",
-          "color": "Cẩm Tú Cầu / Vàng hồng đào / Thủy tinh"
+          "color": "Cẩm Tú Cầu / Vàng hồng đào / Thủy tinh",
+          "stock": 100
         },
         {
           "sku": "SP046-2",
@@ -3544,7 +3679,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp046-2.jpg",
           "name": "Cẩm Tú Cầu / Đỏ trắng ánh kim / Thủy tinh",
-          "color": "Cẩm Tú Cầu / Đỏ trắng ánh kim / Thủy tinh"
+          "color": "Cẩm Tú Cầu / Đỏ trắng ánh kim / Thủy tinh",
+          "stock": 100
         },
         {
           "sku": "SP046-3",
@@ -3557,21 +3693,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp046-3.jpg",
           "name": "Cẩm Tú Cầu / Tím ánh / Thủy tinh",
-          "color": "Cẩm Tú Cầu / Tím ánh / Thủy tinh"
+          "color": "Cẩm Tú Cầu / Tím ánh / Thủy tinh",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 14,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "lich_tot_nghiep",
-      "name": "Gradie - Lịch Tốt Nghiệp chính hãng, chất lượng cao",
+      "name": "Lịch Tốt Nghiệp",
       "description": "Lịch tốt nghiệp được thiết kế như một món quà tặng độc đáo, mang phong cách troll vui nhộn dành cho bạn bè. Với hình ảnh và chi tiết gắn liền không khí lễ tốt nghiệp, sản phẩm vừa tạo tiếng cười vừa lưu giữ kỷ niệm đáng nhớ. Đây là lựa chọn thú vị để tặng bạn bè trong ngày tốt nghiệp, giúp không khí thêm phần hài hước và ý nghĩa.",
       "category": "Khung ảnh",
       "price": 69000,
@@ -3580,7 +3717,9 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp047-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp047-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp047-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp047-3.jpg",
+        "https://sg-test-11.slatic.net/p/2fd314378bc4f0abdb653b28627f87f2.jpg",
+        "https://sg-test-11.slatic.net/p/3bd6f12052ed85137de738b803c0efd6.jpg"
       ],
       "options": [
         {
@@ -3613,9 +3752,11 @@ window.GRADIE_DATA = {
             "29,7 x 42 cm",
             "Giấy cứng"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp047-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/2fd314378bc4f0abdb653b28627f87f2.jpg",
           "name": "Hồng / 29,7 x 42 cm / Giấy cứng",
-          "color": "Hồng / 29,7 x 42 cm / Giấy cứng"
+          "color": "Hồng / 29,7 x 42 cm / Giấy cứng",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP047-2",
@@ -3628,21 +3769,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp047-3.jpg",
           "name": "Vàng / 29,7 x 42 cm / Giấy cứng",
-          "color": "Vàng / 29,7 x 42 cm / Giấy cứng"
+          "color": "Vàng / 29,7 x 42 cm / Giấy cứng",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 51,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
-      "lazadaStock": 200,
+      "isTrending": false,
+      "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "sen_da_va_gau",
-      "name": "Gradie - Bó Hoa Mini Kèm Gấu Tốt Nghiệp chính hãng, chất lượng cao",
+      "name": "Bó Hoa Mini Kèm Gấu Tốt Nghiệp",
       "description": "Set quà tặng tốt nghiệp độc đáo và ý nghĩa, mang đến sự tươi mới và may mắn cho người nhận. Mỗi set sen đá/xương rồng đi kèm chậu tráng men hoặc đất nung trắng đường kính 8cm, kết hợp cùng mô hình gấu tốt nghiệp dễ thương và túi giấy đựng quà sang trọng, thích hợp làm quà tặng bạn bè, người thân trong dịp tốt nghiệp.",
       "category": "Chậu cây",
       "price": 79000,
@@ -3686,7 +3828,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp048-1.jpg",
           "name": "Gấu / 29,7 x 42 cm / Sen đá",
-          "color": "Gấu / 29,7 x 42 cm / Sen đá"
+          "color": "Gấu / 29,7 x 42 cm / Sen đá",
+          "stock": 100
         },
         {
           "sku": "SP048-2",
@@ -3699,21 +3842,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp048-2.jpg",
           "name": "Gấu / 29,7 x 42 cm / Lá may mắn",
-          "color": "Gấu / 29,7 x 42 cm / Lá may mắn"
+          "color": "Gấu / 29,7 x 42 cm / Lá may mắn",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 10,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "chau_cay_may_man",
-      "name": "Gradie - Bó Xương Rồng Mini Tốt Nghiệp chính hãng, chất lượng cao",
+      "name": "Bó Xương Rồng Mini Tốt Nghiệp",
       "description": "Chậu cây được vẽ tay 100% thủ công, mang nét độc đáo và tinh tế, thích hợp làm quà tặng tốt nghiệp ý nghĩa. Với kích thước đường kính 8cm, sản phẩm nhỏ gọn, dễ dàng trưng bày trên bàn học, bàn làm việc hoặc góc trang trí. Đây là món quà vừa mang tính thẩm mỹ vừa gửi gắm lời chúc may mắn, thành công đến người nhận.",
       "category": "Chậu cây",
       "price": 159000,
@@ -3757,7 +3901,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp049-1.jpg",
           "name": "Nam / 8cm / Xương rồng",
-          "color": "Nam / 8cm / Xương rồng"
+          "color": "Nam / 8cm / Xương rồng",
+          "stock": 100
         },
         {
           "sku": "SP049-2",
@@ -3770,21 +3915,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp049-2.jpg",
           "name": "Nữ / 8cm / Xương rồng",
-          "color": "Nữ / 8cm / Xương rồng"
+          "color": "Nữ / 8cm / Xương rồng",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 40,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "balo-da-en",
-      "name": "Gradie - Balo mini thời trang DA ÉN chính hãng, chất lượng cao",
+      "name": "Balo mini thời trang DA ÉN",
       "description": "Balo mini nữ mang phong cách sang trọng, cổ điển pha chút hiện đại, là phụ kiện lý tưởng cho các buổi dạo phố, đi chơi hay hẹn hò. Sản phẩm gây ấn tượng mạnh mẽ với bề mặt được làm từ chất liệu vải dạ dệt họa tiết răng sói (houndstooth) tinh tế, mang lại vẻ ngoài thời thượng và không bao giờ lỗi mốt.",
       "category": "Balo",
       "price": 69000,
@@ -3793,7 +3939,10 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp050-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp050-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp050-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp050-2.jpg",
+        "https://sg-test-11.slatic.net/p/00a29909c6aac7fa2c071f56a1f03ee1.png",
+        "https://sg-test-11.slatic.net/p/5d3fdc05c29732c46e2cd4d2fa158f50.png",
+        "https://sg-test-11.slatic.net/p/8d436678202d513d740d2aaad316d0f1.jpg"
       ],
       "options": [
         {
@@ -3825,9 +3974,11 @@ window.GRADIE_DATA = {
             "12*15*30",
             "Da én"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp050-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/8d436678202d513d740d2aaad316d0f1.jpg",
           "name": "Hình chữ nhật / 12*15*30 / Da én",
-          "color": "Hình chữ nhật / 12*15*30 / Da én"
+          "color": "Hình chữ nhật / 12*15*30 / Da én",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP050-2",
@@ -3836,21 +3987,22 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp050-2.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 30,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "vi-nam-canvas",
-      "name": "Gradie - Ví nam dáng đứng vải canvas chính hãng, chất lượng cao",
+      "name": "Ví nam dáng đứng vải canvas",
       "description": "Ví đứng nam mang phong cách tối giản, hiện đại và thanh lịch, là phụ kiện lý tưởng cho những ai yêu thích sự gọn gàng, tinh tế. Sản phẩm được làm từ chất liệu vải giả canvas cao cấp với bề mặt vân dệt mịn màng, mang lại độ bền cao, khả năng chống sờn rách và tạo cảm giác cầm nắm chắc chắn, êm tay.",
       "category": "Ví",
       "price": 60000,
@@ -3859,7 +4011,9 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp051-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp051-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp051-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp051-2.jpg",
+        "https://sg-test-11.slatic.net/p/b933bc2bdbe2b0e6871e1167d7c894e4.jpg",
+        "https://sg-test-11.slatic.net/p/b76a60ba8c6b4d44799f6eb41ce66521.jpg"
       ],
       "options": [
         {
@@ -3892,9 +4046,11 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Canvas"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp051-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/b933bc2bdbe2b0e6871e1167d7c894e4.jpg",
           "name": "Xám / 11x8cm / Canvas",
-          "color": "Xám / 11x8cm / Canvas"
+          "color": "Xám / 11x8cm / Canvas",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP051-2",
@@ -3907,21 +4063,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp051-2.jpg",
           "name": "Đen / 11x8cm / Canvas",
-          "color": "Đen / 11x8cm / Canvas"
+          "color": "Đen / 11x8cm / Canvas",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 22,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
-      "lazadaStock": 0,
+      "isTrending": false,
+      "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "vi-dung-the",
-      "name": "Gradie - Ví Đựng Thẻ Zootopia chính hãng, chất lượng cao",
+      "name": "Ví Đựng Thẻ Zootopia",
       "description": "Ví đứng mang phong cách hoạt hình trẻ trung, năng động và cá tính, là phụ kiện lý tưởng cho các bạn trẻ yêu thích sự độc đáo. Sản phẩm được hoàn thiện từ chất liệu vải giả canvas bền bỉ với bề mặt vân dệt rõ nét, mang lại khả năng chống trầy xước tốt và cảm giác cầm nắm chắc chắn.",
       "category": "Ví",
       "price": 80000,
@@ -3930,7 +4087,9 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp052-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp052-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp052-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp052-2.jpg",
+        "https://sg-test-11.slatic.net/p/72cc7f11a19a308e11d211f7ad8d78ba.jpg",
+        "https://sg-test-11.slatic.net/p/ee21838f0414ed42b8daaf3b1f7de9ed.jpg"
       ],
       "options": [
         {
@@ -3963,9 +4122,11 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Canvas"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp052-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/ee21838f0414ed42b8daaf3b1f7de9ed.jpg",
           "name": "Navy / 11x8cm / Canvas",
-          "color": "Navy / 11x8cm / Canvas"
+          "color": "Navy / 11x8cm / Canvas",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP052-2",
@@ -3978,21 +4139,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp052-2.jpg",
           "name": "Xanh dương / 11x8cm / Canvas",
-          "color": "Xanh dương / 11x8cm / Canvas"
+          "color": "Xanh dương / 11x8cm / Canvas",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 50,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
-      "lazadaStock": 0,
+      "isTrending": false,
+      "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "vi-dung-the-sang-tao",
-      "name": "Gradie - Ví đựng thẻ chính hãng, chất lượng cao",
+      "name": "Ví đựng thẻ",
       "description": "Ví vải gấp ba mang phong cách trẻ trung, hài hước và cá tính, là phụ kiện hoàn hảo cho học sinh, sinh viên hoặc những ai yêu thích sự độc lạ. Sản phẩm được hoàn thiện từ chất liệu vải canvas giả denim dày dặn, bền bỉ, mang lại khả năng chống sờn rách cao và cảm giác cầm nắm chắc chắn, thân thiện.",
       "category": "Ví",
       "price": 85000,
@@ -4001,7 +4163,9 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp053-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp053-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp053-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp053-2.jpg",
+        "https://sg-test-11.slatic.net/p/b97abff6b41282ea3c5a9efe7df404ad.jpg",
+        "https://sg-test-11.slatic.net/p/4eeeb41ea587c8201e99bf11c18173cf.jpg"
       ],
       "options": [
         {
@@ -4034,9 +4198,11 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Canvas"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp053-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/b97abff6b41282ea3c5a9efe7df404ad.jpg",
           "name": "Navy / 11x8cm / Canvas",
-          "color": "Navy / 11x8cm / Canvas"
+          "color": "Navy / 11x8cm / Canvas",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP053-2",
@@ -4049,21 +4215,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp053-2.jpg",
           "name": "Nâu / 11x8cm / Canvas",
-          "color": "Nâu / 11x8cm / Canvas"
+          "color": "Nâu / 11x8cm / Canvas",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 22,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
-      "lazadaStock": 0,
+      "isTrending": false,
+      "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "vi-gap-in-hinh",
-      "name": "Gradie - Ví Gập được in hình mèo con chính hãng, chất lượng cao",
+      "name": "Ví Gập được in hình mèo con",
       "description": "Ví ngắn cầm tay nữ sở hữu phong cách đáng yêu, ngọt ngào và vô cùng tiện dụng, rất thích hợp cho các bạn học sinh, sinh viên sử dụng hàng ngày. Sản phẩm được làm từ chất liệu da mềm mịn, đứng dáng, mang lại độ bền cao và cảm giác êm ái khi cầm trên tay.",
       "category": "Ví",
       "price": 45000,
@@ -4074,7 +4241,11 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp054-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp054-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp054-3.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp054-4.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp054-4.jpg",
+        "https://sg-test-11.slatic.net/p/c312c604c0cdd8107aa3f2766c61194a.jpg",
+        "https://sg-test-11.slatic.net/p/b05774f705e405479178c43ce1634f32.jpg",
+        "https://sg-test-11.slatic.net/p/e06113ae9c52109bf90ce2455da60514.jpg",
+        "https://sg-test-11.slatic.net/p/2e56b3f86c011fe8d355c1c3fa742eb8.jpg"
       ],
       "options": [
         {
@@ -4109,9 +4280,11 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp054-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/2e56b3f86c011fe8d355c1c3fa742eb8.jpg",
           "name": "Kaki / 11x8cm / Da pu",
-          "color": "Kaki / 11x8cm / Da pu"
+          "color": "Kaki / 11x8cm / Da pu",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP054-2",
@@ -4124,7 +4297,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp054-2.jpg",
           "name": "Đen / 11x8cm / Da pu",
-          "color": "Đen / 11x8cm / Da pu"
+          "color": "Đen / 11x8cm / Da pu",
+          "stock": 100
         },
         {
           "sku": "SP054-3",
@@ -4137,7 +4311,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp054-3.jpg",
           "name": "Hồng / 11x8cm / Da pu",
-          "color": "Hồng / 11x8cm / Da pu"
+          "color": "Hồng / 11x8cm / Da pu",
+          "stock": 100
         },
         {
           "sku": "SP054-4",
@@ -4150,21 +4325,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp054-4.jpg",
           "name": "Xanh lá / 11x8cm / Da pu",
-          "color": "Xanh lá / 11x8cm / Da pu"
+          "color": "Xanh lá / 11x8cm / Da pu",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 35,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
-      "lazadaStock": 0,
+      "isTrending": false,
+      "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 400,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "vi-mini-khoa-keo",
-      "name": "Gradie - Ví mini 2 khoá kéo chính hãng, chất lượng cao",
+      "name": "Ví mini 2 khoá kéo",
       "description": "Ví ngắn cầm tay nữ mang phong cách hiện đại, thanh lịch và sang trọng, là lựa chọn lý tưởng cho phái đẹp sử dụng hàng ngày hoặc mang theo trong các buổi tiệc. Sản phẩm được làm từ chất liệu da mịn cao cấp, đứng phom với bề mặt tạo điểm nhấn bằng các đường chỉ may trần hình quả trám đan dệt tạo hiệu ứng hình khối ba chiều độc đáo.",
       "category": "Ví",
       "price": 45000,
@@ -4174,7 +4350,10 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp055-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp055-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp055-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp055-3.jpg",
+        "https://sg-test-11.slatic.net/p/f8ae826b0028aa4ae1453b4444865c61.jpg",
+        "https://sg-test-11.slatic.net/p/2dbc87adaed300e7e4a0643357d35285.jpg",
+        "https://sg-test-11.slatic.net/p/fc6662fa8c2659a6be883f7cc2061955.jpg"
       ],
       "options": [
         {
@@ -4208,9 +4387,11 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp055-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/fc6662fa8c2659a6be883f7cc2061955.jpg",
           "name": "Xanh / 11x8cm / Da pu",
-          "color": "Xanh / 11x8cm / Da pu"
+          "color": "Xanh / 11x8cm / Da pu",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP055-2",
@@ -4223,7 +4404,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp055-2.jpg",
           "name": "Hồng / 11x8cm / Da pu",
-          "color": "Hồng / 11x8cm / Da pu"
+          "color": "Hồng / 11x8cm / Da pu",
+          "stock": 100
         },
         {
           "sku": "SP055-3",
@@ -4236,21 +4418,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp055-3.jpg",
           "name": "Đen / 11x8cm / Da pu",
-          "color": "Đen / 11x8cm / Da pu"
+          "color": "Đen / 11x8cm / Da pu",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 28,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
-      "lazadaStock": 0,
+      "isTrending": false,
+      "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "nen-thom-hoa-kho",
-      "name": "Gradie - Nến Thơm Trang Trí Hoa Khô chính hãng, chất lượng cao",
+      "name": "Nến Thơm Trang Trí Hoa Khô",
       "description": "Nến thơm nghệ thuật cao cấp mang phong cách thiên nhiên thanh lịch, là món đồ decor hoàn hảo giúp làm ấm không gian sống và mang lại cảm giác thư giãn, dễ chịu. Sản phẩm nổi bật với thiết kế đặt trong một chiếc lồng kính thủy tinh vòm tròn suốt tinh tế, đi kèm phần đế lót bằng lát gỗ mộc tự nhiên nguyên vỏ.",
       "category": "Nến thơm",
       "price": 119000,
@@ -4296,7 +4479,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp056-1.jpg",
           "name": "Cam quýt / 7x7x9cm / Sáp",
-          "color": "Cam quýt / 7x7x9cm / Sáp"
+          "color": "Cam quýt / 7x7x9cm / Sáp",
+          "stock": 100
         },
         {
           "sku": "SP056-2",
@@ -4309,7 +4493,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp056-2.jpg",
           "name": "Hoa cỏ / 7x7x9cm / Sáp",
-          "color": "Hoa cỏ / 7x7x9cm / Sáp"
+          "color": "Hoa cỏ / 7x7x9cm / Sáp",
+          "stock": 100
         },
         {
           "sku": "SP056-3",
@@ -4322,21 +4507,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp056-3.jpg",
           "name": "Trái cây / 7x7x9cm / Sáp",
-          "color": "Trái cây / 7x7x9cm / Sáp"
+          "color": "Trái cây / 7x7x9cm / Sáp",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 50,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "nen-thom-vo-so",
-      "name": "Gradie - Nến thơm ốc biển chính hãng, chất lượng cao",
+      "name": "Nến thơm ốc biển",
       "description": "Nến thơm nghệ thuật đại dương mang thiết kế độc đáo và tràn đầy hơi thở của biển cả, là món đồ decor lý tưởng cho những ai yêu thích phong cách lãng mạn, phóng khoáng. Sản phẩm gây ấn tượng mạnh với phần vỏ nến được tạo hình phỏng sinh học theo một chiếc vỏ sò gai uốn lượn tự nhiên, có kết cấu bề mặt nhám nhẹ chân thực.",
       "category": "Nến thơm",
       "price": 80000,
@@ -4380,7 +4566,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp057-1.jpg",
           "name": "Vỏ sò / 7x7x9cm / Sáp",
-          "color": "Vỏ sò / 7x7x9cm / Sáp"
+          "color": "Vỏ sò / 7x7x9cm / Sáp",
+          "stock": 100
         },
         {
           "sku": "SP057-2",
@@ -4389,7 +4576,8 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp057-2.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         },
         {
           "sku": "SP057-3",
@@ -4398,21 +4586,22 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp057-3.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 48,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
-      "tikiStock": 100
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
+      "tikiStock": 0
     },
     {
       "id": "nen-thom-hop",
-      "name": "Gradie - Nến thơm hộp quà chính hãng, chất lượng cao",
+      "name": "Nến thơm hộp quà",
       "description": "Nến thơm hũ thủy tinh nghệ thuật mang phong cách hiện đại và tinh tế, là lựa chọn hoàn hảo để làm ấm không gian sống hoặc làm quà tặng chỉn chu trong các dịp đặc biệt. Thân hũ dán nhãn tối giản hiển thị rõ nét thông tin tên mùi hương mang hương vị thức uống ngọt ngào, tạo cảm giác thư giãn, dễ chịu ngay từ cái nhìn đầu tiên.",
       "category": "Nến thơm",
       "price": 25000,
@@ -4455,7 +4644,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp058-1.jpg",
           "name": "Hộp / 10x7x9cm / Sáp",
-          "color": "Hộp / 10x7x9cm / Sáp"
+          "color": "Hộp / 10x7x9cm / Sáp",
+          "stock": 100
         },
         {
           "sku": "SP058-2",
@@ -4464,21 +4654,22 @@ window.GRADIE_DATA = {
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp508-2.jpg",
           "name": "",
-          "color": ""
+          "color": "",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 12,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
+      "isTrending": false,
       "lazadaStock": 0,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "tui-dung-laptop",
-      "name": "Gradie - Túi đựng laptop chống sốc chính hãng, chất lượng cao",
+      "name": "Túi đựng laptop chống sốc",
       "description": "Túi chống sốc đựng laptop và máy tính bảng sở hữu thiết kế vuông vắn, tối giản và hiện đại, mang lại sự bảo vệ tối ưu cho các thiết bị công nghệ của bạn. Sản phẩm được làm từ chất liệu vải sợi cao cấp dày dặn, có khả năng kháng nước nhẹ, chống trầy xước và chống bám bụi hiệu quả.",
       "category": "Túi đựng laptop",
       "price": 138000,
@@ -4488,7 +4679,10 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp059-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp059-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp059-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp059-3.jpg",
+        "https://sg-test-11.slatic.net/p/16bd6a3d83a8ba871695948cd7c3361c.jpg",
+        "https://sg-test-11.slatic.net/p/b7ed48b8b1497b9729b75e0c03d3c4af.jpg",
+        "https://sg-test-11.slatic.net/p/38478996daee16d4f4335145e88a6623.jpg"
       ],
       "options": [
         {
@@ -4522,9 +4716,11 @@ window.GRADIE_DATA = {
             "39x28cm",
             "Vải"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp059-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/38478996daee16d4f4335145e88a6623.jpg",
           "name": "Hồng / 39x28cm / Vải",
-          "color": "Hồng / 39x28cm / Vải"
+          "color": "Hồng / 39x28cm / Vải",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP059-2",
@@ -4537,7 +4733,8 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp059-2.jpg",
           "name": "Đen / 39x28cm / Vải",
-          "color": "Đen / 39x28cm / Vải"
+          "color": "Đen / 39x28cm / Vải",
+          "stock": 100
         },
         {
           "sku": "SP059-3",
@@ -4550,21 +4747,22 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp059-3.jpg",
           "name": "Trắng / 39x28cm / Vải",
-          "color": "Trắng / 39x28cm / Vải"
+          "color": "Trắng / 39x28cm / Vải",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 50,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
-      "lazadaStock": 0,
+      "isTrending": false,
+      "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 300,
+      "tags": [],
       "tikiStock": 0
     },
     {
       "id": "tui-dung-laptop-notebook",
-      "name": "Gradie - TÚI ĐỰNG laptop notebook chính hãng, chất lượng cao",
+      "name": "TÚI ĐỰNG laptop notebook",
       "description": "Túi xách đựng laptop chống sốc chuyên dụng sở hữu thiết kế vuông vắn, thanh lịch và mang tính ứng dụng cao, là trợ thủ đắc lực bảo vệ thiết bị công nghệ cho dân văn phòng, doanh nhân hay học sinh, sinh viên. Sản phẩm được may từ chất liệu vải sợi dệt cao cấp bền bỉ, bề mặt tạo vân mịn có khả năng kháng nước nhẹ, chống trầy xước và chống bám bụi cực tốt.",
       "category": "Túi đựng laptop",
       "price": 140000,
@@ -4573,7 +4771,9 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp060-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp060-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp060-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp060-2.jpg",
+        "https://sg-test-11.slatic.net/p/613e3332fd0c8168c06c1d1a848b7b45.jpg",
+        "https://sg-test-11.slatic.net/p/74426acf751c82d9e4486bfabde0a3c7.jpg"
       ],
       "options": [
         {
@@ -4606,9 +4806,11 @@ window.GRADIE_DATA = {
             "39x28cm",
             "Canvas"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp060-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/613e3332fd0c8168c06c1d1a848b7b45.jpg",
           "name": "Xanh biển / 39x28cm / Canvas",
-          "color": "Xanh biển / 39x28cm / Canvas"
+          "color": "Xanh biển / 39x28cm / Canvas",
+          "lazadaStock": 100,
+          "stock": 100
         },
         {
           "sku": "SP060-2",
@@ -4621,1092 +4823,58 @@ window.GRADIE_DATA = {
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp060-2.jpg",
           "name": "Hồng / 39x28cm / Canvas",
-          "color": "Hồng / 39x28cm / Canvas"
+          "color": "Hồng / 39x28cm / Canvas",
+          "stock": 100
         }
       ],
-      "oldPrice": null,
-      "stock": 20,
-      "rating": 4.8,
-      "tags": [],
-      "isTrending": false,
       "isFeatured": false,
-      "lazadaStock": 0,
+      "isTrending": false,
+      "lazadaStock": 100,
+      "oldPrice": null,
+      "rating": 4.8,
+      "stock": 200,
+      "tags": [],
       "tikiStock": 0
     },
     {
-      "id": "1782397240273",
-      "sku": "7310591476451",
-      "name": "Gradie - Ly Giữ Nhiệt Họa Tiết Hoa Lá Cành Đẹp Mắt, Tiện Dụng Hằng Ngày chính hãng, chất lượng cao",
-      "price": 299000,
-      "stock": 10,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/1d/12/bf/511b838a8bca1697bf2b29acea97f644.png",
-      "dateAdded": "2026-06-25T14:20:40.024Z",
-      "oldPrice": null,
-      "rating": 4.8,
+      "id": "1782566770902",
+      "category": "13036",
+      "dateAdded": "2026-06-27T13:26:10.847Z",
+      "description": "<article class=\"lzd-article\" style=\"white-space:break-spaces\"><p style=\"line-height:1.7;text-align:left;text-indent:0;margin-left:0;margin-top:0;margin-bottom:0\"><span>Balo mini nữ mang phong cách ngọt ngào, trẻ trung và năng động, là món phụ kiện tuyệt vời cho những chuyến đi chơi, dạo phố hay hẹn hò. Sản phẩm gây ấn tượng độc đáo với bề mặt chất liệu da được xử lý tạo hiệu ứng vân nhăn, giả giấy sần nhẹ lạ mắt, mang lại vẻ ngoài cá tính nhưng vẫn không kém phần tinh tế.</span></p></article>",
       "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/1d/12/bf/511b838a8bca1697bf2b29acea97f644.png"
+        "https://vn-live.slatic.net/p/3b2abe2d751cfba631bb300117396f2c.jpg",
+        "https://vn-live.slatic.net/p/93587a64d2ac24b9c4083c866fc65e33.jpg"
       ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397241000",
-      "sku": "9082696686950",
-      "name": "Gradie - Hộp Nến Thơm Sang Trọng, Quà Tặng Ý Nghĩa Cho Mọi Dịp chính hãng, chất lượng cao",
-      "price": 250000,
-      "stock": 45,
-      "tikiStock": 99,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/fc/c3/63/168f2a8f918523798b1b863089b6c12a.png",
-      "dateAdded": "2026-06-25T14:20:40.024Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/fc/c3/63/168f2a8f918523798b1b863089b6c12a.png"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397240057",
-      "sku": "1744577481143",
-      "name": "Gradie - Sổ Tay Ghi Chép Nghệ Thuật Bìa Cứng - Monet - 18x23cm chính hãng, chất lượng cao",
-      "price": 235000,
-      "stock": 24,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/b8/45/39/eeb9f56534d2d34f9bc028c126b0fe0a.jpg",
-      "dateAdded": "2026-06-25T14:20:40.025Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/b8/45/39/eeb9f56534d2d34f9bc028c126b0fe0a.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397240368",
-      "sku": "6399265422386",
-      "name": "Gradie - Sổ Tay Ghi Chép Nghệ Thuật Bìa Cứng - Bridge - 18x23cm chính hãng, chất lượng cao",
-      "price": 235000,
-      "stock": 59,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/8b/74/fe/b789d70097f9783e75a2c41fde301b05.jpg",
-      "dateAdded": "2026-06-25T14:20:40.025Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/8b/74/fe/b789d70097f9783e75a2c41fde301b05.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397240972",
-      "sku": "2451646320315",
-      "name": "Gradie - Sổ Tay Ghi Chép Nghệ Thuật Bìa Cứng - Monet Claude - 18x23cm chính hãng, chất lượng cao",
-      "price": 235000,
-      "stock": 22,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/19/bb/a1/1494007d03e5b9d7059ff2f6a68e4b4b.png",
-      "dateAdded": "2026-06-25T14:20:40.025Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/19/bb/a1/1494007d03e5b9d7059ff2f6a68e4b4b.png"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397240971",
-      "sku": "8995354658794",
-      "name": "Gradie - Nến Thơm Nghệ Thuật Cao Cấp - Trái cây - 7x7x9cm chính hãng, chất lượng cao",
-      "price": 119000,
-      "stock": 48,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/d0/ba/d4/8ead54046fba5c409e6654e61e9789d0.png",
-      "dateAdded": "2026-06-25T14:20:40.025Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/d0/ba/d4/8ead54046fba5c409e6654e61e9789d0.png"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397240697",
-      "sku": "4219944247676",
-      "name": "Gradie - Nến Thơm Nghệ Thuật Cao Cấp - Hoa cỏ - 7x7x9cm chính hãng, chất lượng cao",
-      "price": 119000,
-      "stock": 58,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/e0/e8/5f/613121cb78253a2a25a714dfafa67905.png",
-      "dateAdded": "2026-06-25T14:20:40.025Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/e0/e8/5f/613121cb78253a2a25a714dfafa67905.png"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397240424",
-      "sku": "8561411148347",
-      "name": "Gradie - Nến Thơm Nghệ Thuật Cao Cấp - Cam quýt - 7x7x9cm chính hãng, chất lượng cao",
-      "price": 119000,
-      "stock": 10,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/a8/86/90/3359bae4c63b5af76a19cf76a3fe847f.png",
-      "dateAdded": "2026-06-25T14:20:40.025Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/a8/86/90/3359bae4c63b5af76a19cf76a3fe847f.png"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397248715",
-      "sku": "SP053",
-      "name": "Gradie Ví Vải Gấp Ba Phong Cách Trẻ Trung",
-      "price": 85000,
-      "stock": 32,
-      "lazadaStock": 200,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/b97abff6b41282ea3c5a9efe7df404ad.jpg",
-      "dateAdded": "2026-06-25T14:20:47.848Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/b97abff6b41282ea3c5a9efe7df404ad.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397248428",
-      "sku": "SP052",
-      "name": "Gradie Ví Đứng Hoạt Hình Trẻ Trung Cá Tính",
-      "price": 80000,
-      "stock": 17,
-      "lazadaStock": 200,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/72cc7f11a19a308e11d211f7ad8d78ba.jpg",
-      "dateAdded": "2026-06-25T14:20:47.848Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/72cc7f11a19a308e11d211f7ad8d78ba.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397248060",
-      "sku": "SP059",
-      "name": "Gradie Túi Chống Sốc Laptop Máy Tính Bảng",
-      "price": 138000,
-      "stock": 57,
-      "lazadaStock": 300,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/16bd6a3d83a8ba871695948cd7c3361c.jpg",
-      "dateAdded": "2026-06-25T14:20:47.848Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/16bd6a3d83a8ba871695948cd7c3361c.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397248430",
-      "sku": "SP028",
-      "name": "Gradie Balo Thời Trang Nữ Dáng Mini Sang Trọng",
-      "price": 73000,
-      "stock": 19,
-      "lazadaStock": 200,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/cdc437ba584af44e8cea060f05a9307c.jpg",
-      "dateAdded": "2026-06-25T14:20:47.848Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/cdc437ba584af44e8cea060f05a9307c.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397247995",
-      "sku": "SP023",
-      "name": "Gradie Túi Đeo Vai Nữ Xếp Ly Thời Trang",
-      "price": 67000,
-      "stock": 48,
-      "lazadaStock": 300,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/f1710922d8a5e6e32dae436ce8edcd5b.jpg",
-      "dateAdded": "2026-06-25T14:20:47.849Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/f1710922d8a5e6e32dae436ce8edcd5b.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397247893",
-      "sku": "SP051",
-      "name": "Gradie Ví Đứng Nam Tối Giản Nhỏ Gọn",
-      "price": 60000,
-      "stock": 28,
-      "lazadaStock": 200,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/b933bc2bdbe2b0e6871e1167d7c894e4.jpg",
-      "dateAdded": "2026-06-25T14:20:47.849Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/b933bc2bdbe2b0e6871e1167d7c894e4.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397248682",
-      "sku": "SP027",
-      "name": "Gradie Túi Tote Da Dáng Lớn Thanh Lịch",
-      "price": 85000,
-      "stock": 59,
-      "lazadaStock": 200,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/1d3e44a8f1f0b9135adf1345c7907deb.jpg",
-      "dateAdded": "2026-06-25T14:20:47.849Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/1d3e44a8f1f0b9135adf1345c7907deb.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397248259",
-      "sku": "SP055",
-      "name": "Gradie Ví Ngắn Cầm Tay Nữ Thanh Lịch",
-      "price": 45000,
-      "stock": 48,
-      "lazadaStock": 300,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/f8ae826b0028aa4ae1453b4444865c61.jpg",
-      "dateAdded": "2026-06-25T14:20:47.849Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/f8ae826b0028aa4ae1453b4444865c61.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397248701",
-      "sku": "SP026",
-      "name": "Gradie Túi Tote Vải Cỡ Lớn Phong Cách Tối Giản",
-      "price": 65000,
-      "stock": 16,
-      "lazadaStock": 200,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/d27d9fdffcee903a6515d5482cc9108e.jpg",
-      "dateAdded": "2026-06-25T14:20:47.849Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/d27d9fdffcee903a6515d5482cc9108e.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397247875",
-      "sku": "SP054",
-      "name": "Gradie Ví Ngắn Cầm Tay Nữ Dễ Thương",
-      "price": 45000,
-      "stock": 34,
-      "lazadaStock": 400,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/c312c604c0cdd8107aa3f2766c61194a.jpg",
-      "dateAdded": "2026-06-25T14:20:47.849Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/c312c604c0cdd8107aa3f2766c61194a.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782397248740",
-      "sku": "SP060",
-      "name": "Gradie Túi Xách Đựng Laptop Chống Sốc",
-      "price": 140000,
-      "stock": 55,
-      "lazadaStock": 200,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/613e3332fd0c8168c06c1d1a848b7b45.jpg",
-      "dateAdded": "2026-06-25T14:20:47.849Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/613e3332fd0c8168c06c1d1a848b7b45.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462984426",
-      "sku": "2243724385503",
-      "name": "Gradie - Bó Xương Rồng Mini Tốt Nghiệp - Nữ - 8cm chính hãng, chất lượng cao",
-      "price": 159000,
-      "stock": 10,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/6a/46/bc/e5a2b5943668e65e4a5ceac4265b78c8.jpg",
-      "dateAdded": "2026-06-26T08:36:23.981Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/6a/46/bc/e5a2b5943668e65e4a5ceac4265b78c8.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462984060",
-      "sku": "5999040827583",
-      "name": "Gradie - Bó Xương Rồng Mini Tốt Nghiệp - Nam - 8cm chính hãng, chất lượng cao",
-      "price": 159000,
-      "stock": 19,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/6a/46/bc/e5a2b5943668e65e4a5ceac4265b78c8.jpg",
-      "dateAdded": "2026-06-26T08:36:23.981Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/6a/46/bc/e5a2b5943668e65e4a5ceac4265b78c8.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462983995",
-      "sku": "3677635974887",
-      "name": "Gradie - Túi Kẹo Lớn Hình Trái Tim - Xanh - 90cm chính hãng, chất lượng cao",
-      "price": 89000,
-      "stock": 24,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/3f/e9/e3/c68b7df623dc97caab9f99b6d1adee2d.jpg",
-      "dateAdded": "2026-06-26T08:36:23.981Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/3f/e9/e3/c68b7df623dc97caab9f99b6d1adee2d.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462984445",
-      "sku": "3248628189014",
-      "name": "Gradie - Túi Kẹo Lớn Hình Trái Tim - Hồng - 90cm chính hãng, chất lượng cao",
-      "price": 89000,
-      "stock": 11,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/3f/e9/e3/c68b7df623dc97caab9f99b6d1adee2d.jpg",
-      "dateAdded": "2026-06-26T08:36:23.981Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/3f/e9/e3/c68b7df623dc97caab9f99b6d1adee2d.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462984460",
-      "sku": "8821235128064",
-      "name": "Gradie - Nến Thơm Ốc Biển Thư Giãn, Hương Dịu Nhẹ Cho Không Gian chính hãng, chất lượng cao",
-      "price": 80000,
-      "stock": 48,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/5f/d4/d7/2f528d45c903d0cf7bf7270839e95bbd.jpg",
-      "dateAdded": "2026-06-26T08:36:23.982Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/5f/d4/d7/2f528d45c903d0cf7bf7270839e95bbd.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462984768",
-      "sku": "3663856197854",
-      "name": "Gấu Bông Tốt Nghiệp Gradie - Không kính, in tên - 20cm khi ngồi 18cm",
-      "price": 70000,
-      "stock": 53,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/30/40/92/06d069111f54f9a21606c546424c218a.jpg",
-      "dateAdded": "2026-06-26T08:36:23.982Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/30/40/92/06d069111f54f9a21606c546424c218a.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462984700",
-      "sku": "7315667885998",
-      "name": "Gấu Bông Tốt Nghiệp Gradie - Không kính, không in - 20cm khi ngồi 18cm",
-      "price": 60000,
-      "stock": 36,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/30/40/92/06d069111f54f9a21606c546424c218a.jpg",
-      "dateAdded": "2026-06-26T08:36:23.982Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/30/40/92/06d069111f54f9a21606c546424c218a.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462984825",
-      "sku": "9145375030564",
-      "name": "Gấu Bông Tốt Nghiệp Gradie - Có kính, in tên - 20cm khi ngồi 18cm",
-      "price": 80000,
-      "stock": 33,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/30/40/92/06d069111f54f9a21606c546424c218a.jpg",
-      "dateAdded": "2026-06-26T08:36:23.982Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/30/40/92/06d069111f54f9a21606c546424c218a.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462984933",
-      "sku": "8146744562033",
-      "name": "Gấu Bông Tốt Nghiệp Gradie - Có kính, không in - 20cm khi ngồi 18cm",
-      "price": 65000,
-      "stock": 52,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/30/40/92/06d069111f54f9a21606c546424c218a.jpg",
-      "dateAdded": "2026-06-26T08:36:23.982Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/30/40/92/06d069111f54f9a21606c546424c218a.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462984013",
-      "sku": "4467037526797",
-      "name": "Gradie - Túi Kẹo Quà Tặng Đáng Yêu, Phù Hợp Nhiều Dịp Đặc Biệt - Xanh - 30cm chính hãng, chất lượng cao",
-      "price": 49000,
-      "stock": 51,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/a3/b9/cd/2558b175490c2ee3e59aa9fcfeb2aa35.jpg",
-      "dateAdded": "2026-06-26T08:36:23.982Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/a3/b9/cd/2558b175490c2ee3e59aa9fcfeb2aa35.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462984685",
-      "sku": "4242193988716",
-      "name": "Gradie - Túi Kẹo Quà Tặng Đáng Yêu, Phù Hợp Nhiều Dịp Đặc Biệt - Đỏ - 30cm chính hãng, chất lượng cao",
-      "price": 49000,
-      "stock": 28,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/a3/b9/cd/2558b175490c2ee3e59aa9fcfeb2aa35.jpg",
-      "dateAdded": "2026-06-26T08:36:23.982Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/a3/b9/cd/2558b175490c2ee3e59aa9fcfeb2aa35.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462984072",
-      "sku": "6773016129537",
-      "name": "Gradie - Túi Kẹo Quà Tặng Đáng Yêu, Phù Hợp Nhiều Dịp Đặc Biệt - Hồng - 30cm chính hãng, chất lượng cao",
-      "price": 49000,
-      "stock": 17,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/a3/b9/cd/2558b175490c2ee3e59aa9fcfeb2aa35.jpg",
-      "dateAdded": "2026-06-26T08:36:23.982Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/a3/b9/cd/2558b175490c2ee3e59aa9fcfeb2aa35.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462983988",
-      "sku": "7842879705619",
-      "name": "Gradie - Khung Ảnh Tốt Nghiệp Chibi - Khung chữ nhật - 13x18cm chính hãng, chất lượng cao",
-      "price": 75000,
-      "stock": 38,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/69/e0/56/a9e28c95f0b0c7314036c24b0449acee.jpg",
-      "dateAdded": "2026-06-26T08:36:23.982Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/69/e0/56/a9e28c95f0b0c7314036c24b0449acee.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462984539",
-      "sku": "3293419069928",
-      "name": "Gradie - Khung Ảnh Tốt Nghiệp Chibi - Khung chữ nhật - 10x15cm chính hãng, chất lượng cao",
-      "price": 64000,
-      "stock": 42,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/69/e0/56/a9e28c95f0b0c7314036c24b0449acee.jpg",
-      "dateAdded": "2026-06-26T08:36:23.982Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/69/e0/56/a9e28c95f0b0c7314036c24b0449acee.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462984742",
-      "sku": "3849603056931",
-      "name": "Gradie - Bình Pha Cafe Cold Brew Tiện Dụng, Thiết Kế Hiện Đại chính hãng, chất lượng cao",
-      "price": 120000,
-      "stock": 57,
-      "tikiStock": 100,
-      "category": "Uncategorized",
-      "image": "https://salt.tikicdn.com/cache/280x280/ts/product/71/7c/52/b99d6f9830e947efa9eeca087a49ac72.jpg",
-      "dateAdded": "2026-06-26T08:36:23.983Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://salt.tikicdn.com/cache/280x280/ts/product/71/7c/52/b99d6f9830e947efa9eeca087a49ac72.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462986954",
-      "sku": "SP061",
+      "image": "https://vn-live.slatic.net/p/3b2abe2d751cfba631bb300117396f2c.jpg",
+      "isSyncOnly": true,
+      "lazadaStock": 100,
+      "marketplaceSource": "Lazada",
       "name": "Gradie Balo mini dành cho nữ",
       "price": 71000,
-      "stock": 28,
-      "lazadaStock": 100,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/44f4495743d3e2bb021e5edffc5b61ab.jpg",
-      "dateAdded": "2026-06-26T08:36:26.594Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/44f4495743d3e2bb021e5edffc5b61ab.jpg"
+      "showOnWebsite": false,
+      "sku": "SP061-1",
+      "stock": 0,
+      "variants": [
+        {
+          "name": "Chữ nhật 15*15*30",
+          "sku": "SP061-1",
+          "price": 71000,
+          "stock": 0,
+          "lazadaStock": 100,
+          "image": "https://vn-live.slatic.net/p/93587a64d2ac24b9c4083c866fc65e33.jpg",
+          "color": "Chữ nhật 15*15*30"
+        }
       ],
-      "variants": [],
-      "tags": [],
+      "isFeatured": false,
+      "isTrending": false,
+      "oldPrice": null,
       "options": {
         "colors": [],
         "sizes": [],
         "personalization": []
       },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462986945",
-      "sku": "SP008",
-      "name": "Gradie Túi Kẹo Lớn Hình Trái Tim",
-      "price": 89000,
-      "stock": 17,
-      "lazadaStock": 200,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/b9778a7650161e15d81d96be52c17573.jpg",
-      "dateAdded": "2026-06-26T08:36:26.594Z",
-      "oldPrice": null,
       "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/b9778a7650161e15d81d96be52c17573.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462987358",
-      "sku": "SP022",
-      "name": "Gradie Túi Tote Nữ Da Cao Cấp",
-      "price": 70000,
-      "stock": 28,
-      "lazadaStock": 100,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/9beeabe7514607463a2d40e2768083a9.jpg",
-      "dateAdded": "2026-06-26T08:36:26.595Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/9beeabe7514607463a2d40e2768083a9.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462986737",
-      "sku": "SP050",
-      "name": "Gradie Balo mini thời trang DA ÉN",
-      "price": 69000,
-      "stock": 31,
-      "lazadaStock": 100,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/8d436678202d513d740d2aaad316d0f1.jpg",
-      "dateAdded": "2026-06-26T08:36:26.595Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/8d436678202d513d740d2aaad316d0f1.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462987044",
-      "sku": "SP021",
-      "name": "Gradie LY giữ nhiệt hoa lá cành",
-      "price": 99000,
-      "stock": 58,
-      "lazadaStock": 100,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/9ad14e680ec85313180f68353902f07f.jpg",
-      "dateAdded": "2026-06-26T08:36:26.595Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/9ad14e680ec85313180f68353902f07f.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462987021",
-      "sku": "SP024",
-      "name": "Gradie Túi Tote Balo nữ da PU",
-      "price": 70000,
-      "stock": 18,
-      "lazadaStock": 100,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/7bd3eea3356757acdbe4de0a4a1deb42.jpg",
-      "dateAdded": "2026-06-26T08:36:26.596Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/7bd3eea3356757acdbe4de0a4a1deb42.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462986994",
-      "sku": "SP007",
-      "name": "Gradie Túi Kẹo Quà Tặng",
-      "price": 49000,
-      "stock": 55,
-      "lazadaStock": 300,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/63ac0d422e7b19015a8e2ff9102e246f.jpg",
-      "dateAdded": "2026-06-26T08:36:26.596Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/63ac0d422e7b19015a8e2ff9102e246f.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462987036",
-      "sku": "SP047",
-      "name": "Gradie Lịch Tốt Nghiệp",
-      "price": 69000,
-      "stock": 18,
-      "lazadaStock": 200,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/2fd314378bc4f0abdb653b28627f87f2.jpg",
-      "dateAdded": "2026-06-26T08:36:26.596Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/2fd314378bc4f0abdb653b28627f87f2.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
-    },
-    {
-      "id": "1782462987381",
-      "sku": "SP025",
-      "name": "Gradie Túi xách Tote nữ họa tiết gấu",
-      "price": 70000,
-      "stock": 51,
-      "lazadaStock": 100,
-      "category": "Uncategorized",
-      "image": "https://sg-test-11.slatic.net/p/3075df0ef2347ff85778a2b5f7305334.jpg",
-      "dateAdded": "2026-06-26T08:36:26.596Z",
-      "oldPrice": null,
-      "rating": 4.8,
-      "gallery": [
-        "https://sg-test-11.slatic.net/p/3075df0ef2347ff85778a2b5f7305334.jpg"
-      ],
-      "variants": [],
-      "tags": [],
-      "options": {
-        "colors": [],
-        "sizes": [],
-        "personalization": []
-      },
-      "isTrending": false,
-      "isFeatured": false
+      "tags": []
     }
   ],
   "users": [
@@ -7192,57 +6360,90 @@ window.GRADIE_DATA = {
     },
     {
       "id": "b5",
-      "title": "Bộ Sưu Tập Quà Tặng Tốt Nghiệp Cao Cấp Bán Chạy Nhất Tại Gradie Mùa Lễ 2026",
-      "excerpt": "Khám phá những món quà tốt nghiệp độc đáo, ý nghĩa và được thiết kế cá nhân hóa tinh tế nhất từ Gradie để ghi dấu ngày trọng đại của người thương yêu.",
-      "content": "<p>Lễ tốt nghiệp là cột mốc thiêng liêng đánh dấu sự trưởng thành, khép lại hành trình học tập nỗ lực và mở ra cánh cổng tương lai tươi sáng. Để giúp bạn gửi gắm trọn vẹn tình cảm và sự tự hào đến những tân cử nhân trong ngày đặc biệt này, Gradie mang đến bộ sưu tập quà tặng tốt nghiệp độc đáo, cao cấp và đầy ý nghĩa. Hãy cùng điểm qua bốn món quà tặng đang dẫn đầu xu hướng và được yêu thích nhất tại Gradie trong mùa lễ tốt nghiệp năm nay.</p>\n\n<p>Đầu tiên phải kể đến dòng sản phẩm quà cá nhân hóa tinh tế, nơi mỗi món quà là một tác phẩm độc nhất vô nhị dành riêng cho người nhận. Nổi bật trong dòng sản phẩm này là những chiếc túi vải cao cấp thêu tên thủ công tỉ mỉ với họa tiết hoa nhã nhặn trên nền vải mịn màng. Với mức giá chỉ từ 199.000đ, món quà thêu tên cá nhân không chỉ mang giá trị sử dụng cao nhưng còn thể hiện sự tinh tế của người tặng, khẳng định rằng người nhận là duy nhất và món quà dành cho họ cũng độc đáo không ai giống ai.</p>\n<img src=\"images/blog_personalized_gift.jpg\" alt=\"Quà Cá Nhân Hóa Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Bên cạnh những món quà cá nhân hóa thêu tên, bó hoa len tốt nghiệp thủ công cũng là sự lựa chọn hoàn hảo được đông đảo khách hàng săn đón. Nếu như những đóa hoa tươi chỉ lưu giữ được vẻ đẹp trong khoảnh khắc ngắn ngủi, thì đóa hoa len được móc tay tỉ mỉ từ những sợi len mềm mại sẽ lưu giữ trọn vẹn ký ức của ngày ra trường mãi về sau. Mỗi bó hoa len tốt nghiệp tại Gradie có giá chỉ từ 149.000đ, được phối màu pastel nhẹ nhàng sang trọng, đi kèm thiệp chúc mừng thiết kế tinh xảo và đóng gói vô cùng chỉn chu. Đây thực sự là món quà bền vững theo thời gian, gửi gắm thông điệp chân thành rằng tình cảm chân thành sẽ không bao giờ nhạt phai.</p>\n<img src=\"images/blog_crochet_flowers.jpg\" alt=\"Bó Hoa Len Tốt Nghiệp Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Một biểu tượng không thể thiếu trong ngày lễ nhận bằng chính là những chú gấu bông tốt nghiệp đáng yêu. Chú gấu bông cử nhân của Gradie được chế tác từ chất liệu lông mềm mịn cao cấp, khoác lên mình bộ lễ phục cử nhân thắt nơ lịch lãm và tay cầm bó hoa len mini xinh xắn. Với mức giá từ 189.000đ, chú gấu bông nhỏ nhắn này sẽ là người bạn đồng hành ấm áp để ôm khi vui, để nhớ khi buồn, và để nhắc nhở các tân cử nhân về ngày họ đã tỏa sáng rực rỡ dưới mái trường thân yêu. Hộp quà tặng đi kèm gấu bông được thiết kế tinh tế giúp bạn dễ dàng trao gửi lời chúc tự hào đến người thương yêu một cách trang trọng nhất.</p>\n<img src=\"images/blog_graduation_teddy.jpg\" alt=\"Gấu Bông Tốt Nghiệp Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Cuối cùng, nếu bạn muốn món quà của mình trở nên thật nổi bật và lung linh giữa hàng trăm bức ảnh kỷ niệm, hoa bóng bay tốt nghiệp chính là sự lựa chọn đột phá nhất. Sản phẩm là sự kết hợp độc đáo giữa chú gấu bông cử nhân đáng yêu đặt bên trong quả bóng bay trong suốt cỡ lớn in chữ chúc mừng nổi bật, xung quanh là những đóa hồng tươi tắn và bóng bay pastel đồng điệu. Với mức giá từ 359.000đ, mẫu hoa bóng bay này mang thiết kế vô cùng sang trọng và bắt mắt, chắc chắn sẽ giúp người thương yêu của bạn chiếm trọn mọi ánh nhìn và tạo nên những bức ảnh kỷ yếu độc đáo, biến ngày lễ tốt nghiệp trở thành một ký ức lộng lẫy khó quên.</p>\n<img src=\"images/blog_graduation_balloon.jpg\" alt=\"Hoa Bóng Bay Tốt Nghiệp Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Với bộ sưu tập đa dạng từ túi cá nhân hóa thêu tên, bó hoa len lưu niệm, gấu bông cử nhân đến hoa bóng bay sang trọng, Gradie cam kết mang lại sự hài lòng tuyệt đối nhờ vào quy trình đóng gói chỉn chu, tỉ mỉ và giao hàng nhanh chóng. Hãy ghé cửa hàng Gradie hoặc liên hệ trực tuyến ngay hôm nay để chọn lựa những món quà tốt nghiệp đong đầy tình cảm nhất cho những người thân yêu của bạn!</p>",
-      "image": "images/blog_personalized_gift.jpg",
-      "date": "26/06/2026",
+      "title": "Checklist Tốt Nghiệp: Lưu Ngay Kẻo Đến Ngày Lại Quên!",
+      "excerpt": "Checklist chuẩn bị hoàn hảo cho ngày lễ tốt nghiệp trọng đại của bạn. Cùng Gradie kiểm tra các đầu việc quan trọng nhé!",
+      "content": "Mùa lễ tốt nghiệp đang đến rất gần! Để ngày vui diễn ra trọn vẹn và không gặp phải những sự cố đáng tiếc, việc lên kế hoạch chuẩn bị từ trước là vô cùng quan trọng. Hãy lưu ngay checklist dưới đây từ Gradie để tự tin tỏa sáng trong ngày trọng đại của mình nhé!\n\n1. Kiểm tra thời gian & địa điểm\nHãy chắc chắn bạn đã nắm rõ lịch tập trung, giờ làm lễ chính thức và địa điểm tổ chức của trường/khoa. Nên đến sớm ít nhất 30 - 45 phút để chuẩn bị trang phục và chụp ảnh trước khi lễ tốt nghiệp bắt đầu.\n\n2. Chuẩn bị áo tốt nghiệp, nón và phụ kiện\nNhận áo cử nhân trước ngày lễ và nhớ ủi phẳng phiu. Chuẩn bị đầy đủ nón tốt nghiệp, tua rua nón và các phụ kiện đi kèm như ghim cài, kẹp tóc để cố định nón chắc chắn.\n\n3. Chọn trang phục mặc bên trong\nNên chọn trang phục sáng màu (như trắng, kem, pastel), ít họa tiết phức tạp để khi mặc áo cử nhân bên ngoài trông bạn vẫn thanh lịch và nổi bật. Đối với nam, một chiếc áo sơ mi có cổ phối cùng cravat là lựa chọn hoàn hảo. Đối với nữ, áo dài hoặc đầm nhẹ nhàng sẽ rất tôn dáng.\n\n4. Sạc đầy điện thoại, máy ảnh và pin dự phòng\nNgày tốt nghiệp bạn sẽ phải chụp ảnh và quay phim liên tục. Đừng để điện thoại hết pin giữa chừng! Hãy sạc đầy tất cả thiết bị và mang theo ít nhất một viên pin dự phòng dung lượng lớn.\n\n5. Mang theo giấy tờ cần thiết\nThẻ sinh viên, CCCD hoặc thư mời từ nhà trường là những thứ bắt buộc phải có để bạn được vào hội trường nhận bằng. Hãy để chúng ở một ngăn dễ tìm trong túi xách.\n\n6. Chuẩn bị hoa, quà và lời chúc\nNếu bạn đi tham dự lễ tốt nghiệp của bạn bè, đừng quên chuẩn bị những bó hoa rực rỡ, những chú gấu bông cử nhân đáng yêu và những tấm thiệp ghi lời chúc chân thành để gửi tặng họ.\n\n7. Hẹn trước hội bạn để chụp ảnh\nLên lịch hẹn và thống nhất địa điểm chụp ảnh với gia đình, bạn bè trước để tránh việc lạc nhau giữa đám đông đông đúc tại trường.\n\nGradie đồng hành cùng bạn trong mùa tốt nghiệp. Chúc bạn có một ngày lễ tốt nghiệp thật đáng nhớ và ý nghĩa!",
+      "image": "images/blog_checklist_tot_nghiep.jpg",
+      "date": "27/06/2026",
       "author": "Gradie",
-      "category": "Gợi ý Quà Tặng",
+      "category": "Gifting Tips",
       "status": "Published"
     },
     {
       "id": "b6",
-      "title": "Checklist Tốt Nghiệp: Lưu Ngay Kẻo Đến Ngày Lại Quên!",
-      "excerpt": "Ngày tốt nghiệp cận kề với bao nhiêu việc phải lo toan? Hãy lưu ngay checklist chuẩn bị chi tiết từ Gradie dưới đây để có một ngày nhận bằng trọn vẹn và không lo thiếu sót nhé!",
-      "content": "<p>Ngày lễ nhận bằng tốt nghiệp là một trong những cột mốc trọng đại nhất của thời sinh viên. Để ngày vui này diễn ra trọn vẹn và hoàn hảo nhất, việc chuẩn bị kỹ lưỡng từ trước là vô cùng quan trọng. Hãy cùng Gradie điểm qua checklist những việc cần làm ngay dưới đây để không bỏ sót bất kỳ chi tiết nào trong ngày trọng đại của mình nhé!</p>\n\n<p>Trước hết, hãy chắc chắn rằng bạn đã kiểm tra kỹ thời gian và địa điểm tổ chức lễ tốt nghiệp của trường mình. Hãy nắm rõ khung giờ tập trung, giờ làm lễ chính thức và sơ đồ hội trường để tránh việc đi muộn hoặc lạc đường. Tiếp theo là chuẩn bị sẵn sàng áo tốt nghiệp (áo cử nhân), nón tốt nghiệp và các phụ kiện đi kèm như dải sash hay bằng tốt nghiệp giả để chụp ảnh. Đừng quên lựa chọn trang phục lịch sự và thoải mái để mặc bên trong áo cử nhân, giúp bạn tự tin và nổi bật suốt cả ngày dài.</p>\n<img src=\"images/blog_checklist_tot_nghiep.jpg\" alt=\"Checklist Tốt Nghiệp Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Bên cạnh trang phục, việc chuẩn bị các thiết bị công nghệ cũng quan trọng không kém. Hãy sạc đầy pin điện thoại, máy ảnh cá nhân và mang theo pin sạc dự phòng để đảm bảo bạn không bị gián đoạn khi lưu lại những khoảnh khắc đẹp. Ngoài ra, hãy chuẩn bị đầy đủ các loại giấy tờ cần thiết như thẻ sinh viên, phiếu nhận bằng hoặc chứng minh nhân dân theo yêu cầu của nhà trường. Cuối cùng, hãy chuẩn bị trước những bó hoa tươi thắm, những món quà ý nghĩa cùng những lời chúc chân thành, đồng thời hẹn trước giờ giấc với hội bạn thân để cùng nhau chụp những bức hình kỷ niệm thật rực rỡ. Gradie tự hào được đồng hành cùng bạn trên mọi nẻo đường của mùa tốt nghiệp ý nghĩa!</p>",
-      "image": "images/blog_checklist_tot_nghiep.jpg",
-      "date": "26/06/2026",
+      "title": "Ảnh Tốt Nghiệp Xinh Hơn: Chỉ Với 5 Mẹo Đơn Giản",
+      "excerpt": "Làm sao để có những bức ảnh kỷ niệm ngày ra trường lung linh và thần thái nhất? Đọc ngay 5 mẹo đơn giản từ Gradie!",
+      "content": "Ngày lễ tốt nghiệp là cột mốc chỉ có một lần trong đời sinh viên. Ai cũng mong muốn lưu giữ lại những khung hình đẹp nhất, rạng rỡ nhất bên thầy cô, gia đình và bạn bè. Dưới đây là 5 mẹo đơn giản từ Gradie giúp bạn có những bức ảnh tốt nghiệp lung linh và tự nhiên nhất:\n\n1. Chọn trang phục mặc bên trong sáng màu, ít họa tiết\nTrang phục mặc bên trong áo cử nhân đóng vai trò cực kỳ quan trọng. Bạn nên chọn áo sơ mi trắng, áo dài trắng hoặc đầm trơn màu pastel. Tránh các trang phục tối màu hoặc có quá nhiều họa tiết rườm rà vì chúng sẽ làm tổng thể bức ảnh trông bị tối và rối mắt.\n\n2. Makeup nhẹ nhàng, lớp nền lâu trôi\nVì bạn sẽ phải hoạt động ngoài trời khá nhiều dưới thời tiết nắng nóng, hãy chọn phong cách trang điểm tự nhiên, trong trẻo. Đặc biệt, nên sử dụng kem lót kiềm dầu và xịt khóa nền để giữ cho lớp trang điểm không bị trôi hay xuống tông trong suốt buổi lễ.\n\n3. Tóc gọn gàng để đội nón cử nhân đẹp hơn\nNón tốt nghiệp khá nặng và dễ làm xẹp tóc. Bạn nên chọn các kiểu tóc đơn giản như xõa tự nhiên cúp nhẹ, uốn sóng lơi nhẹ nhàng, hoặc tết tóc một bên. Hãy dùng thêm ghim tăm để cố định nón chắc chắn trên đầu, tránh để nón bị lệch khi chụp ảnh.\n\n4. Chuẩn bị trước từ 3 đến 5 dáng chụp ảnh\nĐừng để đến lúc đứng trước ống kính mới suy nghĩ nên tạo dáng thế nào! Hãy tham khảo và tập trước một vài dáng chụp đơn giản nhưng lên hình cực đẹp như: cầm bằng tốt nghiệp trước ngực, tung nón cử nhân, ôm bó hoa cười rạng rỡ, hoặc chụp nghiêng góc 45 độ khoe góc nghiêng thần thánh.\n\n5. Chọn thời gian chụp sáng sớm hoặc chiều muộn\nÁnh sáng tự nhiên là yếu tố quyết định chất lượng ảnh. Khoảng thời gian từ 7h00 - 9h00 sáng hoặc 15h30 - 17h00 chiều là lúc ánh nắng mềm mại nhất, không quá gắt, giúp làn da trông hồng hào tự nhiên và không bị nheo mắt khi chụp.\n\nHãy lưu lại những mẹo này và chia sẻ cùng hội bạn thân để cùng nhau có một album ảnh tốt nghiệp thật xịn xò nhé!",
+      "image": "images/blog_anh_tot_nghiep_xinh.jpg",
+      "date": "27/06/2026",
       "author": "Gradie",
-      "category": "Kinh Nghiệm",
+      "category": "Gifting Tips",
       "status": "Published"
     },
     {
       "id": "b7",
-      "title": "5 Mẹo Đơn Giản Để Có Bộ Ảnh Tốt Nghiệp Lung Linh Nhất",
-      "excerpt": "Làm sao để lên hình thật xinh xắn và rạng rỡ trong ngày lễ tốt nghiệp? Gradie bật mí cho bạn 5 mẹo đơn giản từ trang phục, makeup đến dáng chụp để có những bức ảnh kỷ niệm để đời.",
-      "content": "<p>Lễ tốt nghiệp là dịp để bạn ghi lại những khoảnh khắc rạng rỡ nhất bên thầy cô, gia đình và bạn bè. Để tấm hình kỷ niệm nào của bạn cũng lung linh và đầy sức sống, hãy lưu lại ngay 5 bí quyết chụp ảnh cực kỳ đơn giản và hiệu quả mà Gradie chia sẻ dưới đây nhé!</p>\n\n<p>Bí quyết đầu tiên là lựa chọn trang phục mặc bên trong áo cử nhân. Bạn nên ưu tiên những bộ cánh có tông màu sáng như trắng, kem, pastel và hạn chế tối đa các họa tiết cầu kỳ để tổng thể trang phục khi khoác áo cử nhân trông thanh lịch, gọn gàng nhất. Thứ hai, hãy trang điểm nhẹ nhàng theo phong cách tự nhiên và sử dụng lớp nền lâu trôi vì bạn sẽ phải hoạt động ngoài trời và dưới thời tiết nóng bức suốt nhiều giờ liền. Mẹo thứ ba là hãy làm tóc thật gọn gàng, có thể chọn kiểu tóc xõa tự nhiên hoặc buộc nửa đầu tinh tế để khi đội chiếc nón cử nhân lên trông gương mặt bạn vẫn thanh thoát và ăn ảnh.</p>\n<img src=\"images/blog_anh_tot_nghiep_xinh.jpg\" alt=\"Mẹo Chụp Ảnh Tốt Nghiệp Xinh Hơn\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Mẹo thứ tư vô cùng quan trọng đó là hãy chuẩn bị và tập trước từ 3 đến 5 dáng chụp ảnh cơ bản trước gương. Việc này giúp bạn không bị bỡ ngỡ, đơ cứng khi đứng trước ống kính và có thể nhanh chóng tạo dáng tự nhiên nhất. Cuối cùng, thời điểm chụp ảnh lý tưởng nhất là vào lúc sáng sớm (khoảng 7h - 9h) hoặc chiều muộn (khoảng 15h - 17h) khi ánh sáng mặt trời dịu nhẹ, tạo nên màu sắc ấm áp và không bị bóng mắt. Đừng quên chuẩn bị những phụ kiện xinh xắn từ Gradie để bức ảnh của bạn thêm phần sinh động và ý nghĩa nhé!</p>",
-      "image": "images/blog_anh_tot_nghiep_xinh.jpg",
-      "date": "26/06/2026",
-      "author": "Admin",
-      "category": "Mẹo Chọn Quà",
+      "title": "Tặng Gì Cho Bestie Trong Ngày Tốt Nghiệp?",
+      "excerpt": "Gợi ý 5 món quà tốt nghiệp ý nghĩa, tinh tế nhất dành tặng cho người bạn thân thiết của bạn vào ngày ra trường.",
+      "content": "Bạn thân (Bestie) là người đã cùng bạn trải qua bao nhiêu thăng trầm thời sinh viên, từ những buổi cúp học chung, những đêm ôn thi thâu đêm đến những lúc chia sẻ niềm vui nỗi buồn. Ngày tốt nghiệp của đứa bạn thân thiết, chắc chắn bạn sẽ muốn chọn một món quà thật đặc biệt để chúc mừng. Dưới đây là 5 gợi ý quà tặng tốt nghiệp ý nghĩa và dễ thương nhất từ Gradie:\n\n1. Bó hoa tốt nghiệp chúc mừng\nMột bó hoa tươi rực rỡ (như hoa hướng dương đại diện cho tương lai tươi sáng, hoa hồng kem thanh lịch) luôn là lựa chọn hàng đầu. Nếu muốn giữ được lâu hơn, bạn có thể chọn hoa len handmade xinh xắn - một xu hướng quà tặng rất được ưa chuộng hiện nay.\n\n2. Gấu bông cử nhân tốt nghiệp\nChú gấu bông mềm mịn khoác lên mình bộ áo cử nhân tí hon và đội chiếc nón tốt nghiệp xinh xắn là biểu tượng không thể thiếu. Đây sẽ là người bạn đồng hành đáng yêu, lưu giữ kỷ niệm ngày ra trường trên bàn làm việc hay góc học tập mới của bestie.\n\n3. Khung ảnh hoặc album kỷ niệm\nCòn gì ý nghĩa hơn một chiếc album lưu giữ những bức ảnh chụp chung của hai bạn suốt những năm tháng đại học. Bạn có thể in ảnh ra và lồng vào khung ảnh thiết kế sang trọng để bestie có thể trưng bày ở phòng khách hoặc phòng ngủ.\n\n4. Quà tặng cá nhân hóa\nNhững món quà được khắc tên, in hình vẽ chibi hoặc dệt thông điệp riêng theo yêu cầu (như dải băng đeo sash tốt nghiệp thiết kế riêng, móc khóa khắc tên) thể hiện sự chu đáo và độc bản, chắc chắn sẽ khiến người nhận vô cùng cảm động.\n\n5. Hộp quà (Gift box) nhỏ xinh được tuyển chọn\nNếu bạn muốn món quà trông thật chỉn chu và cao cấp, một hộp quà Gradie kết hợp hài hòa giữa hoa tốt nghiệp, gấu cử nhân, nến thơm thư giãn và một tấm thiệp viết tay chân thành sẽ là set quà hoàn hảo ghi điểm tuyệt đối.\n\nHãy gắn thẻ ngay người bạn thân mà bạn muốn gửi tặng những món quà ý nghĩa này và ghé Gradie để chuẩn bị món quà hoàn hảo nhất nhé!",
+      "image": "images/blog_tang_gi_bestie.jpg",
+      "date": "27/06/2026",
+      "author": "Gradie",
+      "category": "Meaning of Gifts",
       "status": "Published"
     },
     {
       "id": "b8",
-      "title": "Tặng Gì Cho Bestie Trong Ngày Tốt Nghiệp Ý Nghĩa Nhất?",
-      "excerpt": "Bạn thân sắp ra trường và bạn đang băn khoăn không biết nên tặng món quà gì để chúc mừng cột mốc quan trọng này? Hãy để Gradie gợi ý cho bạn 5 món quà tốt nghiệp đong đầy tình cảm nhé!",
-      "content": "<p>Ngày tốt nghiệp của người bạn thân thiết (bestie) là dịp đặc biệt để bạn bày tỏ sự chúc mừng chân thành và gửi gắm những lời chúc tốt đẹp nhất cho chặng đường tương lai của họ. Nếu bạn vẫn đang phân vân chưa biết chọn món quà nào vừa ý nghĩa vừa thiết thực, hãy cùng tham khảo 5 gợi ý quà tặng được yêu thích nhất từ Gradie dưới đây.</p>\n\n<p>Món quà truyền thống nhưng không bao giờ lỗi thời chính là những đóa hoa tốt nghiệp rực rỡ. Bạn có thể chọn hoa len thủ công bền vững hoặc hoa bóng bay nổi bật để người bạn của mình trông thật lung linh khi chụp ảnh kỷ yếu. Gợi ý thứ hai là những chú gấu bông tốt nghiệp cử nhân đáng yêu - người bạn đồng hành tinh thần biểu tượng cho sự đỗ đạt và thành công. Tiếp theo là những chiếc khung ảnh hoặc album kỷ niệm lưu giữ lại những tấm hình chung của cả hai suốt năm tháng ngồi trên giảng đường đại học, một món quà mang giá trị tinh thần vô cùng lớn lao.</p>\n<img src=\"images/blog_tang_gi_bestie.jpg\" alt=\"Quà Tốt Nghiệp Cho Bestie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Nếu muốn tạo sự khác biệt, quà cá nhân hóa thêu tên riêng của bestie lên những chiếc túi vải, phụ kiện thời trang sẽ là lựa chọn tuyệt vời, chứng minh sự chu đáo và tỉ mỉ của bạn dành riêng cho họ. Cuối cùng, những bộ gift box nhỏ xinh được kết hợp tinh tế giữa nến thơm, phụ kiện và thiệp chúc mừng viết tay từ Gradie sẽ là lời chúc ngọt ngào, tiếp thêm động lực cho người bạn thân yêu trên hành trình mới. Hãy ghé Gradie ngay hôm nay để chọn lựa món quà hoàn hảo nhất cho bestie của mình nhé!</p>",
-      "image": "images/blog_tang_gi_bestie.jpg",
-      "date": "26/06/2026",
+      "title": "Sau Tốt Nghiệp, Bắt Đầu Từ Đâu? 5 Bước Nhỏ Để Bớt Overthinking",
+      "excerpt": "Rời khỏi cánh cổng đại học và đối mặt với thực tế có thể khiến bạn lo lắng. Hãy cùng Gradie thực hiện 5 bước nhỏ để định hướng tương lai nhé!",
+      "content": "Cầm trên tay tấm bằng tốt nghiệp, bên cạnh niềm vui sướng và tự hào, chắc hẳn nhiều bạn trẻ không tránh khỏi cảm giác chông chênh, lo lắng về tương lai phía trước. \"Mình sẽ làm gì tiếp theo?\", \"Liệu mình có tìm được công việc phù hợp?\" - những câu hỏi này dễ khiến bạn rơi vào trạng thái overthinking.\nHãy hít một hơi thật sâu và cùng Gradie thực hiện 5 bước nhỏ dưới đây để từng bước xây dựng lộ trình sự nghiệp vững chắc cho mình nhé:\n\n1. Cập nhật CV và Portfolio cá nhân\nĐây là bước đầu tiên và quan trọng nhất. Hãy hệ thống lại toàn bộ quá trình học tập, các hoạt động ngoại khóa, dự án đã tham gia và các kỹ năng bạn đã tích lũy được. Trình bày chúng một cách khoa học, ngắn gọn và thu hút trên CV của mình.\n\n2. Liệt kê danh sách các công việc muốn thử sức\nĐừng vội giới hạn bản thân vào một vị trí cố định. Hãy liệt kê từ 3 - 5 công việc mà bạn cảm thấy yêu thích và phù hợp với năng lực. Tìm hiểu kỹ yêu cầu tuyển dụng của các vị trí đó để biết mình cần bổ sung thêm những gì.\n\n3. Học thêm ít nhất một kỹ năng hữu ích mới\nKhoảng thời gian chờ đợi nhận việc là cơ hội vàng để nâng cấp bản thân. Bạn có thể đăng ký các khóa học ngắn hạn về ngoại ngữ, tin học văn phòng, kỹ năng thiết kế cơ bản, chạy quảng cáo hoặc kỹ năng giao tiếp. Những điều này sẽ giúp CV của bạn nổi bật hơn trong mắt nhà tuyển dụng.\n\n4. Chủ động kết nối với các anh chị đi trước và bạn bè trong ngành\nMở rộng mạng lưới quan hệ (networking) sẽ mang lại cho bạn rất nhiều cơ hội việc làm ẩn. Đừng ngần ngại trò chuyện, hỏi xin kinh nghiệm từ các cựu sinh viên khóa trước, thầy cô giáo hoặc tham gia vào các cộng đồng chuyên môn trên LinkedIn, Facebook.\n\n5. Thiết lập mục tiêu cụ thể cho 30 ngày đầu tiên\nThay vì lo lắng về mục tiêu 5 năm hay 10 năm, hãy bắt đầu bằng mục tiêu ngắn hạn cho 1 tháng tới. Ví dụ: hoàn thiện CV trong tuần đầu tiên, gửi hồ sơ ứng tuyển đến 5 công ty trong tuần tiếp theo, và dành 2 tiếng mỗi ngày để tự học kỹ năng mới. Việc hoàn thành từng mục tiêu nhỏ sẽ giúp bạn có thêm động lực và giảm bớt lo âu.\n\nHãy nhớ rằng, mỗi người có một múi giờ trưởng thành khác nhau. Đừng quá nôn nóng hay so sánh bản thân với người khác. Cứ tự tin bước đi, hành trình mới đầy thú vị đang chờ đón bạn phía trước!\n\nGradie luôn đồng hành và chúc bạn gặt hái được nhiều thành công trên con đường sắp tới!",
+      "image": "images/blog_sau_tot_nghiep.jpg",
+      "date": "27/06/2026",
       "author": "Gradie",
-      "category": "Ý Nghĩa Quà Tặng",
+      "category": "Meaning of Gifts",
       "status": "Published"
     },
     {
       "id": "b9",
-      "title": "Sau Tốt Nghiệp, Bắt Đầu Từ Đâu? 5 Bước Để Bớt Overthinking",
-      "excerpt": "Vừa mới ra trường và cảm thấy mông lung, lo lắng trước tương lai phía trước? Hãy tham khảo ngay 5 bước nhỏ dưới đây từ Gradie để sắp xếp lại cuộc sống và giảm bớt sự lo âu quá mức nhé!",
-      "content": "<p>Cảm giác mông lung, lo lắng và có chút \"overthinking\" sau khi tốt nghiệp đại học là điều hoàn toàn bình thường mà hầu hết các tân cử nhân đều trải qua. Để giúp bản thân giữ được sự bình tĩnh, chủ động và tràn đầy năng lượng khi bắt đầu chặng đường mới, hãy thử thực hiện theo 5 bước nhỏ cực kỳ thiết thực mà Gradie chia sẻ dưới đây.</p>\n\n<p>Bước đầu tiên bạn cần làm là dành thời gian cập nhật lại CV (hồ sơ xin việc) và portfolio (hồ sơ năng lực) của mình. Hãy hệ thống hóa các kiến thức đã học, các dự án thực tế và kỹ năng mềm tích lũy được trong suốt thời gian học tập để sẵn sàng gửi tới nhà tuyển dụng. Bước thứ hai là lập một danh sách các công việc hoặc lĩnh vực mà bạn thực sự muốn thử sức, từ đó giúp bạn định hình rõ nét hơn về mục tiêu nghề nghiệp. Bước thứ ba, hãy tranh thủ học thêm một kỹ năng mới hữu ích phục vụ cho công việc như ngoại ngữ, tin học văn phòng nâng cao, thiết kế đồ họa hoặc kỹ năng giao tiếp.</p>\n<img src=\"images/blog_sau_tot_nghiep.jpg\" alt=\"Vượt Qua Lo Âu Sau Tốt Nghiệp\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Bước thứ tư là tích cực kết nối, trò chuyện với các anh chị đi trước hoặc bạn bè đồng trang lứa đang làm việc trong ngành để lắng nghe những chia sẻ thực tế và có thêm định hướng đúng đắn. Cuối cùng, hãy đặt ra những mục tiêu nhỏ và cụ thể cho 30 ngày đầu tiên sau khi ra trường, thay vì tạo áp lực quá lớn cho bản thân phải có ngay công việc mơ ước. Hãy nhớ rằng tốt nghiệp không phải là vạch đích mà là điểm khởi đầu của một hành trình thú vị. Gradie luôn đồng hành và tiếp thêm động lực cho bạn tự tin vững bước kiến tạo tương lai!</p>",
-      "image": "images/blog_sau_tot_nghiep.jpg",
-      "date": "26/06/2026",
+      "title": "Quà Cá Nhân Hóa: Món Quà Mang Dấu Ấn Riêng Biệt",
+      "excerpt": "Khám phá xu hướng quà tặng cá nhân hóa cao cấp từ Gradie. Khắc tên, thêu chữ theo yêu cầu để tạo nên món quà độc bản!",
+      "content": "Trong vô vàn những món quà chúc mừng ngày ra trường, một món quà được thiết kế dành riêng cho người nhận luôn có sức hút và giá trị tinh thần vượt trội. Tại Gradie, chúng tôi tin rằng mỗi cử nhân là một cá thể độc lập, không ai giống ai, và món quà của họ cũng nên mang dấu ấn độc bản như vậy.\n\nTại sao nên chọn Quà Cá Nhân Hóa tại Gradie?\n\n1. Khắc tên, thêu chữ theo yêu cầu\nTừ những chiếc túi vải xinh xắn, hộp đựng bút cao cấp đến dải băng đeo sash cử nhân, Gradie hỗ trợ khắc tên riêng, thêu chữ thủ công tỉ mỉ theo mong muốn của bạn. Điều này biến một vật phẩm thông thường trở thành một kỉ vật vô giá.\n\n2. Độc đáo, hoàn toàn không đụng hàng\nKhi bạn trao đi một món quà cá nhân hóa, bạn đang gửi gắm một thông điệp rằng: \"Món quà này được làm ra chỉ dành riêng cho bạn\". Người nhận chắc chắn sẽ cảm nhận được sự chu đáo, tận tâm và trân trọng từ bạn.\n\n3. Chi phí vô cùng hợp lý\nKhông cần phải bỏ ra một khoản ngân sách quá lớn để sở hữu sự sang trọng và độc đáo. Tại Gradie, các sản phẩm quà tặng cá nhân hóa cao cấp có giá chỉ từ 199.000đ, phù hợp với túi tiền của học sinh, sinh viên nhưng vẫn đảm bảo chất lượng tinh tế nhất.\n\nNếu bạn đang tìm kiếm một món quà kỷ niệm ngày tốt nghiệp vừa ý nghĩa, vừa mang tính ứng dụng cao và ghi dấu ấn riêng biệt, hãy liên hệ Gradie ngay hôm nay để được tư vấn thiết kế mẫu thêu/khắc hoàn toàn miễn phí nhé!",
+      "image": "images/blog_personalized_gift.jpg",
+      "date": "27/06/2026",
       "author": "Gradie",
-      "category": "Câu Chuyện",
+      "category": "Meaning of Gifts",
+      "status": "Published"
+    },
+    {
+      "id": "b10",
+      "title": "Gấu Bông Tốt Nghiệp: Món Quà Đáng Yêu Cho Ngày Đặc Biệt",
+      "excerpt": "Chú gấu cử nhân đáng yêu khoác áo tốt nghiệp sẽ thay bạn gửi gắm tình cảm và lời chúc mừng tự hào nhất.",
+      "content": "Một chú gấu bông nhỏ để ôm khi vui, để nhớ khi buồn, và để nhớ mãi ngày bạn tỏa sáng trên bục nhận bằng tốt nghiệp.\n\nGấu bông cử nhân từ lâu đã là biểu tượng ngọt ngào gắn liền với ngày ra trường. Chú gấu nhỏ khoác lên mình chiếc áo cử nhân xinh xắn, đội chiếc mũ tốt nghiệp mini tinh nghịch sẽ thay bạn gửi lời chúc tự hào đến người nhận. Món quà tuy nhỏ nhắn nhưng chứa đựng cả sự yêu thương và động viên to lớn cho chặng đường mới sắp tới.\n\nVì sao khách hàng luôn yêu thích gấu bông tốt nghiệp của Gradie?\n\n- Thiết kế cực kỳ dễ thương: Chú gấu được thiết kế tỉ mỉ với khuôn mặt đáng yêu, khoác áo cử nhân chuẩn tone và đội mũ tốt nghiệp xinh xắn.\n- Chất liệu cao cấp: Chất bông mềm mịn, an toàn cho làn da, đàn hồi tốt và không bị xẹp form sau thời gian dài sử dụng.\n- Lên hình siêu xinh: Gấu bông cử nhân là phụ kiện chụp ảnh kỷ yếu tuyệt vời, giúp các bức ảnh tốt nghiệp của bạn thêm phần sinh động, trẻ trung.\n- Tặng kèm phụ kiện: Mỗi chú gấu bông tại Gradie đều đi kèm một bó hoa len mini làm thủ công xinh xắn và một tấm thiệp viết tay để bạn gửi gắm lời chúc mừng.\n- Đóng gói chỉn chu: Sản phẩm được đặt trong hộp quà trang nhã, thắt nơ ruy băng lịch sự, sẵn sàng để làm quà tặng trực tiếp.\n\nVới giá chỉ từ 189.000đ, hãy để chú gấu cử nhân Gradie đồng hành cùng những người bạn yêu thương trong cột mốc đáng nhớ này nhé!",
+      "image": "images/blog_graduation_teddy.jpg",
+      "date": "27/06/2026",
+      "author": "Gradie",
+      "category": "Meaning of Gifts",
+      "status": "Published"
+    },
+    {
+      "id": "b11",
+      "title": "Bó Hoa Len Tốt Nghiệp: Món Quà Kỷ Niệm Không Bao Giờ Tàn",
+      "excerpt": "Nếu hoa tươi lưu giữ khoảnh khắc, thì hoa len handmade sẽ lưu giữ cả ký ức vĩnh cửu thời học sinh, sinh viên.",
+      "content": "Có thể sau này người ta sẽ quên bó hoa hôm ấy giá bao nhiêu. Nhưng họ sẽ nhớ rất rõ ai là người đã trao nó cho mình trong ngày lễ tốt nghiệp.\n\nBên cạnh những bó hoa tươi rực rỡ nhưng nhanh héo úa, xu hướng tặng hoa len handmade (móc bằng tay) đang ngày càng lên ngôi vì tính bền vững và sự ấm áp. Mỗi bó hoa len tốt nghiệp của Gradie không chỉ là một món quà, mà còn là một tác phẩm nghệ thuật đong đầy tình cảm.\n\nNhững điểm đặc biệt của bó hoa len tốt nghiệp Gradie:\n\n- Thủ công tỉ mỉ: Từng cánh hoa, chiếc lá đều được móc thủ công bằng tay từ sợi len chất lượng tốt nhất, đảm bảo độ mịn màng và màu sắc tươi tắn.\n- Phối màu pastel nhẹ nhàng: Màu sắc được lựa chọn và phối hợp theo phong cách vintage và hiện đại cực kỳ sang trọng, trang nhã.\n- Lưu giữ mãi mãi: Hoa len không bao giờ tàn, tượng trưng cho những kỷ niệm đẹp đẽ thời đi học sẽ luôn được trân trọng và giữ gìn vĩnh cửu.\n- Phù hợp mọi dịp: Rất thích hợp để ôm chụp hình kỷ yếu, lễ nhận bằng tốt nghiệp, làm quà tặng cho bạn bè, người yêu hoặc trưng bày ở bàn làm việc.\n- Đóng gói hoàn mỹ: Bó hoa được bọc giấy gói cao cấp kết hợp ruy băng lụa sang trọng, kèm thiệp chúc mừng thiết kế riêng.\n\nSở hữu ngay bó hoa len chúc mừng tốt nghiệp chỉ từ 149.000đ để gửi gắm tình cảm chân thành nhất đến người đặc biệt của bạn nhé!",
+      "image": "images/blog_crochet_flowers.jpg",
+      "date": "27/06/2026",
+      "author": "Gradie",
+      "category": "Gifting Tips",
+      "status": "Published"
+    },
+    {
+      "id": "b12",
+      "title": "Hoa Bóng Bay Tốt Nghiệp: Nổi Bật Giữa Hàng Trăm Bức Ảnh",
+      "excerpt": "Một chút độc đáo, một chút vui vẻ từ bó hoa bóng bay cử nhân sẽ biến ngày tốt nghiệp của bạn trở thành ký ức vô cùng ấn tượng!",
+      "content": "Làm sao để nổi bật và thu hút mọi ánh nhìn giữa hàng ngàn cử nhân trong ngày lễ tốt nghiệp? Câu trả lời chính là Bó Hoa Bóng Bay Tốt Nghiệp của Gradie!\n\nSự kết hợp độc đáo giữa gấu bông cử nhân ấm áp, hoa len handmade tinh tế và quả bóng bay trong suốt khổng lồ in dòng chữ chúc mừng (như \"Congratulations Graduate\") đã tạo nên một set quà tặng hot-trend vô cùng ấn tượng.\n\nTại sao Hoa Bóng Bay Gradie luôn là lựa chọn hàng đầu?\n\n- Thiết kế nổi bật: Kích thước lớn, hình dáng độc lạ, tạo điểm nhấn tuyệt đối giúp bạn tỏa sáng lung linh trong mọi khung hình kỷ niệm.\n- Phối màu hài hòa, tươi tắn: Tông màu bóng bay (như hồng gold, bạc, champagne) được phối cực kỳ tinh tế và nịnh mắt.\n- Set quà đa năng: Bên trong mỗi bó hoa bóng bay đều tích hợp sẵn một chú gấu cử nhân xinh xắn, các bông hoa len đan tay tỉ mỉ và thiệp viết lời chúc.\n- Đóng gói cẩn thận: Chúng tôi sử dụng chất liệu bóng bền bỉ, được xử lý chống xẹp và đóng gói chống sốc an toàn khi vận chuyển.\n\nVới giá chỉ từ 359.000đ, hãy biến ngày lễ tốt nghiệp của bestie hay người thương trở thành một ngày lễ rực rỡ và đáng nhớ nhất bằng món quà siêu đặc biệt này!",
+      "image": "images/blog_graduation_balloon.jpg",
+      "date": "27/06/2026",
+      "author": "Gradie",
+      "category": "Gifting Tips",
       "status": "Published"
     }
   ],

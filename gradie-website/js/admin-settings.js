@@ -218,5 +218,21 @@ document.addEventListener('DOMContentLoaded', () => {
             URL.revokeObjectURL(url);
             showToast("Đã tải xuống global-data.js. Hãy copy đè vào file js/global-data.js!", "success");
         };
+
+        // Tab Switching Logic
+        const tabs = document.querySelectorAll('.settings-tabs li');
+        const panes = document.querySelectorAll('.settings-pane');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-tab');
+                
+                tabs.forEach(t => t.classList.remove('active'));
+                panes.forEach(p => p.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(target).classList.add('active');
+            });
+        });
     }
 });
