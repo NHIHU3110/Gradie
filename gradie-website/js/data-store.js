@@ -2042,8 +2042,17 @@ window.GradieStore = {
   deleteProduct: function (id) { let data = this.getData(); data.products = data.products.filter(p => p.id !== id); this.saveData(data); fetch('/api/products?id=' + id, { method: 'DELETE' }).then(() => { window.dispatchEvent(new Event('gradie_data_synced')); }).catch(e => console.error('Sync error', e)); },
 
   normalizeProduct: function (p) {
-    p.id = p.id || ''; p.name = p.name || 'Untitled Product'; p.category = p.category || 'Uncategorized'; p.price = Number(p.price) || 0;
-    p.oldPrice = p.oldPrice ? Number(p.oldPrice) : null; p.stock = Number(p.stock) || 0; p.rating = Math.max(0, Math.min(5, Number(p.rating) || 4.8));
+    p.id = p.id || '';
+        p.name = p.name || 'Untitled Product';
+        p.category = p.category || 'Uncategorized';
+        p.price = Number(p.price) || 0;
+        p.sku = p.sku || '';
+        p.description = p.description || '';
+    p.oldPrice = p.oldPrice ? Number(p.oldPrice) : null;
+        p.stock = Number(p.stock) || 0;
+        p.tikiStock = p.tikiStock !== undefined ? Number(p.tikiStock) : p.stock;
+        p.lazadaStock = p.lazadaStock !== undefined ? Number(p.lazadaStock) : p.stock;
+        p.rating = Math.max(0, Math.min(5, Number(p.rating) || 4.8));
     if (!p.gallery || !Array.isArray(p.gallery)) { p.gallery = p.image ? [p.image] : []; }
     p.gallery = p.gallery.filter(img => img && typeof img === 'string' && img.trim() !== '');
     p.gallery = [...new Set(p.gallery)];
@@ -2498,9 +2507,18 @@ window.GradieStore = {
             });
             if (p) {
               const oldImage = p.image;
-              p.image = ttp.image;
-              if (!p.gallery) p.gallery = [];
-              if (!p.gallery.includes(ttp.image)) p.gallery.unshift(ttp.image);
+              p.name = ttp.name || p.name;
+              p.price = ttp.price || p.price;
+              p.tikiStock = ttp.stock !== undefined ? ttp.stock : p.tikiStock;
+              p.stock = ttp.stock !== undefined ? ttp.stock : p.stock;
+              if (ttp.gallery && ttp.gallery.length > 0) {
+                p.gallery = ttp.gallery;
+              } else if (ttp.image && (!p.gallery || !p.gallery.includes(ttp.image))) {
+                if (!p.gallery) p.gallery = [];
+                p.gallery.unshift(ttp.image);
+              }
+              p.image = ttp.image || p.image;
+              if (ttp.description) p.description = ttp.description;
               if (oldImage !== ttp.image) updatedImageCount++;
               fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) })
                 .catch(e => console.error('Sync product error', e));
@@ -2510,11 +2528,12 @@ window.GradieStore = {
                 sku: ttp.sku || '',
                 name: ttp.name || 'Sản phẩm mới từ Tiki',
                 price: ttp.price || 0,
-                stock: 0,
-                tikiStock: ttp.stock,
+                stock: ttp.stock || 0,
+                tikiStock: ttp.stock || 0,
                 category: 'Uncategorized',
                 image: ttp.image || '',
-                gallery: [ttp.image],
+                gallery: ttp.gallery && ttp.gallery.length > 0 ? ttp.gallery : (ttp.image ? [ttp.image] : []),
+                description: ttp.description || '',
                 dateAdded: new Date().toISOString()
               });
               updatedImageCount++;

@@ -51,11 +51,11 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label style="display:flex; justify-content:space-between;">Tiki Stock <a href="#" id="btn-sync-tiki" style="color:var(--admin-primary); font-size:0.85em; text-decoration:none;">🔄 Sync Ảnh</a></label>
+                                <label style="display:flex; justify-content:space-between;">Tiki Stock <a href="#" id="btn-sync-tiki" style="color:var(--admin-primary); font-size:0.85em; text-decoration:none;">🔄 Đồng bộ API</a></label>
                                 <input type="number" id="p-stock-tiki" value="20">
                             </div>
                             <div class="form-group">
-                                <label style="display:flex; justify-content:space-between;">Lazada Stock <a href="#" id="btn-sync-lazada" style="color:var(--admin-primary); font-size:0.85em; text-decoration:none;">🔄 Sync Ảnh</a></label>
+                                <label style="display:flex; justify-content:space-between;">Lazada Stock <a href="#" id="btn-sync-lazada" style="color:var(--admin-primary); font-size:0.85em; text-decoration:none;">🔄 Đồng bộ API</a></label>
                                 <input type="number" id="p-stock-lazada" value="20">
                             </div>
                         </div>
@@ -168,6 +168,99 @@
             }
             renderVariants();
             updateTotalStock();
+
+            // --- AUTO SYNC API WHEN FORM LOADS ---
+            async function autoSyncFromAPI(sku) {
+                const settings = window.GradieStore.getSettings();
+                const hasTiki = settings.tikiAppKey && settings.tikiAppSecret;
+                const hasLazada = settings.lazadaAppKey && settings.lazadaAppSecret;
+                if (!hasTiki && !hasLazada) return;
+
+                // Helper: fill form from matched product
+                function fillForm(match, source) {
+                    if (!match) return false;
+                    if (match.name && !document.getElementById('p-name').value) document.getElementById('p-name').value = match.name;
+                    if (match.price && !document.getElementById('p-price').value) document.getElementById('p-price').value = match.price;
+                    if (match.stock !== undefined) {
+                        if (source === 'tiki') document.getElementById('p-stock-tiki').value = match.stock;
+                        if (source === 'lazada') document.getElementById('p-stock-lazada').value = match.stock;
+                        if (!document.getElementById('p-stock').value || document.getElementById('p-stock').value === '0')
+                            document.getElementById('p-stock').value = match.stock;
+                    }
+                    if ((match.gallery && match.gallery.length > 0) && !document.getElementById('p-gallery').value) {
+                        document.getElementById('p-gallery').value = match.gallery.join('\n');
+                    } else if (match.image && !document.getElementById('p-gallery').value) {
+                        document.getElementById('p-gallery').value = match.image;
+                    }
+                    if (match.description && !document.getElementById('p-desc').value) document.getElementById('p-desc').value = match.description;
+                    if (match.variants && match.variants.length > 0 && currentVariants.length === 0) {
+                        currentVariants = JSON.parse(JSON.stringify(match.variants));
+                        renderVariants();
+                    }
+                    return true;
+                }
+
+                // Helper: find matching product in list (by SKU or name)
+                function findMatch(products, sku, name) {
+                    const normSku = s => (s || '').replace(/[\s\-_]/g, '').toLowerCase();
+                    const normName = s => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+                    const rSku = normSku(sku);
+                    const rName = normName(name);
+                    return products.find(p => {
+                        if (rSku && normSku(p.sku) === rSku) return true;
+                        if (rSku && p.id && normSku(String(p.id)) === rSku) return true;
+                        if (rName && normName(p.name) === rName) return true;
+                        if (rName && normName(p.name) && (normName(p.name).includes(rName) || rName.includes(normName(p.name)))) return true;
+                        return false;
+                    });
+                }
+
+                const currentSku = document.getElementById('p-sku').value;
+                const currentName = document.getElementById('p-name').value;
+                if (!currentSku && !currentName) return; // nothing to match
+
+                // Sync Tiki
+                if (hasTiki) {
+                    try {
+                        const res = await fetch('/api/tiki', {
+                            method: 'POST', headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({ action: 'sync_products', appId: settings.tikiAppKey, appSecret: settings.tikiAppSecret })
+                        });
+                        const data = await res.json();
+                        if (data.success && data.products) {
+                            const match = findMatch(data.products, currentSku, currentName);
+                            if (fillForm(match, 'tiki')) {
+                                // Update sku if not set
+                                if (!document.getElementById('p-sku').value && match.sku) document.getElementById('p-sku').value = match.sku;
+                                showToast('Đã tự động đồng bộ từ Tiki!', 'success');
+                            }
+                        }
+                    } catch(e) { console.warn('Auto-sync Tiki failed', e); }
+                }
+
+                // Sync Lazada
+                if (hasLazada) {
+                    try {
+                        const res = await fetch('/api/lazada', {
+                            method: 'POST', headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({ action: 'sync_products', appKey: settings.lazadaAppKey, appSecret: settings.lazadaAppSecret, accessToken: settings.lazadaAccessToken, baseUrl: settings.lazadaApiBaseUrl })
+                        });
+                        const data = await res.json();
+                        if (data.success && data.products) {
+                            const currentSku2 = document.getElementById('p-sku').value;
+                            const currentName2 = document.getElementById('p-name').value;
+                            const match = findMatch(data.products, currentSku2, currentName2);
+                            if (fillForm(match, 'lazada')) {
+                                if (!document.getElementById('p-sku').value && match.sku) document.getElementById('p-sku').value = match.sku;
+                                showToast('Đã tự động đồng bộ từ Lazada!', 'success');
+                            }
+                        }
+                    } catch(e) { console.warn('Auto-sync Lazada failed', e); }
+                }
+            }
+
+            // Trigger auto-sync after short delay (let form finish rendering)
+            setTimeout(() => autoSyncFromAPI(), 800);
             
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -244,12 +337,13 @@
                 }
             });
         });
+
         // --- SYNC API LOGIC ---
         document.getElementById('btn-sync-tiki').addEventListener('click', async (e) => {
             e.preventDefault();
             const sku = document.getElementById('p-sku').value;
             if (!sku) return showToast('Vui lòng nhập SKU trước khi đồng bộ', 'error');
-            const settings = JSON.parse(localStorage.getItem('gradie_settings') || '{}');
+            const settings = window.GradieStore.getSettings();
             if (!settings.tikiAppKey || !settings.tikiAppSecret) return showToast('Vui lòng cấu hình API Tiki trong Settings trước', 'error');
             
             showToast('Đang lấy dữ liệu từ Tiki...', 'info');
@@ -262,53 +356,83 @@
                 if (data.success && data.products) {
                     const match = data.products.find(p => p.sku === sku || p.id === sku);
                     if (match) {
-                        if (match.image) {
-                            const galleryEl = document.getElementById('p-gallery');
-                            let images = galleryEl.value.split(/[\n]+|,(?=\s*http)/).map(s => s.trim()).filter(s => s);
-                            images = [match.image, ...images.filter(img => img !== match.image)];
-                            galleryEl.value = images.join('\n');
+                        if (match.name) document.getElementById('p-name').value = match.name;
+                        if (match.price) document.getElementById('p-price').value = match.price;
+                        if (match.stock !== undefined) {
+                            document.getElementById('p-stock-tiki').value = match.stock;
+                            document.getElementById('p-stock').value = match.stock;
                         }
-                        showToast(`Đã đồng bộ Ảnh từ Tiki!`, 'success');
+                        if (match.gallery && match.gallery.length > 0) {
+                            document.getElementById('p-gallery').value = match.gallery.join('\n');
+                        } else if (match.image) {
+                            document.getElementById('p-gallery').value = match.image;
+                        }
+                        if (match.description) {
+                            document.getElementById('p-desc').value = match.description;
+                        }
+                        if (match.variants && match.variants.length > 0) {
+                            currentVariants = JSON.parse(JSON.stringify(match.variants));
+                            renderVariants();
+                        }
+                        showToast(`Đã đồng bộ thông tin từ Tiki!`, 'success');
                     } else {
                         showToast('Không tìm thấy SKU này trên Tiki', 'error');
                     }
                 } else {
                     showToast('Lỗi khi lấy dữ liệu Tiki', 'error');
                 }
-            } catch (err) { showToast('Lỗi kết nối Tiki', 'error'); }
+            } catch (err) { console.error(err); showToast('Lỗi kết nối Tiki', 'error'); }
         });
 
         document.getElementById('btn-sync-lazada').addEventListener('click', async (e) => {
             e.preventDefault();
             const sku = document.getElementById('p-sku').value;
             if (!sku) return showToast('Vui lòng nhập SKU trước khi đồng bộ', 'error');
-            const settings = JSON.parse(localStorage.getItem('gradie_settings') || '{}');
+            const settings = window.GradieStore.getSettings();
             if (!settings.lazadaAppKey || !settings.lazadaAppSecret) return showToast('Vui lòng cấu hình API Lazada trong Settings trước', 'error');
             
             showToast('Đang lấy dữ liệu từ Lazada...', 'info');
             try {
-                const res = await fetch('/api/lazada_eb6b', {
+                const res = await fetch('/api/lazada', {
                     method: 'POST', headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ action: 'getProducts', appKey: settings.lazadaAppKey, appSecret: settings.lazadaAppSecret })
+                    body: JSON.stringify({ 
+                        action: 'sync_products', 
+                        appKey: settings.lazadaAppKey, 
+                        appSecret: settings.lazadaAppSecret, 
+                        accessToken: settings.lazadaAccessToken, 
+                        baseUrl: settings.lazadaApiBaseUrl 
+                    })
                 });
                 const data = await res.json();
                 if (data.success && data.products) {
                     const match = data.products.find(p => p.sku === sku || p.id === sku);
                     if (match) {
-                        if (match.image) {
-                            const galleryEl = document.getElementById('p-gallery');
-                            let images = galleryEl.value.split(/[\n]+|,(?=\s*http)/).map(s => s.trim()).filter(s => s);
-                            images = [match.image, ...images.filter(img => img !== match.image)];
-                            galleryEl.value = images.join('\n');
+                        if (match.name) document.getElementById('p-name').value = match.name;
+                        if (match.price) document.getElementById('p-price').value = match.price;
+                        if (match.stock !== undefined) {
+                            document.getElementById('p-stock-lazada').value = match.stock;
+                            document.getElementById('p-stock').value = match.stock;
                         }
-                        showToast(`Đã đồng bộ Ảnh từ Lazada!`, 'success');
+                        if (match.gallery && match.gallery.length > 0) {
+                            document.getElementById('p-gallery').value = match.gallery.join('\n');
+                        } else if (match.image) {
+                            document.getElementById('p-gallery').value = match.image;
+                        }
+                        if (match.description) {
+                            document.getElementById('p-desc').value = match.description;
+                        }
+                        if (match.variants && match.variants.length > 0) {
+                            currentVariants = JSON.parse(JSON.stringify(match.variants));
+                            renderVariants();
+                        }
+                        showToast(`Đã đồng bộ thông tin từ Lazada!`, 'success');
                     } else {
                         showToast('Không tìm thấy SKU này trên Lazada', 'error');
                     }
                 } else {
                     showToast('Lỗi khi lấy dữ liệu Lazada', 'error');
                 }
-            } catch (err) { showToast('Lỗi kết nối Lazada', 'error'); }
+            } catch (err) { console.error(err); showToast('Lỗi kết nối Lazada', 'error'); }
         });
     </script>
 </body>

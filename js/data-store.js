@@ -2042,8 +2042,17 @@ window.GradieStore = {
   deleteProduct: function (id) { let data = this.getData(); data.products = data.products.filter(p => p.id !== id); this.saveData(data); fetch('/api/products?id=' + id, { method: 'DELETE' }).then(() => { window.dispatchEvent(new Event('gradie_data_synced')); }).catch(e => console.error('Sync error', e)); },
 
   normalizeProduct: function (p) {
-    p.id = p.id || ''; p.name = p.name || 'Untitled Product'; p.category = p.category || 'Uncategorized'; p.price = Number(p.price) || 0;
-    p.oldPrice = p.oldPrice ? Number(p.oldPrice) : null; p.stock = Number(p.stock) || 0; p.rating = Math.max(0, Math.min(5, Number(p.rating) || 4.8));
+    p.id = p.id || '';
+        p.name = p.name || 'Untitled Product';
+        p.category = p.category || 'Uncategorized';
+        p.price = Number(p.price) || 0;
+        p.sku = p.sku || '';
+        p.description = p.description || '';
+    p.oldPrice = p.oldPrice ? Number(p.oldPrice) : null;
+        p.stock = Number(p.stock) || 0;
+        p.tikiStock = p.tikiStock !== undefined ? Number(p.tikiStock) : p.stock;
+        p.lazadaStock = p.lazadaStock !== undefined ? Number(p.lazadaStock) : p.stock;
+        p.rating = Math.max(0, Math.min(5, Number(p.rating) || 4.8));
     if (!p.gallery || !Array.isArray(p.gallery)) { p.gallery = p.image ? [p.image] : []; }
     p.gallery = p.gallery.filter(img => img && typeof img === 'string' && img.trim() !== '');
     p.gallery = [...new Set(p.gallery)];
@@ -2479,45 +2488,31 @@ window.GradieStore = {
       if (res.ok && data.success) {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
-          let updatedImageCount = 0;
-
-          // Helper: normalize SKU (strip hyphens/spaces, lowercase)
+            let updatedImageCount = 0;
           const normSku = s => (s || '').replace(/[\s\-_]/g, '').toLowerCase();
-          // Helper: normalize name (lowercase, remove extra spaces)
           const normName = s => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
-
           data.products.forEach(ttp => {
-            // Skip if Tiki product has no image
             if (!ttp.image) return;
-
+            const rSku = normSku(ttp.sku);
+            const rName = normName(ttp.name);
             let p = all.find(x => {
-              // 1. Exact ID match
+              const pSku = normSku(x.sku);
               if (String(x.id) === String(ttp.id)) return true;
-              // 2. SKU match (normalized)
-              if (x.sku && ttp.sku && normSku(x.sku) === normSku(ttp.sku)) return true;
-              // 3. SKU partial match (e.g. local 'SP010-1' vs Tiki 'SP010')
-              if (x.sku && ttp.sku) {
-                const xs = normSku(x.sku); const ts = normSku(ttp.sku);
-                if (xs.startsWith(ts) || ts.startsWith(xs)) return true;
-              }
-              // 4. Name fuzzy match
-              const n1 = normName(x.name); const n2 = normName(ttp.name);
-              if (n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1))) return true;
+              if (pSku && rSku && pSku === rSku) return true;
+              if (pSku && rSku && (pSku.startsWith(rSku) || rSku.startsWith(pSku))) return true;
+              if (x.variants && x.variants.some(v => normSku(v.sku) === rSku)) return true;
+              const pName = normName(x.name);
+              if (pName && rName && (pName === rName || pName.includes(rName) || rName.includes(pName))) return true;
               return false;
             });
-
             if (p) {
               const oldImage = p.image;
               p.image = ttp.image;
-              // Also prepend Tiki image to gallery if not already there
               if (!p.gallery) p.gallery = [];
               if (!p.gallery.includes(ttp.image)) p.gallery.unshift(ttp.image);
               if (oldImage !== ttp.image) updatedImageCount++;
-              fetch('/api/products', {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(p)
-              }).catch(e => console.error('Sync product error', e));
+              fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) })
+                .catch(e => console.error('Sync product error', e));
             } else {
               all.push({
                 id: String(Date.now() + Math.floor(Math.random() * 1000)),
@@ -2528,13 +2523,12 @@ window.GradieStore = {
                 tikiStock: ttp.stock,
                 category: 'Uncategorized',
                 image: ttp.image || '',
-                gallery: ttp.image ? [ttp.image] : [],
+                gallery: [ttp.image],
                 dateAdded: new Date().toISOString()
               });
               updatedImageCount++;
             }
           });
-
           let currentData = this.getData();
           currentData.products = all;
           this.saveData(currentData);
@@ -2674,42 +2668,31 @@ window.GradieStore = {
       if (res.ok && data.success) {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
-          let updatedImageCount = 0;
-
-          // Helper: normalize SKU
+            let updatedImageCount = 0;
           const normSku = s => (s || '').replace(/[\s\-_]/g, '').toLowerCase();
           const normName = s => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
-
           data.products.forEach(lzdp => {
             if (!lzdp.image) return;
-
+            const lSku = normSku(lzdp.sku);
+            const lName = normName(lzdp.name);
             let p = all.find(x => {
-              // 1. Exact ID
+              const xs = normSku(x.sku);
               if (String(x.id) === String(lzdp.id)) return true;
-              // 2. SKU normalized
-              if (x.sku && lzdp.sku && normSku(x.sku) === normSku(lzdp.sku)) return true;
-              // 3. SKU partial
-              if (x.sku && lzdp.sku) {
-                const xs = normSku(x.sku); const ls = normSku(lzdp.sku);
-                if (xs.startsWith(ls) || ls.startsWith(xs)) return true;
-              }
-              // 4. Name fuzzy
-              const n1 = normName(x.name); const n2 = normName(lzdp.name);
-              if (n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1))) return true;
+              if (xs && lSku && xs === lSku) return true;
+              if (xs && lSku && (xs.startsWith(lSku) || lSku.startsWith(xs))) return true;
+              if (x.variants && x.variants.some(v => normSku(v.sku) === lSku)) return true;
+              const xn = normName(x.name);
+              if (xn && lName && (xn === lName || xn.includes(lName) || lName.includes(xn))) return true;
               return false;
             });
-
             if (p) {
               const oldImage = p.image;
               p.image = lzdp.image;
               if (!p.gallery) p.gallery = [];
               if (!p.gallery.includes(lzdp.image)) p.gallery.unshift(lzdp.image);
               if (oldImage !== lzdp.image) updatedImageCount++;
-              fetch('/api/products', {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(p)
-              }).catch(e => console.error('Sync product error', e));
+              fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) })
+                .catch(e => console.error('Sync product error', e));
             } else {
               all.push({
                 id: String(Date.now() + Math.floor(Math.random() * 1000)),
@@ -2720,31 +2703,18 @@ window.GradieStore = {
                 lazadaStock: lzdp.stock,
                 category: 'Uncategorized',
                 image: lzdp.image || '',
-                gallery: lzdp.image ? [lzdp.image] : [],
+                gallery: [lzdp.image],
                 dateAdded: new Date().toISOString()
               });
               updatedImageCount++;
             }
           });
-
-          // === Cross-platform fallback ===
-          // Nếu sản phẩm có lazadaStock > 0 nhưng CHƯA có ảnh Lazada,
-          // và sản phẩm đó đã có ảnh Tiki → dùng ảnh Tiki làm tạm
-          const crossFallbackUpdates = [];
-          all.forEach(p => {
-            if (
-              p.lazadaStock > 0 &&
-              p.image && !p.image.includes('slatic.net') && !p.image.includes('lazada.vn') &&
-              p.image.includes('salt.tikicdn.com')
-            ) {
-              // Ảnh Tiki dùng làm fallback – giữ nguyên, chỉ log
-              crossFallbackUpdates.push(p.id);
-            }
-          });
-          if (crossFallbackUpdates.length > 0) {
-            console.log(`[Lazada Sync] ${crossFallbackUpdates.length} sản phẩm dùng ảnh Tiki làm fallback cho Lazada.`);
+          const crossFallback = all.filter(p =>
+            p.lazadaStock > 0 && p.image && p.image.includes('salt.tikicdn.com') && !p.image.includes('slatic.net')
+          );
+          if (crossFallback.length > 0) {
+            console.log(`[Lazada Sync] ${crossFallback.length} sản phẩm dùng ảnh Tiki làm fallback cho Lazada.`);
           }
-
           let currentData = this.getData();
           currentData.products = all;
           this.saveData(currentData);

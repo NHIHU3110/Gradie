@@ -125,8 +125,26 @@ module.exports = async (req, res) => {
              
              let price = 0;
              let image = '';
-             if (p.images && p.images.length > 0) image = p.images[0];
+             const gallery = p.images || [];
+             if (gallery.length > 0) image = gallery[0];
              if (p.skus && p.skus.length > 0 && p.skus[0].price) price = p.skus[0].price;
+
+             let description = '';
+             if (p.attributes) {
+                 description = p.attributes.description || p.attributes.short_description || '';
+             }
+
+             const variants = [];
+             if (p.skus && p.skus.length > 1) {
+                 p.skus.forEach(s => {
+                     variants.push({
+                         name: s.SaleProp ? Object.values(s.SaleProp).join(' / ') : (s.color_family || s.size || 'Variant'),
+                         price: Number(s.price) || price,
+                         stock: Number(s.quantity || s.Available) || 0,
+                         sku: s.SellerSku || ''
+                     });
+                 });
+             }
 
              realProducts.push({
                  id: String(p.item_id),
@@ -134,7 +152,10 @@ module.exports = async (req, res) => {
                  name: name,
                  stock: totalStock,
                  price: price,
-                 image: image
+                 image: image,
+                 gallery: gallery,
+                 description: description,
+                 variants: variants
              });
          });
       }
@@ -149,6 +170,99 @@ module.exports = async (req, res) => {
     }
 
     if (action === 'sync_orders') {
+  // Live Lazada API Call
+  const method = 'GET';
+  const apiName = '/orders/get';
+  const params = {
+    app_key: currentKey,
+    sign_method: 'sha256',
+    timestamp: Date.now().toString(),
+    format: 'json',
+    version: '1.0',
+    created_after: new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString()
+  };
+
+  const activeAccessToken = accessToken || VALID_ACCESS_TOKEN;
+  if (activeAccessToken) {
+    params.access_token = activeAccessToken;
+  }
+
+  params.sign = buildLazadaSignature(apiName, currentSecret, params);
+  const result = await callLazadaApi(endpointUrl, apiName, params, method);
+
+  const responseBody = result.body || {};
+  const orderList = (responseBody.data && responseBody.data.orders) || [];
+  const mappedOrders = await Promise.all(orderList.map(async (lo) => {
+    let items = [];
+    try {
+      const itemParams = {
+        app_key: currentKey,
+        sign_method: 'sha256',
+        timestamp: Date.now().toString(),
+        format: 'json',
+        version: '1.0',
+        order_id: lo.order_id || lo.order_number
+      };
+      if (activeAccessToken) {
+        itemParams.access_token = activeAccessToken;
+      }
+      itemParams.sign = buildLazadaSignature('/order/items/get', currentSecret, itemParams);
+
+      const itemResult = await callLazadaApi(endpointUrl, '/order/items/get', itemParams, 'GET');
+      const fetchedItems = itemResult.body?.data || [];
+      if (fetchedItems.length > 0) {
+        items = fetchedItems.map(it => ({
+          id: it.sku || `lazada-${it.order_item_id}`,
+          name: it.name || 'Sản phẩm Lazada',
+          price: Number(it.item_price) || 0,
+          quantity: 1,
+          image: it.product_main_image || ''
+        }));
+      }
+    } catch (e) {
+      console.error("Error fetching items for order", lo.order_id, e);
+    }
+
+    // Aggregate items with same SKU/name
+    const aggregatedItems = [];
+    items.forEach(it => {
+      const existing = aggregatedItems.find(x => x.id === it.id || x.name === it.name);
+      if (existing) {
+        existing.quantity += it.quantity;
+      } else {
+        aggregatedItems.push({ ...it });
+      }
+    });
+
+    let subtotal = aggregatedItems.reduce((acc, it) => acc + (it.price * it.quantity), 0);
+    if (subtotal === 0) {
+      subtotal = Number(lo.price) || 0;
+    }
+    const shippingFee = Number(lo.shipping_fee) > 0 ? Number(lo.shipping_fee) : 29000;
+    const total = subtotal + shippingFee;
+
+    return {
+      id: lo.order_id || lo.order_number,
+      orderNumber: `LZD-${lo.order_id || lo.order_number}`,
+      customerName: `${lo.address_billing?.first_name || ''} ${lo.address_billing?.last_name || ''}`.trim() || 'Khách hàng Lazada',
+      customerEmail: lo.customer_email || '',
+      customerPhone: lo.address_billing?.phone || lo.address_shipping?.phone || '',
+      shippingAddress: `${lo.address_shipping?.address1 || ''}, ${lo.address_shipping?.city || ''}, ${lo.address_shipping?.country || ''}`.replace(/^, | , | ,$/g, '').trim(),
+      notes: lo.remarks || '',
+      paymentMethod: lo.payment_method || 'Lazada Pay',
+      date: lo.created_at ? new Date(lo.created_at).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }) : new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }),
+      items: aggregatedItems,
+      subtotal: subtotal,
+      shippingFee: shippingFee,
+      total: total,
+      status: lo.statuses?.[0] || 'Pending',
+      source: 'Lazada'
+    };
+  }));
+
+  // Standardized success response matching Tiki's format
+  return res.status(200).json({ success: true, orders: mappedOrders });
+}
       // Live Lazada API Call
       const method = 'GET';
       const apiName = '/orders/get';
