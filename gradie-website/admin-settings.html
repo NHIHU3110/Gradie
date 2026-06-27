@@ -33,12 +33,12 @@
                     
                     <hr style="margin: 25px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">
                     <h3 style="margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
-                        🔗 TikTok Shop Integration
+                        🔗 Tiki Integration
                     </h3>
-                    <div class="form-group"><label>TikTok App Key</label><input type="text" id="set-tiktok-key"></div>
-                    <div class="form-group"><label>TikTok App Secret</label><input type="password" id="set-tiktok-secret"></div>
-                    <div class="form-group"><label>TikTok Access Token</label><input type="text" id="set-tiktok-token"></div>
-                    <div class="form-group"><label>TikTok Shop Cipher</label><input type="text" id="set-tiktok-shop-cipher"></div>
+                    <div class="form-group"><label>Tiki App Key</label><input type="text" id="set-tiki-key"></div>
+                    <div class="form-group"><label>Tiki App Secret</label><input type="password" id="set-tiki-secret"></div>
+                    <div class="form-group"><label>Tiki Access Token</label><input type="text" id="set-tiki-token"></div>
+                    <div class="form-group"><label>Tiki Cipher</label><input type="text" id="set-tiki-shop-cipher"></div>
 
                     <hr style="margin: 25px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">
                     <h3 style="margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
@@ -46,39 +46,58 @@
                     </h3>
                     <div class="form-group"><label>Lazada App Key</label><input type="text" id="set-lazada-key"></div>
                     <div class="form-group"><label>Lazada App Secret</label><input type="password" id="set-lazada-secret"></div>
+                    <div class="form-group"><label>Lazada Access Token</label><input type="text" id="set-lazada-token"></div>
                     <div class="form-group"><label>Lazada API Base URL</label><input type="text" id="set-lazada-base-url"></div>
+
+
 
                     <button type="submit" class="btn-primary">Save Settings</button>
                 </form>
                 
                 <hr style="margin: 40px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">
-                <div class="tiktok-sync-panel" style="padding: 20px; background: rgba(0,0,0,0.02); border-radius: 8px; border: 1px solid rgba(0,0,0,0.08);">
+                <div class="export-panel" style="padding: 20px; background: rgba(0,0,0,0.02); border-radius: 8px; border: 1px solid rgba(0,0,0,0.08);">
                     <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px; font-size: 1.25rem;">
-                        🎵 TikTok Shop Live Sync
+                        💾 Export System Data (Vercel Fix)
                     </h3>
-                    <p style="margin-bottom: 20px; font-size: 0.9rem; color: #64748b;">Sync products and import orders directly from your connected TikTok Shop.</p>
+                    <p style="margin-bottom: 20px; font-size: 0.9rem; color: #64748b;">Because Vercel is a read-only environment without a Database, your edits are only saved in your browser. Use these buttons to download your edits and commit them to GitHub!</p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <button type="button" onclick="exportProductsJson()" class="btn-secondary" style="display: flex; align-items: center; gap: 8px;">
+                            Download products.json
+                        </button>
+                        <button type="button" onclick="exportGlobalDataJs()" class="btn-secondary" style="display: flex; align-items: center; gap: 8px;">
+                            Download global-data.js
+                        </button>
+                    </div>
+                </div>
+
+                <hr style="margin: 40px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">
+                <div class="tiki-sync-panel" style="padding: 20px; background: rgba(0,0,0,0.02); border-radius: 8px; border: 1px solid rgba(0,0,0,0.08);">
+                    <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px; font-size: 1.25rem;">
+                        🎵 Tiki Live Sync
+                    </h3>
+                    <p style="margin-bottom: 20px; font-size: 0.9rem; color: #64748b;">Sync products and import orders directly from your connected Tiki.</p>
                     
                     <div class="sync-status-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 25px;">
                         <div class="status-card" style="padding: 15px; background: #fff; border-radius: 6px; border: 1px solid rgba(0,0,0,0.05); text-align: center;">
                             <div style="font-size: 0.85rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">Connection Status</div>
-                            <div id="tiktok-conn-status" style="font-weight: 600; color: #10b981;">● Connected</div>
+                            <div id="tiki-conn-status" style="font-weight: 600; color: #10b981;">● Connected</div>
                         </div>
                         <div class="status-card" style="padding: 15px; background: #fff; border-radius: 6px; border: 1px solid rgba(0,0,0,0.05); text-align: center;">
                             <div style="font-size: 0.85rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">Synced Products</div>
-                            <div id="tiktok-synced-products" style="font-size: 1.5rem; font-weight: 600; color: #3b82f6;">--</div>
+                            <div id="tiki-synced-products" style="font-size: 1.5rem; font-weight: 600; color: #3b82f6;">--</div>
                         </div>
                         <div class="status-card" style="padding: 15px; background: #fff; border-radius: 6px; border: 1px solid rgba(0,0,0,0.05); text-align: center;">
                             <div style="font-size: 0.85rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">Synced Orders</div>
-                            <div id="tiktok-synced-orders" style="font-size: 1.5rem; font-weight: 600; color: #3b82f6;">--</div>
+                            <div id="tiki-synced-orders" style="font-size: 1.5rem; font-weight: 600; color: #3b82f6;">--</div>
                         </div>
                     </div>
 
                     <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                        <button type="button" id="btn-sync-tiktok-products" class="btn-primary" style="display: flex; align-items: center; gap: 8px;">
-                            🔄 Sync Products to TikTok
+                        <button type="button" id="btn-sync-tiki-products" class="btn-primary" style="display: flex; align-items: center; gap: 8px;">
+                            <img src="images/2267901.png" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 5px;"> Sync Products to Tiki
                         </button>
-                        <button type="button" id="btn-sync-tiktok-orders" class="btn-secondary" style="display: flex; align-items: center; gap: 8px; background: #475569; color: #fff;">
-                            📥 Import TikTok Orders
+                        <button type="button" id="btn-sync-tiki-orders" class="btn-secondary" style="display: flex; align-items: center; gap: 8px; background: #475569; color: #fff;">
+                            📥 Import Tiki Orders
                         </button>
                     </div>
                 </div>
@@ -107,7 +126,7 @@
 
                     <div style="display: flex; gap: 15px; flex-wrap: wrap;">
                         <button type="button" id="btn-sync-lazada-products" class="btn-primary" style="display: flex; align-items: center; gap: 8px;">
-                            🔄 Sync Products to Lazada
+                            <img src="images/2267901.png" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 5px;"> Sync Products to Lazada
                         </button>
                         <button type="button" id="btn-sync-lazada-orders" class="btn-secondary" style="display: flex; align-items: center; gap: 8px; background: #475569; color: #fff;">
                             📥 Import Lazada Orders
@@ -126,7 +145,7 @@
   <script src="js/icons.js"></script>
   <script src="js/toast.js"></script>
   <script src="js/global-data.js?v=1780167290"></script>
-    <script src="js/data-store.js?v=1780167290"></script>
+    <script src="js/data-store.js?v=2?v=1780167290"></script>
     <script src="js/admin-auth.js?v=1780167290"></script>
     <script src="js/admin.js?v=2"></script>
     <script src="js/admin-settings.js?v=1780167290"></script>

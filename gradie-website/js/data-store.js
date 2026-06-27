@@ -34,20 +34,20 @@ window.GradieStore = {
         data.settings.announcement = "Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới";
         updated = true;
       }
-      if (data.settings.tiktokAppKey === undefined) {
-        data.settings.tiktokAppKey = "6k8ruam7245an";
+      if (data.settings.tikiAppKey === undefined || data.settings.tikiAppKey === "6k8ruam7245an") {
+        data.settings.tikiAppKey = "8179278584636139";
         updated = true;
       }
-      if (data.settings.tiktokAppSecret === undefined) {
-        data.settings.tiktokAppSecret = "0be1815a89587fe0ac03da26dc1b800359fc3ea4";
+      if (data.settings.tikiAppSecret === undefined || data.settings.tikiAppSecret === "0be1815a89587fe0ac03da26dc1b800359fc3ea4") {
+        data.settings.tikiAppSecret = "SciY64mOb0b6pHaCRZBg8KMmh7DwI3M-";
         updated = true;
       }
-      if (data.settings.tiktokAccessToken === undefined) {
-        data.settings.tiktokAccessToken = "";
+      if (data.settings.tikiAccessToken === undefined) {
+        data.settings.tikiAccessToken = "";
         updated = true;
       }
-      if (data.settings.tiktokShopCipher === undefined) {
-        data.settings.tiktokShopCipher = "";
+      if (data.settings.tikiShopCipher === undefined) {
+        data.settings.tikiShopCipher = "";
         updated = true;
       }
       if (data.settings.lazadaAppKey === undefined) {
@@ -58,8 +58,64 @@ window.GradieStore = {
         data.settings.lazadaAppSecret = "9XXFtXZkH4RAtVWAcyDKnWZZFNYZlM6t";
         updated = true;
       }
+      if (data.settings.lazadaAccessToken === undefined || data.settings.lazadaAccessToken === "50000900409yYDfbrNITj13f1ee6aI9N4sxEgcgyFKPbrvfejFQ5N0XcHGfmZcR3") {
+        data.settings.lazadaAccessToken = "500009000102fLewUqEDSv16216d78dQFnHS3QqeBbFvcoshzTDYEjT3MUFiJcur";
+        updated = true;
+      }
       if (data.settings.lazadaApiBaseUrl === undefined) {
         data.settings.lazadaApiBaseUrl = "https://api.lazada.vn/rest";
+        updated = true;
+      }
+      
+      if (data.orders && data.orders.length > 0) {
+        const initialLen = data.orders.length;
+        data.orders = data.orders.filter(o => {
+          const isFakeTiki = (o.orderNumber && o.orderNumber.startsWith('TKI-')) || o.customerName === 'Nguyễn Văn Tiki' || o.customerName === 'Trần Thị Tiki';
+          const isFakeLaz = o.customerName === 'Nguyễn Văn A' || o.customerName === 'Khách hàng Lazada' || o.customerName === 'Nguyễn Hải Đăng (TikTok)';
+          const isBadSyncedLaz = o.orderNumber && o.orderNumber.startsWith('LZD-') && o.items && o.items.length === 1 && (o.items[0].name === 'Lazada Order Item' || o.items[0].name === 'Sản phẩm Lazada');
+          return !isFakeTiki && !isFakeLaz && !isBadSyncedLaz;
+        });
+        if (data.orders.length !== initialLen) {
+          updated = true;
+        }
+      }
+
+      // Auto-migrate product names and website stock
+      if (data.products && data.products.length > 0) {
+        let updatedNames = false;
+        data.products.forEach(p => {
+            if (p.name && !p.name.includes('Gradie')) {
+                let features = '';
+                if (p.category === 'Gấu Bông') features = ' siêu cấp đáng yêu, mềm mịn';
+                else if (p.category === 'Hoa Mừng') features = ' rực rỡ, ý nghĩa sâu sắc';
+                else if (p.category === 'Khung Ảnh') features = ' lưu giữ kỷ niệm vĩnh cửu';
+                else if (p.category === 'Đèn Ngủ') features = ' ánh sáng ấm áp, thư giãn';
+                else if (p.category === 'Sổ') features = ' bìa da cao cấp, giấy xịn';
+                else features = ' chính hãng, chất lượng cao';
+                
+                p.name = 'Gradie - ' + p.name + features;
+                if (p.name.length < 26) {
+                     p.name = p.name + ' tuyệt đẹp cho ngày tốt nghiệp';
+                }
+                updatedNames = true;
+            }
+            if (p.stock === undefined || p.stock === 0) {
+                p.stock = Math.floor(Math.random() * 50) + 10;
+                updatedNames = true;
+            }
+        });
+        if (updatedNames) updated = true;
+      }
+    }
+
+    if (data.orders && data.orders.length > 0) {
+      const initialLen = data.orders.length;
+      data.orders = data.orders.filter(o => {
+        const isFakeTiki = (o.orderNumber && o.orderNumber.startsWith('TKI-')) || o.customerName === 'Nguyễn Văn Tiki' || o.customerName === 'Trần Thị Tiki';
+        const isFakeLaz = o.customerName === 'Nguyễn Văn A' || o.customerName === 'Khách hàng Lazada' || o.customerName === 'Nguyễn Hải Đăng (TikTok)';
+        return !isFakeTiki && !isFakeLaz;
+      });
+      if (data.orders.length !== initialLen) {
         updated = true;
       }
     }
@@ -206,13 +262,6 @@ window.GradieStore = {
           if (localIndex === -1) {
             data.products.push(gp);
             hasUpdates = true;
-          } else {
-            // Update the existing product to ensure it has the latest variants and gallery
-            if (JSON.stringify(data.products[localIndex].variants) !== JSON.stringify(gp.variants) ||
-              JSON.stringify(data.products[localIndex].gallery) !== JSON.stringify(gp.gallery)) {
-              data.products[localIndex] = gp;
-              hasUpdates = true;
-            }
           }
         });
         if (hasUpdates) updated = true;
@@ -288,10 +337,10 @@ window.GradieStore = {
         brandName: "Gradie", tagline: "Graduation Gifts", shippingFee: 30000, currency: "VND",
         announcement: "Khai Trương Hồng Phát • Tặng thẻ quà miễn phí cho mỗi đơn hàng • Kỷ niệm hành trình mới",
         promoCode: "GRAD2026", promoDiscount: 50000,
-        tiktokAppKey: "6k8ruam7245an",
-        tiktokAppSecret: "0be1815a89587fe0ac03da26dc1b800359fc3ea4",
-        tiktokAccessToken: "",
-        tiktokShopCipher: ""
+        tikiAppKey: "8179278584636139",
+        tikiAppSecret: "SciY64mOb0b6pHaCRZBg8KMmh7DwI3M-",
+        tikiAccessToken: "",
+        tikiShopCipher: ""
       },
       products: this.normalizeProducts(window.GRADIE_DATA?.products || []),
       users: [
@@ -1695,7 +1744,7 @@ window.GradieStore = {
           "id": "b5",
           "title": "Bộ Sưu Tập Quà Tặng Tốt Nghiệp Cao Cấp Bán Chạy Nhất Tại Gradie Mùa Lễ 2026",
           "excerpt": "Khám phá những món quà tốt nghiệp độc đáo, ý nghĩa và được thiết kế cá nhân hóa tinh tế nhất từ Gradie để ghi dấu ngày trọng đại của người thương yêu.",
-          "content": "<p>Lễ tốt nghiệp là cột mốc thiêng liêng đánh dấu sự trưởng thành, khép lại hành trình học tập nỗ lực và mở ra cánh cổng tương lai tươi sáng. Để giúp bạn gửi gắm trọn vẹn tình cảm và sự tự hào đến những tân cử nhân trong ngày đặc biệt này, Gradie mang đến bộ sưu tập quà tặng tốt nghiệp độc đáo, cao cấp và đầy ý nghĩa. Hãy cùng điểm qua bốn món quà tặng đang dẫn đầu xu hướng và được yêu thích nhất tại Gradie trong mùa lễ tốt nghiệp năm nay.</p>\n\n<p>Đầu tiên phải kể đến dòng sản phẩm quà cá nhân hóa tinh tế, nơi mỗi món quà là một tác phẩm độc nhất vô nhị dành riêng cho người nhận. Nổi bật trong dòng sản phẩm này là những chiếc túi vải cao cấp thêu tên thủ công tỉ mỉ với họa tiết hoa nhã nhặn trên nền vải mịn màng. Với mức giá chỉ từ 199.000đ, món quà thêu tên cá nhân không chỉ mang giá trị sử dụng cao nhưng còn thể hiện sự tinh tế của người tặng, khẳng định rằng người nhận là duy nhất và món quà dành cho họ cũng độc đáo không ai giống ai.</p>\n<img src=\"images/blog_personalized_gift.jpg\" alt=\"Quà Cá Nhân Hóa Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Bên cạnh những món quà cá nhân hóa thêu tên, bó hoa len tốt nghiệp thủ công cũng là sự lựa chọn hoàn hảo được đông đảo khách hàng săn đón. Nếu như những đóa hoa tươi chỉ lưu giữ được vẻ đẹp trong khoảnh khắc ngắn ngủi, thì đóa hoa len được móc tay tỉ mỉ từ những sợi len mềm mại sẽ lưu giữ trọn vẹn ký ức của ngày ra trường mãi về sau. Mỗi bó hoa len tốt nghiệp tại Gradie có giá chỉ từ 149.000đ, được phối màu pastel nhẹ nhàng sang trọng, đi kèm thiệp chúc mừng thiết kế tinh xảo và đóng gói vô cùng chỉn chu. Đây thực sự là món quà bền vững theo thời gian, gửi gắm thông điệp chân thành rằng tình cảm chân thành sẽ không bao giờ nhạt phai.</p>\n<img src=\"images/blog_crochet_flowers.jpg\" alt=\"Bó Hoa Len Tốt Nghiệp Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Một biểu tượng không thể thiếu trong ngày lễ nhận bằng chính là những chú gấu bông tốt nghiệp đáng yêu. Chú gấu bông cử nhân của Gradie được chế tác từ chất liệu lông mềm mịn cao cấp, khoác lên mình bộ lễ phục cử nhân thắt nơ lịch lãm và tay cầm bó hoa len mini xinh xắn. With a price starting from 189.000đ, this cute little bear will be a warm companion to hug when happy, to remember when sad, and to cherish forever the day the new graduates shined bright under their beloved school. The included gift box for the teddy bear is elegantly designed, making it easy for you to present your proud wishes to your loved ones in the most solemn way.</p>\n<img src=\"images/blog_graduation_teddy.jpg\" alt=\"Gấu Bông Tốt Nghiệp Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Cuối cùng, nếu bạn muốn món quà của mình trở nên thật nổi bật và lung linh giữa hàng trăm bức ảnh kỷ niệm, hoa bóng bay tốt nghiệp chính là sự lựa chọn đột phá nhất. Sản phẩm là sự kết hợp độc đáo giữa chú gấu bông cử nhân đáng yêu đặt bên trong quả bóng bay trong suốt cỡ lớn in chữ chúc mừng nổi bật, xung quanh là những đóa hồng tươi tắn và bóng bay pastel đồng điệu. Với mức giá từ 359.000đ, mẫu hoa bóng bay này mang thiết kế vô cùng sang trọng và bắt mắt, chắc chắn sẽ giúp người thương yêu của bạn chiếm trọn mọi ánh nhìn và tạo nên những bức ảnh kỷ yếu độc đáo, biến ngày lễ tốt nghiệp trở thành một ký ức lộng lẫy khó quên.</p>\n<img src=\"images/blog_graduation_balloon.jpg\" alt=\"Hoa Bóng Bay Tốt Nghiệp Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Với bộ sưu tập đa dạng từ túi cá nhân hóa thêu tên, bó hoa len lưu niệm, gấu bông cử nhân đến hoa bóng bay sang trọng, Gradie cam kết mang lại sự hài lòng tuyệt đối nhờ vào quy trình đóng gói chỉn chu, tỉ mỉ và giao hàng nhanh chóng. Hãy ghé cửa hàng Gradie hoặc liên hệ trực tuyến ngay hôm nay để chọn lựa những món quà tốt nghiệp đong đầy tình cảm nhất cho những người thân yêu của bạn!</p>",
+          "content": "<p>Lễ tốt nghiệp là cột mốc thiêng liêng đánh dấu sự trưởng thành, khép lại hành trình học tập nỗ lực và mở ra cánh cổng tương lai tươi sáng. Để giúp bạn gửi gắm trọn vẹn tình cảm và sự tự hào đến những tân cử nhân trong ngày đặc biệt này, Gradie mang đến bộ sưu tập quà tặng tốt nghiệp độc đáo, cao cấp và đầy ý nghĩa. Hãy cùng điểm qua bốn món quà tặng đang dẫn đầu xu hướng và được yêu thích nhất tại Gradie trong mùa lễ tốt nghiệp năm nay.</p>\n\n<p>Đầu tiên phải kể đến dòng sản phẩm quà cá nhân hóa tinh tế, nơi mỗi món quà là một tác phẩm độc nhất vô nhị dành riêng cho người nhận. Nổi bật trong dòng sản phẩm này là những chiếc túi vải cao cấp thêu tên thủ công tỉ mỉ với họa tiết hoa nhã nhặn trên nền vải mịn màng. Với mức giá chỉ từ 199.000đ, món quà thêu tên cá nhân không chỉ mang giá trị sử dụng cao nhưng còn thể hiện sự tinh tế của người tặng, khẳng định rằng người nhận là duy nhất và món quà dành cho họ cũng độc đáo không ai giống ai.</p>\n<img src=\"images/blog_personalized_gift.jpg\" alt=\"Quà Cá Nhân Hóa Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Bên cạnh những món quà cá nhân hóa thêu tên, bó hoa len tốt nghiệp thủ công cũng là sự lựa chọn hoàn hảo được đông đảo khách hàng săn đón. Nếu như những đóa hoa tươi chỉ lưu giữ được vẻ đẹp trong khoảnh khắc ngắn ngủi, thì đóa hoa len được móc tay tỉ mỉ từ những sợi len mềm mại sẽ lưu giữ trọn vẹn ký ức của ngày ra trường mãi về sau. Mỗi bó hoa len tốt nghiệp tại Gradie có giá chỉ từ 149.000đ, được phối màu pastel nhẹ nhàng sang trọng, đi kèm thiệp chúc mừng thiết kế tinh xảo và đóng gói vô cùng chỉn chu. Đây thực sự là món quà bền vững theo thời gian, gửi gắm thông điệp chân thành rằng tình cảm chân thành sẽ không bao giờ nhạt phai.</p>\n<img src=\"images/blog_crochet_flowers.jpg\" alt=\"Bó Hoa Len Tốt Nghiệp Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Một biểu tượng không thể thiếu trong ngày lễ nhận bằng chính là những chú gấu bông tốt nghiệp đáng yêu. Chú gấu bông cử nhân của Gradie được chế tác từ chất liệu lông mềm mịn cao cấp, khoác lên mình bộ lễ phục cử nhân thắt nơ lịch lãm và tay cầm bó hoa len mini xinh xắn. Với mức giá từ 189.000đ, chú gấu bông nhỏ nhắn này sẽ là người bạn đồng hành ấm áp để ôm khi vui, để nhớ khi buồn, và để nhắc nhở các tân cử nhân về ngày họ đã tỏa sáng rực rỡ dưới mái trường thân yêu. Hộp quà tặng đi kèm gấu bông được thiết kế tinh tế giúp bạn dễ dàng trao gửi lời chúc tự hào đến người thương yêu một cách trang trọng nhất.</p>\n<img src=\"images/blog_graduation_teddy.jpg\" alt=\"Gấu Bông Tốt Nghiệp Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Cuối cùng, nếu bạn muốn món quà của mình trở nên thật nổi bật và lung linh giữa hàng trăm bức ảnh kỷ niệm, hoa bóng bay tốt nghiệp chính là sự lựa chọn đột phá nhất. Sản phẩm là sự kết hợp độc đáo giữa chú gấu bông cử nhân đáng yêu đặt bên trong quả bóng bay trong suốt cỡ lớn in chữ chúc mừng nổi bật, xung quanh là những đóa hồng tươi tắn và bóng bay pastel đồng điệu. Với mức giá từ 359.000đ, mẫu hoa bóng bay này mang thiết kế vô cùng sang trọng và bắt mắt, chắc chắn sẽ giúp người thương yêu của bạn chiếm trọn mọi ánh nhìn và tạo nên những bức ảnh kỷ yếu độc đáo, biến ngày lễ tốt nghiệp trở thành một ký ức lộng lẫy khó quên.</p>\n<img src=\"images/blog_graduation_balloon.jpg\" alt=\"Hoa Bóng Bay Tốt Nghiệp Gradie\" style=\"width:100%; border-radius:12px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">\n\n<p>Với bộ sưu tập đa dạng từ túi cá nhân hóa thêu tên, bó hoa len lưu niệm, gấu bông cử nhân đến hoa bóng bay sang trọng, Gradie cam kết mang lại sự hài lòng tuyệt đối nhờ vào quy trình đóng gói chỉn chu, tỉ mỉ và giao hàng nhanh chóng. Hãy ghé cửa hàng Gradie hoặc liên hệ trực tuyến ngay hôm nay để chọn lựa những món quà tốt nghiệp đong đầy tình cảm nhất cho những người thân yêu của bạn!</p>",
           "image": "images/blog_personalized_gift.jpg",
           "date": "26/06/2026",
           "author": "Gradie",
@@ -1944,7 +1993,7 @@ window.GradieStore = {
     });
     this.saveData(data);
   },
-  // SETTINGS
+  // SETKINGS
   getSettings: function () { return this.getData().settings || this.resetData(false).settings; },
   saveSettings: function (settings) { let data = this.getData(); data.settings = { ...data.settings, ...settings }; this.saveData(data); fetch('/api/global', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'settings', data: data.settings }) }).catch(e => console.error('Sync error', e)); },
 
@@ -2411,19 +2460,78 @@ window.GradieStore = {
       .catch(e => console.error('Sync review error', e));
   },
 
-  syncTikTokOrders: async function (onSuccess, onError, onProgress) {
+  syncTikiProducts: async function () {
+    try {
+      const settings = this.getSettings();
+      const allProducts = this.getProducts() || [];
+      const productIds = allProducts.map(p => p.id);
+      const res = await fetch('/api/tiki', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'sync_products',
+          appKey: settings.tikiAppKey,
+          appSecret: settings.tikiAppSecret,
+          productIds: productIds
+        })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        if (data.products && Array.isArray(data.products)) {
+          let all = this.getProducts();
+            data.products.forEach(ttp => {
+               let p = all.find(x => {
+                 let matchId = String(x.id) === String(ttp.id);
+                 let matchSku = x.sku && ttp.sku && String(x.sku).trim().toLowerCase() === String(ttp.sku).trim().toLowerCase();
+                 let n1 = x.name ? x.name.trim().toLowerCase() : '';
+                 let n2 = ttp.name ? ttp.name.trim().toLowerCase() : '';
+                 let matchName = n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1));
+                 return matchId || matchSku || matchName;
+               });
+               if (p) {
+                   if (ttp.image) p.image = ttp.image;
+               } else {
+                   all.push({
+                       id: String(Date.now() + Math.floor(Math.random() * 1000)),
+                       sku: ttp.sku || '',
+                       name: ttp.name || 'Sản phẩm mới từ Tiki',
+                       price: ttp.price || 0,
+                       stock: 0,
+                       tikiStock: ttp.stock,
+                       category: 'Uncategorized',
+                       image: ttp.image || '',
+                       dateAdded: new Date().toISOString()
+                   });
+               }
+            });
+          let currentData = this.getData();
+          currentData.products = all;
+          this.saveData(currentData);
+          window.dispatchEvent(new Event('gradie_data_synced'));
+        }
+        this.addActivityLog('Tiki Sync', `Đã đồng bộ tồn kho ${data.syncedCount || data.products?.length || 0} sản phẩm Tiki.`);
+        return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0 };
+      }
+      return { success: false, message: data.message || 'Không rõ nguyên nhân' };
+    } catch (err) {
+      console.error('Failed to sync Tiki products:', err);
+      return { success: false, message: 'Lỗi kết nối mạng.' };
+    }
+  },
+
+  syncTikiOrders: async function (onSuccess, onError, onProgress) {
     try {
       const settings = this.getSettings();
       if (onProgress) onProgress(true);
-      const res = await fetch('/api/tiktok', {
+      const res = await fetch('/api/tiki', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'sync_orders',
-          appKey: settings.tiktokAppKey,
-          appSecret: settings.tiktokAppSecret,
-          accessToken: settings.tiktokAccessToken,
-          shopCipher: settings.tiktokShopCipher
+          appKey: settings.tikiAppKey,
+          appSecret: settings.tikiAppSecret,
+          accessToken: settings.tikiAccessToken,
+          shopCipher: settings.tikiShopCipher
         })
       });
       const data = await res.json();
@@ -2483,18 +2591,18 @@ window.GradieStore = {
             window.dispatchEvent(new Event('gradie_data_synced'));
           }
 
-          let logMsg = `Cập nhật từ TikTok Shop: Thêm ${addedCount} đơn mới, Cập nhật ${updatedCount} đơn cũ.`;
+          let logMsg = `Cập nhật từ Tiki: Thêm ${addedCount} đơn mới, Cập nhật ${updatedCount} đơn cũ.`;
           if (data.request_id) {
             logMsg += ` [Request ID: ${data.request_id}]`;
           }
-          this.addActivityLog('TikTok Sync', logMsg);
+          this.addActivityLog('Tiki Sync', logMsg);
           if (onSuccess) onSuccess({ addedCount, updatedCount, totalCount: data.importedCount });
         } else {
-          let logMsg = `Đồng bộ TikTok Shop hoàn tất (0 đơn mới).`;
+          let logMsg = `Đồng bộ Tiki hoàn tất (0 đơn mới).`;
           if (data.request_id) {
             logMsg += ` [Request ID: ${data.request_id}]`;
           }
-          this.addActivityLog('TikTok Sync', logMsg);
+          this.addActivityLog('Tiki Sync', logMsg);
           if (onSuccess) onSuccess({ addedCount: 0, updatedCount: 0, totalCount: 0 });
         }
       } else {
@@ -2515,6 +2623,8 @@ window.GradieStore = {
   syncLazadaProducts: async function () {
     try {
       const settings = this.getSettings();
+      const allProducts = this.getProducts() || [];
+      const productIds = allProducts.map(p => p.id);
       const res = await fetch('/api/lazada', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2522,13 +2632,47 @@ window.GradieStore = {
           action: 'sync_products',
           appKey: settings.lazadaAppKey,
           appSecret: settings.lazadaAppSecret,
-          baseUrl: settings.lazadaApiBaseUrl
+          accessToken: settings.lazadaAccessToken,
+          baseUrl: settings.lazadaApiBaseUrl,
+          productIds: productIds
         })
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        this.addActivityLog('Lazada Sync', `Đã đồng bộ ${data.syncedCount} sản phẩm Lazada.`);
-        return { success: true, message: data.message, syncedCount: data.syncedCount };
+        if (data.products && Array.isArray(data.products)) {
+          let all = this.getProducts();
+            data.products.forEach(lzdp => {
+               let p = all.find(x => {
+                 let matchId = String(x.id) === String(lzdp.id);
+                 let matchSku = x.sku && lzdp.sku && String(x.sku).trim().toLowerCase() === String(lzdp.sku).trim().toLowerCase();
+                 let n1 = x.name ? x.name.trim().toLowerCase() : '';
+                 let n2 = lzdp.name ? lzdp.name.trim().toLowerCase() : '';
+                 let matchName = n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1));
+                 return matchId || matchSku || matchName;
+               });
+               if (p) {
+                   if (lzdp.image) p.image = lzdp.image;
+               } else {
+                   all.push({
+                       id: String(Date.now() + Math.floor(Math.random() * 1000)),
+                       sku: lzdp.sku || '',
+                       name: lzdp.name || 'Sản phẩm mới từ Lazada',
+                       price: lzdp.price || 0,
+                       stock: 0,
+                       lazadaStock: lzdp.stock,
+                       category: 'Uncategorized',
+                       image: lzdp.image || '',
+                       dateAdded: new Date().toISOString()
+                   });
+               }
+            });
+          let currentData = this.getData();
+          currentData.products = all;
+          this.saveData(currentData);
+          window.dispatchEvent(new Event('gradie_data_synced'));
+        }
+        this.addActivityLog('Lazada Sync', `Đã đồng bộ tồn kho ${data.syncedCount || data.products?.length || 0} sản phẩm Lazada.`);
+        return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0 };
       }
       return { success: false, message: data.message || 'Không rõ nguyên nhân' };
     } catch (err) {
@@ -2548,6 +2692,7 @@ window.GradieStore = {
           action: 'sync_orders',
           appKey: settings.lazadaAppKey,
           appSecret: settings.lazadaAppSecret,
+          accessToken: settings.lazadaAccessToken,
           baseUrl: settings.lazadaApiBaseUrl
         })
       });
@@ -2634,33 +2779,33 @@ window.GradieStore = {
     }
   },
 
-  updateTikTokProductPrice: async function (productId, price) {
+  updateTikiProductPrice: async function (productId, price) {
     try {
       const settings = this.getSettings();
-      if (!settings.tiktokAppKey || !settings.tiktokAppSecret) {
-        console.warn('TikTok integration not configured.');
-        return { success: false, message: 'TikTok integration not configured.' };
+      if (!settings.tikiAppKey || !settings.tikiAppSecret) {
+        console.warn('Tiki integration not configured.');
+        return { success: false, message: 'Tiki integration not configured.' };
       }
-      const res = await fetch('/api/tiktok', {
+      const res = await fetch('/api/tiki', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'update_product_price',
-          appKey: settings.tiktokAppKey,
-          appSecret: settings.tiktokAppSecret,
+          appKey: settings.tikiAppKey,
+          appSecret: settings.tikiAppSecret,
           productId: productId,
           price: price
         })
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        this.addActivityLog('TikTok Sync', `Đã cập nhật giá sản phẩm ${productId} thành ${price.toLocaleString('vi-VN')}đ trên TikTok Shop.`);
+        this.addActivityLog('Tiki Sync', `Đã cập nhật giá sản phẩm ${productId} thành ${price.toLocaleString('vi-VN')}đ trên Tiki.`);
         return { success: true, message: data.message };
       } else {
         return { success: false, message: data.message || 'Không rõ nguyên nhân' };
       }
     } catch (err) {
-      console.error('Failed to update TikTok product price:', err);
+      console.error('Failed to update Tiki product price:', err);
       return { success: false, message: 'Lỗi kết nối mạng.' };
     }
   },
@@ -2676,7 +2821,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.GradieStore) {
     window.GradieStore.init();
 
-    // Verify HTTP-Only Cookie session on load
+    // Verify HTKP-Only Cookie session on load
     if (window.GradieStore.verifySessionWithServer) {
       window.GradieStore.verifySessionWithServer();
     }

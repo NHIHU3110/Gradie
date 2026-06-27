@@ -1,14 +1,35 @@
 // js/admin-products.js
 
+window.currentProductFilter = window.currentProductFilter || 'all';
+
+window.setProductFilter = function(filter) {
+    window.currentProductFilter = filter;
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if(btn.dataset.filter === filter) btn.classList.add('active');
+    });
+    renderAdminProducts();
+}
+
 function renderAdminProducts() {
     const tbody = document.getElementById('admin-product-list');
     if(!tbody) return;
     
-    const products = window.GradieStore.getProducts();
+    let products = window.GradieStore.getProducts() || [];
+    
+    // Áp dụng bộ lọc
+    if (window.currentProductFilter === 'tiki') {
+        products = products.filter(p => p.tikiStock !== undefined && p.tikiStock > 0);
+    } else if (window.currentProductFilter === 'lazada') {
+        products = products.filter(p => p.lazadaStock !== undefined && p.lazadaStock > 0);
+    } else if (window.currentProductFilter === 'website') {
+        products = products.filter(p => (!p.tikiStock || p.tikiStock === 0) && (!p.lazadaStock || p.lazadaStock === 0));
+    }
+
     console.log("GradieStore products count (Admin):", products.length);
     
     if (!products || products.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No products found.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No products found for this category.</td></tr>';
         return;
     }
     
@@ -28,7 +49,25 @@ function renderAdminProducts() {
                 <td><strong>${p.name || 'Untitled'}</strong>${featuredBadge}<br><small style="color:var(--admin-muted)">ID: ${safeId}</small></td>
                 <td>${p.category || 'Uncategorized'}</td>
                 <td>${price.toLocaleString('vi-VN')} ₫</td>
-                <td>${p.stock || 0}</td>
+                <td>
+                      <div style="display:flex; flex-direction:column; font-size:0.85rem; line-height:1.4; gap: 4px;">
+                          ${(window.currentProductFilter === 'all' || window.currentProductFilter === 'website') ? `
+                          <div style="display:flex; align-items:center; gap:6px;" title="Website Stock">
+                              <img src="images/12953846.png" alt="Web" style="width:16px; height:16px; object-fit:contain; border-radius:50%;">
+                              <span style="color:#3b82f6;">${p.stock || 0}</span>
+                          </div>` : ''}
+                          ${(window.currentProductFilter === 'all' || window.currentProductFilter === 'tiki') ? `
+                          <div style="display:flex; align-items:center; gap:6px;" title="Tiki Stock">
+                              <img src="images/tiki-logo.png" alt="Tiki" style="width:16px; height:16px; object-fit:contain; border-radius:4px;">
+                              <span style="color:#1A94FF;">${p.tikiStock !== undefined ? p.tikiStock : (p.stock || 0)}</span>
+                          </div>` : ''}
+                          ${(window.currentProductFilter === 'all' || window.currentProductFilter === 'lazada') ? `
+                          <div style="display:flex; align-items:center; gap:6px;" title="Lazada Stock">
+                              <img src="images/lazada-seeklogo.png" alt="Lazada" style="width:16px; height:16px; object-fit:contain; border-radius:4px;">
+                              <span style="color:#f97316;">${p.lazadaStock !== undefined ? p.lazadaStock : (p.stock || 0)}</span>
+                          </div>` : ''}
+                      </div>
+                </td>
                 <td class="actions">
                     <div style="display: flex; gap: 6px; align-items: center;">
                         <button onclick="window.location.href='admin-product-form.html?id=${encodedId}'">Edit</button>
@@ -98,7 +137,9 @@ function getProductExportData(products) {
             "Category": p.category || '',
             "Price": p.price || 0,
             "Old Price": p.oldPrice !== null && p.oldPrice !== undefined ? p.oldPrice : '',
-            "Stock": p.stock || 0,
+            "Website Stock": p.stock || 0,
+            "Tiki Stock": p.tikiStock !== undefined ? p.tikiStock : (p.stock || 0),
+            "Lazada Stock": p.lazadaStock !== undefined ? p.lazadaStock : (p.stock || 0),
             "Rating": p.rating || '',
             "Reviews Count": p.reviews || '',
             "Main Image": p.image || '',
@@ -176,9 +217,55 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const btnCSV = document.getElementById('btn-export-csv');
     const btnXLSX = document.getElementById('btn-export-xlsx');
+    const btnSyncTiktokProducts = document.getElementById('btn-sync-tiki-products');
+    const btnSyncLazadaProducts = document.getElementById('btn-sync-lazada-products');
     
     if (btnCSV) btnCSV.addEventListener('click', exportToCSV);
     if (btnXLSX) btnXLSX.addEventListener('click', exportToXLSX);
+
+    if (btnSyncTiktokProducts) {
+        btnSyncTiktokProducts.addEventListener('click', async () => {
+            const originalText = btnSyncTiktokProducts.innerHTML;
+            btnSyncTiktokProducts.innerHTML = 'Đang đồng bộ...';
+            btnSyncTiktokProducts.disabled = true;
+            try {
+                const res = await window.GradieStore.syncTikiProducts();
+                if (res && res.success) {
+                    showToast(`Đồng bộ thành công ${res.syncedCount || 0} sản phẩm từ Tiki`, 'success');
+                    renderAdminProducts();
+                } else {
+                    showToast(res?.message || 'Đồng bộ thất bại', 'error');
+                }
+            } catch (err) {
+                showToast('Lỗi khi đồng bộ Tiki', 'error');
+            } finally {
+                btnSyncTiktokProducts.innerHTML = originalText;
+                btnSyncTiktokProducts.disabled = false;
+            }
+        });
+    }
+
+    if (btnSyncLazadaProducts) {
+        btnSyncLazadaProducts.addEventListener('click', async () => {
+            const originalText = btnSyncLazadaProducts.innerHTML;
+            btnSyncLazadaProducts.innerHTML = 'Đang đồng bộ...';
+            btnSyncLazadaProducts.disabled = true;
+            try {
+                const res = await window.GradieStore.syncLazadaProducts();
+                if (res && res.success) {
+                    showToast(`Đồng bộ thành công ${res.syncedCount || 0} sản phẩm từ Lazada`, 'success');
+                    renderAdminProducts();
+                } else {
+                    showToast(res?.message || 'Đồng bộ thất bại', 'error');
+                }
+            } catch (err) {
+                showToast('Lỗi khi đồng bộ Lazada', 'error');
+            } finally {
+                btnSyncLazadaProducts.innerHTML = originalText;
+                btnSyncLazadaProducts.disabled = false;
+            }
+        });
+    }
 
     // Bulk Actions Handlers
     const bulkDeleteBtn = document.getElementById('bulk-delete-btn');
