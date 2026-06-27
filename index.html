@@ -252,6 +252,13 @@
     const slides = document.querySelectorAll('.hero-slide');
     const dots = document.querySelectorAll('.dot');
     let currentSlide = 0;
+
+    // Initial check
+    const heroEl = document.querySelector('.hero');
+    if (heroEl && slides.length > 0 && slides[currentSlide].tagName === 'A') {
+      heroEl.classList.add('hide-content-card');
+    }
+
     let slideInterval = setInterval(nextSlide, 4000);
 
     function nextSlide() {
@@ -265,6 +272,14 @@
       currentSlide = (n + slides.length) % slides.length;
       slides[currentSlide].classList.add('active');
       dots[currentSlide].classList.add('active');
+
+      if (heroEl) {
+        if (slides[currentSlide].tagName === 'A') {
+          heroEl.classList.add('hide-content-card');
+        } else {
+          heroEl.classList.remove('hide-content-card');
+        }
+      }
     }
 
     dots.forEach((dot, idx) => {

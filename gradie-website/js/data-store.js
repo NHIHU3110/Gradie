@@ -1680,6 +1680,7 @@ window.GradieStore = {
           "category": "Handmade",
           "status": "Published"
         },
+        {
           "id": "b4",
           "title": "Ý Nghĩa Của Lễ Tốt Nghiệp Và Những Kỷ Niệm Đáng Trân Trọng",
           "excerpt": "Lễ tốt nghiệp không chỉ là ngày kết thúc mà còn là khởi đầu của một hành trình mới đầy hứa hẹn...",
