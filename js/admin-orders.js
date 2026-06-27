@@ -109,25 +109,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const syncDirectBtn = document.getElementById('btn-sync-tiki-orders-direct');
         if (syncDirectBtn) {
             syncDirectBtn.addEventListener('click', async () => {
+                // Pre-check credentials
+                const settings = window.GradieStore.getSettings() || {};
+                if (!settings.tikiAppKey || !settings.tikiAppSecret) {
+                    showToast('⚠️ Chưa có Tiki App Key / App Secret. Vui lòng cài đặt trong Thiết Lập.', 'error');
+                    return;
+                }
+                if (!settings.tikiAccessToken) {
+                    showToast('⚠️ Tiki Access Token chưa được cấu hình. Vào Thiết Lập → Tiki → nhập Access Token.', 'error');
+                    return;
+                }
+
                 const origText = syncDirectBtn.innerHTML;
                 syncDirectBtn.disabled = true;
                 syncDirectBtn.innerHTML = '<span>⏳</span> Cập nhật...';
 
                 await window.GradieStore.syncTikiOrders(
                     (res) => {
-                        if (typeof showToast === 'function') {
-                            showToast(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ Tiki.`, 'success');
-                        } else {
-                            alert(`Đồng bộ thành công! Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng từ Tiki.`);
-                        }
+                        const msg = res.addedCount > 0 || res.updatedCount > 0
+                            ? `✅ Tiki: Thêm ${res.addedCount} đơn mới, cập nhật ${res.updatedCount} đơn hàng`
+                            : '✅ Đồng bộ Tiki hoàn tất (không có đơn mới)';
+                        showToast(msg, 'success');
                         window.renderOrdersTable();
                     },
                     (err) => {
-                        if (typeof showToast === 'function') {
-                            showToast(`Lỗi đồng bộ Tiki: ${err}`, 'error');
-                        } else {
-                            alert(`Lỗi đồng bộ Tiki: ${err}`);
-                        }
+                        showToast(`❌ Lỗi đồng bộ Tiki: ${err}`, 'error');
                     },
                     (loading) => {
                         if (!loading) {
@@ -153,8 +159,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 syncLazadaDirectBtn.disabled = false;
                 syncLazadaDirectBtn.innerHTML = origText;
 
-                if (typeof showToast === 'function') {
-                    showToast(`Đã lấy dữ liệu trực tiếp từ Lazada!`, 'success');
+                const orderCount = cachedLazadaOrders ? cachedLazadaOrders.length : 0;
+                if (orderCount > 0) {
+                    showToast(`✅ Lấy được ${orderCount} đơn hàng từ Lazada`, 'success');
+                } else {
+                    showToast('⚠️ Lazada không trả về đơn hàng nào (kiểm tra Access Token trong Thiết Lập)', 'warning');
                 }
             });
         }

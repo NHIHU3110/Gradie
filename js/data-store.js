@@ -2479,38 +2479,71 @@ window.GradieStore = {
       if (res.ok && data.success) {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
-            data.products.forEach(ttp => {
-               let p = all.find(x => {
-                 let matchId = String(x.id) === String(ttp.id);
-                 let matchSku = x.sku && ttp.sku && String(x.sku).trim().toLowerCase() === String(ttp.sku).trim().toLowerCase();
-                 let n1 = x.name ? x.name.trim().toLowerCase() : '';
-                 let n2 = ttp.name ? ttp.name.trim().toLowerCase() : '';
-                 let matchName = n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1));
-                 return matchId || matchSku || matchName;
-               });
-               if (p) {
-                   if (ttp.image) p.image = ttp.image;
-               } else {
-                   all.push({
-                       id: String(Date.now() + Math.floor(Math.random() * 1000)),
-                       sku: ttp.sku || '',
-                       name: ttp.name || 'Sản phẩm mới từ Tiki',
-                       price: ttp.price || 0,
-                       stock: 0,
-                       tikiStock: ttp.stock,
-                       category: 'Uncategorized',
-                       image: ttp.image || '',
-                       dateAdded: new Date().toISOString()
-                   });
-               }
+          let updatedImageCount = 0;
+
+          // Helper: normalize SKU (strip hyphens/spaces, lowercase)
+          const normSku = s => (s || '').replace(/[\s\-_]/g, '').toLowerCase();
+          // Helper: normalize name (lowercase, remove extra spaces)
+          const normName = s => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+
+          data.products.forEach(ttp => {
+            // Skip if Tiki product has no image
+            if (!ttp.image) return;
+
+            let p = all.find(x => {
+              // 1. Exact ID match
+              if (String(x.id) === String(ttp.id)) return true;
+              // 2. SKU match (normalized)
+              if (x.sku && ttp.sku && normSku(x.sku) === normSku(ttp.sku)) return true;
+              // 3. SKU partial match (e.g. local 'SP010-1' vs Tiki 'SP010')
+              if (x.sku && ttp.sku) {
+                const xs = normSku(x.sku); const ts = normSku(ttp.sku);
+                if (xs.startsWith(ts) || ts.startsWith(xs)) return true;
+              }
+              // 4. Name fuzzy match
+              const n1 = normName(x.name); const n2 = normName(ttp.name);
+              if (n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1))) return true;
+              return false;
             });
+
+            if (p) {
+              const oldImage = p.image;
+              p.image = ttp.image;
+              // Also prepend Tiki image to gallery if not already there
+              if (!p.gallery) p.gallery = [];
+              if (!p.gallery.includes(ttp.image)) p.gallery.unshift(ttp.image);
+              if (oldImage !== ttp.image) updatedImageCount++;
+              fetch('/api/products', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(p)
+              }).catch(e => console.error('Sync product error', e));
+            } else {
+              all.push({
+                id: String(Date.now() + Math.floor(Math.random() * 1000)),
+                sku: ttp.sku || '',
+                name: ttp.name || 'Sản phẩm mới từ Tiki',
+                price: ttp.price || 0,
+                stock: 0,
+                tikiStock: ttp.stock,
+                category: 'Uncategorized',
+                image: ttp.image || '',
+                gallery: ttp.image ? [ttp.image] : [],
+                dateAdded: new Date().toISOString()
+              });
+              updatedImageCount++;
+            }
+          });
+
           let currentData = this.getData();
           currentData.products = all;
           this.saveData(currentData);
           window.dispatchEvent(new Event('gradie_data_synced'));
+          this.addActivityLog('Tiki Sync', `Đã đồng bộ ${data.syncedCount || data.products?.length || 0} sản phẩm, cập nhật ${updatedImageCount} ảnh từ Tiki.`);
+          return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0, updatedImageCount };
         }
-        this.addActivityLog('Tiki Sync', `Đã đồng bộ tồn kho ${data.syncedCount || data.products?.length || 0} sản phẩm Tiki.`);
-        return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0 };
+        this.addActivityLog('Tiki Sync', `Tiki trả về 0 sản phẩm.`);
+        return { success: true, message: data.message, syncedCount: 0, updatedImageCount: 0 };
       }
       return { success: false, message: data.message || 'Không rõ nguyên nhân' };
     } catch (err) {
@@ -2641,38 +2674,86 @@ window.GradieStore = {
       if (res.ok && data.success) {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
-            data.products.forEach(lzdp => {
-               let p = all.find(x => {
-                 let matchId = String(x.id) === String(lzdp.id);
-                 let matchSku = x.sku && lzdp.sku && String(x.sku).trim().toLowerCase() === String(lzdp.sku).trim().toLowerCase();
-                 let n1 = x.name ? x.name.trim().toLowerCase() : '';
-                 let n2 = lzdp.name ? lzdp.name.trim().toLowerCase() : '';
-                 let matchName = n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1));
-                 return matchId || matchSku || matchName;
-               });
-               if (p) {
-                   if (lzdp.image) p.image = lzdp.image;
-               } else {
-                   all.push({
-                       id: String(Date.now() + Math.floor(Math.random() * 1000)),
-                       sku: lzdp.sku || '',
-                       name: lzdp.name || 'Sản phẩm mới từ Lazada',
-                       price: lzdp.price || 0,
-                       stock: 0,
-                       lazadaStock: lzdp.stock,
-                       category: 'Uncategorized',
-                       image: lzdp.image || '',
-                       dateAdded: new Date().toISOString()
-                   });
-               }
+          let updatedImageCount = 0;
+
+          // Helper: normalize SKU
+          const normSku = s => (s || '').replace(/[\s\-_]/g, '').toLowerCase();
+          const normName = s => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+
+          data.products.forEach(lzdp => {
+            if (!lzdp.image) return;
+
+            let p = all.find(x => {
+              // 1. Exact ID
+              if (String(x.id) === String(lzdp.id)) return true;
+              // 2. SKU normalized
+              if (x.sku && lzdp.sku && normSku(x.sku) === normSku(lzdp.sku)) return true;
+              // 3. SKU partial
+              if (x.sku && lzdp.sku) {
+                const xs = normSku(x.sku); const ls = normSku(lzdp.sku);
+                if (xs.startsWith(ls) || ls.startsWith(xs)) return true;
+              }
+              // 4. Name fuzzy
+              const n1 = normName(x.name); const n2 = normName(lzdp.name);
+              if (n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1))) return true;
+              return false;
             });
+
+            if (p) {
+              const oldImage = p.image;
+              p.image = lzdp.image;
+              if (!p.gallery) p.gallery = [];
+              if (!p.gallery.includes(lzdp.image)) p.gallery.unshift(lzdp.image);
+              if (oldImage !== lzdp.image) updatedImageCount++;
+              fetch('/api/products', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(p)
+              }).catch(e => console.error('Sync product error', e));
+            } else {
+              all.push({
+                id: String(Date.now() + Math.floor(Math.random() * 1000)),
+                sku: lzdp.sku || '',
+                name: lzdp.name || 'Sản phẩm mới từ Lazada',
+                price: lzdp.price || 0,
+                stock: 0,
+                lazadaStock: lzdp.stock,
+                category: 'Uncategorized',
+                image: lzdp.image || '',
+                gallery: lzdp.image ? [lzdp.image] : [],
+                dateAdded: new Date().toISOString()
+              });
+              updatedImageCount++;
+            }
+          });
+
+          // === Cross-platform fallback ===
+          // Nếu sản phẩm có lazadaStock > 0 nhưng CHƯA có ảnh Lazada,
+          // và sản phẩm đó đã có ảnh Tiki → dùng ảnh Tiki làm tạm
+          const crossFallbackUpdates = [];
+          all.forEach(p => {
+            if (
+              p.lazadaStock > 0 &&
+              p.image && !p.image.includes('slatic.net') && !p.image.includes('lazada.vn') &&
+              p.image.includes('salt.tikicdn.com')
+            ) {
+              // Ảnh Tiki dùng làm fallback – giữ nguyên, chỉ log
+              crossFallbackUpdates.push(p.id);
+            }
+          });
+          if (crossFallbackUpdates.length > 0) {
+            console.log(`[Lazada Sync] ${crossFallbackUpdates.length} sản phẩm dùng ảnh Tiki làm fallback cho Lazada.`);
+          }
+
           let currentData = this.getData();
           currentData.products = all;
           this.saveData(currentData);
           window.dispatchEvent(new Event('gradie_data_synced'));
+          this.addActivityLog('Lazada Sync', `Đã đồng bộ ${data.syncedCount || data.products?.length || 0} sản phẩm, cập nhật ${updatedImageCount} ảnh từ Lazada.`);
+          return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0, updatedImageCount };
         }
-        this.addActivityLog('Lazada Sync', `Đã đồng bộ tồn kho ${data.syncedCount || data.products?.length || 0} sản phẩm Lazada.`);
-        return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0 };
+        this.addActivityLog('Lazada Sync', `Lazada trả về 0 sản phẩm.`);
+        return { success: true, message: data.message, syncedCount: 0, updatedImageCount: 0 };
       }
       return { success: false, message: data.message || 'Không rõ nguyên nhân' };
     } catch (err) {

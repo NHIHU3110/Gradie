@@ -54,22 +54,82 @@ export default async function handler(req, res) {
 
     // Step 2: Fetch Orders
     if (action === 'sync_orders') {
-      const ordersResponse = await fetch('https://api.tiki.vn/integration/v2/orders?limit=50', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`
-        }
-      });
-
-      if (!ordersResponse.ok) {
-        return res.status(ordersResponse.status).json({ success: false, message: 'Failed to fetch orders from Tiki' });
+  const allOrders = [];
+  let page = 1;
+  const limit = 100; // adjust as needed
+  while (true) {
+    const ordersResponse = await fetch(`https://api.tiki.vn/integration/v2/orders?limit=${limit}&page=${page}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
       }
+    });
+    if (!ordersResponse.ok) {
+      return res.status(ordersResponse.status).json({ success: false, message: 'Failed to fetch orders from Tiki' });
+    }
+    const ordersData = await ordersResponse.json();
+    const batch = ordersData.data || [];
+    if (batch.length === 0) break;
+    allOrders.push(...batch);
+    if (batch.length < limit) break;
+    page += 1;
+  }
+  // Transform to Gradie format
+  const formattedOrders = allOrders.map(order => {
+    // Map Tiki statuses to Gradie statuses
+    let status = 'Pending';
+    const tikiStatus = (order.status || '').toLowerCase();
+    if (tikiStatus === 'processing' || tikiStatus === 'packaging') status = 'Processing';
+    else if (tikiStatus === 'shipping' || tikiStatus === 'shipped') status = 'Shipped';
+    else if (tikiStatus === 'successful' || tikiStatus === 'delivered') status = 'Delivered';
+    else if (tikiStatus === 'canceled' || tikiStatus === 'returned') status = 'Cancelled';
 
-      const ordersData = await ordersResponse.json();
-      const tikiOrders = ordersData.data || [];
-
+    let customerName = 'Khách Tiki';
+    let customerPhone = '';
+    let address = '';
+    if (order.shipping && order.shipping.address) {
+      customerName = order.shipping.address.full_name || customerName;
+      customerPhone = order.shipping.address.phone || '';
+      address = order.shipping.address.street || '';
+    }
+    const items = (order.items || []).map(item => ({
+      id: item.product && item.product.sku ? item.product.sku : 'tiki-item',
+      name: item.product && item.product.name ? item.product.name : 'Sản phẩm Tiki',
+      price: item.price || 0,
+      quantity: item.qty || 1,
+      image: (item.product && (item.product.thumbnail || item.product.thumbnail_url || item.product.image_url)) || ''
+    }));
+    return {
+      id: order.code,
+      orderNumber: 'TIKI-' + order.code,
+      customerName: customerName,
+      customerEmail: '',
+      customerPhone: customerPhone,
+      shippingAddress: address,
+      date: order.created_at || new Date().toISOString(),
+      status: status,
+      const allOrders = [];
+      let page = 1;
+      const limit = 100; // adjust as needed
+      while (true) {
+        const ordersResponse = await fetch(`https://api.tiki.vn/integration/v2/orders?limit=${limit}&page=${page}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+        });
+        if (!ordersResponse.ok) {
+          return res.status(ordersResponse.status).json({ success: false, message: 'Failed to fetch orders from Tiki' });
+        }
+        const ordersData = await ordersResponse.json();
+        const batch = ordersData.data || [];
+        if (batch.length === 0) break;
+        allOrders.push(...batch);
+        if (batch.length < limit) break;
+        page += 1;
+      }
       // Transform to Gradie format
-      const formattedOrders = tikiOrders.map(order => {
+      const formattedOrders = allOrders.map(order => {
         // Map Tiki statuses to Gradie statuses
         let status = 'Pending';
         const tikiStatus = (order.status || '').toLowerCase();
@@ -78,24 +138,21 @@ export default async function handler(req, res) {
         else if (tikiStatus === 'successful' || tikiStatus === 'delivered') status = 'Delivered';
         else if (tikiStatus === 'canceled' || tikiStatus === 'returned') status = 'Cancelled';
 
-        let customerName = 'Kh├ích Tiki';
+        let customerName = 'Khách Tiki';
         let customerPhone = '';
         let address = '';
-        
         if (order.shipping && order.shipping.address) {
           customerName = order.shipping.address.full_name || customerName;
           customerPhone = order.shipping.address.phone || '';
           address = order.shipping.address.street || '';
         }
-
         const items = (order.items || []).map(item => ({
           id: item.product && item.product.sku ? item.product.sku : 'tiki-item',
-          name: item.product && item.product.name ? item.product.name : 'Sß║ún phß║⌐m Tiki',
+          name: item.product && item.product.name ? item.product.name : 'Sản phẩm Tiki',
           price: item.price || 0,
           quantity: item.qty || 1,
           image: (item.product && (item.product.thumbnail || item.product.thumbnail_url || item.product.image_url)) || ''
         }));
-
         return {
           id: order.code,
           orderNumber: 'TIKI-' + order.code,
@@ -111,7 +168,6 @@ export default async function handler(req, res) {
           items: items
         };
       });
-
       return res.status(200).json({ success: true, orders: formattedOrders });
     }
 

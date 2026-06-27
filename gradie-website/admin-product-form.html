@@ -250,13 +250,13 @@
             const sku = document.getElementById('p-sku').value;
             if (!sku) return showToast('Vui lòng nhập SKU trước khi đồng bộ', 'error');
             const settings = JSON.parse(localStorage.getItem('gradie_settings') || '{}');
-            if (!settings.tikiAppId || !settings.tikiAppSecret) return showToast('Vui lòng cấu hình API Tiki trong Settings trước', 'error');
+            if (!settings.tikiAppKey || !settings.tikiAppSecret) return showToast('Vui lòng cấu hình API Tiki trong Settings trước', 'error');
             
             showToast('Đang lấy dữ liệu từ Tiki...', 'info');
             try {
                 const res = await fetch('/api/tiki', {
                     method: 'POST', headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ action: 'sync_products', appId: settings.tikiAppId, appSecret: settings.tikiAppSecret })
+                    body: JSON.stringify({ action: 'sync_products', appId: settings.tikiAppKey, appSecret: settings.tikiAppSecret })
                 });
                 const data = await res.json();
                 if (data.success && data.products) {

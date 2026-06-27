@@ -931,3 +931,253 @@ textarea { resize: vertical; min-height: 100px; padding: 12px 14px; }
 .content-wrapper {
   animation: fadeInAdmin 0.35s ease-out both;
 }
+
+/* ============================================================
+   TIKI & LAZADA BEAUTIFUL BUTTONS & SETTINGS PANELS
+   ============================================================ */
+
+/* Sync Actions Container */
+.sync-actions-group {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* Base button animations and icons */
+#btn-sync-tiki-orders-direct,
+#btn-sync-tiki-products,
+#btn-sync-tiki-orders,
+#btn-sync-lazada-orders-direct,
+#btn-sync-lazada-products,
+#btn-sync-lazada-orders {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#btn-sync-tiki-orders-direct img,
+#btn-sync-tiki-products img,
+#btn-sync-tiki-orders img,
+#btn-sync-lazada-orders-direct img,
+#btn-sync-lazada-products img,
+#btn-sync-lazada-orders img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+#btn-sync-tiki-orders-direct:hover img,
+#btn-sync-tiki-products:hover img,
+#btn-sync-tiki-orders:hover img,
+#btn-sync-lazada-orders-direct:hover img,
+#btn-sync-lazada-products:hover img,
+#btn-sync-lazada-orders:hover img {
+  transform: scale(1.18) rotate(5deg);
+}
+
+/* Tiki Buttons (Blue Theme) */
+#btn-sync-tiki-orders-direct,
+#btn-sync-tiki-products {
+  color: #ffffff;
+  background: linear-gradient(135deg, #1A94FF 0%, #0056B3 100%);
+  border: none;
+  box-shadow: 0 4px 14px rgba(26, 148, 255, 0.3);
+}
+
+#btn-sync-tiki-orders-direct:hover,
+#btn-sync-tiki-products:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 148, 255, 0.45);
+}
+
+#btn-sync-tiki-orders {
+  color: #1A94FF;
+  background: #ffffff;
+  border: 2px solid #1A94FF;
+}
+
+#btn-sync-tiki-orders:hover {
+  background: rgba(26, 148, 255, 0.08);
+  color: #0056B3;
+  border-color: #0056B3;
+  transform: translateY(-2px);
+}
+
+/* Lazada Buttons (Orange/Red Theme) */
+#btn-sync-lazada-orders-direct,
+#btn-sync-lazada-products {
+  color: #ffffff;
+  background: linear-gradient(135deg, #FF6000 0%, #D10000 100%);
+  border: none;
+  box-shadow: 0 4px 14px rgba(255, 96, 0, 0.3);
+}
+
+#btn-sync-lazada-orders-direct:hover,
+#btn-sync-lazada-products:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 96, 0, 0.45);
+}
+
+#btn-sync-lazada-orders {
+  color: #FF6000;
+  background: #ffffff;
+  border: 2px solid #FF6000;
+}
+
+#btn-sync-lazada-orders:hover {
+  background: rgba(255, 96, 0, 0.08);
+  color: #D10000;
+  border-color: #D10000;
+  transform: translateY(-2px);
+}
+
+/* Settings Panels Style */
+.tiki-sync-panel,
+.lazada-sync-panel,
+.export-panel {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  border: 1.5px solid #E7E2DA;
+  box-shadow: 0 10px 25px -5px rgba(28,25,23,0.05), 0 8px 10px -6px rgba(28,25,23,0.05);
+  margin-bottom: 35px;
+  transition: all 0.3s ease;
+}
+
+.tiki-sync-panel:hover,
+.lazada-sync-panel:hover,
+.export-panel:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 30px -5px rgba(216,169,79,0.08), 0 10px 15px -5px rgba(216,169,79,0.06);
+  border-color: var(--adm-gold);
+}
+
+.sync-status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.status-card {
+  padding: 20px;
+  background: #FAF8F5;
+  border-radius: 12px;
+  border: 1px solid #E6D5B8;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.status-card:hover {
+  background: #ffffff;
+  box-shadow: 0 6px 16px rgba(216,169,79,0.08);
+  transform: scale(1.02);
+}
+
+.status-label {
+  font-size: 0.85rem;
+  color: #78716C;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+/* Secondary Buttons */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #ffffff;
+  border: 1.5px solid var(--adm-border-gold);
+  border-radius: 12px;
+  color: var(--adm-text);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(28,25,23,0.02);
+}
+
+.btn-secondary:hover {
+  background: #FAF8F5;
+  border-color: var(--adm-gold);
+  color: var(--adm-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(216,169,79,0.12);
+}
+
+.btn-secondary:active {
+  transform: translateY(1px);
+}
+
+/* Integration Settings Cards */
+.integration-card {
+  background: #ffffff;
+  border: 1.5px solid #E7E2DA;
+  border-radius: 16px;
+  padding: 28px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(28,25,23,0.02);
+  transition: all 0.3s ease;
+}
+
+.integration-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(216,169,79,0.05);
+  border-color: var(--adm-gold);
+}
+
+.integration-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1.5px solid #F5F2EB;
+  padding-bottom: 14px;
+}
+
+.integration-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.integration-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--adm-text);
+  margin: 0;
+}
+
+/* Two-column layout for input fields */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 768px) {
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

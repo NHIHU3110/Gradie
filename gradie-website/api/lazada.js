@@ -121,8 +121,6 @@ module.exports = async (req, res) => {
              let skuStr = '';
              if (p.skus && p.skus[0] && p.skus[0].SellerSku) {
                  skuStr = p.skus[0].SellerSku;
-                 // Sometimes SKU has a suffix like -1, let's also pass a base sku
-                 if (skuStr.includes('-')) skuStr = skuStr.split('-')[0];
              }
              
              let price = 0;

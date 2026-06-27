@@ -208,8 +208,9 @@ function exportToXLSX() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Re-render khi DB sync về (bao gồm tikiStock/lazadaStock mới)
     window.addEventListener('gradie_data_synced', () => {
-        if (window.renderProductsTable) window.renderProductsTable();
+        renderAdminProducts();
     });
     if(document.getElementById('admin-product-list')) {
         renderAdminProducts();
@@ -231,7 +232,10 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const res = await window.GradieStore.syncTikiProducts();
                 if (res && res.success) {
-                    showToast(`Đồng bộ thành công ${res.syncedCount || 0} sản phẩm từ Tiki`, 'success');
+                    const imgMsg = res.updatedImageCount > 0
+                        ? `, cập nhật ${res.updatedImageCount} ảnh`
+                        : '';
+                    showToast(`✅ Đã đồng bộ ${res.syncedCount || 0} sản phẩm Tiki${imgMsg}`, 'success');
                     renderAdminProducts();
                 } else {
                     showToast(res?.message || 'Đồng bộ thất bại', 'error');
@@ -253,7 +257,10 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const res = await window.GradieStore.syncLazadaProducts();
                 if (res && res.success) {
-                    showToast(`Đồng bộ thành công ${res.syncedCount || 0} sản phẩm từ Lazada`, 'success');
+                    const imgMsg = res.updatedImageCount > 0
+                        ? `, cập nhật ${res.updatedImageCount} ảnh`
+                        : '';
+                    showToast(`✅ Đã đồng bộ ${res.syncedCount || 0} sản phẩm Lazada${imgMsg}`, 'success');
                     renderAdminProducts();
                 } else {
                     showToast(res?.message || 'Đồng bộ thất bại', 'error');

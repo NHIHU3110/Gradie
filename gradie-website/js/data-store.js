@@ -2479,38 +2479,56 @@ window.GradieStore = {
       if (res.ok && data.success) {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
-            data.products.forEach(ttp => {
-               let p = all.find(x => {
-                 let matchId = String(x.id) === String(ttp.id);
-                 let matchSku = x.sku && ttp.sku && String(x.sku).trim().toLowerCase() === String(ttp.sku).trim().toLowerCase();
-                 let n1 = x.name ? x.name.trim().toLowerCase() : '';
-                 let n2 = ttp.name ? ttp.name.trim().toLowerCase() : '';
-                 let matchName = n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1));
-                 return matchId || matchSku || matchName;
-               });
-               if (p) {
-                   if (ttp.image) p.image = ttp.image;
-               } else {
-                   all.push({
-                       id: String(Date.now() + Math.floor(Math.random() * 1000)),
-                       sku: ttp.sku || '',
-                       name: ttp.name || 'Sản phẩm mới từ Tiki',
-                       price: ttp.price || 0,
-                       stock: 0,
-                       tikiStock: ttp.stock,
-                       category: 'Uncategorized',
-                       image: ttp.image || '',
-                       dateAdded: new Date().toISOString()
-                   });
-               }
+            let updatedImageCount = 0;
+          const normSku = s => (s || '').replace(/[\s\-_]/g, '').toLowerCase();
+          const normName = s => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+          data.products.forEach(ttp => {
+            if (!ttp.image) return;
+            const rSku = normSku(ttp.sku);
+            const rName = normName(ttp.name);
+            let p = all.find(x => {
+              const pSku = normSku(x.sku);
+              if (String(x.id) === String(ttp.id)) return true;
+              if (pSku && rSku && pSku === rSku) return true;
+              if (pSku && rSku && (pSku.startsWith(rSku) || rSku.startsWith(pSku))) return true;
+              if (x.variants && x.variants.some(v => normSku(v.sku) === rSku)) return true;
+              const pName = normName(x.name);
+              if (pName && rName && (pName === rName || pName.includes(rName) || rName.includes(pName))) return true;
+              return false;
             });
+            if (p) {
+              const oldImage = p.image;
+              p.image = ttp.image;
+              if (!p.gallery) p.gallery = [];
+              if (!p.gallery.includes(ttp.image)) p.gallery.unshift(ttp.image);
+              if (oldImage !== ttp.image) updatedImageCount++;
+              fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) })
+                .catch(e => console.error('Sync product error', e));
+            } else {
+              all.push({
+                id: String(Date.now() + Math.floor(Math.random() * 1000)),
+                sku: ttp.sku || '',
+                name: ttp.name || 'Sản phẩm mới từ Tiki',
+                price: ttp.price || 0,
+                stock: 0,
+                tikiStock: ttp.stock,
+                category: 'Uncategorized',
+                image: ttp.image || '',
+                gallery: [ttp.image],
+                dateAdded: new Date().toISOString()
+              });
+              updatedImageCount++;
+            }
+          });
           let currentData = this.getData();
           currentData.products = all;
           this.saveData(currentData);
           window.dispatchEvent(new Event('gradie_data_synced'));
+          this.addActivityLog('Tiki Sync', `Đã đồng bộ ${data.syncedCount || data.products?.length || 0} sản phẩm, cập nhật ${updatedImageCount} ảnh từ Tiki.`);
+          return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0, updatedImageCount };
         }
-        this.addActivityLog('Tiki Sync', `Đã đồng bộ tồn kho ${data.syncedCount || data.products?.length || 0} sản phẩm Tiki.`);
-        return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0 };
+        this.addActivityLog('Tiki Sync', `Tiki trả về 0 sản phẩm.`);
+        return { success: true, message: data.message, syncedCount: 0, updatedImageCount: 0 };
       }
       return { success: false, message: data.message || 'Không rõ nguyên nhân' };
     } catch (err) {
@@ -2641,38 +2659,62 @@ window.GradieStore = {
       if (res.ok && data.success) {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
-            data.products.forEach(lzdp => {
-               let p = all.find(x => {
-                 let matchId = String(x.id) === String(lzdp.id);
-                 let matchSku = x.sku && lzdp.sku && String(x.sku).trim().toLowerCase() === String(lzdp.sku).trim().toLowerCase();
-                 let n1 = x.name ? x.name.trim().toLowerCase() : '';
-                 let n2 = lzdp.name ? lzdp.name.trim().toLowerCase() : '';
-                 let matchName = n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1));
-                 return matchId || matchSku || matchName;
-               });
-               if (p) {
-                   if (lzdp.image) p.image = lzdp.image;
-               } else {
-                   all.push({
-                       id: String(Date.now() + Math.floor(Math.random() * 1000)),
-                       sku: lzdp.sku || '',
-                       name: lzdp.name || 'Sản phẩm mới từ Lazada',
-                       price: lzdp.price || 0,
-                       stock: 0,
-                       lazadaStock: lzdp.stock,
-                       category: 'Uncategorized',
-                       image: lzdp.image || '',
-                       dateAdded: new Date().toISOString()
-                   });
-               }
+            let updatedImageCount = 0;
+          const normSku = s => (s || '').replace(/[\s\-_]/g, '').toLowerCase();
+          const normName = s => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+          data.products.forEach(lzdp => {
+            if (!lzdp.image) return;
+            const lSku = normSku(lzdp.sku);
+            const lName = normName(lzdp.name);
+            let p = all.find(x => {
+              const xs = normSku(x.sku);
+              if (String(x.id) === String(lzdp.id)) return true;
+              if (xs && lSku && xs === lSku) return true;
+              if (xs && lSku && (xs.startsWith(lSku) || lSku.startsWith(xs))) return true;
+              if (x.variants && x.variants.some(v => normSku(v.sku) === lSku)) return true;
+              const xn = normName(x.name);
+              if (xn && lName && (xn === lName || xn.includes(lName) || lName.includes(xn))) return true;
+              return false;
             });
+            if (p) {
+              const oldImage = p.image;
+              p.image = lzdp.image;
+              if (!p.gallery) p.gallery = [];
+              if (!p.gallery.includes(lzdp.image)) p.gallery.unshift(lzdp.image);
+              if (oldImage !== lzdp.image) updatedImageCount++;
+              fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) })
+                .catch(e => console.error('Sync product error', e));
+            } else {
+              all.push({
+                id: String(Date.now() + Math.floor(Math.random() * 1000)),
+                sku: lzdp.sku || '',
+                name: lzdp.name || 'Sản phẩm mới từ Lazada',
+                price: lzdp.price || 0,
+                stock: 0,
+                lazadaStock: lzdp.stock,
+                category: 'Uncategorized',
+                image: lzdp.image || '',
+                gallery: [lzdp.image],
+                dateAdded: new Date().toISOString()
+              });
+              updatedImageCount++;
+            }
+          });
+          const crossFallback = all.filter(p =>
+            p.lazadaStock > 0 && p.image && p.image.includes('salt.tikicdn.com') && !p.image.includes('slatic.net')
+          );
+          if (crossFallback.length > 0) {
+            console.log(`[Lazada Sync] ${crossFallback.length} sản phẩm dùng ảnh Tiki làm fallback cho Lazada.`);
+          }
           let currentData = this.getData();
           currentData.products = all;
           this.saveData(currentData);
           window.dispatchEvent(new Event('gradie_data_synced'));
+          this.addActivityLog('Lazada Sync', `Đã đồng bộ ${data.syncedCount || data.products?.length || 0} sản phẩm, cập nhật ${updatedImageCount} ảnh từ Lazada.`);
+          return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0, updatedImageCount };
         }
-        this.addActivityLog('Lazada Sync', `Đã đồng bộ tồn kho ${data.syncedCount || data.products?.length || 0} sản phẩm Lazada.`);
-        return { success: true, message: data.message, syncedCount: data.syncedCount || data.products?.length || 0 };
+        this.addActivityLog('Lazada Sync', `Lazada trả về 0 sản phẩm.`);
+        return { success: true, message: data.message, syncedCount: 0, updatedImageCount: 0 };
       }
       return { success: false, message: data.message || 'Không rõ nguyên nhân' };
     } catch (err) {
