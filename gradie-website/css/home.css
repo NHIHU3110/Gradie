@@ -61,6 +61,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: left center;
 }
 
 /* Gradient overlay to soften the image for text readability */
