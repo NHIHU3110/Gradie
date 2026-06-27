@@ -2507,9 +2507,18 @@ window.GradieStore = {
             });
             if (p) {
               const oldImage = p.image;
-              p.image = ttp.image;
-              if (!p.gallery) p.gallery = [];
-              if (!p.gallery.includes(ttp.image)) p.gallery.unshift(ttp.image);
+              p.name = ttp.name || p.name;
+              p.price = ttp.price || p.price;
+              p.tikiStock = ttp.stock !== undefined ? ttp.stock : p.tikiStock;
+              p.stock = ttp.stock !== undefined ? ttp.stock : p.stock;
+              if (ttp.gallery && ttp.gallery.length > 0) {
+                p.gallery = ttp.gallery;
+              } else if (ttp.image && (!p.gallery || !p.gallery.includes(ttp.image))) {
+                if (!p.gallery) p.gallery = [];
+                p.gallery.unshift(ttp.image);
+              }
+              p.image = ttp.image || p.image;
+              if (ttp.description) p.description = ttp.description;
               if (oldImage !== ttp.image) updatedImageCount++;
               fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) })
                 .catch(e => console.error('Sync product error', e));
@@ -2519,11 +2528,12 @@ window.GradieStore = {
                 sku: ttp.sku || '',
                 name: ttp.name || 'Sản phẩm mới từ Tiki',
                 price: ttp.price || 0,
-                stock: 0,
-                tikiStock: ttp.stock,
+                stock: ttp.stock || 0,
+                tikiStock: ttp.stock || 0,
                 category: 'Uncategorized',
                 image: ttp.image || '',
-                gallery: [ttp.image],
+                gallery: ttp.gallery && ttp.gallery.length > 0 ? ttp.gallery : (ttp.image ? [ttp.image] : []),
+                description: ttp.description || '',
                 dateAdded: new Date().toISOString()
               });
               updatedImageCount++;
@@ -2672,7 +2682,7 @@ window.GradieStore = {
           const normSku = s => (s || '').replace(/[\s\-_]/g, '').toLowerCase();
           const normName = s => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
           data.products.forEach(lzdp => {
-            if (!lzdp.image) return;
+            if (!lzdp.image && !lzdp.name) return;
             const lSku = normSku(lzdp.sku);
             const lName = normName(lzdp.name);
             let p = all.find(x => {
@@ -2687,9 +2697,19 @@ window.GradieStore = {
             });
             if (p) {
               const oldImage = p.image;
-              p.image = lzdp.image;
-              if (!p.gallery) p.gallery = [];
-              if (!p.gallery.includes(lzdp.image)) p.gallery.unshift(lzdp.image);
+              // Update ALL fields, not just image
+              p.name = lzdp.name || p.name;
+              p.price = lzdp.price || p.price;
+              p.lazadaStock = lzdp.stock !== undefined ? lzdp.stock : p.lazadaStock;
+              p.stock = lzdp.stock !== undefined ? lzdp.stock : p.stock;
+              if (lzdp.gallery && lzdp.gallery.length > 0) {
+                p.gallery = lzdp.gallery;
+              } else if (lzdp.image && (!p.gallery || !p.gallery.includes(lzdp.image))) {
+                if (!p.gallery) p.gallery = [];
+                p.gallery.unshift(lzdp.image);
+              }
+              p.image = lzdp.image || p.image;
+              if (lzdp.description) p.description = lzdp.description;
               if (oldImage !== lzdp.image) updatedImageCount++;
               fetch('/api/products', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) })
                 .catch(e => console.error('Sync product error', e));
@@ -2699,11 +2719,12 @@ window.GradieStore = {
                 sku: lzdp.sku || '',
                 name: lzdp.name || 'Sản phẩm mới từ Lazada',
                 price: lzdp.price || 0,
-                stock: 0,
-                lazadaStock: lzdp.stock,
+                stock: lzdp.stock || 0,
+                lazadaStock: lzdp.stock || 0,
                 category: 'Uncategorized',
                 image: lzdp.image || '',
-                gallery: [lzdp.image],
+                gallery: lzdp.gallery && lzdp.gallery.length > 0 ? lzdp.gallery : (lzdp.image ? [lzdp.image] : []),
+                description: lzdp.description || '',
                 dateAdded: new Date().toISOString()
               });
               updatedImageCount++;
