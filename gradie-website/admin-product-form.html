@@ -34,6 +34,26 @@
                 <div class="form-card">
                     <form id="product-form">
                         <input type="hidden" id="product-id">
+
+                        <!-- IMPORT FROM MARKETPLACE BANNER (only shown for new products) -->
+                        <div id="marketplace-import-banner" style="display:none; background:linear-gradient(135deg,#f0f7ff,#e8f0fe); border:1px solid #c5d8f6; border-radius:10px; padding:16px 20px; margin-bottom:20px;">
+                            <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+                                <span style="font-size:1.3em;">🛍️</span>
+                                <strong style="color:#1a56db;">Nhập sản phẩm từ Tiki / Lazada</strong>
+                                <span id="marketplace-loading" style="display:none; font-size:0.8em; color:#666;">⏳ Đang tải...</span>
+                            </div>
+                            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                                <select id="marketplace-product-select" style="flex:1; min-width:200px; padding:9px 12px; border:1px solid #c5d8f6; border-radius:6px; font-size:0.95em; background:white; cursor:pointer;">
+                                    <option value="">-- Chọn sản phẩm từ sàn --</option>
+                                </select>
+                                <button type="button" id="btn-import-marketplace" style="padding:9px 18px; background:#1a56db; color:white; border:none; border-radius:6px; cursor:pointer; font-weight:600; white-space:nowrap;">
+                                    ✅ Nhập thông tin
+                                </button>
+                                <button type="button" id="btn-refresh-marketplace" style="padding:9px 14px; background:white; color:#1a56db; border:1px solid #c5d8f6; border-radius:6px; cursor:pointer;" title="Tải lại danh sách">
+                                    🔄
+                                </button>
+                            </div>
+                        </div>
                         
                         <div class="form-row">
                             <div class="form-group"><label>Name *</label><input type="text" id="p-name" required></div>
@@ -170,37 +190,17 @@
             updateTotalStock();
 
             // --- AUTO SYNC API WHEN FORM LOADS ---
-            async function autoSyncFromAPI(sku) {
+            async function autoSyncFromAPI() {
                 const settings = window.GradieStore.getSettings();
                 const hasTiki = settings.tikiAppKey && settings.tikiAppSecret;
                 const hasLazada = settings.lazadaAppKey && settings.lazadaAppSecret;
                 if (!hasTiki && !hasLazada) return;
 
-                // Helper: fill form from matched product
-                function fillForm(match, source) {
-                    if (!match) return false;
-                    if (match.name && !document.getElementById('p-name').value) document.getElementById('p-name').value = match.name;
-                    if (match.price && !document.getElementById('p-price').value) document.getElementById('p-price').value = match.price;
-                    if (match.stock !== undefined) {
-                        if (source === 'tiki') document.getElementById('p-stock-tiki').value = match.stock;
-                        if (source === 'lazada') document.getElementById('p-stock-lazada').value = match.stock;
-                        if (!document.getElementById('p-stock').value || document.getElementById('p-stock').value === '0')
-                            document.getElementById('p-stock').value = match.stock;
-                    }
-                    if ((match.gallery && match.gallery.length > 0) && !document.getElementById('p-gallery').value) {
-                        document.getElementById('p-gallery').value = match.gallery.join('\n');
-                    } else if (match.image && !document.getElementById('p-gallery').value) {
-                        document.getElementById('p-gallery').value = match.image;
-                    }
-                    if (match.description && !document.getElementById('p-desc').value) document.getElementById('p-desc').value = match.description;
-                    if (match.variants && match.variants.length > 0 && currentVariants.length === 0) {
-                        currentVariants = JSON.parse(JSON.stringify(match.variants));
-                        renderVariants();
-                    }
-                    return true;
-                }
+                const currentSku = document.getElementById('p-sku').value;
+                const currentName = document.getElementById('p-name').value;
+                if (!currentSku && !currentName) return; // nothing to match
 
-                // Helper: find matching product in list (by SKU or name)
+                // Helper: find matching product in API list by SKU or name
                 function findMatch(products, sku, name) {
                     const normSku = s => (s || '').replace(/[\s\-_]/g, '').toLowerCase();
                     const normName = s => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
@@ -215,24 +215,71 @@
                     });
                 }
 
-                const currentSku = document.getElementById('p-sku').value;
-                const currentName = document.getElementById('p-name').value;
-                if (!currentSku && !currentName) return; // nothing to match
+                // Helper: fill form — stock + gallery ALWAYS overwrite, others only if empty
+                function fillForm(match, source) {
+                    if (!match) return false;
+                    // Name, price, desc: fill only if currently empty
+                    if (match.name && !document.getElementById('p-name').value) 
+                        document.getElementById('p-name').value = match.name;
+                    if (match.price && !document.getElementById('p-price').value) 
+                        document.getElementById('p-price').value = match.price;
+                    if (match.description && !document.getElementById('p-desc').value) 
+                        document.getElementById('p-desc').value = match.description;
+
+                    // Stock: ALWAYS update tiki/lazada stock from API
+                    if (match.stock !== undefined) {
+                        if (source === 'tiki') {
+                            document.getElementById('p-stock-tiki').value = match.stock;
+                        }
+                        if (source === 'lazada') {
+                            document.getElementById('p-stock-lazada').value = match.stock;
+                        }
+                        // Update website stock if currently 0 or not set
+                        const ws = document.getElementById('p-stock');
+                        if (!ws.value || ws.value === '0' || ws.value === '20') {
+                            ws.value = match.stock;
+                        }
+                    }
+
+                    // Gallery: ALWAYS update with API images (fresher data)
+                    if (match.gallery && match.gallery.length > 0) {
+                        document.getElementById('p-gallery').value = match.gallery.join('\n');
+                    } else if (match.image) {
+                        const curGallery = document.getElementById('p-gallery').value;
+                        if (!curGallery || curGallery.includes('img1.jpg')) {
+                            document.getElementById('p-gallery').value = match.image;
+                        }
+                    }
+
+                    // SKU: fill if empty
+                    if (!document.getElementById('p-sku').value && match.sku)
+                        document.getElementById('p-sku').value = match.sku;
+
+                    // Variants: fill if none added yet
+                    if (match.variants && match.variants.length > 0 && currentVariants.length === 0) {
+                        currentVariants = JSON.parse(JSON.stringify(match.variants));
+                        renderVariants();
+                    }
+                    return true;
+                }
 
                 // Sync Tiki
                 if (hasTiki) {
                     try {
+                        showToast('Đang đồng bộ từ Tiki...', 'info');
                         const res = await fetch('/api/tiki', {
                             method: 'POST', headers: {'Content-Type': 'application/json'},
                             body: JSON.stringify({ action: 'sync_products', appId: settings.tikiAppKey, appSecret: settings.tikiAppSecret })
                         });
                         const data = await res.json();
                         if (data.success && data.products) {
-                            const match = findMatch(data.products, currentSku, currentName);
+                            const sku = document.getElementById('p-sku').value;
+                            const name = document.getElementById('p-name').value;
+                            const match = findMatch(data.products, sku, name);
                             if (fillForm(match, 'tiki')) {
-                                // Update sku if not set
-                                if (!document.getElementById('p-sku').value && match.sku) document.getElementById('p-sku').value = match.sku;
-                                showToast('Đã tự động đồng bộ từ Tiki!', 'success');
+                                showToast('✅ Đã đồng bộ đầy đủ từ Tiki!', 'success');
+                            } else {
+                                showToast('Không tìm thấy sản phẩm trên Tiki', 'warning');
                             }
                         }
                     } catch(e) { console.warn('Auto-sync Tiki failed', e); }
@@ -241,18 +288,20 @@
                 // Sync Lazada
                 if (hasLazada) {
                     try {
+                        showToast('Đang đồng bộ từ Lazada...', 'info');
                         const res = await fetch('/api/lazada', {
                             method: 'POST', headers: {'Content-Type': 'application/json'},
                             body: JSON.stringify({ action: 'sync_products', appKey: settings.lazadaAppKey, appSecret: settings.lazadaAppSecret, accessToken: settings.lazadaAccessToken, baseUrl: settings.lazadaApiBaseUrl })
                         });
                         const data = await res.json();
                         if (data.success && data.products) {
-                            const currentSku2 = document.getElementById('p-sku').value;
-                            const currentName2 = document.getElementById('p-name').value;
-                            const match = findMatch(data.products, currentSku2, currentName2);
+                            const sku = document.getElementById('p-sku').value;
+                            const name = document.getElementById('p-name').value;
+                            const match = findMatch(data.products, sku, name);
                             if (fillForm(match, 'lazada')) {
-                                if (!document.getElementById('p-sku').value && match.sku) document.getElementById('p-sku').value = match.sku;
-                                showToast('Đã tự động đồng bộ từ Lazada!', 'success');
+                                showToast('✅ Đã đồng bộ đầy đủ từ Lazada!', 'success');
+                            } else {
+                                showToast('Không tìm thấy sản phẩm trên Lazada', 'warning');
                             }
                         }
                     } catch(e) { console.warn('Auto-sync Lazada failed', e); }
