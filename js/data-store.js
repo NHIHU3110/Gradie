@@ -2459,12 +2459,12 @@ window.GradieStore = {
       return { success: false, message: "Mạng lỗi, vui lòng thử lại." };
     }
   },
-  loginUser: async function (email, password) {
+  loginUser: async function (email, password, rememberMe = false) {
     try {
       const res = await fetch('/api/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'login', email, password })
+        body: JSON.stringify({ action: 'login', email, password, rememberMe })
       });
       const resData = await res.json();
       if (resData.success) {

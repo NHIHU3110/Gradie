@@ -170,10 +170,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
           if (confirm('Bạn có chắc muốn đăng xuất?')) {
-            sessionStorage.removeItem('GRADIE_ADMIN_AUTH');
-            sessionStorage.removeItem('GRADIE_ACTIVE_ROLE');
-            sessionStorage.removeItem('GRADIE_ACTIVE_USER');
-            window.location.href = 'login.html';
+             sessionStorage.removeItem('GRADIE_ADMIN_AUTH');
+             sessionStorage.removeItem('GRADIE_ACTIVE_ROLE');
+             sessionStorage.removeItem('GRADIE_ACTIVE_USER');
+             localStorage.removeItem('GRADIE_ADMIN_AUTH');
+             localStorage.removeItem('GRADIE_ACTIVE_ROLE');
+             localStorage.removeItem('GRADIE_ACTIVE_USER');
+             window.location.href = 'login.html';
           }
         });
     }
@@ -200,10 +203,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── 3. Logout handler ──
   document.body.addEventListener('click', (e) => {
     if (e.target && (e.target.id === 'admin-logout-btn' || e.target.closest('#admin-logout-btn'))) {
-      sessionStorage.removeItem('GRADIE_ADMIN_AUTH');
-      sessionStorage.removeItem('GRADIE_ACTIVE_ROLE');
-      sessionStorage.removeItem('GRADIE_ACTIVE_USER');
-      window.location.href = 'login.html';
+       sessionStorage.removeItem('GRADIE_ADMIN_AUTH');
+       sessionStorage.removeItem('GRADIE_ACTIVE_ROLE');
+       sessionStorage.removeItem('GRADIE_ACTIVE_USER');
+       localStorage.removeItem('GRADIE_ADMIN_AUTH');
+       localStorage.removeItem('GRADIE_ACTIVE_ROLE');
+       localStorage.removeItem('GRADIE_ACTIVE_USER');
+       window.location.href = 'login.html';
     }
   });
 

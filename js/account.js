@@ -135,29 +135,42 @@ document.addEventListener('DOMContentLoaded', async () => {
       const email = document.getElementById('login-email').value.trim();
       const pass = document.getElementById('login-password').value;
       const msg = document.getElementById('login-message');
-
+      const rememberCheckbox = document.getElementById('remember-me');
+      const rememberMe = rememberCheckbox ? rememberCheckbox.checked : false;
+ 
       if (!email || !pass) {
         msg.textContent = 'Vui lòng điền đầy đủ thông tin.';
         msg.style.color = 'red';
         return;
       }
-
+ 
       // ADMIN LOGIN INTERCEPT
       const staffList = window.GradieStore.getStaff() || [];
       const matchedStaff = staffList.find(s => s.email === email && (s.password === pass || (!s.password && pass === '123456')));
-
+ 
       if (matchedStaff) {
         sessionStorage.setItem('GRADIE_ADMIN_AUTH', 'true');
         sessionStorage.setItem('GRADIE_ACTIVE_ROLE', matchedStaff.role);
         sessionStorage.setItem('GRADIE_ACTIVE_USER', matchedStaff.name);
+        
+        if (rememberMe) {
+          localStorage.setItem('GRADIE_ADMIN_AUTH', 'true');
+          localStorage.setItem('GRADIE_ACTIVE_ROLE', matchedStaff.role);
+          localStorage.setItem('GRADIE_ACTIVE_USER', matchedStaff.name);
+        } else {
+          localStorage.removeItem('GRADIE_ADMIN_AUTH');
+          localStorage.removeItem('GRADIE_ACTIVE_ROLE');
+          localStorage.removeItem('GRADIE_ACTIVE_USER');
+        }
+        
         msg.textContent = `Đăng nhập hệ thống thành công! Xin chào ${matchedStaff.name}...`;
         msg.style.color = 'var(--champagne)';
         setTimeout(() => window.location.href = 'admin-dashboard.html', 1000);
         return;
       }
-
+ 
       // User Authentication
-      const result = await window.GradieStore.loginUser(email, pass);
+      const result = await window.GradieStore.loginUser(email, pass, rememberMe);
       if (result.success) {
         msg.textContent = `Chào mừng ${result.user.username || 'Khách'} đến với Gradie! Đang chuyển hướng...`;
         msg.style.color = 'green';

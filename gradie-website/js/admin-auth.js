@@ -1,7 +1,13 @@
 // js/admin-auth.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    const isAuth = sessionStorage.getItem('GRADIE_ADMIN_AUTH') === 'true';
+    let isAuth = sessionStorage.getItem('GRADIE_ADMIN_AUTH') === 'true';
+    if (!isAuth && localStorage.getItem('GRADIE_ADMIN_AUTH') === 'true') {
+        sessionStorage.setItem('GRADIE_ADMIN_AUTH', 'true');
+        sessionStorage.setItem('GRADIE_ACTIVE_ROLE', localStorage.getItem('GRADIE_ACTIVE_ROLE'));
+        sessionStorage.setItem('GRADIE_ACTIVE_USER', localStorage.getItem('GRADIE_ACTIVE_USER'));
+        isAuth = true;
+    }
     const currentPath = window.location.pathname.split('/').pop();
     
     if (!isAuth && currentPath !== 'login.html') {

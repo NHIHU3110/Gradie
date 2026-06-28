@@ -49,7 +49,7 @@ module.exports = async (req, res) => {
       const body = req.body;
 
       if (body.action === 'login') {
-        const { email, password } = body;
+        const { email, password, rememberMe } = body;
         if (!email || !password) {
           return res.status(400).json({ success: false, message: 'Missing fields.' });
         }
@@ -57,8 +57,9 @@ module.exports = async (req, res) => {
         if (user && user.password === password) {
           const { password: _, ...safeUser } = user;
           
-          // Set httpOnly secure cookie
-          res.setHeader('Set-Cookie', `gradie_session=${encodeURIComponent(user.email)}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=86400`);
+          // Set httpOnly secure cookie: 30 days if rememberMe is true, else 1 day (86400 seconds)
+          const maxAge = rememberMe ? 2592000 : 86400;
+          res.setHeader('Set-Cookie', `gradie_session=${encodeURIComponent(user.email)}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${maxAge}`);
           return res.status(200).json({ success: true, user: safeUser });
         }
         return res.status(401).json({ success: false, message: 'Invalid email or password.' });
