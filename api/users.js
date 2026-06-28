@@ -65,6 +65,19 @@ module.exports = async (req, res) => {
         return res.status(401).json({ success: false, message: 'Invalid email or password.' });
       }
 
+      if (body.action === 'reset_password') {
+        const { email, newPassword } = body;
+        if (!email || !newPassword) {
+          return res.status(400).json({ success: false, message: 'Thiếu thông tin email hoặc mật khẩu mới.' });
+        }
+        const user = await collection.findOne({ email: email.toLowerCase() });
+        if (!user) {
+          return res.status(404).json({ success: false, message: 'Email không tồn tại trên hệ thống.' });
+        }
+        await collection.updateOne({ email: email.toLowerCase() }, { $set: { password: newPassword } });
+        return res.status(200).json({ success: true, message: 'Đặt lại mật khẩu thành công.' });
+      }
+
       if (body.action === 'logout') {
         res.setHeader('Set-Cookie', 'gradie_session=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0');
         return res.status(200).json({ success: true });

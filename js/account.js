@@ -1357,4 +1357,102 @@ document.addEventListener('DOMContentLoaded', async () => {
       window.location.href = 'login.html';
     });
   }
+
+  // Forgot Password functions
+  let generatedOTP = '';
+  let resetEmail = '';
+
+  window.openForgotModal = function() {
+    const modal = document.getElementById('forgot-password-modal');
+    if (modal) modal.style.display = 'block';
+    
+    const step1 = document.getElementById('forgot-step-1');
+    const step2 = document.getElementById('forgot-step-2');
+    if (step1) step1.style.display = 'block';
+    if (step2) step2.style.display = 'none';
+    
+    if (document.getElementById('forgot-email')) document.getElementById('forgot-email').value = '';
+    if (document.getElementById('forgot-otp')) document.getElementById('forgot-otp').value = '';
+    if (document.getElementById('forgot-new-password')) document.getElementById('forgot-new-password').value = '';
+  };
+
+  window.closeForgotModal = function() {
+    const modal = document.getElementById('forgot-password-modal');
+    if (modal) modal.style.display = 'none';
+  };
+
+  window.sendForgotOTP = async function() {
+    const emailInput = document.getElementById('forgot-email');
+    const email = emailInput ? emailInput.value.trim() : '';
+    if (!email) {
+      showToast('Vui lòng nhập email.', 'error');
+      return;
+    }
+    
+    // Check if email exists
+    try {
+      const res = await fetch(`/api/users`);
+      const users = await res.json();
+      const exists = users.some(u => u.email.toLowerCase() === email.toLowerCase());
+      if (!exists) {
+        showToast('Email không tồn tại trên hệ thống.', 'error');
+        return;
+      }
+    } catch (e) {
+      console.warn('Could not check email existence, proceeding...', e);
+    }
+
+    resetEmail = email;
+    generatedOTP = Math.floor(100000 + Math.random() * 900000).toString(); // 6 digit OTP
+    
+    // Show OTP in a toast
+    showToast(`Mã OTP đặt lại mật khẩu là: ${generatedOTP}`, 'success', 8000);
+    
+    const step1 = document.getElementById('forgot-step-1');
+    const step2 = document.getElementById('forgot-step-2');
+    if (step1) step1.style.display = 'none';
+    if (step2) step2.style.display = 'block';
+    
+    const msg = document.getElementById('forgot-otp-message');
+    if (msg) msg.textContent = `Mã xác nhận OTP đã được gửi tới email ${email} (Vì là phiên bản thử nghiệm, mã OTP đã được hiển thị trên thông báo Toast ở góc màn hình).`;
+  };
+
+  window.resetUserPassword = async function() {
+    const otpInput = document.getElementById('forgot-otp');
+    const passInput = document.getElementById('forgot-new-password');
+    const otp = otpInput ? otpInput.value.trim() : '';
+    const newPassword = passInput ? passInput.value : '';
+
+    if (!otp || !newPassword) {
+      showToast('Vui lòng nhập đầy đủ OTP và mật khẩu mới.', 'error');
+      return;
+    }
+
+    if (otp !== generatedOTP) {
+      showToast('Mã OTP không chính xác.', 'error');
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      showToast('Mật khẩu mới phải từ 6 ký tự trở lên.', 'error');
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'reset_password', email: resetEmail, newPassword })
+      });
+      const data = await res.json();
+      if (data.success) {
+        showToast('Đặt lại mật khẩu thành công! Vui lòng đăng nhập bằng mật khẩu mới.', 'success');
+        window.closeForgotModal();
+      } else {
+        showToast(data.message || 'Lỗi đặt lại mật khẩu.', 'error');
+      }
+    } catch (e) {
+      showToast('Mạng lỗi, vui lòng thử lại sau.', 'error');
+    }
+  };
 });
