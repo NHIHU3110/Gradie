@@ -80,13 +80,12 @@ function renderAdminProducts() {
         window.GradieStore.saveData(data);
     }
     
-    // Áp dụng bộ lọc
     if (window.currentProductFilter === 'tiki') {
-        products = products.filter(p => p.tikiStock !== undefined && p.tikiStock > 0);
+        products = products.filter(p => (p.tikiStock !== undefined && p.tikiStock > 0) || p.marketplaceSource === 'Tiki');
     } else if (window.currentProductFilter === 'lazada') {
-        products = products.filter(p => p.lazadaStock !== undefined && p.lazadaStock > 0);
+        products = products.filter(p => (p.lazadaStock !== undefined && p.lazadaStock > 0) || p.marketplaceSource === 'Lazada');
     } else if (window.currentProductFilter === 'website') {
-        products = products.filter(p => (!p.tikiStock || p.tikiStock === 0) && (!p.lazadaStock || p.lazadaStock === 0));
+        products = products.filter(p => !p.marketplaceSource || p.marketplaceSource === 'Website');
     }
 
     // Sắp xếp sản phẩm theo mã SKU (nhóm các biến thể cạnh nhau)

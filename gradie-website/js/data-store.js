@@ -3,6 +3,24 @@ window.GradieStore = {
   storageKey: "GRADIE_CMS_DATA",
 
 
+  isValidProductImageUrl: function (url) {
+    if (!url || typeof url !== 'string') return false;
+    const cleaned = url.trim().replace(/^[`'"]+|[`'"]+$/g, '');
+    const lower = cleaned.toLowerCase();
+    if (!lower.startsWith('http')) return false;
+    if (
+      lower.includes('ui-avatars.com') ||
+      lower.includes('placeholder') ||
+      lower.includes('via.placeholder') ||
+      lower.includes('unsplash.com') ||
+      lower.includes('lazada.vn/products') ||
+      lower.includes('tiki.vn/p/') ||
+      lower.includes('shopee.vn/product')
+    ) return false;
+    if (/\.html(\?|#|$)/i.test(lower)) return false;
+    return true;
+  },
+
   init: function () {
     let data = this.getData();
     let updated = false;
@@ -1997,17 +2015,7 @@ window.GradieStore = {
             )
         );
     };
-    const isRealImage = url => {
-        if (!url || typeof url !== 'string') return false;
-        const u = url.trim().toLowerCase();
-        if (!u.startsWith('http') || u.includes('placeholder') || u.includes('ui-avatars.com') || u.includes('via.placeholder') || u.includes('unsplash.com')) {
-            return false;
-        }
-        if (u.includes('cdn.hstatic.net') && (u.includes('/file/sp') || u.includes('/file/sp-'))) {
-            return false;
-        }
-        return true;
-    };
+    const isRealImage = url => this.isValidProductImageUrl(url);
     const addImage = (product, image) => {
         if (!isRealImage(image)) return false;
         let changed = false;

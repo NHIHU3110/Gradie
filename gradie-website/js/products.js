@@ -187,12 +187,15 @@ document.addEventListener('DOMContentLoaded', () => {
           
           if(p) {
               let initialImage = p.image;
-              const isPl = !initialImage || initialImage.includes('ui-avatars.com') || initialImage.includes('placeholder') || !initialImage.startsWith('http');
-              if (isPl && p.variants && p.variants.length > 0 && p.variants[0].image) {
-                  initialImage = p.variants[0].image;
+              const isValidImg = (url) => window.GradieStore?.isValidProductImageUrl?.(url);
+              const isPl = !isValidImg(initialImage);
+              if (isPl && p.variants && p.variants.length > 0) {
+                  const variantImg = p.variants.map(v => v.image).find(isValidImg);
+                  if (variantImg) initialImage = variantImg;
               }
-              if ((!initialImage || initialImage.includes('ui-avatars.com') || initialImage.includes('placeholder')) && p.gallery && p.gallery.length > 0) {
-                  initialImage = p.gallery[0];
+              const validGallery = (p.gallery || []).filter(isValidImg);
+              if (!isValidImg(initialImage) && validGallery.length > 0) {
+                  initialImage = validGallery[0];
               }
 
               let vHtml = '';
@@ -235,8 +238,8 @@ document.addEventListener('DOMContentLoaded', () => {
               };
               
               let thumbsHtml = '';
-              if (p.gallery && p.gallery.length > 1) {
-                  thumbsHtml = p.gallery.map((img, idx) => `
+              if (validGallery.length > 1) {
+                  thumbsHtml = validGallery.map((img, idx) => `
                     <img src="${img}" class="detail-thumb-img ${idx === 0 ? 'active' : ''}" 
                          onclick="document.getElementById('main-detail-image').src = this.src; document.querySelectorAll('.detail-thumb-img').forEach(el => el.classList.remove('active')); this.classList.add('active');">
                   `).join('');

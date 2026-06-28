@@ -115,10 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     showToast('⚠️ Chưa có Tiki App Key / App Secret. Vui lòng cài đặt trong Thiết Lập.', 'error');
                     return;
                 }
-                if (!settings.tikiAccessToken) {
-                    showToast('⚠️ Tiki Access Token chưa được cấu hình. Vào Thiết Lập → Tiki → nhập Access Token.', 'error');
-                    return;
-                }
 
                 const origText = syncDirectBtn.innerHTML;
                 syncDirectBtn.disabled = true;

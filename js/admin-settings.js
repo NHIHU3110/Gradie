@@ -51,12 +51,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const productsEl = document.getElementById('tiki-synced-products');
             const ordersEl = document.getElementById('tiki-synced-orders');
-            if (productsEl) productsEl.textContent = allProducts.filter(p => p.tikiStock !== undefined).length || allProducts.length;
+            if (productsEl) productsEl.textContent = allProducts.filter(p => (p.tikiStock > 0) || p.marketplaceSource === 'Tiki').length;
             if (ordersEl) ordersEl.textContent = allOrders.filter(o => o.source === 'Tiki').length;
 
             const lazadaProductsEl = document.getElementById('lazada-synced-products');
             const lazadaOrdersEl = document.getElementById('lazada-synced-orders');
-            if (lazadaProductsEl) lazadaProductsEl.textContent = allProducts.filter(p => p.lazadaStock !== undefined).length || allProducts.length;
+            if (lazadaProductsEl) lazadaProductsEl.textContent = allProducts.filter(p => (p.lazadaStock > 0) || p.marketplaceSource === 'Lazada').length;
             if (lazadaOrdersEl) lazadaOrdersEl.textContent = allOrders.filter(o => o.source === 'Lazada').length;
         };
         
