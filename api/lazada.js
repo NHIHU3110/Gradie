@@ -405,7 +405,7 @@ module.exports = async (req, res) => {
                   items = fetchedItems.map(it => ({
                       id: it.sku || `lazada-${it.order_item_id}`,
                       name: it.name || 'Sản phẩm Lazada',
-                      price: Number(it.item_price) || 0,
+                      price: (it.paid_price !== undefined && it.paid_price !== null) ? Number(it.paid_price) : (Number(it.item_price) || 0),
                       quantity: 1, // Lazada returns one row per item quantity
                       image: it.product_main_image || ''
                   }));
@@ -425,12 +425,15 @@ module.exports = async (req, res) => {
               }
           });
           
-          let subtotal = items.reduce((acc, it) => acc + (it.price * it.quantity), 0);
-          if (subtotal === 0) {
-              subtotal = Number(lo.price) || 0;
+          const shippingFee = (lo.shipping_fee !== undefined && lo.shipping_fee !== null) ? Number(lo.shipping_fee) : 0;
+          let total = 0;
+          if (lo.price !== undefined && lo.price !== null) {
+              total = Number(lo.price) - Number(lo.voucher || 0) + shippingFee;
+          } else {
+              const itemSum = aggregatedItems.reduce((acc, it) => acc + (it.price * it.quantity), 0);
+              total = itemSum + shippingFee;
           }
-          const shippingFee = Number(lo.shipping_fee) > 0 ? Number(lo.shipping_fee) : 29000;
-          const total = subtotal + shippingFee;
+          const subtotal = total - shippingFee;
           
           return {
             orderNumber: `LZD-${lo.order_id || lo.order_number}`,

@@ -131,11 +131,38 @@ module.exports = async function handler(req, res) {
 
         const items = (order.items || []).map(item => ({
           id: item.product && item.product.sku ? item.product.sku : 'tiki-item',
-          name: item.product && item.product.name ? item.product.name : 'Sß║ún phß║⌐m Tiki',
+          name: item.product && item.product.name ? item.product.name : 'Sản phẩm Tiki',
           price: item.price || 0,
           quantity: item.qty || 1,
           image: (item.product && (item.product.thumbnail || item.product.thumbnail_url || item.product.image_url)) || ''
         }));
+
+        const subtotal = (order.invoice && order.invoice.subtotal) ? Number(order.invoice.subtotal) : 0;
+        const discount = (order.invoice && order.invoice.discount_amount) ? Number(order.invoice.discount_amount) : 0;
+        const total = (order.invoice && order.invoice.grand_total) ? Number(order.invoice.grand_total) : 0;
+        
+        let shippingFee = 0;
+        if (order.invoice) {
+          if (order.invoice.shipping_amount_after_discount !== undefined && order.invoice.shipping_amount_after_discount !== null) {
+            shippingFee = Number(order.invoice.shipping_amount_after_discount);
+          } else if (order.invoice.shipping_amount !== undefined && order.invoice.shipping_amount !== null) {
+            shippingFee = Number(order.invoice.shipping_amount);
+          }
+        }
+        
+        let finalSubtotal = subtotal;
+        if (finalSubtotal === 0) {
+          finalSubtotal = items.reduce((acc, it) => acc + (it.price * it.quantity), 0);
+        }
+        
+        let finalTotal = total;
+        if (finalTotal === 0) {
+          finalTotal = finalSubtotal + shippingFee - discount;
+        }
+        
+        if (finalSubtotal === 0 && finalTotal > 0) {
+          finalSubtotal = finalTotal - shippingFee;
+        }
 
         return {
           id: order.code,
@@ -146,7 +173,9 @@ module.exports = async function handler(req, res) {
           shippingAddress: address,
           date: order.created_at || new Date().toISOString(),
           status: status,
-          total: (order.invoice && order.invoice.grand_total) ? order.invoice.grand_total : 0,
+          subtotal: finalSubtotal,
+          shippingFee: shippingFee,
+          total: finalTotal,
           paymentMethod: 'Tiki',
           source: 'Tiki',
           items: items
