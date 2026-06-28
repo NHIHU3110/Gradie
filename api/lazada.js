@@ -307,10 +307,11 @@ module.exports = async (req, res) => {
         offset += pageLimit;
       }
 
-      const realProducts = rawProducts.map(formatLazadaProduct);
+      const activeRawProducts = rawProducts.filter(p => p.status === 'Active');
+      const realProducts = activeRawProducts.map(formatLazadaProduct);
 
       if (realProducts.length === 1) {
-        const firstRaw = rawProducts[0];
+        const firstRaw = activeRawProducts[0];
         console.log('DEBUG: First Lazada product raw images field:', firstRaw.images);
         console.log('DEBUG: First Lazada product skus[0].Images:', firstRaw.skus && firstRaw.skus[0] ? firstRaw.skus[0].Images : undefined);
         console.log('DEBUG: First Lazada product skus[0].image:', firstRaw.skus && firstRaw.skus[0] ? firstRaw.skus[0].image : undefined);
