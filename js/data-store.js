@@ -2363,7 +2363,7 @@ window.GradieStore = {
       }
 
       this.saveData(data);
-      fetch('/api/orders', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data.orders[i]) }).catch(e => console.error('Sync error', e));
+      fetch('/api/orders', { method: 'PUT', headers: { 'Content-Type': 'application/json', 'x-admin-auth': 'true' }, body: JSON.stringify(data.orders[i]) }).catch(e => console.error('Sync error', e));
     }
   },
   deleteOrder: function (id) { let data = this.getData(); data.orders = data.orders.filter(o => o.orderNumber !== id); this.saveData(data); /* Missing delete api, but usually handled by status 'Cancelled' in updateOrder */ },
