@@ -39,14 +39,18 @@ const server = http.createServer(async (req, res) => {
                 const updatedProduct = JSON.parse(body);
                 
                 // Read current products
-                const currentData = JSON.parse(fs.readFileSync(PRODUCTS_JSON_PATH, 'utf8'));
+                let currentData = JSON.parse(fs.readFileSync(PRODUCTS_JSON_PATH, 'utf8'));
                 
-                // Update product
-                const index = currentData.findIndex(p => p.id === updatedProduct.id);
-                if (index !== -1) {
-                    currentData[index] = { ...currentData[index], ...updatedProduct };
+                if (Array.isArray(updatedProduct)) {
+                    currentData = updatedProduct;
                 } else {
-                    currentData.push(updatedProduct);
+                    // Update product
+                    const index = currentData.findIndex(p => p.id === updatedProduct.id);
+                    if (index !== -1) {
+                        currentData[index] = { ...currentData[index], ...updatedProduct };
+                    } else {
+                        currentData.push(updatedProduct);
+                    }
                 }
                 
                 // Write back to products.json

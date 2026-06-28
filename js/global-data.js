@@ -49,7 +49,9 @@ window.GRADIE_DATA = {
         "https://res.cloudinary.com/dvxxkygip/image/upload/f_auto,q_auto/changing_the_angle_other_brand_202606251939_1_gwjvch",
         "https://res.cloudinary.com/dvxxkygip/image/upload/f_auto,q_auto/img-20260626-wa0000-1_y1z1wz",
         "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg",
+        "https://sg-test-11.slatic.net/p/1b8ac5cc31007524ee4fe7ee3eabb2cc.jpg",
+        "https://sg-test-11.slatic.net/p/2533affba2c9f10939aba4301ed0100c.jpg"
       ],
       "options": [
         {
@@ -82,10 +84,11 @@ window.GRADIE_DATA = {
             "35cm",
             "Bông gòn 7D, vải miniso"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/1b8ac5cc31007524ee4fe7ee3eabb2cc.jpg",
           "name": "Capybara / 35cm / Bông gòn 7D, vải miniso",
           "color": "Capybara / 35cm / Bông gòn 7D, vải miniso",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP001-2",
@@ -96,10 +99,11 @@ window.GRADIE_DATA = {
             "20cm",
             "Bông gòn 7D, vải miniso"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp001_2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/2533affba2c9f10939aba4301ed0100c.jpg",
           "name": "Capybara / 20cm / Bông gòn 7D, vải miniso",
           "color": "Capybara / 20cm / Bông gòn 7D, vải miniso",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
@@ -108,7 +112,7 @@ window.GRADIE_DATA = {
       "rating": 4.8,
       "stock": 200,
       "tags": [],
-      "lazadaStock": 0,
+      "lazadaStock": 200,
       "tikiStock": 0
     },
     {
@@ -124,7 +128,11 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp002_1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp002_2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp002_3.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp002_4.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp002_4.jpg",
+        "https://sg-test-11.slatic.net/p/0dc6f7e07d34ba8b2259e304e60f7768.jpg",
+        "https://sg-test-11.slatic.net/p/e3fe6c879166fbe8d386520011ae71f0.jpg",
+        "https://sg-test-11.slatic.net/p/715038e2bf42760e87e3dd3cf9b3fb61.jpg",
+        "https://sg-test-11.slatic.net/p/c936dfa454517d5ee711a0d53c8e8ddb.jpg"
       ],
       "options": [
         {
@@ -159,10 +167,11 @@ window.GRADIE_DATA = {
             "20cm khi ngồi 18cm",
             "Bông gòn nhân tạo 3 chiều"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/0dc6f7e07d34ba8b2259e304e60f7768.jpg",
           "name": "Có kính, không in / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
           "color": "Có kính, không in / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP002-2",
@@ -173,10 +182,11 @@ window.GRADIE_DATA = {
             "20cm khi ngồi 18cm",
             "Bông gòn nhân tạo 3 chiều"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/e3fe6c879166fbe8d386520011ae71f0.jpg",
           "name": "Có kính, in tên / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
           "color": "Có kính, in tên / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP002-3",
@@ -187,10 +197,11 @@ window.GRADIE_DATA = {
             "20cm khi ngồi 18cm",
             "Bông gòn nhân tạo 3 chiều"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_3.jpg",
+          "image": "https://sg-test-11.slatic.net/p/715038e2bf42760e87e3dd3cf9b3fb61.jpg",
           "name": "Không kính, không in / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
           "color": "Không kính, không in / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP002-4",
@@ -201,15 +212,16 @@ window.GRADIE_DATA = {
             "20cm khi ngồi 18cm",
             "Bông gòn nhân tạo 3 chiều"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp002_4.jpg",
+          "image": "https://sg-test-11.slatic.net/p/c936dfa454517d5ee711a0d53c8e8ddb.jpg",
           "name": "Không kính, in tên / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
           "color": "Không kính, in tên / 20cm khi ngồi 18cm / Bông gòn nhân tạo 3 chiều",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 400,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 400,
@@ -268,7 +280,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_1.jpg",
           "name": "Nữ, có đế / 23cm / Len",
           "color": "Nữ, có đế / 23cm / Len",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP003-2",
@@ -282,7 +295,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_2.jpg",
           "name": "Nữ, không đế / 20cm / Len",
           "color": "Nữ, không đế / 20cm / Len",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP003-3",
@@ -296,7 +310,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_3.jpg",
           "name": "Nam, có đế / 23cm / Len",
           "color": "Nam, có đế / 23cm / Len",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP003-4",
@@ -310,7 +325,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp003_4.jpg",
           "name": "Nam, không đế / 20cm / Len",
           "color": "Nam, không đế / 20cm / Len",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -334,7 +350,12 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp004_1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp004_2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp004_3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp004_3.jpg",
+        "https://vn-live.slatic.net/p/bacea618656fe60eb85c4ea21f88d8e6.jpg",
+        "https://vn-live.slatic.net/p/36fbe1926866c2e783c0ff40abbe69af.jpg",
+        "https://vn-live.slatic.net/p/0daa5f18d0421eaef1f5c8e1aa841278.jpg",
+        "https://vn-live.slatic.net/p/e232c086ed55c9426b2f7169cf33f4ae.jpg",
+        "https://vn-live.slatic.net/p/f2bc44161d69593cc93ccb63f8b315c1.jpg"
       ],
       "options": [
         {
@@ -366,15 +387,16 @@ window.GRADIE_DATA = {
             "50cm",
             "Len"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp004_1.jpg",
+          "image": "https://vn-live.slatic.net/p/f2bc44161d69593cc93ccb63f8b315c1.jpg",
           "name": "Bó hoa / 50cm / Len",
           "color": "Bó hoa / 50cm / Len",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 100,
@@ -393,7 +415,8 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp005_1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp005_2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp005_3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp005_3.jpg",
+        "https://vn-live.slatic.net/p/bb16f49672c4677459e935b33f9d085d.png"
       ],
       "options": [
         {
@@ -425,15 +448,16 @@ window.GRADIE_DATA = {
             "30cm",
             "Hoa sáp"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp005_1.jpg",
+          "image": "https://vn-live.slatic.net/p/bb16f49672c4677459e935b33f9d085d.png",
           "name": "Bó hoa / 30cm / Hoa sáp",
           "color": "Bó hoa / 30cm / Hoa sáp",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 100,
@@ -452,7 +476,10 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp006_1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp006_2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp006_3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp006_3.jpg",
+        "https://vn-live.slatic.net/p/ddb508c3a99886f8deed66c8247bddd8.jpg",
+        "https://vn-live.slatic.net/p/4dc9343d1b13f8363a48d6003b9278c6.jpg",
+        "https://vn-live.slatic.net/p/f9699d9e366ea6171e6a08f16824c8b0.jpg"
       ],
       "options": [
         {
@@ -484,15 +511,16 @@ window.GRADIE_DATA = {
             "80cm",
             "Bong Bóng"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp006_1.jpg",
+          "image": "https://vn-live.slatic.net/p/f9699d9e366ea6171e6a08f16824c8b0.jpg",
           "name": "Bó hoa / 80cm / Bong Bóng",
           "color": "Bó hoa / 80cm / Bong Bóng",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 100,
@@ -562,10 +590,11 @@ window.GRADIE_DATA = {
             "30cm",
             "Kẹo"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg",
+          "image": "https://sg-test-11.slatic.net/p/c3405ac7a568234c2098690cf7bf20cb.jpg",
           "name": "Đỏ / 30cm / Kẹo",
           "color": "Đỏ / 30cm / Kẹo",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP007-3",
@@ -576,15 +605,16 @@ window.GRADIE_DATA = {
             "30cm",
             "Kẹo"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp007_3.jpg",
+          "image": "https://sg-test-11.slatic.net/p/44180391096d2ee5b581c2f646d003ff.jpg",
           "name": "Xanh / 30cm / Kẹo",
           "color": "Xanh / 30cm / Kẹo",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 100,
+      "lazadaStock": 300,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -604,7 +634,8 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg",
         "https://vn-live.slatic.net/p/6fc3596b8b50753438138177ae01d0c8.jpg",
         "https://vn-live.slatic.net/p/1e1d25d8046ebf30d431eabbc4bb4e7a.jpg",
-        "https://vn-live.slatic.net/p/3e5f463f82a01cca31e7b885e3849b08.jpg"
+        "https://vn-live.slatic.net/p/3e5f463f82a01cca31e7b885e3849b08.jpg",
+        "https://vn-live.slatic.net/p/4bb2cf8244e611bb8e1ad3c7c9c6c9da.jpg"
       ],
       "options": [
         {
@@ -637,7 +668,7 @@ window.GRADIE_DATA = {
             "90cm",
             "Kẹo"
           ],
-          "image": "https://vn-live.slatic.net/p/1e1d25d8046ebf30d431eabbc4bb4e7a.jpg",
+          "image": "https://vn-live.slatic.net/p/4bb2cf8244e611bb8e1ad3c7c9c6c9da.jpg",
           "name": "Hồng / 90cm / Kẹo",
           "color": "Hồng / 90cm / Kẹo",
           "lazadaStock": 100,
@@ -652,15 +683,16 @@ window.GRADIE_DATA = {
             "90cm",
             "Kẹo"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp008_1.jpg",
+          "image": "https://vn-live.slatic.net/p/4bb2cf8244e611bb8e1ad3c7c9c6c9da.jpg",
           "name": "Xanh / 90cm / Kẹo",
           "color": "Xanh / 90cm / Kẹo",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 100,
+      "lazadaStock": 200,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 200,
@@ -678,7 +710,9 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp009_2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp009_2.jpg",
+        "https://sg-test-11.slatic.net/p/9e1bae8e81eff130ed9e14cdcbedfe21.jpg",
+        "https://sg-test-11.slatic.net/p/89087f006fef2d46a3caccc2a8385035.jpg"
       ],
       "options": [
         {
@@ -711,10 +745,11 @@ window.GRADIE_DATA = {
             "10x15cm",
             "Nhựa"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp009_1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/9e1bae8e81eff130ed9e14cdcbedfe21.jpg",
           "name": "Khung chữ nhật / 10x15cm / Nhựa",
           "color": "Khung chữ nhật / 10x15cm / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP009-2",
@@ -725,15 +760,16 @@ window.GRADIE_DATA = {
             "13x18cm",
             "Nhựa"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp009_2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/89087f006fef2d46a3caccc2a8385035.jpg",
           "name": "Khung chữ nhật / 13x18cm / Nhựa",
           "color": "Khung chữ nhật / 13x18cm / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 200,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 200,
@@ -753,7 +789,9 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp029-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp029-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp029-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp029-3.jpg",
+        "https://sg-test-11.slatic.net/p/505e7250691a56ec82e108fc4e95cc2b.jpg",
+        "https://sg-test-11.slatic.net/p/fa20649116aea8c4981641011a2530c7.jpg"
       ],
       "options": [
         {
@@ -787,10 +825,11 @@ window.GRADIE_DATA = {
             "15x21cm",
             "Nhựa"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/505e7250691a56ec82e108fc4e95cc2b.jpg",
           "name": "Khung chữ nhật / 15x21cm / Nhựa",
           "color": "Khung chữ nhật / 15x21cm / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP029-2",
@@ -801,15 +840,16 @@ window.GRADIE_DATA = {
             "18x18cm",
             "Nhựa"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp029_2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/fa20649116aea8c4981641011a2530c7.jpg",
           "name": "Khung vuông / 18x18cm / Nhựa",
           "color": "Khung vuông / 18x18cm / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 200,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 200,
@@ -828,7 +868,11 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp010-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp010-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp010-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp010-3.jpg",
+        "https://sg-test-11.slatic.net/p/acecb85cc75969484a50f56ecac57f99.png",
+        "https://sg-test-11.slatic.net/p/8fed86dc66a5b696e04485ba7fe85abd.png",
+        "https://sg-test-11.slatic.net/p/87783fd05a15a53397f4bdc8371bec0a.png",
+        "https://vn-live.slatic.net/p/5a41a951c8ca74a7208bcefd4050f3e0.jpg"
       ],
       "options": [
         {
@@ -860,10 +904,11 @@ window.GRADIE_DATA = {
             "19x19cm",
             "Giấy"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp010-1.jpg",
+          "image": "https://vn-live.slatic.net/p/5a41a951c8ca74a7208bcefd4050f3e0.jpg",
           "name": "Hình chữ nhật / 19x19cm / Giấy",
           "color": "Hình chữ nhật / 19x19cm / Giấy",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP010-2",
@@ -873,7 +918,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp010-2.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP010-3",
@@ -883,12 +929,13 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp010-3.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -907,7 +954,8 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp011-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp011-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp011-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp011-3.jpg",
+        "https://sg-test-11.slatic.net/p/54bb3f325dc7aeb680cad704736ea89f.jpg"
       ],
       "options": [
         {
@@ -939,10 +987,11 @@ window.GRADIE_DATA = {
             "19x19cm",
             "Giấy"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp011-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/54bb3f325dc7aeb680cad704736ea89f.jpg",
           "name": "Hình chữ nhật / 19x19cm / Giấy",
           "color": "Hình chữ nhật / 19x19cm / Giấy",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP011-2",
@@ -952,7 +1001,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp011-2.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP011-3",
@@ -962,12 +1012,13 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp011-3.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -986,7 +1037,14 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp012-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp012-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp012-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp012-3.jpg",
+        "https://sg-test-11.slatic.net/p/b41a531fe6b0d8a853248243c1edd470.png",
+        "https://sg-test-11.slatic.net/p/2f5da9ce39153d9acec2d251445aa187.png",
+        "https://sg-test-11.slatic.net/p/e2918e8c4850f7ce476d74526b05bb27.png",
+        "https://vn-live.slatic.net/p/e2918e8c4850f7ce476d74526b05bb27.png",
+        "https://vn-live.slatic.net/p/2f5da9ce39153d9acec2d251445aa187.png",
+        "https://vn-live.slatic.net/p/b41a531fe6b0d8a853248243c1edd470.png",
+        "https://vn-live.slatic.net/p/88fb69bd523451deb238e733aeab77a1.jpg"
       ],
       "options": [
         {
@@ -1020,10 +1078,11 @@ window.GRADIE_DATA = {
             "19x19cm",
             "Giấy"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp012-1.jpg",
+          "image": "https://vn-live.slatic.net/p/88fb69bd523451deb238e733aeab77a1.jpg",
           "name": "Xám / 19x19cm / Giấy",
           "color": "Xám / 19x19cm / Giấy",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP012-2",
@@ -1034,10 +1093,11 @@ window.GRADIE_DATA = {
             "19x19cm",
             "Giấy"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp012-2.jpg",
+          "image": "https://vn-live.slatic.net/p/88fb69bd523451deb238e733aeab77a1.jpg",
           "name": "Nâu / 19x19cm / Giấy",
           "color": "Nâu / 19x19cm / Giấy",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP012-3",
@@ -1048,15 +1108,16 @@ window.GRADIE_DATA = {
             "19x19cm",
             "Giấy"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp012-3.jpg",
+          "image": "https://vn-live.slatic.net/p/88fb69bd523451deb238e733aeab77a1.jpg",
           "name": "Trắng / 19x19cm / Giấy",
           "color": "Trắng / 19x19cm / Giấy",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 300,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -1075,7 +1136,8 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp013-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp013-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp013-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp013-3.jpg",
+        "https://sg-test-11.slatic.net/p/2afa998a6c45036659e7f0adc6ab3e15.jpg"
       ],
       "options": [
         {
@@ -1107,10 +1169,11 @@ window.GRADIE_DATA = {
             "19x25cm",
             "Giấy"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp013-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/2afa998a6c45036659e7f0adc6ab3e15.jpg",
           "name": "Hình chữ nhật / 19x25cm / Giấy",
           "color": "Hình chữ nhật / 19x25cm / Giấy",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP013-2",
@@ -1120,7 +1183,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp013-2.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP013-3",
@@ -1130,12 +1194,13 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp013-3.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -1154,7 +1219,12 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp014-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp014-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp014-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp014-3.jpg",
+        "https://sg-test-11.slatic.net/p/27f6bc02536ab6ba8fd286a04fc097f9.png",
+        "https://sg-test-11.slatic.net/p/0abb3bdbbf9c23ef2c4789ca1b4738f6.png",
+        "https://sg-test-11.slatic.net/p/888a2bad30f8bb17c62558fc3cc934c2.png",
+        "https://vn-live.slatic.net/p/71b072a528727dc8409d2b01608a29eb.jpg",
+        "https://sg-test-11.slatic.net/p/e66b10d869715e21dfab020912d08245.jpg"
       ],
       "options": [
         {
@@ -1186,10 +1256,11 @@ window.GRADIE_DATA = {
             "18x23cm",
             "Giấy"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp014-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/e66b10d869715e21dfab020912d08245.jpg",
           "name": "Hình chữ nhật / 18x23cm / Giấy",
           "color": "Hình chữ nhật / 18x23cm / Giấy",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP014-2",
@@ -1199,7 +1270,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp014-2.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP014-3",
@@ -1209,12 +1281,13 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp014-3.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -1233,7 +1306,10 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp015-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp015-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp015-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp015-3.jpg",
+        "https://sg-test-11.slatic.net/p/d8923a8127229815454da5a8c680a4b3.jpg",
+        "https://sg-test-11.slatic.net/p/91c4e240e640bae177e9bb8eff91d178.jpg",
+        "https://sg-test-11.slatic.net/p/fd42fa8cda9648b3f78111eb156a99af.jpg"
       ],
       "options": [
         {
@@ -1267,10 +1343,11 @@ window.GRADIE_DATA = {
             "18x23cm",
             "Giấy"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp015-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/d8923a8127229815454da5a8c680a4b3.jpg",
           "name": "Monet Claude / 18x23cm / Giấy",
           "color": "Monet Claude / 18x23cm / Giấy",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP015-2",
@@ -1281,10 +1358,11 @@ window.GRADIE_DATA = {
             "18x23cm",
             "Giấy"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp015-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/91c4e240e640bae177e9bb8eff91d178.jpg",
           "name": "Bridge / 18x23cm / Giấy",
           "color": "Bridge / 18x23cm / Giấy",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP015-3",
@@ -1295,15 +1373,16 @@ window.GRADIE_DATA = {
             "18x23cm",
             "Giấy"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp015-3.jpg",
+          "image": "https://sg-test-11.slatic.net/p/fd42fa8cda9648b3f78111eb156a99af.jpg",
           "name": "Monet / 18x23cm / Giấy",
           "color": "Monet / 18x23cm / Giấy",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 300,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -1321,7 +1400,8 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp016-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp016-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp016-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp016-2.jpg",
+        "https://sg-test-11.slatic.net/p/736c63578c30e929d77c5e6b0a530b00.jpg"
       ],
       "options": [
         {
@@ -1353,15 +1433,16 @@ window.GRADIE_DATA = {
             "2L",
             "Nhựa"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp016-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/736c63578c30e929d77c5e6b0a530b00.jpg",
           "name": "Hình trụ / 2L / Nhựa",
           "color": "Hình trụ / 2L / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 100,
@@ -1381,7 +1462,8 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp017-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp017-2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp017-3.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp017-4.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp017-4.jpg",
+        "https://sg-test-11.slatic.net/p/6733bac847a1a0acbb942235c25369e4.jpg"
       ],
       "options": [
         {
@@ -1413,10 +1495,11 @@ window.GRADIE_DATA = {
             "2L",
             "Nhựa"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/6733bac847a1a0acbb942235c25369e4.jpg",
           "name": "Hình trụ / 2L / Nhựa",
           "color": "Hình trụ / 2L / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP017-2",
@@ -1426,7 +1509,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-2.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP017-3",
@@ -1436,7 +1520,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-3.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP017-4",
@@ -1446,12 +1531,13 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp017-4.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 400,
@@ -1470,7 +1556,10 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp018-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp018-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp018-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp018-3.jpg",
+        "https://vn-live.slatic.net/p/275b8aa6b0861a69161420d2bc4d4fa1.jpg",
+        "https://vn-live.slatic.net/p/ba001682b80e3ac22093edb2341f06e9.jpg",
+        "https://vn-live.slatic.net/p/66564de5943fff44ce5282224874d44e.jpg"
       ],
       "options": [
         {
@@ -1502,10 +1591,11 @@ window.GRADIE_DATA = {
             "480ml",
             "Thép không gỉ 316 + nhựa PP"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp018-1.jpg",
+          "image": "https://vn-live.slatic.net/p/275b8aa6b0861a69161420d2bc4d4fa1.jpg",
           "name": "Hình trụ / 480ml / Thép không gỉ 316 + nhựa PP",
           "color": "Hình trụ / 480ml / Thép không gỉ 316 + nhựa PP",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP018-2",
@@ -1515,7 +1605,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp018-2.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP018-3",
@@ -1525,12 +1616,13 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp018-3.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -1548,7 +1640,8 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp019-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp019-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp019-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp019-2.jpg",
+        "https://vn-live.slatic.net/p/1e84f1aaf7c66196ec2380a0184a6aec.jpg"
       ],
       "options": [
         {
@@ -1580,15 +1673,16 @@ window.GRADIE_DATA = {
             "2L",
             "Nhựa"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp019-1.jpg",
+          "image": "https://vn-live.slatic.net/p/1e84f1aaf7c66196ec2380a0184a6aec.jpg",
           "name": "Hình trụ / 2L / Nhựa",
           "color": "Hình trụ / 2L / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 100,
@@ -1607,7 +1701,11 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp020-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp020-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp020-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp020-3.jpg",
+        "https://vn-live.slatic.net/p/5f9d0a645f0e9d0b8378723fe641026c.jpg",
+        "https://vn-live.slatic.net/p/74c0e3279719972cd6519667922d5441.jpg",
+        "https://vn-live.slatic.net/p/44cd5e7456c49ddcafc82981e876d05b.jpg",
+        "https://vn-live.slatic.net/p/c3eb3bba67b0e9aa5bd1b97a24411de2.jpg"
       ],
       "options": [
         {
@@ -1639,10 +1737,11 @@ window.GRADIE_DATA = {
             "1,4L",
             "Nhựa"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp020-1.jpg",
+          "image": "https://vn-live.slatic.net/p/c3eb3bba67b0e9aa5bd1b97a24411de2.jpg",
           "name": "Hình trụ / 1,4L / Nhựa",
           "color": "Hình trụ / 1,4L / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP020-2",
@@ -1652,7 +1751,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp020-2.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP020-3",
@@ -1662,12 +1762,13 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp020-3.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -1688,7 +1789,8 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp021-2.jpg",
         "https://sg-test-11.slatic.net/p/80bed301415519aede0c4dc7146e589d.png",
         "https://sg-test-11.slatic.net/p/4ab8b5949a6ba87dc7dd1baae18af156.png",
-        "https://vn-live.slatic.net/p/80bed301415519aede0c4dc7146e589d.png"
+        "https://vn-live.slatic.net/p/80bed301415519aede0c4dc7146e589d.png",
+        "https://sg-test-11.slatic.net/p/9ad14e680ec85313180f68353902f07f.jpg"
       ],
       "options": [
         {
@@ -1720,7 +1822,7 @@ window.GRADIE_DATA = {
             "500ml",
             "Inox"
           ],
-          "image": "https://vn-live.slatic.net/p/80bed301415519aede0c4dc7146e589d.png",
+          "image": "https://sg-test-11.slatic.net/p/9ad14e680ec85313180f68353902f07f.jpg",
           "name": "Hình trụ / 500ml / Inox",
           "color": "Hình trụ / 500ml / Inox",
           "lazadaStock": 100,
@@ -1734,7 +1836,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp021-2.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -1805,7 +1908,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp022-2.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP022-3",
@@ -1815,7 +1919,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp022-3.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -1876,7 +1981,7 @@ window.GRADIE_DATA = {
             "32* 12*26",
             "Da pu"
           ],
-          "image": "https://sg-test-11.slatic.net/p/39f5ec89562452f0cbe6462274371342.jpg",
+          "image": "https://sg-test-11.slatic.net/p/f1710922d8a5e6e32dae436ce8edcd5b.jpg",
           "name": "Đen / 32* 12*26 / Da pu",
           "color": "Đen / 32* 12*26 / Da pu",
           "lazadaStock": 100,
@@ -1891,10 +1996,11 @@ window.GRADIE_DATA = {
             "32* 12*26",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp023-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/73110741a54be8753d6df89397d8c57b.jpg",
           "name": "Trắng / 32* 12*26 / Da pu",
           "color": "Trắng / 32* 12*26 / Da pu",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP023-3",
@@ -1905,15 +2011,16 @@ window.GRADIE_DATA = {
             "32* 12*26",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp023-3.jpg",
+          "image": "https://sg-test-11.slatic.net/p/39f5ec89562452f0cbe6462274371342.jpg",
           "name": "Hồng / 32* 12*26 / Da pu",
           "color": "Hồng / 32* 12*26 / Da pu",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 100,
+      "lazadaStock": 300,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -1978,7 +2085,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp024-2.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -2050,7 +2158,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp025-2.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -2123,15 +2232,16 @@ window.GRADIE_DATA = {
             "15* 12*26",
             "Canvas"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp026-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/cdb42336d60834b5f34ad62fbe4c310f.jpg",
           "name": "Đen / 15* 12*26 / Canvas",
           "color": "Đen / 15* 12*26 / Canvas",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 100,
+      "lazadaStock": 200,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 200,
@@ -2184,7 +2294,7 @@ window.GRADIE_DATA = {
             "20*20*25",
             "Da pu"
           ],
-          "image": "https://sg-test-11.slatic.net/p/2364a87c72963232ab65278496d5d9c4.jpg",
+          "image": "https://sg-test-11.slatic.net/p/1d3e44a8f1f0b9135adf1345c7907deb.jpg",
           "name": "Nâu / 20*20*25 / Da pu",
           "color": "Nâu / 20*20*25 / Da pu",
           "lazadaStock": 100,
@@ -2199,15 +2309,16 @@ window.GRADIE_DATA = {
             "20*20*25",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp027-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/2364a87c72963232ab65278496d5d9c4.jpg",
           "name": "Đen / 20*20*25 / Da pu",
           "color": "Đen / 20*20*25 / Da pu",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 100,
+      "lazadaStock": 200,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 200,
@@ -2260,7 +2371,7 @@ window.GRADIE_DATA = {
             "15*15*30",
             "Vải dạ"
           ],
-          "image": "https://sg-test-11.slatic.net/p/5b626816a7006ea58cfdc6a17bb93c34.jpg",
+          "image": "https://sg-test-11.slatic.net/p/cdc437ba584af44e8cea060f05a9307c.jpg",
           "name": "Trắng / 15*15*30 / Vải dạ",
           "color": "Trắng / 15*15*30 / Vải dạ",
           "lazadaStock": 100,
@@ -2275,15 +2386,16 @@ window.GRADIE_DATA = {
             "15*15*30",
             "Vải dạ"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp028-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/5b626816a7006ea58cfdc6a17bb93c34.jpg",
           "name": "Đen / 15*15*30 / Vải dạ",
           "color": "Đen / 15*15*30 / Vải dạ",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 100,
+      "lazadaStock": 200,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 200,
@@ -2335,7 +2447,8 @@ window.GRADIE_DATA = {
             "Da nhung"
           ],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp029-1.jpg",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP029-2",
@@ -2343,7 +2456,8 @@ window.GRADIE_DATA = {
           "compare_at_price": "90000",
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp029-2.jpg",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP029-3",
@@ -2351,10 +2465,12 @@ window.GRADIE_DATA = {
           "compare_at_price": "90000",
           "options": [],
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp029-3.jpg",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
-      "stock": 300
+      "stock": 300,
+      "lazadaStock": 0
     },
     {
       "id": "huy_chuong_chuc_mung_tot_nghiep",
@@ -2368,7 +2484,10 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp030_1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp030_2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp030_3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp030_3.jpg",
+        "https://vn-live.slatic.net/p/c87eb693da1571c6ec5c86bf910b5edb.png",
+        "https://vn-live.slatic.net/p/a1128f587f4756c3ecf362af23fa39b8.png",
+        "https://vn-live.slatic.net/p/3c6332abefa28bedbb94dcb0a46bb148.png"
       ],
       "options": [
         {
@@ -2402,10 +2521,11 @@ window.GRADIE_DATA = {
             "Hình tròn",
             "Đồng"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_1.jpg",
+          "image": "https://vn-live.slatic.net/p/3c6332abefa28bedbb94dcb0a46bb148.png",
           "name": "Xanh đen / Hình tròn / Đồng",
           "color": "Xanh đen / Hình tròn / Đồng",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP030-2",
@@ -2416,10 +2536,11 @@ window.GRADIE_DATA = {
             "Hình tròn",
             "Đồng"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_2.jpg",
+          "image": "https://vn-live.slatic.net/p/c87eb693da1571c6ec5c86bf910b5edb.png",
           "name": "Vàng cam / Hình tròn / Đồng",
           "color": "Vàng cam / Hình tròn / Đồng",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP030-3",
@@ -2430,15 +2551,16 @@ window.GRADIE_DATA = {
             "Hình tròn",
             "Đồng"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp030_3.jpg",
+          "image": "https://vn-live.slatic.net/p/a1128f587f4756c3ecf362af23fa39b8.png",
           "name": "Da trời / Hình tròn / Đồng",
           "color": "Da trời / Hình tròn / Đồng",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 300,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -2458,7 +2580,11 @@ window.GRADIE_DATA = {
         "https://cdn.hstatic.net/files/200001178391/file/sp031_1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp031_2.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp031_3.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp031_4.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp031_4.jpg",
+        "https://vn-live.slatic.net/p/f29b3eca8be529000c44ee9c61975523.png",
+        "https://vn-live.slatic.net/p/4cf2ce84ffed855c414f10034e177e58.png",
+        "https://vn-live.slatic.net/p/1cf8d4ff1fa8bb3a4621d7369cc96571.png",
+        "https://vn-live.slatic.net/p/6cd65470a41e4967d9002b59fa0c0db7.png"
       ],
       "options": [
         {
@@ -2494,10 +2620,11 @@ window.GRADIE_DATA = {
             "Hướng dương, nam",
             "Nhựa"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_1.jpg",
+          "image": "https://vn-live.slatic.net/p/1cf8d4ff1fa8bb3a4621d7369cc96571.png",
           "name": "Vàng / Hướng dương, nam / Nhựa",
           "color": "Vàng / Hướng dương, nam / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP031-2",
@@ -2508,10 +2635,11 @@ window.GRADIE_DATA = {
             "Hướng dương, nữ",
             "Nhựa"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_2.jpg",
+          "image": "https://vn-live.slatic.net/p/6cd65470a41e4967d9002b59fa0c0db7.png",
           "name": "Vàng / Hướng dương, nữ / Nhựa",
           "color": "Vàng / Hướng dương, nữ / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP031-3",
@@ -2522,10 +2650,11 @@ window.GRADIE_DATA = {
             "Tulip Gấu",
             "Nhựa"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_3.jpg",
+          "image": "https://vn-live.slatic.net/p/4cf2ce84ffed855c414f10034e177e58.png",
           "name": "Hồng / Tulip Gấu / Nhựa",
           "color": "Hồng / Tulip Gấu / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP031-4",
@@ -2536,15 +2665,16 @@ window.GRADIE_DATA = {
             "Tulip Gấu",
             "Nhựa"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp031_4.jpg",
+          "image": "https://vn-live.slatic.net/p/f29b3eca8be529000c44ee9c61975523.png",
           "name": "Xanh / Tulip Gấu / Nhựa",
           "color": "Xanh / Tulip Gấu / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 400,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 400,
@@ -2602,7 +2732,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_1.jpg",
           "name": "Hồng / Vuông / Nhựa",
           "color": "Hồng / Vuông / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP032-2",
@@ -2616,7 +2747,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_2.jpg",
           "name": "Xanh / Vuông / Nhựa",
           "color": "Xanh / Vuông / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP032-3",
@@ -2630,7 +2762,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_3.jpg",
           "name": "Tím / Vuông / Nhựa",
           "color": "Tím / Vuông / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP032-4",
@@ -2644,7 +2777,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp032_4.jpg",
           "name": "Nhiều màu / Vuông / Nhựa",
           "color": "Nhiều màu / Vuông / Nhựa",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -2668,7 +2802,10 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp033_1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp033_2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp033_3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp033_3.jpg",
+        "https://sg-test-11.slatic.net/p/20f17f7e53298b13d4359c93998a0034.jpg",
+        "https://sg-test-11.slatic.net/p/9d92e6d9be55342ce8e5e7c49fffa050.jpg",
+        "https://sg-test-11.slatic.net/p/c2cb40d2e11b22fa22dde1cd4bc7b9c7.jpg"
       ],
       "options": [
         {
@@ -2702,10 +2839,11 @@ window.GRADIE_DATA = {
             "Trằng, vàng",
             "Silicon"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/20f17f7e53298b13d4359c93998a0034.jpg",
           "name": "Thỏ / Trằng, vàng / Silicon",
           "color": "Thỏ / Trằng, vàng / Silicon",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP033-2",
@@ -2716,10 +2854,11 @@ window.GRADIE_DATA = {
             "Trằng, vàng",
             "Silicon"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/c2cb40d2e11b22fa22dde1cd4bc7b9c7.jpg",
           "name": "Vịt / Trằng, vàng / Silicon",
           "color": "Vịt / Trằng, vàng / Silicon",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP033-3",
@@ -2730,15 +2869,16 @@ window.GRADIE_DATA = {
             "Trằng, vàng",
             "Silicon"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp033_3.jpg",
+          "image": "https://sg-test-11.slatic.net/p/9d92e6d9be55342ce8e5e7c49fffa050.jpg",
           "name": "Rồng / Trằng, vàng / Silicon",
           "color": "Rồng / Trằng, vàng / Silicon",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 300,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -2757,7 +2897,10 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp034_1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp034_2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp034_3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp034_3.jpg",
+        "https://vn-live.slatic.net/p/06704702fb462d744b178eed6008ab8a.png",
+        "https://vn-live.slatic.net/p/1a68b98c8cf915e29c4a0ff14597d257.png",
+        "https://vn-live.slatic.net/p/9562802b39d460920f15f52b8aaf9d02.png"
       ],
       "options": [
         {
@@ -2793,10 +2936,11 @@ window.GRADIE_DATA = {
             "Xanh",
             "Giấy, Hoa lụa, Ngọc trai"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_1.jpg",
+          "image": "https://vn-live.slatic.net/p/9562802b39d460920f15f52b8aaf9d02.png",
           "name": "Bướm / Xanh / Giấy, Hoa lụa, Ngọc trai",
           "color": "Bướm / Xanh / Giấy, Hoa lụa, Ngọc trai",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP034-2",
@@ -2807,10 +2951,11 @@ window.GRADIE_DATA = {
             "Đỏ",
             "Giấy, Hoa lụa, Ngọc trai"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_2.jpg",
+          "image": "https://vn-live.slatic.net/p/1a68b98c8cf915e29c4a0ff14597d257.png",
           "name": "Hoa hồng / Đỏ / Giấy, Hoa lụa, Ngọc trai",
           "color": "Hoa hồng / Đỏ / Giấy, Hoa lụa, Ngọc trai",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP034-3",
@@ -2821,15 +2966,16 @@ window.GRADIE_DATA = {
             "Hồng",
             "Giấy, Hoa lụa, Ngọc trai"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp034_3.jpg",
+          "image": "https://vn-live.slatic.net/p/06704702fb462d744b178eed6008ab8a.png",
           "name": "Hoa Tulip / Hồng / Giấy, Hoa lụa, Ngọc trai",
           "color": "Hoa Tulip / Hồng / Giấy, Hoa lụa, Ngọc trai",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 300,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -2883,7 +3029,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_1.jpg",
           "name": "Bộ áo mũ / Xanh, trắng / Cotton",
           "color": "Bộ áo mũ / Xanh, trắng / Cotton",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP035-2",
@@ -2897,7 +3044,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp035_2.jpg",
           "name": "Bộ áo mũ, nơ / Xanh, trắng / Cotton",
           "color": "Bộ áo mũ, nơ / Xanh, trắng / Cotton",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -2921,7 +3069,9 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp036_1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp036_2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp036_3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp036_3.jpg",
+        "https://vn-live.slatic.net/p/b96dd8c0495be8f0294f3b3337ca0d36.png",
+        "https://vn-live.slatic.net/p/8a0d67261fa3381fac849072a1fc595a.png"
       ],
       "options": [
         {
@@ -2953,15 +3103,16 @@ window.GRADIE_DATA = {
             "Trắng",
             "170x120cm"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp036_1.jpg",
+          "image": "https://vn-live.slatic.net/p/8a0d67261fa3381fac849072a1fc595a.png",
           "name": "Sash tên / Trắng / 170x120cm",
           "color": "Sash tên / Trắng / 170x120cm",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 100,
@@ -2980,7 +3131,8 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp037-1_89a66e29e1b74c988e6075b6f4562b2c.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp037-2_872c336fd1124b549532c0e40352da87.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp037-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp037-3.jpg",
+        "https://sg-test-11.slatic.net/p/a5788a64af75b526ed9e8ed4beecfcf5.jpg"
       ],
       "options": [
         {
@@ -3012,15 +3164,16 @@ window.GRADIE_DATA = {
             "Chất nhung, lông xù",
             "24-25cm"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp037-1_89a66e29e1b74c988e6075b6f4562b2c.jpg",
+          "image": "https://sg-test-11.slatic.net/p/a5788a64af75b526ed9e8ed4beecfcf5.jpg",
           "name": "Cánh cụt / Chất nhung, lông xù / 24-25cm",
           "color": "Cánh cụt / Chất nhung, lông xù / 24-25cm",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 100,
@@ -3074,7 +3227,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp038-1.jpg",
           "name": "Mũ tốt nghiệp / thi và bìa cứng / 24-25cm",
           "color": "Mũ tốt nghiệp / thi và bìa cứng / 24-25cm",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -3135,7 +3289,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp039-1.jpg",
           "name": "Đỏ / Giấy / 9x6x6 cm",
           "color": "Đỏ / Giấy / 9x6x6 cm",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP039-2",
@@ -3149,7 +3304,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp039-2.jpg",
           "name": "Xanh / Giấy / 9x6x6 cm",
           "color": "Xanh / Giấy / 9x6x6 cm",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP039-3",
@@ -3163,7 +3319,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp039-3.jpg",
           "name": "Tím / Giấy / 9x6x6 cm",
           "color": "Tím / Giấy / 9x6x6 cm",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -3222,7 +3379,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp040-1.jpg",
           "name": "Tự do, phụ thuộc ảnh gửi / 15-20cm / Mica",
           "color": "Tự do, phụ thuộc ảnh gửi / 15-20cm / Mica",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -3281,7 +3439,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp041-1.jpg",
           "name": "Hình chữ nhật / 21x29.7cm / Kính trong suốt",
           "color": "Hình chữ nhật / 21x29.7cm / Kính trong suốt",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -3342,7 +3501,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp042-1.jpg",
           "name": "Lá / 19cm / Thủy tinh",
           "color": "Lá / 19cm / Thủy tinh",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP042-2",
@@ -3356,7 +3516,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp042-2.jpg",
           "name": "Trái tim / 19cm / Thủy tinh",
           "color": "Trái tim / 19cm / Thủy tinh",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP042-3",
@@ -3370,7 +3531,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp042-3.jpg",
           "name": "Xéo / 19cm / Thủy tinh",
           "color": "Xéo / 19cm / Thủy tinh",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -3393,7 +3555,11 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp043-2.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp043-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp043-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp043-3.jpg",
+        "https://vn-live.slatic.net/p/b85dd7bf387e2195ff970bb731d0b87a.png",
+        "https://vn-live.slatic.net/p/e1b3c92312d1e729bab16dfe2c0d9a53.png",
+        "https://vn-live.slatic.net/p/9d6edf789956a2227eafd301a276c317.png",
+        "https://vn-live.slatic.net/p/83a4bdc92cb1dca3b10daad52fa00b98.png"
       ],
       "options": [
         {
@@ -3426,10 +3592,11 @@ window.GRADIE_DATA = {
             "8,5cm",
             "Mica"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp043-2.jpg",
+          "image": "https://vn-live.slatic.net/p/9d6edf789956a2227eafd301a276c317.png",
           "name": "Tròn - Nam / 8,5cm / Mica",
           "color": "Tròn - Nam / 8,5cm / Mica",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP043-2",
@@ -3440,15 +3607,16 @@ window.GRADIE_DATA = {
             "8,5cm",
             "Mica"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp043-3.jpg",
+          "image": "https://vn-live.slatic.net/p/83a4bdc92cb1dca3b10daad52fa00b98.png",
           "name": "Tròn - / 8,5cm / Mica",
           "color": "Tròn - / 8,5cm / Mica",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 200,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 200,
@@ -3466,7 +3634,11 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp044-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp044-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp044-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp044-2.jpg",
+        "https://vn-live.slatic.net/p/dac1ced93074b5df2666ba9ecdb40006.png",
+        "https://vn-live.slatic.net/p/b197b55cc2c222ca04036856dbbc6a4c.png",
+        "https://vn-live.slatic.net/p/c434c6aa8207a9736e363e827b45d9b9.png",
+        "https://vn-live.slatic.net/p/06e74e99a132c7a279f8d66d7bcee5fd.png"
       ],
       "options": [
         {
@@ -3499,10 +3671,11 @@ window.GRADIE_DATA = {
             "80cm",
             "Bánh kẹo,sữa, gấu bông"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp044-1.jpg",
+          "image": "https://vn-live.slatic.net/p/06e74e99a132c7a279f8d66d7bcee5fd.png",
           "name": "Hồng / 80cm / Bánh kẹo,sữa, gấu bông",
           "color": "Hồng / 80cm / Bánh kẹo,sữa, gấu bông",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP044-2",
@@ -3513,15 +3686,16 @@ window.GRADIE_DATA = {
             "80cm",
             "Bánh kẹo,sữa, gấu bông"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp044-2.jpg",
+          "image": "https://vn-live.slatic.net/p/c434c6aa8207a9736e363e827b45d9b9.png",
           "name": "Xanh / 80cm / Bánh kẹo,sữa, gấu bông",
           "color": "Xanh / 80cm / Bánh kẹo,sữa, gấu bông",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 200,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 200,
@@ -3540,7 +3714,10 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp045-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp045-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp045-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp045-3.jpg",
+        "https://sg-test-11.slatic.net/p/d38d1ba01188f5090a7dc1340be87c1a.jpg",
+        "https://sg-test-11.slatic.net/p/998e0069aaec56eaa3dcc56ef61877a3.jpg",
+        "https://sg-test-11.slatic.net/p/472806b8aad22cec2468180371e83564.jpg"
       ],
       "options": [
         {
@@ -3574,10 +3751,11 @@ window.GRADIE_DATA = {
             "Trằng, vàng",
             "Thủy tinh"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp045-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/d38d1ba01188f5090a7dc1340be87c1a.jpg",
           "name": "Gấu / Trằng, vàng / Thủy tinh",
           "color": "Gấu / Trằng, vàng / Thủy tinh",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP045-2",
@@ -3588,10 +3766,11 @@ window.GRADIE_DATA = {
             "Trằng, vàng",
             "Thủy tinh"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp045-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/472806b8aad22cec2468180371e83564.jpg",
           "name": "Nam / Trằng, vàng / Thủy tinh",
           "color": "Nam / Trằng, vàng / Thủy tinh",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP045-3",
@@ -3602,15 +3781,16 @@ window.GRADIE_DATA = {
             "Trằng, vàng",
             "Thủy tinh"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp045-3.jpg",
+          "image": "https://sg-test-11.slatic.net/p/998e0069aaec56eaa3dcc56ef61877a3.jpg",
           "name": "Nữ / Trằng, vàng / Thủy tinh",
           "color": "Nữ / Trằng, vàng / Thủy tinh",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 300,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -3629,7 +3809,10 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp046-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp046-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp046-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp046-3.jpg",
+        "https://sg-test-11.slatic.net/p/196e14b648cd479d24f009f9c0d54424.jpg",
+        "https://sg-test-11.slatic.net/p/8f70264404776f583087296422758309.jpg",
+        "https://sg-test-11.slatic.net/p/1b4fca07e06720d5b4f64f1672c64c5d.jpg"
       ],
       "options": [
         {
@@ -3663,10 +3846,11 @@ window.GRADIE_DATA = {
             "Vàng hồng đào",
             "Thủy tinh"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp046-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/196e14b648cd479d24f009f9c0d54424.jpg",
           "name": "Cẩm Tú Cầu / Vàng hồng đào / Thủy tinh",
           "color": "Cẩm Tú Cầu / Vàng hồng đào / Thủy tinh",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP046-2",
@@ -3677,10 +3861,11 @@ window.GRADIE_DATA = {
             "Đỏ trắng ánh kim",
             "Thủy tinh"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp046-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/8f70264404776f583087296422758309.jpg",
           "name": "Cẩm Tú Cầu / Đỏ trắng ánh kim / Thủy tinh",
           "color": "Cẩm Tú Cầu / Đỏ trắng ánh kim / Thủy tinh",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP046-3",
@@ -3691,15 +3876,16 @@ window.GRADIE_DATA = {
             "Tím ánh",
             "Thủy tinh"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp046-3.jpg",
+          "image": "https://sg-test-11.slatic.net/p/1b4fca07e06720d5b4f64f1672c64c5d.jpg",
           "name": "Cẩm Tú Cầu / Tím ánh / Thủy tinh",
           "color": "Cẩm Tú Cầu / Tím ánh / Thủy tinh",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 300,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -3767,15 +3953,16 @@ window.GRADIE_DATA = {
             "29,7 x 42 cm",
             "Giấy cứng"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp047-3.jpg",
+          "image": "https://sg-test-11.slatic.net/p/3bd6f12052ed85137de738b803c0efd6.jpg",
           "name": "Vàng / 29,7 x 42 cm / Giấy cứng",
           "color": "Vàng / 29,7 x 42 cm / Giấy cứng",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 100,
+      "lazadaStock": 200,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 200,
@@ -3829,7 +4016,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp048-1.jpg",
           "name": "Gấu / 29,7 x 42 cm / Sen đá",
           "color": "Gấu / 29,7 x 42 cm / Sen đá",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP048-2",
@@ -3843,7 +4031,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp048-2.jpg",
           "name": "Gấu / 29,7 x 42 cm / Lá may mắn",
           "color": "Gấu / 29,7 x 42 cm / Lá may mắn",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -3902,7 +4091,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp049-1.jpg",
           "name": "Nam / 8cm / Xương rồng",
           "color": "Nam / 8cm / Xương rồng",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP049-2",
@@ -3916,7 +4106,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp049-2.jpg",
           "name": "Nữ / 8cm / Xương rồng",
           "color": "Nữ / 8cm / Xương rồng",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -3988,7 +4179,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp050-2.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
@@ -4061,15 +4253,16 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Canvas"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp051-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/b76a60ba8c6b4d44799f6eb41ce66521.jpg",
           "name": "Đen / 11x8cm / Canvas",
           "color": "Đen / 11x8cm / Canvas",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 100,
+      "lazadaStock": 200,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 200,
@@ -4122,7 +4315,7 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Canvas"
           ],
-          "image": "https://sg-test-11.slatic.net/p/ee21838f0414ed42b8daaf3b1f7de9ed.jpg",
+          "image": "https://sg-test-11.slatic.net/p/72cc7f11a19a308e11d211f7ad8d78ba.jpg",
           "name": "Navy / 11x8cm / Canvas",
           "color": "Navy / 11x8cm / Canvas",
           "lazadaStock": 100,
@@ -4137,15 +4330,16 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Canvas"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp052-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/ee21838f0414ed42b8daaf3b1f7de9ed.jpg",
           "name": "Xanh dương / 11x8cm / Canvas",
           "color": "Xanh dương / 11x8cm / Canvas",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 100,
+      "lazadaStock": 200,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 200,
@@ -4213,15 +4407,16 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Canvas"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp053-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/4eeeb41ea587c8201e99bf11c18173cf.jpg",
           "name": "Nâu / 11x8cm / Canvas",
           "color": "Nâu / 11x8cm / Canvas",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 100,
+      "lazadaStock": 200,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 200,
@@ -4280,7 +4475,7 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Da pu"
           ],
-          "image": "https://sg-test-11.slatic.net/p/2e56b3f86c011fe8d355c1c3fa742eb8.jpg",
+          "image": "https://sg-test-11.slatic.net/p/c312c604c0cdd8107aa3f2766c61194a.jpg",
           "name": "Kaki / 11x8cm / Da pu",
           "color": "Kaki / 11x8cm / Da pu",
           "lazadaStock": 100,
@@ -4295,10 +4490,11 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp054-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/e06113ae9c52109bf90ce2455da60514.jpg",
           "name": "Đen / 11x8cm / Da pu",
           "color": "Đen / 11x8cm / Da pu",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP054-3",
@@ -4309,10 +4505,11 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp054-3.jpg",
+          "image": "https://sg-test-11.slatic.net/p/b05774f705e405479178c43ce1634f32.jpg",
           "name": "Hồng / 11x8cm / Da pu",
           "color": "Hồng / 11x8cm / Da pu",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP054-4",
@@ -4323,15 +4520,16 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp054-4.jpg",
+          "image": "https://sg-test-11.slatic.net/p/2e56b3f86c011fe8d355c1c3fa742eb8.jpg",
           "name": "Xanh lá / 11x8cm / Da pu",
           "color": "Xanh lá / 11x8cm / Da pu",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 100,
+      "lazadaStock": 400,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 400,
@@ -4387,7 +4585,7 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Da pu"
           ],
-          "image": "https://sg-test-11.slatic.net/p/fc6662fa8c2659a6be883f7cc2061955.jpg",
+          "image": "https://sg-test-11.slatic.net/p/f8ae826b0028aa4ae1453b4444865c61.jpg",
           "name": "Xanh / 11x8cm / Da pu",
           "color": "Xanh / 11x8cm / Da pu",
           "lazadaStock": 100,
@@ -4402,10 +4600,11 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp055-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/2dbc87adaed300e7e4a0643357d35285.jpg",
           "name": "Hồng / 11x8cm / Da pu",
           "color": "Hồng / 11x8cm / Da pu",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP055-3",
@@ -4416,15 +4615,16 @@ window.GRADIE_DATA = {
             "11x8cm",
             "Da pu"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp055-3.jpg",
+          "image": "https://sg-test-11.slatic.net/p/fc6662fa8c2659a6be883f7cc2061955.jpg",
           "name": "Đen / 11x8cm / Da pu",
           "color": "Đen / 11x8cm / Da pu",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 100,
+      "lazadaStock": 300,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -4443,7 +4643,10 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp056-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp056-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp056-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp056-3.jpg",
+        "https://sg-test-11.slatic.net/p/acaeaf2b7cee0ebaaad55ea86102675b.jpg",
+        "https://sg-test-11.slatic.net/p/d16ab34ee45e9ba438778013d5f3b006.jpg",
+        "https://sg-test-11.slatic.net/p/fe958c9bc99c52a21f223e17abf63d9f.jpg"
       ],
       "options": [
         {
@@ -4477,10 +4680,11 @@ window.GRADIE_DATA = {
             "7x7x9cm",
             "Sáp"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp056-1.jpg",
+          "image": "https://sg-test-11.slatic.net/p/acaeaf2b7cee0ebaaad55ea86102675b.jpg",
           "name": "Cam quýt / 7x7x9cm / Sáp",
           "color": "Cam quýt / 7x7x9cm / Sáp",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP056-2",
@@ -4491,10 +4695,11 @@ window.GRADIE_DATA = {
             "7x7x9cm",
             "Sáp"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp056-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/fe958c9bc99c52a21f223e17abf63d9f.jpg",
           "name": "Hoa cỏ / 7x7x9cm / Sáp",
           "color": "Hoa cỏ / 7x7x9cm / Sáp",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP056-3",
@@ -4505,15 +4710,16 @@ window.GRADIE_DATA = {
             "7x7x9cm",
             "Sáp"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp056-3.jpg",
+          "image": "https://sg-test-11.slatic.net/p/d16ab34ee45e9ba438778013d5f3b006.jpg",
           "name": "Trái cây / 7x7x9cm / Sáp",
           "color": "Trái cây / 7x7x9cm / Sáp",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 300,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -4532,7 +4738,11 @@ window.GRADIE_DATA = {
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp057-1.jpg",
         "https://cdn.hstatic.net/files/200001178391/file/sp057-2.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp057-3.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp057-3.jpg",
+        "https://sg-test-11.slatic.net/p/b47e8202f862fd62588928b8e6ea72d8.jpg",
+        "https://sg-test-11.slatic.net/p/6b2eb1bcc7a8d2d053b31e0ddf3339bf.png",
+        "https://sg-test-11.slatic.net/p/c3f2d483968c5275566abbd944d09e7c.png",
+        "https://vn-live.slatic.net/p/6b2eb1bcc7a8d2d053b31e0ddf3339bf.png"
       ],
       "options": [
         {
@@ -4564,10 +4774,11 @@ window.GRADIE_DATA = {
             "7x7x9cm",
             "Sáp"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp057-1.jpg",
+          "image": "https://vn-live.slatic.net/p/6b2eb1bcc7a8d2d053b31e0ddf3339bf.png",
           "name": "Vỏ sò / 7x7x9cm / Sáp",
           "color": "Vỏ sò / 7x7x9cm / Sáp",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP057-2",
@@ -4577,7 +4788,8 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp057-2.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         },
         {
           "sku": "SP057-3",
@@ -4587,12 +4799,13 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp057-3.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -4610,7 +4823,10 @@ window.GRADIE_DATA = {
       "image": "https://cdn.hstatic.net/files/200001178391/file/sp058-1.jpg",
       "gallery": [
         "https://cdn.hstatic.net/files/200001178391/file/sp058-1.jpg",
-        "https://cdn.hstatic.net/files/200001178391/file/sp508-2.jpg"
+        "https://cdn.hstatic.net/files/200001178391/file/sp508-2.jpg",
+        "https://sg-test-11.slatic.net/p/f6567342fffb4e3e13e700f39302491e.png",
+        "https://sg-test-11.slatic.net/p/fe5485b16a93041498da38b8d9bb200f.png",
+        "https://vn-live.slatic.net/p/f5e6338eb95d136c81bbd397fa0fb1fe.png"
       ],
       "options": [
         {
@@ -4642,10 +4858,11 @@ window.GRADIE_DATA = {
             "10x7x9cm",
             "Sáp"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp058-1.jpg",
+          "image": "https://vn-live.slatic.net/p/f5e6338eb95d136c81bbd397fa0fb1fe.png",
           "name": "Hộp / 10x7x9cm / Sáp",
           "color": "Hộp / 10x7x9cm / Sáp",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP058-2",
@@ -4655,12 +4872,13 @@ window.GRADIE_DATA = {
           "image": "https://cdn.hstatic.net/files/200001178391/file/sp508-2.jpg",
           "name": "",
           "color": "",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 0
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 0,
+      "lazadaStock": 100,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 200,
@@ -4716,7 +4934,7 @@ window.GRADIE_DATA = {
             "39x28cm",
             "Vải"
           ],
-          "image": "https://sg-test-11.slatic.net/p/38478996daee16d4f4335145e88a6623.jpg",
+          "image": "https://sg-test-11.slatic.net/p/16bd6a3d83a8ba871695948cd7c3361c.jpg",
           "name": "Hồng / 39x28cm / Vải",
           "color": "Hồng / 39x28cm / Vải",
           "lazadaStock": 100,
@@ -4731,10 +4949,11 @@ window.GRADIE_DATA = {
             "39x28cm",
             "Vải"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp059-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/b7ed48b8b1497b9729b75e0c03d3c4af.jpg",
           "name": "Đen / 39x28cm / Vải",
           "color": "Đen / 39x28cm / Vải",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         },
         {
           "sku": "SP059-3",
@@ -4745,15 +4964,16 @@ window.GRADIE_DATA = {
             "39x28cm",
             "Vải"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp059-3.jpg",
+          "image": "https://sg-test-11.slatic.net/p/38478996daee16d4f4335145e88a6623.jpg",
           "name": "Trắng / 39x28cm / Vải",
           "color": "Trắng / 39x28cm / Vải",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 100,
+      "lazadaStock": 300,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 300,
@@ -4821,15 +5041,16 @@ window.GRADIE_DATA = {
             "39x28cm",
             "Canvas"
           ],
-          "image": "https://cdn.hstatic.net/files/200001178391/file/sp060-2.jpg",
+          "image": "https://sg-test-11.slatic.net/p/74426acf751c82d9e4486bfabde0a3c7.jpg",
           "name": "Hồng / 39x28cm / Canvas",
           "color": "Hồng / 39x28cm / Canvas",
-          "stock": 100
+          "stock": 100,
+          "lazadaStock": 100
         }
       ],
       "isFeatured": false,
       "isTrending": false,
-      "lazadaStock": 100,
+      "lazadaStock": 200,
       "oldPrice": null,
       "rating": 4.8,
       "stock": 200,
@@ -4861,7 +5082,7 @@ window.GRADIE_DATA = {
           "price": 71000,
           "stock": 0,
           "lazadaStock": 100,
-          "image": "https://vn-live.slatic.net/p/93587a64d2ac24b9c4083c866fc65e33.jpg",
+          "image": "https://vn-live.slatic.net/p/3b2abe2d751cfba631bb300117396f2c.jpg",
           "color": "Chữ nhật 15*15*30"
         }
       ],

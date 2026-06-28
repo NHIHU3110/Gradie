@@ -14,7 +14,9 @@ window.GradieStore = {
       lower.includes('unsplash.com') ||
       lower.includes('lazada.vn/products') ||
       lower.includes('tiki.vn/p/') ||
-      lower.includes('shopee.vn/product')
+      lower.includes('shopee.vn/product') ||
+      lower.includes('sg-test-11.slatic.net') ||
+      (lower.includes('test') && lower.includes('.slatic.net'))
     ) return false;
     if (/\.html(\?|#|$)/i.test(lower)) return false;
     return true;
@@ -2769,21 +2771,37 @@ window.GradieStore = {
     };
     const normName = s => String(s || '').trim().toLowerCase().replace(/\s+/g, ' ');
 
+    const nameMatch = (name1, name2) => {
+      const n1 = normName(name1);
+      const n2 = normName(name2);
+      if (!n1 || !n2) return false;
+      if (n1 === n2) return true;
+      const clean1 = n1.startsWith('gradie ') ? n1.substring(7).trim() : n1;
+      const clean2 = n2.startsWith('gradie ') ? n2.substring(7).trim() : n2;
+      return clean1 === clean2;
+    };
+
+    const isSkuConflicting = (sku1, sku2) => {
+      if (!sku1 || !sku2) return false;
+      const r1 = rootSku(sku1);
+      const r2 = rootSku(sku2);
+      return r1 && r2 && r1 !== r2;
+    };
+
     const findTikiVariantMatch = (product, ttp) => {
       if (!product.variants || product.variants.length === 0) return null;
       const ttpSkuNorm = normSku(ttp.sku);
       const ttpOrigSkuNorm = normSku(ttp.original_sku);
-      const ttpNameLower = String(ttp.name || '').toLowerCase();
 
-      const bySku = product.variants.find(v => {
-        return (ttpSkuNorm && skuRelated(v.sku, ttp.sku)) || (ttpOrigSkuNorm && skuRelated(v.sku, ttp.original_sku));
-      });
-      if (bySku) return bySku;
-
-      return product.variants.find(v => {
-        if (!v.options || !Array.isArray(v.options) || v.options.length === 0) return false;
-        return v.options.every(opt => ttpNameLower.includes(String(opt).toLowerCase()));
-      }) || null;
+      if (ttpSkuNorm) {
+        const exact = product.variants.find(v => normSku(v.sku) === ttpSkuNorm);
+        if (exact) return exact;
+      }
+      if (ttpOrigSkuNorm) {
+        const exact = product.variants.find(v => normSku(v.sku) === ttpOrigSkuNorm);
+        if (exact) return exact;
+      }
+      return null;
     };
 
     try {
@@ -2807,12 +2825,29 @@ window.GradieStore = {
       if (res.ok && data.success) {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
+          
+          // Reset Tiki stock of all products to 0 first
+          all.forEach(p => {
+              p.tikiStock = 0;
+              if (p.variants && p.variants.length > 0) {
+                  p.variants.forEach(v => {
+                      v.tikiStock = 0;
+                  });
+              }
+          });
+
             data.products.forEach(ttp => {
                 let matchedVariant = null;
                 
                 let p = all.find(x => {
                   if (String(x.id) === String(ttp.id)) return true;
                   
+                  const ttpSkuNorm = normSku(ttp.sku);
+                  const ttpOrigSkuNorm = normSku(ttp.original_sku);
+                  
+                  // If root SKUs conflict, do not match
+                  if (isSkuConflicting(x.sku, ttp.sku) || isSkuConflicting(x.sku, ttp.original_sku)) return false;
+
                   // Prioritize variant matching if variants exist
                   if (x.variants && x.variants.length > 0) {
                       const vMatch = findTikiVariantMatch(x, ttp);
@@ -2820,17 +2855,22 @@ window.GradieStore = {
                           matchedVariant = vMatch;
                           return true;
                       }
+                      
+                      // Match parent if root SKUs match
+                      const xRoot = rootSku(x.sku);
+                      const tRoot = rootSku(ttp.sku) || rootSku(ttp.original_sku);
+                      if (xRoot && tRoot && xRoot === tRoot) return true;
                       return false;
                   }
                   
-                  const ttpSkuNorm = normSku(ttp.sku);
-                  const ttpOrigSkuNorm = normSku(ttp.original_sku);
-                  if (ttpSkuNorm && skuRelated(x.sku, ttp.sku)) return true;
-                  if (ttpOrigSkuNorm && skuRelated(x.sku, ttp.original_sku)) return true;
+                  if (ttpSkuNorm && normSku(x.sku) === ttpSkuNorm) return true;
+                  if (ttpOrigSkuNorm && normSku(x.sku) === ttpOrigSkuNorm) return true;
                   
-                  const n1 = normName(x.name);
-                  const n2 = normName(ttp.name);
-                  if (n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1))) return true;
+                  const xRoot = rootSku(x.sku);
+                  const tRoot = rootSku(ttp.sku) || rootSku(ttp.original_sku);
+                  if (xRoot && tRoot && xRoot === tRoot) return true;
+                  
+                  if (nameMatch(x.name, ttp.name)) return true;
                   return false;
                 });
 
@@ -3092,25 +3132,44 @@ window.GradieStore = {
       }
     };
 
+    const nameMatch = (name1, name2) => {
+      const n1 = normName(name1);
+      const n2 = normName(name2);
+      if (!n1 || !n2) return false;
+      if (n1 === n2) return true;
+      const clean1 = n1.startsWith('gradie ') ? n1.substring(7).trim() : n1;
+      const clean2 = n2.startsWith('gradie ') ? n2.substring(7).trim() : n2;
+      return clean1 === clean2;
+    };
+
+    const isSkuConflicting = (sku1, sku2) => {
+      if (!sku1 || !sku2) return false;
+      const r1 = rootSku(sku1);
+      const r2 = rootSku(sku2);
+      return r1 && r2 && r1 !== r2;
+    };
+
     const findLazadaVariantMatch = (product, lzdp) => {
       if (!product.variants || product.variants.length === 0) return null;
       const lzdpSkuNorm = normSku(lzdp.sku);
-      const lzdpBaseNorm = normSku(lzdp.baseSku);
+      
+      // 1. Try exact SKU match first
+      if (lzdpSkuNorm) {
+        const exact = product.variants.find(v => normSku(v.sku) === lzdpSkuNorm);
+        if (exact) return exact;
+      }
 
-      const bySku = product.variants.find(v => {
-        const vSkuNorm = normSku(v.sku);
-        return (lzdpSkuNorm && skuRelated(v.sku, lzdp.sku)) ||
-          (lzdpBaseNorm && (skuRelated(v.sku, lzdp.baseSku) || vSkuNorm.startsWith(lzdpBaseNorm)));
-      });
-      if (bySku) return bySku;
-
+      // 2. Try exact SKU match for Lazada's sub-variants if any
       if (lzdp.variants && lzdp.variants.length > 0) {
         for (const lv of lzdp.variants) {
           const lvSkuNorm = normSku(lv.sku);
-          const vMatch = product.variants.find(v => normSku(v.sku) === lvSkuNorm || skuRelated(v.sku, lv.sku));
-          if (vMatch) return vMatch;
+          if (lvSkuNorm) {
+            const exact = product.variants.find(v => normSku(v.sku) === lvSkuNorm);
+            if (exact) return exact;
+          }
         }
       }
+      
       return null;
     };
 
@@ -3137,11 +3196,25 @@ window.GradieStore = {
       if (res.ok && data.success) {
         if (data.products && Array.isArray(data.products)) {
           let all = this.getProducts();
+          
+          // Reset Lazada stock of all products to 0 first
+          all.forEach(p => {
+              p.lazadaStock = 0;
+              if (p.variants && p.variants.length > 0) {
+                  p.variants.forEach(v => {
+                      v.lazadaStock = 0;
+                  });
+              }
+          });
+
             data.products.forEach(lzdp => {
                 let matchedVariant = null;
                 
                 let p = all.find(x => {
                   if (String(x.id) === String(lzdp.id)) return true;
+                  
+                  // If root SKUs conflict, they should never match
+                  if (isSkuConflicting(x.sku, lzdp.sku)) return false;
                   
                   // Prioritize variant matching if variants exist
                   if (x.variants && x.variants.length > 0) {
@@ -3150,18 +3223,23 @@ window.GradieStore = {
                           matchedVariant = vMatch;
                           return true;
                       }
+                      
+                      // Match parent if root SKUs match
+                      const xRoot = rootSku(x.sku);
+                      const lzRoot = rootSku(lzdp.sku);
+                      if (xRoot && lzRoot && xRoot === lzRoot) return true;
                       return false;
                   }
                   
                   const lzdpSkuNorm = normSku(lzdp.sku);
-                  const lzdpBaseNorm = normSku(lzdp.baseSku);
                   const xSkuNorm = normSku(x.sku);
-                  if (lzdpSkuNorm && skuRelated(x.sku, lzdp.sku)) return true;
-                  if (lzdpBaseNorm && (skuRelated(x.sku, lzdp.baseSku) || xSkuNorm.startsWith(lzdpBaseNorm))) return true;
+                  if (lzdpSkuNorm && xSkuNorm && lzdpSkuNorm === xSkuNorm) return true;
                   
-                  const n1 = normName(x.name);
-                  const n2 = normName(lzdp.name);
-                  if (n1 && n2 && (n1 === n2 || n1.includes(n2) || n2.includes(n1))) return true;
+                  const xRoot = rootSku(x.sku);
+                  const lzRoot = rootSku(lzdp.sku);
+                  if (xRoot && lzRoot && xRoot === lzRoot) return true;
+                  
+                  if (nameMatch(x.name, lzdp.name)) return true;
                   return false;
                 });
 
@@ -3171,7 +3249,7 @@ window.GradieStore = {
                         if (p.variants && p.variants.length > 0) {
                             lzdp.variants.forEach(lv => {
                                 const lvSkuNorm = normSku(lv.sku);
-                                const vMatch = p.variants.find(v => normSku(v.sku) === lvSkuNorm || skuRelated(v.sku, lv.sku));
+                                const vMatch = p.variants.find(v => normSku(v.sku) === lvSkuNorm);
                                 if (vMatch) {
                                     vMatch.lazadaStock = lv.lazadaStock ?? lv.stock;
                                     // Do NOT overwrite price and image if product is from Website
