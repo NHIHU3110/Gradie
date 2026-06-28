@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', async () => {
  
       // ADMIN LOGIN INTERCEPT
       const staffList = window.GradieStore.getStaff() || [];
-      const matchedStaff = staffList.find(s => s.email === email && (s.password === pass || (!s.password && pass === '123456')));
+      const matchedStaff = staffList.find(s => s.email && s.email.toLowerCase() === email.toLowerCase() && (s.password === pass || (!s.password && pass === '123456')));
  
       if (matchedStaff) {
         sessionStorage.setItem('GRADIE_ADMIN_AUTH', 'true');
